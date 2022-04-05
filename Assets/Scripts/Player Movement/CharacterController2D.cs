@@ -22,6 +22,13 @@ public class CharacterController2D : MonoBehaviour
 	public float fallMultiplier = 2.5f;
 	public float lowJumpMultiplier = 2f;
 
+    private float coyoteTime = 0.3f; // timer indicating how long the player can jump after leaving the ground (higher value means more forgiving time)
+    private float coyoteTimeCounter;
+
+    private float jumpBufferTime = 0.3f; //adds a buffer so player jumps as soon as they touch the ground, instead of having to wait until they land to press space
+    //in other words, the player can jump slightly before they are allowed to (sort of makes a bounce effect)
+    private float jumpBufferCounter;
+
 
 	[Header("Events")]
 	[Space]
@@ -49,6 +56,19 @@ public class CharacterController2D : MonoBehaviour
 
     private void Update()
     {
+
+
+        if (m_Grounded)
+        {
+            coyoteTimeCounter = coyoteTime;
+        }
+        else
+        {
+            //when player is mid-air, start counting the coyote time down
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+        
+
 		//if we are currently falling, then we will apply the fallMultipler on the player
         if(m_Rigidbody2D.velocity.y < 0)
         {
@@ -81,7 +101,7 @@ public class CharacterController2D : MonoBehaviour
 	}
 
 
-	public void Move(float move, bool crouch, bool jump)
+	public void Move(float move, bool crouch, bool jump, float jumpBufferCounter)
 	{
 		// If crouching, check to see if the character can stand up
 		if (!crouch)
@@ -145,12 +165,17 @@ public class CharacterController2D : MonoBehaviour
 			}
 		}
 		// If the player should jump...
-		if (m_Grounded && jump)
+        // BEFORE: I was checking if player was allowed to jump and they were grounded, but i substituted
+        // the grounded condition with checking the coyoteTimeCounter instead
+		if (coyoteTimeCounter > 0f && jumpBufferCounter > 0f)
 		{
-			// Add a vertical force to the player.
+            // Add a vertical force to the player.
+            
 			m_Grounded = false;
 			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
-		}
+            coyoteTimeCounter = 0f;
+            jumpBufferCounter = 0f;
+        }
 	}
 
 
