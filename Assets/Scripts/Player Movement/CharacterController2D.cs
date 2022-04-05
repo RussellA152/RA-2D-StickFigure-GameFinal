@@ -19,15 +19,14 @@ public class CharacterController2D : MonoBehaviour
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
 
+    //public int jump_count = 2; // the number of times the player can jump
+
 	public float fallMultiplier = 2.5f;
 	public float lowJumpMultiplier = 2f;
 
-    private float coyoteTime = 0.3f; // timer indicating how long the player can jump after leaving the ground (higher value means more forgiving time)
+    private float coyoteTime = 0.2f; // timer indicating how long the player can jump after leaving the ground (higher value means more forgiving time)
     private float coyoteTimeCounter;
 
-    private float jumpBufferTime = 0.3f; //adds a buffer so player jumps as soon as they touch the ground, instead of having to wait until they land to press space
-    //in other words, the player can jump slightly before they are allowed to (sort of makes a bounce effect)
-    private float jumpBufferCounter;
 
 
 	[Header("Events")]
