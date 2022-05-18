@@ -27,6 +27,9 @@ public class CharacterController2D : MonoBehaviour
     private float coyoteTime = 0.2f; // timer indicating how long the player can jump after leaving the ground (higher value means more forgiving time)
     private float coyoteTimeCounter;
 
+	private bool isWalking;
+	[SerializeField] private Animator animator;
+
 
 
 	[Header("Events")]
@@ -53,9 +56,15 @@ public class CharacterController2D : MonoBehaviour
 			OnCrouchEvent = new BoolEvent();
 	}
 
+    private void Start()
+    {
+		isWalking = false;
+	
+    }
+
     private void Update()
     {
-
+		Debug.Log(isWalking);
 
         if (m_Grounded)
         {
@@ -102,6 +111,19 @@ public class CharacterController2D : MonoBehaviour
 
 	public void Move(float move, bool crouch, bool jump, float jumpBufferCounter)
 	{
+
+		if (move != 0 && m_Grounded)
+        {
+			isWalking = true;
+			animator.SetBool("isWalking", isWalking);
+        }
+
+        else
+        {
+			isWalking = false;
+			animator.SetBool("isWalking",isWalking);
+		}
+
 		// If crouching, check to see if the character can stand up
 		if (!crouch)
 		{
@@ -162,6 +184,7 @@ public class CharacterController2D : MonoBehaviour
 				// ... flip the player.
 				Flip();
 			}
+            
 		}
 		// If the player should jump...
         // BEFORE: I was checking if player was allowed to jump and they were grounded, but i substituted

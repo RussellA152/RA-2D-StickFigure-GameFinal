@@ -14,6 +14,7 @@ public class PlayerMove : MonoBehaviour
     private float jumpBufferTime = 0.3f; //adds a buffer so player jumps as soon as they touch the ground, instead of having to wait until they land to press space
     private float jumpBufferCounter;
 
+
     private void Start()
     {
         
@@ -21,6 +22,7 @@ public class PlayerMove : MonoBehaviour
     private void Update()
     {
         horizontalMovement = Input.GetAxisRaw("Horizontal") * runSpeed;
+
 
         if (Input.GetButtonDown("Jump"))
         {
