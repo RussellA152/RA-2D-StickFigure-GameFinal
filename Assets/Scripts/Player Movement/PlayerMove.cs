@@ -9,7 +9,7 @@ public class PlayerMove : MonoBehaviour
     private float horizontalMovement = 0f;
     private bool jumping = false;
 
-    public float runSpeed = 40f;
+    public float runSpeed = 70f;
 
     private float jumpBufferTime = 0.3f; //adds a buffer so player jumps as soon as they touch the ground, instead of having to wait until they land to press space
     private float jumpBufferCounter;

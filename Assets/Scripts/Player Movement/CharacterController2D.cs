@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections;
 
 public class CharacterController2D : MonoBehaviour
 {
@@ -19,7 +20,11 @@ public class CharacterController2D : MonoBehaviour
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 	private Vector3 m_Velocity = Vector3.zero;
 
-    //public int jump_count = 2; // the number of times the player can jump
+	private float animVelocity = 0.0f; //velocity used for locomotion blend tree
+	private int velocityHash;
+	private float acceleration = 1f;
+
+	//public int jump_count = 2; // the number of times the player can jump
 
 	public float fallMultiplier = 2.5f;
 	public float lowJumpMultiplier = 2f;
@@ -27,7 +32,9 @@ public class CharacterController2D : MonoBehaviour
     private float coyoteTime = 0.2f; // timer indicating how long the player can jump after leaving the ground (higher value means more forgiving time)
     private float coyoteTimeCounter;
 
+
 	private bool isWalking;
+
 	[SerializeField] private Animator animator;
 
 
@@ -59,22 +66,32 @@ public class CharacterController2D : MonoBehaviour
     private void Start()
     {
 		isWalking = false;
+
+		//increases performance
+		velocityHash = Animator.StringToHash("Velocity");
+
+		//OnLandEvent.AddListener(LandAnimation);
 	
     }
 
     private void Update()
     {
-		Debug.Log(isWalking);
 
         if (m_Grounded)
         {
+			//if grounded, you're not jumping
+			animator.SetBool("isJumping", false);
+			animator.SetBool("isGrounded", true);
+
             coyoteTimeCounter = coyoteTime;
+			
         }
         else
         {
             //when player is mid-air, start counting the coyote time down
             coyoteTimeCounter -= Time.deltaTime;
-        }
+			animator.SetBool("isGrounded", false);
+		}
         
 
 		//if we are currently falling, then we will apply the fallMultipler on the player
@@ -102,8 +119,11 @@ public class CharacterController2D : MonoBehaviour
 			if (colliders[i].gameObject != gameObject)
 			{
 				m_Grounded = true;
+
+				//Player has just landed
 				if (!wasGrounded)
 					OnLandEvent.Invoke();
+					
 			}
 		}
 	}
@@ -111,6 +131,10 @@ public class CharacterController2D : MonoBehaviour
 
 	public void Move(float move, bool crouch, bool jump, float jumpBufferCounter)
 	{
+		//set locomotion velocity equal to player's speed * acceleration (this will make walking animation faster depending on movement speed)
+		animVelocity = Mathf.Abs(move * acceleration);
+		animator.SetFloat(velocityHash, animVelocity);
+		
 
 		if (move != 0 && m_Grounded)
         {
@@ -197,7 +221,8 @@ public class CharacterController2D : MonoBehaviour
 			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
             coyoteTimeCounter = 0f;
             jumpBufferCounter = 0f;
-        }
+			animator.SetBool("isJumping", true);
+		}
 	}
 
 
@@ -211,4 +236,5 @@ public class CharacterController2D : MonoBehaviour
 		theScale.x *= -1;
 		transform.localScale = theScale;
 	}
+
 }
