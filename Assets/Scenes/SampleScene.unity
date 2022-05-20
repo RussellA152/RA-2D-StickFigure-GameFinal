@@ -1785,6 +1785,7 @@ GameObject:
   - component: {fileID: 1777725234}
   - component: {fileID: 1777725233}
   - component: {fileID: 1777725236}
+  - component: {fileID: 1777725238}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -1918,6 +1919,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 1777725234}
   runSpeed: 65
+--- !u!114 &1777725238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1777725231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 573af71acbc5daa41a28a5195cd706fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 999245632}
+  isAttacking: 0
 --- !u!1 &2084911961
 GameObject:
   m_ObjectHideFlags: 0
