@@ -7,6 +7,7 @@ public class AttackController : MonoBehaviour
     public static AttackController instance;
     public Animator animator;
     public bool isAttacking = false;
+    public bool isHeavyAttacking = false;
 
     private void Awake()
     {
@@ -26,13 +27,19 @@ public class AttackController : MonoBehaviour
     void Update()
     {
         Attack();
+        
     }
 
     public void Attack()
     {
-        if(Input.GetButtonDown("Fire1") && !isAttacking)
+        if(Input.GetMouseButtonDown(0) && !isAttacking)
         {
             isAttacking = true;
+        }
+
+        if(Input.GetMouseButtonDown(1) && !isHeavyAttacking)
+        {
+            isHeavyAttacking = true;
         }
     }
 }
