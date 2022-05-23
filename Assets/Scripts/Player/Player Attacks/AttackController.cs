@@ -5,6 +5,7 @@ using UnityEngine;
 public class AttackController : MonoBehaviour
 {
     public static AttackController instance;
+
     public Animator animator;
     public bool isAttacking = false;
     public bool isHeavyAttacking = false;
@@ -20,7 +21,7 @@ public class AttackController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        animator = GetComponent<PlayerComponents>().getAnimator();
     }
 
     // Update is called once per frame

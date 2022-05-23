@@ -35,7 +35,7 @@ public class CharacterController2D : MonoBehaviour
 
 	private bool isWalking;
 
-	[SerializeField] private Animator animator;
+	public Animator animator;
 
 
 
@@ -54,7 +54,8 @@ public class CharacterController2D : MonoBehaviour
 
 	private void Awake()
 	{
-		m_Rigidbody2D = GetComponent<Rigidbody2D>();
+		
+		
 
 		if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();
@@ -70,6 +71,9 @@ public class CharacterController2D : MonoBehaviour
 		//increases performance
 		velocityHash = Animator.StringToHash("Velocity");
 
+		m_Rigidbody2D = GetComponent<PlayerComponents>().getRB();
+		animator = GetComponent<PlayerComponents>().getAnimator();
+
 		//OnLandEvent.AddListener(LandAnimation);
 	
     }
@@ -77,13 +81,17 @@ public class CharacterController2D : MonoBehaviour
     private void Update()
     {
 
+		
+
         if (m_Grounded)
         {
 			//if grounded, you're not jumping
 			animator.SetBool("isJumping", false);
 			animator.SetBool("isGrounded", true);
 
-            coyoteTimeCounter = coyoteTime;
+			//Debug.Log("Is Jumping! FALSE");
+
+			coyoteTimeCounter = coyoteTime;
 			
         }
         else
@@ -215,13 +223,15 @@ public class CharacterController2D : MonoBehaviour
         // the grounded condition with checking the coyoteTimeCounter instead
 		if (coyoteTimeCounter > 0f && jumpBufferCounter > 0f)
 		{
-            // Add a vertical force to the player.
-            
+			// Add a vertical force to the player.
+			
 			m_Grounded = false;
 			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
             coyoteTimeCounter = 0f;
             jumpBufferCounter = 0f;
 			animator.SetBool("isJumping", true);
+
+			//Debug.Log("Is Jumping!");
 		}
 	}
 
@@ -236,5 +246,7 @@ public class CharacterController2D : MonoBehaviour
 		theScale.x *= -1;
 		transform.localScale = theScale;
 	}
+
+ 
 
 }

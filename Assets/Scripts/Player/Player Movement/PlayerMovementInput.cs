@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMove : MonoBehaviour
+public class PlayerMovementInput : MonoBehaviour
 {
-    public CharacterController2D controller;
+    private CharacterController2D controller;
 
     private float horizontalMovement = 0f;
     private bool jumping = false;
@@ -17,7 +17,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Start()
     {
-        
+        controller = gameObject.GetComponent<PlayerComponents>().getControllerScript();
     }
     private void Update()
     {
