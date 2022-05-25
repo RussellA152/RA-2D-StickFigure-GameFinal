@@ -10,39 +10,30 @@ public class CameraFollow : MonoBehaviour
 
     [SerializeField] private float offsetSmoothing;
 
-    private Vector3 temp;
+    private Vector3 cameraFollowPosition;
 
+    private float followSpeed = 0.3f;
 
     private Vector3 velocity = Vector3.zero;
 
-    private void Update()
-    {
-        //Application.targetFrameRate = 60;
-    }
     private void LateUpdate()
     {
 
-        //temp is the position of camera
-        temp = transform.position;
+        //cameraFollowPosition is the position of camera
+        cameraFollowPosition = transform.position;
 
         //camera's x & y position equals player's x & y position
-        temp.x = playerTransform.position.x;
-        temp.y = playerTransform.position.y;
+        cameraFollowPosition.x = playerTransform.position.x;
+        cameraFollowPosition.y = playerTransform.position.y;
 
-        temp.x += cameraOffsetX;
-        temp.y += cameraOffsetY;
+        //add cameraFollowPosition by an offset
+        cameraFollowPosition.x += cameraOffsetX;
+        cameraFollowPosition.y += cameraOffsetY;
 
-        //transform.position = temp;
-        //SMOOTH BUT BLURRY
-        transform.position = Vector3.SmoothDamp(transform.position, temp, ref velocity, 0.3f);
+        //set actual Main Camera's position using SmoothDamp so the camera can fall behind player 
+        transform.position = Vector3.SmoothDamp(transform.position, cameraFollowPosition, ref velocity, followSpeed);
     }
 
-    private void FixedUpdate()
-    {
-        //NOT SMOOTH BUT NOT BLURRY
-        //we update position inside of fixedUpdate because the player sprite becomes blurry when inside of lateUpdate
-       // transform.position = Vector3.SmoothDamp(transform.position, temp, ref velocity, 0.3f);
-    }
 
 
 }

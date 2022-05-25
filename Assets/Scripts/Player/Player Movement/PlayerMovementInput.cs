@@ -17,7 +17,7 @@ public class PlayerMovementInput : MonoBehaviour
 
     private void Start()
     {
-        controller = gameObject.GetComponent<PlayerComponents>().getControllerScript();
+        controller = GetComponent<CharacterController2D>();
     }
     private void Update()
     {

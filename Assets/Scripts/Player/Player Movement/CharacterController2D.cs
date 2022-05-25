@@ -4,6 +4,8 @@ using System.Collections;
 
 public class CharacterController2D : MonoBehaviour
 {
+	private PlayerComponents playerComponentScript;
+
 	[SerializeField] private float m_JumpForce = 1400f;                          // Amount of force added when the player jumps.
 	[Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;          // Amount of maxSpeed applied to crouching movement. 1 = 100%
 	[Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;  // How much to smooth out the movement
@@ -18,6 +20,10 @@ public class CharacterController2D : MonoBehaviour
 	const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
 	private Rigidbody2D m_Rigidbody2D;
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
+
+
+	private bool canInteract; //determines if player can walk and jump (retrieved from playerComponents script
+
 	private Vector3 m_Velocity = Vector3.zero;
 
 	private float animVelocity = 0.0f; //velocity used for locomotion blend tree
@@ -54,8 +60,7 @@ public class CharacterController2D : MonoBehaviour
 
 	private void Awake()
 	{
-		
-		
+
 
 		if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();
@@ -71,25 +76,24 @@ public class CharacterController2D : MonoBehaviour
 		//increases performance
 		velocityHash = Animator.StringToHash("Velocity");
 
-		m_Rigidbody2D = GetComponent<PlayerComponents>().getRB();
-		animator = GetComponent<PlayerComponents>().getAnimator();
 
-		//OnLandEvent.AddListener(LandAnimation);
+		playerComponentScript = GetComponent<PlayerComponents>();
+		m_Rigidbody2D = playerComponentScript.getRB();
+		animator = playerComponentScript.getAnimator();
+		
 	
     }
 
     private void Update()
     {
+		//always updating the canInteract bool to check if player is allowed to move and jump
+		canInteract = playerComponentScript.getCanInteract();
 
-		
-
-        if (m_Grounded)
+		if (m_Grounded)
         {
 			//if grounded, you're not jumping
 			animator.SetBool("isJumping", false);
 			animator.SetBool("isGrounded", true);
-
-			//Debug.Log("Is Jumping! FALSE");
 
 			coyoteTimeCounter = coyoteTime;
 			
@@ -139,6 +143,10 @@ public class CharacterController2D : MonoBehaviour
 
 	public void Move(float move, bool crouch, bool jump, float jumpBufferCounter)
 	{
+		//if you cannot interact, then set move to 0 (player will not be able to move)
+		if (!canInteract)
+			move = 0f;
+
 		//set locomotion velocity equal to player's speed * acceleration (this will make walking animation faster depending on movement speed)
 		animVelocity = Mathf.Abs(move * acceleration);
 		animator.SetFloat(velocityHash, animVelocity);
@@ -221,12 +229,17 @@ public class CharacterController2D : MonoBehaviour
 		// If the player should jump...
         // BEFORE: I was checking if player was allowed to jump and they were grounded, but i substituted
         // the grounded condition with checking the coyoteTimeCounter instead
-		if (coyoteTimeCounter > 0f && jumpBufferCounter > 0f)
+		if (coyoteTimeCounter > 0f && jumpBufferCounter > 0f && canInteract)
 		{
-			// Add a vertical force to the player.
-			
+
+			//reset y velocity when jumping so player can get a high jump height with coyote time
+			m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x,0f);
+
 			m_Grounded = false;
+
+			// Add a vertical force to the player.
 			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+			//Debug.Log("Y Velocity: " + m_Rigidbody2D.velocity.y);
             coyoteTimeCounter = 0f;
             jumpBufferCounter = 0f;
 			animator.SetBool("isJumping", true);
