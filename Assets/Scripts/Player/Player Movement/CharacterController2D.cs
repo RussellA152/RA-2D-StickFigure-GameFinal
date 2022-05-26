@@ -22,7 +22,7 @@ public class CharacterController2D : MonoBehaviour
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 
 
-	private bool canInteract; //determines if player can walk and jump (retrieved from playerComponents script
+	private bool canMove; //determines if player can walk and jump (retrieved from playerComponents script
 
 	private Vector3 m_Velocity = Vector3.zero;
 
@@ -87,7 +87,19 @@ public class CharacterController2D : MonoBehaviour
     private void Update()
     {
 		//always updating the canInteract bool to check if player is allowed to move and jump
-		canInteract = playerComponentScript.getCanInteract();
+		canMove = playerComponentScript.getCanMove();
+
+
+		//if (Input.GetKey(KeyCode.E))
+		//{
+			//playerComponentScript.setCanInteract(false);
+			//Debug.Log("Inside character controller2d");
+		//}
+		//else
+		//{
+			//playerComponentScript.setCanInteract(true);
+		//}
+		
 
 		if (m_Grounded)
         {
@@ -144,7 +156,7 @@ public class CharacterController2D : MonoBehaviour
 	public void Move(float move, bool crouch, bool jump, float jumpBufferCounter)
 	{
 		//if you cannot interact, then set move to 0 (player will not be able to move)
-		if (!canInteract)
+		if (!canMove)
 			move = 0f;
 
 		//set locomotion velocity equal to player's speed * acceleration (this will make walking animation faster depending on movement speed)
@@ -229,7 +241,7 @@ public class CharacterController2D : MonoBehaviour
 		// If the player should jump...
         // BEFORE: I was checking if player was allowed to jump and they were grounded, but i substituted
         // the grounded condition with checking the coyoteTimeCounter instead
-		if (coyoteTimeCounter > 0f && jumpBufferCounter > 0f && canInteract)
+		if (coyoteTimeCounter > 0f && jumpBufferCounter > 0f && canMove)
 		{
 
 			//reset y velocity when jumping so player can get a high jump height with coyote time

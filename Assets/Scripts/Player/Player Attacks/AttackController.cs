@@ -14,7 +14,7 @@ public class AttackController : MonoBehaviour
     public bool isAttacking = false;
     public bool isHeavyAttacking = false;
 
-    private bool canInteract; //determines if player is allowed to attack
+    private bool canAttack; //determines if player is allowed to attack
 
     private void Awake()
     {
@@ -34,18 +34,18 @@ public class AttackController : MonoBehaviour
     {
         Attack();
 
-        canInteract = playerComponentScript.getCanInteract();
+        canAttack = playerComponentScript.getCanAttack();
         
     }
 
     public void Attack()
     {
-        if(Input.GetMouseButtonDown(0) && !isAttacking && canInteract)
+        if(Input.GetMouseButtonDown(0) && !isAttacking && canAttack)
         {
             isAttacking = true;
         }
 
-        if(Input.GetMouseButtonDown(1) && !isHeavyAttacking && canInteract)
+        if(Input.GetMouseButtonDown(1) && !isHeavyAttacking && canAttack)
         {
             isHeavyAttacking = true;
         }

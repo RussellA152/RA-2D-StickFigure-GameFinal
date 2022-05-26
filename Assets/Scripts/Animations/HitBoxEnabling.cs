@@ -12,43 +12,44 @@ public class HitBoxEnabling : StateMachineBehaviour
 
     [SerializeField] private bool animHasHitbox; //determines if the animation has a hitbox tied to it
 
-    [SerializeField] private GameObject hitbox; //the hitbox (used for attacking enemy) gameobject
+    [SerializeField] private BoxCollider2D hitbox; //the hitbox (used for attacking enemy) gameobject
 
     [SerializeField] private bool turnOffHitbox; //determines if we should turn off hitbox
+
+    private PlayerComponents playerComponentScript; //we will use the player component script in order to invoke the setCanInteract() function
 
 
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        hitbox = GameObject.Find("Player Hit Box");
+        //when animation begins, retrieve the player's hitbox from the PlayerComponent's script
+        // this WILL break if the hitbox has a new parent
+        playerComponentScript = animator.transform.parent.gameObject.GetComponent<PlayerComponents>();
+        hitbox = playerComponentScript.getHitBox();
+        
 
-        if(animHasHitbox && hitbox != null)
-            hitbox.SetActive(true);
+        //if this animation contains a hitbox, then enable it at start of animation
+        if (animHasHitbox && hitbox != null)
+        {
+            hitbox.enabled = true;
+        }
+            
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
-
+        //Don't let player move during attack animation
+        playerComponentScript.setCanMove(false);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(hitbox.activeInHierarchy && turnOffHitbox && animHasHitbox)
-            hitbox.SetActive(false);
+        //if the hitbox is active, and we should turn it off, then set it to false
+        if (hitbox.enabled && turnOffHitbox && animHasHitbox)
+        {
+            hitbox.enabled = false;        
+        }        
     }
-
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
-
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
 }

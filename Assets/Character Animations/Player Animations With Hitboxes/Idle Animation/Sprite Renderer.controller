@@ -88,13 +88,12 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Transition 2
-  m_Speed: 1
+  m_Speed: 0.05
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -1481080456839953913}
   m_StateMachineBehaviours:
   - {fileID: -840034841098984016}
-  - {fileID: 2866546115202045448}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -103,7 +102,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
+  m_Motion: {fileID: 7400000, guid: 9c581fff158fdd843bdbdb36abc3e22f, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -148,6 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackName: 
   heavyAttackName: 
+  allowMovementDuringAnim: 0
 --- !u!1101 &-7758563310901304590
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -246,6 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackName: Attack 2
   heavyAttackName: Heavy Attack 1
+  allowMovementDuringAnim: 0
 --- !u!1102 &-6761910278824410491
 AnimatorState:
   serializedVersion: 6
@@ -399,6 +400,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackName: Attack 1
   heavyAttackName: Heavy Attack 1
+  allowMovementDuringAnim: 1
 --- !u!1101 &-5643098270777370237
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -535,13 +537,12 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Transition 1
-  m_Speed: 1
+  m_Speed: 0.05
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -2772697269554074870}
   m_StateMachineBehaviours:
   - {fileID: -6985050710066496230}
-  - {fileID: 982973275633868824}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -550,7 +551,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
+  m_Motion: {fileID: 7400000, guid: 0e0ede18b3b2ad94bb2afe66aa234cdf, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: isWalking
@@ -791,7 +792,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5df6cd3a55f82bd44b072b442e55c40e, type: 3}
   m_Name: 
@@ -898,13 +899,12 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Heavy Transition 1
-  m_Speed: 1
+  m_Speed: 0.05
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -4637648621336165065}
   m_StateMachineBehaviours:
   - {fileID: 7563747192174533840}
-  - {fileID: -521287384802984413}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -913,7 +913,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
+  m_Motion: {fileID: 7400000, guid: 9ced2dedc278d854da91f68bf4d9e2e6, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -987,6 +987,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackName: 
   heavyAttackName: 
+  allowMovementDuringAnim: 0
 --- !u!1101 &-3064123944577189723
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1335,13 +1336,12 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Transition 3
-  m_Speed: 1
+  m_Speed: 0.05
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 2602408295242947668}
   m_StateMachineBehaviours:
   - {fileID: -7831326710310975870}
-  - {fileID: 5280434184027605114}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1350,7 +1350,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
+  m_Motion: {fileID: 7400000, guid: af63ef2237bc5df4eaa400db79776976, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1370,6 +1370,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackName: Attack 3
   heavyAttackName: 
+  allowMovementDuringAnim: 0
 --- !u!1101 &-781862993067807824
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1447,7 +1448,7 @@ AnimatorState:
   - {fileID: -540783272023650815}
   - {fileID: 7849834021157964563}
   m_StateMachineBehaviours:
-  - {fileID: -4034424245109920686}
+  - {fileID: 4318441755560687824}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1963,6 +1964,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackName: 
   heavyAttackName: 
+  allowMovementDuringAnim: 0
 --- !u!1101 &3016651845754949685
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2051,6 +2053,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heavyAttackName: Heavy Attack 1 P2
+--- !u!114 &4318441755560687824
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bcdc20dc630907469b3c280d9dbdbfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackName: Attack 1
+  heavyAttackName: Heavy Attack 1
+  allowMovementDuringAnim: 1
 --- !u!1102 &4428197502280195058
 AnimatorState:
   serializedVersion: 6
@@ -2059,13 +2076,12 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Heavy Transition 1 P2
-  m_Speed: 1
+  m_Speed: 0.05
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 193169169946245021}
   m_StateMachineBehaviours:
   - {fileID: 3010920825516572795}
-  - {fileID: -1860903273753080068}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -2074,7 +2090,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
+  m_Motion: {fileID: 7400000, guid: 373c4a7735e94354e83f532c5e1af717, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -2427,6 +2443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackName: 
   heavyAttackName: Heavy Attack 1 P2
+  allowMovementDuringAnim: 0
 --- !u!1107 &7812341550167220144
 AnimatorStateMachine:
   serializedVersion: 6
