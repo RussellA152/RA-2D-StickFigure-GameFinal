@@ -21,14 +21,14 @@ AnimationClip:
   - curve:
     - time: 0
       value: {fileID: 21300000, guid: 8c955b8930a1edf4b9cc74e8282e58b7, type: 3}
-    - time: 0.11666667
+    - time: 0.05
       value: {fileID: 21300000, guid: 63a5903b74c1ce444bc0dddfac53eebd, type: 3}
-    - time: 0.25
+    - time: 0.1
       value: {fileID: 21300000, guid: 70d495c3f48bc0c4e9e5d19abf997287, type: 3}
-    - time: 0.36666667
+    - time: 0.15
       value: {fileID: 21300000, guid: c71bf9282ff4ad140b537840ed157556, type: 3}
     attribute: m_Sprite
-    path: 
+    path: Player Sprite Renderer
     classID: 212
     script: {fileID: 0}
   m_SampleRate: 60
@@ -39,7 +39,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 0
+      path: 1527452753
       attribute: 0
       script: {fileID: 0}
       typeID: 212
@@ -55,7 +55,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.38333336
+    m_StopTime: 0.16666667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

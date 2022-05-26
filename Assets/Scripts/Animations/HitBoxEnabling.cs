@@ -23,8 +23,7 @@ public class HitBoxEnabling : StateMachineBehaviour
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         //when animation begins, retrieve the player's hitbox from the PlayerComponent's script
-        // this WILL break if the hitbox has a new parent
-        playerComponentScript = animator.transform.parent.gameObject.GetComponent<PlayerComponents>();
+        playerComponentScript = animator.transform.gameObject.GetComponent<PlayerComponents>();
         hitbox = playerComponentScript.getHitBox();
         
 

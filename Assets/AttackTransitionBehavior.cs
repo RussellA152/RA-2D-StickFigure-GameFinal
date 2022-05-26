@@ -14,7 +14,7 @@ public class AttackTransitionBehavior : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        playerComponentScript = animator.transform.parent.gameObject.GetComponent<PlayerComponents>();
+        playerComponentScript = animator.transform.gameObject.GetComponent<PlayerComponents>();
 
         // IF this animation allows movement during animation then allow player to move (instead the animation will move player a little)
         // we also set canAttack to false inside of HitBoxEnabling ***

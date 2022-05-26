@@ -20,7 +20,7 @@ public class PlayerComponents : MonoBehaviour
 
     private void Awake()
     {
-        animator = GetComponentInChildren<Animator>();
+        animator = GetComponent<Animator>();
         playerRB = GetComponent<Rigidbody2D>();
 
     }
