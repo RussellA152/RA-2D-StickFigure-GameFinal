@@ -272,6 +272,11 @@ public class CharacterController2D : MonoBehaviour
 		transform.localScale = theScale;
 	}
 
+	public bool getDirection()
+    {
+		return m_FacingRight;
+    }
+
  
 
 }

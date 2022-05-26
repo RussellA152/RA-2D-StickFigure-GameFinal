@@ -14,6 +14,7 @@ AnimatorState:
   - {fileID: 1584577333131934857}
   m_StateMachineBehaviours:
   - {fileID: 1128361374566700145}
+  - {fileID: 7575761301753349140}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -224,7 +225,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d40dcd185d80fba4296621e82e8845e8, type: 3}
   m_Name: 
@@ -282,7 +283,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d40dcd185d80fba4296621e82e8845e8, type: 3}
   m_Name: 
@@ -401,6 +402,23 @@ MonoBehaviour:
   attackName: Attack 1
   heavyAttackName: Heavy Attack 1
   allowMovementDuringAnim: 1
+--- !u!114 &-5735426188076464095
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animHasHitbox: 1
+  hitbox: {fileID: 0}
+  turnOffHitbox: 1
+  joltForceX: 1000
+  joltForceY: 0
 --- !u!1101 &-5643098270777370237
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -645,6 +663,7 @@ AnimatorState:
   - {fileID: -1564167217349303066}
   m_StateMachineBehaviours:
   - {fileID: -1639682898318523224}
+  - {fileID: -3338777746874676715}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -883,7 +902,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d40dcd185d80fba4296621e82e8845e8, type: 3}
   m_Name: 
@@ -973,6 +992,23 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &-3338777746874676715
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animHasHitbox: 1
+  hitbox: {fileID: 0}
+  turnOffHitbox: 1
+  joltForceX: 1000
+  joltForceY: 0
 --- !u!114 &-3170488162557796640
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1032,6 +1068,23 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-2871570766332167747
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animHasHitbox: 1
+  hitbox: {fileID: 0}
+  turnOffHitbox: 1
+  joltForceX: 900
+  joltForceY: 0
 --- !u!1101 &-2772697269554074870
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1205,6 +1258,7 @@ AnimatorState:
   - {fileID: -4871780538469933713}
   m_StateMachineBehaviours:
   - {fileID: -6631401594209044092}
+  - {fileID: 8101292665032055161}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1226,7 +1280,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d40dcd185d80fba4296621e82e8845e8, type: 3}
   m_Name: 
@@ -1644,7 +1698,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d40dcd185d80fba4296621e82e8845e8, type: 3}
   m_Name: 
@@ -1823,6 +1877,7 @@ AnimatorState:
   - {fileID: 5803501384023743359}
   m_StateMachineBehaviours:
   - {fileID: -7096926578195532071}
+  - {fileID: -5735426188076464095}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -2337,6 +2392,7 @@ AnimatorState:
   - {fileID: -3763195675890542838}
   m_StateMachineBehaviours:
   - {fileID: -3755302433874455141}
+  - {fileID: -2871570766332167747}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -2390,10 +2446,10 @@ AnimatorStateMachine:
     m_Position: {x: 530, y: -150, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -9173212949789218592}
-    m_Position: {x: 270, y: -90, z: 0}
+    m_Position: {x: 270, y: -60, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4428197502280195058}
-    m_Position: {x: 530, y: -90, z: 0}
+    m_Position: {x: 550, y: -60, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -2444,6 +2500,23 @@ MonoBehaviour:
   attackName: 
   heavyAttackName: Heavy Attack 1 P2
   allowMovementDuringAnim: 0
+--- !u!114 &7575761301753349140
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animHasHitbox: 1
+  hitbox: {fileID: 0}
+  turnOffHitbox: 1
+  joltForceX: 900
+  joltForceY: 0
 --- !u!1107 &7812341550167220144
 AnimatorStateMachine:
   serializedVersion: 6
@@ -2596,6 +2669,23 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &8101292665032055161
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animHasHitbox: 1
+  hitbox: {fileID: 0}
+  turnOffHitbox: 1
+  joltForceX: 900
+  joltForceY: 0
 --- !u!1101 &9201745048176970995
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
