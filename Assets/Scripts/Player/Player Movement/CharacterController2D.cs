@@ -7,6 +7,8 @@ public class CharacterController2D : MonoBehaviour
 	private PlayerComponents playerComponentScript;
 
 	[SerializeField] private float m_JumpForce = 1400f;                          // Amount of force added when the player jumps.
+	[SerializeField] private float speedMultiplier = 10f;                       // this float is applied to the regular movement speed (allows movement to gradually increase)
+	[SerializeField] private float maxSpeedMultiplier = 20f;
 	[Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;          // Amount of maxSpeed applied to crouching movement. 1 = 100%
 	[Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;  // How much to smooth out the movement
 	[SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
@@ -76,7 +78,6 @@ public class CharacterController2D : MonoBehaviour
 		//increases performance
 		velocityHash = Animator.StringToHash("Velocity");
 
-
 		playerComponentScript = GetComponent<PlayerComponents>();
 		m_Rigidbody2D = playerComponentScript.getRB();
 		animator = playerComponentScript.getAnimator();
@@ -88,19 +89,7 @@ public class CharacterController2D : MonoBehaviour
     {
 		//always updating the canInteract bool to check if player is allowed to move and jump
 		canMove = playerComponentScript.getCanMove();
-
-
-		//if (Input.GetKey(KeyCode.E))
-		//{
-			//playerComponentScript.setCanInteract(false);
-			//Debug.Log("Inside character controller2d");
-		//}
-		//else
-		//{
-			//playerComponentScript.setCanInteract(true);
-		//}
-		
-
+		Debug.Log("Velocity is :" + animVelocity);
 		if (m_Grounded)
         {
 			//if grounded, you're not jumping
@@ -155,13 +144,22 @@ public class CharacterController2D : MonoBehaviour
 
 	public void Move(float move, bool crouch, bool jump, float jumpBufferCounter)
 	{
+		//if you're moving then gradually increase movement speed
+		if (move > 0 || move < 0)
+        {
+			//limit the movement speedMultipler to 20 so the player can move too fast
+			if(speedMultiplier < maxSpeedMultiplier)
+				speedMultiplier += 0.1f;
+		}
+			
+		else
+			speedMultiplier = 10f;
+
+
+
 		//if you cannot interact, then set move to 0 (player will not be able to move)
 		if (!canMove)
 			move = 0f;
-
-		//set locomotion velocity equal to player's speed * acceleration (this will make walking animation faster depending on movement speed)
-		animVelocity = Mathf.Abs(move * acceleration);
-		animator.SetFloat(velocityHash, animVelocity);
 		
 
 		if (move != 0 && m_Grounded)
@@ -220,9 +218,15 @@ public class CharacterController2D : MonoBehaviour
 			}
 
 			// Move the character by finding the target velocity
-			Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.velocity.y);
+			Vector3 targetVelocity = new Vector2(move * speedMultiplier, m_Rigidbody2D.velocity.y);
+
 			// And then smoothing it out and applying it to the character
 			m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
+
+
+			//set locomotion velocity equal to player's speed * acceleration (this will make walking animation faster depending on movement speed)
+			animVelocity = Mathf.Abs((targetVelocity.x * acceleration)/12);
+			animator.SetFloat(velocityHash, animVelocity);
 
 			// If the input is moving the player right and the player is facing left...
 			if (move > 0 && !m_FacingRight)
@@ -256,7 +260,6 @@ public class CharacterController2D : MonoBehaviour
             jumpBufferCounter = 0f;
 			animator.SetBool("isJumping", true);
 
-			//Debug.Log("Is Jumping!");
 		}
 	}
 

@@ -33,28 +33,9 @@ public class PlayerComponents : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log("canInteract is: " + canInteract);
 
-        //if (Input.GetKey(KeyCode.E))
-        //{
-        ////    setCanInteract(false);
-        //}
-        //else
-        //{
-        //    setCanInteract(true);
-        //}
     }
 
-    //sets canInteract equal to the given boolean value
-    //public void setCanInteract(bool boolean)
-    //{
-      //  canInteract = boolean;
-    //}
-    //retrieves the canInteract boolean
-    //public bool getCanInteract()
-    //{
-      //  return canInteract;
-    //}
 
     public void setCanAttack(bool boolean)
     {
