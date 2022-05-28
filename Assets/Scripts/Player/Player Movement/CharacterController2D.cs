@@ -24,13 +24,9 @@ public class CharacterController2D : MonoBehaviour
 	private bool m_FacingRight = true;  // For determining which way the player is currently facing.
 
 
-	private bool canMove; //determines if player can walk and jump (retrieved from playerComponents script
-
 	private Vector3 m_Velocity = Vector3.zero;
 
-	private float animVelocity = 0.0f; //velocity used for locomotion blend tree
-	private int velocityHash;
-	private float acceleration = 1f;
+	private float acceleration = 1f; //acceleration of player's movement
 
 	//public int jump_count = 2; // the number of times the player can jump
 
@@ -41,9 +37,18 @@ public class CharacterController2D : MonoBehaviour
     private float coyoteTimeCounter;
 
 
-	private bool isWalking;
+	private bool isWalking; //bool if player is walking
+	private bool canMove; //determines if player can walk and jump (retrieved from playerComponents script
 
 	public Animator animator;
+
+	private float animVelocity = 0.0f; //velocity used for locomotion blend tree
+
+	//using hashvalues for setBool & setFloat is faster than using strings like "isWalking"
+	private int velocityHash; //the hash value of our animator's velocity parameter
+	private int isWalkingHash; //hash value of our animator's isWalking parameter
+	private int isJumpingHash; //hash value of our animator's isJumping parameter
+	private int isGroundedHash; //hash value of our animator's isGrounded parameter
 
 
 
@@ -77,6 +82,9 @@ public class CharacterController2D : MonoBehaviour
 
 		//increases performance
 		velocityHash = Animator.StringToHash("Velocity");
+		isGroundedHash = Animator.StringToHash("isGrounded");
+		isWalkingHash = Animator.StringToHash("isWalking");
+		isJumpingHash = Animator.StringToHash("isJumping");
 
 		playerComponentScript = GetComponent<PlayerComponents>();
 		m_Rigidbody2D = playerComponentScript.getRB();
@@ -87,14 +95,25 @@ public class CharacterController2D : MonoBehaviour
 
     private void Update()
     {
+
+        if (Input.GetKey(KeyCode.S))
+        {
+			animator.SetBool("isSliding", true);
+        }
+        else
+        {
+			animator.SetBool("isSliding", false);
+        }
+
+
 		//always updating the canInteract bool to check if player is allowed to move and jump
 		canMove = playerComponentScript.getCanMove();
-		Debug.Log("Velocity is :" + animVelocity);
+		//Debug.Log("Velocity is : " + animVelocity);
 		if (m_Grounded)
         {
 			//if grounded, you're not jumping
-			animator.SetBool("isJumping", false);
-			animator.SetBool("isGrounded", true);
+			animator.SetBool(isJumpingHash, false);
+			animator.SetBool(isGroundedHash, true);
 
 			coyoteTimeCounter = coyoteTime;
 			
@@ -103,7 +122,7 @@ public class CharacterController2D : MonoBehaviour
         {
             //when player is mid-air, start counting the coyote time down
             coyoteTimeCounter -= Time.deltaTime;
-			animator.SetBool("isGrounded", false);
+			animator.SetBool(isGroundedHash, false);
 		}
         
 
@@ -165,13 +184,13 @@ public class CharacterController2D : MonoBehaviour
 		if (move != 0 && m_Grounded)
         {
 			isWalking = true;
-			animator.SetBool("isWalking", isWalking);
+			animator.SetBool(isWalkingHash, isWalking);
         }
 
         else
         {
 			isWalking = false;
-			animator.SetBool("isWalking",isWalking);
+			animator.SetBool(isWalkingHash,isWalking);
 		}
 
 		// If crouching, check to see if the character can stand up
@@ -226,6 +245,7 @@ public class CharacterController2D : MonoBehaviour
 
 			//set locomotion velocity equal to player's speed * acceleration (this will make walking animation faster depending on movement speed)
 			animVelocity = Mathf.Abs((targetVelocity.x * acceleration)/12);
+			//setting the animator's velocity equal to animVelocity
 			animator.SetFloat(velocityHash, animVelocity);
 
 			// If the input is moving the player right and the player is facing left...
@@ -258,7 +278,7 @@ public class CharacterController2D : MonoBehaviour
 			//Debug.Log("Y Velocity: " + m_Rigidbody2D.velocity.y);
             coyoteTimeCounter = 0f;
             jumpBufferCounter = 0f;
-			animator.SetBool("isJumping", true);
+			animator.SetBool(isJumpingHash, true);
 
 		}
 	}
