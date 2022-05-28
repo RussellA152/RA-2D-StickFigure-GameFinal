@@ -311,8 +311,8 @@ AnimatorStateMachine:
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 60, y: 80, z: 0}
-  m_ExitPosition: {x: 800, y: 120, z: 0}
-  m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
+  m_ExitPosition: {x: 790, y: 220, z: 0}
+  m_ParentStateMachinePosition: {x: 800, y: 70, z: 0}
   m_DefaultState: {fileID: -531396272448702576}
 --- !u!1101 &-7351825801671126240
 AnimatorStateTransition:
@@ -1144,7 +1144,6 @@ AnimatorState:
   - {fileID: -8904573781492956020}
   - {fileID: -8945714494672827793}
   - {fileID: -7708759900026134090}
-  - {fileID: 5748339122062817194}
   m_StateMachineBehaviours:
   - {fileID: -5912430534155928566}
   - {fileID: -5031270007173552886}
@@ -1699,6 +1698,21 @@ BlendTree:
   m_UseAutomaticThresholds: 1
   m_NormalizedBlendValues: 0
   m_BlendType: 0
+--- !u!206 &-1417553462602530421
+BlendTree:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Blend Tree
+  m_Childs: []
+  m_BlendParameter: Velocity
+  m_BlendParameterY: Velocity
+  m_MinThreshold: 0
+  m_MaxThreshold: 1
+  m_UseAutomaticThresholds: 1
+  m_NormalizedBlendValues: 0
+  m_BlendType: 0
 --- !u!1102 &-1366450803559254387
 AnimatorState:
   serializedVersion: 6
@@ -2001,12 +2015,6 @@ AnimatorController:
     m_Controller: {fileID: 0}
   - m_Name: isSliding
     m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
-  - m_Name: turnedAround
-    m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -2715,7 +2723,7 @@ AnimatorStateMachine:
     m_Position: {x: 570, y: 410, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: 6496870065685537018}
-    m_Position: {x: -200, y: 400, z: 0}
+    m_Position: {x: -220, y: 210, z: 0}
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
@@ -2723,7 +2731,7 @@ AnimatorStateMachine:
     second: []
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -90, y: -60, z: 0}
-  m_EntryPosition: {x: -150, y: 110, z: 0}
+  m_EntryPosition: {x: -250, y: 110, z: 0}
   m_ExitPosition: {x: 1000, y: 170, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -96890588181203755}
@@ -2740,6 +2748,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   heavyAttackName: Heavy Attack 1 P2
+--- !u!1102 &4313004062030697132
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Blend Tree
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 0}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!114 &4318441755560687824
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2866,7 +2900,7 @@ AnimatorStateMachine:
     m_Position: {x: 200, y: -50, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: -7408078327581011937}
-    m_Position: {x: -30, y: 120, z: 0}
+    m_Position: {x: -130, y: 200, z: 0}
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}

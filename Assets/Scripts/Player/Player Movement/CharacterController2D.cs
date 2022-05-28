@@ -1,9 +1,13 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
+using UnityEngine.InputSystem;
 
 public class CharacterController2D : MonoBehaviour
 {
+	public PlayerInputActions playerControls;
+
+
 	private PlayerComponents playerComponentScript;
 
 	[SerializeField] private float m_JumpForce = 1400f;                          // Amount of force added when the player jumps.
@@ -51,6 +55,10 @@ public class CharacterController2D : MonoBehaviour
 	private int isGroundedHash; //hash value of our animator's isGrounded parameter
 
 
+	private InputAction move;
+	private InputAction jump;
+
+
 
 	[Header("Events")]
 	[Space]
@@ -63,9 +71,17 @@ public class CharacterController2D : MonoBehaviour
 	public BoolEvent OnCrouchEvent;
 	private bool m_wasCrouching = false;
 
-	//testing github again
+    private void OnEnable()
+    {
+        
+    }
 
-	private void Awake()
+    private void OnDisable()
+    {
+        
+    }
+
+    private void Awake()
 	{
 
 
@@ -78,6 +94,8 @@ public class CharacterController2D : MonoBehaviour
 
     private void Start()
     {
+
+
 		isWalking = false;
 
 		//increases performance
@@ -87,8 +105,14 @@ public class CharacterController2D : MonoBehaviour
 		isJumpingHash = Animator.StringToHash("isJumping");
 
 		playerComponentScript = GetComponent<PlayerComponents>();
+
+		move = playerComponentScript.getMove();
+		jump = playerComponentScript.getJump();
+
 		m_Rigidbody2D = playerComponentScript.getRB();
 		animator = playerComponentScript.getAnimator();
+
+
 		
 	
     }
@@ -96,14 +120,14 @@ public class CharacterController2D : MonoBehaviour
     private void Update()
     {
 
-        if (Input.GetKey(KeyCode.S))
-        {
-			animator.SetBool("isSliding", true);
-        }
-        else
-        {
-			animator.SetBool("isSliding", false);
-        }
+        //if (Input.GetKey(KeyCode.S))
+        //{
+			//animator.SetBool("isSliding", true);
+        //}
+        //else
+        //{
+			//animator.SetBool("isSliding", false);
+        //}
 
 
 		//always updating the canInteract bool to check if player is allowed to move and jump
@@ -132,7 +156,7 @@ public class CharacterController2D : MonoBehaviour
 			m_Rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
 		//if we are rising (jumping), and we let go of the jump button, then we should have a low jump multiplier applied
-		else if(m_Rigidbody2D.velocity.y > 0 && !Input.GetButton("Jump"))
+		else if(m_Rigidbody2D.velocity.y > 0 && jump.ReadValue<float>() == 0f)
         {
 			m_Rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
 		}

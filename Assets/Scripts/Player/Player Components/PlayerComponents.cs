@@ -1,9 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerComponents : MonoBehaviour
 {
+    public PlayerInputActions playerControls;
+
+    private InputAction move;
+    private InputAction jump;
+    private InputAction attack;
+
     private float health;
 
     public Animator animator;
@@ -22,8 +29,11 @@ public class PlayerComponents : MonoBehaviour
 
     private void Awake()
     {
+        playerControls = new PlayerInputActions();
         animator = GetComponent<Animator>();
         playerRB = GetComponent<Rigidbody2D>();
+
+        
 
     }
     private void Start()
@@ -34,6 +44,23 @@ public class PlayerComponents : MonoBehaviour
     private void Update()
     {
 
+    }
+
+    private void OnEnable()
+    {
+        move = playerControls.Player.Move;
+        jump = playerControls.Player.Jump;
+        attack = playerControls.Player.Fire;
+
+        move.Enable();
+        jump.Enable();
+        attack.Enable();
+    }
+    private void OnDisable()
+    {
+        move.Disable();
+        jump.Disable();
+        attack.Disable();
     }
 
 
@@ -85,6 +112,16 @@ public class PlayerComponents : MonoBehaviour
         //update player's direction before giving 
         playerFacingRight = GetComponent<CharacterController2D>().getDirection();
         return playerFacingRight;
+    }
+
+    public InputAction getMove()
+    {
+        return move;
+    }
+
+    public InputAction getJump()
+    {
+        return jump;
     }
 
 }
