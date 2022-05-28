@@ -10,11 +10,12 @@ public class AttackController : MonoBehaviour
 
     public Animator animator;
 
+    private bool canAttack; //determines if player is allowed to attack
 
     public bool isAttacking = false;
     public bool isHeavyAttacking = false;
 
-    private bool canAttack; //determines if player is allowed to attack
+    
 
     private void Awake()
     {
