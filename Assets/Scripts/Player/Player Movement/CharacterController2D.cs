@@ -11,8 +11,8 @@ public class CharacterController2D : MonoBehaviour
 
 	[SerializeField] private float m_JumpForce = 1400f;                          // Amount of force added when the player jumps.
 	[SerializeField] private float speedMultiplier = 10f;                       // this float is applied to the regular movement speed (allows movement to gradually increase)
-	[SerializeField] private float slideSpeed = 100f;
 	[SerializeField] private float maxSpeedMultiplier = 20f;
+
 	[Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;          // Amount of maxSpeed applied to crouching movement. 1 = 100%
 	[Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;  // How much to smooth out the movement
 	[SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
@@ -125,24 +125,15 @@ public class CharacterController2D : MonoBehaviour
     {
 		canMove = playerComponentScript.getCanMove();
 
-		//if player is holding slide button, then slide, otherwise stop
+		//if player is holding slide button, then slide, otherwise stop (will be interrupted if player is no longer grounded (will probably change)
 		if(slide.ReadValue<float>() > 0 && m_Grounded)
         {
 			animator.SetBool(isSlidingHash, true);
-			playerComponentScript.setCanMove(false);
-			Slide();
 			
         }
-        else if(!playerComponentScript.getCanAttack() && m_Grounded)
-        {
-			animator.SetBool(isSlidingHash, false);
-			playerComponentScript.setCanMove(true);
-			slideSpeed = 10f;
-		}
         else
         {
 			animator.SetBool(isSlidingHash, false);
-			slideSpeed = 10f;
 		}
 
 
@@ -341,26 +332,5 @@ public class CharacterController2D : MonoBehaviour
     {
 		return m_FacingRight;
     }
-
-	private void Slide()
-    {
-		
-
-		//Debug.Log(slideSpeed);
-		if (m_FacingRight)
-			m_Rigidbody2D.AddForce(Vector2.right * slideSpeed);
-		else
-			m_Rigidbody2D.AddForce(Vector2.left * slideSpeed);
-
-		if (slideSpeed > 0)
-			slideSpeed -= 0.01f;
-        else
-        {
-			slideSpeed = 0f;
-			//playerComponentScript.setCanSlide(false);
-		}
-			
-    }
-
 
 }
