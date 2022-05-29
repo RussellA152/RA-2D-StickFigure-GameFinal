@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class AttackController : MonoBehaviour
 {
@@ -15,6 +16,10 @@ public class AttackController : MonoBehaviour
     public bool isAttacking = false;
     public bool isHeavyAttacking = false;
 
+    private InputAction lightAttack;
+    private InputAction heavyAttack;
+    private InputAction backLightAttack;
+
     
 
     private void Awake()
@@ -23,32 +28,59 @@ public class AttackController : MonoBehaviour
     
     }
 
+    private void OnEnable()
+    {
+        
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         playerComponentScript = GetComponent<PlayerComponents>();
         animator = playerComponentScript.getAnimator();
+
+        lightAttack = playerComponentScript.getLightAttack();
+        heavyAttack = playerComponentScript.getHeavyAttack();
+        backLightAttack = playerComponentScript.getBackLightAttack();
+
+        lightAttack.performed += LightAttack;
+        heavyAttack.performed += HeavyAttack;
+        backLightAttack.performed += BackLightAttack;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Attack();
+        //Attack();
 
         canAttack = playerComponentScript.getCanAttack();
         
     }
 
-    public void Attack()
+    public void LightAttack(InputAction.CallbackContext context)
     {
-        if(Input.GetMouseButtonDown(0) && !isAttacking && canAttack)
+        if (context.performed && canAttack &&!isAttacking)
         {
             isAttacking = true;
-        }
-
-        if(Input.GetMouseButtonDown(1) && !isHeavyAttacking && canAttack)
-        {
-            isHeavyAttacking = true;
+            Debug.Log("Light Attack!");
         }
     }
+
+    public void HeavyAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed && canAttack && !isAttacking)
+        {
+            isHeavyAttacking = true;
+            Debug.Log("Heavy Attack!");
+        }
+    }
+
+    public void BackLightAttack(InputAction.CallbackContext context)
+    {
+        if(context.performed && canAttack)
+        {
+            Debug.Log("Back attack!");
+        }
+    }
+
 }

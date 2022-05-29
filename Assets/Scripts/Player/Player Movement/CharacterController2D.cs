@@ -7,11 +7,11 @@ public class CharacterController2D : MonoBehaviour
 {
 	public PlayerInputActions playerControls;
 
-
 	private PlayerComponents playerComponentScript;
 
 	[SerializeField] private float m_JumpForce = 1400f;                          // Amount of force added when the player jumps.
 	[SerializeField] private float speedMultiplier = 10f;                       // this float is applied to the regular movement speed (allows movement to gradually increase)
+	[SerializeField] private float slideSpeed = 100f;
 	[SerializeField] private float maxSpeedMultiplier = 20f;
 	[Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;          // Amount of maxSpeed applied to crouching movement. 1 = 100%
 	[Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;  // How much to smooth out the movement
@@ -53,10 +53,12 @@ public class CharacterController2D : MonoBehaviour
 	private int isWalkingHash; //hash value of our animator's isWalking parameter
 	private int isJumpingHash; //hash value of our animator's isJumping parameter
 	private int isGroundedHash; //hash value of our animator's isGrounded parameter
+	private int isSlidingHash; //hash value of our animator's isSliding parameter
 
 
-	private InputAction move;
+	//private InputAction move;
 	private InputAction jump;
+	private InputAction slide;
 
 
 
@@ -98,16 +100,18 @@ public class CharacterController2D : MonoBehaviour
 
 		isWalking = false;
 
-		//increases performance
+		//increases performance to use hashvalues instead of reading strings
 		velocityHash = Animator.StringToHash("Velocity");
 		isGroundedHash = Animator.StringToHash("isGrounded");
 		isWalkingHash = Animator.StringToHash("isWalking");
 		isJumpingHash = Animator.StringToHash("isJumping");
+		isSlidingHash = Animator.StringToHash("isSliding");
 
 		playerComponentScript = GetComponent<PlayerComponents>();
 
-		move = playerComponentScript.getMove();
+		//move = playerComponentScript.getMove();
 		jump = playerComponentScript.getJump();
+		slide = playerComponentScript.getSlide();
 
 		m_Rigidbody2D = playerComponentScript.getRB();
 		animator = playerComponentScript.getAnimator();
@@ -119,19 +123,31 @@ public class CharacterController2D : MonoBehaviour
 
     private void Update()
     {
+		canMove = playerComponentScript.getCanMove();
 
-        //if (Input.GetKey(KeyCode.S))
-        //{
-			//animator.SetBool("isSliding", true);
-        //}
-        //else
-        //{
-			//animator.SetBool("isSliding", false);
-        //}
+		//if player is holding slide button, then slide, otherwise stop
+		if(slide.ReadValue<float>() > 0 && m_Grounded)
+        {
+			animator.SetBool(isSlidingHash, true);
+			playerComponentScript.setCanMove(false);
+			Slide();
+			
+        }
+        else if(!playerComponentScript.getCanAttack() && m_Grounded)
+        {
+			animator.SetBool(isSlidingHash, false);
+			playerComponentScript.setCanMove(true);
+			slideSpeed = 10f;
+		}
+        else
+        {
+			animator.SetBool(isSlidingHash, false);
+			slideSpeed = 10f;
+		}
 
 
 		//always updating the canInteract bool to check if player is allowed to move and jump
-		canMove = playerComponentScript.getCanMove();
+		
 		//Debug.Log("Velocity is : " + animVelocity);
 		if (m_Grounded)
         {
@@ -187,14 +203,26 @@ public class CharacterController2D : MonoBehaviour
 
 	public void Move(float move, bool crouch, bool jump, float jumpBufferCounter)
 	{
+
+		if (move != 0 && m_Grounded)
+		{
+			isWalking = true;
+			animator.SetBool(isWalkingHash, isWalking);
+		}
+
+		else
+		{
+			isWalking = false;
+			animator.SetBool(isWalkingHash, isWalking);
+		}
+
 		//if you're moving then gradually increase movement speed
 		if (move > 0 || move < 0)
         {
 			//limit the movement speedMultipler to 20 so the player can move too fast
 			if(speedMultiplier < maxSpeedMultiplier)
 				speedMultiplier += 0.1f;
-		}
-			
+		}	
 		else
 			speedMultiplier = 10f;
 
@@ -203,19 +231,7 @@ public class CharacterController2D : MonoBehaviour
 		//if you cannot interact, then set move to 0 (player will not be able to move)
 		if (!canMove)
 			move = 0f;
-		
-
-		if (move != 0 && m_Grounded)
-        {
-			isWalking = true;
-			animator.SetBool(isWalkingHash, isWalking);
-        }
-
-        else
-        {
-			isWalking = false;
-			animator.SetBool(isWalkingHash,isWalking);
-		}
+	
 
 		// If crouching, check to see if the character can stand up
 		if (!crouch)
@@ -311,6 +327,8 @@ public class CharacterController2D : MonoBehaviour
 	private void Flip()
 	{
 		// Switch the way the player is labelled as facing.
+		speedMultiplier = 10f;
+
 		m_FacingRight = !m_FacingRight;
 
 		// Multiply the player's x local scale by -1.
@@ -324,6 +342,25 @@ public class CharacterController2D : MonoBehaviour
 		return m_FacingRight;
     }
 
- 
+	private void Slide()
+    {
+		
+
+		//Debug.Log(slideSpeed);
+		if (m_FacingRight)
+			m_Rigidbody2D.AddForce(Vector2.right * slideSpeed);
+		else
+			m_Rigidbody2D.AddForce(Vector2.left * slideSpeed);
+
+		if (slideSpeed > 0)
+			slideSpeed -= 0.01f;
+        else
+        {
+			slideSpeed = 0f;
+			//playerComponentScript.setCanSlide(false);
+		}
+			
+    }
+
 
 }

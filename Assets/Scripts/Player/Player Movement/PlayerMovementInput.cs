@@ -49,7 +49,7 @@ public class PlayerMovementInput : MonoBehaviour
     private void Update()
     {
         bool canMove = playerComponentScript.getCanMove();
-        Debug.Log(horizontalMovement);
+        //Debug.Log(horizontalMovement);
         //if player can move, then calculate input
         //otherwise make movement = 0
 
@@ -60,10 +60,10 @@ public class PlayerMovementInput : MonoBehaviour
             horizontalMovement = temp.x * runSpeed;
             //horizontalMovement = Input.GetAxisRaw("Horizontal") * runSpeed;
         }
-
         else
             horizontalMovement = 0f;
 
+        //Debug.Log("Speed: " + horizontalMovement);
 
         if (jump.triggered)
         {
