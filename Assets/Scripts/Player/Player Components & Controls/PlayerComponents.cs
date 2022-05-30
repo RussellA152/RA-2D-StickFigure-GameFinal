@@ -29,9 +29,13 @@ public class PlayerComponents : MonoBehaviour
 
     //private bool canInteract = true; //this bool determines if the player should be able to move, attack, or jump (set to false when attacked)
 
-    private bool canAttack = true; //this bool determines if the player is allowed to move or jump
-    private bool canMove = true; //this bool determines if the player is allowed to attack
+    private bool canAttack = true; //this bool determines if the player is allowed to attack
+    private bool canBackAttack = true; //this bool determines if the player to perform a back attack (turning around and attacking)
+    private bool canMove = true; //this bool determines if the player is allowed to walk and jump (both)
     private bool canSlide = true; //this bool determines if the player is allowed to slide
+
+    private bool canJump = true; //this bool determines if the player is allowed to walk (only)
+    private bool canWalk = true; //this bool determines if the player is allowed to jump (only)
 
 
     private void Awake()
@@ -81,22 +85,51 @@ public class PlayerComponents : MonoBehaviour
     public void setCanAttack(bool boolean)
     {
         canAttack = boolean;
+        canBackAttack = boolean;
+
     }
-    //retrieves the canInteract boolean
+    public void setCanBackAttack(bool boolean)
+    {
+        canBackAttack = boolean;
+    }
+
+    //retrieves the canAttack boolean
     public bool getCanAttack()
     {
         return canAttack;
     }
+    public bool getCanBackAttack()
+    {
+        return canBackAttack;
+    }
 
     public void setCanMove(bool boolean)
     {
-        canMove = boolean;
+        canJump = boolean;
+        canWalk = boolean;
     }
+    public void setCanJump(bool boolean)
+    {
+        canJump = boolean;
+    }
+    public void setCanWalk(bool boolean)
+    {
+        canJump = boolean;
+    }
+
     public void setCanSlide(bool boolean)
     {
         canSlide = boolean;
     }
-    //retrieves the canInteract boolean
+    public bool getCanJump()
+    {
+        return canJump;
+    }
+    public bool getCanWalk()
+    {
+        return canWalk;
+    }
+    //retrieves the canMove boolean
     public bool getCanMove()
     {
         return canMove;
@@ -160,6 +193,19 @@ public class PlayerComponents : MonoBehaviour
     public InputAction getBackLightAttack()
     {
         return backLightAttack;
+    }
+
+    //might put this in a different script later (could there be a memory leak here?)
+    // ONLY WORKS WITH A KEYBOARD AT THE MOMENT
+    public void rebindBackAttack(string originalBind, string newBind)
+    {
+        //Debug.Log("REBIND START!");
+        //if(originalBind.Equals("a"))
+            //backLightAttack.ChangeBindingWithPath("<Keyboard>/a").WithPath("<Keyboard>/d");
+        //else if (originalBind.Equals("d"))
+            //backLightAttack.ChangeBindingWithPath("<Keyboard>/d").WithPath("<Keyboard>/a");
+
+        //Debug.Log("REBIND END!");
     }
 
 }

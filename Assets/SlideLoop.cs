@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class SlideLoop : StateMachineBehaviour
 {
-    [SerializeField] private float slideSpeed;
+    [SerializeField] private float slideSpeed;                                  // How fast the player will slide (slow decreases & must be a high value ex. 34,000)
+
     private float tempSlideSpeed;
+
     private bool directionIsRight;
 
     private PlayerComponents playerCompScript;
@@ -16,12 +18,21 @@ public class SlideLoop : StateMachineBehaviour
     {
         tempSlideSpeed = slideSpeed;
 
+        //retrieve player components
         playerCompScript = animator.transform.gameObject.GetComponent<PlayerComponents>();
+
+        //disable player's ability walk & jump & attack during slide
+        playerCompScript.setCanMove(false);
+        playerCompScript.setCanAttack(false);
 
         rb = playerCompScript.getRB();
         directionIsRight = playerCompScript.getPlayerDirection();
 
-        rb.AddForce(Vector2.right * tempSlideSpeed);
+        //apply force to Vector2.right or Vector2.left depending on which way player is facing
+        if (directionIsRight)
+            rb.AddForce(Vector2.right * tempSlideSpeed * Time.deltaTime);
+        else
+            rb.AddForce(Vector2.left * tempSlideSpeed * Time.deltaTime);
 
 
     }
@@ -29,42 +40,35 @@ public class SlideLoop : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(directionIsRight)
-            rb.AddForce(Vector2.right * tempSlideSpeed);
+        //apply force to Vector2.right or Vector2.left depending on which way player is facing
+        if (directionIsRight)
+            rb.AddForce(Vector2.right * tempSlideSpeed  * Time.deltaTime);
         else
-            rb.AddForce(Vector2.left * tempSlideSpeed);
+            rb.AddForce(Vector2.left * tempSlideSpeed * Time.deltaTime);
 
+        //while slide Speed is greater than 0, decrease it
         if (tempSlideSpeed > 0)
-            tempSlideSpeed -= .8f;
+            tempSlideSpeed -= 20000f * Time.deltaTime;
+
+        //if slide speed becomes lower than 0, then reset it to 0
         else if (tempSlideSpeed < 0)
             tempSlideSpeed = 0f;
 
+        //once slide speed reaches 0, play getting up animation
         if (tempSlideSpeed == 0)
         {
             animator.SetBool("isSliding", false);
             animator.Play("P_Slide_GetUp");
         }
-
-        Debug.Log(tempSlideSpeed);
             
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        //allow player is move and attack again
+        //playerCompScript.setCanMove(true);
         playerCompScript.setCanMove(true);
         playerCompScript.setCanAttack(true);
     }
-
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
-
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
 }

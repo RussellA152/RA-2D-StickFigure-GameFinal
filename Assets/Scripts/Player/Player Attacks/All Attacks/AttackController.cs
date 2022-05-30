@@ -12,9 +12,11 @@ public class AttackController : MonoBehaviour
     public Animator animator;
 
     private bool canAttack; //determines if player is allowed to attack
+    private bool canBackAttack; //determines if player is allowed to do a back attack
 
     public bool isAttacking = false;
     public bool isHeavyAttacking = false;
+    public bool isBackAttacking = false;
 
     private InputAction lightAttack;
     private InputAction heavyAttack;
@@ -43,23 +45,49 @@ public class AttackController : MonoBehaviour
         heavyAttack = playerComponentScript.getHeavyAttack();
         backLightAttack = playerComponentScript.getBackLightAttack();
 
-        lightAttack.performed += LightAttack;
-        heavyAttack.performed += HeavyAttack;
-        backLightAttack.performed += BackLightAttack;
+        //lightAttack.performed += LightAttack;
+        //heavyAttack.performed += HeavyAttack;
+        //backLightAttack.performed += BackLightAttack;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Attack();
-
-        canAttack = playerComponentScript.getCanAttack();
         
+        canAttack = playerComponentScript.getCanAttack();
+        canBackAttack = playerComponentScript.getCanBackAttack();
+
+        Attack();
+
+
+
+    }
+    private void Attack()
+    {
+        //instead of using event systems with context, I am using .triggered and if statements to create a priority system
+        if (backLightAttack.triggered && canBackAttack && !isBackAttacking)
+        {
+            isBackAttacking = true;
+            //Debug.Log("BACK ATTACK!");
+        }
+
+        else if (lightAttack.triggered && canAttack && !isAttacking)
+        {
+            isAttacking = true;
+            //Debug.Log("LIGHT ATTACK!");
+        }
+
+        else if (heavyAttack.triggered && canAttack && !isHeavyAttacking)
+        {
+            isHeavyAttacking = true;
+            //Debug.Log("HEAVY ATTACK!");
+        }
     }
 
+    /*
     public void LightAttack(InputAction.CallbackContext context)
     {
-        if (context.performed && canAttack &&!isAttacking)
+        if (context.performed && canAttack &&!isAttacking && !isBackAttacking)
         {
             isAttacking = true;
             Debug.Log("Light Attack!");
@@ -77,10 +105,13 @@ public class AttackController : MonoBehaviour
 
     public void BackLightAttack(InputAction.CallbackContext context)
     {
-        if(context.performed && canAttack)
+        if(context.performed && canAttack && !isAttacking)
         {
+            isBackAttacking = true;
             Debug.Log("Back attack!");
         }
     }
+
+    */
 
 }

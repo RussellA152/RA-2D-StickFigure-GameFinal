@@ -42,7 +42,9 @@ public class CharacterController2D : MonoBehaviour
 
 
 	private bool isWalking; //bool if player is walking
-	private bool canMove; //determines if player can walk and jump (retrieved from playerComponents script
+	private bool canMove; //determines if player can walk and jump (retrieved from playerComponents script)
+	private bool canWalk; //determines if player can walk (retrieved from playerComponents script)
+	private bool canJump; //determines if player can jump (retrieved from playerComponents script)
 
 	public Animator animator;
 
@@ -58,7 +60,7 @@ public class CharacterController2D : MonoBehaviour
 
 	//private InputAction move;
 	private InputAction jump;
-	private InputAction slide;
+	//private InputAction slide;
 
 
 
@@ -96,8 +98,7 @@ public class CharacterController2D : MonoBehaviour
 
     private void Start()
     {
-
-
+		
 		isWalking = false;
 
 		//increases performance to use hashvalues instead of reading strings
@@ -109,10 +110,7 @@ public class CharacterController2D : MonoBehaviour
 
 		playerComponentScript = GetComponent<PlayerComponents>();
 
-		//move = playerComponentScript.getMove();
 		jump = playerComponentScript.getJump();
-		slide = playerComponentScript.getSlide();
-
 		m_Rigidbody2D = playerComponentScript.getRB();
 		animator = playerComponentScript.getAnimator();
 
@@ -123,26 +121,15 @@ public class CharacterController2D : MonoBehaviour
 
     private void Update()
     {
+		//always updating the canMove bool to check if player is allowed to move and jump
 		canMove = playerComponentScript.getCanMove();
-
-		//if player is holding slide button, then slide, otherwise stop (will be interrupted if player is no longer grounded (will probably change)
-		if(slide.ReadValue<float>() > 0 && m_Grounded)
-        {
-			animator.SetBool(isSlidingHash, true);
-			
-        }
-        else
-        {
-			animator.SetBool(isSlidingHash, false);
-		}
+		canWalk = playerComponentScript.getCanWalk();
+		canJump = playerComponentScript.getCanJump();
 
 
-		//always updating the canInteract bool to check if player is allowed to move and jump
-		
-		//Debug.Log("Velocity is : " + animVelocity);
+		//if grounded, animator's isJumping is set to false, and isGrounded parameter is set to true
 		if (m_Grounded)
         {
-			//if grounded, you're not jumping
 			animator.SetBool(isJumpingHash, false);
 			animator.SetBool(isGroundedHash, true);
 
@@ -192,9 +179,12 @@ public class CharacterController2D : MonoBehaviour
 	}
 
 
-	public void Move(float move, bool crouch, bool jump, float jumpBufferCounter)
+	public void Move(float move, bool crouch, bool jump, bool sliding, float jumpBufferCounter)
 	{
 
+		animator.SetBool(isSlidingHash, sliding);
+
+		//if player is moving and grounded, play walking animation
 		if (move != 0 && m_Grounded)
 		{
 			isWalking = true;
@@ -214,13 +204,14 @@ public class CharacterController2D : MonoBehaviour
 			if(speedMultiplier < maxSpeedMultiplier)
 				speedMultiplier += 0.1f;
 		}	
+		//when player stops moving, reset speedMultiplier
 		else
 			speedMultiplier = 10f;
 
 
 
 		//if you cannot interact, then set move to 0 (player will not be able to move)
-		if (!canMove)
+		if (!canMove || !canWalk)
 			move = 0f;
 	
 
@@ -296,19 +287,22 @@ public class CharacterController2D : MonoBehaviour
 		// If the player should jump...
         // BEFORE: I was checking if player was allowed to jump and they were grounded, but i substituted
         // the grounded condition with checking the coyoteTimeCounter instead
-		if (coyoteTimeCounter > 0f && jumpBufferCounter > 0f && canMove)
+		if (coyoteTimeCounter > 0f && jumpBufferCounter > 0f && canJump)
 		{
 
 			//reset y velocity when jumping so player can get a high jump height with coyote time
 			m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x,0f);
 
+			//player is no longer grounded when jumping
 			m_Grounded = false;
 
 			// Add a vertical force to the player.
 			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
-			//Debug.Log("Y Velocity: " + m_Rigidbody2D.velocity.y);
+			
+			//set CoyoteTime and jumpBuffer to 0
             coyoteTimeCounter = 0f;
             jumpBufferCounter = 0f;
+			//allow isJumping to be true
 			animator.SetBool(isJumpingHash, true);
 
 		}
@@ -318,9 +312,24 @@ public class CharacterController2D : MonoBehaviour
 	private void Flip()
 	{
 		// Switch the way the player is labelled as facing.
+		m_FacingRight = !m_FacingRight;
+
+		//rebind back attack button with a or d depending on direction
+		//if player is facing right
+		//if (m_FacingRight)
+			//playerComponentScript.rebindBackAttack("a", "d");
+        //else
+			//playerComponentScript.rebindBackAttack("d", "a");
+
+		//player has turned around, they can now perform a back attack (otherwise they cannot)
+		playerComponentScript.setCanBackAttack(true);
+
+		if(playerComponentScript.getCanBackAttack() == true)
+			StartCoroutine(BackAttack());
+
+		//reset speed multiplier (fixes bug where player can keep momentum when turning around
 		speedMultiplier = 10f;
 
-		m_FacingRight = !m_FacingRight;
 
 		// Multiply the player's x local scale by -1.
 		Vector3 theScale = transform.localScale;
@@ -328,9 +337,18 @@ public class CharacterController2D : MonoBehaviour
 		transform.localScale = theScale;
 	}
 
+	//return the direction of the player
 	public bool getDirection()
     {
 		return m_FacingRight;
     }
 
+	IEnumerator BackAttack()
+    {
+		yield return new WaitForSeconds(0.5f);
+		//if player fails to do back attack, set canBackAttack to false until they turn around again
+		playerComponentScript.setCanBackAttack(false);
+		//Debug.Log("can Back Attack is: " + playerComponentScript.getCanBackAttack());
+
+	}
 }

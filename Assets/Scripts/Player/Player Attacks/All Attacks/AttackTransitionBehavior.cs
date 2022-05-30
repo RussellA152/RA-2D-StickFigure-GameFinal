@@ -6,6 +6,7 @@ public class AttackTransitionBehavior : StateMachineBehaviour
 {
     public string attackName; //name of light attack
     public string heavyAttackName; //name of heavy attack
+    public string backAttackName; //name of back attack
 
     [SerializeField] private bool allowMovementDuringAnim; //this bool determines if the player is allowed to move during this transition
     private PlayerComponents playerComponentScript; //we will use the player component script in order to invoke the setCanInteract() function
@@ -49,7 +50,12 @@ public class AttackTransitionBehavior : StateMachineBehaviour
             }
                 
         }
-        
+        else if (AttackController.instance.isBackAttacking)
+        {
+            if (backAttackName != "")
+                AttackController.instance.animator.Play(backAttackName);
+        }
+
 
     }
 
@@ -59,19 +65,23 @@ public class AttackTransitionBehavior : StateMachineBehaviour
         if (AttackController.instance.isAttacking)
         {
             AttackController.instance.isAttacking = false;
-            //playerComponentScript.setCanMove(true);
-
-            //playerComponentScript.setCanInteract(true);
         }
             
         if (AttackController.instance.isHeavyAttacking)
         {
             AttackController.instance.isHeavyAttacking = false;
-            //playerComponentScript.setCanMove(true);
-            //playerComponentScript.setCanInteract(true);
 
         }
-            
+        if (AttackController.instance.isBackAttacking)
+        {
+            AttackController.instance.isBackAttacking = false;
+
+            //after back attacking, the player will need to turn around again (see CharacterController2D script)
+            playerComponentScript.setCanBackAttack(false);
+
+
+        }
+
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
