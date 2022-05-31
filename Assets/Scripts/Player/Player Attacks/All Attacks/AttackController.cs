@@ -48,8 +48,8 @@ public class AttackController : MonoBehaviour
         backLightAttackLeft = playerComponentScript.GetBackLightAttackLeft();
         backLightAttackRight = playerComponentScript.GetBackLightAttackRight();
 
-        backLightAttackLeft.performed += BackLightAttackLeft;
-        backLightAttackRight.performed += BackLightAttackRight;
+        //backLightAttackLeft.performed += BackLightAttackLeft;
+        //backLightAttackRight.performed += BackLightAttackRight;
         //lightAttack.performed += LightAttack;
         //heavyAttack.performed += HeavyAttack;
         //backLightAttack.performed += BackLightAttack;
@@ -115,7 +115,7 @@ public class AttackController : MonoBehaviour
             //Debug.Log("Heavy Attack!");
         //}
     //}
-
+    /*
     public void BackLightAttackLeft(InputAction.CallbackContext context)
     {
         if(context.performed && canAttack && !isAttacking)
@@ -130,6 +130,6 @@ public class AttackController : MonoBehaviour
             Debug.Log("Back attack! Right RIGHT");
         }
     }
-
+    */
 
 }

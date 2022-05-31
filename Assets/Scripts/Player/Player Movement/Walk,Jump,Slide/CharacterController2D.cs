@@ -37,6 +37,7 @@ public class CharacterController2D : MonoBehaviour
 	public float fallMultiplier = 2.5f;
 	public float lowJumpMultiplier = 2f;
 
+	private float backAttackTimer = 0.4f;	//time that player has to perform a back attack
     private float coyoteTime = 0.2f; // timer indicating how long the player can jump after leaving the ground (higher value means more forgiving time)
     private float coyoteTimeCounter;
 
@@ -345,7 +346,7 @@ public class CharacterController2D : MonoBehaviour
 
 	IEnumerator BackAttack()
     {
-		yield return new WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(backAttackTimer);
 		//if player fails to do back attack, set canBackAttack to false until they turn around again
 		playerComponentScript.SetCanBackAttack(false);
 		//Debug.Log("can Back Attack is: " + playerComponentScript.getCanBackAttack());
