@@ -32,11 +32,11 @@ public class AttackAnimationBehavior : StateMachineBehaviour
         //when animation begins, retrieve the player's hitbox from the PlayerComponent's script
         playerComponentScript = animator.transform.gameObject.GetComponent<PlayerComponents>();
         //retrive which way player is facing
-        playerFacingRight = playerComponentScript.getPlayerDirection();
+        playerFacingRight = playerComponentScript.GetPlayerDirection();
 
         //grab hitbox and rigidbody component
-        hitbox = playerComponentScript.getHitBox();
-        rb = playerComponentScript.getRB();
+        hitbox = playerComponentScript.GetHitBox();
+        rb = playerComponentScript.GetRB();
 
         //invoke jolt movement 
         joltPlayer(playerFacingRight,joltForceX, joltForceY);
@@ -55,7 +55,7 @@ public class AttackAnimationBehavior : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         //Don't let player move during attack animation
-        playerComponentScript.setCanMove(false);
+        playerComponentScript.SetCanMove(false);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

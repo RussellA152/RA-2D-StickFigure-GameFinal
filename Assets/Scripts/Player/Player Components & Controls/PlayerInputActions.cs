@@ -75,9 +75,17 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Back Attack"",
+                    ""name"": ""Back Attack Left"",
                     ""type"": ""Button"",
                     ""id"": ""e900ed7b-6df4-407c-bbe3-3da3568d4b82"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Back Attack Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""43202349-cd4b-47d5-aa4b-4a240c8e69b2"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -322,7 +330,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Back Attack"",
+                    ""action"": ""Back Attack Left"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -332,8 +340,8 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Back Attack"",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Back Attack Left"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -344,7 +352,40 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Back Attack"",
+                    ""action"": ""Back Attack Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Button With One Modifier"",
+                    ""id"": ""5b00af94-50a5-4531-8d33-f241911ec38b"",
+                    ""path"": ""ButtonWithOneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back Attack Right"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""af58fb98-c8f0-4bd0-a707-00f38549e8a7"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Back Attack Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""button"",
+                    ""id"": ""dce428d2-9f1e-46ff-a6c1-e830b5588dc3"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Back Attack Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -929,7 +970,8 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_Player_LightAttack = m_Player.FindAction("Light Attack", throwIfNotFound: true);
         m_Player_HeavyAttack = m_Player.FindAction("Heavy Attack", throwIfNotFound: true);
         m_Player_Slide = m_Player.FindAction("Slide", throwIfNotFound: true);
-        m_Player_BackAttack = m_Player.FindAction("Back Attack", throwIfNotFound: true);
+        m_Player_BackAttackLeft = m_Player.FindAction("Back Attack Left", throwIfNotFound: true);
+        m_Player_BackAttackRight = m_Player.FindAction("Back Attack Right", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -998,7 +1040,8 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_LightAttack;
     private readonly InputAction m_Player_HeavyAttack;
     private readonly InputAction m_Player_Slide;
-    private readonly InputAction m_Player_BackAttack;
+    private readonly InputAction m_Player_BackAttackLeft;
+    private readonly InputAction m_Player_BackAttackRight;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1010,7 +1053,8 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         public InputAction @LightAttack => m_Wrapper.m_Player_LightAttack;
         public InputAction @HeavyAttack => m_Wrapper.m_Player_HeavyAttack;
         public InputAction @Slide => m_Wrapper.m_Player_Slide;
-        public InputAction @BackAttack => m_Wrapper.m_Player_BackAttack;
+        public InputAction @BackAttackLeft => m_Wrapper.m_Player_BackAttackLeft;
+        public InputAction @BackAttackRight => m_Wrapper.m_Player_BackAttackRight;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1041,9 +1085,12 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Slide.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSlide;
                 @Slide.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSlide;
                 @Slide.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSlide;
-                @BackAttack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackAttack;
-                @BackAttack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackAttack;
-                @BackAttack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackAttack;
+                @BackAttackLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackAttackLeft;
+                @BackAttackLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackAttackLeft;
+                @BackAttackLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackAttackLeft;
+                @BackAttackRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackAttackRight;
+                @BackAttackRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackAttackRight;
+                @BackAttackRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackAttackRight;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1069,9 +1116,12 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Slide.started += instance.OnSlide;
                 @Slide.performed += instance.OnSlide;
                 @Slide.canceled += instance.OnSlide;
-                @BackAttack.started += instance.OnBackAttack;
-                @BackAttack.performed += instance.OnBackAttack;
-                @BackAttack.canceled += instance.OnBackAttack;
+                @BackAttackLeft.started += instance.OnBackAttackLeft;
+                @BackAttackLeft.performed += instance.OnBackAttackLeft;
+                @BackAttackLeft.canceled += instance.OnBackAttackLeft;
+                @BackAttackRight.started += instance.OnBackAttackRight;
+                @BackAttackRight.performed += instance.OnBackAttackRight;
+                @BackAttackRight.canceled += instance.OnBackAttackRight;
             }
         }
     }
@@ -1235,7 +1285,8 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnLightAttack(InputAction.CallbackContext context);
         void OnHeavyAttack(InputAction.CallbackContext context);
         void OnSlide(InputAction.CallbackContext context);
-        void OnBackAttack(InputAction.CallbackContext context);
+        void OnBackAttackLeft(InputAction.CallbackContext context);
+        void OnBackAttackRight(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

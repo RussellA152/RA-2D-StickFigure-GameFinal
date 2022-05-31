@@ -18,12 +18,12 @@ public class AttackTransitionBehavior : StateMachineBehaviour
         playerComponentScript = animator.transform.gameObject.GetComponent<PlayerComponents>();
 
         // IF this animation allows movement during animation then allow player to move (instead the animation will move player a little)
-        // we also set canAttack to false inside of HitBoxEnabling ***
+        // we also set canAttack to false inside of "AttackAnimationBehavior.cs"
         if (allowMovementDuringAnim)
-            playerComponentScript.setCanMove(true);
+            playerComponentScript.SetCanMove(true);
         else
         {
-            playerComponentScript.setCanMove(false);
+            playerComponentScript.SetCanMove(false);
         }
 
     }
@@ -31,29 +31,39 @@ public class AttackTransitionBehavior : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        //if we press left click during an attack animation, play the corresponding light attack
         if (AttackController.instance.isAttacking)
         {
             if(attackName != "")
             {
                 AttackController.instance.animator.Play(attackName);
-                
+                Debug.Log("Light ATTACK!");
+
             }
                 
         }
+        //if we press right click during an attack animation, play the corresponding heavy attack
         else if (AttackController.instance.isHeavyAttacking)
         {
             if (heavyAttackName != "")
             {
                 AttackController.instance.animator.Play(heavyAttackName);
                 
+                Debug.Log("Heavy ATTACK!");
+                
+
 
             }
                 
         }
+        // if we press back button + left click, play the corresponding light attack
         else if (AttackController.instance.isBackAttacking)
         {
             if (backAttackName != "")
+            {
                 AttackController.instance.animator.Play(backAttackName);
+                Debug.Log("Back ATTACK!");
+            }
         }
 
 
@@ -77,7 +87,7 @@ public class AttackTransitionBehavior : StateMachineBehaviour
             AttackController.instance.isBackAttacking = false;
 
             //after back attacking, the player will need to turn around again (see CharacterController2D script)
-            playerComponentScript.setCanBackAttack(false);
+            playerComponentScript.SetCanBackAttack(false);
 
 
         }

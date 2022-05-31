@@ -22,11 +22,11 @@ public class SlideLoop : StateMachineBehaviour
         playerCompScript = animator.transform.gameObject.GetComponent<PlayerComponents>();
 
         //disable player's ability walk & jump & attack during slide
-        playerCompScript.setCanMove(false);
-        playerCompScript.setCanAttack(false);
+        playerCompScript.SetCanMove(false);
+        playerCompScript.SetCanAttack(false);
 
-        rb = playerCompScript.getRB();
-        directionIsRight = playerCompScript.getPlayerDirection();
+        rb = playerCompScript.GetRB();
+        directionIsRight = playerCompScript.GetPlayerDirection();
 
         //apply force to Vector2.right or Vector2.left depending on which way player is facing
         if (directionIsRight)
@@ -68,7 +68,7 @@ public class SlideLoop : StateMachineBehaviour
     {
         //allow player is move and attack again
         //playerCompScript.setCanMove(true);
-        playerCompScript.setCanMove(true);
-        playerCompScript.setCanAttack(true);
+        playerCompScript.SetCanMove(true);
+        playerCompScript.SetCanAttack(true);
     }
 }

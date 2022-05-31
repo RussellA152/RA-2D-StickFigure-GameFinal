@@ -28,10 +28,10 @@ public class PlayerMovementInput : MonoBehaviour
         controller = GetComponent<CharacterController2D>();
         playerComponentScript = GetComponent<PlayerComponents>();
 
-        move = playerComponentScript.getMove();
-        jump = playerComponentScript.getJump();
+        move = playerComponentScript.GetMove();
+        jump = playerComponentScript.GetJump();
 
-        slide = playerComponentScript.getSlide();
+        slide = playerComponentScript.GetSlide();
     }
 
 
@@ -52,7 +52,7 @@ public class PlayerMovementInput : MonoBehaviour
 
     private void Update()
     {
-        bool canWalk = playerComponentScript.getCanWalk();
+        bool canWalk = playerComponentScript.GetCanWalk();
 
         //if player is holding slide button, then slide, otherwise stop (will be interrupted if player is no longer grounded (will probably change)
         if(slide.ReadValue<float>() > 0)

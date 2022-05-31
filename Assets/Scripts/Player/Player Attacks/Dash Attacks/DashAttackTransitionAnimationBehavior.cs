@@ -6,6 +6,7 @@ public class DashAttackTransitionAnimationBehavior : StateMachineBehaviour
 {
     public string attackName; //name of light attack
     public string heavyAttackName; //name of heavy attack
+    public string backAttackName; //name of back attack
     public string dashAttackName; //name of dash attack
 
     [SerializeField] private float dashAttackVelocityRequirement; //amount of velocity required to perform dash attack instead of regular heavy attack
@@ -28,10 +29,10 @@ public class DashAttackTransitionAnimationBehavior : StateMachineBehaviour
         // IF this animation allows movement during animation then allow player to move (instead the animation will move player a little)
         // we also set canAttack to false inside of HitBoxEnabling ***
         if (allowMovementDuringAnim)
-            playerComponentScript.setCanMove(true);
+            playerComponentScript.SetCanMove(true);
         else
         {
-            playerComponentScript.setCanMove(false);
+            playerComponentScript.SetCanMove(false);
         }
 
     }
@@ -68,6 +69,15 @@ public class DashAttackTransitionAnimationBehavior : StateMachineBehaviour
 
             }
         }
+        // if we press back button + left click, play the corresponding light attack
+        else if (AttackController.instance.isBackAttacking)
+        {
+            if (backAttackName != "")
+            {
+                AttackController.instance.animator.Play(backAttackName);
+                //Debug.Log("Back ATTACK!");
+            }
+        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
@@ -84,6 +94,14 @@ public class DashAttackTransitionAnimationBehavior : StateMachineBehaviour
         if (AttackController.instance.isHeavyAttacking)
         {
             AttackController.instance.isHeavyAttacking = false;
+            //playerComponentScript.setCanMove(true);
+            //playerComponentScript.setCanInteract(true);
+
+        }
+        if (AttackController.instance.isBackAttacking)
+        {
+            AttackController.instance.isBackAttacking = false;
+            playerComponentScript.SetCanBackAttack(false);
             //playerComponentScript.setCanMove(true);
             //playerComponentScript.setCanInteract(true);
 

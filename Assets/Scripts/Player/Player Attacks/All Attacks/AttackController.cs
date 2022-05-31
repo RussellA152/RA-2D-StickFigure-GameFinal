@@ -20,9 +20,11 @@ public class AttackController : MonoBehaviour
 
     private InputAction lightAttack;
     private InputAction heavyAttack;
-    private InputAction backLightAttack;
 
-    
+    private InputAction backLightAttackLeft;
+    private InputAction backLightAttackRight;
+
+
 
     private void Awake()
     {
@@ -39,12 +41,15 @@ public class AttackController : MonoBehaviour
     void Start()
     {
         playerComponentScript = GetComponent<PlayerComponents>();
-        animator = playerComponentScript.getAnimator();
+        animator = playerComponentScript.GetAnimator();
 
-        lightAttack = playerComponentScript.getLightAttack();
-        heavyAttack = playerComponentScript.getHeavyAttack();
-        backLightAttack = playerComponentScript.getBackLightAttack();
+        lightAttack = playerComponentScript.GetLightAttack();
+        heavyAttack = playerComponentScript.GetHeavyAttack();
+        backLightAttackLeft = playerComponentScript.GetBackLightAttackLeft();
+        backLightAttackRight = playerComponentScript.GetBackLightAttackRight();
 
+        backLightAttackLeft.performed += BackLightAttackLeft;
+        backLightAttackRight.performed += BackLightAttackRight;
         //lightAttack.performed += LightAttack;
         //heavyAttack.performed += HeavyAttack;
         //backLightAttack.performed += BackLightAttack;
@@ -54,8 +59,8 @@ public class AttackController : MonoBehaviour
     void Update()
     {
         
-        canAttack = playerComponentScript.getCanAttack();
-        canBackAttack = playerComponentScript.getCanBackAttack();
+        canAttack = playerComponentScript.GetCanAttack();
+        canBackAttack = playerComponentScript.GetCanBackAttack();
 
         Attack();
 
@@ -65,10 +70,18 @@ public class AttackController : MonoBehaviour
     private void Attack()
     {
         //instead of using event systems with context, I am using .triggered and if statements to create a priority system
-        if (backLightAttack.triggered && canBackAttack && !isBackAttacking)
+        // .triggered means the button was pressed
+
+        if (backLightAttackLeft.triggered && canBackAttack && !isBackAttacking)
         {
             isBackAttacking = true;
+            Debug.Log("Back Attack TO THE LEFT!");
             //Debug.Log("BACK ATTACK!");
+        }
+        else if(backLightAttackRight.triggered && canBackAttack && !isBackAttacking)
+        {
+            isBackAttacking = true;
+            Debug.Log("Back Attack TO THE RIGHT!");
         }
 
         else if (lightAttack.triggered && canAttack && !isAttacking)
@@ -84,34 +97,39 @@ public class AttackController : MonoBehaviour
         }
     }
 
-    /*
-    public void LightAttack(InputAction.CallbackContext context)
-    {
-        if (context.performed && canAttack &&!isAttacking && !isBackAttacking)
-        {
-            isAttacking = true;
-            Debug.Log("Light Attack!");
-        }
-    }
+    
+    //public void LightAttack(InputAction.CallbackContext context)
+    //{
+        //if (context.performed && canAttack &&!isAttacking && !isBackAttacking)
+        //{
+            //isAttacking = true;
+            //Debug.Log("Light Attack!");
+        //}
+    //}
 
-    public void HeavyAttack(InputAction.CallbackContext context)
-    {
-        if (context.performed && canAttack && !isAttacking)
-        {
-            isHeavyAttacking = true;
-            Debug.Log("Heavy Attack!");
-        }
-    }
+    //public void HeavyAttack(InputAction.CallbackContext context)
+    //{
+        //if (context.performed && canAttack && !isAttacking)
+        //{
+            //isHeavyAttacking = true;
+            //Debug.Log("Heavy Attack!");
+        //}
+    //}
 
-    public void BackLightAttack(InputAction.CallbackContext context)
+    public void BackLightAttackLeft(InputAction.CallbackContext context)
     {
         if(context.performed && canAttack && !isAttacking)
         {
-            isBackAttacking = true;
-            Debug.Log("Back attack!");
+            Debug.Log("Back attack! LEFT LEFT");
+        }
+    }
+    public void BackLightAttackRight(InputAction.CallbackContext context)
+    {
+        if (context.performed && canAttack && !isAttacking)
+        {
+            Debug.Log("Back attack! Right RIGHT");
         }
     }
 
-    */
 
 }

@@ -62,9 +62,17 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Back Attack",
+                    "name": "Back Attack Left",
                     "type": "Button",
                     "id": "e900ed7b-6df4-407c-bbe3-3da3568d4b82",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Back Attack Right",
+                    "type": "Button",
+                    "id": "43202349-cd4b-47d5-aa4b-4a240c8e69b2",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -309,7 +317,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Back Attack",
+                    "action": "Back Attack Left",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -319,8 +327,8 @@
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Back Attack",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Back Attack Left",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -331,7 +339,40 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Back Attack",
+                    "action": "Back Attack Left",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Button With One Modifier",
+                    "id": "5b00af94-50a5-4531-8d33-f241911ec38b",
+                    "path": "ButtonWithOneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Back Attack Right",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "af58fb98-c8f0-4bd0-a707-00f38549e8a7",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Back Attack Right",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "button",
+                    "id": "dce428d2-9f1e-46ff-a6c1-e830b5588dc3",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Back Attack Right",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }

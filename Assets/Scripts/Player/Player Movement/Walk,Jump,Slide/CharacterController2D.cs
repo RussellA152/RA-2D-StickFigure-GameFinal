@@ -110,9 +110,9 @@ public class CharacterController2D : MonoBehaviour
 
 		playerComponentScript = GetComponent<PlayerComponents>();
 
-		jump = playerComponentScript.getJump();
-		m_Rigidbody2D = playerComponentScript.getRB();
-		animator = playerComponentScript.getAnimator();
+		jump = playerComponentScript.GetJump();
+		m_Rigidbody2D = playerComponentScript.GetRB();
+		animator = playerComponentScript.GetAnimator();
 
 
 		
@@ -122,9 +122,9 @@ public class CharacterController2D : MonoBehaviour
     private void Update()
     {
 		//always updating the canMove bool to check if player is allowed to move and jump
-		canMove = playerComponentScript.getCanMove();
-		canWalk = playerComponentScript.getCanWalk();
-		canJump = playerComponentScript.getCanJump();
+		canMove = playerComponentScript.GetCanMove();
+		canWalk = playerComponentScript.GetCanWalk();
+		canJump = playerComponentScript.GetCanJump();
 
 
 		//if grounded, animator's isJumping is set to false, and isGrounded parameter is set to true
@@ -322,9 +322,9 @@ public class CharacterController2D : MonoBehaviour
 			//playerComponentScript.rebindBackAttack("d", "a");
 
 		//player has turned around, they can now perform a back attack (otherwise they cannot)
-		playerComponentScript.setCanBackAttack(true);
+		playerComponentScript.SetCanBackAttack(true);
 
-		if(playerComponentScript.getCanBackAttack() == true)
+		if(playerComponentScript.GetCanBackAttack() == true)
 			StartCoroutine(BackAttack());
 
 		//reset speed multiplier (fixes bug where player can keep momentum when turning around
@@ -347,7 +347,7 @@ public class CharacterController2D : MonoBehaviour
     {
 		yield return new WaitForSeconds(0.5f);
 		//if player fails to do back attack, set canBackAttack to false until they turn around again
-		playerComponentScript.setCanBackAttack(false);
+		playerComponentScript.SetCanBackAttack(false);
 		//Debug.Log("can Back Attack is: " + playerComponentScript.getCanBackAttack());
 
 	}

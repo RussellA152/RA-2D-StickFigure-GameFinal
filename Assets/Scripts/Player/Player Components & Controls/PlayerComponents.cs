@@ -15,7 +15,8 @@ public class PlayerComponents : MonoBehaviour
     private InputAction lightAttack; //input action used for performing light attacks (left click)
     private InputAction heavyAttack; //input action used for performing heavy attacks (right click)
     private InputAction slide; //input action used for performing a slide (left shift)
-    private InputAction backLightAttack; //input action used for performing a back light attack (turning around and performing a light attack quickly) ( A + left click or D depending on direction )
+    private InputAction backLightAttackLeft; //input action used for performing a back light attack (turning around and performing a light attack quickly) ( A for turning left )
+    private InputAction backLightAttackRight; //input action used for performing a back light attack (turning around and performing a light attack quickly) ( D for turning right )
 
     private float health;
 
@@ -30,7 +31,9 @@ public class PlayerComponents : MonoBehaviour
     //private bool canInteract = true; //this bool determines if the player should be able to move, attack, or jump (set to false when attacked)
 
     private bool canAttack = true; //this bool determines if the player is allowed to attack
-    private bool canBackAttack = true; //this bool determines if the player to perform a back attack (turning around and attacking)
+
+    //(Set to false by default since player hasn't turned around at the start of the game
+    private bool canBackAttack = false; //this bool determines if the player to perform a back attack (turning around and attacking) 
     private bool canMove = true; //this bool determines if the player is allowed to walk and jump (both)
     private bool canSlide = true; //this bool determines if the player is allowed to slide
 
@@ -61,14 +64,16 @@ public class PlayerComponents : MonoBehaviour
         lightAttack = playerControls.Player.LightAttack;
         heavyAttack = playerControls.Player.HeavyAttack;
         slide = playerControls.Player.Slide;
-        backLightAttack = playerControls.Player.BackAttack;
+        backLightAttackLeft = playerControls.Player.BackAttackLeft;
+        backLightAttackRight = playerControls.Player.BackAttackRight;
 
         move.Enable();
         jump.Enable();
         lightAttack.Enable();
         heavyAttack.Enable();
         slide.Enable();
-        backLightAttack.Enable();
+        backLightAttackLeft.Enable();
+        backLightAttackRight.Enable();
 
     }
     private void OnDisable()
@@ -78,126 +83,130 @@ public class PlayerComponents : MonoBehaviour
         lightAttack.Disable();
         heavyAttack.Disable();
         slide.Disable();
-        backLightAttack.Disable();
+        backLightAttackLeft.Disable();
+        backLightAttackRight.Disable();
     }
 
 
-    public void setCanAttack(bool boolean)
+    public void SetCanAttack(bool boolean)
     {
         canAttack = boolean;
         canBackAttack = boolean;
 
     }
-    public void setCanBackAttack(bool boolean)
+    public void SetCanBackAttack(bool boolean)
     {
         canBackAttack = boolean;
     }
 
     //retrieves the canAttack boolean
-    public bool getCanAttack()
+    public bool GetCanAttack()
     {
         return canAttack;
     }
-    public bool getCanBackAttack()
+    public bool GetCanBackAttack()
     {
         return canBackAttack;
     }
 
-    public void setCanMove(bool boolean)
+    public void SetCanMove(bool boolean)
     {
         canJump = boolean;
         canWalk = boolean;
     }
-    public void setCanJump(bool boolean)
+    public void SetCanJump(bool boolean)
     {
         canJump = boolean;
     }
-    public void setCanWalk(bool boolean)
+    public void SetCanWalk(bool boolean)
     {
         canJump = boolean;
     }
 
-    public void setCanSlide(bool boolean)
+    public void SetCanSlide(bool boolean)
     {
         canSlide = boolean;
     }
-    public bool getCanJump()
+    public bool GetCanJump()
     {
         return canJump;
     }
-    public bool getCanWalk()
+    public bool GetCanWalk()
     {
         return canWalk;
     }
     //retrieves the canMove boolean
-    public bool getCanMove()
+    public bool GetCanMove()
     {
         return canMove;
     }
 
     //retrieves the health value
-    public float getHP()
+    public float GetHP()
     {
         return health;
     }
     //retrieves the player's animator component
-    public Animator getAnimator()
+    public Animator GetAnimator()
     {
         return animator;
     }
 
     //retrieves the player's rigidbody component
-    public Rigidbody2D getRB()
+    public Rigidbody2D GetRB()
     {
         return playerRB;
     }
     //retrives the player's hitbox 
-    public BoxCollider2D getHitBox()
+    public BoxCollider2D GetHitBox()
     {
         return hitbox;
     }
 
     //retrives the direction the sprite is facing
-    public bool getPlayerDirection()
+    public bool GetPlayerDirection()
     {
         //update player's direction before giving 
         playerFacingRight = GetComponent<CharacterController2D>().getDirection();
         return playerFacingRight;
     }
 
-    public InputAction getMove()
+    public InputAction GetMove()
     {
         return move;
     }
 
-    public InputAction getJump()
+    public InputAction GetJump()
     {
         return jump;
     }
 
-    public InputAction getLightAttack()
+    public InputAction GetLightAttack()
     {
         return lightAttack;
     }
 
-    public InputAction getHeavyAttack()
+    public InputAction GetHeavyAttack()
     {
         return heavyAttack;
     }
 
-    public InputAction getSlide()
+    public InputAction GetSlide()
     {
         return slide;
     }
 
-    public InputAction getBackLightAttack()
+    public InputAction GetBackLightAttackLeft()
     {
-        return backLightAttack;
+        return backLightAttackLeft;
     }
-
+    public InputAction GetBackLightAttackRight()
+    {
+        return backLightAttackRight;
+    }
     //might put this in a different script later (could there be a memory leak here?)
     // ONLY WORKS WITH A KEYBOARD AT THE MOMENT
-    public void rebindBackAttack(string originalBind, string newBind)
+    public void RebindBackAttack(string originalBind, string newBind)
     {
         //Debug.Log("REBIND START!");
         //if(originalBind.Equals("a"))
