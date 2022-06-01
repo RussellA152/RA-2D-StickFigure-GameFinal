@@ -37,7 +37,6 @@ public class CharacterController2D : MonoBehaviour
 	public float fallMultiplier = 2.5f;
 	public float lowJumpMultiplier = 2f;
 
-	private float backAttackTimer = 0.4f;	//time that player has to perform a back attack
     private float coyoteTime = 0.2f; // timer indicating how long the player can jump after leaving the ground (higher value means more forgiving time)
     private float coyoteTimeCounter;
 
@@ -61,6 +60,9 @@ public class CharacterController2D : MonoBehaviour
 
 	//private InputAction move;
 	private InputAction jump;
+
+
+	private float backAttackTimer = 0.3f; //time allowed for player to perform a back attack (once this hits 0, the player must turn around again to perform a back attack)
 	//private InputAction slide;
 
 
@@ -122,6 +124,15 @@ public class CharacterController2D : MonoBehaviour
 
     private void Update()
     {
+		//decrement back attack timer until it hits 0 (player can no longer back attack
+		if (backAttackTimer > 0f)
+			backAttackTimer -= Time.deltaTime;
+		else
+			backAttackTimer = 0f;
+
+		//check if back attack should be true or false depending on timer
+		CheckBackAttack();
+
 		//always updating the canMove bool to check if player is allowed to move and jump
 		canMove = playerComponentScript.GetCanMove();
 		canWalk = playerComponentScript.GetCanWalk();
@@ -315,19 +326,11 @@ public class CharacterController2D : MonoBehaviour
 		// Switch the way the player is labelled as facing.
 		m_FacingRight = !m_FacingRight;
 
-		//rebind back attack button with a or d depending on direction
-		//if player is facing right
-		//if (m_FacingRight)
-			//playerComponentScript.rebindBackAttack("a", "d");
-        //else
-			//playerComponentScript.rebindBackAttack("d", "a");
+		//reset back attack timer
+		backAttackTimer = 0.3f;
 
-		//player has turned around, they can now perform a back attack (otherwise they cannot)
+		//player has turned around, they are now allowed to perform a back attack
 		playerComponentScript.SetCanBackAttack(true);
-
-		if(playerComponentScript.GetCanBackAttack() == true)
-			StartCoroutine(BackAttack());
-
 		//reset speed multiplier (fixes bug where player can keep momentum when turning around
 		speedMultiplier = 10f;
 
@@ -339,17 +342,17 @@ public class CharacterController2D : MonoBehaviour
 	}
 
 	//return the direction of the player
-	public bool getDirection()
+	public bool GetDirection()
     {
 		return m_FacingRight;
     }
 
-	IEnumerator BackAttack()
-    {
-		yield return new WaitForSeconds(backAttackTimer);
-		//if player fails to do back attack, set canBackAttack to false until they turn around again
-		playerComponentScript.SetCanBackAttack(false);
-		//Debug.Log("can Back Attack is: " + playerComponentScript.getCanBackAttack());
 
+	private void CheckBackAttack()
+    {
+		//if back attack timer reaches 0, then the player must turn around again
+		if (backAttackTimer <= 0f)
+			playerComponentScript.SetCanBackAttack(false);
+		//Debug.Log(backAttackTimer);
 	}
 }

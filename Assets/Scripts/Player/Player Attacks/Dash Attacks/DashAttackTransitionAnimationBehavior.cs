@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// EXIT Time for transition animations refer to how long it will take to revert back to Idle state
 public class DashAttackTransitionAnimationBehavior : StateMachineBehaviour
 {
     public string attackName; //name of light attack
@@ -86,6 +88,8 @@ public class DashAttackTransitionAnimationBehavior : StateMachineBehaviour
         if (AttackController.instance.isAttacking)
         {
             AttackController.instance.isAttacking = false;
+            //if player did a regular attack, dont let them do a back attack
+            playerComponentScript.SetCanBackAttack(false);
             //playerComponentScript.setCanMove(true);
 
             //playerComponentScript.setCanInteract(true);
@@ -94,6 +98,7 @@ public class DashAttackTransitionAnimationBehavior : StateMachineBehaviour
         if (AttackController.instance.isHeavyAttacking)
         {
             AttackController.instance.isHeavyAttacking = false;
+            playerComponentScript.SetCanBackAttack(false);
             //playerComponentScript.setCanMove(true);
             //playerComponentScript.setCanInteract(true);
 
@@ -102,8 +107,6 @@ public class DashAttackTransitionAnimationBehavior : StateMachineBehaviour
         {
             AttackController.instance.isBackAttacking = false;
             playerComponentScript.SetCanBackAttack(false);
-            //playerComponentScript.setCanMove(true);
-            //playerComponentScript.setCanInteract(true);
 
         }
 

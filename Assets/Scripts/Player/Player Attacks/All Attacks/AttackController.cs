@@ -75,13 +75,12 @@ public class AttackController : MonoBehaviour
         if (backLightAttackLeft.triggered && canBackAttack && !isBackAttacking)
         {
             isBackAttacking = true;
-            Debug.Log("Back Attack TO THE LEFT!");
-            //Debug.Log("BACK ATTACK!");
+            //Debug.Log("Back Attack TO THE LEFT!");
         }
         else if(backLightAttackRight.triggered && canBackAttack && !isBackAttacking)
         {
             isBackAttacking = true;
-            Debug.Log("Back Attack TO THE RIGHT!");
+            //Debug.Log("Back Attack TO THE RIGHT!");
         }
 
         else if (lightAttack.triggered && canAttack && !isAttacking)

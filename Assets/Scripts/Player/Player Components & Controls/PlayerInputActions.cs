@@ -89,6 +89,14 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Quick Step"",
+                    ""type"": ""Button"",
+                    ""id"": ""c3092336-8b34-4795-92e1-c80e05f5241d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -388,6 +396,17 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""action"": ""Back Attack Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5bacacf5-b738-4c0e-85c4-e54b70773d07"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Quick Step"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -972,6 +991,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_Player_Slide = m_Player.FindAction("Slide", throwIfNotFound: true);
         m_Player_BackAttackLeft = m_Player.FindAction("Back Attack Left", throwIfNotFound: true);
         m_Player_BackAttackRight = m_Player.FindAction("Back Attack Right", throwIfNotFound: true);
+        m_Player_QuickStep = m_Player.FindAction("Quick Step", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1042,6 +1062,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Slide;
     private readonly InputAction m_Player_BackAttackLeft;
     private readonly InputAction m_Player_BackAttackRight;
+    private readonly InputAction m_Player_QuickStep;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1055,6 +1076,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         public InputAction @Slide => m_Wrapper.m_Player_Slide;
         public InputAction @BackAttackLeft => m_Wrapper.m_Player_BackAttackLeft;
         public InputAction @BackAttackRight => m_Wrapper.m_Player_BackAttackRight;
+        public InputAction @QuickStep => m_Wrapper.m_Player_QuickStep;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1091,6 +1113,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @BackAttackRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackAttackRight;
                 @BackAttackRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackAttackRight;
                 @BackAttackRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackAttackRight;
+                @QuickStep.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickStep;
+                @QuickStep.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickStep;
+                @QuickStep.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickStep;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1122,6 +1147,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @BackAttackRight.started += instance.OnBackAttackRight;
                 @BackAttackRight.performed += instance.OnBackAttackRight;
                 @BackAttackRight.canceled += instance.OnBackAttackRight;
+                @QuickStep.started += instance.OnQuickStep;
+                @QuickStep.performed += instance.OnQuickStep;
+                @QuickStep.canceled += instance.OnQuickStep;
             }
         }
     }
@@ -1287,6 +1315,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnSlide(InputAction.CallbackContext context);
         void OnBackAttackLeft(InputAction.CallbackContext context);
         void OnBackAttackRight(InputAction.CallbackContext context);
+        void OnQuickStep(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

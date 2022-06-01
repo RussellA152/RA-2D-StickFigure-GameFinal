@@ -2,19 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//AttackTransitionBehavior handles the activation of scripts (if the player presses a heavy, light, back, etc.. attack within the time interval (transition's exit time) the corresponding attack animation will play
+// EXIT Time for transition animations refer to how long it will take to revert back to Idle state
 public class AttackTransitionBehavior : StateMachineBehaviour
 {
     public string attackName; //name of light attack
     public string heavyAttackName; //name of heavy attack
     public string backAttackName; //name of back attack
 
-    [SerializeField] private bool allowMovementDuringAnim; //this bool determines if the player is allowed to move during this transition
+    [SerializeField] private bool allowMovementDuringAnim; //this bool determines if the player is allowed to move during this transition (used for Idle animation, otherwise player can't move in Idle state)
     private PlayerComponents playerComponentScript; //we will use the player component script in order to invoke the setCanInteract() function
 
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        //retrieve component script
         playerComponentScript = animator.transform.gameObject.GetComponent<PlayerComponents>();
 
         // IF this animation allows movement during animation then allow player to move (instead the animation will move player a little)
@@ -22,22 +25,22 @@ public class AttackTransitionBehavior : StateMachineBehaviour
         if (allowMovementDuringAnim)
             playerComponentScript.SetCanMove(true);
         else
-        {
             playerComponentScript.SetCanMove(false);
-        }
 
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        //If player fails to meet any of the following conditions below, the player will return to the Idle state 
+
         //if we press left click during an attack animation, play the corresponding light attack
         if (AttackController.instance.isAttacking)
         {
             if(attackName != "")
             {
                 AttackController.instance.animator.Play(attackName);
-                Debug.Log("Light ATTACK!");
+                //Debug.Log("Light ATTACK!");
 
             }
                 
@@ -49,20 +52,20 @@ public class AttackTransitionBehavior : StateMachineBehaviour
             {
                 AttackController.instance.animator.Play(heavyAttackName);
                 
-                Debug.Log("Heavy ATTACK!");
+                //Debug.Log("Heavy ATTACK!");
                 
 
 
             }
                 
         }
-        // if we press back button + left click, play the corresponding light attack
+        // if we press back button (could be 'a' or 'd') + left click, play the corresponding back light attack
         else if (AttackController.instance.isBackAttacking)
         {
             if (backAttackName != "")
             {
                 AttackController.instance.animator.Play(backAttackName);
-                Debug.Log("Back ATTACK!");
+                //Debug.Log("Back ATTACK!");
             }
         }
 
@@ -75,11 +78,14 @@ public class AttackTransitionBehavior : StateMachineBehaviour
         if (AttackController.instance.isAttacking)
         {
             AttackController.instance.isAttacking = false;
+            //if player did a regular attack, dont let them do a back attack
+            playerComponentScript.SetCanBackAttack(false);
         }
             
         if (AttackController.instance.isHeavyAttacking)
         {
             AttackController.instance.isHeavyAttacking = false;
+            playerComponentScript.SetCanBackAttack(false);
 
         }
         if (AttackController.instance.isBackAttacking)

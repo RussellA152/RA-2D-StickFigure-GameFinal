@@ -25,10 +25,14 @@ public class AttackAnimationBehavior : StateMachineBehaviour
     [SerializeField] private float joltForceX; //determines how far the player will 'jolt' forward in the x direction when attacking (Should be a high value)
     [SerializeField] private float joltForceY; //determines how far the player will 'jolt' forward in the y direction when attacking (Should be a high value)
 
+    private int isGroundedHash; //hash value for animator's isGrounded parameter
+
 
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        isGroundedHash = Animator.StringToHash("isGrounded");
+
         //when animation begins, retrieve the player's hitbox from the PlayerComponent's script
         playerComponentScript = animator.transform.gameObject.GetComponent<PlayerComponents>();
         //retrive which way player is facing
@@ -54,8 +58,15 @@ public class AttackAnimationBehavior : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        //if player is no longer grounded during attack animation, allow them to jump, otherwise don't
+        if (!animator.GetBool(isGroundedHash))
+            playerComponentScript.SetCanMove(true);
+        else
+            playerComponentScript.SetCanMove(false);
+
+
         //Don't let player move during attack animation
-        playerComponentScript.SetCanMove(false);
+        //playerComponentScript.SetCanMove(false);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

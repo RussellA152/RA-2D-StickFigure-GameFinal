@@ -167,7 +167,7 @@ public class PlayerComponents : MonoBehaviour
     public bool GetPlayerDirection()
     {
         //update player's direction before giving 
-        playerFacingRight = GetComponent<CharacterController2D>().getDirection();
+        playerFacingRight = GetComponent<CharacterController2D>().GetDirection();
         return playerFacingRight;
     }
 
