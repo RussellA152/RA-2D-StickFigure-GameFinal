@@ -253,7 +253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackName: 
   heavyAttackName: 
-  backAttackName: 
+  backAttackName: Back Light Attack
   allowMovementDuringAnim: 0
 --- !u!114 &-7831326710310975870
 MonoBehaviour:
@@ -1028,7 +1028,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 1
+  m_ExitTime: 0.5
   m_HasExitTime: 1
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
@@ -1244,7 +1244,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Locomotion
+  m_Name: Walking
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1547,7 +1547,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 1
+  m_ExitTime: 0.5
   m_HasExitTime: 1
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
@@ -1827,7 +1827,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 1
+  m_ExitTime: 0.5
   m_HasExitTime: 1
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
@@ -2239,7 +2239,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 1
+  m_ExitTime: 0.5
   m_HasExitTime: 1
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
@@ -2360,7 +2360,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 1
+  m_ExitTime: 0.5
   m_HasExitTime: 1
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
@@ -2662,6 +2662,38 @@ AnimatorStateTransition:
   m_InterruptionSource: 1
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1107 &1514594096764517698
+AnimatorStateMachine:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Locomotion
+  m_ChildStates:
+  - serializedVersion: 1
+    m_State: {fileID: -3813740514680594825}
+    m_Position: {x: 420, y: 240, z: 0}
+  m_ChildStateMachines:
+  - serializedVersion: 1
+    m_StateMachine: {fileID: 7812341550167220144}
+    m_Position: {x: 610, y: -260, z: 0}
+  - serializedVersion: 1
+    m_StateMachine: {fileID: 6496870065685537018}
+    m_Position: {x: 1110, y: 110, z: 0}
+  m_AnyStateTransitions: []
+  m_EntryTransitions: []
+  m_StateMachineTransitions:
+  - first: {fileID: 7812341550167220144}
+    second: []
+  - first: {fileID: 6496870065685537018}
+    second: []
+  m_StateMachineBehaviours: []
+  m_AnyStatePosition: {x: 50, y: 20, z: 0}
+  m_EntryPosition: {x: 50, y: 240, z: 0}
+  m_ExitPosition: {x: 1080, y: 400, z: 0}
+  m_ParentStateMachinePosition: {x: 680, y: -20, z: 0}
+  m_DefaultState: {fileID: -3813740514680594825}
 --- !u!1107 &1538655715377161641
 AnimatorStateMachine:
   serializedVersion: 6
@@ -2673,7 +2705,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 4583760041415756786}
-    m_Position: {x: 340, y: 120, z: 0}
+    m_Position: {x: 360, y: 120, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -2682,7 +2714,7 @@ AnimatorStateMachine:
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
-  m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
+  m_ParentStateMachinePosition: {x: 610, y: 70, z: 0}
   m_DefaultState: {fileID: 4583760041415756786}
 --- !u!1101 &1584577333131934857
 AnimatorStateTransition:
@@ -2843,7 +2875,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 1
+  m_ExitTime: 0.5
   m_HasExitTime: 1
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
@@ -2878,6 +2910,35 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: Velocity
+--- !u!1107 &2667175908007912112
+AnimatorStateMachine:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Attack Combos
+  m_ChildStates: []
+  m_ChildStateMachines:
+  - serializedVersion: 1
+    m_StateMachine: {fileID: 4565386627695345526}
+    m_Position: {x: 350, y: 100, z: 0}
+  - serializedVersion: 1
+    m_StateMachine: {fileID: 1538655715377161641}
+    m_Position: {x: 350, y: 0, z: 0}
+  m_AnyStateTransitions: []
+  m_EntryTransitions: []
+  m_StateMachineTransitions:
+  - first: {fileID: 4565386627695345526}
+    second: []
+  - first: {fileID: 1538655715377161641}
+    second: []
+  m_StateMachineBehaviours: []
+  m_AnyStatePosition: {x: 50, y: 20, z: 0}
+  m_EntryPosition: {x: 50, y: 110, z: 0}
+  m_ExitPosition: {x: 800, y: 280, z: 0}
+  m_ParentStateMachinePosition: {x: 830, y: 100, z: 0}
+  m_DefaultState: {fileID: 2494972024138249509}
 --- !u!1102 &2683845294095325203
 AnimatorState:
   serializedVersion: 6
@@ -2955,7 +3016,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackName: 
   heavyAttackName: 
-  backAttackName: 
+  backAttackName: Back Light Attack
   allowMovementDuringAnim: 0
 --- !u!1101 &3016651845754949685
 AnimatorStateTransition:
@@ -3008,34 +3069,21 @@ AnimatorStateMachine:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Base Layer
+  m_Name: Idle
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -96890588181203755}
-    m_Position: {x: -180, y: 220, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -3813740514680594825}
-    m_Position: {x: 720, y: 770, z: 0}
+    m_Position: {x: -100, y: 90, z: 0}
   m_ChildStateMachines:
   - serializedVersion: 1
-    m_StateMachine: {fileID: 7812341550167220144}
-    m_Position: {x: 690, y: 220, z: 0}
+    m_StateMachine: {fileID: 1514594096764517698}
+    m_Position: {x: -100, y: 260, z: 0}
   - serializedVersion: 1
-    m_StateMachine: {fileID: 4565386627695345526}
-    m_Position: {x: -180, y: -60, z: 0}
-  - serializedVersion: 1
-    m_StateMachine: {fileID: 1538655715377161641}
-    m_Position: {x: 160, y: -10, z: 0}
-  - serializedVersion: 1
-    m_StateMachine: {fileID: 6496870065685537018}
-    m_Position: {x: -190, y: 770, z: 0}
+    m_StateMachine: {fileID: 2667175908007912112}
+    m_Position: {x: -100, y: -10, z: 0}
   m_AnyStateTransitions: []
   m_EntryTransitions: []
-  m_StateMachineTransitions:
-  - first: {fileID: 4565386627695345526}
-    second: []
-  - first: {fileID: 6496870065685537018}
-    second: []
+  m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 390, y: -80, z: 0}
   m_EntryPosition: {x: -420, y: 100, z: 0}
@@ -3252,7 +3300,7 @@ AnimatorStateMachine:
     m_Position: {x: 200, y: -50, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: -7408078327581011937}
-    m_Position: {x: -100, y: 200, z: 0}
+    m_Position: {x: 140, y: 380, z: 0}
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
@@ -3737,7 +3785,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackName: 
   heavyAttackName: Heavy Attack 1 P2
-  backAttackName: 
+  backAttackName: Back Light Attack
   allowMovementDuringAnim: 0
 --- !u!114 &7575761301753349140
 MonoBehaviour:

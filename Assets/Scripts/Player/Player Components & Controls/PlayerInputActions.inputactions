@@ -84,6 +84,22 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Flip Right",
+                    "type": "Button",
+                    "id": "b71512b7-2180-4da9-b856-2b524ed1b98f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Flip Left",
+                    "type": "Button",
+                    "id": "cc5806a5-a807-431c-9a55-0601f8c65891",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -392,6 +408,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Quick Step",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "85228ab0-583c-4d53-a580-513cb46fd54a",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Flip Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "20f60920-e677-4b9b-a72c-2eea22203af1",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Flip Left",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

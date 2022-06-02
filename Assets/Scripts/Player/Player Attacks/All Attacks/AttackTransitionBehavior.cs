@@ -11,7 +11,7 @@ public class AttackTransitionBehavior : StateMachineBehaviour
     public string backAttackName; //name of back attack
 
     [SerializeField] private bool allowMovementDuringAnim; //this bool determines if the player is allowed to move during this transition (used for Idle animation, otherwise player can't move in Idle state)
-    private PlayerComponents playerComponentScript; //we will use the player component script in order to invoke the setCanInteract() function
+    private PlayerComponents playerComponentScript; //we will use the player component script in order to invoke the setCan"action" functions
 
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -19,6 +19,8 @@ public class AttackTransitionBehavior : StateMachineBehaviour
     {
         //retrieve component script
         playerComponentScript = animator.transform.gameObject.GetComponent<PlayerComponents>();
+
+        playerComponentScript.SetCanFlip(true);
 
         // IF this animation allows movement during animation then allow player to move (instead the animation will move player a little)
         // we also set canAttack to false inside of "AttackAnimationBehavior.cs"
@@ -34,12 +36,12 @@ public class AttackTransitionBehavior : StateMachineBehaviour
     {
         //If player fails to meet any of the following conditions below, the player will return to the Idle state 
 
-        //if we press left click during an attack animation, play the corresponding light attack
-        if (AttackController.instance.isAttacking)
+        // if we press back button (could be 'a' or 'd') + left click, play the corresponding back light attack
+        if (AttackController.instance.isBackAttacking)
         {
-            if(attackName != "")
+            if(backAttackName != "")
             {
-                AttackController.instance.animator.Play(attackName);
+                AttackController.instance.animator.Play(backAttackName);
                 //Debug.Log("Light ATTACK!");
 
             }
@@ -59,12 +61,12 @@ public class AttackTransitionBehavior : StateMachineBehaviour
             }
                 
         }
-        // if we press back button (could be 'a' or 'd') + left click, play the corresponding back light attack
-        else if (AttackController.instance.isBackAttacking)
+        //if we press left click during an attack animation, play the corresponding light attack
+        else if (AttackController.instance.isAttacking)
         {
-            if (backAttackName != "")
+            if (attackName != "")
             {
-                AttackController.instance.animator.Play(backAttackName);
+                AttackController.instance.animator.Play(attackName);
                 //Debug.Log("Back ATTACK!");
             }
         }
@@ -75,6 +77,8 @@ public class AttackTransitionBehavior : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        
+
         if (AttackController.instance.isAttacking)
         {
             AttackController.instance.isAttacking = false;

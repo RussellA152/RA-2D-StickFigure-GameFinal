@@ -45,6 +45,7 @@ public class CharacterController2D : MonoBehaviour
 	private bool canMove; //determines if player can walk and jump (retrieved from playerComponents script)
 	private bool canWalk; //determines if player can walk (retrieved from playerComponents script)
 	private bool canJump; //determines if player can jump (retrieved from playerComponents script)
+	private bool canFlip; //determines if the player's sprite can flip (retrieved from playerComponents script)
 
 	public Animator animator;
 
@@ -60,6 +61,8 @@ public class CharacterController2D : MonoBehaviour
 
 	//private InputAction move;
 	private InputAction jump;
+	private InputAction turnRight;
+	private InputAction turnLeft;
 
 
 	private float backAttackTimer = 0.3f; //time allowed for player to perform a back attack (once this hits 0, the player must turn around again to perform a back attack)
@@ -114,6 +117,8 @@ public class CharacterController2D : MonoBehaviour
 		playerComponentScript = GetComponent<PlayerComponents>();
 
 		jump = playerComponentScript.GetJump();
+		turnLeft = playerComponentScript.GetTurnLeft();
+		turnRight = playerComponentScript.GetTurnRight();
 		m_Rigidbody2D = playerComponentScript.GetRB();
 		animator = playerComponentScript.GetAnimator();
 
@@ -137,6 +142,7 @@ public class CharacterController2D : MonoBehaviour
 		canMove = playerComponentScript.GetCanMove();
 		canWalk = playerComponentScript.GetCanWalk();
 		canJump = playerComponentScript.GetCanJump();
+		canFlip = playerComponentScript.GetCanFlip();
 
 
 		//if grounded, animator's isJumping is set to false, and isGrounded parameter is set to true
@@ -189,8 +195,6 @@ public class CharacterController2D : MonoBehaviour
 			}
 		}
 	}
-
-
 	public void Move(float move, bool crouch, bool jump, bool sliding, float jumpBufferCounter)
 	{
 
@@ -283,13 +287,13 @@ public class CharacterController2D : MonoBehaviour
 			animator.SetFloat(velocityHash, animVelocity);
 
 			// If the input is moving the player right and the player is facing left...
-			if (move > 0 && !m_FacingRight)
+			if (turnRight.ReadValue<float>() > 0 && turnLeft.ReadValue<float>() == 0 && !m_FacingRight && canFlip)
 			{
 				// ... flip the player.
 				Flip();
 			}
 			// Otherwise if the input is moving the player left and the player is facing right...
-			else if (move < 0 && m_FacingRight)
+			else if (turnLeft.ReadValue<float>() > 0  && turnRight.ReadValue<float>() == 0 && m_FacingRight && canFlip)
 			{
 				// ... flip the player.
 				Flip();

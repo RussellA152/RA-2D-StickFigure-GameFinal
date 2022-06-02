@@ -4,6 +4,7 @@ using UnityEngine;
 
 
 // EXIT Time for transition animations refer to how long it will take to revert back to Idle state
+//There are only dash attacks when pressing heavy attack button, not for light attack button
 public class DashAttackTransitionAnimationBehavior : StateMachineBehaviour
 {
     public string attackName; //name of light attack
@@ -16,7 +17,7 @@ public class DashAttackTransitionAnimationBehavior : StateMachineBehaviour
     private int animVelocityParameter; //animator's velocity parameter 
 
     [SerializeField] private bool allowMovementDuringAnim; //this bool determines if the player is allowed to move during this transition
-    private PlayerComponents playerComponentScript; //we will use the player component script in order to invoke the setCanInteract() function
+    private PlayerComponents playerComponentScript; //we will use the player component script in order to invoke the setCan"action" functions
 
 
 
@@ -45,15 +46,18 @@ public class DashAttackTransitionAnimationBehavior : StateMachineBehaviour
 
         //Debug.Log(animator.GetFloat(velocityParameter));
 
-        if (AttackController.instance.isAttacking)
+        // if we press back button + left click, play the corresponding back light attack
+        
+        if (AttackController.instance.isBackAttacking)
         {
-            if (attackName != "")
+            if (backAttackName != "")
             {
-                AttackController.instance.animator.Play(attackName);
+                AttackController.instance.animator.Play(backAttackName);
 
             }
 
         }
+        //if we press right click during an attack animation, play the corresponding heavy attack
         else if (AttackController.instance.isHeavyAttacking && animator.GetFloat(animVelocityParameter) > dashAttackVelocityRequirement)
         {
             if (dashAttackName != "")
@@ -64,6 +68,7 @@ public class DashAttackTransitionAnimationBehavior : StateMachineBehaviour
             }
 
         }
+        //if we press right click and we are near the required velocity speed, play the corresponding dash attack
         else if (AttackController.instance.isHeavyAttacking && animator.GetFloat(animVelocityParameter) < dashAttackVelocityRequirement){
             if (heavyAttackName != "")
             {
@@ -71,12 +76,12 @@ public class DashAttackTransitionAnimationBehavior : StateMachineBehaviour
 
             }
         }
-        // if we press back button + left click, play the corresponding light attack
-        else if (AttackController.instance.isBackAttacking)
+        //if we press left click during an attack animation, play the corresponding light attack
+        else if (AttackController.instance.isAttacking)
         {
-            if (backAttackName != "")
+            if (attackName != "")
             {
-                AttackController.instance.animator.Play(backAttackName);
+                AttackController.instance.animator.Play(attackName);
                 //Debug.Log("Back ATTACK!");
             }
         }

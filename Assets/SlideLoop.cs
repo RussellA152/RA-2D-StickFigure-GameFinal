@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SlideLoop : StateMachineBehaviour
 {
-    [SerializeField] private float slideSpeed;                                  // How fast the player will slide (slow decreases & must be a high value ex. 34,000)
+    [SerializeField] private float slideSpeed; // How fast the player will slide (slow decreases & must be a high value ex. 34,000)
 
     private float tempSlideSpeed;
 

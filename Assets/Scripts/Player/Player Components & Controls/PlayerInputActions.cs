@@ -97,6 +97,22 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Flip Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""b71512b7-2180-4da9-b856-2b524ed1b98f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Flip Left"",
+                    ""type"": ""Button"",
+                    ""id"": ""cc5806a5-a807-431c-9a55-0601f8c65891"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -405,6 +421,28 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Quick Step"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""85228ab0-583c-4d53-a580-513cb46fd54a"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Flip Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""20f60920-e677-4b9b-a72c-2eea22203af1"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Flip Left"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -992,6 +1030,8 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_Player_BackAttackLeft = m_Player.FindAction("Back Attack Left", throwIfNotFound: true);
         m_Player_BackAttackRight = m_Player.FindAction("Back Attack Right", throwIfNotFound: true);
         m_Player_QuickStep = m_Player.FindAction("Quick Step", throwIfNotFound: true);
+        m_Player_FlipRight = m_Player.FindAction("Flip Right", throwIfNotFound: true);
+        m_Player_FlipLeft = m_Player.FindAction("Flip Left", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1063,6 +1103,8 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_BackAttackLeft;
     private readonly InputAction m_Player_BackAttackRight;
     private readonly InputAction m_Player_QuickStep;
+    private readonly InputAction m_Player_FlipRight;
+    private readonly InputAction m_Player_FlipLeft;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1077,6 +1119,8 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         public InputAction @BackAttackLeft => m_Wrapper.m_Player_BackAttackLeft;
         public InputAction @BackAttackRight => m_Wrapper.m_Player_BackAttackRight;
         public InputAction @QuickStep => m_Wrapper.m_Player_QuickStep;
+        public InputAction @FlipRight => m_Wrapper.m_Player_FlipRight;
+        public InputAction @FlipLeft => m_Wrapper.m_Player_FlipLeft;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1116,6 +1160,12 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @QuickStep.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickStep;
                 @QuickStep.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickStep;
                 @QuickStep.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickStep;
+                @FlipRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlipRight;
+                @FlipRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlipRight;
+                @FlipRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlipRight;
+                @FlipLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlipLeft;
+                @FlipLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlipLeft;
+                @FlipLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlipLeft;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1150,6 +1200,12 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @QuickStep.started += instance.OnQuickStep;
                 @QuickStep.performed += instance.OnQuickStep;
                 @QuickStep.canceled += instance.OnQuickStep;
+                @FlipRight.started += instance.OnFlipRight;
+                @FlipRight.performed += instance.OnFlipRight;
+                @FlipRight.canceled += instance.OnFlipRight;
+                @FlipLeft.started += instance.OnFlipLeft;
+                @FlipLeft.performed += instance.OnFlipLeft;
+                @FlipLeft.canceled += instance.OnFlipLeft;
             }
         }
     }
@@ -1316,6 +1372,8 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnBackAttackLeft(InputAction.CallbackContext context);
         void OnBackAttackRight(InputAction.CallbackContext context);
         void OnQuickStep(InputAction.CallbackContext context);
+        void OnFlipRight(InputAction.CallbackContext context);
+        void OnFlipLeft(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

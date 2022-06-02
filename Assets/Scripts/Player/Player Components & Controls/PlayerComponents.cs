@@ -17,6 +17,8 @@ public class PlayerComponents : MonoBehaviour
     private InputAction slide; //input action used for performing a slide (left shift)
     private InputAction backLightAttackLeft; //input action used for performing a back light attack (turning around and performing a light attack quickly) ( A for turning left )
     private InputAction backLightAttackRight; //input action used for performing a back light attack (turning around and performing a light attack quickly) ( D for turning right )
+    private InputAction turnRight; //input action used for turning player to face right direction
+    private InputAction turnLeft; //input action used for turning player to face left direction
 
     private float health;
 
@@ -39,6 +41,7 @@ public class PlayerComponents : MonoBehaviour
 
     private bool canJump = true; //this bool determines if the player is allowed to walk (only)
     private bool canWalk = true; //this bool determines if the player is allowed to jump (only)
+    private bool canFlip = true; //this bool determines if the player's sprite is allowed to flip
 
 
     private void Awake()
@@ -66,6 +69,8 @@ public class PlayerComponents : MonoBehaviour
         slide = playerControls.Player.Slide;
         backLightAttackLeft = playerControls.Player.BackAttackLeft;
         backLightAttackRight = playerControls.Player.BackAttackRight;
+        turnRight = playerControls.Player.FlipRight;
+        turnLeft = playerControls.Player.FlipLeft;
 
         move.Enable();
         jump.Enable();
@@ -74,6 +79,8 @@ public class PlayerComponents : MonoBehaviour
         slide.Enable();
         backLightAttackLeft.Enable();
         backLightAttackRight.Enable();
+        turnRight.Enable();
+        turnLeft.Enable();
 
     }
     private void OnDisable()
@@ -85,6 +92,9 @@ public class PlayerComponents : MonoBehaviour
         slide.Disable();
         backLightAttackLeft.Disable();
         backLightAttackRight.Disable();
+
+        turnRight.Disable();
+        turnLeft.Disable();
     }
 
 
@@ -127,6 +137,11 @@ public class PlayerComponents : MonoBehaviour
     {
         canSlide = boolean;
     }
+
+    public void SetCanFlip(bool boolean)
+    {
+        canFlip = boolean;
+    }
     public bool GetCanJump()
     {
         return canJump;
@@ -139,6 +154,11 @@ public class PlayerComponents : MonoBehaviour
     public bool GetCanMove()
     {
         return canMove;
+    }
+    //retrieves the canFlip boolean
+    public bool GetCanFlip()
+    {
+        return canFlip;
     }
 
     //retrieves the health value
@@ -203,6 +223,15 @@ public class PlayerComponents : MonoBehaviour
     public InputAction GetBackLightAttackRight()
     {
         return backLightAttackRight;
+    }
+
+    public InputAction GetTurnRight()
+    {
+        return turnRight;
+    }
+    public InputAction GetTurnLeft()
+    {
+        return turnLeft;
     }
     //might put this in a different script later (could there be a memory leak here?)
     // ONLY WORKS WITH A KEYBOARD AT THE MOMENT

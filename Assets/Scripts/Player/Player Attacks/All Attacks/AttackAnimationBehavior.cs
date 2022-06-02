@@ -29,18 +29,22 @@ public class AttackAnimationBehavior : StateMachineBehaviour
 
 
 
+
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         isGroundedHash = Animator.StringToHash("isGrounded");
 
         //when animation begins, retrieve the player's hitbox from the PlayerComponent's script
         playerComponentScript = animator.transform.gameObject.GetComponent<PlayerComponents>();
+
         //retrive which way player is facing
         playerFacingRight = playerComponentScript.GetPlayerDirection();
 
         //grab hitbox and rigidbody component
         hitbox = playerComponentScript.GetHitBox();
         rb = playerComponentScript.GetRB();
+
+        playerComponentScript.SetCanFlip(false);
 
         //invoke jolt movement 
         joltPlayer(playerFacingRight,joltForceX, joltForceY);
@@ -77,6 +81,7 @@ public class AttackAnimationBehavior : StateMachineBehaviour
         {
             hitbox.enabled = false;
         }
+
     }
 
     //will move by player using force by powerX and powerY 
