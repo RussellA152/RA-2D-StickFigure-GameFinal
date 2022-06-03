@@ -10,11 +10,11 @@ public class AttackAnimationBehavior : StateMachineBehaviour
 
     // ONLY ANIMATIONS THAT HAVE A HITBOX (NOT HURTBOX) SHOULD USE THIS SCRIPT
 
-    [SerializeField] private bool animHasHitbox; //determines if the animation has a hitbox tied to it
+    //[SerializeField] private bool animHasHitbox; //determines if the animation has a hitbox tied to it
 
-    [SerializeField] private BoxCollider2D hitbox; //the hitbox (used for attacking enemy) gameobject
+    //[SerializeField] private BoxCollider2D hitbox; //the hitbox (used for attacking enemy) gameobject
 
-    [SerializeField] private bool turnOffHitbox; //determines if we should turn off hitbox
+    //[SerializeField] private bool turnOffHitbox; //determines if we should turn off hitbox
 
     private PlayerComponents playerComponentScript; //we will use the player component script in order to invoke the setCanInteract() function
 
@@ -41,7 +41,7 @@ public class AttackAnimationBehavior : StateMachineBehaviour
         playerFacingRight = playerComponentScript.GetPlayerDirection();
 
         //grab hitbox and rigidbody component
-        hitbox = playerComponentScript.GetHitBox();
+        //hitbox = playerComponentScript.GetHitBox();
         rb = playerComponentScript.GetRB();
 
         playerComponentScript.SetCanFlip(false);
@@ -52,10 +52,10 @@ public class AttackAnimationBehavior : StateMachineBehaviour
 
 
         //if this animation contains a hitbox, then enable it at start of animation
-        if (animHasHitbox && hitbox != null)
-        {
-            hitbox.enabled = true;
-        }
+        //if (animHasHitbox && hitbox != null)
+        //{
+            //hitbox.enabled = true;
+        //}
 
     }
 
@@ -77,10 +77,10 @@ public class AttackAnimationBehavior : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         //if the hitbox is active, and we should turn it off, then set it to false
-        if (hitbox.enabled && turnOffHitbox && animHasHitbox)
-        {
-            hitbox.enabled = false;
-        }
+        //if (hitbox.enabled && turnOffHitbox && animHasHitbox)
+        //{
+           // hitbox.enabled = false;
+        //}
 
     }
 
