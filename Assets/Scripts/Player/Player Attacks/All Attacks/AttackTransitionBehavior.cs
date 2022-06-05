@@ -9,6 +9,7 @@ public class AttackTransitionBehavior : StateMachineBehaviour
     public string attackName; //name of light attack
     public string heavyAttackName; //name of heavy attack
     public string backAttackName; //name of back attack
+    public string backHeavyAttackName; //name of back heavy attack
 
     [SerializeField] private bool allowMovementDuringAnim; //this bool determines if the player is allowed to move during this transition (used for Idle animation, otherwise player can't move in Idle state)
     private PlayerComponents playerComponentScript; //we will use the player component script in order to invoke the setCan"action" functions
@@ -46,6 +47,15 @@ public class AttackTransitionBehavior : StateMachineBehaviour
 
             }
                 
+        }
+        else if (AttackController.instance.isBackHeavyAttacking)
+        {
+            if (backHeavyAttackName != "")
+            {
+                AttackController.instance.animator.Play(backHeavyAttackName);
+                //Debug.Log("Light ATTACK!");
+
+            }
         }
         //if we press right click during an attack animation, play the corresponding heavy attack
         else if (AttackController.instance.isHeavyAttacking)
@@ -99,8 +109,16 @@ public class AttackTransitionBehavior : StateMachineBehaviour
             //after back attacking, the player will need to turn around again (see CharacterController2D script)
             playerComponentScript.SetCanBackAttack(false);
 
+        }
+        if (AttackController.instance.isBackHeavyAttacking)
+        {
+            AttackController.instance.isBackHeavyAttacking = false;
+
+            //after back attacking, the player will need to turn around again (see CharacterController2D script)
+            playerComponentScript.SetCanBackAttack(false);
 
         }
+
 
     }
 

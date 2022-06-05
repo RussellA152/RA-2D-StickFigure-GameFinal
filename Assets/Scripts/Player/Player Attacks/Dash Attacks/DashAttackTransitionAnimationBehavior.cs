@@ -10,6 +10,7 @@ public class DashAttackTransitionAnimationBehavior : StateMachineBehaviour
     public string attackName; //name of light attack
     public string heavyAttackName; //name of heavy attack
     public string backAttackName; //name of back attack
+    public string backHeavyAttackName; //name of back heavy attack
     public string dashAttackName; //name of dash attack
 
     [SerializeField] private float dashAttackVelocityRequirement; //amount of velocity required to perform dash attack instead of regular heavy attack
@@ -56,6 +57,15 @@ public class DashAttackTransitionAnimationBehavior : StateMachineBehaviour
 
             }
 
+        }
+        else if (AttackController.instance.isBackHeavyAttacking)
+        {
+            if (backHeavyAttackName != "")
+            {
+                AttackController.instance.animator.Play(backHeavyAttackName);
+                //Debug.Log("Light ATTACK!");
+
+            }
         }
         //if we press right click during an attack animation, play the corresponding heavy attack
         else if (AttackController.instance.isHeavyAttacking && animator.GetFloat(animVelocityParameter) > dashAttackVelocityRequirement)
@@ -111,6 +121,15 @@ public class DashAttackTransitionAnimationBehavior : StateMachineBehaviour
         if (AttackController.instance.isBackAttacking)
         {
             AttackController.instance.isBackAttacking = false;
+            playerComponentScript.SetCanBackAttack(false);
+
+        }
+
+        if (AttackController.instance.isBackHeavyAttacking)
+        {
+            AttackController.instance.isBackHeavyAttacking = false;
+
+            //after back attacking, the player will need to turn around again (see CharacterController2D script)
             playerComponentScript.SetCanBackAttack(false);
 
         }

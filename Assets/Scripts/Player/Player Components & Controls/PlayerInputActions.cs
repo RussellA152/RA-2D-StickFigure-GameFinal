@@ -113,6 +113,22 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Back Heavy Attack Left"",
+                    ""type"": ""Button"",
+                    ""id"": ""e0d1d778-e58b-4b48-8c18-b16e5a7dfbc0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Back Heavy Attack Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""08f2bdae-6cee-4dad-b154-0b97d3d01c3e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -445,6 +461,72 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""action"": ""Flip Left"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Button With One Modifier"",
+                    ""id"": ""81c715b8-0c34-41d1-84e5-bf88253e3ce6"",
+                    ""path"": ""ButtonWithOneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back Heavy Attack Left"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""24f10cfc-04db-40a8-bc7e-a41d6e6270f5"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Back Heavy Attack Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""button"",
+                    ""id"": ""7526dc45-47cc-4188-8a72-3d81917f08f8"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Back Heavy Attack Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Button With One Modifier"",
+                    ""id"": ""83ae215a-d4a3-4767-a755-166589322dff"",
+                    ""path"": ""ButtonWithOneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back Heavy Attack Right"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""d7ae5d82-cfc6-4aa1-9de0-2a0b873ab109"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Back Heavy Attack Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""button"",
+                    ""id"": ""ab381d96-eb27-4d06-b093-b104536c8a0f"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Back Heavy Attack Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -1032,6 +1114,8 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_Player_QuickStep = m_Player.FindAction("Quick Step", throwIfNotFound: true);
         m_Player_FlipRight = m_Player.FindAction("Flip Right", throwIfNotFound: true);
         m_Player_FlipLeft = m_Player.FindAction("Flip Left", throwIfNotFound: true);
+        m_Player_BackHeavyAttackLeft = m_Player.FindAction("Back Heavy Attack Left", throwIfNotFound: true);
+        m_Player_BackHeavyAttackRight = m_Player.FindAction("Back Heavy Attack Right", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1105,6 +1189,8 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_QuickStep;
     private readonly InputAction m_Player_FlipRight;
     private readonly InputAction m_Player_FlipLeft;
+    private readonly InputAction m_Player_BackHeavyAttackLeft;
+    private readonly InputAction m_Player_BackHeavyAttackRight;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1121,6 +1207,8 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         public InputAction @QuickStep => m_Wrapper.m_Player_QuickStep;
         public InputAction @FlipRight => m_Wrapper.m_Player_FlipRight;
         public InputAction @FlipLeft => m_Wrapper.m_Player_FlipLeft;
+        public InputAction @BackHeavyAttackLeft => m_Wrapper.m_Player_BackHeavyAttackLeft;
+        public InputAction @BackHeavyAttackRight => m_Wrapper.m_Player_BackHeavyAttackRight;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1166,6 +1254,12 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @FlipLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlipLeft;
                 @FlipLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlipLeft;
                 @FlipLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlipLeft;
+                @BackHeavyAttackLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackHeavyAttackLeft;
+                @BackHeavyAttackLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackHeavyAttackLeft;
+                @BackHeavyAttackLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackHeavyAttackLeft;
+                @BackHeavyAttackRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackHeavyAttackRight;
+                @BackHeavyAttackRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackHeavyAttackRight;
+                @BackHeavyAttackRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackHeavyAttackRight;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1206,6 +1300,12 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @FlipLeft.started += instance.OnFlipLeft;
                 @FlipLeft.performed += instance.OnFlipLeft;
                 @FlipLeft.canceled += instance.OnFlipLeft;
+                @BackHeavyAttackLeft.started += instance.OnBackHeavyAttackLeft;
+                @BackHeavyAttackLeft.performed += instance.OnBackHeavyAttackLeft;
+                @BackHeavyAttackLeft.canceled += instance.OnBackHeavyAttackLeft;
+                @BackHeavyAttackRight.started += instance.OnBackHeavyAttackRight;
+                @BackHeavyAttackRight.performed += instance.OnBackHeavyAttackRight;
+                @BackHeavyAttackRight.canceled += instance.OnBackHeavyAttackRight;
             }
         }
     }
@@ -1374,6 +1474,8 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnQuickStep(InputAction.CallbackContext context);
         void OnFlipRight(InputAction.CallbackContext context);
         void OnFlipLeft(InputAction.CallbackContext context);
+        void OnBackHeavyAttackLeft(InputAction.CallbackContext context);
+        void OnBackHeavyAttackRight(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

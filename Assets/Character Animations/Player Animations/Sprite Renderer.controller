@@ -81,7 +81,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 1
+  m_ExitTime: 0.6
   m_HasExitTime: 1
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
@@ -147,11 +147,12 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Back Heavy Attack
-  m_Speed: 1
+  m_Speed: 0.15
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 3823287536300520025}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -4635856912504220411}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -160,7 +161,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
+  m_Motion: {fileID: 7400000, guid: 50361c65e39a5a44387517e33fa9fe70, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -276,6 +277,7 @@ MonoBehaviour:
   attackName: 
   heavyAttackName: 
   backAttackName: Back Light Attack
+  backHeavyAttackName: 
   allowMovementDuringAnim: 0
 --- !u!114 &-7831326710310975870
 MonoBehaviour:
@@ -292,6 +294,7 @@ MonoBehaviour:
   attackName: Attack 4
   heavyAttackName: 
   backAttackName: Back Light Attack
+  backHeavyAttackName: Back Heavy Attack
   allowMovementDuringAnim: 0
 --- !u!1101 &-7758563310901304590
 AnimatorStateTransition:
@@ -530,6 +533,7 @@ MonoBehaviour:
   attackName: Attack 2
   heavyAttackName: Heavy Attack 1
   backAttackName: Back Light Attack
+  backHeavyAttackName: Back Heavy Attack
   allowMovementDuringAnim: 0
 --- !u!1102 &-6761910278824410491
 AnimatorState:
@@ -713,6 +717,7 @@ MonoBehaviour:
   attackName: Attack 1
   heavyAttackName: Heavy Attack 1
   backAttackName: 
+  backHeavyAttackName: 
   allowMovementDuringAnim: 1
 --- !u!114 &-5735426188076464095
 MonoBehaviour:
@@ -954,6 +959,7 @@ MonoBehaviour:
   attackName: Attack 1
   heavyAttackName: Single Heavy Attack
   backAttackName: Back Light Attack
+  backHeavyAttackName: Back Heavy Attack
   dashAttackName: 
   dashAttackVelocityRequirement: 1.7
   allowMovementDuringAnim: 1
@@ -1081,6 +1087,20 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-4635856912504220411
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  joltForceX: 4000
+  joltForceY: 0
 --- !u!1102 &-4507273775334180747
 AnimatorState:
   serializedVersion: 6
@@ -1539,6 +1559,7 @@ MonoBehaviour:
   attackName: 
   heavyAttackName: 
   backAttackName: 
+  backHeavyAttackName: 
   allowMovementDuringAnim: 0
 --- !u!1101 &-3135887821146915841
 AnimatorStateTransition:
@@ -1682,7 +1703,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 655757939311734196}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -516583471553664903}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1691,7 +1713,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
+  m_Motion: {fileID: 7400000, guid: d2795b6c736c689428d5c8753bfc2549, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -2109,6 +2131,7 @@ MonoBehaviour:
   attackName: Attack 3
   heavyAttackName: 
   backAttackName: Back Light Attack
+  backHeavyAttackName: Back Heavy Attack
   allowMovementDuringAnim: 0
 --- !u!1101 &-781862993067807824
 AnimatorStateTransition:
@@ -2249,7 +2272,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Back Light Attack
-  m_Speed: 0.05
+  m_Speed: 0.15
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -3135887821146915841}
@@ -2263,7 +2286,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 48c73a574682683488f27cda3f1a33b7, type: 2}
+  m_Motion: {fileID: 7400000, guid: 5608aebb87465ab4caca6d4e983558f1, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -2284,6 +2307,23 @@ MonoBehaviour:
   animHasHitbox: 0
   hitbox: {fileID: 0}
   turnOffHitbox: 0
+--- !u!114 &-516583471553664903
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bcdc20dc630907469b3c280d9dbdbfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackName: Attack 1
+  heavyAttackName: Single Heavy Attack
+  backAttackName: 
+  backHeavyAttackName: 
+  allowMovementDuringAnim: 0
 --- !u!1101 &-367424455089454425
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2353,7 +2393,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 0.5
+  m_ExitTime: 1
   m_HasExitTime: 1
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
@@ -2598,7 +2638,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 1
+  m_ExitTime: 2
   m_HasExitTime: 1
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
@@ -2938,7 +2978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joltForceX: 4000
+  joltForceX: 3000
   joltForceY: 0
 --- !u!1101 &1844816730347360954
 AnimatorStateTransition:
@@ -3168,6 +3208,7 @@ MonoBehaviour:
   attackName: 
   heavyAttackName: 
   backAttackName: Back Light Attack
+  backHeavyAttackName: 
   allowMovementDuringAnim: 0
 --- !u!1101 &3016651845754949685
 AnimatorStateTransition:
@@ -3228,6 +3269,7 @@ MonoBehaviour:
   attackName: 
   heavyAttackName: 
   backAttackName: Back Light Attack
+  backHeavyAttackName: Back Heavy Attack
   allowMovementDuringAnim: 0
 --- !u!1107 &3297704623643483786
 AnimatorStateMachine:
@@ -3273,7 +3315,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 1
+  m_ExitTime: 1.5
   m_HasExitTime: 1
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
@@ -3333,6 +3375,7 @@ MonoBehaviour:
   attackName: Attack 1
   heavyAttackName: Single Heavy Attack
   backAttackName: Back Light Attack
+  backHeavyAttackName: Back Heavy Attack
   allowMovementDuringAnim: 1
 --- !u!1102 &4428197502280195058
 AnimatorState:
@@ -3449,7 +3492,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 1
+  m_ExitTime: 1.5
   m_HasExitTime: 1
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
@@ -3467,13 +3510,13 @@ AnimatorStateMachine:
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: 7124717852219899023}
-    m_Position: {x: 480, y: -50, z: 0}
+    m_Position: {x: 460, y: 80, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: 4485709841718707602}
-    m_Position: {x: 200, y: -50, z: 0}
+    m_Position: {x: 240, y: 80, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: -7408078327581011937}
-    m_Position: {x: 140, y: 380, z: 0}
+    m_Position: {x: 180, y: 320, z: 0}
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
@@ -3938,7 +3981,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 48c73a574682683488f27cda3f1a33b7, type: 2}
+  m_Motion: {fileID: 7400000, guid: 75a3b9b76cab91044815f607ccb0c4f0, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -3959,6 +4002,7 @@ MonoBehaviour:
   attackName: 
   heavyAttackName: Heavy Attack 1 P2
   backAttackName: Back Light Attack
+  backHeavyAttackName: 
   allowMovementDuringAnim: 0
 --- !u!114 &7575761301753349140
 MonoBehaviour:
@@ -4066,8 +4110,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackName: Attack 1
-  heavyAttackName: Heavy Attack 1
+  heavyAttackName: Single Heavy Attack
   backAttackName: 
+  backHeavyAttackName: 
   allowMovementDuringAnim: 0
 --- !u!1101 &8075325903898891747
 AnimatorStateTransition:

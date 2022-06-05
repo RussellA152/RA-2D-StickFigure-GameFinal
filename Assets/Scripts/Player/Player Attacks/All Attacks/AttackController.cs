@@ -17,12 +17,16 @@ public class AttackController : MonoBehaviour
     public bool isAttacking = false;
     public bool isHeavyAttacking = false;
     public bool isBackAttacking = false;
+    public bool isBackHeavyAttacking = false;
 
     private InputAction lightAttack;
     private InputAction heavyAttack;
 
     private InputAction backLightAttackLeft;
     private InputAction backLightAttackRight;
+
+    private InputAction backHeavyAttackLeft;
+    private InputAction backHeavyAttackRight;
 
 
 
@@ -45,8 +49,12 @@ public class AttackController : MonoBehaviour
 
         lightAttack = playerComponentScript.GetLightAttack();
         heavyAttack = playerComponentScript.GetHeavyAttack();
+
         backLightAttackLeft = playerComponentScript.GetBackLightAttackLeft();
         backLightAttackRight = playerComponentScript.GetBackLightAttackRight();
+
+        backHeavyAttackLeft = playerComponentScript.GetBackHeavyAttackLeft();
+        backHeavyAttackRight = playerComponentScript.GetBackHeavyAttackRight();
 
         //backLightAttackLeft.performed += BackLightAttackLeft;
         //backLightAttackRight.performed += BackLightAttackRight;
@@ -77,7 +85,7 @@ public class AttackController : MonoBehaviour
             isBackAttacking = true;
             //Debug.Log("Back Attack TO THE LEFT!");
         }
-        else if(backLightAttackRight.triggered && canBackAttack && !isBackAttacking)
+        else if (backLightAttackRight.triggered && canBackAttack && !isBackAttacking)
         {
             isBackAttacking = true;
             //Debug.Log("Back Attack TO THE RIGHT!");
@@ -89,46 +97,20 @@ public class AttackController : MonoBehaviour
             //Debug.Log("LIGHT ATTACK!");
         }
 
+        else if(backHeavyAttackLeft.triggered && canBackAttack && !isBackAttacking){
+            isBackHeavyAttacking = true;
+        }
+
+        else if (backHeavyAttackRight.triggered && canBackAttack && !isBackAttacking)
+        {
+            isBackHeavyAttacking = true;
+        }
+
         else if (heavyAttack.triggered && canAttack && !isHeavyAttacking)
         {
             isHeavyAttacking = true;
             //Debug.Log("HEAVY ATTACK!");
         }
     }
-
-    
-    //public void LightAttack(InputAction.CallbackContext context)
-    //{
-        //if (context.performed && canAttack &&!isAttacking && !isBackAttacking)
-        //{
-            //isAttacking = true;
-            //Debug.Log("Light Attack!");
-        //}
-    //}
-
-    //public void HeavyAttack(InputAction.CallbackContext context)
-    //{
-        //if (context.performed && canAttack && !isAttacking)
-        //{
-            //isHeavyAttacking = true;
-            //Debug.Log("Heavy Attack!");
-        //}
-    //}
-    /*
-    public void BackLightAttackLeft(InputAction.CallbackContext context)
-    {
-        if(context.performed && canAttack && !isAttacking)
-        {
-            Debug.Log("Back attack! LEFT LEFT");
-        }
-    }
-    public void BackLightAttackRight(InputAction.CallbackContext context)
-    {
-        if (context.performed && canAttack && !isAttacking)
-        {
-            Debug.Log("Back attack! Right RIGHT");
-        }
-    }
-    */
 
 }

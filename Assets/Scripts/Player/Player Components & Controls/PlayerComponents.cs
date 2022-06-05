@@ -12,11 +12,18 @@ public class PlayerComponents : MonoBehaviour
 
     private InputAction move; //input action used for WASD movement
     private InputAction jump; //input action used for jumping 
+
     private InputAction lightAttack; //input action used for performing light attacks (left click)
     private InputAction heavyAttack; //input action used for performing heavy attacks (right click)
+
     private InputAction slide; //input action used for performing a slide (left shift)
+
     private InputAction backLightAttackLeft; //input action used for performing a back light attack (turning around and performing a light attack quickly) ( A for turning left )
     private InputAction backLightAttackRight; //input action used for performing a back light attack (turning around and performing a light attack quickly) ( D for turning right )
+
+    private InputAction backHeavyAttackLeft; //input action used for performing a back heavy attack in the left direction
+    private InputAction backHeavyAttackRight; //input action used for performing a back heavy attack in the right direction
+
     private InputAction turnRight; //input action used for turning player to face right direction
     private InputAction turnLeft; //input action used for turning player to face left direction
 
@@ -69,16 +76,25 @@ public class PlayerComponents : MonoBehaviour
         slide = playerControls.Player.Slide;
         backLightAttackLeft = playerControls.Player.BackAttackLeft;
         backLightAttackRight = playerControls.Player.BackAttackRight;
+        backHeavyAttackLeft = playerControls.Player.BackHeavyAttackLeft;
+        backHeavyAttackRight = playerControls.Player.BackHeavyAttackRight;
         turnRight = playerControls.Player.FlipRight;
         turnLeft = playerControls.Player.FlipLeft;
 
         move.Enable();
         jump.Enable();
+
         lightAttack.Enable();
         heavyAttack.Enable();
+
         slide.Enable();
+
         backLightAttackLeft.Enable();
         backLightAttackRight.Enable();
+
+        backHeavyAttackLeft.Enable();
+        backHeavyAttackRight.Enable();
+
         turnRight.Enable();
         turnLeft.Enable();
 
@@ -87,11 +103,17 @@ public class PlayerComponents : MonoBehaviour
     {
         move.Disable();
         jump.Disable();
+
         lightAttack.Disable();
         heavyAttack.Disable();
+
         slide.Disable();
+
         backLightAttackLeft.Disable();
         backLightAttackRight.Disable();
+
+        backHeavyAttackLeft.Disable();
+        backHeavyAttackRight.Disable();
 
         turnRight.Disable();
         turnLeft.Disable();
@@ -223,6 +245,15 @@ public class PlayerComponents : MonoBehaviour
     public InputAction GetBackLightAttackRight()
     {
         return backLightAttackRight;
+    }
+
+    public InputAction GetBackHeavyAttackLeft()
+    {
+        return backHeavyAttackLeft;
+    }
+    public InputAction GetBackHeavyAttackRight()
+    {
+        return backHeavyAttackRight;
     }
 
     public InputAction GetTurnRight()
