@@ -49,7 +49,7 @@ public class AttackAnimationBehavior : StateMachineBehaviour
         playerComponentScript.SetCanFlip(false);
 
         //invoke jolt movement 
-        joltPlayer(playerFacingRight, joltForceX, joltForceY);
+        JoltPlayer(playerFacingRight, joltForceX, joltForceY);
 
         //invoke hitbox's function updates damage values
         hitbox.gameObject.GetComponent<DamageCollider>().UpdateAttackValues(attackDamage, attackingPowerX, attackingPowerY);
@@ -78,7 +78,7 @@ public class AttackAnimationBehavior : StateMachineBehaviour
 
     //will move by player using force by powerX and powerY 
     //checks for direction player is facing
-    private void joltPlayer(bool directionIsRight,float powerX, float powerY)
+    private void JoltPlayer(bool directionIsRight,float powerX, float powerY)
     {
         if(directionIsRight)
             rb.AddForce(new Vector2(powerX, powerY));

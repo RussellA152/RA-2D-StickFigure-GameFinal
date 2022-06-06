@@ -2526,7 +2526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 0
-  attackingPowerX: 300
+  attackingPowerX: 500
   attackingPowerY: 0
   joltForceX: 3500
   joltForceY: 0
