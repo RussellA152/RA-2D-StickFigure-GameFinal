@@ -33,7 +33,9 @@ public class PlayerComponents : MonoBehaviour
 
     private Rigidbody2D playerRB;
 
-    public BoxCollider2D hitbox;
+    private BoxCollider2D hitbox; //hitbox used for attacks
+
+    private BoxCollider2D bodyCollider; //collider used for for collisions between enemies and ground/walls
 
     private bool playerFacingRight;
 
@@ -56,6 +58,8 @@ public class PlayerComponents : MonoBehaviour
         playerControls = new PlayerInputActions();
         animator = GetComponent<Animator>();
         playerRB = GetComponent<Rigidbody2D>();
+        bodyCollider = GetComponent<BoxCollider2D>();
+        hitbox = GameObject.Find("Player Hit Box").GetComponent<BoxCollider2D>(); ;
     }
     private void Start()
     {
@@ -205,6 +209,12 @@ public class PlayerComponents : MonoBehaviour
         return hitbox;
     }
 
+    //returns player's bodycollider
+    public BoxCollider2D GetBodyCollider()
+    {
+        return bodyCollider;
+    }
+
     //retrives the direction the sprite is facing
     public bool GetPlayerDirection()
     {
@@ -276,5 +286,6 @@ public class PlayerComponents : MonoBehaviour
 
         //Debug.Log("REBIND END!");
     }
+
 
 }

@@ -277,7 +277,7 @@ MonoBehaviour:
   attackName: 
   heavyAttackName: 
   backAttackName: Back Light Attack
-  backHeavyAttackName: 
+  backHeavyAttackName: Back Heavy Attack
   allowMovementDuringAnim: 0
 --- !u!114 &-7831326710310975870
 MonoBehaviour:
@@ -731,6 +731,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDamage: 0
+  attackingPowerX: 0
+  attackingPowerY: 0
   joltForceX: 1000
   joltForceY: 0
 --- !u!1101 &-5643098270777370237
@@ -791,7 +794,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Attack 4 Transition
-  m_Speed: 0.05
+  m_Speed: 0.03
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -8908570319301394034}
@@ -1099,6 +1102,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDamage: 0
+  attackingPowerX: 0
+  attackingPowerY: 0
   joltForceX: 4000
   joltForceY: 0
 --- !u!1102 &-4507273775334180747
@@ -1542,6 +1548,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDamage: 30
+  attackingPowerX: 300
+  attackingPowerY: 0
   joltForceX: 1000
   joltForceY: 0
 --- !u!114 &-3170488162557796640
@@ -1639,6 +1648,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDamage: 0
+  attackingPowerX: 300
+  attackingPowerY: 0
   joltForceX: 1000
   joltForceY: 0
 --- !u!1101 &-2772697269554074870
@@ -1864,7 +1876,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Attack 3
-  m_Speed: 0.15
+  m_Speed: 0.2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -4871780538469933713}
@@ -2061,6 +2073,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDamage: 0
+  attackingPowerX: 0
+  attackingPowerY: 0
   joltForceX: 2000
   joltForceY: 0
 --- !u!1102 &-1215099197619369295
@@ -2321,8 +2336,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackName: Attack 1
   heavyAttackName: Single Heavy Attack
-  backAttackName: 
-  backHeavyAttackName: 
+  backAttackName: Back Light Attack
+  backHeavyAttackName: Back Heavy Attack
   allowMovementDuringAnim: 0
 --- !u!1101 &-367424455089454425
 AnimatorStateTransition:
@@ -2510,6 +2525,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDamage: 0
+  attackingPowerX: 300
+  attackingPowerY: 0
   joltForceX: 3500
   joltForceY: 0
 --- !u!1101 &193169169946245021
@@ -2978,6 +2996,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDamage: 0
+  attackingPowerX: 0
+  attackingPowerY: 0
   joltForceX: 3000
   joltForceY: 0
 --- !u!1101 &1844816730347360954
@@ -3208,7 +3229,7 @@ MonoBehaviour:
   attackName: 
   heavyAttackName: 
   backAttackName: Back Light Attack
-  backHeavyAttackName: 
+  backHeavyAttackName: Back Heavy Attack
   allowMovementDuringAnim: 0
 --- !u!1101 &3016651845754949685
 AnimatorStateTransition:
@@ -3315,7 +3336,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 1.5
+  m_ExitTime: 2
   m_HasExitTime: 1
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
@@ -4002,7 +4023,7 @@ MonoBehaviour:
   attackName: 
   heavyAttackName: Heavy Attack 1 P2
   backAttackName: Back Light Attack
-  backHeavyAttackName: 
+  backHeavyAttackName: Back Heavy Attack
   allowMovementDuringAnim: 0
 --- !u!114 &7575761301753349140
 MonoBehaviour:
@@ -4016,6 +4037,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDamage: 0
+  attackingPowerX: 0
+  attackingPowerY: 0
   joltForceX: 900
   joltForceY: 0
 --- !u!1107 &7812341550167220144
@@ -4111,8 +4135,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackName: Attack 1
   heavyAttackName: Single Heavy Attack
-  backAttackName: 
-  backHeavyAttackName: 
+  backAttackName: Back Light Attack
+  backHeavyAttackName: Back Heavy Attack
   allowMovementDuringAnim: 0
 --- !u!1101 &8075325903898891747
 AnimatorStateTransition:
@@ -4173,6 +4197,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDamage: 0
+  attackingPowerX: 300
+  attackingPowerY: 0
   joltForceX: 1100
   joltForceY: 0
 --- !u!1102 &8180898813625264346

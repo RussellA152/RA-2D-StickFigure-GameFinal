@@ -10,20 +10,20 @@ public class AttackAnimationBehavior : StateMachineBehaviour
 
     // ONLY ANIMATIONS THAT HAVE A HITBOX (NOT HURTBOX) SHOULD USE THIS SCRIPT
 
-    //[SerializeField] private bool animHasHitbox; //determines if the animation has a hitbox tied to it
-
-    //[SerializeField] private BoxCollider2D hitbox; //the hitbox (used for attacking enemy) gameobject
-
-    //[SerializeField] private bool turnOffHitbox; //determines if we should turn off hitbox
-
     private PlayerComponents playerComponentScript; //we will use the player component script in order to invoke the setCanInteract() function
 
     private Rigidbody2D rb;
 
+    private BoxCollider2D hitbox;
+
     private bool playerFacingRight; // represents direction player is facing (retrieved from playerComponents script)
 
-    [SerializeField] private float joltForceX; //determines how far the player will 'jolt' forward in the x direction when attacking (Should be a high value)
-    [SerializeField] private float joltForceY; //determines how far the player will 'jolt' forward in the y direction when attacking (Should be a high value)
+    [SerializeField] private float attackDamage; //damage of the attack
+    [SerializeField] private float attackingPowerX; //amount of force applied to enemy that is hit by this attack in x-direction
+    [SerializeField] private float attackingPowerY; //amount of force applied to enemy that is hit by this attack in y-direction
+
+    [SerializeField] private float joltForceX; //determines how far the player will 'jolt' forward in the x-direction when attacking (Should be a high value)
+    [SerializeField] private float joltForceY; //determines how far the player will 'jolt' forward in the y-direction when attacking (Should be a high value)
 
     private int isGroundedHash; //hash value for animator's isGrounded parameter
 
@@ -32,10 +32,12 @@ public class AttackAnimationBehavior : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        //improves performance
         isGroundedHash = Animator.StringToHash("isGrounded");
 
         //when animation begins, retrieve the player's hitbox from the PlayerComponent's script
         playerComponentScript = animator.transform.gameObject.GetComponent<PlayerComponents>();
+        hitbox = playerComponentScript.GetHitBox();
 
         //retrive which way player is facing
         playerFacingRight = playerComponentScript.GetPlayerDirection();
@@ -47,15 +49,10 @@ public class AttackAnimationBehavior : StateMachineBehaviour
         playerComponentScript.SetCanFlip(false);
 
         //invoke jolt movement 
-        joltPlayer(playerFacingRight,joltForceX, joltForceY);
-        
+        joltPlayer(playerFacingRight, joltForceX, joltForceY);
 
-
-        //if this animation contains a hitbox, then enable it at start of animation
-        //if (animHasHitbox && hitbox != null)
-        //{
-            //hitbox.enabled = true;
-        //}
+        //invoke hitbox's function updates damage values
+        hitbox.gameObject.GetComponent<DamageCollider>().UpdateAttackValues(attackDamage, attackingPowerX, attackingPowerY);
 
     }
 
@@ -76,11 +73,6 @@ public class AttackAnimationBehavior : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //if the hitbox is active, and we should turn it off, then set it to false
-        //if (hitbox.enabled && turnOffHitbox && animHasHitbox)
-        //{
-           // hitbox.enabled = false;
-        //}
 
     }
 

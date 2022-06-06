@@ -65,7 +65,7 @@ public class CharacterController2D : MonoBehaviour
 	private InputAction turnLeft;
 
 
-	private float backAttackTimer = 0.3f; //time allowed for player to perform a back attack (once this hits 0, the player must turn around again to perform a back attack)
+	private float backAttackTimer = 0.35f; //time allowed for player to perform a back attack (once this hits 0, the player must turn around again to perform a back attack)
 	//private InputAction slide;
 
 
@@ -104,7 +104,7 @@ public class CharacterController2D : MonoBehaviour
 
     private void Start()
     {
-		
+
 		isWalking = false;
 
 		//increases performance to use hashvalues instead of reading strings
@@ -129,6 +129,9 @@ public class CharacterController2D : MonoBehaviour
 
     private void Update()
     {
+
+		//Debug.Log("Timer: " + backAttackTimer);
+
 		//decrement back attack timer until it hits 0 (player can no longer back attack
 		if (backAttackTimer > 0f)
 			backAttackTimer -= Time.deltaTime;
@@ -331,7 +334,7 @@ public class CharacterController2D : MonoBehaviour
 		m_FacingRight = !m_FacingRight;
 
 		//reset back attack timer
-		backAttackTimer = 0.3f;
+		backAttackTimer = 0.35f;
 
 		//player has turned around, they are now allowed to perform a back attack
 		playerComponentScript.SetCanBackAttack(true);
