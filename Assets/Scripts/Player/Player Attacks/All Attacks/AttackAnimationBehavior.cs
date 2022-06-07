@@ -10,6 +10,9 @@ public class AttackAnimationBehavior : StateMachineBehaviour
 
     // ONLY ANIMATIONS THAT HAVE A HITBOX (NOT HURTBOX) SHOULD USE THIS SCRIPT
 
+    //type of damage the attack will do (light -- > enemy flinches, heavy -- > enemy knocked back )
+    public DamageType damageType;
+
     private PlayerComponents playerComponentScript; //we will use the player component script in order to invoke the setCanInteract() function
 
     private Rigidbody2D rb;
@@ -26,6 +29,7 @@ public class AttackAnimationBehavior : StateMachineBehaviour
     [SerializeField] private float joltForceY; //determines how far the player will 'jolt' forward in the y-direction when attacking (Should be a high value)
 
     private int isGroundedHash; //hash value for animator's isGrounded parameter
+
 
 
 
@@ -52,7 +56,7 @@ public class AttackAnimationBehavior : StateMachineBehaviour
         JoltPlayer(playerFacingRight, joltForceX, joltForceY);
 
         //invoke hitbox's function updates damage values
-        hitbox.gameObject.GetComponent<DamageCollider>().UpdateAttackValues(attackDamage, attackingPowerX, attackingPowerY);
+        hitbox.gameObject.GetComponent<DamageCollider>().UpdateAttackValues(damageType,attackDamage, attackingPowerX, attackingPowerY);
 
     }
 
@@ -86,4 +90,11 @@ public class AttackAnimationBehavior : StateMachineBehaviour
         else
             rb.AddForce(new Vector2(-powerX, -powerY));
     }
+
+}
+
+//determines the knock back effect applied on the enemy
+public enum DamageType
+{
+    light,heavy,air
 }
