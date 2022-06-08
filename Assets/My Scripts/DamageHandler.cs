@@ -10,10 +10,13 @@ public class DamageHandler : MonoBehaviour
 
     private Transform target;
 
+    //private EnemyController enemyController;
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        //enemyController = GetComponent<EnemyController>();
 
         //FLIPS ENEMY (using for test purposes right now)
         // Multiply the player's x local scale by -1.
@@ -34,6 +37,7 @@ public class DamageHandler : MonoBehaviour
 
     public void OnHurt(DamageType damageType, Vector3 attacker, float damage, float attackPowerX, float attackPowerY)
     {
+
         //need to check direction of attack as well
 
         Vector3 direction = attacker - transform.position;

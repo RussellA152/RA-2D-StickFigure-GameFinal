@@ -4,10 +4,102 @@ using UnityEngine;
 using Pathfinding;
 
 //This script will contain states for the AI (ex: Idle, Hostile, Death)
-
-
+//It also controls the values of variables inside of the enemy pathfinding scripts 
 public class EnemyController : MonoBehaviour
 {
+    [Header("Pathing Attributes")]
+    [SerializeField] private float hostileRange; //how far enemy can be to follow player
+
+    [Header("Target Properties")]
+    [SerializeField] private Transform targetTransform; //the target that the enemy will path towards
+
+    [Header("Sprite Direction Vectors")]
+    [SerializeField] private Vector3 facingRightVector; //vector3 representing the enemy facing the right direction
+    [SerializeField] private Vector3 facingLeftVector; //vector3 representing the enemy facing the left direction
+
+    private Rigidbody2D rb;
+
+    private AIPath aiPath;
+
+    private AIDestinationSetter destinationSetter; //destination setter script inside of enemy
+
+    private bool canMove = false; // variable to see if enemy is allowed to move (will be set to true or false depending on if enemy is alive or attacked)
+    //canMove being false also means enemy is allowed to be affected by attack forces because the pathfinding is basically turned off
+
+
+
+    private void Start()
+    {
+        targetTransform = GameObject.Find("Player").transform;
+
+        aiPath = GetComponent<AIPath>();
+        rb = GetComponent<Rigidbody2D>();
+
+        destinationSetter = GetComponent<AIDestinationSetter>();
+
+        destinationSetter.target = targetTransform;
+
+
+    }
+
+    private void Update()
+    {
+        //updating the canMove variable inside of AIPath script
+        aiPath.canMove = canMove;
+
+        if(Vector2.Distance(transform.position,targetTransform.position) > hostileRange)
+        {
+            canMove = false;
+            //set enemy state to idle (should set canMove to false)
+        }
+        else
+        {
+            canMove = true;
+
+        }
+        CheckStoppingDistance();
+
+        //check if enemy needs to flip their sprite
+        FlipSprite();
+    }
+
+    private void FlipSprite()
+    {
+        //if enemy is moving right... flip sprite to face the right direction
+        if (aiPath.desiredVelocity.x >= 0.01f)
+        {
+            transform.localScale = facingRightVector;
+}
+        // if enemy is moving left.. flip sprite to face left direction
+        else if (aiPath.desiredVelocity.x <= -0.01f)
+        {
+            transform.localScale = facingLeftVector;
+        }
+    }
+
+    private void CheckStoppingDistance()
+    {
+        //if enemy gets too close to player, set canMove to false (this will allow enemy to be affected by forces)
+        //if (Vector2.Distance(transform.position, targetTransform.position) <= aiPath.endReachedDistance)
+        //{
+            //canMove = false;
+            //set enemy state to idle (should set canMove to false)
+        //}
+        //else
+        //{
+            //canMove = true;
+
+        //}
+    }
+
+    public void SetEnemyCanMove(bool boolean)
+    {
+        canMove = boolean;
+    }
+
+
+}
+    /*
     private Rigidbody2D rb;
 
     [SerializeField] private Transform target;
@@ -69,14 +161,13 @@ public class EnemyController : MonoBehaviour
         if(currentWayPoint >= path.vectorPath.Count)
         {
             reachEndOfPath = true;
-            rb.velocity = Vector2.zero;
-            CancelInvoke();
+            //rb.velocity = Vector2.zero;
+            //CancelInvoke();
             return;
         }
         else
         {
             reachEndOfPath = false;
-            //InvokeRepeating("UpdatePath", 0f, .5f);
 
         }
         //path.vectorPath[currentWayPoint] gives us the precision of our current way point
@@ -84,9 +175,9 @@ public class EnemyController : MonoBehaviour
         //normalized makes sure the length of this direction is always 1
         Vector2 direction = ((Vector2) path.vectorPath[currentWayPoint] - rb.position).normalized;
 
-        //Vector2 force = direction * speed * Time.fixedDeltaTime;
+        Vector2 force = direction * speed * Time.fixedDeltaTime;
 
-        //rb.AddForce(force);
+        rb.AddForce(force);
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWayPoint]);
 
@@ -96,8 +187,9 @@ public class EnemyController : MonoBehaviour
         }
 
         //check when enemy needs to flip their sprite
-        //FlipSprite(force);
+        FlipSprite(force);
     }
+
 
     void OnPathComplete(Path p)
     {
@@ -125,4 +217,7 @@ public class EnemyController : MonoBehaviour
             transform.localScale = theScale;
         }
     }
+
 }
+
+    */
