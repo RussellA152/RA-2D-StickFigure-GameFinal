@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// SlideLoop requires the PlayerComponents script
+[RequireComponent(typeof(PlayerComponents))]
 public class SlideLoop : StateMachineBehaviour
 {
+    [Header("Speed Properties")]
     [SerializeField] private float slideSpeed; // How fast the player will slide (slow decreases & must be a high value ex. 34,000)
 
     private float tempSlideSpeed;

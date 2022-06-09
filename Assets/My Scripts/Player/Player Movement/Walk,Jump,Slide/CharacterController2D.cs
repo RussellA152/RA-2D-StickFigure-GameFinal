@@ -3,19 +3,27 @@ using UnityEngine.Events;
 using System.Collections;
 using UnityEngine.InputSystem;
 
+
+// CharacterController2D requires the PlayerComponents script in order to access keybinds
+[RequireComponent(typeof(PlayerComponents))]
 public class CharacterController2D : MonoBehaviour
 {
 	public PlayerInputActions playerControls;
 
 	private PlayerComponents playerComponentScript;
 
+	[Header("Speed Properties")]
 	[SerializeField] private float m_JumpForce = 1400f;                          // Amount of force added when the player jumps.
 	[SerializeField] private float speedMultiplier = 10f;                       // this float is applied to the regular movement speed (allows movement to gradually increase)
 	[SerializeField] private float maxSpeedMultiplier = 20f;
 
 	[Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;          // Amount of maxSpeed applied to crouching movement. 1 = 100%
 	[Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;  // How much to smooth out the movement
+
+	[Header("Allow AirControl?")]
 	[SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
+
+	[Header("Ground Checks")]
 	[SerializeField] private LayerMask m_WhatIsGround;                          // A mask determining what is ground to the character
 	[SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.
 	[SerializeField] private Transform m_CeilingCheck;                          // A position marking where to check for ceilings
@@ -34,6 +42,7 @@ public class CharacterController2D : MonoBehaviour
 
 	//public int jump_count = 2; // the number of times the player can jump
 
+	[Header("Falling Speed Properties")]
 	public float fallMultiplier = 2.5f;
 	public float lowJumpMultiplier = 2f;
 
@@ -46,7 +55,8 @@ public class CharacterController2D : MonoBehaviour
 	private bool canWalk; //determines if player can walk (retrieved from playerComponents script)
 	private bool canJump; //determines if player can jump (retrieved from playerComponents script)
 	private bool canFlip; //determines if the player's sprite can flip (retrieved from playerComponents script)
-
+	
+	[HideInInspector]
 	public Animator animator;
 
 	private float animVelocity = 0.0f; //velocity used for locomotion blend tree

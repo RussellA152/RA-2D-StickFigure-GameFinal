@@ -260,6 +260,12 @@ namespace Pathfinding {
 			reachedEndOfPath = false;
 		}
 
+		//I made this function so its easier to set the CanMove variable on and off
+		public void SetAICanMove(bool boolean)
+        {
+			canMove = boolean;
+        }
+
 		/// <summary>
 		/// The end of the path has been reached.
 		/// If you want custom logic for when the AI has reached it's destination add it here. You can

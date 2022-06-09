@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// EnemyDamageHandler requires the GameObject to have a Rigidbody component
+[RequireComponent(typeof(Rigidbody2D))]
 public class DamageHandler : MonoBehaviour
 {
     private Rigidbody2D rb;
@@ -16,26 +19,9 @@ public class DamageHandler : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        //enemyController = GetComponent<EnemyController>();
-
-        //FLIPS ENEMY (using for test purposes right now)
-        // Multiply the player's x local scale by -1.
-        //Vector3 theScale = transform.localScale;
-       /// theScale.x *= -1;
-        //transform.localScale = theScale;
     }
 
-    
-    public void TakeDamage(float damage, float attackPowerX, float attackPowerY)
-    {
-        //enemy's health is subtract by damage dealt
-        //health -= damage;
-
-        //apply attackingPowerX & Y force to enemy based on the direction they are facing
-        rb.AddForce(new Vector2(attackPowerX, attackPowerY));
-    }
-
-    public void OnHurt(DamageType damageType, Vector3 attacker, float damage, float attackPowerX, float attackPowerY)
+    public void OnHurt(DamageType damageType, Vector3 attacker, float damage, float attackPowerX, float attackPowerY, bool receiverWasPlayer)
     {
 
         //need to check direction of attack as well
@@ -52,7 +38,8 @@ public class DamageHandler : MonoBehaviour
                 {
                     //Play backward flinch animation
                     Debug.Log("Backward hit! light");
-                    TakeDamage(damage, -attackPowerX, -attackPowerY);
+                    //call the TakeDamage function to subtract the health of player or enemy's (depending on value of receiverWasPlayer) as well as add force to their rigidbody
+                    TakeDamage(damage, -attackPowerX, -attackPowerY, receiverWasPlayer);
 
 
                 }
@@ -60,7 +47,7 @@ public class DamageHandler : MonoBehaviour
                 {
                     //Play forward flinch animation
                     Debug.Log("Forward hit! light");
-                    TakeDamage(damage, attackPowerX, attackPowerY);
+                    TakeDamage(damage, attackPowerX, attackPowerY, receiverWasPlayer);
                 }
                 break;
 
@@ -69,14 +56,14 @@ public class DamageHandler : MonoBehaviour
                 {
                     //Play backward knock back animation
                     Debug.Log("Backward hit! heavy");
-                    TakeDamage(damage, -attackPowerX, -attackPowerY);
+                    TakeDamage(damage, -attackPowerX, -attackPowerY, receiverWasPlayer);
 
                 }
                 else
                 {
                     //Play forward knock back animation
                     Debug.Log("Forward hit! heavy");
-                    TakeDamage(damage, attackPowerX, attackPowerY);
+                    TakeDamage(damage, attackPowerX, attackPowerY, receiverWasPlayer);
                 }
                 break;
             case DamageType.air:
@@ -84,18 +71,30 @@ public class DamageHandler : MonoBehaviour
                 {
                     //Play backward knock back animation
                     Debug.Log("Backward hit! air");
-                    TakeDamage(damage, -attackPowerX, -attackPowerY);
+                    TakeDamage(damage, -attackPowerX, -attackPowerY, receiverWasPlayer);
                 }
                 else
                 {
                     //Play forward knock back animation
                     Debug.Log("Forward hit! air");
-                    TakeDamage(damage, attackPowerX, attackPowerY);
+                    TakeDamage(damage, attackPowerX, attackPowerY, receiverWasPlayer);
                 }
                 break;
 
             default:
                 break;
         }
+    }
+    public void TakeDamage(float damage, float attackPowerX, float attackPowerY, bool receiverWasPlayer)
+    {
+
+        //this GameObjects's health is subtracted by damage dealt
+        //if (receiverWasPlayer == true)
+        //playerHealth -= damage
+        //else
+        //enemyHealth -= damage
+
+        //apply attackingPowerX & Y force to enemy based on the direction they are facing
+        rb.AddForce(new Vector2(attackPowerX, attackPowerY));
     }
 }

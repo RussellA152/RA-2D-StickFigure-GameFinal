@@ -5,6 +5,9 @@ using Pathfinding;
 
 //This script will contain states for the AI (ex: Idle, Hostile, Death)
 //It also controls the values of variables inside of the enemy pathfinding scripts 
+
+// EnemyDamageHandler requires the GameObject to have a Rigidbody component
+[RequireComponent(typeof(Rigidbody2D))]
 public class EnemyController : MonoBehaviour
 {
     [Header("Pathing Attributes")]
@@ -23,7 +26,7 @@ public class EnemyController : MonoBehaviour
 
     private AIDestinationSetter destinationSetter; //destination setter script inside of enemy
 
-    private bool canMove = false; // variable to see if enemy is allowed to move (will be set to true or false depending on if enemy is alive or attacked)
+    //private bool canMove = false; // variable to see if enemy is allowed to move (will be set to true or false depending on if enemy is alive or attacked)
     //canMove being false also means enemy is allowed to be affected by attack forces because the pathfinding is basically turned off
 
 
@@ -37,24 +40,22 @@ public class EnemyController : MonoBehaviour
 
         destinationSetter = GetComponent<AIDestinationSetter>();
 
-        destinationSetter.target = targetTransform;
+        destinationSetter.SetTarget(targetTransform);
 
 
     }
 
     private void Update()
     {
-        //updating the canMove variable inside of AIPath script
-        aiPath.canMove = canMove;
 
         if(Vector2.Distance(transform.position,targetTransform.position) > hostileRange)
         {
-            canMove = false;
+            aiPath.SetAICanMove(false);
             //set enemy state to idle (should set canMove to false)
         }
         else
         {
-            canMove = true;
+            aiPath.SetAICanMove(true);
 
         }
         CheckStoppingDistance();
@@ -91,12 +92,6 @@ public class EnemyController : MonoBehaviour
 
         //}
     }
-
-    public void SetEnemyCanMove(bool boolean)
-    {
-        canMove = boolean;
-    }
-
 
 }
     /*

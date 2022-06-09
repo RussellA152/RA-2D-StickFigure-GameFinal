@@ -11,6 +11,7 @@ public class PlayerMovementInput : MonoBehaviour
     private bool jumping = false;
     private bool sliding = false;
 
+    [Header("Walking Speed")]
     public float runSpeed = 70f;
 
     private float jumpBufferTime = 0.3f; //adds a buffer so player jumps as soon as they touch the ground, instead of having to wait until they land to press space

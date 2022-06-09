@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// AttackAnimationBehavior requires the PlayerComponents script
+[RequireComponent(typeof(PlayerComponents))]
 public class AttackAnimationBehavior : StateMachineBehaviour
 {
     //I made this script because I want the transitions to use the same animation as the attacks that came before it (makes attacking animations stick out longer without awkwardly idling during attacks)
@@ -10,6 +13,7 @@ public class AttackAnimationBehavior : StateMachineBehaviour
 
     // ONLY ANIMATIONS THAT HAVE A HITBOX (NOT HURTBOX) SHOULD USE THIS SCRIPT
 
+    [Header("Damage Type")]
     //type of damage the attack will do (light -- > enemy flinches, heavy -- > enemy knocked back )
     public DamageType damageType;
 
@@ -21,17 +25,16 @@ public class AttackAnimationBehavior : StateMachineBehaviour
 
     private bool playerFacingRight; // represents direction player is facing (retrieved from playerComponents script)
 
+    [Header("Damage & Force")]
     [SerializeField] private float attackDamage; //damage of the attack
     [SerializeField] private float attackingPowerX; //amount of force applied to enemy that is hit by this attack in x-direction
     [SerializeField] private float attackingPowerY; //amount of force applied to enemy that is hit by this attack in y-direction
 
+    [Header("Jolt Force Applied To Player")]
     [SerializeField] private float joltForceX; //determines how far the player will 'jolt' forward in the x-direction when attacking (Should be a high value)
     [SerializeField] private float joltForceY; //determines how far the player will 'jolt' forward in the y-direction when attacking (Should be a high value)
 
     private int isGroundedHash; //hash value for animator's isGrounded parameter
-
-
-
 
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -56,7 +59,7 @@ public class AttackAnimationBehavior : StateMachineBehaviour
         JoltPlayer(playerFacingRight, joltForceX, joltForceY);
 
         //invoke hitbox's function updates damage values
-        hitbox.gameObject.GetComponent<DamageCollider>().UpdateAttackValues(damageType,attackDamage, attackingPowerX, attackingPowerY);
+        hitbox.gameObject.GetComponent<PlayerHitCollider>().UpdateAttackValues(damageType,attackDamage, attackingPowerX, attackingPowerY);
 
     }
 
@@ -69,9 +72,6 @@ public class AttackAnimationBehavior : StateMachineBehaviour
         else
             playerComponentScript.SetCanMove(false);
 
-
-        //Don't let player move during attack animation
-        //playerComponentScript.SetCanMove(false);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

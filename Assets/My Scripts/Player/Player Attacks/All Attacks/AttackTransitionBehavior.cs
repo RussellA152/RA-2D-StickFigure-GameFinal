@@ -4,13 +4,19 @@ using UnityEngine;
 
 //AttackTransitionBehavior handles the activation of scripts (if the player presses a heavy, light, back, etc.. attack within the time interval (transition's exit time) the corresponding attack animation will play
 // EXIT Time for transition animations refer to how long it will take to revert back to Idle state
+
+// AttackTransitionBehavior requires the PlayerComponents script in order to access keybinds
+[RequireComponent(typeof(PlayerComponents))]
 public class AttackTransitionBehavior : StateMachineBehaviour
 {
+
+    [Header("Name of Attack Animation To Be Played")]
     public string attackName; //name of light attack
     public string heavyAttackName; //name of heavy attack
     public string backAttackName; //name of back attack
     public string backHeavyAttackName; //name of back heavy attack
 
+    [Header("Allow Movement During This Transition?")]
     [SerializeField] private bool allowMovementDuringAnim; //this bool determines if the player is allowed to move during this transition (used for Idle animation, otherwise player can't move in Idle state)
     private PlayerComponents playerComponentScript; //we will use the player component script in order to invoke the setCan"action" functions
 
@@ -121,16 +127,4 @@ public class AttackTransitionBehavior : StateMachineBehaviour
 
 
     }
-
-    // OnStateMove is called right after Animator.OnAnimatorMove()
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that processes and affects root motion
-    //}
-
-    // OnStateIK is called right after Animator.OnAnimatorIK()
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    // Implement code that sets up animation IK (inverse kinematics)
-    //}
 }

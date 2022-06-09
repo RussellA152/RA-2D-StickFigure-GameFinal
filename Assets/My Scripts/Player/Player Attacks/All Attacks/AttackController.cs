@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+// AttackController requires the PlayerComponents script in order to access keybinds
+[RequireComponent(typeof(PlayerComponents))]
 public class AttackController : MonoBehaviour
 {
     private PlayerComponents playerComponentScript;
@@ -14,11 +16,17 @@ public class AttackController : MonoBehaviour
     private bool canAttack; //determines if player is allowed to attack
     private bool canBackAttack; //determines if player is allowed to do a back attack
 
+    [HideInInspector]
+    //booleans representing if the player is performing the specific attack
     public bool isAttacking = false;
+    [HideInInspector]
     public bool isHeavyAttacking = false;
+    [HideInInspector]
     public bool isBackAttacking = false;
+    [HideInInspector]
     public bool isBackHeavyAttacking = false;
 
+    //keybindings needed to perform each attack
     private InputAction lightAttack;
     private InputAction heavyAttack;
 
@@ -27,8 +35,6 @@ public class AttackController : MonoBehaviour
 
     private InputAction backHeavyAttackLeft;
     private InputAction backHeavyAttackRight;
-
-
 
     private void Awake()
     {

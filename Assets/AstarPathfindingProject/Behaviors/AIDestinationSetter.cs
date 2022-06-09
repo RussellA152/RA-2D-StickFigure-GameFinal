@@ -37,5 +37,11 @@ namespace Pathfinding {
 		void Update () {
 			if (target != null && ai != null) ai.destination = target.position;
 		}
+
+		//I made this function to make it easier to set the desired target of this AI
+		public void SetTarget(Transform targetTransform)
+        {
+			target = targetTransform;
+        }
 	}
 }

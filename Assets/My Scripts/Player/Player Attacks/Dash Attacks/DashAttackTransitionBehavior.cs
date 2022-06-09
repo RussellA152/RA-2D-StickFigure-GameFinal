@@ -5,18 +5,24 @@ using UnityEngine;
 
 // EXIT Time for transition animations refer to how long it will take to revert back to Idle state
 //There are only dash attacks when pressing heavy attack button, not for light attack button
-public class DashAttackTransitionAnimationBehavior : StateMachineBehaviour
+
+// DashAttackTransitionAnimationBehavior requires the PlayerComponents script
+[RequireComponent(typeof(PlayerComponents))]
+public class DashAttackTransitionBehavior : StateMachineBehaviour
 {
+    [Header("Name of Attack Animation To Be Played")]
     public string attackName; //name of light attack
     public string heavyAttackName; //name of heavy attack
     public string backAttackName; //name of back attack
     public string backHeavyAttackName; //name of back heavy attack
     public string dashAttackName; //name of dash attack
 
+    [Header("Velocity Required To Perform Dash Attack")]
     [SerializeField] private float dashAttackVelocityRequirement; //amount of velocity required to perform dash attack instead of regular heavy attack
 
     private int animVelocityParameter; //animator's velocity parameter 
 
+    [Header("Allow Movement During This Transition?")]
     [SerializeField] private bool allowMovementDuringAnim; //this bool determines if the player is allowed to move during this transition
     private PlayerComponents playerComponentScript; //we will use the player component script in order to invoke the setCan"action" functions
 
