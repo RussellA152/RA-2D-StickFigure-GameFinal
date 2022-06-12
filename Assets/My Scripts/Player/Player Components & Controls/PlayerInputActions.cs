@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/Player/Player Components & Controls/PlayerInputActions.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/My Scripts/Player/Player Components & Controls/PlayerInputActions.inputactions'
 
 using System;
 using System.Collections;
@@ -20,9 +20,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Move"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""8bb08be6-42c3-4a04-9c63-27d137a4a6ed"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
@@ -62,6 +62,14 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""name"": ""Heavy Attack"",
                     ""type"": ""Button"",
                     ""id"": ""bf8d7e0f-843f-4036-ae19-739360c8b0e3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Combat Roll"",
+                    ""type"": ""Button"",
+                    ""id"": ""357abf1a-6ab4-4e0e-a68c-041c32df79e3"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -343,6 +351,28 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""e09b1550-970b-4fe6-89b7-2c63f7771b92"",
+                    ""path"": ""<DualShockGamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Light Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5043947d-0dbf-467f-ba73-fed4cb1a8037"",
+                    ""path"": ""<XInputController>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Light Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""c118e39a-cee7-4827-8d6d-e1e215ccc393"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
@@ -354,9 +384,31 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""52590c2c-b73e-4fbd-999e-c4fb1048b250"",
+                    ""path"": ""<DualShockGamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Heavy Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f2329baf-7190-4d41-bed0-c70fd7393419"",
+                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Heavy Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""d2d8a871-698c-41f9-bc62-688b57d9116e"",
                     ""path"": ""<Keyboard>/leftShift"",
-                    ""interactions"": """",
+                    ""interactions"": ""Hold"",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Slide"",
@@ -398,6 +450,39 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""Button With One Modifier"",
+                    ""id"": ""ab1d5ab9-993e-442d-96de-de6f224d336c"",
+                    ""path"": ""ButtonWithOneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back Attack Left"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""cba270d1-513b-4fad-b074-5407afff6027"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Back Attack Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""button"",
+                    ""id"": ""4ba68b71-e0ae-4083-85df-9977a72c2638"",
+                    ""path"": ""<XInputController>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Back Attack Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Button With One Modifier"",
                     ""id"": ""5b00af94-50a5-4531-8d33-f241911ec38b"",
                     ""path"": ""ButtonWithOneModifier"",
                     ""interactions"": """",
@@ -430,6 +515,39 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""Button With One Modifier"",
+                    ""id"": ""9da3244b-5a26-4945-af7c-e94ff59594a4"",
+                    ""path"": ""ButtonWithOneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back Attack Right"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""0be15d96-ef5c-48e4-904f-23b0cd02832b"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Back Attack Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""button"",
+                    ""id"": ""8df6e6a9-e07d-42d7-b5c0-f031a9249c2c"",
+                    ""path"": ""<XInputController>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Back Attack Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
                     ""id"": ""5bacacf5-b738-4c0e-85c4-e54b70773d07"",
                     ""path"": """",
@@ -453,11 +571,33 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""dc5d1517-e542-435a-9332-5a8ed8a9c81a"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Flip Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""20f60920-e677-4b9b-a72c-2eea22203af1"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Flip Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d6055502-a9f4-4d01-b7e1-db227d2e0296"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Flip Left"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -497,6 +637,39 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""Button With One Modifier"",
+                    ""id"": ""93fae73e-5a5c-4215-9886-8e4058889035"",
+                    ""path"": ""ButtonWithOneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back Heavy Attack Left"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""72f0e737-cef2-4baa-a3c9-8fa842fe1126"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Back Heavy Attack Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""button"",
+                    ""id"": ""8237413c-a5d2-4084-8a73-9ac766e398d5"",
+                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Back Heavy Attack Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Button With One Modifier"",
                     ""id"": ""83ae215a-d4a3-4767-a755-166589322dff"",
                     ""path"": ""ButtonWithOneModifier"",
                     ""interactions"": """",
@@ -527,6 +700,50 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""action"": ""Back Heavy Attack Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Button With One Modifier"",
+                    ""id"": ""ab5cccae-1fdc-4ca0-bae6-a2e882f26529"",
+                    ""path"": ""ButtonWithOneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back Heavy Attack Right"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""4648cfaf-4231-41b5-b021-8c9514e14908"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Back Heavy Attack Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""button"",
+                    ""id"": ""7ced6faa-b92b-400d-abb6-e4f5f504c5b0"",
+                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Back Heavy Attack Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""86a6d992-886f-4861-9136-af8769397584"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": ""MultiTap"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Combat Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1108,6 +1325,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_LightAttack = m_Player.FindAction("Light Attack", throwIfNotFound: true);
         m_Player_HeavyAttack = m_Player.FindAction("Heavy Attack", throwIfNotFound: true);
+        m_Player_CombatRoll = m_Player.FindAction("Combat Roll", throwIfNotFound: true);
         m_Player_Slide = m_Player.FindAction("Slide", throwIfNotFound: true);
         m_Player_BackAttackLeft = m_Player.FindAction("Back Attack Left", throwIfNotFound: true);
         m_Player_BackAttackRight = m_Player.FindAction("Back Attack Right", throwIfNotFound: true);
@@ -1183,6 +1401,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_LightAttack;
     private readonly InputAction m_Player_HeavyAttack;
+    private readonly InputAction m_Player_CombatRoll;
     private readonly InputAction m_Player_Slide;
     private readonly InputAction m_Player_BackAttackLeft;
     private readonly InputAction m_Player_BackAttackRight;
@@ -1201,6 +1420,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @LightAttack => m_Wrapper.m_Player_LightAttack;
         public InputAction @HeavyAttack => m_Wrapper.m_Player_HeavyAttack;
+        public InputAction @CombatRoll => m_Wrapper.m_Player_CombatRoll;
         public InputAction @Slide => m_Wrapper.m_Player_Slide;
         public InputAction @BackAttackLeft => m_Wrapper.m_Player_BackAttackLeft;
         public InputAction @BackAttackRight => m_Wrapper.m_Player_BackAttackRight;
@@ -1236,6 +1456,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @HeavyAttack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeavyAttack;
                 @HeavyAttack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeavyAttack;
                 @HeavyAttack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeavyAttack;
+                @CombatRoll.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCombatRoll;
+                @CombatRoll.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCombatRoll;
+                @CombatRoll.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCombatRoll;
                 @Slide.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSlide;
                 @Slide.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSlide;
                 @Slide.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSlide;
@@ -1282,6 +1505,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @HeavyAttack.started += instance.OnHeavyAttack;
                 @HeavyAttack.performed += instance.OnHeavyAttack;
                 @HeavyAttack.canceled += instance.OnHeavyAttack;
+                @CombatRoll.started += instance.OnCombatRoll;
+                @CombatRoll.performed += instance.OnCombatRoll;
+                @CombatRoll.canceled += instance.OnCombatRoll;
                 @Slide.started += instance.OnSlide;
                 @Slide.performed += instance.OnSlide;
                 @Slide.canceled += instance.OnSlide;
@@ -1468,6 +1694,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnLightAttack(InputAction.CallbackContext context);
         void OnHeavyAttack(InputAction.CallbackContext context);
+        void OnCombatRoll(InputAction.CallbackContext context);
         void OnSlide(InputAction.CallbackContext context);
         void OnBackAttackLeft(InputAction.CallbackContext context);
         void OnBackAttackRight(InputAction.CallbackContext context);

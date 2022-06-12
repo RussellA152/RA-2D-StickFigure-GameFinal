@@ -10,6 +10,16 @@ using Pathfinding;
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyController : MonoBehaviour
 {
+    [Header("Enemy Configuration Scriptable Object")]
+    public EnemyScriptableObject enemyScriptableObject;
+
+    [HideInInspector]
+    public float enemyHealth; //the health value of this enemy (DERIVED FROM SCRIPTABLEOBJECT)
+    private float enemyMass; //the mass value of this enemy's rigidbody (DERIVED FROM SCRIPTABLEOBJECT)
+    private float enemyWalkingSpeed; // the walking speed of this enemy (using the aiPathing) (DERIVED FROM SCRIPTABLEOBJECT)
+    private Sprite enemySprite; //the sprite of this enemy WHEN SPAWNED (DERIVED FROM SCRIPTABLEOBECT)
+
+
     [Header("Pathing Attributes")]
     [SerializeField] private float hostileRange; //how far enemy can be to follow player
 
@@ -26,27 +36,33 @@ public class EnemyController : MonoBehaviour
 
     private AIDestinationSetter destinationSetter; //destination setter script inside of enemy
 
-    //private bool canMove = false; // variable to see if enemy is allowed to move (will be set to true or false depending on if enemy is alive or attacked)
-    //canMove being false also means enemy is allowed to be affected by attack forces because the pathfinding is basically turned off
 
+    private void OnEnable()
+    {
+        //we are setting up the values for the enemy inside of OnEnable because we will use object pooling for killing enemies
+        SetupEnemyFromConfiguration();
 
+    }
 
     private void Start()
     {
+        // find target (the Player)
         targetTransform = GameObject.Find("Player").transform;
 
-        aiPath = GetComponent<AIPath>();
-        rb = GetComponent<Rigidbody2D>();
-
-        destinationSetter = GetComponent<AIDestinationSetter>();
-
+        //set target as enemy's destintation
         destinationSetter.SetTarget(targetTransform);
 
+        //Debug.Log("My health is " + enemyHealth);
+        //Debug.Log("My mass is " + enemyMass);
+        //Debug.Log("My walking speed is " + enemyWalkingSpeed);
 
     }
 
     private void Update()
     {
+
+        //check if enemy was killed..
+        CheckHealth();
 
         if(Vector2.Distance(transform.position,targetTransform.position) > hostileRange)
         {
@@ -93,126 +109,38 @@ public class EnemyController : MonoBehaviour
         //}
     }
 
-}
-    /*
-    private Rigidbody2D rb;
-
-    [SerializeField] private Transform target;
-
-    [SerializeField] private float speed = 200f;
-
-    [SerializeField] private float nextWayPointDistance = 3f;
-
-    private Path path;
-    private int currentWayPoint = 0;
-    private bool reachEndOfPath = false;
-
-    private Seeker seeker;
-
-    //private AIPath aiPath;
-
-
-    private void Start()
+    // can be virtual, but it won't be for now... (if virtual, then enemies could override this function for subtyping)
+    //sets all base values equal to 
+    public void SetupEnemyFromConfiguration()
     {
-        //Application.targetFrameRate = 30;
-
-        //aiPath = GetComponent<AIPath>();
-        seeker = GetComponent<Seeker>();
+        //cache components required (enemies spawned in during runtime will need this)
+        aiPath = GetComponent<AIPath>();
+        destinationSetter = GetComponent<AIDestinationSetter>();
         rb = GetComponent<Rigidbody2D>();
+        enemySprite = GetComponentInChildren<SpriteRenderer>().sprite;
 
-        speed = speed * 1000;
+        //set basic values equal to the ScriptableObject's values
+        enemyHealth = enemyScriptableObject.maxHealth;
+        enemyMass = enemyScriptableObject.rbMass;
+        enemyWalkingSpeed = enemyScriptableObject.walkingSpeed;
 
-        //use CancelInvoke when enemy goes idle, or if they are in hostile distance?
-        InvokeRepeating("UpdatePath", 0f, .5f);
-        
+        //set enemy's sprite equal to ScriptableObject's sprite
+        enemySprite = enemyScriptableObject.sprite;
+
+        //set enemy's rigidbody mass equal to enemyMass
+        rb.mass = enemyMass;
+        //set enemy's maxSpeed to enemyWalkingSpeed;
+        aiPath.maxSpeed = enemyWalkingSpeed;
     }
 
-    private void Update()
+    public void CheckHealth()
     {
-        //Debug.Log(currentWayPoint);
-
-        //UpdatePath();
-        //Debug.Log("RB Velocity : " + rb.velocity);
-    }
-
-
-    private void UpdatePath()
-    {
-        
-        if(seeker.IsDone())
-            seeker.StartPath(rb.position, target.position, OnPathComplete);
-
-        Debug.Log("INVOKE REPEAT!");
-    }
-
-    private void FixedUpdate()
-    {
-
-        //if enemy has no path, do nothing
-        if (path == null)
-            return;
-
-        // if currentWayPoint is greater or equal to the total amount of waypoints along the path, then enemy reached their destination
-        if(currentWayPoint >= path.vectorPath.Count)
+        //if enemy reaches 0 health, disable their game object (FOR NOW, WE WILL USE OBJECT POOLING LATER)
+        if(enemyHealth <= 0f)
         {
-            reachEndOfPath = true;
-            //rb.velocity = Vector2.zero;
-            //CancelInvoke();
-            return;
-        }
-        else
-        {
-            reachEndOfPath = false;
+            Debug.Log(this.gameObject.name + " has died!");
+            gameObject.SetActive(false);
 
-        }
-        //path.vectorPath[currentWayPoint] gives us the precision of our current way point
-        //direction is a Vector2 that points from the enemy position to the next way point
-        //normalized makes sure the length of this direction is always 1
-        Vector2 direction = ((Vector2) path.vectorPath[currentWayPoint] - rb.position).normalized;
-
-        Vector2 force = direction * speed * Time.fixedDeltaTime;
-
-        rb.AddForce(force);
-
-        float distance = Vector2.Distance(rb.position, path.vectorPath[currentWayPoint]);
-
-        if(distance < nextWayPointDistance)
-        {
-            currentWayPoint++;
-        }
-
-        //check when enemy needs to flip their sprite
-        FlipSprite(force);
-    }
-
-
-    void OnPathComplete(Path p)
-    {
-        //if the path didn't get errors, set path to newly generated path, and then reset progress on path
-        if (!p.error)
-        {
-            path = p;
-            currentWayPoint = 0;
         }
     }
-
-
-    private void FlipSprite(Vector2 force)
-    {
-        //if enemy is moving right... flip sprite to face the right direction
-        if(rb.velocity.x >= 0.01f && force.x > 0f)
-        {
-            Vector3 theScale =  new Vector3(-1f, 1f, 1f);
-            transform.localScale = theScale;
-        }
-        // if enemy is moving left.. flip sprite to face left direction
-        else if(rb.velocity.x <= -0.01f && force.x < 0f)
-        {
-            Vector3 theScale = new Vector3(1f,1f,1f);
-            transform.localScale = theScale;
-        }
-    }
-
 }
-
-    */

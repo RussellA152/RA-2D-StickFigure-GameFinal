@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
+// PlayerMovementInput requires the PlayerComponents script in order to access keybinds
+[RequireComponent(typeof(PlayerComponents))]
 public class PlayerMovementInput : MonoBehaviour
 {
     private CharacterController2D controller;
 
+    //walking value passed into CharacterController2D's Move() 
     private float horizontalMovement = 0f;
-    private bool jumping = false;
+    //bools passed into CharacterController2D's Move() 
+    private bool jumping = false; 
     private bool sliding = false;
+    private bool rolling;
 
     [Header("Walking Speed")]
     public float runSpeed = 70f;
@@ -22,10 +28,13 @@ public class PlayerMovementInput : MonoBehaviour
     private InputAction move;
     private InputAction jump;
     private InputAction slide;
+    private InputAction roll;
 
 
     private void Start()
     {
+
+
         controller = GetComponent<CharacterController2D>();
         playerComponentScript = GetComponent<PlayerComponents>();
 
@@ -33,38 +42,21 @@ public class PlayerMovementInput : MonoBehaviour
         jump = playerComponentScript.GetJump();
 
         slide = playerComponentScript.GetSlide();
-    }
+        roll = playerComponentScript.GetRoll();
 
+        //subscribe the slide and roll to their respective functions
+        slide.performed += SlideInput;
+        slide.canceled += SlideInput;
 
-    private void OnEnable()
-    {
-        //move = playerComponentScript.getMove();
-        //jump = playerComponentScript.getJump();
-
-        //move.Enable();
-        //jump.Enable();
-    }
-    private void OnDisable()
-    {
-        //move.Disable();
-        //jump.Disable();
+        roll.performed += RollInput;
+        roll.canceled += RollInput;
     }
 
 
     private void Update()
     {
+
         bool canWalk = playerComponentScript.GetCanWalk();
-
-        //if player is holding slide button, then slide, otherwise stop (will be interrupted if player is no longer grounded (will probably change)
-        if(slide.ReadValue<float>() > 0)
-        {
-            sliding = true;
-
-        }
-        else
-        {
-            sliding = false;
-        }
 
         if (canWalk == true)
         {
@@ -84,13 +76,40 @@ public class PlayerMovementInput : MonoBehaviour
         {
             jumpBufferCounter -= Time.deltaTime;
         }
+            
+
     }
     private void FixedUpdate()
     {
         //Move our character here
         //the crouch (second parameter) is false because the game will probably not feature a crouch button (unless I implement a crouch sweep or something)
-        
-        controller.Move(horizontalMovement * Time.fixedDeltaTime, false, jumping, sliding, jumpBufferCounter);
+        controller.Move(horizontalMovement * Time.fixedDeltaTime, false, jumping, sliding,rolling, jumpBufferCounter);
+
+        //after calling Move, set jumping and rolling back to false (they will be true when player input for jumping and rolling is detected)
         jumping = false;
+
+        rolling = false;
     }
+
+    private void RollInput(InputAction.CallbackContext context)
+    {
+        //if player is double tapping roll button (left shift), (then set rolling to true)
+        if(context.performed)
+            rolling = true;
+    }
+    private void SlideInput(InputAction.CallbackContext context)
+    {
+        //if player is holding slide button, then slide, otherwise stop (will be interrupted if player is no longer grounded)
+        if (context.performed)
+        {
+            //Debug.Log("SLIDE IS TRUE!");
+            sliding = true;
+        }
+        else if (context.canceled)
+        {
+            //Debug.Log("SLIDE IS FALSE!");
+            sliding = false;
+        }       
+    }
+
 }

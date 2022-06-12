@@ -17,6 +17,7 @@ public class PlayerComponents : MonoBehaviour
     private InputAction heavyAttack; //input action used for performing heavy attacks (right click)
 
     private InputAction slide; //input action used for performing a slide (left shift)
+    private InputAction roll; //input action used for performing a roll (double left shift)
 
     private InputAction backLightAttackLeft; //input action used for performing a back light attack (turning around and performing a light attack quickly) ( A for turning left )
     private InputAction backLightAttackRight; //input action used for performing a back light attack (turning around and performing a light attack quickly) ( D for turning right )
@@ -47,6 +48,7 @@ public class PlayerComponents : MonoBehaviour
     private bool canBackAttack = false; //this bool determines if the player to perform a back attack (turning around and attacking) 
     private bool canMove = true; //this bool determines if the player is allowed to walk and jump (both)
     private bool canSlide = true; //this bool determines if the player is allowed to slide
+    private bool canRoll = true; //this bool determines if the player can perform a forward roll
 
     private bool canJump = true; //this bool determines if the player is allowed to walk (only)
     private bool canWalk = true; //this bool determines if the player is allowed to jump (only)
@@ -59,6 +61,7 @@ public class PlayerComponents : MonoBehaviour
         animator = GetComponent<Animator>();
         playerRB = GetComponent<Rigidbody2D>();
         bodyCollider = GetComponent<BoxCollider2D>();
+
         hitbox = GameObject.Find("Player Hit Box").GetComponent<BoxCollider2D>(); ;
     }
     private void Start()
@@ -75,13 +78,19 @@ public class PlayerComponents : MonoBehaviour
     {
         move = playerControls.Player.Move;
         jump = playerControls.Player.Jump;
+
         lightAttack = playerControls.Player.LightAttack;
         heavyAttack = playerControls.Player.HeavyAttack;
+
         slide = playerControls.Player.Slide;
+        roll = playerControls.Player.CombatRoll;
+
         backLightAttackLeft = playerControls.Player.BackAttackLeft;
         backLightAttackRight = playerControls.Player.BackAttackRight;
+
         backHeavyAttackLeft = playerControls.Player.BackHeavyAttackLeft;
         backHeavyAttackRight = playerControls.Player.BackHeavyAttackRight;
+
         turnRight = playerControls.Player.FlipRight;
         turnLeft = playerControls.Player.FlipLeft;
 
@@ -92,6 +101,7 @@ public class PlayerComponents : MonoBehaviour
         heavyAttack.Enable();
 
         slide.Enable();
+        roll.Enable();
 
         backLightAttackLeft.Enable();
         backLightAttackRight.Enable();
@@ -112,6 +122,7 @@ public class PlayerComponents : MonoBehaviour
         heavyAttack.Disable();
 
         slide.Disable();
+        roll.Disable();
 
         backLightAttackLeft.Disable();
         backLightAttackRight.Disable();
@@ -163,6 +174,10 @@ public class PlayerComponents : MonoBehaviour
     {
         canSlide = boolean;
     }
+    public void SetCanRoll(bool boolean)
+    {
+        canRoll = boolean;
+    }
 
     public void SetCanFlip(bool boolean)
     {
@@ -176,6 +191,11 @@ public class PlayerComponents : MonoBehaviour
     {
         return canWalk;
     }
+    public bool GetCanRoll()
+    {
+        return canRoll;
+    }
+
     //retrieves the canMove boolean
     public bool GetCanMove()
     {
@@ -247,6 +267,10 @@ public class PlayerComponents : MonoBehaviour
     {
         return slide;
     }
+    public InputAction GetRoll()
+    {
+        return roll;
+    }
 
     public InputAction GetBackLightAttackLeft()
     {
@@ -273,18 +297,6 @@ public class PlayerComponents : MonoBehaviour
     public InputAction GetTurnLeft()
     {
         return turnLeft;
-    }
-    //might put this in a different script later (could there be a memory leak here?)
-    // ONLY WORKS WITH A KEYBOARD AT THE MOMENT
-    public void RebindBackAttack(string originalBind, string newBind)
-    {
-        //Debug.Log("REBIND START!");
-        //if(originalBind.Equals("a"))
-            //backLightAttack.ChangeBindingWithPath("<Keyboard>/a").WithPath("<Keyboard>/d");
-        //else if (originalBind.Equals("d"))
-            //backLightAttack.ChangeBindingWithPath("<Keyboard>/d").WithPath("<Keyboard>/a");
-
-        //Debug.Log("REBIND END!");
     }
 
 

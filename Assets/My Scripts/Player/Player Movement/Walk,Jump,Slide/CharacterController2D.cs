@@ -20,6 +20,9 @@ public class CharacterController2D : MonoBehaviour
 	[Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;          // Amount of maxSpeed applied to crouching movement. 1 = 100%
 	[Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;  // How much to smooth out the movement
 
+	[Header("Cooldowns")]
+	[SerializeField] private float rollCooldownTimer;
+
 	[Header("Allow AirControl?")]
 	[SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
 
@@ -55,7 +58,8 @@ public class CharacterController2D : MonoBehaviour
 	private bool canWalk; //determines if player can walk (retrieved from playerComponents script)
 	private bool canJump; //determines if player can jump (retrieved from playerComponents script)
 	private bool canFlip; //determines if the player's sprite can flip (retrieved from playerComponents script)
-	
+	private bool canRoll; //determines if the player can roll (retrieved from playerComponents script)
+
 	[HideInInspector]
 	public Animator animator;
 
@@ -67,6 +71,7 @@ public class CharacterController2D : MonoBehaviour
 	private int isJumpingHash; //hash value of our animator's isJumping parameter
 	private int isGroundedHash; //hash value of our animator's isGrounded parameter
 	private int isSlidingHash; //hash value of our animator's isSliding parameter
+	private int isRollingHash; //hash value of our animator's isRolling parameter
 
 
 	//private InputAction move;
@@ -76,9 +81,6 @@ public class CharacterController2D : MonoBehaviour
 
 
 	private float backAttackTimer = 0.35f; //time allowed for player to perform a back attack (once this hits 0, the player must turn around again to perform a back attack)
-	//private InputAction slide;
-
-
 
 	[Header("Events")]
 	[Space]
@@ -123,6 +125,7 @@ public class CharacterController2D : MonoBehaviour
 		isWalkingHash = Animator.StringToHash("isWalking");
 		isJumpingHash = Animator.StringToHash("isJumping");
 		isSlidingHash = Animator.StringToHash("isSliding");
+		isRollingHash = Animator.StringToHash("isRolling");
 
 		playerComponentScript = GetComponent<PlayerComponents>();
 
@@ -139,7 +142,6 @@ public class CharacterController2D : MonoBehaviour
 
     private void Update()
     {
-
 		//Debug.Log("Timer: " + backAttackTimer);
 
 		//decrement back attack timer until it hits 0 (player can no longer back attack
@@ -156,6 +158,7 @@ public class CharacterController2D : MonoBehaviour
 		canWalk = playerComponentScript.GetCanWalk();
 		canJump = playerComponentScript.GetCanJump();
 		canFlip = playerComponentScript.GetCanFlip();
+		canRoll = playerComponentScript.GetCanRoll();
 
 
 		//if grounded, animator's isJumping is set to false, and isGrounded parameter is set to true
@@ -167,9 +170,9 @@ public class CharacterController2D : MonoBehaviour
 			coyoteTimeCounter = coyoteTime;
 			
         }
-        else
-        {
-            //when player is mid-air, start counting the coyote time down
+		//when player is mid-air, start counting the coyote time down
+		else
+		{
             coyoteTimeCounter -= Time.deltaTime;
 			animator.SetBool(isGroundedHash, false);
 		}
@@ -208,10 +211,27 @@ public class CharacterController2D : MonoBehaviour
 			}
 		}
 	}
-	public void Move(float move, bool crouch, bool jump, bool sliding, float jumpBufferCounter)
+	public void Move(float move, bool crouch, bool jump, bool sliding, bool rolling,float jumpBufferCounter)
 	{
+		//set isSliding bool parameter inside of player animator to true or false depending on player input
+		if (m_Grounded)
+			animator.SetBool(isSlidingHash, sliding);
+		else
+			animator.SetBool(isSlidingHash, false);
 
-		animator.SetBool(isSlidingHash, sliding);
+		//check if player is allowed to roll... (need to be grounded otherwise cooldown will start mid-air)
+        if (canRoll && rolling && m_Grounded)
+        {
+			//set isRolling bool parameter inside of player animator to true or false depending on player input
+			animator.SetBool(isRollingHash, rolling);
+			StartCoroutine(RollCooldown());
+
+		}
+        else
+        {
+			animator.SetBool(isRollingHash, false);
+		}
+		
 
 		//if player is moving and grounded, play walking animation
 		if (move != 0 && m_Grounded)
@@ -372,4 +392,20 @@ public class CharacterController2D : MonoBehaviour
 			playerComponentScript.SetCanBackAttack(false);
 		//Debug.Log(backAttackTimer);
 	}
+
+	IEnumerator RollCooldown()
+    {
+		Debug.Log("Start Roll coroutine!");
+		//after rolling, player must wait a certain time until they can roll again
+		playerComponentScript.SetCanRoll(false);
+
+		//wait a certain amount of time, then allow the player to roll again (roll input is still detected from PlayerMovementInput.cs , but nothing will happen if canRoll is false)
+		yield return new WaitForSeconds(rollCooldownTimer);
+
+		playerComponentScript.SetCanRoll(true);
+
+		Debug.Log("End Roll coroutine!");
+	}
+
+
 }

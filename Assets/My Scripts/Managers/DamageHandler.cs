@@ -9,12 +9,6 @@ public class DamageHandler : MonoBehaviour
 {
     private Rigidbody2D rb;
 
-    //private bool directionFacingRight;
-
-    private Transform target;
-
-    //private EnemyController enemyController;
-
 
     void Start()
     {
@@ -89,11 +83,19 @@ public class DamageHandler : MonoBehaviour
     {
 
         //this GameObjects's health is subtracted by damage dealt
-        //if (receiverWasPlayer == true)
-        //playerHealth -= damage
-        //else
-        //enemyHealth -= damage
+        if (receiverWasPlayer == true)
+        {
+            Debug.Log("PLAYER WAS HIT!");
+        }
+            
+        else
+        {
+            //need to getComponent each time enemy is attacked because we can't cache this in Start() because the enemy will be enabled/disabled constantly during runtime
+            GetComponent<EnemyController>().enemyHealth -= damage;
+            Debug.Log("health = " + GetComponent<EnemyController>().enemyHealth);
 
+        }
+            
         //apply attackingPowerX & Y force to enemy based on the direction they are facing
         rb.AddForce(new Vector2(attackPowerX, attackPowerY));
     }

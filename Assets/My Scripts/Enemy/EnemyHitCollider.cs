@@ -18,7 +18,7 @@ public class EnemyHitCollider : HitColliderBase
     {
         targetTransform = collision.transform;
 
-        //checking if trigger collided with Enemy layer
+        //checking if trigger collided with PlayerHurtBox tag (located only on the hurtbox child gameobject on the Player)
         if (targetTransform.CompareTag("PlayerHurtBox"))
         {
             //the hurtbox is a child of the enemy, so set the target equal to the parent
