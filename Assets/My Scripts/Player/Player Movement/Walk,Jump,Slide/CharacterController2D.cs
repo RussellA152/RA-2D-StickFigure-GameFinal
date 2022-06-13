@@ -22,6 +22,7 @@ public class CharacterController2D : MonoBehaviour
 
 	[Header("Cooldowns")]
 	[SerializeField] private float rollCooldownTimer;
+	private bool rollCooldownCoroutineOccurred = false; //this bool is used for making sure the roll cooldown coroutine only occurs once
 
 	[Header("Allow AirControl?")]
 	[SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
@@ -224,6 +225,8 @@ public class CharacterController2D : MonoBehaviour
         {
 			//set isRolling bool parameter inside of player animator to true or false depending on player input
 			animator.SetBool(isRollingHash, rolling);
+			//if the roll cooldown coroutine is already running, don't run it again (only one at a time)
+			if(!rollCooldownCoroutineOccurred)
 			StartCoroutine(RollCooldown());
 
 		}
@@ -395,16 +398,22 @@ public class CharacterController2D : MonoBehaviour
 
 	IEnumerator RollCooldown()
     {
-		Debug.Log("Start Roll coroutine!");
+		//Debug.Log("Start Roll coroutine!");
+
 		//after rolling, player must wait a certain time until they can roll again
+		rollCooldownCoroutineOccurred = true;
+
 		playerComponentScript.SetCanRoll(false);
 
 		//wait a certain amount of time, then allow the player to roll again (roll input is still detected from PlayerMovementInput.cs , but nothing will happen if canRoll is false)
 		yield return new WaitForSeconds(rollCooldownTimer);
 
+		rollCooldownCoroutineOccurred = false;
+
 		playerComponentScript.SetCanRoll(true);
 
-		Debug.Log("End Roll coroutine!");
+
+		//Debug.Log("End Roll coroutine!");
 	}
 
 

@@ -2626,7 +2626,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1777725231}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15, y: 1, z: 0}
+  m_LocalPosition: {x: -26, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 999245630}
@@ -2680,7 +2680,7 @@ MonoBehaviour:
   maxSpeedMultiplier: 20
   m_CrouchSpeed: 0.36
   m_MovementSmoothing: 0.05
-  rollCooldownTimer: 2
+  rollCooldownTimer: 1
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2

@@ -11,6 +11,7 @@ public class AttackController : MonoBehaviour
 
     public static AttackController instance;
 
+    [HideInInspector]
     public Animator animator;
 
     private bool canAttack; //determines if player is allowed to attack

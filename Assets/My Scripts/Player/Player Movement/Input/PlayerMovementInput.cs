@@ -33,8 +33,7 @@ public class PlayerMovementInput : MonoBehaviour
 
     private void Start()
     {
-
-
+        //Application.targetFrameRate = 20;
         controller = GetComponent<CharacterController2D>();
         playerComponentScript = GetComponent<PlayerComponents>();
 
@@ -48,8 +47,8 @@ public class PlayerMovementInput : MonoBehaviour
         slide.performed += SlideInput;
         slide.canceled += SlideInput;
 
-        roll.performed += RollInput;
-        roll.canceled += RollInput;
+        //roll.performed += RollInput;
+        //roll.canceled += RollInput;
     }
 
 
@@ -57,6 +56,12 @@ public class PlayerMovementInput : MonoBehaviour
     {
 
         bool canWalk = playerComponentScript.GetCanWalk();
+        bool canRoll = playerComponentScript.GetCanRoll();
+
+        if(canRoll && roll.triggered)
+        {
+            SetRolling(true);
+        }
 
         if (canWalk == true)
         {
@@ -88,15 +93,15 @@ public class PlayerMovementInput : MonoBehaviour
         //after calling Move, set jumping and rolling back to false (they will be true when player input for jumping and rolling is detected)
         jumping = false;
 
-        rolling = false;
+        //rolling = false;
     }
 
-    private void RollInput(InputAction.CallbackContext context)
-    {
+    //private void RollInput(InputAction.CallbackContext context)
+    //{
         //if player is double tapping roll button (left shift), (then set rolling to true)
-        if(context.performed)
-            rolling = true;
-    }
+        //if(context.performed)
+            //rolling = true;
+    //}
     private void SlideInput(InputAction.CallbackContext context)
     {
         //if player is holding slide button, then slide, otherwise stop (will be interrupted if player is no longer grounded)
@@ -112,4 +117,12 @@ public class PlayerMovementInput : MonoBehaviour
         }       
     }
 
+    public void SetRolling(bool boolean)
+    {
+        rolling = boolean;
+    }
+
 }
+
+
+

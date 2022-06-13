@@ -43,6 +43,7 @@ public class SlideLoop : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+
         //apply force to Vector2.right or Vector2.left depending on which way player is facing
         if (directionIsRight)
             rb.AddForce(Vector2.right * tempSlideSpeed  * Time.deltaTime);
@@ -63,7 +64,9 @@ public class SlideLoop : StateMachineBehaviour
             animator.SetBool("isSliding", false);
             animator.Play("P_Slide_GetUp");
         }
-            
+
+        Debug.Log("Slide speed is: " + tempSlideSpeed);
+
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
