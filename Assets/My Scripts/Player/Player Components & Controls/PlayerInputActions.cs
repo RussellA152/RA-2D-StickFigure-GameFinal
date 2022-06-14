@@ -67,6 +67,38 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""Back Attack Left"",
+                    ""type"": ""Button"",
+                    ""id"": ""e900ed7b-6df4-407c-bbe3-3da3568d4b82"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Back Heavy Attack Left"",
+                    ""type"": ""Button"",
+                    ""id"": ""e0d1d778-e58b-4b48-8c18-b16e5a7dfbc0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Back Attack Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""43202349-cd4b-47d5-aa4b-4a240c8e69b2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Back Heavy Attack Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""08f2bdae-6cee-4dad-b154-0b97d3d01c3e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Combat Roll"",
                     ""type"": ""Button"",
                     ""id"": ""357abf1a-6ab4-4e0e-a68c-041c32df79e3"",
@@ -83,30 +115,6 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Back Attack Left"",
-                    ""type"": ""Button"",
-                    ""id"": ""e900ed7b-6df4-407c-bbe3-3da3568d4b82"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Back Attack Right"",
-                    ""type"": ""Button"",
-                    ""id"": ""43202349-cd4b-47d5-aa4b-4a240c8e69b2"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Quick Step"",
-                    ""type"": ""Button"",
-                    ""id"": ""c3092336-8b34-4795-92e1-c80e05f5241d"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
                     ""name"": ""Flip Right"",
                     ""type"": ""Button"",
                     ""id"": ""b71512b7-2180-4da9-b856-2b524ed1b98f"",
@@ -118,22 +126,6 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""name"": ""Flip Left"",
                     ""type"": ""Button"",
                     ""id"": ""cc5806a5-a807-431c-9a55-0601f8c65891"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Back Heavy Attack Left"",
-                    ""type"": ""Button"",
-                    ""id"": ""e0d1d778-e58b-4b48-8c18-b16e5a7dfbc0"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Back Heavy Attack Right"",
-                    ""type"": ""Button"",
-                    ""id"": ""08f2bdae-6cee-4dad-b154-0b97d3d01c3e"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -340,6 +332,17 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""c72529e6-361e-469f-875c-06105f07cdd6"",
+                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""194abb41-46f6-4c43-b67b-e853073ba18a"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
@@ -416,149 +419,6 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""Button With One Modifier"",
-                    ""id"": ""79436da4-3e7f-47f9-8e29-5de0e3527574"",
-                    ""path"": ""ButtonWithOneModifier"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Back Attack Left"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""modifier"",
-                    ""id"": ""62c5936a-992c-4560-bad9-6f8aefef81d8"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Back Attack Left"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""button"",
-                    ""id"": ""40b40a5e-25df-46e0-a905-711a19611664"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Back Attack Left"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Button With One Modifier"",
-                    ""id"": ""ab1d5ab9-993e-442d-96de-de6f224d336c"",
-                    ""path"": ""ButtonWithOneModifier"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Back Attack Left"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""modifier"",
-                    ""id"": ""cba270d1-513b-4fad-b074-5407afff6027"",
-                    ""path"": ""<Gamepad>/leftStick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Back Attack Left"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""button"",
-                    ""id"": ""4ba68b71-e0ae-4083-85df-9977a72c2638"",
-                    ""path"": ""<XInputController>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Back Attack Left"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Button With One Modifier"",
-                    ""id"": ""5b00af94-50a5-4531-8d33-f241911ec38b"",
-                    ""path"": ""ButtonWithOneModifier"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Back Attack Right"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""modifier"",
-                    ""id"": ""af58fb98-c8f0-4bd0-a707-00f38549e8a7"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Back Attack Right"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""button"",
-                    ""id"": ""dce428d2-9f1e-46ff-a6c1-e830b5588dc3"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Back Attack Right"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Button With One Modifier"",
-                    ""id"": ""9da3244b-5a26-4945-af7c-e94ff59594a4"",
-                    ""path"": ""ButtonWithOneModifier"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Back Attack Right"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""modifier"",
-                    ""id"": ""0be15d96-ef5c-48e4-904f-23b0cd02832b"",
-                    ""path"": ""<Gamepad>/leftStick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Back Attack Right"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""button"",
-                    ""id"": ""8df6e6a9-e07d-42d7-b5c0-f031a9249c2c"",
-                    ""path"": ""<XInputController>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Back Attack Right"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5bacacf5-b738-4c0e-85c4-e54b70773d07"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Quick Step"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": """",
                     ""id"": ""85228ab0-583c-4d53-a580-513cb46fd54a"",
                     ""path"": ""<Keyboard>/d"",
@@ -603,7 +463,150 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""Button With One Modifier"",
+                    ""name"": """",
+                    ""id"": ""86a6d992-886f-4861-9136-af8769397584"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": ""MultiTap"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Combat Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Keyboard"",
+                    ""id"": ""79436da4-3e7f-47f9-8e29-5de0e3527574"",
+                    ""path"": ""ButtonWithOneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back Attack Left"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Xbox"",
+                    ""id"": ""ab1d5ab9-993e-442d-96de-de6f224d336c"",
+                    ""path"": ""ButtonWithOneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back Attack Left"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""cba270d1-513b-4fad-b074-5407afff6027"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Back Attack Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""button"",
+                    ""id"": ""4ba68b71-e0ae-4083-85df-9977a72c2638"",
+                    ""path"": ""<XInputController>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Back Attack Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""62c5936a-992c-4560-bad9-6f8aefef81d8"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Back Attack Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""button"",
+                    ""id"": ""40b40a5e-25df-46e0-a905-711a19611664"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Back Attack Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Xbox + Keyboard"",
+                    ""id"": ""b047e739-53c8-4ed3-89d0-720ea8ca56ea"",
+                    ""path"": ""ButtonWithOneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back Attack Left"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""ee5a31b3-96c5-4014-aa3e-a29550c6f2ab"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Back Attack Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""button"",
+                    ""id"": ""ce6e57dc-38ac-4318-9716-a507fe7c35d3"",
+                    ""path"": ""<XInputController>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Back Attack Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Keyboard + Gamepad"",
+                    ""id"": ""04f3cbd8-6756-4400-ad43-1a3687ecb35f"",
+                    ""path"": ""ButtonWithOneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back Attack Left"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""6ed0094f-b612-41d6-b8c4-fe3223c60296"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Back Attack Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""button"",
+                    ""id"": ""dcfb2289-fdfa-4999-bac9-fd92e41104ac"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Back Attack Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Keyboard "",
                     ""id"": ""81c715b8-0c34-41d1-84e5-bf88253e3ce6"",
                     ""path"": ""ButtonWithOneModifier"",
                     ""interactions"": """",
@@ -636,7 +639,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""Button With One Modifier"",
+                    ""name"": ""Xbox"",
                     ""id"": ""93fae73e-5a5c-4215-9886-8e4058889035"",
                     ""path"": ""ButtonWithOneModifier"",
                     ""interactions"": """",
@@ -669,7 +672,205 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""Button With One Modifier"",
+                    ""name"": ""Xbox + Keyboard"",
+                    ""id"": ""638e0c03-eb96-4c62-84a6-49994d2639a6"",
+                    ""path"": ""ButtonWithOneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back Heavy Attack Left"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""2bf1d45b-2b5c-487d-917f-50c86e2b55b8"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Back Heavy Attack Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""button"",
+                    ""id"": ""cc12bf33-c297-4dec-9fcf-b79e8c1df9b4"",
+                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Back Heavy Attack Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Keyboard + Gamepad"",
+                    ""id"": ""6751f742-a0db-4f97-b694-443797825287"",
+                    ""path"": ""ButtonWithOneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back Heavy Attack Left"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""989ccce7-28f0-4265-84a0-e7e9beb92926"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Back Heavy Attack Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""button"",
+                    ""id"": ""6619b79b-4ade-4940-8854-5bfa1966c812"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Back Heavy Attack Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Keyboard Back Attack Right"",
+                    ""id"": ""5b00af94-50a5-4531-8d33-f241911ec38b"",
+                    ""path"": ""ButtonWithOneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back Attack Right"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""af58fb98-c8f0-4bd0-a707-00f38549e8a7"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Back Attack Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""button"",
+                    ""id"": ""dce428d2-9f1e-46ff-a6c1-e830b5588dc3"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Back Attack Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Xbox Back Attack Right"",
+                    ""id"": ""9da3244b-5a26-4945-af7c-e94ff59594a4"",
+                    ""path"": ""ButtonWithOneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back Attack Right"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""0be15d96-ef5c-48e4-904f-23b0cd02832b"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Back Attack Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""button"",
+                    ""id"": ""8df6e6a9-e07d-42d7-b5c0-f031a9249c2c"",
+                    ""path"": ""<XInputController>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Back Attack Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Xbox + Keyboard Back Attack Right"",
+                    ""id"": ""ac803526-8085-408b-a9fa-dfe3abdc8b7b"",
+                    ""path"": ""ButtonWithOneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back Attack Right"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""ee833fb9-221b-45ca-84da-9d07701a0729"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Back Attack Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""button"",
+                    ""id"": ""33b91d40-f9f0-4f18-8ca9-902e7c1fca5f"",
+                    ""path"": ""<XInputController>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Back Attack Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Keyboard + Gamepad Back Attack Right"",
+                    ""id"": ""c8babc50-24fe-48a3-83d4-5e87214c60ab"",
+                    ""path"": ""ButtonWithOneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back Attack Right"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""b47a3d12-fd0a-47fe-a831-5b6e60e5a573"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Back Attack Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""button"",
+                    ""id"": ""22c21542-bcc8-471e-a293-012cc6f14059"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Back Attack Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Keyboard"",
                     ""id"": ""83ae215a-d4a3-4767-a755-166589322dff"",
                     ""path"": ""ButtonWithOneModifier"",
                     ""interactions"": """",
@@ -702,7 +903,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""Button With One Modifier"",
+                    ""name"": ""Xbox"",
                     ""id"": ""ab5cccae-1fdc-4ca0-bae6-a2e882f26529"",
                     ""path"": ""ButtonWithOneModifier"",
                     ""interactions"": """",
@@ -735,15 +936,70 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""86a6d992-886f-4861-9136-af8769397584"",
-                    ""path"": ""<Keyboard>/leftShift"",
-                    ""interactions"": ""MultiTap"",
+                    ""name"": ""Xbox + Keyboard"",
+                    ""id"": ""b65e3ee2-b657-4861-8046-49cf3a3f8e48"",
+                    ""path"": ""ButtonWithOneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back Heavy Attack Right"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""ccffc9af-8ce4-4c33-8301-f8b3811c3add"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Combat Roll"",
+                    ""action"": ""Back Heavy Attack Right"",
                     ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""button"",
+                    ""id"": ""01a21a89-5650-4342-8d36-7f9b2e69ffbd"",
+                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Back Heavy Attack Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Keyboard + Gamepad"",
+                    ""id"": ""b0e3280f-efd6-4f7a-8b66-8fe3e03f54e8"",
+                    ""path"": ""ButtonWithOneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back Heavy Attack Right"",
+                    ""isComposite"": true,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""9a03dbdc-9666-4a13-bc8a-3612ebee2c29"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Back Heavy Attack Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""button"",
+                    ""id"": ""7ff504ed-2736-418e-842f-cb41e2055e11"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Back Heavy Attack Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -1325,15 +1581,14 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_LightAttack = m_Player.FindAction("Light Attack", throwIfNotFound: true);
         m_Player_HeavyAttack = m_Player.FindAction("Heavy Attack", throwIfNotFound: true);
+        m_Player_BackAttackLeft = m_Player.FindAction("Back Attack Left", throwIfNotFound: true);
+        m_Player_BackHeavyAttackLeft = m_Player.FindAction("Back Heavy Attack Left", throwIfNotFound: true);
+        m_Player_BackAttackRight = m_Player.FindAction("Back Attack Right", throwIfNotFound: true);
+        m_Player_BackHeavyAttackRight = m_Player.FindAction("Back Heavy Attack Right", throwIfNotFound: true);
         m_Player_CombatRoll = m_Player.FindAction("Combat Roll", throwIfNotFound: true);
         m_Player_Slide = m_Player.FindAction("Slide", throwIfNotFound: true);
-        m_Player_BackAttackLeft = m_Player.FindAction("Back Attack Left", throwIfNotFound: true);
-        m_Player_BackAttackRight = m_Player.FindAction("Back Attack Right", throwIfNotFound: true);
-        m_Player_QuickStep = m_Player.FindAction("Quick Step", throwIfNotFound: true);
         m_Player_FlipRight = m_Player.FindAction("Flip Right", throwIfNotFound: true);
         m_Player_FlipLeft = m_Player.FindAction("Flip Left", throwIfNotFound: true);
-        m_Player_BackHeavyAttackLeft = m_Player.FindAction("Back Heavy Attack Left", throwIfNotFound: true);
-        m_Player_BackHeavyAttackRight = m_Player.FindAction("Back Heavy Attack Right", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1401,15 +1656,14 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_LightAttack;
     private readonly InputAction m_Player_HeavyAttack;
+    private readonly InputAction m_Player_BackAttackLeft;
+    private readonly InputAction m_Player_BackHeavyAttackLeft;
+    private readonly InputAction m_Player_BackAttackRight;
+    private readonly InputAction m_Player_BackHeavyAttackRight;
     private readonly InputAction m_Player_CombatRoll;
     private readonly InputAction m_Player_Slide;
-    private readonly InputAction m_Player_BackAttackLeft;
-    private readonly InputAction m_Player_BackAttackRight;
-    private readonly InputAction m_Player_QuickStep;
     private readonly InputAction m_Player_FlipRight;
     private readonly InputAction m_Player_FlipLeft;
-    private readonly InputAction m_Player_BackHeavyAttackLeft;
-    private readonly InputAction m_Player_BackHeavyAttackRight;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1420,15 +1674,14 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @LightAttack => m_Wrapper.m_Player_LightAttack;
         public InputAction @HeavyAttack => m_Wrapper.m_Player_HeavyAttack;
+        public InputAction @BackAttackLeft => m_Wrapper.m_Player_BackAttackLeft;
+        public InputAction @BackHeavyAttackLeft => m_Wrapper.m_Player_BackHeavyAttackLeft;
+        public InputAction @BackAttackRight => m_Wrapper.m_Player_BackAttackRight;
+        public InputAction @BackHeavyAttackRight => m_Wrapper.m_Player_BackHeavyAttackRight;
         public InputAction @CombatRoll => m_Wrapper.m_Player_CombatRoll;
         public InputAction @Slide => m_Wrapper.m_Player_Slide;
-        public InputAction @BackAttackLeft => m_Wrapper.m_Player_BackAttackLeft;
-        public InputAction @BackAttackRight => m_Wrapper.m_Player_BackAttackRight;
-        public InputAction @QuickStep => m_Wrapper.m_Player_QuickStep;
         public InputAction @FlipRight => m_Wrapper.m_Player_FlipRight;
         public InputAction @FlipLeft => m_Wrapper.m_Player_FlipLeft;
-        public InputAction @BackHeavyAttackLeft => m_Wrapper.m_Player_BackHeavyAttackLeft;
-        public InputAction @BackHeavyAttackRight => m_Wrapper.m_Player_BackHeavyAttackRight;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1456,33 +1709,30 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @HeavyAttack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeavyAttack;
                 @HeavyAttack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeavyAttack;
                 @HeavyAttack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHeavyAttack;
+                @BackAttackLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackAttackLeft;
+                @BackAttackLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackAttackLeft;
+                @BackAttackLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackAttackLeft;
+                @BackHeavyAttackLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackHeavyAttackLeft;
+                @BackHeavyAttackLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackHeavyAttackLeft;
+                @BackHeavyAttackLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackHeavyAttackLeft;
+                @BackAttackRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackAttackRight;
+                @BackAttackRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackAttackRight;
+                @BackAttackRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackAttackRight;
+                @BackHeavyAttackRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackHeavyAttackRight;
+                @BackHeavyAttackRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackHeavyAttackRight;
+                @BackHeavyAttackRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackHeavyAttackRight;
                 @CombatRoll.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCombatRoll;
                 @CombatRoll.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCombatRoll;
                 @CombatRoll.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCombatRoll;
                 @Slide.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSlide;
                 @Slide.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSlide;
                 @Slide.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSlide;
-                @BackAttackLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackAttackLeft;
-                @BackAttackLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackAttackLeft;
-                @BackAttackLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackAttackLeft;
-                @BackAttackRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackAttackRight;
-                @BackAttackRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackAttackRight;
-                @BackAttackRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackAttackRight;
-                @QuickStep.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickStep;
-                @QuickStep.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickStep;
-                @QuickStep.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickStep;
                 @FlipRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlipRight;
                 @FlipRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlipRight;
                 @FlipRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlipRight;
                 @FlipLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlipLeft;
                 @FlipLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlipLeft;
                 @FlipLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlipLeft;
-                @BackHeavyAttackLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackHeavyAttackLeft;
-                @BackHeavyAttackLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackHeavyAttackLeft;
-                @BackHeavyAttackLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackHeavyAttackLeft;
-                @BackHeavyAttackRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackHeavyAttackRight;
-                @BackHeavyAttackRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackHeavyAttackRight;
-                @BackHeavyAttackRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBackHeavyAttackRight;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1505,33 +1755,30 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @HeavyAttack.started += instance.OnHeavyAttack;
                 @HeavyAttack.performed += instance.OnHeavyAttack;
                 @HeavyAttack.canceled += instance.OnHeavyAttack;
+                @BackAttackLeft.started += instance.OnBackAttackLeft;
+                @BackAttackLeft.performed += instance.OnBackAttackLeft;
+                @BackAttackLeft.canceled += instance.OnBackAttackLeft;
+                @BackHeavyAttackLeft.started += instance.OnBackHeavyAttackLeft;
+                @BackHeavyAttackLeft.performed += instance.OnBackHeavyAttackLeft;
+                @BackHeavyAttackLeft.canceled += instance.OnBackHeavyAttackLeft;
+                @BackAttackRight.started += instance.OnBackAttackRight;
+                @BackAttackRight.performed += instance.OnBackAttackRight;
+                @BackAttackRight.canceled += instance.OnBackAttackRight;
+                @BackHeavyAttackRight.started += instance.OnBackHeavyAttackRight;
+                @BackHeavyAttackRight.performed += instance.OnBackHeavyAttackRight;
+                @BackHeavyAttackRight.canceled += instance.OnBackHeavyAttackRight;
                 @CombatRoll.started += instance.OnCombatRoll;
                 @CombatRoll.performed += instance.OnCombatRoll;
                 @CombatRoll.canceled += instance.OnCombatRoll;
                 @Slide.started += instance.OnSlide;
                 @Slide.performed += instance.OnSlide;
                 @Slide.canceled += instance.OnSlide;
-                @BackAttackLeft.started += instance.OnBackAttackLeft;
-                @BackAttackLeft.performed += instance.OnBackAttackLeft;
-                @BackAttackLeft.canceled += instance.OnBackAttackLeft;
-                @BackAttackRight.started += instance.OnBackAttackRight;
-                @BackAttackRight.performed += instance.OnBackAttackRight;
-                @BackAttackRight.canceled += instance.OnBackAttackRight;
-                @QuickStep.started += instance.OnQuickStep;
-                @QuickStep.performed += instance.OnQuickStep;
-                @QuickStep.canceled += instance.OnQuickStep;
                 @FlipRight.started += instance.OnFlipRight;
                 @FlipRight.performed += instance.OnFlipRight;
                 @FlipRight.canceled += instance.OnFlipRight;
                 @FlipLeft.started += instance.OnFlipLeft;
                 @FlipLeft.performed += instance.OnFlipLeft;
                 @FlipLeft.canceled += instance.OnFlipLeft;
-                @BackHeavyAttackLeft.started += instance.OnBackHeavyAttackLeft;
-                @BackHeavyAttackLeft.performed += instance.OnBackHeavyAttackLeft;
-                @BackHeavyAttackLeft.canceled += instance.OnBackHeavyAttackLeft;
-                @BackHeavyAttackRight.started += instance.OnBackHeavyAttackRight;
-                @BackHeavyAttackRight.performed += instance.OnBackHeavyAttackRight;
-                @BackHeavyAttackRight.canceled += instance.OnBackHeavyAttackRight;
             }
         }
     }
@@ -1694,15 +1941,14 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnLightAttack(InputAction.CallbackContext context);
         void OnHeavyAttack(InputAction.CallbackContext context);
+        void OnBackAttackLeft(InputAction.CallbackContext context);
+        void OnBackHeavyAttackLeft(InputAction.CallbackContext context);
+        void OnBackAttackRight(InputAction.CallbackContext context);
+        void OnBackHeavyAttackRight(InputAction.CallbackContext context);
         void OnCombatRoll(InputAction.CallbackContext context);
         void OnSlide(InputAction.CallbackContext context);
-        void OnBackAttackLeft(InputAction.CallbackContext context);
-        void OnBackAttackRight(InputAction.CallbackContext context);
-        void OnQuickStep(InputAction.CallbackContext context);
         void OnFlipRight(InputAction.CallbackContext context);
         void OnFlipLeft(InputAction.CallbackContext context);
-        void OnBackHeavyAttackLeft(InputAction.CallbackContext context);
-        void OnBackHeavyAttackRight(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

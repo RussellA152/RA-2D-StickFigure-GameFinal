@@ -66,8 +66,8 @@ public class PlayerMovementInput : MonoBehaviour
         if (canWalk == true)
         {
             //using new input system
-            Vector2 temp = move.ReadValue<Vector2>();
-            horizontalMovement = temp.x * runSpeed;
+            Vector2 movementInput = move.ReadValue<Vector2>();
+            horizontalMovement = movementInput.x * runSpeed;
         }
         else
             horizontalMovement = 0f;
@@ -107,12 +107,12 @@ public class PlayerMovementInput : MonoBehaviour
         //if player is holding slide button, then slide, otherwise stop (will be interrupted if player is no longer grounded)
         if (context.performed)
         {
-            //Debug.Log("SLIDE IS TRUE!");
+            Debug.Log("SLIDE IS TRUE!");
             sliding = true;
         }
         else if (context.canceled)
         {
-            //Debug.Log("SLIDE IS FALSE!");
+            Debug.Log("SLIDE IS FALSE!");
             sliding = false;
         }       
     }

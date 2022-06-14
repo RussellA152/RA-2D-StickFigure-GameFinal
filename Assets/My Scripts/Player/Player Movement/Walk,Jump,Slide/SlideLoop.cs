@@ -65,7 +65,7 @@ public class SlideLoop : StateMachineBehaviour
             animator.Play("P_Slide_GetUp");
         }
 
-        Debug.Log("Slide speed is: " + tempSlideSpeed);
+        //Debug.Log("Slide speed is: " + tempSlideSpeed);
 
     }
 

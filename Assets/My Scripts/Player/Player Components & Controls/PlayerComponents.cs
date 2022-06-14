@@ -66,7 +66,7 @@ public class PlayerComponents : MonoBehaviour
     }
     private void Start()
     {
-        Application.targetFrameRate = 30;
+
     }
 
     private void Update()
