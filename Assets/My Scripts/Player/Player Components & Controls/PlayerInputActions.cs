@@ -108,11 +108,11 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""Slide"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""3a76e1cf-b29e-4af9-a534-b0201ab9f352"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """"
+                    ""interactions"": ""Hold(duration=0.1)""
                 },
                 {
                     ""name"": ""Flip Right"",
@@ -332,11 +332,11 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c72529e6-361e-469f-875c-06105f07cdd6"",
-                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""id"": ""37993cf2-0899-4684-aa7f-e3b4e79103b0"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": """",
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -354,22 +354,11 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""e09b1550-970b-4fe6-89b7-2c63f7771b92"",
-                    ""path"": ""<DualShockGamepad>/buttonWest"",
+                    ""id"": ""828fac05-1eed-470c-8be9-c050ae1d21cb"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Light Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5043947d-0dbf-467f-ba73-fed4cb1a8037"",
-                    ""path"": ""<XInputController>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
+                    ""groups"": """",
                     ""action"": ""Light Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -387,19 +376,8 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""52590c2c-b73e-4fbd-999e-c4fb1048b250"",
-                    ""path"": ""<DualShockGamepad>/buttonNorth"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Heavy Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f2329baf-7190-4d41-bed0-c70fd7393419"",
-                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""id"": ""0d59ae6f-42f6-46c1-bdac-5df18e18869e"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -410,8 +388,8 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d2d8a871-698c-41f9-bc62-688b57d9116e"",
-                    ""path"": ""<Keyboard>/leftShift"",
-                    ""interactions"": ""Hold"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Slide"",
@@ -465,10 +443,21 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""86a6d992-886f-4861-9136-af8769397584"",
-                    ""path"": ""<Keyboard>/leftShift"",
-                    ""interactions"": ""MultiTap"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Combat Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0964f7a4-a977-4b17-9c2e-29fd8b2f7f24"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Combat Roll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -483,39 +472,6 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""action"": ""Back Attack Left"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""Xbox"",
-                    ""id"": ""ab1d5ab9-993e-442d-96de-de6f224d336c"",
-                    ""path"": ""ButtonWithOneModifier"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Back Attack Left"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""modifier"",
-                    ""id"": ""cba270d1-513b-4fad-b074-5407afff6027"",
-                    ""path"": ""<Gamepad>/leftStick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Back Attack Left"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""button"",
-                    ""id"": ""4ba68b71-e0ae-4083-85df-9977a72c2638"",
-                    ""path"": ""<XInputController>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Back Attack Left"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""modifier"",
@@ -540,7 +496,40 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""Xbox + Keyboard"",
+                    ""name"": ""Gamepad"",
+                    ""id"": ""ab1d5ab9-993e-442d-96de-de6f224d336c"",
+                    ""path"": ""ButtonWithOneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back Attack Left"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""cba270d1-513b-4fad-b074-5407afff6027"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Back Attack Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""button"",
+                    ""id"": ""4ba68b71-e0ae-4083-85df-9977a72c2638"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Back Attack Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Gamepad + Keyboard"",
                     ""id"": ""b047e739-53c8-4ed3-89d0-720ea8ca56ea"",
                     ""path"": ""ButtonWithOneModifier"",
                     ""interactions"": """",
@@ -564,7 +553,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": ""button"",
                     ""id"": ""ce6e57dc-38ac-4318-9716-a507fe7c35d3"",
-                    ""path"": ""<XInputController>/buttonWest"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -639,7 +628,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""Xbox"",
+                    ""name"": ""Gamepad"",
                     ""id"": ""93fae73e-5a5c-4215-9886-8e4058889035"",
                     ""path"": ""ButtonWithOneModifier"",
                     ""interactions"": """",
@@ -663,7 +652,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": ""button"",
                     ""id"": ""8237413c-a5d2-4084-8a73-9ac766e398d5"",
-                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -672,7 +661,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""Xbox + Keyboard"",
+                    ""name"": ""Gamepad+ Keyboard"",
                     ""id"": ""638e0c03-eb96-4c62-84a6-49994d2639a6"",
                     ""path"": ""ButtonWithOneModifier"",
                     ""interactions"": """",
@@ -696,7 +685,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": ""button"",
                     ""id"": ""cc12bf33-c297-4dec-9fcf-b79e8c1df9b4"",
-                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -771,7 +760,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""Xbox Back Attack Right"",
+                    ""name"": ""Gamepad Back Attack Right"",
                     ""id"": ""9da3244b-5a26-4945-af7c-e94ff59594a4"",
                     ""path"": ""ButtonWithOneModifier"",
                     ""interactions"": """",
@@ -795,7 +784,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": ""button"",
                     ""id"": ""8df6e6a9-e07d-42d7-b5c0-f031a9249c2c"",
-                    ""path"": ""<XInputController>/buttonWest"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -804,7 +793,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""Xbox + Keyboard Back Attack Right"",
+                    ""name"": ""Gamepad + Keyboard Back Attack Right"",
                     ""id"": ""ac803526-8085-408b-a9fa-dfe3abdc8b7b"",
                     ""path"": ""ButtonWithOneModifier"",
                     ""interactions"": """",
@@ -828,7 +817,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": ""button"",
                     ""id"": ""33b91d40-f9f0-4f18-8ca9-902e7c1fca5f"",
-                    ""path"": ""<XInputController>/buttonWest"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -903,7 +892,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""Xbox"",
+                    ""name"": ""Gamepad"",
                     ""id"": ""ab5cccae-1fdc-4ca0-bae6-a2e882f26529"",
                     ""path"": ""ButtonWithOneModifier"",
                     ""interactions"": """",
@@ -927,7 +916,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": ""button"",
                     ""id"": ""7ced6faa-b92b-400d-abb6-e4f5f504c5b0"",
-                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -960,7 +949,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": ""button"",
                     ""id"": ""01a21a89-5650-4342-8d36-7f9b2e69ffbd"",
-                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",

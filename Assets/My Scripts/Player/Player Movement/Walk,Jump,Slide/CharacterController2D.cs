@@ -22,7 +22,9 @@ public class CharacterController2D : MonoBehaviour
 
 	[Header("Cooldowns")]
 	[SerializeField] private float rollCooldownTimer;
+	[SerializeField] private float slideCooldownTimer;
 	private bool rollCooldownCoroutineOccurred = false; //this bool is used for making sure the roll cooldown coroutine only occurs once
+	private bool slideCooldownCoroutineOccurred = false; //this bool is used for making sure the slide cooldown coroutine only occurs once
 
 	[Header("Allow AirControl?")]
 	[SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
@@ -60,6 +62,7 @@ public class CharacterController2D : MonoBehaviour
 	private bool canJump; //determines if player can jump (retrieved from playerComponents script)
 	private bool canFlip; //determines if the player's sprite can flip (retrieved from playerComponents script)
 	private bool canRoll; //determines if the player can roll (retrieved from playerComponents script)
+	private bool canSlide; //determines if the player can slide (retrieved from playerComponents script)
 
 	[HideInInspector]
 	public Animator animator;
@@ -160,6 +163,7 @@ public class CharacterController2D : MonoBehaviour
 		canJump = playerComponentScript.GetCanJump();
 		canFlip = playerComponentScript.GetCanFlip();
 		canRoll = playerComponentScript.GetCanRoll();
+		canSlide = playerComponentScript.GetCanSlide();
 
 
 		//if grounded, animator's isJumping is set to false, and isGrounded parameter is set to true
@@ -196,6 +200,9 @@ public class CharacterController2D : MonoBehaviour
 		bool wasGrounded = m_Grounded;
 		m_Grounded = false;
 
+		// set playercomponent's isGrounded to false so other scripts can see 
+		playerComponentScript.SetIsGrounded(false);
+
 		// The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
 		// This can be done using layers instead but Sample Assets will not overwrite your project settings.
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
@@ -205,6 +212,9 @@ public class CharacterController2D : MonoBehaviour
 			{
 				m_Grounded = true;
 
+				// set playercomponent's isGrounded to true so other scripts can see 
+				playerComponentScript.SetIsGrounded(true);
+
 				//Player has just landed
 				if (!wasGrounded)
 					OnLandEvent.Invoke();
@@ -212,19 +222,30 @@ public class CharacterController2D : MonoBehaviour
 			}
 		}
 	}
-	public void Move(float move, bool crouch, bool jump, bool sliding, bool rolling,float jumpBufferCounter)
+	public void Move(float move, bool crouch, bool jump, bool wantsToSlide, bool wantsToRoll,float jumpBufferCounter)
 	{
+		Debug.Log("can slide? " + canSlide);
+
 		//set isSliding bool parameter inside of player animator to true or false depending on player input
-		if (m_Grounded)
-			animator.SetBool(isSlidingHash, sliding);
-		else
+		if (m_Grounded && canSlide && wantsToSlide)
+        {
+			animator.SetBool(isSlidingHash, wantsToSlide);
+
+			if(!slideCooldownCoroutineOccurred)
+				StartCoroutine(SlideCooldown());
+
+		}
+
+        else
+        {
 			animator.SetBool(isSlidingHash, false);
+		}
 
 		//check if player is allowed to roll... (need to be grounded otherwise cooldown will start mid-air)
-        if (canRoll && rolling && m_Grounded)
+        if (canRoll && wantsToRoll  && m_Grounded)
         {
 			//set isRolling bool parameter inside of player animator to true or false depending on player input
-			animator.SetBool(isRollingHash, rolling);
+			animator.SetBool(isRollingHash, wantsToRoll);
 			//if the roll cooldown coroutine is already running, don't run it again (only one at a time)
 			if(!rollCooldownCoroutineOccurred)
 			StartCoroutine(RollCooldown());
@@ -348,6 +369,10 @@ public class CharacterController2D : MonoBehaviour
 			//player is no longer grounded when jumping
 			m_Grounded = false;
 
+			// set playercomponent's isGrounded to false so other scripts can see 
+			playerComponentScript.SetIsGrounded(false);
+
+
 			// Add a vertical force to the player.
 			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
 			
@@ -411,6 +436,26 @@ public class CharacterController2D : MonoBehaviour
 		rollCooldownCoroutineOccurred = false;
 
 		playerComponentScript.SetCanRoll(true);
+
+
+		//Debug.Log("End Roll coroutine!");
+	}
+
+	IEnumerator SlideCooldown()
+	{
+		Debug.Log("Start slide cooldown!");
+
+		//after rolling, player must wait a certain time until they can roll again
+		slideCooldownCoroutineOccurred = true;
+
+		playerComponentScript.SetCanSlide(false);
+
+		//wait a certain amount of time, then allow the player to roll again (roll input is still detected from PlayerMovementInput.cs , but nothing will happen if canRoll is false)
+		yield return new WaitForSeconds(slideCooldownTimer);
+
+		slideCooldownCoroutineOccurred = false;
+
+		playerComponentScript.SetCanSlide(true);
 
 
 		//Debug.Log("End Roll coroutine!");

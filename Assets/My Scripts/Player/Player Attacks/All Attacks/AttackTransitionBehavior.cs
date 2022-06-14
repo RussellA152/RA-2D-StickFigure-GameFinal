@@ -27,6 +27,7 @@ public class AttackTransitionBehavior : StateMachineBehaviour
         //retrieve component script
         playerComponentScript = animator.transform.gameObject.GetComponent<PlayerComponents>();
 
+        //let player flip during attack transition period
         playerComponentScript.SetCanFlip(true);
 
         // IF this animation allows movement during animation then allow player to move (instead the animation will move player a little)
@@ -78,7 +79,7 @@ public class AttackTransitionBehavior : StateMachineBehaviour
                 
         }
         //if we press left click during an attack animation, play the corresponding light attack
-        else if (AttackController.instance.isAttacking)
+        else if (AttackController.instance.isLightAttacking)
         {
             if (attackName != "")
             {
@@ -95,9 +96,9 @@ public class AttackTransitionBehavior : StateMachineBehaviour
     {
         
 
-        if (AttackController.instance.isAttacking)
+        if (AttackController.instance.isLightAttacking)
         {
-            AttackController.instance.isAttacking = false;
+            AttackController.instance.isLightAttacking = false;
             //if player did a regular attack, dont let them do a back attack
             playerComponentScript.SetCanBackAttack(false);
         }

@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,15 +10,23 @@ public class AttackController : MonoBehaviour
 
     public static AttackController instance;
 
+    public event Action onAttackStart; //an event that occurs when the player attacks (UNUSED)
+    public event Action onAttackFinish; //an event that occurs when the player is done attacking (UNUSED)
+
     [HideInInspector]
     public Animator animator;
+
+    private bool isGrounded; //is the player on the ground? if so, allow them to do a standing attack
 
     private bool canAttack; //determines if player is allowed to attack
     private bool canBackAttack; //determines if player is allowed to do a back attack
 
     [HideInInspector]
+    //isAttacking is true if the player successfully performs any attack
+    private bool isAttacking = false;
+    [HideInInspector]
     //booleans representing if the player is performing the specific attack
-    public bool isAttacking = false;
+    public bool isLightAttacking = false;
     [HideInInspector]
     public bool isHeavyAttacking = false;
     [HideInInspector]
@@ -52,6 +59,8 @@ public class AttackController : MonoBehaviour
     void Start()
     {
         playerComponentScript = GetComponent<PlayerComponents>();
+
+
         animator = playerComponentScript.GetAnimator();
 
         lightAttack = playerComponentScript.GetLightAttack();
@@ -63,11 +72,6 @@ public class AttackController : MonoBehaviour
         backHeavyAttackLeft = playerComponentScript.GetBackHeavyAttackLeft();
         backHeavyAttackRight = playerComponentScript.GetBackHeavyAttackRight();
 
-        //backLightAttackLeft.performed += BackLightAttackLeft;
-        //backLightAttackRight.performed += BackLightAttackRight;
-        //lightAttack.performed += LightAttack;
-        //heavyAttack.performed += HeavyAttack;
-        //backLightAttack.performed += BackLightAttack;
     }
 
     // Update is called once per frame
@@ -84,40 +88,97 @@ public class AttackController : MonoBehaviour
     }
     private void Attack()
     {
+        //need to check if player is grounded to perform standing attacks, or not grounded for jumping attacks
+        isGrounded = playerComponentScript.GetPlayerIsGrounded();
+
+
         //instead of using event systems with context, I am using .triggered and if statements to create a priority system
         // .triggered means the button was pressed
 
-        if (backLightAttackLeft.triggered && canBackAttack && !isBackAttacking)
+        //player must be pressing the correct bind, be allowed to attack (in other words: not mid-hurt animation), and not already attacking mid animatiom
+
+        if (backLightAttackLeft.triggered && canBackAttack && !isBackAttacking && isGrounded)
         {
             isBackAttacking = true;
-            //Debug.Log("Back Attack TO THE LEFT!");
+
+            SetPlayerIsAttacking(true);
+
+            //Call the onAttack() event system because the player is now attacking
+            PlayerHasAttackedEvent();
         }
-        else if (backLightAttackRight.triggered && canBackAttack && !isBackAttacking)
+        else if (backLightAttackRight.triggered && canBackAttack && !isBackAttacking && isGrounded)
         {
             isBackAttacking = true;
-            //Debug.Log("Back Attack TO THE RIGHT!");
+
+            SetPlayerIsAttacking(true);
+
+            PlayerHasAttackedEvent();
         }
 
-        else if (lightAttack.triggered && canAttack && !isAttacking)
+        else if (lightAttack.triggered && canAttack && !isLightAttacking && isGrounded)
         {
-            isAttacking = true;
-            //Debug.Log("LIGHT ATTACK!");
+            isLightAttacking = true;
+
+            SetPlayerIsAttacking(true);
+
+            PlayerHasAttackedEvent();
         }
 
-        else if(backHeavyAttackLeft.triggered && canBackAttack && !isBackAttacking){
-            isBackHeavyAttacking = true;
-        }
-
-        else if (backHeavyAttackRight.triggered && canBackAttack && !isBackAttacking)
+        else if(backHeavyAttackLeft.triggered && canBackAttack && !isBackAttacking && isGrounded)
         {
             isBackHeavyAttacking = true;
+
+            SetPlayerIsAttacking(true);
+
+            PlayerHasAttackedEvent();
         }
 
-        else if (heavyAttack.triggered && canAttack && !isHeavyAttacking)
+        else if (backHeavyAttackRight.triggered && canBackAttack && !isBackAttacking && isGrounded)
+        {
+            isBackHeavyAttacking = true;
+
+            SetPlayerIsAttacking(true);
+
+            PlayerHasAttackedEvent();
+        }
+
+        else if (heavyAttack.triggered && canAttack && !isHeavyAttacking && isGrounded)
         {
             isHeavyAttacking = true;
+
+            SetPlayerIsAttacking(true);
+
+            PlayerHasAttackedEvent();
             //Debug.Log("HEAVY ATTACK!");
         }
     }
 
+    //Event system that occurs when the player attacks *
+    public void PlayerHasAttackedEvent()
+    {
+        if(onAttackStart != null)
+        {
+            onAttackStart();
+        }
+    }
+
+    public void PlayerDoneAttackingEvent()
+    {
+        if (onAttackFinish != null)
+        {
+            onAttackFinish();
+
+        }
+    }
+
+    public void SetPlayerIsAttacking(bool boolean)
+    {
+        isAttacking = boolean;
+    }
+
+    public bool GetPlayerIsAttacking()
+    {
+        return isAttacking;
+    }
+        
 }

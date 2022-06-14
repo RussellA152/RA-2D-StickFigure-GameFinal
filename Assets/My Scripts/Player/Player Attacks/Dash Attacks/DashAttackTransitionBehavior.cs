@@ -93,7 +93,7 @@ public class DashAttackTransitionBehavior : StateMachineBehaviour
             }
         }
         //if we press left click during an attack animation, play the corresponding light attack
-        else if (AttackController.instance.isAttacking)
+        else if (AttackController.instance.isLightAttacking)
         {
             if (attackName != "")
             {
@@ -106,9 +106,9 @@ public class DashAttackTransitionBehavior : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (AttackController.instance.isAttacking)
+        if (AttackController.instance.isLightAttacking)
         {
-            AttackController.instance.isAttacking = false;
+            AttackController.instance.isLightAttacking = false;
             //if player did a regular attack, dont let them do a back attack
             playerComponentScript.SetCanBackAttack(false);
             //playerComponentScript.setCanMove(true);

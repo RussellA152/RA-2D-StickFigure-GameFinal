@@ -39,6 +39,7 @@ public class PlayerComponents : MonoBehaviour
     private BoxCollider2D bodyCollider; //collider used for for collisions between enemies and ground/walls
 
     private bool playerFacingRight;
+    private bool playerIsGrounded;
 
     //private bool canInteract = true; //this bool determines if the player should be able to move, attack, or jump (set to false when attacked)
 
@@ -183,6 +184,11 @@ public class PlayerComponents : MonoBehaviour
     {
         canFlip = boolean;
     }
+
+    public void SetIsGrounded(bool boolean)
+    {
+        playerIsGrounded = boolean;
+    }
     public bool GetCanJump()
     {
         return canJump;
@@ -191,6 +197,12 @@ public class PlayerComponents : MonoBehaviour
     {
         return canWalk;
     }
+
+    public bool GetCanSlide()
+    {
+        return canSlide;
+    }
+
     public bool GetCanRoll()
     {
         return canRoll;
@@ -241,6 +253,11 @@ public class PlayerComponents : MonoBehaviour
         //update player's direction before giving 
         playerFacingRight = GetComponent<CharacterController2D>().GetDirection();
         return playerFacingRight;
+    }
+    
+    public bool GetPlayerIsGrounded()
+    {
+        return playerIsGrounded;
     }
 
     public InputAction GetMove()

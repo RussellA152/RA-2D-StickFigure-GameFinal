@@ -17,8 +17,9 @@ public class PlayerMovementInput : MonoBehaviour
     private bool sliding = false;
     private bool rolling;
 
+
     [Header("Walking Speed")]
-    public float runSpeed = 70f;
+    [SerializeField] private float runSpeed = 70f;
 
     private float jumpBufferTime = 0.3f; //adds a buffer so player jumps as soon as they touch the ground, instead of having to wait until they land to press space
     private float jumpBufferCounter;
@@ -30,12 +31,14 @@ public class PlayerMovementInput : MonoBehaviour
     private InputAction slide;
     private InputAction roll;
 
+    private bool canSlide; //determines if the player can slide (retrieved from playerComponents script)
 
     private void Start()
     {
         //Application.targetFrameRate = 20;
         controller = GetComponent<CharacterController2D>();
         playerComponentScript = GetComponent<PlayerComponents>();
+
 
         move = playerComponentScript.GetMove();
         jump = playerComponentScript.GetJump();
@@ -49,16 +52,27 @@ public class PlayerMovementInput : MonoBehaviour
 
         //roll.performed += RollInput;
         //roll.canceled += RollInput;
+    
     }
 
 
+    private void OnDisable()
+    {
+        //AttackController.instance.onAttack -= SetRollingFalse;
+    }
+
     private void Update()
     {
-
+        //update canWalk and canRoll to see if the player is allowed to roll or walk
         bool canWalk = playerComponentScript.GetCanWalk();
         bool canRoll = playerComponentScript.GetCanRoll();
+        bool isAttacking = AttackController.instance.GetPlayerIsAttacking();
 
-        if(canRoll && roll.triggered)
+        bool isGrounded = playerComponentScript.GetPlayerIsGrounded();
+
+        canSlide = playerComponentScript.GetCanSlide();
+
+        if(canRoll && roll.triggered && !slide.triggered && isGrounded && !isAttacking)
         {
             SetRolling(true);
         }
@@ -121,6 +135,9 @@ public class PlayerMovementInput : MonoBehaviour
     {
         rolling = boolean;
     }
+
+
+
 
 }
 
