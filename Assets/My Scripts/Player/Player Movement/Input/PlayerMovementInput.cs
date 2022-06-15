@@ -35,6 +35,9 @@ public class PlayerMovementInput : MonoBehaviour
 
     private void Start()
     {
+
+
+
         //Application.targetFrameRate = 20;
         controller = GetComponent<CharacterController2D>();
         playerComponentScript = GetComponent<PlayerComponents>();
@@ -66,35 +69,20 @@ public class PlayerMovementInput : MonoBehaviour
         //update canWalk and canRoll to see if the player is allowed to roll or walk
         bool canWalk = playerComponentScript.GetCanWalk();
         bool canRoll = playerComponentScript.GetCanRoll();
+
+        //update isAttacking to see if player is currently attacking
         bool isAttacking = AttackController.instance.GetPlayerIsAttacking();
 
+        //update isGrounded to see if player is currently grounded
         bool isGrounded = playerComponentScript.GetPlayerIsGrounded();
 
         canSlide = playerComponentScript.GetCanSlide();
 
-        if(canRoll && roll.triggered && !slide.triggered && isGrounded && !isAttacking)
-        {
-            SetRolling(true);
-        }
+        CheckRoll(isAttacking, canRoll, isGrounded, sliding);
 
-        if (canWalk == true)
-        {
-            //using new input system
-            Vector2 movementInput = move.ReadValue<Vector2>();
-            horizontalMovement = movementInput.x * runSpeed;
-        }
-        else
-            horizontalMovement = 0f;
+        CheckWalk(canWalk);
 
-        if (jump.triggered)
-        {
-            jumping = true;
-            jumpBufferCounter = jumpBufferTime;
-        }
-        else
-        {
-            jumpBufferCounter -= Time.deltaTime;
-        }
+        CheckJump();
             
 
     }
@@ -110,12 +98,44 @@ public class PlayerMovementInput : MonoBehaviour
         //rolling = false;
     }
 
-    //private void RollInput(InputAction.CallbackContext context)
-    //{
-        //if player is double tapping roll button (left shift), (then set rolling to true)
-        //if(context.performed)
-            //rolling = true;
-    //}
+    //check for walking input from player
+    private void CheckWalk(bool canWalk)
+    {
+        if (canWalk == true)
+        {
+            //using new input system
+            Vector2 movementInput = move.ReadValue<Vector2>();
+            horizontalMovement = movementInput.x * runSpeed;
+        }
+        else
+            horizontalMovement = 0f;
+    }
+
+    //check for roll input from player
+    private void CheckRoll(bool playerIsAttacking,bool canRoll,bool isGrounded, bool isSliding)
+    {
+        //if player is allowed to roll (they must be grounded, not attacking, and not sliding)
+        if (canRoll && roll.triggered && !slide.triggered && isGrounded && !playerIsAttacking && !sliding)
+        {
+            SetRolling(true);
+        }
+    }
+
+    //check for jump input from player
+    private void CheckJump()
+    {
+        //if player pressed jump button..
+        //also start jump buffer counter
+        if (jump.triggered)
+        {
+            jumping = true;
+            jumpBufferCounter = jumpBufferTime;
+        }
+        else
+        {
+            jumpBufferCounter -= Time.deltaTime;
+        }
+    }
     private void SlideInput(InputAction.CallbackContext context)
     {
         //if player is holding slide button, then slide, otherwise stop (will be interrupted if player is no longer grounded)
@@ -128,13 +148,18 @@ public class PlayerMovementInput : MonoBehaviour
         {
             Debug.Log("SLIDE IS FALSE!");
             sliding = false;
-        }       
+        }
+        else
+        {
+            sliding = false;
+        }
     }
 
     public void SetRolling(bool boolean)
     {
         rolling = boolean;
     }
+
 
 
 

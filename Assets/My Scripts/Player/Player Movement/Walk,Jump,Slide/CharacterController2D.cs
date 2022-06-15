@@ -22,9 +22,9 @@ public class CharacterController2D : MonoBehaviour
 
 	[Header("Cooldowns")]
 	[SerializeField] private float rollCooldownTimer;
-	[SerializeField] private float slideCooldownTimer;
+	//[SerializeField] private float slideCooldownTimer;
 	private bool rollCooldownCoroutineOccurred = false; //this bool is used for making sure the roll cooldown coroutine only occurs once
-	private bool slideCooldownCoroutineOccurred = false; //this bool is used for making sure the slide cooldown coroutine only occurs once
+	//private bool slideCooldownCoroutineOccurred = false; //this bool is used for making sure the slide cooldown coroutine only occurs once
 
 	[Header("Allow AirControl?")]
 	[SerializeField] private bool m_AirControl = false;                         // Whether or not a player can steer while jumping;
@@ -224,18 +224,13 @@ public class CharacterController2D : MonoBehaviour
 	}
 	public void Move(float move, bool crouch, bool jump, bool wantsToSlide, bool wantsToRoll,float jumpBufferCounter)
 	{
-		Debug.Log("can slide? " + canSlide);
 
 		//set isSliding bool parameter inside of player animator to true or false depending on player input
 		if (m_Grounded && canSlide && wantsToSlide)
         {
 			animator.SetBool(isSlidingHash, wantsToSlide);
 
-			if(!slideCooldownCoroutineOccurred)
-				StartCoroutine(SlideCooldown());
-
 		}
-
         else
         {
 			animator.SetBool(isSlidingHash, false);
@@ -441,6 +436,7 @@ public class CharacterController2D : MonoBehaviour
 		//Debug.Log("End Roll coroutine!");
 	}
 
+	/*
 	IEnumerator SlideCooldown()
 	{
 		Debug.Log("Start slide cooldown!");
@@ -460,6 +456,8 @@ public class CharacterController2D : MonoBehaviour
 
 		//Debug.Log("End Roll coroutine!");
 	}
+
+	*/
 
 
 }

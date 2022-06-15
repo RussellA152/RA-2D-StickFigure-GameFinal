@@ -16,8 +16,8 @@ public class PlayerComponents : MonoBehaviour
     private InputAction lightAttack; //input action used for performing light attacks (left click)
     private InputAction heavyAttack; //input action used for performing heavy attacks (right click)
 
-    private InputAction slide; //input action used for performing a slide (left shift)
-    private InputAction roll; //input action used for performing a roll (double left shift)
+    private InputAction slide; //input action used for performing a slide (left control)
+    private InputAction roll; //input action used for performing a roll (left shift)
 
     private InputAction backLightAttackLeft; //input action used for performing a back light attack (turning around and performing a light attack quickly) ( A for turning left )
     private InputAction backLightAttackRight; //input action used for performing a back light attack (turning around and performing a light attack quickly) ( D for turning right )

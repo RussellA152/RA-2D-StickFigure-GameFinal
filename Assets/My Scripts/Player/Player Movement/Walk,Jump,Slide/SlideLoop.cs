@@ -75,6 +75,7 @@ public class SlideLoop : StateMachineBehaviour
         //allow player is move and attack again
         //playerCompScript.setCanMove(true);
         playerCompScript.SetCanMove(true);
+
         playerCompScript.SetCanAttack(true);
     }
 }

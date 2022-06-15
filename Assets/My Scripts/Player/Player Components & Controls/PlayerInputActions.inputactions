@@ -95,11 +95,11 @@
                 },
                 {
                     "name": "Slide",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "3a76e1cf-b29e-4af9-a534-b0201ab9f352",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold(duration=0.1)"
+                    "interactions": ""
                 },
                 {
                     "name": "Flip Right",
@@ -376,9 +376,20 @@
                     "name": "",
                     "id": "d2d8a871-698c-41f9-bc62-688b57d9116e",
                     "path": "<Keyboard>/leftCtrl",
-                    "interactions": "",
+                    "interactions": "Hold(duration=0.1)",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
+                    "action": "Slide",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "58546fc6-af1c-43f3-8b34-ad9e5bc3e213",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "Hold(duration=0.1)",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "Slide",
                     "isComposite": false,
                     "isPartOfComposite": false
