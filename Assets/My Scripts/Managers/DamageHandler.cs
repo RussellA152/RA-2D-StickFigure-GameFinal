@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//This script is used on both AI and Player (with checks to differentiate the two)
 
 // EnemyDamageHandler requires the GameObject to have a Rigidbody component
 [RequireComponent(typeof(Rigidbody2D))]
@@ -79,6 +80,8 @@ public class DamageHandler : MonoBehaviour
                 break;
         }
     }
+    //this function takes in 4 parameters, the damage of the attack dealt to this gameobject, the attack power forces (x & y direction) applied to this gameobject
+    // and a bool that checks if the player was the one that took damage (we use this script for AI and Player)
     public void TakeDamage(float damage, float attackPowerX, float attackPowerY, bool receiverWasPlayer)
     {
 
@@ -91,8 +94,11 @@ public class DamageHandler : MonoBehaviour
         else
         {
             //need to getComponent each time enemy is attacked because we can't cache this in Start() because the enemy will be enabled/disabled constantly during runtime
-            GetComponent<EnemyController>().enemyHealth -= damage;
-            Debug.Log("health = " + GetComponent<EnemyController>().enemyHealth);
+            GetComponent<EnemyHealth>().enemyHealth -= damage;
+            Debug.Log("health = " + GetComponent<EnemyHealth>().enemyHealth);
+
+            //change enemy's current state to the Hurt state (they can't move or flip their sprite)
+            GetComponent<EnemyStateManager>().ChangeEnemyStateToHurt();
 
         }
             

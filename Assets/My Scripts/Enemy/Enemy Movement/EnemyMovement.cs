@@ -8,20 +8,22 @@ using Pathfinding;
 
 // EnemyDamageHandler requires the GameObject to have a Rigidbody component
 [RequireComponent(typeof(Rigidbody2D))]
-public class EnemyController : MonoBehaviour
+public class EnemyMovement : MonoBehaviour
 {
+
+    private Vector3 startingPosition; //the position of wherever the enemy spawned at
+
+
     [Header("Enemy Configuration Scriptable Object")]
     public EnemyScriptableObject enemyScriptableObject;
 
-    [HideInInspector]
-    public float enemyHealth; //the health value of this enemy (DERIVED FROM SCRIPTABLEOBJECT)
     private float enemyMass; //the mass value of this enemy's rigidbody (DERIVED FROM SCRIPTABLEOBJECT)
     private float enemyWalkingSpeed; // the walking speed of this enemy (using the aiPathing) (DERIVED FROM SCRIPTABLEOBJECT)
     private Sprite enemySprite; //the sprite of this enemy WHEN SPAWNED (DERIVED FROM SCRIPTABLEOBECT)
 
 
     [Header("Pathing Attributes")]
-    [SerializeField] private float hostileRange; //how far enemy can be to follow player
+    [SerializeField] private float followRange; //how far enemy can be to follow player
 
     [Header("Target Properties")]
     [SerializeField] private Transform targetTransform; //the target that the enemy will path towards
@@ -52,30 +54,10 @@ public class EnemyController : MonoBehaviour
         //set target as enemy's destintation
         destinationSetter.SetTarget(targetTransform);
 
-        //Debug.Log("My health is " + enemyHealth);
-        //Debug.Log("My mass is " + enemyMass);
-        //Debug.Log("My walking speed is " + enemyWalkingSpeed);
-
     }
 
     private void Update()
     {
-
-        //check if enemy was killed..
-        CheckHealth();
-
-        if(Vector2.Distance(transform.position,targetTransform.position) > hostileRange)
-        {
-            aiPath.SetAICanMove(false);
-            //set enemy state to idle (should set canMove to false)
-        }
-        else
-        {
-            aiPath.SetAICanMove(true);
-
-        }
-        CheckStoppingDistance();
-
         //check if enemy needs to flip their sprite
         FlipSprite();
     }
@@ -94,33 +76,50 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void CheckStoppingDistance()
+    public void AllowMovement()
     {
-        //if enemy gets too close to player, set canMove to false (this will allow enemy to be affected by forces)
-        //if (Vector2.Distance(transform.position, targetTransform.position) <= aiPath.endReachedDistance)
-        //{
-            //canMove = false;
-            //set enemy state to idle (should set canMove to false)
-        //}
-        //else
-        //{
-            //canMove = true;
+        aiPath.SetAICanMove(true);
+    }
 
-        //}
+    public void DisableMovement()
+    {
+        aiPath.SetAICanMove(false);
+        
+    }
+
+    public void CheckStoppingDistance()
+    {
+
+    }
+
+
+    public Transform GetEnemyTarget()
+    {
+        return targetTransform;
+    }
+
+    public float GetEnemyFollowRange()
+    {
+        return followRange;
     }
 
     // can be virtual, but it won't be for now... (if virtual, then enemies could override this function for subtyping)
     //sets all base values equal to 
     public void SetupEnemyFromConfiguration()
     {
+        //set starting position to where the enemy spawned
+        startingPosition = transform.position;
+
+
         //cache components required (enemies spawned in during runtime will need this)
         aiPath = GetComponent<AIPath>();
         destinationSetter = GetComponent<AIDestinationSetter>();
+        //retrieve rigidbody
         rb = GetComponent<Rigidbody2D>();
+
         enemySprite = GetComponentInChildren<SpriteRenderer>().sprite;
 
         //set basic values equal to the ScriptableObject's values
-        enemyHealth = enemyScriptableObject.maxHealth;
         enemyMass = enemyScriptableObject.rbMass;
         enemyWalkingSpeed = enemyScriptableObject.walkingSpeed;
 
@@ -129,18 +128,8 @@ public class EnemyController : MonoBehaviour
 
         //set enemy's rigidbody mass equal to enemyMass
         rb.mass = enemyMass;
+
         //set enemy's maxSpeed to enemyWalkingSpeed;
         aiPath.maxSpeed = enemyWalkingSpeed;
-    }
-
-    public void CheckHealth()
-    {
-        //if enemy reaches 0 health, disable their game object (FOR NOW, WE WILL USE OBJECT POOLING LATER)
-        if(enemyHealth <= 0f)
-        {
-            Debug.Log(this.gameObject.name + " has died!");
-            gameObject.SetActive(false);
-
-        }
     }
 }

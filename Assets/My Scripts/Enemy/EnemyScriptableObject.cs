@@ -18,5 +18,4 @@ public class EnemyScriptableObject : ScriptableObject
 
     [Header("Rigidbody Properties")]
     public float rbMass;
-
 }

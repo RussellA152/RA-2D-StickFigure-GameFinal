@@ -39,6 +39,7 @@ public class EnemyHitCollider : HitColliderBase
         }
     }
 
+    //Attack animations will call this function which updates this collider's damage and apply force numbers ( which is then passed into DealDamage() )
     public override void UpdateAttackValues(DamageType damageTypeParameter, float damage, float attackPowerX, float attackPowerY)
     {
         damageType = damageTypeParameter;

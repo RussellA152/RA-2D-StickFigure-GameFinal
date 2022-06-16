@@ -2623,7 +2623,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageType: 0
   attackDamage: 40
-  attackingPowerX: 30000
+  attackingPowerX: 12000
   attackingPowerY: 0
   joltForceX: 1000
   joltForceY: 0

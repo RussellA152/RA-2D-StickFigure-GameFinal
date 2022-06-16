@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7fddc9bc85337b45b44300ea5ae77cb, type: 3}
   m_Name: Small Enemy
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 1000
   walkingSpeed: 12
   sprite: {fileID: 21300000, guid: 0fdbcf28872d9fc43a7b564e95d8f4ea, type: 3}
   rbMass: 100
