@@ -8,6 +8,7 @@ public class SlideLoop : StateMachineBehaviour
 {
     [Header("Speed Properties")]
     [SerializeField] private float slideSpeed; // How fast the player will slide (slow decreases & must be a high value ex. 34,000)
+    [SerializeField] private float slowdownSpeed; // How fast the player's slide will slow down until they have to stand up
 
     private float tempSlideSpeed;
 
@@ -28,7 +29,10 @@ public class SlideLoop : StateMachineBehaviour
         playerCompScript.SetCanMove(false);
         playerCompScript.SetCanAttack(false);
 
+        //retrieve the player's rigidbody
         rb = playerCompScript.GetRB();
+
+        //retrieve the direction the player is facing
         directionIsRight = playerCompScript.GetPlayerDirection();
 
         //apply force to Vector2.right or Vector2.left depending on which way player is facing
@@ -52,7 +56,7 @@ public class SlideLoop : StateMachineBehaviour
 
         //while slide Speed is greater than 0, decrease it
         if (tempSlideSpeed > 0)
-            tempSlideSpeed -= 20000f * Time.deltaTime;
+            tempSlideSpeed -= slowdownSpeed * Time.deltaTime;
 
         //if slide speed becomes lower than 0, then reset it to 0
         else if (tempSlideSpeed < 0)

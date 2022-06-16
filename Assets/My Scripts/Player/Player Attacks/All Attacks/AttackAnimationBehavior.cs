@@ -39,6 +39,7 @@ public class AttackAnimationBehavior : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+
         //improves performance
         isGroundedHash = Animator.StringToHash("isGrounded");
 

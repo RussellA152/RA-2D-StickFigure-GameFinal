@@ -9,6 +9,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovementInput : MonoBehaviour
 {
     private CharacterController2D controller;
+    private PlayerComponents playerComponentScript; // using this to get reference to the canMove boolean (will determine if we should calculate user input)
 
     //walking value passed into CharacterController2D's Move() 
     private float horizontalMovement = 0f;
@@ -24,8 +25,6 @@ public class PlayerMovementInput : MonoBehaviour
     private float jumpBufferTime = 0.3f; //adds a buffer so player jumps as soon as they touch the ground, instead of having to wait until they land to press space
     private float jumpBufferCounter;
 
-    private PlayerComponents playerComponentScript; // using this to get reference to the canMove boolean (will determine if we should calculate user input)
-
     private InputAction move;
     private InputAction jump;
     private InputAction slide;
@@ -36,9 +35,6 @@ public class PlayerMovementInput : MonoBehaviour
     private void Start()
     {
 
-
-
-        //Application.targetFrameRate = 20;
         controller = GetComponent<CharacterController2D>();
         playerComponentScript = GetComponent<PlayerComponents>();
 
@@ -52,10 +48,6 @@ public class PlayerMovementInput : MonoBehaviour
         //subscribe the slide and roll to their respective functions
         slide.performed += SlideInput;
         slide.canceled += SlideInput;
-
-        //roll.performed += RollInput;
-        //roll.canceled += RollInput;
-    
     }
 
 
@@ -88,14 +80,13 @@ public class PlayerMovementInput : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        //Move our character here
+        //Pass input values into the Move() function from CharacterController2D
         //the crouch (second parameter) is false because the game will probably not feature a crouch button (unless I implement a crouch sweep or something)
         controller.Move(horizontalMovement * Time.fixedDeltaTime, false, jumping, sliding,rolling, jumpBufferCounter);
 
-        //after calling Move, set jumping and rolling back to false (they will be true when player input for jumping and rolling is detected)
+        //after calling Move, set jumping back to false (will be true when player input for jumping is detected)
         jumping = false;
 
-        //rolling = false;
     }
 
     //check for walking input from player
@@ -136,20 +127,19 @@ public class PlayerMovementInput : MonoBehaviour
             jumpBufferCounter -= Time.deltaTime;
         }
     }
+    //check for slide input from player 
     private void SlideInput(InputAction.CallbackContext context)
     {
         //if player is holding slide button, then slide, otherwise stop (will be interrupted if player is no longer grounded)
         if (context.performed)
         {
-            Debug.Log("SLIDE IS TRUE!");
             sliding = true;
+
+            //although this is a movement ability, it deals damage to enemies that it comes into contact with, so we must set PlayerIsAttacking to true here
+            AttackController.instance.SetPlayerIsAttacking(true);
+            
         }
         else if (context.canceled)
-        {
-            Debug.Log("SLIDE IS FALSE!");
-            sliding = false;
-        }
-        else
         {
             sliding = false;
         }

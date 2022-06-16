@@ -158,12 +158,7 @@ public class CharacterController2D : MonoBehaviour
 		CheckBackAttack();
 
 		//always updating the canMove bool to check if player is allowed to move and jump
-		canMove = playerComponentScript.GetCanMove();
-		canWalk = playerComponentScript.GetCanWalk();
-		canJump = playerComponentScript.GetCanJump();
-		canFlip = playerComponentScript.GetCanFlip();
-		canRoll = playerComponentScript.GetCanRoll();
-		canSlide = playerComponentScript.GetCanSlide();
+		UpdatePlayerComponents();
 
 
 		//if grounded, animator's isJumping is set to false, and isGrounded parameter is set to true
@@ -181,19 +176,10 @@ public class CharacterController2D : MonoBehaviour
             coyoteTimeCounter -= Time.deltaTime;
 			animator.SetBool(isGroundedHash, false);
 		}
-        
 
 		//if we are currently falling, then we will apply the fallMultipler on the player
-        if(m_Rigidbody2D.velocity.y < 0)
-        {
-			m_Rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-        }
-		//if we are rising (jumping), and we let go of the jump button, then we should have a low jump multiplier applied
-		else if(m_Rigidbody2D.velocity.y > 0 && jump.ReadValue<float>() == 0f)
-        {
-			m_Rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
-		}
-    }
+		ApplyFallMultiplier();
+	}
 
     private void FixedUpdate()
 	{
@@ -241,6 +227,7 @@ public class CharacterController2D : MonoBehaviour
         {
 			//set isRolling bool parameter inside of player animator to true or false depending on player input
 			animator.SetBool(isRollingHash, wantsToRoll);
+
 			//if the roll cooldown coroutine is already running, don't run it again (only one at a time)
 			if(!rollCooldownCoroutineOccurred)
 			StartCoroutine(RollCooldown());
@@ -401,6 +388,20 @@ public class CharacterController2D : MonoBehaviour
 		transform.localScale = theScale;
 	}
 
+	private void ApplyFallMultiplier()
+    {
+		//if we are currently falling, then we will apply the fallMultipler on the player
+		if (m_Rigidbody2D.velocity.y < 0)
+		{
+			m_Rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+		}
+		//if we are rising (jumping), and we let go of the jump button, then we should have a low jump multiplier applied
+		else if (m_Rigidbody2D.velocity.y > 0 && jump.ReadValue<float>() == 0f)
+		{
+			m_Rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+		}
+	}
+
 	//return the direction of the player
 	public bool GetDirection()
     {
@@ -416,9 +417,20 @@ public class CharacterController2D : MonoBehaviour
 		//Debug.Log(backAttackTimer);
 	}
 
+	private void UpdatePlayerComponents()
+    {
+		//updates all conditions to perform certain movements (taken from the PlayerComponent.cs script)
+		canMove = playerComponentScript.GetCanMove();
+		canWalk = playerComponentScript.GetCanWalk();
+		canJump = playerComponentScript.GetCanJump();
+		canFlip = playerComponentScript.GetCanFlip();
+		canRoll = playerComponentScript.GetCanRoll();
+		canSlide = playerComponentScript.GetCanSlide();
+
+	}
+
 	IEnumerator RollCooldown()
     {
-		//Debug.Log("Start Roll coroutine!");
 
 		//after rolling, player must wait a certain time until they can roll again
 		rollCooldownCoroutineOccurred = true;
@@ -431,33 +443,11 @@ public class CharacterController2D : MonoBehaviour
 		rollCooldownCoroutineOccurred = false;
 
 		playerComponentScript.SetCanRoll(true);
-
-
-		//Debug.Log("End Roll coroutine!");
 	}
 
-	/*
-	IEnumerator SlideCooldown()
-	{
-		Debug.Log("Start slide cooldown!");
-
-		//after rolling, player must wait a certain time until they can roll again
-		slideCooldownCoroutineOccurred = true;
-
-		playerComponentScript.SetCanSlide(false);
-
-		//wait a certain amount of time, then allow the player to roll again (roll input is still detected from PlayerMovementInput.cs , but nothing will happen if canRoll is false)
-		yield return new WaitForSeconds(slideCooldownTimer);
-
-		slideCooldownCoroutineOccurred = false;
-
-		playerComponentScript.SetCanSlide(true);
 
 
-		//Debug.Log("End Roll coroutine!");
-	}
 
-	*/
 
 
 }
