@@ -16,6 +16,11 @@ public class EnemyScriptableObject : ScriptableObject
 
     public Sprite sprite; //while we could just set the sprite renderer in the inspector... when the enemy dies, they will be disabled, and they should reappear on scene with the idle sprite 
 
+
+    [Header("Attack Properties")]
+    public float attackRange; //how far enemy can be to attack player
+
+
     [Header("Rigidbody Properties")]
     public float rbMass;
 }

@@ -45,6 +45,7 @@ public class AttackAnimationBehavior : StateMachineBehaviour
 
         //when animation begins, retrieve the player's hitbox from the PlayerComponent's script
         playerComponentScript = animator.transform.gameObject.GetComponent<PlayerComponents>();
+
         hitbox = playerComponentScript.GetHitBox();
 
         //retrive which way player is facing
@@ -60,7 +61,7 @@ public class AttackAnimationBehavior : StateMachineBehaviour
         JoltPlayer(playerFacingRight, joltForceX, joltForceY);
 
         //invoke hitbox's function updates damage values
-        hitbox.gameObject.GetComponent<PlayerHitCollider>().UpdateAttackValues(damageType,attackDamage, attackingPowerX, attackingPowerY);
+        hitbox.gameObject.GetComponent<IDamageDealing>().DealDamage(animator.transform, damageType, attackDamage, attackingPowerX, attackingPowerY);
 
     }
 

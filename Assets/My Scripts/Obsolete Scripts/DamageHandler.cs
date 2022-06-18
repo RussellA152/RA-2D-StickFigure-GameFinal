@@ -4,6 +4,9 @@ using UnityEngine;
 
 //This script is used on both AI and Player (with checks to differentiate the two)
 
+
+// *** THIS SCRIPT IS OBSOLETE NOW!
+
 // EnemyDamageHandler requires the GameObject to have a Rigidbody component
 [RequireComponent(typeof(Rigidbody2D))]
 public class DamageHandler : MonoBehaviour
@@ -98,7 +101,7 @@ public class DamageHandler : MonoBehaviour
             Debug.Log("health = " + GetComponent<EnemyHealth>().enemyHealth);
 
             //change enemy's current state to the Hurt state (they can't move or flip their sprite)
-            GetComponent<EnemyStateManager>().ChangeEnemyStateToHurt();
+            GetComponent<EnemyController>().ChangeEnemyStateToHurt();
 
         }
             

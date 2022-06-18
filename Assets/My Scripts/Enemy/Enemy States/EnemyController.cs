@@ -5,8 +5,25 @@ using UnityEngine;
 
 //This script is responsible for changing and setting the current state of the enemy this script is placed on
 // we will invoke methods from our referenced scripts when states change
-public class EnemyStateManager : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
+    private EnemyMovement enemyMoveScript; //every enemy will have a movement script
+
+    private EnemyHealth enemyHpScript; // every enemy will have a health script
+
+    private IEnemyAttacks enemyAttackScript; //Every enemy will have an attacking script, but might not share the exact same behavior, so we will use an interface 
+
+    private Transform target; //enemy's target that they will chase and attack
+
+    private float distanceFromTarget; // the distance from enemy and player
+
+    private float followRange; //range that enemy can chase target (taken from enemymovescript)
+    private float attackRange; //range that enemy can attack target (taken from enemyattack script)
+
+    private bool hurtCoroutineStarted; // TEMPORARY VARIABLE, REMOVE LATER
+
+    private EnemyState currentState;
+
     public enum EnemyState
     {
         Idle, //enemy is staying still
@@ -20,31 +37,40 @@ public class EnemyStateManager : MonoBehaviour
         Attacking, // enemy is trying to attack player
 
         Dead
-
     }
-
-    private EnemyMovement enemyMoveScript;
-    private EnemyHealth enemyHpScript;
-
-    private float attackRange = 10f; //temporary variable, put this inside of a EnemyAttack
-
-    private bool hurtCoroutineStarted; // TEMPORARY VARIABLE, REMOVE LATER
-
-    private EnemyState currentState;
 
     private void OnEnable()
     {
         currentState = EnemyState.Idle;
-    }
 
-    private void Start()
-    {
+        //Get the enemy's movement script 
         enemyMoveScript = GetComponent<EnemyMovement>();
+
+        //Get the enemy's movement script
         enemyHpScript = GetComponent<EnemyHealth>();
+
+        //Get the enemy's attacking script (has a type of IEnemyAttacks)
+        enemyAttackScript = GetComponent<IEnemyAttacks>();
+
+        //tell other scripts to get their values
+        SetUpEnemyConfiguration();
+
+
+        //retrieve the enemy's current target from movement script
+        target = enemyMoveScript.GetEnemyTarget();
+
+        //retrieve the following range from the movement script
+        followRange = enemyMoveScript.GetEnemyFollowRange();
+
+        //retrieve the attacking range from the attacking script
+        attackRange = enemyAttackScript.GetAttackRange();
     }
 
     private void Update()
     {
+        //calculate the distance between enemy and player
+        // we will need this value to determine when to switch to idle, attacking, or chasing
+        distanceFromTarget = Vector2.Distance(transform.position, target.position);
 
         switch (currentState)
         {
@@ -69,6 +95,7 @@ public class EnemyStateManager : MonoBehaviour
             case EnemyState.Attacking:
 
                 EnemyAttackingBehavior();
+
                 break;
 
             case EnemyState.Hurt:
@@ -86,16 +113,10 @@ public class EnemyStateManager : MonoBehaviour
         //goes to EnemyMovement script and sets canMove to false (allowing enemy to walk to enemy)
         enemyMoveScript.DisableMovement();
 
-        //find enemy's current target
-        Transform target = enemyMoveScript.GetEnemyTarget();
-        float followRange = enemyMoveScript.GetEnemyFollowRange();
-
-        //Debug.Log("Enemy is idle!");
-
         //check distance between enemy and player
         //if enemy is close to player, chase them (within follow range)
 
-        if (Vector2.Distance(transform.position, target.position) <= followRange && Vector2.Distance(transform.position, target.position) > attackRange)
+        if (distanceFromTarget <= followRange && distanceFromTarget > attackRange)
         {
             currentState = EnemyState.ChaseTarget;
         }
@@ -113,17 +134,10 @@ public class EnemyStateManager : MonoBehaviour
         //goes to EnemyMovement script and sets canMove to true (allowing enemy to walk to enemy)
         enemyMoveScript.AllowMovement();
 
-
-        //find enemy's current target
-        Transform target = enemyMoveScript.GetEnemyTarget();
-        float followRange = enemyMoveScript.GetEnemyFollowRange();
-
-        //Debug.Log("Enemy is chasing!");
-
         //check distance between enemy and player
         //if enemy and player are too far from each other, return to idle
         // also check if player is within the enemy's attacking range, if so, change state into Attacking
-        if (Vector2.Distance(transform.position, target.position) > followRange && Vector2.Distance(transform.position, target.position) > attackRange)
+        if (distanceFromTarget > followRange && Vector2.Distance(transform.position, target.position) > attackRange)
         {
             currentState = EnemyState.Idle;
         }
@@ -142,26 +156,22 @@ public class EnemyStateManager : MonoBehaviour
         //goes to EnemyMovement script and sets canMove to false
         enemyMoveScript.DisableMovement();
 
-
-        //find enemy's current target
-        Transform target = enemyMoveScript.GetEnemyTarget();
-        float followRange = enemyMoveScript.GetEnemyFollowRange();
-
+        //Debug.Log("Attack state!");
 
 
         //check distance between enemy and player
         //if player is no longer in attacking range, but still in follow range, follow them
-        if (Vector2.Distance(transform.position, target.position) <= followRange && Vector2.Distance(transform.position, target.position) > attackRange)
+        if (distanceFromTarget <= followRange && distanceFromTarget > attackRange)
         {
             currentState = EnemyState.ChaseTarget;
         }
         //if player is too far from enemy, return to idle
-        else if (Vector2.Distance(transform.position, target.position) > attackRange && Vector2.Distance(transform.position, target.position) > followRange)
+        else if (distanceFromTarget > attackRange && distanceFromTarget > followRange)
         {
             currentState = EnemyState.Idle;
         }
 
-        //Debug.Log("Enemy tries to attack!");
+        enemyAttackScript.AttackTarget(target);
 
         //check when done attacking so we can go back to chase target or something?
     }
@@ -198,6 +208,16 @@ public class EnemyStateManager : MonoBehaviour
         currentState = EnemyState.Idle;
         hurtCoroutineStarted = false;
         
+    }
+
+    //we will tell the other scripts to begin setting up inside of EnemyController.cs because we need an order of execution
+    private void SetUpEnemyConfiguration()
+    {
+        enemyMoveScript.SetupEnemyMovementFromConfiguration();
+
+        enemyHpScript.SetupEnemyHealthFromConfiguration();
+
+        enemyAttackScript.SetUpEnemyAttackConfiguration();
     }
 }
 

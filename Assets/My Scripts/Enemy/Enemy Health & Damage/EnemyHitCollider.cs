@@ -2,55 +2,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHitCollider : HitColliderBase
+public class EnemyHitCollider : MonoBehaviour, IDamageDealing
 {
-    private Transform targetTransform;
 
-    private DamageType damageType; //type of damage the attack does (updated from AttackAnimationBehavior)
-
-    private float attackDamage; //damage of the attack
-
-    private float attackingPowerX; //amount of force applied to enemy that is hit by this attack in x-direction
-    private float attackingPowerY; //amount of force applied to enemy that is hit by this attack in y-direction
+    private Transform targetTransform; //the gameobject inside of the enemy's hit collider
+    private bool playerInsideTrigger; // is the player inside of enemy's hit collider?
 
 
-    protected override void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         targetTransform = collision.transform;
 
         //checking if trigger collided with PlayerHurtBox tag (located only on the hurtbox child gameobject on the Player)
         if (targetTransform.CompareTag("PlayerHurtBox"))
         {
-            //the hurtbox is a child of the enemy, so set the target equal to the parent
+            //the hurtbox is a child of the player, so set the target equal to the parent
             targetTransform = targetTransform.parent;
-            DealDamage(attackDamage, attackingPowerX, attackingPowerY);
+
+            playerInsideTrigger = true;
         }
     }
 
-    protected override void DealDamage(float damage, float attackPowerX, float attackPowerY)
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+
+        if (targetTransform.CompareTag("PlayerHurtBox"))
+        {
+            playerInsideTrigger = false;
+        }
+
+    }
+
+    public void DealDamage(Transform attacker, DamageType damageType, float damage, float attackPowerX, float attackPowerY)
     {
         if (targetTransform != null)
         {
-            //calls the receiver's OnHurt function which will apply the damage and force of this attack (receiverWasPlayer is false because this is the enemy's hit collider)
-            targetTransform.gameObject.GetComponent<DamageHandler>().OnHurt(damageType, transform.parent.position, damage, attackPowerX, attackPowerY, true);
+            if (playerInsideTrigger)
+            {
+                //calls the receiver's OnHurt function which will apply the damage and force of this attack (receiverWasPlayer is false because this is the enemy's hit collider)
+                targetTransform.gameObject.GetComponent<IDamageable>().OnHurt(attacker.position, damageType, damage, attackPowerX, attackPowerY);
 
-            //set target to null afterwards to prevent enemy from dealing damage to player without any collision
-            targetTransform = null;
+                //set target to null afterwards to prevent enemy from dealing damage to player without any collision
+                targetTransform = null;
+            }
+            
         }
-    }
-
-    //Attack animations will call this function which updates this collider's damage and apply force numbers ( which is then passed into DealDamage() )
-    public override void UpdateAttackValues(DamageType damageTypeParameter, float damage, float attackPowerX, float attackPowerY)
-    {
-        damageType = damageTypeParameter;
-
-        attackDamage = damage;
-
-        attackingPowerX = attackPowerX;
-
-        attackingPowerY = attackPowerY;
-
-        //throw new System.NotImplementedException();
     }
 
 }

@@ -15,4 +15,5 @@ MonoBehaviour:
   maxHealth: 1000
   walkingSpeed: 12
   sprite: {fileID: 21300000, guid: 0fdbcf28872d9fc43a7b564e95d8f4ea, type: 3}
+  attackRange: 5
   rbMass: 100

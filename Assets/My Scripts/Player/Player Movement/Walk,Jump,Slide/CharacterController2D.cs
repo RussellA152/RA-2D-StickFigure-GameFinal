@@ -431,23 +431,23 @@ public class CharacterController2D : MonoBehaviour
 
 	IEnumerator RollCooldown()
     {
+		//Debug.Log("Roll cooldown started");
 
-		//after rolling, player must wait a certain time until they can roll again
+		//cooldown coroutine has occurred
 		rollCooldownCoroutineOccurred = true;
 
+		//after rolling, player must wait a certain time until they can roll again
 		playerComponentScript.SetCanRoll(false);
 
 		//wait a certain amount of time, then allow the player to roll again (roll input is still detected from PlayerMovementInput.cs , but nothing will happen if canRoll is false)
 		yield return new WaitForSeconds(rollCooldownTimer);
 
+		//cooldown coroutine has finished
 		rollCooldownCoroutineOccurred = false;
 
+		//allow player to roll again
 		playerComponentScript.SetCanRoll(true);
+
+		//Debug.Log("Roll cooldown ended");
 	}
-
-
-
-
-
-
 }

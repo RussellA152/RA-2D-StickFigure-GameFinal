@@ -17,9 +17,13 @@ public class SlideLoop : StateMachineBehaviour
     private PlayerComponents playerCompScript;
     private Rigidbody2D rb;
 
+    private int isSlidingHash; //setting the isSliding parameter to a hash value to save performance
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        isSlidingHash = Animator.StringToHash("isSliding");
+
         tempSlideSpeed = slideSpeed;
 
         //retrieve player components
@@ -65,7 +69,7 @@ public class SlideLoop : StateMachineBehaviour
         //once slide speed reaches 0, play getting up animation
         if (tempSlideSpeed == 0)
         {
-            animator.SetBool("isSliding", false);
+            animator.SetBool(isSlidingHash, false);
             animator.Play("P_Slide_GetUp");
         }
 
@@ -81,5 +85,6 @@ public class SlideLoop : StateMachineBehaviour
         playerCompScript.SetCanMove(true);
 
         playerCompScript.SetCanAttack(true);
+
     }
 }

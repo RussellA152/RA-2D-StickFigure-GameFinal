@@ -106,7 +106,7 @@ public class PlayerMovementInput : MonoBehaviour
     private void CheckRoll(bool playerIsAttacking,bool canRoll,bool isGrounded, bool isSliding)
     {
         //if player is allowed to roll (they must be grounded, not attacking, and not sliding)
-        if (canRoll && roll.triggered && !slide.triggered && isGrounded && !playerIsAttacking && !sliding)
+        if (canRoll && roll.triggered && isGrounded && !playerIsAttacking && !sliding)
         {
             SetRolling(true);
         }

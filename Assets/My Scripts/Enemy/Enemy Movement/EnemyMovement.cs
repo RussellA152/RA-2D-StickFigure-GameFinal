@@ -39,18 +39,8 @@ public class EnemyMovement : MonoBehaviour
     private AIDestinationSetter destinationSetter; //destination setter script inside of enemy
 
 
-    private void OnEnable()
-    {
-        //we are setting up the values for the enemy inside of OnEnable because we will use object pooling for killing enemies
-        SetupEnemyFromConfiguration();
-
-    }
-
     private void Start()
     {
-        // find target (the Player)
-        targetTransform = GameObject.Find("Player").transform;
-
         //set target as enemy's destintation
         destinationSetter.SetTarget(targetTransform);
 
@@ -60,6 +50,11 @@ public class EnemyMovement : MonoBehaviour
     {
         //check if enemy needs to flip their sprite
         FlipSprite();
+    }
+
+    private void EnemyJump()
+    {
+
     }
 
     private void FlipSprite()
@@ -87,11 +82,6 @@ public class EnemyMovement : MonoBehaviour
         
     }
 
-    public void CheckStoppingDistance()
-    {
-
-    }
-
 
     public Transform GetEnemyTarget()
     {
@@ -105,8 +95,12 @@ public class EnemyMovement : MonoBehaviour
 
     // can be virtual, but it won't be for now... (if virtual, then enemies could override this function for subtyping)
     //sets all base values equal to 
-    public void SetupEnemyFromConfiguration()
+    public void SetupEnemyMovementFromConfiguration()
     {
+        // find target (the Player)
+        targetTransform = GameObject.Find("Player").transform;
+
+
         //set starting position to where the enemy spawned
         startingPosition = transform.position;
 
