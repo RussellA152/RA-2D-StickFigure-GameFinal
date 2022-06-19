@@ -61,7 +61,7 @@ public class AttackAnimationBehavior : StateMachineBehaviour
         JoltPlayer(playerFacingRight, joltForceX, joltForceY);
 
         //invoke hitbox's function updates damage values
-        hitbox.gameObject.GetComponent<IDamageDealing>().DealDamage(animator.transform, damageType, attackDamage, attackingPowerX, attackingPowerY);
+        hitbox.gameObject.GetComponent<IDamageDealing>().UpdateAttackValues(damageType, attackDamage, attackingPowerX, attackingPowerY);
 
     }
 
@@ -98,5 +98,5 @@ public class AttackAnimationBehavior : StateMachineBehaviour
 //determines the knock back effect applied on the enemy
 public enum DamageType
 {
-    light,heavy,air
+    none,light,heavy,air
 }

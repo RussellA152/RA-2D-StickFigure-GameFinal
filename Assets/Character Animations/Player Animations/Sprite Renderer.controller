@@ -743,7 +743,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageType: 1
+  damageType: 2
   attackDamage: 0
   attackingPowerX: 0
   attackingPowerY: 0
@@ -1138,7 +1138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageType: 1
+  damageType: 2
   attackDamage: 30
   attackingPowerX: 50000
   attackingPowerY: 20000
@@ -1586,7 +1586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageType: 0
+  damageType: 1
   attackDamage: 20
   attackingPowerX: 12000
   attackingPowerY: 0
@@ -1687,7 +1687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageType: 0
+  damageType: 1
   attackDamage: 20
   attackingPowerX: 12000
   attackingPowerY: 0
@@ -2141,7 +2141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageType: 1
+  damageType: 2
   attackDamage: 40
   attackingPowerX: 40000
   attackingPowerY: 20000
@@ -2623,7 +2623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageType: 0
+  damageType: 1
   attackDamage: 40
   attackingPowerX: 12000
   attackingPowerY: 0
@@ -3098,7 +3098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageType: 0
+  damageType: 1
   attackDamage: 20
   attackingPowerX: 30000
   attackingPowerY: 0
@@ -4253,7 +4253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageType: 1
+  damageType: 2
   attackDamage: 0
   attackingPowerX: 0
   attackingPowerY: 0
@@ -4414,7 +4414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageType: 0
+  damageType: 1
   attackDamage: 20
   attackingPowerX: 12000
   attackingPowerY: 0

@@ -202,12 +202,14 @@ public class EnemyController : MonoBehaviour
     //TESTING HURT BEHAVIOR
     IEnumerator GetBackUp()
     {
-        Debug.Log("Enemy hurt coroutine!");
+        Debug.Log("Enemy hurt coroutine STARTED!");
         hurtCoroutineStarted = true;
         yield return new WaitForSeconds(3f);
         currentState = EnemyState.Idle;
         hurtCoroutineStarted = false;
-        
+
+        Debug.Log("Enemy hurt coroutine FINISHED!");
+
     }
 
     //we will tell the other scripts to begin setting up inside of EnemyController.cs because we need an order of execution

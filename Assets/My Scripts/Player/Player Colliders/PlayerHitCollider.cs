@@ -10,6 +10,12 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealing
 
     private bool enemyInsideTrigger; //is the enemy inside of our hitbox collider?
 
+    //temporary damage values updated by the attack animation
+    private DamageType tempDamageType;
+    private float tempAttackDamage;
+    private float tempAttackPowerX;
+    private float tempAttackPowerY;
+
     private void Start()
     {
         hitbox = GetComponent<BoxCollider2D>();
@@ -18,6 +24,7 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealing
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //update our target
         targetTransform = collision.transform;
 
         //checking if trigger collided with EnemyHurtBox tag (located only on the hurtbox child gameobject on each enemy)
@@ -26,8 +33,12 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealing
             //the hurtbox is a child of the enemy, so set the target equal to the parent
             targetTransform = targetTransform.parent;
 
+            //Debug.Log("Enemy entered player's hitbox!");
+
             enemyInsideTrigger = true;
-            //DealDamage(attackDamage, attackingPowerX, attackingPowerY);
+
+            //now that enemy is inside the trigger, call the deal damage function
+            DealDamage(transform.parent, tempDamageType, tempAttackDamage, tempAttackPowerX, tempAttackPowerY);
         }
         else
         {
@@ -38,8 +49,11 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealing
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        //if we hit the enemy's hurt box
-        if (targetTransform.CompareTag("EnemyHurtBox"))
+        Debug.Log("my target is " + targetTransform);
+
+        //if there is no target to be found... or the hit collider leaves the enemy's hurt box...
+        // then set enemyInsideTrigger to false
+        if (targetTransform == null || targetTransform.CompareTag("EnemyHurtBox") == true)
         {
             enemyInsideTrigger = false;
         }
@@ -55,6 +69,8 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealing
                 //calls the receiver's OnHurt function which will apply the damage and force of this attack (receiverWasPlayer is false because this is the player's hit collider)
                 targetTransform.gameObject.GetComponent<IDamageable>().OnHurt(attacker.position, damageType, damage, attackPowerX, attackPowerY);
 
+                //Debug.Log("Player hit enemy!");
+
                 //set target to null afterwards to prevent player from dealing damage to enemy without any collision
                 targetTransform = null;
             }
@@ -62,6 +78,23 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealing
         }
     }
 
+    //this function is updated by the player's attack animations
+    public void UpdateAttackValues(DamageType damageType, float damage, float attackPowerX, float attackPowerY)
+    {
+        tempDamageType = damageType;
+        tempAttackDamage = damage;
+        tempAttackPowerX = attackPowerX;
+        tempAttackPowerY = attackPowerY;
+    }
+
+    private void ResetAttackValues()
+    {
+        tempDamageType = DamageType.none;
+        tempAttackDamage = 0f;
+        tempAttackPowerX = 0f;
+        tempAttackPowerY = 0f;
+
+    }
 
     /*
     private Transform targetTransform;
