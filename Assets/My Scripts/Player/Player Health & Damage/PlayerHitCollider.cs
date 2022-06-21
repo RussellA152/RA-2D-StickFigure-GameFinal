@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// This script should be placed on the hit box of the player
+// when the player performs an attack animation, the damage values of this script will be updated
+// and when the enemy is inside the box collider's trigger, call the deal damage function that will apply the damage and force on the enemy
 public class PlayerHitCollider : MonoBehaviour, IDamageDealing
 {
     private BoxCollider2D hitbox;
@@ -49,13 +53,15 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealing
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("my target is " + targetTransform);
+        //Debug.Log("my target is " + targetTransform);
 
         //if there is no target to be found... or the hit collider leaves the enemy's hurt box...
         // then set enemyInsideTrigger to false
         if (targetTransform == null || targetTransform.CompareTag("EnemyHurtBox") == true)
         {
             enemyInsideTrigger = false;
+
+            ResetAttackValues();
         }
     }
 
@@ -94,6 +100,11 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealing
         tempAttackPowerX = 0f;
         tempAttackPowerY = 0f;
 
+    }
+
+    public BoxCollider2D GetHitBox()
+    {
+        throw new System.NotImplementedException();
     }
 
     /*

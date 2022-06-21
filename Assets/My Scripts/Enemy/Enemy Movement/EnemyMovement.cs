@@ -28,7 +28,8 @@ public class EnemyMovement : MonoBehaviour
     [Header("Target Properties")]
     [SerializeField] private Transform targetTransform; //the target that the enemy will path towards
 
-    [Header("Sprite Direction Vectors")]
+    [Header("Sprite Direction Properties")]
+    private bool enemyFacingRight; //is the enemy facing the right direction? true if so, false if facing left
     [SerializeField] private Vector3 facingRightVector; //vector3 representing the enemy facing the right direction
     [SerializeField] private Vector3 facingLeftVector; //vector3 representing the enemy facing the left direction
 
@@ -63,11 +64,13 @@ public class EnemyMovement : MonoBehaviour
         if (aiPath.desiredVelocity.x >= 0.01f)
         {
             transform.localScale = facingRightVector;
-}
+            enemyFacingRight = true;
+        }
         // if enemy is moving left.. flip sprite to face left direction
         else if (aiPath.desiredVelocity.x <= -0.01f)
         {
             transform.localScale = facingLeftVector;
+            enemyFacingRight = false;
         }
     }
 
@@ -91,6 +94,11 @@ public class EnemyMovement : MonoBehaviour
     public float GetEnemyFollowRange()
     {
         return followRange;
+    }
+
+    public bool GetDirection()
+    {
+        return enemyFacingRight;
     }
 
     // can be virtual, but it won't be for now... (if virtual, then enemies could override this function for subtyping)

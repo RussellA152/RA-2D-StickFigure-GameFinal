@@ -361,6 +361,7 @@ public class CharacterController2D : MonoBehaviour
 			//set CoyoteTime and jumpBuffer to 0
             coyoteTimeCounter = 0f;
             jumpBufferCounter = 0f;
+
 			//allow isJumping to be true
 			animator.SetBool(isJumpingHash, true);
 

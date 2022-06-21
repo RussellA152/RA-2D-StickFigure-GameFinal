@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyHitCollider : MonoBehaviour, IDamageDealing
 {
+    private BoxCollider2D hitbox; // the hitbox gameobject that this script is placed in
 
     private Transform targetTransform; //the gameobject inside of the enemy's hit collider
     private bool playerInsideTrigger; // is the player inside of enemy's hit collider?
@@ -14,6 +15,11 @@ public class EnemyHitCollider : MonoBehaviour, IDamageDealing
     private float tempAttackDamage;
     private float tempAttackPowerX;
     private float tempAttackPowerY;
+
+    private void OnEnable()
+    {
+        hitbox = GetComponent<BoxCollider2D>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -45,6 +51,8 @@ public class EnemyHitCollider : MonoBehaviour, IDamageDealing
         if (targetTransform == null || targetTransform.CompareTag("PlayerHurtBox") == true)
         {
             playerInsideTrigger = false;
+
+            ResetAttackValues();
         }
 
 
@@ -81,5 +89,11 @@ public class EnemyHitCollider : MonoBehaviour, IDamageDealing
         tempAttackPowerX = 0f;
         tempAttackPowerY = 0f;
 
+    }
+
+    //returns the hitbox box collider2D (needed by all enemy attack animations)
+    public BoxCollider2D GetHitBox()
+    {
+        return hitbox;
     }
 }

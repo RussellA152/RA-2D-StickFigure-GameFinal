@@ -906,7 +906,7 @@ Animator:
   m_GameObject: {fileID: 289929561}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1ec845dfe06015945b0c6373bb6015e1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1055,6 +1055,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyScriptableObject: {fileID: 11400000, guid: 4b37b5569570cf64db1b6e69241b715e, type: 2}
+  attackAnimation1: Attack 1
 --- !u!1 &374404467
 GameObject:
   m_ObjectHideFlags: 0
@@ -1412,7 +1413,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &891531174
 Transform:
   m_ObjectHideFlags: 0
@@ -3116,6 +3117,7 @@ GameObject:
   - component: {fileID: 1777725238}
   - component: {fileID: 1777725237}
   - component: {fileID: 1777725234}
+  - component: {fileID: 1777725244}
   - component: {fileID: 1777725242}
   - component: {fileID: 1777725235}
   - component: {fileID: 1777725233}
@@ -3364,6 +3366,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.02}
   serializedVersion: 2
   m_Radius: 1.36
+--- !u!114 &1777725244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1777725231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0b733f6c7e4dc249950cadc74908276, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth: 300
 --- !u!1 &1800157955
 GameObject:
   m_ObjectHideFlags: 0

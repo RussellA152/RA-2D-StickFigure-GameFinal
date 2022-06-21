@@ -63,7 +63,7 @@ public class PlayerComponents : MonoBehaviour
         playerRB = GetComponent<Rigidbody2D>();
         bodyCollider = GetComponent<BoxCollider2D>();
 
-        hitbox = GameObject.Find("Player Hit Box").GetComponent<BoxCollider2D>(); ;
+        hitbox = GameObject.Find("Player Hit Box").GetComponent<BoxCollider2D>();
     }
     private void Start()
     {

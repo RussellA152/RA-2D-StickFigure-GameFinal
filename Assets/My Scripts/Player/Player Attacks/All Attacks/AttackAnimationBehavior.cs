@@ -5,7 +5,7 @@ using UnityEngine;
 
 // AttackAnimationBehavior requires the PlayerComponents script
 [RequireComponent(typeof(PlayerComponents))]
-public class AttackAnimationBehavior : StateMachineBehaviour
+public class AttackAnimationBehavior : StateMachineBehaviour, IAttackAnimation
 {
     //I made this script because I want the transitions to use the same animation as the attacks that came before it (makes attacking animations stick out longer without awkwardly idling during attacks)
     //But I don't want hitboxes to appear twice, so I am tieing the enabling of hitboxes during attack animations to this script, if the animation has a hitbox during it, then enable it at start, and disable it when it ends
@@ -58,7 +58,7 @@ public class AttackAnimationBehavior : StateMachineBehaviour
         playerComponentScript.SetCanFlip(false);
 
         //invoke jolt movement 
-        JoltPlayer(playerFacingRight, joltForceX, joltForceY);
+        JoltThisObject(playerFacingRight, joltForceX, joltForceY);
 
         //invoke hitbox's function updates damage values
         hitbox.gameObject.GetComponent<IDamageDealing>().UpdateAttackValues(damageType, attackDamage, attackingPowerX, attackingPowerY);
@@ -82,21 +82,12 @@ public class AttackAnimationBehavior : StateMachineBehaviour
 
     }
 
-    //will move by player using force by powerX and powerY 
-    //checks for direction player is facing
-    private void JoltPlayer(bool directionIsRight,float powerX, float powerY)
+    public void JoltThisObject(bool directionIsRight, float powerX, float powerY)
     {
-        if(directionIsRight)
+        if (directionIsRight)
             rb.AddForce(new Vector2(powerX, powerY));
         //if player is facing left, then multiply force by negative 1 to prevent player from jolting backwards
         else
             rb.AddForce(new Vector2(-powerX, -powerY));
     }
-
-}
-
-//determines the knock back effect applied on the enemy
-public enum DamageType
-{
-    none,light,heavy,air
 }

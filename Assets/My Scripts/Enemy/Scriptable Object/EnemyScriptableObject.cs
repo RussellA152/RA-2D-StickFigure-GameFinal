@@ -7,6 +7,7 @@ using UnityEngine;
 // and to reset their stats if they died or modified during runtime
 
 [CreateAssetMenu(fileName = "Enemy Configuration", menuName = "ScriptableObject/Enemy Configuration")]
+
 public class EnemyScriptableObject : ScriptableObject
 {
     [Header("Basic Enemy Properties")]
@@ -14,13 +15,16 @@ public class EnemyScriptableObject : ScriptableObject
 
     public float walkingSpeed;
 
-    public Sprite sprite; //while we could just set the sprite renderer in the inspector... when the enemy dies, they will be disabled, and they should reappear on scene with the idle sprite 
-
+    [Header("Basic Animation Properties")]
+    public Sprite sprite; //while we could just set the sprite renderer in the inspector... when the enemy dies, they will be disabled, and they should reappear on scene with the idle sprite
+    //public Animator animatorController; // the animator and the controlle the enemy will use
 
     [Header("Attack Properties")]
     public float attackRange; //how far enemy can be to attack player
-
+    public float attackCooldownTimer; //time between each attack
 
     [Header("Rigidbody Properties")]
     public float rbMass;
+
+
 }

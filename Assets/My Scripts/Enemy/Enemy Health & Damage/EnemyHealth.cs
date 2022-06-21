@@ -39,4 +39,11 @@ public class EnemyHealth : MonoBehaviour, IHealth
 
         }
     }
+
+    public void ModifyHealth(float amount)
+    {
+        //add by a negative number if we should decrease health
+        enemyHealth += amount;
+
+    }
 }

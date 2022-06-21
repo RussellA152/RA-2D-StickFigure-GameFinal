@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraFollow : MonoBehaviour
+public class CameraFollow2D : MonoBehaviour
 {
     [SerializeField] private Transform playerTransform;
     [SerializeField] private float cameraOffsetX;

@@ -11,7 +11,7 @@ public class EnemyController : MonoBehaviour
 
     private EnemyHealth enemyHpScript; // every enemy will have a health script
 
-    private IEnemyAttacks enemyAttackScript; //Every enemy will have an attacking script, but might not share the exact same behavior, so we will use an interface 
+    private IAIAttacks enemyAttackScript; //Every enemy will have an attacking script, but might not share the exact same behavior, so we will use an interface 
 
     private Transform target; //enemy's target that they will chase and attack
 
@@ -41,6 +41,7 @@ public class EnemyController : MonoBehaviour
 
     private void OnEnable()
     {
+        //enemy is in idle state when spawning in
         currentState = EnemyState.Idle;
 
         //Get the enemy's movement script 
@@ -50,7 +51,7 @@ public class EnemyController : MonoBehaviour
         enemyHpScript = GetComponent<EnemyHealth>();
 
         //Get the enemy's attacking script (has a type of IEnemyAttacks)
-        enemyAttackScript = GetComponent<IEnemyAttacks>();
+        enemyAttackScript = GetComponent<IAIAttacks>();
 
         //tell other scripts to get their values
         SetUpEnemyConfiguration();

@@ -11,5 +11,7 @@ public interface IDamageDealing
     // attack animations will update the damage values that the hit collider will apply to targets
     public void UpdateAttackValues(DamageType damageType, float damage, float attackPowerX, float attackPowerY);
 
+    //return the hitbox (box collider 2D, which is typically needed by attack animations)
+    public BoxCollider2D GetHitBox();
 
 }
