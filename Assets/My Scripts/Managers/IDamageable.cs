@@ -11,4 +11,8 @@ public interface IDamageable
 
     // when the gameobject is attacked... make them take damage that will be subtracted to their health (this function is typically called by OnHurt())
     public void TakeDamage(float damage, float attackPowerX, float attackPowerY);
+
+    //plays the hurt animation depending on the damage type and direction of the attack
+    //takes in an animationHash value using StringToHash
+    public void PlayHurtAnimation(int animationHash);
 }

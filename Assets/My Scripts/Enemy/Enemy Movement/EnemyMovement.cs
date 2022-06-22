@@ -103,7 +103,7 @@ public class EnemyMovement : MonoBehaviour
 
     // can be virtual, but it won't be for now... (if virtual, then enemies could override this function for subtyping)
     //sets all base values equal to 
-    public void SetupEnemyMovementFromConfiguration()
+    public void InitializeMovementProperties()
     {
         // find target (the Player)
         targetTransform = GameObject.Find("Player").transform;

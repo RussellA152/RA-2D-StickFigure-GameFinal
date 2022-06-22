@@ -14,7 +14,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
 
 
     // this function is called inside of EnemyAttacks
-    public void SetupEnemyHealthFromConfiguration()
+    public void InitializeHealthProperties()
     {
         //set basic values equal to the ScriptableObject's values
         enemyHealth = enemyScriptableObject.maxHealth;

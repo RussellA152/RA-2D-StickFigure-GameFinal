@@ -9,8 +9,8 @@ public interface IAIAttacks
     //attack the player in some way..
     public void AttackTarget(Transform target);
 
-    //initialize attack properties from scriptable object
-    public void SetUpEnemyAttackConfiguration();
+    //retrieve attacking values and numbers from scriptable object
+    public void InitializeAttackProperties();
 
     //return attackRange to EnemyController
     public float GetAttackRange();

@@ -875,6 +875,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62b3aa75dee424b4d832fd16ec46b95b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lightHurtAnimFront: Enemy Light Hurt Front
+  lightHurtAnimBehind: Enemy Light Hurt Behind
+  heavyHurtAnimFront: Enemy Heavy Hurt Front
+  heavyHurtAnimBehind: Enemy Heavy Hurt Behind
 --- !u!50 &289929565
 Rigidbody2D:
   serializedVersion: 4
@@ -3114,8 +3118,8 @@ GameObject:
   - component: {fileID: 1777725240}
   - component: {fileID: 1777725241}
   - component: {fileID: 1777725239}
-  - component: {fileID: 1777725238}
   - component: {fileID: 1777725237}
+  - component: {fileID: 1777725238}
   - component: {fileID: 1777725234}
   - component: {fileID: 1777725244}
   - component: {fileID: 1777725242}
@@ -3190,6 +3194,7 @@ MonoBehaviour:
   m_JumpForce: 1600
   speedMultiplier: 10
   maxSpeedMultiplier: 20
+  runSpeed: 65
   m_CrouchSpeed: 0.36
   m_MovementSmoothing: 0.05
   rollCooldownTimer: 1
@@ -3258,7 +3263,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ef045928fe97314798725afae676dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 65
 --- !u!114 &1777725238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3350,6 +3354,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 934d3d062fecc34469c22c8e2198038f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lightHurtAnimFront: Light Hurt Front
+  lightHurtAnimBehind: Light Hurt Behind
+  heavyHurtAnimFront: Heavy Hurt Front
+  heavyHurtAnimBehind: Heavy Hurt Behind
 --- !u!58 &1777725243
 CircleCollider2D:
   m_ObjectHideFlags: 0

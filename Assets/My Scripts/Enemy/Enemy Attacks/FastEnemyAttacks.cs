@@ -41,7 +41,7 @@ public class FastEnemyAttacks : MonoBehaviour, IAIAttacks
     }
 
     //this function is called inside of EnemyController
-    public void SetUpEnemyAttackConfiguration()
+    public void InitializeAttackProperties()
     {
         attackRange = enemyScriptableObject.attackRange;
         attackCooldownTimer = enemyScriptableObject.attackCooldownTimer;
@@ -54,7 +54,7 @@ public class FastEnemyAttacks : MonoBehaviour, IAIAttacks
 
     public IEnumerator AttackCooldown()
     {
-        //Debug.Log("enemy attack cooldown started!");
+        Debug.Log("enemy attack cooldown started!");
 
         cooldownCoroutineStarted = true;
         onCooldown = true;
@@ -64,6 +64,6 @@ public class FastEnemyAttacks : MonoBehaviour, IAIAttacks
         onCooldown = false;
         cooldownCoroutineStarted = false;
 
-        //Debug.Log("enemy attack cooldown finished!");
+        Debug.Log("enemy attack cooldown finished!");
     }
 }

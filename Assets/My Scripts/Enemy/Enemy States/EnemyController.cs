@@ -69,6 +69,9 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
+        //Debug.Log("Enemy state is currently = " + currentState);
+
+
         //calculate the distance between enemy and player
         // we will need this value to determine when to switch to idle, attacking, or chasing
         distanceFromTarget = Vector2.Distance(transform.position, target.position);
@@ -78,7 +81,6 @@ public class EnemyController : MonoBehaviour
             default:
 
             case EnemyState.Idle:
-
                 EnemyIdleBehavior();
 
                 break;
@@ -88,22 +90,22 @@ public class EnemyController : MonoBehaviour
                 break;
 
             case EnemyState.ChaseTarget:
-
                 EnemyChaseBehavior();
 
                 break;
 
             case EnemyState.Attacking:
-
                 EnemyAttackingBehavior();
 
                 break;
 
             case EnemyState.Hurt:
                 EnemyHurtBehavior();
+
                 break;
 
             case EnemyState.Dead:
+
                 break;
         }
     }
@@ -157,9 +159,6 @@ public class EnemyController : MonoBehaviour
         //goes to EnemyMovement script and sets canMove to false
         enemyMoveScript.DisableMovement();
 
-        //Debug.Log("Attack state!");
-
-
         //check distance between enemy and player
         //if player is no longer in attacking range, but still in follow range, follow them
         if (distanceFromTarget <= followRange && distanceFromTarget > attackRange)
@@ -183,8 +182,8 @@ public class EnemyController : MonoBehaviour
 
         //disable flip here too
 
-        if(!hurtCoroutineStarted)
-            StartCoroutine(GetBackUp());
+        //if(!hurtCoroutineStarted)
+            //StartCoroutine(GetBackUp());
 
     }
 
@@ -201,26 +200,26 @@ public class EnemyController : MonoBehaviour
     }
 
     //TESTING HURT BEHAVIOR
-    IEnumerator GetBackUp()
-    {
-        Debug.Log("Enemy hurt coroutine STARTED!");
-        hurtCoroutineStarted = true;
-        yield return new WaitForSeconds(3f);
-        currentState = EnemyState.Idle;
-        hurtCoroutineStarted = false;
+    //IEnumerator GetBackUp()
+    //{
+        //Debug.Log("Enemy hurt coroutine STARTED!");
+        //hurtCoroutineStarted = true;
+        //yield return new WaitForSeconds(3f);
+        //currentState = EnemyState.Idle;
+        //hurtCoroutineStarted = false;
 
-        Debug.Log("Enemy hurt coroutine FINISHED!");
+        //Debug.Log("Enemy hurt coroutine FINISHED!");
 
-    }
+    //}
 
     //we will tell the other scripts to begin setting up inside of EnemyController.cs because we need an order of execution
     private void SetUpEnemyConfiguration()
     {
-        enemyMoveScript.SetupEnemyMovementFromConfiguration();
+        enemyMoveScript.InitializeMovementProperties();
 
-        enemyHpScript.SetupEnemyHealthFromConfiguration();
+        enemyHpScript.InitializeHealthProperties();
 
-        enemyAttackScript.SetUpEnemyAttackConfiguration();
+        enemyAttackScript.InitializeAttackProperties();
     }
 }
 

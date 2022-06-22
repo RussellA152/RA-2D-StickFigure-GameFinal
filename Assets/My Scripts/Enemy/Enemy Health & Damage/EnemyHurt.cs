@@ -4,9 +4,30 @@ using UnityEngine;
 
 public class EnemyHurt : MonoBehaviour, IDamageable
 {
-    private Rigidbody2D rb;
     private IHealth healthScript;
     private EnemyMovement enemyMovementScript;
+
+    private Rigidbody2D rb;
+    private Animator animator;
+
+    //Animations to play when enemy is hit by a light attack (depends on the direction of the light attack)
+    [Header("Enemy Light Attack Hurt Animation Names")]
+    [SerializeField] private string lightHurtAnimFront;
+    [SerializeField] private string lightHurtAnimBehind;
+
+    //Animations to play when enemy is hit by a heavy attack (depends on the direction of the heavy attack)
+    [Header("Enemy Heavy Attack Hurt Animation Names")]
+    [SerializeField] private string heavyHurtAnimFront;
+    [SerializeField] private string heavyHurtAnimBehind;
+
+    private int baseLayerInt = 0;
+
+    //String to hash values for the animations to save performance
+    private int lightHurtAnimFrontHash;
+    private int lightHurtAnimBehindHash;
+    private int heavyHurtAnimFrontHash;
+    private int heavyHurtAnimBehindHash;
+
 
 
     void Start()
@@ -14,6 +35,15 @@ public class EnemyHurt : MonoBehaviour, IDamageable
         healthScript = GetComponent<IHealth>();
         rb = GetComponent<Rigidbody2D>();
         enemyMovementScript = GetComponent<EnemyMovement>();
+
+
+        animator = GetComponent<Animator>();
+
+        lightHurtAnimFrontHash = Animator.StringToHash(lightHurtAnimFront);
+        lightHurtAnimBehindHash = Animator.StringToHash(lightHurtAnimBehind);
+
+        heavyHurtAnimFrontHash = Animator.StringToHash(heavyHurtAnimFront);
+        heavyHurtAnimBehindHash = Animator.StringToHash(heavyHurtAnimBehind);
 
     }
 
@@ -37,11 +67,15 @@ public class EnemyHurt : MonoBehaviour, IDamageable
 
             case DamageType.light:
 
+                //if the attacker's sprite is facing the right direction, and the enemy's sprite is also facing right
                 if (attackerFacingRight && enemyFacingRight)
                 {
                     //Play backward flinch animation
-                    Debug.Log("Backward hit! light 1");
-                    //call the TakeDamage function to subtract the health of player or enemy's
+                    //Debug.Log("Backward light hit! enemy facing right!");
+
+                    PlayHurtAnimation(lightHurtAnimBehindHash);
+
+                    //call the TakeDamage function to subtract the health of enemy 
                     TakeDamage(damage, attackPowerX, attackPowerY);
 
 
@@ -49,92 +83,113 @@ public class EnemyHurt : MonoBehaviour, IDamageable
                 else if (attackerFacingRight && !enemyFacingRight)
                 {
                     //Play forward flinch animation
-                    Debug.Log("Forward hit! light 1");
+                    //Debug.Log("Forward light hit! enemy facing left!");
+
+                    PlayHurtAnimation(lightHurtAnimFrontHash);
+
                     TakeDamage(damage, attackPowerX, attackPowerY);
                 }
 
                 else if (!attackerFacingRight && enemyFacingRight)
                 {
                     //Play backward flinch animation
-                    Debug.Log("Forward hit! light 2");
-                    //call the TakeDamage function to subtract the health of player or enemy's
-                    TakeDamage(damage, -attackPowerX, -attackPowerY);
+                    //Debug.Log("Forward light hit! enemy facing right!");
+
+                    PlayHurtAnimation(lightHurtAnimFrontHash);
+
+                    //call the TakeDamage function to subtract the health of enemy 
+                    TakeDamage(damage, -attackPowerX, attackPowerY);
 
 
                 }
                 else if (!attackerFacingRight && !enemyFacingRight)
                 {
                     //Play forward flinch animation
-                    Debug.Log("Backward hit! light 2");
-                    TakeDamage(damage, -attackPowerX, -attackPowerY);
+                    //Debug.Log("Backward light hit! enemy facing left!");
+
+                    PlayHurtAnimation(lightHurtAnimBehindHash);
+
+                    TakeDamage(damage, -attackPowerX, attackPowerY);
                 }
                 break;
 
             case DamageType.heavy:
                 if (attackerFacingRight && enemyFacingRight)
                 {
-                    //Play backward flinch animation
-                    Debug.Log("Backward hit! heavy 1");
-                    //call the TakeDamage function to subtract the health of player or enemy's 
+                    //Play backward heavy animation
+                    //Debug.Log("Backward heavy hit! enemy facing right!");
+
+                    PlayHurtAnimation(heavyHurtAnimBehindHash);
+
+                    //call the TakeDamage function to subtract the health of enemy 
                     TakeDamage(damage, attackPowerX, attackPowerY);
 
 
                 }
                 else if (attackerFacingRight && !enemyFacingRight)
                 {
-                    //Play forward flinch animation
-                    Debug.Log("Forward hit! heavy 1");
+                    //Play forward heavy animation
+                    //Debug.Log("Forward heavy hit! enemy facing left!");
+
+                    PlayHurtAnimation(heavyHurtAnimFrontHash);
+
                     TakeDamage(damage, attackPowerX, attackPowerY);
                 }
 
                 else if (!attackerFacingRight && enemyFacingRight)
                 {
-                    //Play backward flinch animation
-                    Debug.Log("Forward hit! heavy 2");
-                    //call the TakeDamage function to subtract the health of player or enemy's 
-                    TakeDamage(damage, -attackPowerX, -attackPowerY);
+                    //Play forward heavy animation
+                    //Debug.Log("Forward heavy hit! enemy facing right!");
+
+                    PlayHurtAnimation(heavyHurtAnimFrontHash);
+
+                    //call the TakeDamage function to subtract the health of enemy 
+                    TakeDamage(damage, -attackPowerX, attackPowerY);
 
 
                 }
                 else if (!attackerFacingRight && !enemyFacingRight)
                 {
-                    //Play forward flinch animation
-                    Debug.Log("Backward hit! heavy 2");
-                    TakeDamage(damage, -attackPowerX, -attackPowerY);
+                    //Play backward heavy animation
+                    //Debug.Log("Backward heavy hit! enemy facing left!");
+
+                    PlayHurtAnimation(heavyHurtAnimBehindHash);
+
+                    TakeDamage(damage, -attackPowerX, attackPowerY);
                 }
                 break;
 
             case DamageType.air:
                 if (attackerFacingRight && enemyFacingRight)
                 {
-                    //Play backward flinch animation
-                    Debug.Log("Backward hit! air 1");
-                    //call the TakeDamage function to subtract the health of player or enemy's 
+                    //Play backward air animation
+                    //Debug.Log("Backward air hit! enemy facing right!");
+                    //call the TakeDamage function to subtract the health of enemy 
                     TakeDamage(damage, attackPowerX, attackPowerY);
 
 
                 }
                 else if (attackerFacingRight && !enemyFacingRight)
                 {
-                    //Play forward flinch animation
-                    Debug.Log("Forward hit! air 1");
+                    //Play forward air animation
+                    //Debug.Log("Forward air hit! enemy facing left!");
                     TakeDamage(damage, attackPowerX, attackPowerY);
                 }
 
                 else if (!attackerFacingRight && enemyFacingRight)
                 {
-                    //Play backward flinch animation
-                    Debug.Log("Forward hit! air 2");
-                    //call the TakeDamage function to subtract the health of player or enemy's 
-                    TakeDamage(damage, -attackPowerX, -attackPowerY);
+                    //Play forward air animation
+                    //Debug.Log("Forward air hit! enemy facing right!");
+                    //call the TakeDamage function to subtract the health of enemy 
+                    TakeDamage(damage, -attackPowerX, attackPowerY);
 
 
                 }
                 else if (!attackerFacingRight && !enemyFacingRight)
                 {
-                    //Play forward flinch animation
-                    Debug.Log("Backward hit! air 2");
-                    TakeDamage(damage, -attackPowerX, -attackPowerY);
+                    //Play backward air animation
+                    //Debug.Log("Backward air hit! enemy facing left!");
+                    TakeDamage(damage, -attackPowerX, attackPowerY);
                 }
                 break;
 
@@ -142,8 +197,7 @@ public class EnemyHurt : MonoBehaviour, IDamageable
                 break;
         }
     }
-    //this function takes in 4 parameters, the damage of the attack dealt to this gameobject, the attack power forces (x & y direction) applied to this gameobject
-    // and a bool that checks if the player was the one that took damage (we use this script for AI and Player)
+    //this function takes in 3 parameters, the damage of the attack dealt to this gameobject, the attack power forces (x & y direction) applied to this gameobject
     public void TakeDamage(float damage, float attackPowerX, float attackPowerY)
     {
         //need to getComponent each time enemy is attacked because we can't cache this in Start() because the enemy will be enabled/disabled constantly during runtime
@@ -157,5 +211,21 @@ public class EnemyHurt : MonoBehaviour, IDamageable
 
         //apply attackingPowerX & Y force to enemy based on the direction they are facing
         rb.AddForce(new Vector2(attackPowerX, attackPowerY));
+    }
+
+
+    //plays the hurt animation (depending on the damage type and direction of the attack)
+    public void PlayHurtAnimation(int animationHash)
+    {
+        //if the animation exists in the base layer...
+        //play it, otherwise log that it doesn't exist
+        if (animator.HasState(baseLayerInt, animationHash) == true)
+        {
+            animator.Play(animationHash);
+            //Debug.Log("Enemy hurt animation played!");
+        }
+            
+        else
+            Debug.Log("This animation does not exist!");
     }
 }

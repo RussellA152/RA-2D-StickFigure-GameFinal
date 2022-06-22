@@ -18,10 +18,6 @@ public class PlayerMovementInput : MonoBehaviour
     private bool sliding = false;
     private bool rolling;
 
-
-    [Header("Walking Speed")]
-    [SerializeField] private float runSpeed = 70f;
-
     private float jumpBufferTime = 0.3f; //adds a buffer so player jumps as soon as they touch the ground, instead of having to wait until they land to press space
     private float jumpBufferCounter;
 
@@ -96,7 +92,7 @@ public class PlayerMovementInput : MonoBehaviour
         {
             //using new input system
             Vector2 movementInput = move.ReadValue<Vector2>();
-            horizontalMovement = movementInput.x * runSpeed;
+            horizontalMovement = movementInput.x;
         }
         else
             horizontalMovement = 0f;

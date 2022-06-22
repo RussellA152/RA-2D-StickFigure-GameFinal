@@ -16,6 +16,7 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField] private float m_JumpForce = 1400f;                          // Amount of force added when the player jumps.
 	[SerializeField] private float speedMultiplier = 10f;                       // this float is applied to the regular movement speed (allows movement to gradually increase)
 	[SerializeField] private float maxSpeedMultiplier = 20f;
+	[SerializeField] private float runSpeed = 70f;
 
 	[Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;          // Amount of maxSpeed applied to crouching movement. 1 = 100%
 	[Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;  // How much to smooth out the movement
@@ -210,6 +211,7 @@ public class CharacterController2D : MonoBehaviour
 	}
 	public void Move(float move, bool crouch, bool jump, bool wantsToSlide, bool wantsToRoll,float jumpBufferCounter)
 	{
+		move *= runSpeed;
 
 		//set isSliding bool parameter inside of player animator to true or false depending on player input
 		if (m_Grounded && canSlide && wantsToSlide)
