@@ -24,7 +24,7 @@ public class EnemyHurtAnimation : StateMachineBehaviour
     {
 
         //when the hurt animation is finished, return to idle (might be a problem when we make it so that animation needs to loop until grounded)
-        enemyControllerScript.ChangeEnemyStateToIdle();
+        //enemyControllerScript.ChangeEnemyStateToIdle();
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

@@ -20,9 +20,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Move"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""8bb08be6-42c3-4a04-9c63-27d137a4a6ed"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
@@ -138,7 +138,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": "";Gamepad"",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -423,7 +423,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""id"": ""dc5d1517-e542-435a-9332-5a8ed8a9c81a"",
                     ""path"": ""<Gamepad>/leftStick/right"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""AxisDeadzone(min=0.3)"",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Flip Right"",
                     ""isComposite"": false,
@@ -445,7 +445,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""id"": ""d6055502-a9f4-4d01-b7e1-db227d2e0296"",
                     ""path"": ""<Gamepad>/leftStick/left"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""AxisDeadzone(min=0.3)"",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Flip Left"",
                     ""isComposite"": false,

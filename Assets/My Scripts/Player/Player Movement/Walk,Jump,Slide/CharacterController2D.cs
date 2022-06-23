@@ -13,10 +13,14 @@ public class CharacterController2D : MonoBehaviour
 	private PlayerComponents playerComponentScript;
 
 	[Header("Speed Properties")]
-	[SerializeField] private float m_JumpForce = 1400f;                          // Amount of force added when the player jumps.
+	[SerializeField] private float runSpeed = 70f;                              //general movement speed of the player
+	[SerializeField] private float m_JumpForce = 1400f;                         // Amount of force added when the player jumps.
+	private float minSpeedMultiplierRequirement;                                //this is the minimum value that the player must be moving at in order to increase movement speed (for the speed multiplier to begin)
+																				//we need this value for gamepads, otherwise the player can build up their speed multiplier while moving slow (they should atleast be moving relatively fast)
 	[SerializeField] private float speedMultiplier = 10f;                       // this float is applied to the regular movement speed (allows movement to gradually increase)
-	[SerializeField] private float maxSpeedMultiplier = 20f;
-	[SerializeField] private float runSpeed = 70f;
+	[SerializeField] private float maxSpeedMultiplier = 20f;					//this is the maximum value that the speed multiplier can reach, speed multiplier won't go further than this (increasing this value means player will increase speed more)
+	
+	
 
 	[Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;          // Amount of maxSpeed applied to crouching movement. 1 = 100%
 	[Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;  // How much to smooth out the movement
@@ -44,8 +48,6 @@ public class CharacterController2D : MonoBehaviour
 
 
 	private Vector3 m_Velocity = Vector3.zero;
-
-	private float acceleration = 1f; //acceleration of player's movement
 
 	//public int jump_count = 2; // the number of times the player can jump
 
@@ -141,13 +143,14 @@ public class CharacterController2D : MonoBehaviour
 		animator = playerComponentScript.GetAnimator();
 
 
-		
+		UpdateMinimumSpeedMultiplierRequirement();
 	
     }
 
     private void Update()
     {
-		//Debug.Log("Timer: " + backAttackTimer);
+
+		//Debug.Log("Speed multiplier = " + speedMultiplier);
 
 		//decrement back attack timer until it hits 0 (player can no longer back attack
 		if (backAttackTimer > 0f)
@@ -211,6 +214,8 @@ public class CharacterController2D : MonoBehaviour
 	}
 	public void Move(float move, bool crouch, bool jump, bool wantsToSlide, bool wantsToRoll,float jumpBufferCounter)
 	{
+
+		//multiply the movement by the running speed set in the inspector
 		move *= runSpeed;
 
 		//set isSliding bool parameter inside of player animator to true or false depending on player input
@@ -254,20 +259,20 @@ public class CharacterController2D : MonoBehaviour
 			animator.SetBool(isWalkingHash, isWalking);
 		}
 
-		//if you're moving then gradually increase movement speed
-		if (move > 0 || move < 0)
+		//Once the player has reached the minimum walking speed requirement (about 1.1f), then allow them to increase their movement speed further
+		if (move >= minSpeedMultiplierRequirement || move <= -minSpeedMultiplierRequirement)
         {
 			//limit the movement speedMultipler to 20 so the player can move too fast
 			if(speedMultiplier < maxSpeedMultiplier)
 				speedMultiplier += 0.1f;
 		}	
-		//when player stops moving, reset speedMultiplier
+		//when player stops moving, reset speedMultiplier (also reset when the sprite is flipped)
 		else
 			speedMultiplier = 10f;
 
 
 
-		//if you cannot interact, then set move to 0 (player will not be able to move)
+		//if you cannot interact or walk, then set move to 0 (player will not be able to move)
 		if (!canMove || !canWalk)
 			move = 0f;
 	
@@ -318,12 +323,15 @@ public class CharacterController2D : MonoBehaviour
 			// Move the character by finding the target velocity
 			Vector3 targetVelocity = new Vector2(move * speedMultiplier, m_Rigidbody2D.velocity.y);
 
+
 			// And then smoothing it out and applying it to the character
 			m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);
 
 
-			//set locomotion velocity equal to player's speed * acceleration (this will make walking animation faster depending on movement speed)
-			animVelocity = Mathf.Abs((targetVelocity.x * acceleration)/12);
+			//set locomotion velocity equal to player's current speed (this will make walking animation faster depending on movement speed)
+			//is divided by 12 so that the animation doesn't move too fast 
+			animVelocity = Mathf.Abs(move * speedMultiplier / 12f);
+
 			//setting the animator's velocity equal to animVelocity
 			animator.SetFloat(velocityHash, animVelocity);
 
@@ -418,6 +426,14 @@ public class CharacterController2D : MonoBehaviour
 		if (backAttackTimer <= 0f)
 			playerComponentScript.SetCanBackAttack(false);
 		//Debug.Log(backAttackTimer);
+	}
+
+	//invoked at start and should be invoked whenever the running speed is changed (say we pick up an item that increases our movement speed)
+	public void UpdateMinimumSpeedMultiplierRequirement()
+    {
+		minSpeedMultiplierRequirement = runSpeed * 1 / 60; //since movement speed could be changed throughout runtime.. we need to find calculate the minimum speed multiplier requirement 
+														   //we multiply the runSpeed by a small value like 1/60 so that even small running speeds like 10 will be able to activate the speed multiplier
+														   
 	}
 
 	private void UpdatePlayerComponents()

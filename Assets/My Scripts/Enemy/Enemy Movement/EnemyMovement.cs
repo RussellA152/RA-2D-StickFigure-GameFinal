@@ -76,11 +76,13 @@ public class EnemyMovement : MonoBehaviour
 
     public void AllowMovement()
     {
+        
         aiPath.SetAICanMove(true);
     }
 
     public void DisableMovement()
     {
+        
         aiPath.SetAICanMove(false);
         
     }
