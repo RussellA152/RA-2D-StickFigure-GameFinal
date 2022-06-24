@@ -20,9 +20,19 @@ public class EnemyController : MonoBehaviour
     private float followRange; //range that enemy can chase target (taken from enemymovescript)
     private float attackRange; //range that enemy can attack target (taken from enemyattack script)
 
-    private bool hurtCoroutineStarted; // TEMPORARY VARIABLE, REMOVE LATER
-
     private EnemyState currentState;
+
+
+    [Header("State Transition Timers")]
+    //How long will it take for the AI to change from their current state to one of the following states? (might differ with each enemy.. like with faster or slower enemies)
+    // ex. changing from idle to chaseTarget might take 0.6 seconds
+    [SerializeField] private float idleStateTransitionTimer;
+    [SerializeField] private float chaseStateTransitionTimer;
+    [SerializeField] private float attackStateTransitionTimer;
+    
+
+    private bool stateCooldownStarted = false;
+
 
     public enum EnemyState
     {
@@ -118,17 +128,20 @@ public class EnemyController : MonoBehaviour
 
         //check distance between enemy and player
         //if enemy is close to player, chase them (within follow range)
-
-        if (distanceFromTarget <= followRange && distanceFromTarget > attackRange)
+        if (!stateCooldownStarted)
         {
-            currentState = EnemyState.ChaseTarget;
-        }
+            if (distanceFromTarget <= followRange && distanceFromTarget > attackRange)
+            {
+                ChangeEnemyState(chaseStateTransitionTimer, EnemyState.ChaseTarget);
+            }
 
-        // if the player is within attacking range, attack them instead of chase
-        else if (Vector2.Distance(transform.position, target.position) <= attackRange)
-        {
-            currentState = EnemyState.Attacking;
+            // if the player is within attacking range, attack them instead of chase
+            else if (Vector2.Distance(transform.position, target.position) <= attackRange)
+            {
+                ChangeEnemyState(attackStateTransitionTimer, EnemyState.Attacking);
+            }
         }
+            
 
     }
 
@@ -140,14 +153,19 @@ public class EnemyController : MonoBehaviour
         //check distance between enemy and player
         //if enemy and player are too far from each other, return to idle
         // also check if player is within the enemy's attacking range, if so, change state into Attacking
-        if (distanceFromTarget > followRange && Vector2.Distance(transform.position, target.position) > attackRange)
+
+        if (!stateCooldownStarted)
         {
-            currentState = EnemyState.Idle;
+            if (distanceFromTarget > followRange && Vector2.Distance(transform.position, target.position) > attackRange)
+            {
+                ChangeEnemyState(idleStateTransitionTimer, EnemyState.Idle);
+            }
+            else if (Vector2.Distance(transform.position, target.position) <= attackRange)
+            {
+                ChangeEnemyState(attackStateTransitionTimer, EnemyState.Attacking);
+            }
         }
-        else if(Vector2.Distance(transform.position, target.position) <= attackRange)
-        {
-            currentState = EnemyState.Attacking;
-        }
+        
     }
 
     private void EnemyAttackingBehavior()
@@ -161,15 +179,15 @@ public class EnemyController : MonoBehaviour
 
         //check distance between enemy and player
         //if player is no longer in attacking range, but still in follow range, follow them
-        if (distanceFromTarget <= followRange && distanceFromTarget > attackRange)
-        {
-            currentState = EnemyState.ChaseTarget;
-        }
+        //if (distanceFromTarget <= followRange && distanceFromTarget > attackRange)
+        //{
+            //currentState = EnemyState.ChaseTarget;
+        //}
         //if player is too far from enemy, return to idle
-        else if (distanceFromTarget > attackRange && distanceFromTarget > followRange)
-        {
-            currentState = EnemyState.Idle;
-        }
+        //else if (distanceFromTarget > attackRange && distanceFromTarget > followRange)
+        //{
+            //currentState = EnemyState.Idle;
+        //}
 
         enemyAttackScript.AttackTarget(target);
 
@@ -187,30 +205,15 @@ public class EnemyController : MonoBehaviour
 
     }
 
-    //sets enemy's current state to Hurt
-    public void ChangeEnemyStateToHurt()
+    //this function is meant for when other scripts want to change the enemy's state
+    public void ChangeEnemyState(float cooldownTimer,EnemyState state)
     {
-        currentState = EnemyState.Hurt;
+        //if there is already a coroutine going, cancel it, then start a new one
+        if (stateCooldownStarted)
+            StopAllCoroutines();
+
+        StartCoroutine(StateTransitionCooldown(cooldownTimer, state));
     }
-    
-    //sets enemy's current state to Idle
-    public void ChangeEnemyStateToIdle()
-    {
-        currentState = EnemyState.Idle;
-    }
-
-    //TESTING HURT BEHAVIOR
-    //IEnumerator GetBackUp()
-    //{
-        //Debug.Log("Enemy hurt coroutine STARTED!");
-        //hurtCoroutineStarted = true;
-        //yield return new WaitForSeconds(3f);
-        //currentState = EnemyState.Idle;
-        //hurtCoroutineStarted = false;
-
-        //Debug.Log("Enemy hurt coroutine FINISHED!");
-
-    //}
 
     //we will tell the other scripts to begin setting up inside of EnemyController.cs because we need an order of execution
     private void SetUpEnemyConfiguration()
@@ -220,6 +223,24 @@ public class EnemyController : MonoBehaviour
         enemyHpScript.InitializeHealthProperties();
 
         enemyAttackScript.InitializeAttackProperties();
+    }
+
+    //how long should ai wait until they change to the given state?
+    //changing from idle to chase would take about 0.8 seconds so that enemy is not constantly moving (they have brief pauses)
+    // a 0 second timer would mean the ai instantly changes to that state
+    IEnumerator StateTransitionCooldown(float timeToChangeState, EnemyState state)
+    {
+
+        stateCooldownStarted = true;
+
+        //wait a few seconds, then change the state
+       yield return new WaitForSeconds(timeToChangeState);
+
+        stateCooldownStarted = false;
+
+        currentState = state;
+
+
     }
 }
 

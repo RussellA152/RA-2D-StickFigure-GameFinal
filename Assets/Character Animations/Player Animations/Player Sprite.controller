@@ -3640,7 +3640,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageType: 1
+  damageType: 2
   attackDamage: 50
   attackingPowerX: 80000
   attackingPowerY: 30000

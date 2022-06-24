@@ -13,7 +13,8 @@ public class EnemyIdleAnimationBehavior : StateMachineBehaviour
         enemyControllerScript = animator.transform.gameObject.GetComponent<EnemyController>();
 
         //when returning to the idle animation, tell EnemyController to return to idle state
-        enemyControllerScript.ChangeEnemyStateToIdle();
+        enemyControllerScript.ChangeEnemyState(0f, EnemyController.EnemyState.Idle);
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

@@ -101,7 +101,7 @@ public class DamageHandler : MonoBehaviour
             Debug.Log("health = " + GetComponent<EnemyHealth>().enemyHealth);
 
             //change enemy's current state to the Hurt state (they can't move or flip their sprite)
-            GetComponent<EnemyController>().ChangeEnemyStateToHurt();
+            //GetComponent<EnemyController>().ChangeEnemyStateToHurt();
 
         }
             
