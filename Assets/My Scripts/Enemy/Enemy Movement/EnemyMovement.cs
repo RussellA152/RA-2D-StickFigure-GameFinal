@@ -121,21 +121,21 @@ public class EnemyMovement : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
 
-        enemySprite = spriteRenderer.sprite;
+        
 
         //set basic values equal to the ScriptableObject's values
-        //if (enemyScriptableObject != null)
-        //{
-        enemyMass = enemyScriptableObject.rbMass;
-        enemyWalkingSpeed = enemyScriptableObject.walkingSpeed;
+        if (enemyScriptableObject != null)
+        {
+            enemyMass = enemyScriptableObject.rbMass;
+            enemyWalkingSpeed = enemyScriptableObject.walkingSpeed;
 
             //set enemy's sprite equal to ScriptableObject's sprite
-        enemySprite = enemyScriptableObject.sprite;
-        //}
-        //else
-        //{
-            //Debug.Log("This enemy doesn't have a scriptable object!");
-        //}
+            spriteRenderer.sprite = enemyScriptableObject.sprite;
+        }
+        else
+        {
+            Debug.Log("This enemy doesn't have a scriptable object! Inside Movement Script*");
+        }
 
         //set enemy's rigidbody mass equal to enemyMass
         rb.mass = enemyMass;

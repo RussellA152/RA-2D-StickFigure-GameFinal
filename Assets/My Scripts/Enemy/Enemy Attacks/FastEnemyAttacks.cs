@@ -24,21 +24,29 @@ public class FastEnemyAttacks : MonoBehaviour, IAIAttacks
     private void Start()
     {
         //animator = GetComponent<Animator>();
+
+        if(animator.enabled == false)  
+            Debug.Log("This enemy does not have an animator, or the animator is disabled! Therefore, it cannot return to Idle state!");
+                
     }
 
     public void AttackTarget(Transform target)
     {
-        //if enemy is not on attack cooldown... let them perform an attack
-        if (!onCooldown)
-            animator.Play(attackAnimation1);
-        else
-            return;
+        if(animator != null)
+        {
+            //if enemy is not on attack cooldown... let them perform an attack
+            if (!onCooldown)
+                animator.Play(attackAnimation1);
+            else
+                return;
 
-        //if the attack cooldown is on going, don't call it again
-        if(!cooldownCoroutineStarted)
-            StartCoroutine(AttackCooldown());
-        else
-            return;
+            //if the attack cooldown is on going, don't call it again
+            if (!cooldownCoroutineStarted)
+                StartCoroutine(AttackCooldown());
+            else
+                return;
+        }
+        
 
     }
 
@@ -52,7 +60,7 @@ public class FastEnemyAttacks : MonoBehaviour, IAIAttacks
         }
         else
         {
-            Debug.Log("This enemy doesn't have a scriptable object!");
+            Debug.Log("This enemy doesn't have a scriptable object! Inside Attack Script*");
         }
 
         

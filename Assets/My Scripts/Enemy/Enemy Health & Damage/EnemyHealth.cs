@@ -20,7 +20,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
         if(enemyScriptableObject != null)
             enemyHealth = enemyScriptableObject.maxHealth;
         else
-            Debug.Log("This enemy doesn't have a scriptable object!");
+            Debug.Log("This enemy doesn't have a scriptable object! Inside Health Script*");
         
 
     }
