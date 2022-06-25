@@ -6,10 +6,18 @@ using Pathfinding;
 //This script will contain states for the AI (ex: Idle, Hostile, Death)
 //It also controls the values of variables inside of the enemy pathfinding scripts 
 
-// EnemyDamageHandler requires the GameObject to have a Rigidbody component
+// EnemyMovement.cs requires the GameObject to have a Rigidbody and the AI pathfinding components
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(AIPath))]
+[RequireComponent(typeof(AIDestinationSetter))]
 public class EnemyMovement : MonoBehaviour
 {
+
+    [Header("Required Components")]
+    [SerializeField] private AIPath aiPath;
+
+    [SerializeField] private AIDestinationSetter destinationSetter; //destination setter script inside of enemy
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     private Vector3 startingPosition; //the position of wherever the enemy spawned at
 
@@ -29,15 +37,13 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private Transform targetTransform; //the target that the enemy will path towards
 
     [Header("Sprite Direction Properties")]
-    private bool enemyFacingRight; //is the enemy facing the right direction? true if so, false if facing left
     [SerializeField] private Vector3 facingRightVector; //vector3 representing the enemy facing the right direction
     [SerializeField] private Vector3 facingLeftVector; //vector3 representing the enemy facing the left direction
+    private bool enemyFacingRight; //is the enemy facing the right direction? true if so, false if facing left
 
     private Rigidbody2D rb;
 
-    private AIPath aiPath;
-
-    private AIDestinationSetter destinationSetter; //destination setter script inside of enemy
+    
 
 
     private void Start()
@@ -110,25 +116,26 @@ public class EnemyMovement : MonoBehaviour
         // find target (the Player)
         targetTransform = GameObject.Find("Player").transform;
 
-
         //set starting position to where the enemy spawned
         startingPosition = transform.position;
 
-
-        //cache components required (enemies spawned in during runtime will need this)
-        aiPath = GetComponent<AIPath>();
-        destinationSetter = GetComponent<AIDestinationSetter>();
-        //retrieve rigidbody
         rb = GetComponent<Rigidbody2D>();
 
-        enemySprite = GetComponentInChildren<SpriteRenderer>().sprite;
+        enemySprite = spriteRenderer.sprite;
 
         //set basic values equal to the ScriptableObject's values
+        //if (enemyScriptableObject != null)
+        //{
         enemyMass = enemyScriptableObject.rbMass;
         enemyWalkingSpeed = enemyScriptableObject.walkingSpeed;
 
-        //set enemy's sprite equal to ScriptableObject's sprite
+            //set enemy's sprite equal to ScriptableObject's sprite
         enemySprite = enemyScriptableObject.sprite;
+        //}
+        //else
+        //{
+            //Debug.Log("This enemy doesn't have a scriptable object!");
+        //}
 
         //set enemy's rigidbody mass equal to enemyMass
         rb.mass = enemyMass;

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyHurt : MonoBehaviour, IDamageable
 {
+    [Header("Required Scripts")]
+    [SerializeField] private EnemyController enemyControlScript; //every enemy will have a movement script
+
     private IHealth healthScript;
     private EnemyMovement enemyMovementScript;
 
@@ -206,7 +209,7 @@ public class EnemyHurt : MonoBehaviour, IDamageable
         //Debug.Log("health = " + GetComponent<EnemyHealth>().enemyHealth);
 
         //change enemy's current state to the Hurt state (they can't move or flip their sprite)
-        GetComponent<EnemyController>().ChangeEnemyState(0f, EnemyController.EnemyState.Hurt);
+        enemyControlScript.ChangeEnemyState(0f, EnemyController.EnemyState.Hurt);
 
 
         //apply attackingPowerX & Y force to enemy based on the direction they are facing

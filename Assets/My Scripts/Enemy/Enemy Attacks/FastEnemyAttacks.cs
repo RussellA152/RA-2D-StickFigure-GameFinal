@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class FastEnemyAttacks : MonoBehaviour, IAIAttacks
 {
+    [Header("Required Components")]
+    [SerializeField] private Animator animator;
 
     [Header("Enemy Configuration Scriptable Object")]
     public EnemyScriptableObject enemyScriptableObject;
@@ -17,11 +19,11 @@ public class FastEnemyAttacks : MonoBehaviour, IAIAttacks
     private bool onCooldown = false; //is the enemy on cooldown to attack?
     private bool cooldownCoroutineStarted = false; //is the Attack Cooldown coroutine on going?
 
-    private Animator animator;
+    
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
     }
 
     public void AttackTarget(Transform target)
@@ -43,8 +45,17 @@ public class FastEnemyAttacks : MonoBehaviour, IAIAttacks
     //this function is called inside of EnemyController
     public void InitializeAttackProperties()
     {
-        attackRange = enemyScriptableObject.attackRange;
-        attackCooldownTimer = enemyScriptableObject.attackCooldownTimer;
+        if (enemyScriptableObject != null)
+        {
+            attackRange = enemyScriptableObject.attackRange;
+            attackCooldownTimer = enemyScriptableObject.attackCooldownTimer;
+        }
+        else
+        {
+            Debug.Log("This enemy doesn't have a scriptable object!");
+        }
+
+        
     }
 
     public float GetAttackRange()

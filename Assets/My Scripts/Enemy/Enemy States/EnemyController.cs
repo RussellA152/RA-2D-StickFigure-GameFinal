@@ -5,11 +5,13 @@ using UnityEngine;
 
 //This script is responsible for changing and setting the current state of the enemy this script is placed on
 // we will invoke methods from our referenced scripts when states change
+//This script also requires the EnemyHealth and EnemyMovement scripts to function
 public class EnemyController : MonoBehaviour
 {
-    private EnemyMovement enemyMoveScript; //every enemy will have a movement script
+    [Header("Required Scripts")]
+    [SerializeField] private EnemyMovement enemyMoveScript; //every enemy will have a movement script
 
-    private EnemyHealth enemyHpScript; // every enemy will have a health script
+    [SerializeField] private EnemyHealth enemyHpScript; // every enemy will have a health script
 
     private IAIAttacks enemyAttackScript; //Every enemy will have an attacking script, but might not share the exact same behavior, so we will use an interface 
 
@@ -51,21 +53,14 @@ public class EnemyController : MonoBehaviour
 
     private void OnEnable()
     {
+        //since the enemyAttackScript implements an interface (*enemy attack behaviors are abstract*) we have to getComponent the script because serializefield doesn't work on interfaces
+        enemyAttackScript = GetComponent<IAIAttacks>();
+
         //enemy is in idle state when spawning in
         currentState = EnemyState.Idle;
 
-        //Get the enemy's movement script 
-        enemyMoveScript = GetComponent<EnemyMovement>();
-
-        //Get the enemy's movement script
-        enemyHpScript = GetComponent<EnemyHealth>();
-
-        //Get the enemy's attacking script (has a type of IEnemyAttacks)
-        enemyAttackScript = GetComponent<IAIAttacks>();
-
         //tell other scripts to get their values
         SetUpEnemyConfiguration();
-
 
         //retrieve the enemy's current target from movement script
         target = enemyMoveScript.GetEnemyTarget();
@@ -84,7 +79,8 @@ public class EnemyController : MonoBehaviour
 
         //calculate the distance between enemy and player
         // we will need this value to determine when to switch to idle, attacking, or chasing
-        distanceFromTarget = Vector2.Distance(transform.position, target.position);
+        if(target != null)
+            distanceFromTarget = Vector2.Distance(transform.position, target.position);
 
         switch (currentState)
         {
@@ -190,8 +186,6 @@ public class EnemyController : MonoBehaviour
         //}
 
         enemyAttackScript.AttackTarget(target);
-
-        //check when done attacking so we can go back to chase target or something?
     }
 
     private void EnemyHurtBehavior()

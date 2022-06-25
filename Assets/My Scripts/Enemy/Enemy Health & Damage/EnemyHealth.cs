@@ -17,7 +17,11 @@ public class EnemyHealth : MonoBehaviour, IHealth
     public void InitializeHealthProperties()
     {
         //set basic values equal to the ScriptableObject's values
-        enemyHealth = enemyScriptableObject.maxHealth;
+        if(enemyScriptableObject != null)
+            enemyHealth = enemyScriptableObject.maxHealth;
+        else
+            Debug.Log("This enemy doesn't have a scriptable object!");
+        
 
     }
 
