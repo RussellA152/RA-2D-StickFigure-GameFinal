@@ -82,45 +82,49 @@ public class EnemyController : MonoBehaviour
         if(target != null)
             distanceFromTarget = Vector2.Distance(transform.position, target.position);
 
-        switch (currentState)
-        {
-            default:
+        //only switch states if we have a target ( if there is no target, just remain in Idle )
+        if (target != null)
+            switch (currentState)
+            {
+                default:
 
-            case EnemyState.Idle:
-                EnemyIdleBehavior();
+                case EnemyState.Idle:
+                    EnemyIdleBehavior();
 
-                break;
+                    break;
 
-            //doesn't do anything for now
-            case EnemyState.Roaming:
-                break;
+                //doesn't do anything for now
+                case EnemyState.Roaming:
+                    break;
 
-            case EnemyState.ChaseTarget:
-                EnemyChaseBehavior();
+                case EnemyState.ChaseTarget:
+                    EnemyChaseBehavior();
 
-                break;
+                    break;
 
-            case EnemyState.Attacking:
-                EnemyAttackingBehavior();
+                case EnemyState.Attacking:
+                    EnemyAttackingBehavior();
 
-                break;
+                    break;
 
-            case EnemyState.Hurt:
-                EnemyHurtBehavior();
+                case EnemyState.Hurt:
+                    EnemyHurtBehavior();
 
-                break;
+                    break;
 
-            case EnemyState.Dead:
+                case EnemyState.Dead:
 
-                break;
-        }
+                    break;
+            }
+        else
+            currentState = EnemyState.Idle;
     }
 
     private void EnemyIdleBehavior()
     {
         //don't let enemy move in idle state
-        //goes to EnemyMovement script and sets canMove to false (allowing enemy to walk to enemy)
-        enemyMoveScript.DisableMovement();
+        //goes to EnemyMovement script and sets isStopped to true
+        enemyMoveScript.StopMovement(true);
 
         //check distance between enemy and player
         //if enemy is close to player, chase them (within follow range)
@@ -132,7 +136,7 @@ public class EnemyController : MonoBehaviour
             }
 
             // if the player is within attacking range, attack them instead of chase
-            else if (Vector2.Distance(transform.position, target.position) <= attackRange)
+            else if (distanceFromTarget <= attackRange)
             {
                 ChangeEnemyState(attackStateTransitionTimer, EnemyState.Attacking);
             }
@@ -144,6 +148,9 @@ public class EnemyController : MonoBehaviour
     private void EnemyChaseBehavior()
     {
         //goes to EnemyMovement script and sets canMove to true (allowing enemy to walk to enemy)
+        //also sets isStopped back to false
+        enemyMoveScript.StopMovement(false);
+
         enemyMoveScript.AllowMovement();
 
         //check distance between enemy and player
@@ -152,11 +159,11 @@ public class EnemyController : MonoBehaviour
 
         if (!stateCooldownStarted)
         {
-            if (distanceFromTarget > followRange && Vector2.Distance(transform.position, target.position) > attackRange)
+            if (distanceFromTarget > followRange && distanceFromTarget > attackRange)
             {
                 ChangeEnemyState(idleStateTransitionTimer, EnemyState.Idle);
             }
-            else if (Vector2.Distance(transform.position, target.position) <= attackRange)
+            else if (distanceFromTarget <= attackRange)
             {
                 ChangeEnemyState(attackStateTransitionTimer, EnemyState.Attacking);
             }
@@ -166,36 +173,18 @@ public class EnemyController : MonoBehaviour
 
     private void EnemyAttackingBehavior()
     {
-        //check if enemy is within attacking range, disable their movement and play attacks or something
-        //probably make an enemy attack script
-
         //don't let enemy move when trying to attack
-        //goes to EnemyMovement script and sets canMove to false
-        enemyMoveScript.DisableMovement();
-
-        //check distance between enemy and player
-        //if player is no longer in attacking range, but still in follow range, follow them
-        //if (distanceFromTarget <= followRange && distanceFromTarget > attackRange)
-        //{
-            //currentState = EnemyState.ChaseTarget;
-        //}
-        //if player is too far from enemy, return to idle
-        //else if (distanceFromTarget > attackRange && distanceFromTarget > followRange)
-        //{
-            //currentState = EnemyState.Idle;
-        //}
+        //goes to EnemyMovement script and sets isStopped to true
+        enemyMoveScript.StopMovement(true);
 
         enemyAttackScript.AttackTarget(target);
     }
 
     private void EnemyHurtBehavior()
     {
+        //don't let enemy move at all
         enemyMoveScript.DisableMovement();
 
-        //disable flip here too
-
-        //if(!hurtCoroutineStarted)
-            //StartCoroutine(GetBackUp());
 
     }
 
@@ -212,9 +201,9 @@ public class EnemyController : MonoBehaviour
     //we will tell the other scripts to begin setting up inside of EnemyController.cs because we need an order of execution
     private void SetUpEnemyConfiguration()
     {
-        enemyMoveScript.InitializeMovementProperties();
-
         enemyHpScript.InitializeHealthProperties();
+
+        enemyMoveScript.InitializeMovementProperties();
 
         enemyAttackScript.InitializeAttackProperties();
     }

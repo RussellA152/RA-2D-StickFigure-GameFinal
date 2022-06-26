@@ -12,8 +12,8 @@ public class EnemyScriptableObject : ScriptableObject
 {
     [Header("Basic Enemy Properties")]
     public float maxHealth;
-
     public float walkingSpeed;
+    public float followRange; //distance enemy must be to chase player
 
     [Header("Basic Animation Properties")]
     public Sprite sprite; //while we could just set the sprite renderer in the inspector... when the enemy dies, they will be disabled, and they should reappear on scene with the idle sprite
