@@ -8,7 +8,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "Enemy Configuration", menuName = "ScriptableObject/Enemy Configuration")]
 
-public class EnemyScriptableObject : ScriptableObject
+public class EnemyScriptableObject : ScriptableObject, IAIAttacks
 {
     [Header("Basic Enemy Properties")]
     public float maxHealth;
@@ -26,5 +26,44 @@ public class EnemyScriptableObject : ScriptableObject
     [Header("Rigidbody Properties")]
     public float rbMass;
 
+    [HideInInspector]
+    public bool cooldownCoroutineStarted = false;
+    [HideInInspector]
+    public bool onCooldown = false;
 
+    [Header("Animator Properties")]
+    public Animator animator;
+
+    [Header("Attack Animations")]
+    [SerializeField] public string attackAnimation1;
+
+    //Animations to play when enemy is hit by a light attack (depends on the direction of the light attack)
+    [Header("Enemy Light Attack Hurt Animation Names")]
+    [SerializeField] public string lightHurtAnimFront;
+    [SerializeField] public string lightHurtAnimBehind;
+
+    //Animations to play when enemy is hit by a heavy attack (depends on the direction of the heavy attack)
+    [Header("Enemy Heavy Attack Hurt Animation Names")]
+    [SerializeField] public string heavyHurtAnimFront;
+    [SerializeField] public string heavyHurtAnimBehind;
+
+    public IEnumerator AttackCooldown()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void AttackTarget(Transform target)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public float GetAttackRange()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void InitializeAttackProperties()
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -96,6 +96,7 @@ public class EnemyMovement : MonoBehaviour
         
     }
 
+
     //canMove being true means the AI is allowed to pathfind (enemy is not affected by forces when canMove is true)
     public void AllowMovement()
     {
@@ -117,6 +118,9 @@ public class EnemyMovement : MonoBehaviour
     {
         aiPath.isStopped = shouldStop;
     }
+
+
+
 
     //return the target of this enemy
     public Transform GetEnemyTarget()
@@ -148,8 +152,6 @@ public class EnemyMovement : MonoBehaviour
         startingPosition = transform.position;
 
         rb = GetComponent<Rigidbody2D>();
-
-        
 
         //set basic values equal to the ScriptableObject's values
         if (enemyScriptableObject != null)

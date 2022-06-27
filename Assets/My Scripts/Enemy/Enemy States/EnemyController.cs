@@ -8,22 +8,19 @@ using UnityEngine;
 //This script also requires the EnemyHealth and EnemyMovement scripts to function
 public class EnemyController : MonoBehaviour
 {
-    [Header("Required Scripts")]
-    [SerializeField] private EnemyMovement enemyMoveScript; //every enemy will have a movement script
-
-    [SerializeField] private EnemyHealth enemyHpScript; // every enemy will have a health script
-
-    private IAIAttacks enemyAttackScript; //Every enemy will have an attacking script, but might not share the exact same behavior, so we will use an interface 
-
-    private Transform target; //enemy's target that they will chase and attack
-
-    private float distanceFromTarget; // the distance from enemy and player
-
-    private float followRange; //range that enemy can chase target (taken from enemymovescript)
-    private float attackRange; //range that enemy can attack target (taken from enemyattack script)
-
     private EnemyState currentState;
 
+    [Header("Required Scripts")]
+    [SerializeField] private EnemyMovement enemyMoveScript; //every enemy will have a movement script
+    [SerializeField] private EnemyHealth enemyHpScript; // every enemy will have a health script
+    private IAIAttacks enemyAttackScript; //Every enemy will have an attacking script, but might not share the exact same behavior, so we will use an interface 
+
+
+    [Header("Enemy v. Player Properties")]
+    private Transform target; //enemy's target that they will chase and attack
+    private float distanceFromTarget; // the distance from enemy and player
+    private float followRange; //range that enemy can chase target (taken from enemymovescript)
+    private float attackRange; //range that enemy can attack target (taken from enemyattack script)
 
     [Header("State Transition Timers")]
     //How long will it take for the AI to change from their current state to one of the following states? (might differ with each enemy.. like with faster or slower enemies)
@@ -32,9 +29,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float chaseStateTransitionTimer;
     [SerializeField] private float attackStateTransitionTimer;
     
-
     private bool stateCooldownStarted = false;
-
 
     public enum EnemyState
     {
@@ -74,9 +69,6 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log("Enemy state is currently = " + currentState);
-
-
         //calculate the distance between enemy and player
         // we will need this value to determine when to switch to idle, attacking, or chasing
         if(target != null)
@@ -193,6 +185,7 @@ public class EnemyController : MonoBehaviour
     {
         //if there is already a coroutine going, cancel it, then start a new one
         if (stateCooldownStarted)
+            //NEED TO REPLACED TO STOP THE SPECIFIC COROUTINE, NOT ALL COROUTINES
             StopAllCoroutines();
 
         StartCoroutine(StateTransitionCooldown(cooldownTimer, state));
