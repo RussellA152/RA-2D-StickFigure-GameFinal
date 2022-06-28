@@ -9,36 +9,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Fast Enemy", menuName = "ScriptableObject/Fast Enemy Configuration")]
 public class FastEnemySO : EnemyScriptableObject
 {
-    public override void AttackTarget(Transform target)
+    [Header("Fast Enemy Special Attack Animation Name")]
+    [SerializeField] public string fastEnemySpecialAttack; //a special attack that the fast enemy could do (A barage of punches)
+
+    public override void AttackTarget(Animator animator, Transform target)
     {
-        Debug.Log("Attack in Fast Enemy!");
-        Debug.Log("Coroutine started = " + attackCooldownCoroutineStarted);
-
-        if (animator != null)
-        {
-            //if enemy is not on attack cooldown... let them perform an attack
-            
-            if (!attackOnCooldown)
-                animator.Play(attackAnimation1);
-            else
-                return;
-        }
+        // play the attack animation
+        animator.Play(lightAttackAnimation);
+                
+        
     }
-
-    public override IEnumerator AttackCooldown()
-    {
-        attackCooldownCoroutineStarted = true;
-        attackOnCooldown = true;
-
-        Debug.Log("Attack coroutine STARTED!");
-
-        yield return new WaitForSeconds(attackCooldownTimer);
-
-        attackOnCooldown = false;
-        attackCooldownCoroutineStarted = false;
-
-        Debug.Log("Attack coroutine ENDED!");
-    }
-
 
 }

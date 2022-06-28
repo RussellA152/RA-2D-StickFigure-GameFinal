@@ -75,6 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a99494eb295fb140a5dc581f8f53c6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 1373278072336133614}
   enemyMoveScript: {fileID: 5969129094098281727}
   enemyHpScript: {fileID: 1709358543280309288}
   enemyScriptableObject: {fileID: 0}

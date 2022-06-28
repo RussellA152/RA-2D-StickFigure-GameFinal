@@ -7,10 +7,7 @@ using UnityEngine;
 public interface IAIAttacks
 {
     //attack the player in some way..
-    public void AttackTarget(Transform target);
-
-    //retrieve attacking values and numbers from scriptable object
-    public void InitializeAttackProperties();
+    public void AttackTarget(Animator animator, Transform target);
 
     //return attackRange to EnemyController
     public float GetAttackRange();

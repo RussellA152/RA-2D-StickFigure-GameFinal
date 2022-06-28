@@ -10,6 +10,8 @@ public class EnemyController : MonoBehaviour
 {
     private EnemyState currentState;
 
+    [SerializeField] private Animator animator; // every enemy will have an animator, but the animator controller they use may differ
+
     [Header("Required Scripts")]
     [SerializeField] private EnemyMovement enemyMoveScript; //every enemy will have a movement script
     [SerializeField] private EnemyHealth enemyHpScript; // every enemy will have a health script
@@ -28,8 +30,10 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float idleStateTransitionTimer;
     [SerializeField] private float chaseStateTransitionTimer;
     [SerializeField] private float attackStateTransitionTimer;
-    
+
     private bool stateCooldownStarted = false;
+
+    private bool attackOnCooldown = false; //is the enemy on attack cooldown? If so, don't let them attack again
 
     public enum EnemyState
     {
@@ -53,6 +57,9 @@ public class EnemyController : MonoBehaviour
 
         //enemy is in idle state when spawning in
         currentState = EnemyState.Idle;
+
+        //set the enemy's animator controller to the scriptable object's animator controller
+        animator.runtimeAnimatorController = enemyScriptableObject.enemyAnimatorController;
 
         //tell other scripts to get their values
         SetUpEnemyConfiguration();
@@ -150,7 +157,6 @@ public class EnemyController : MonoBehaviour
         //check distance between enemy and player
         //if enemy and player are too far from each other, return to idle
         // also check if player is within the enemy's attacking range, if so, change state into Attacking
-
         if (!stateCooldownStarted)
         {
             if (distanceFromTarget > followRange && distanceFromTarget > attackRange)
@@ -167,18 +173,21 @@ public class EnemyController : MonoBehaviour
 
     private void EnemyAttackingBehavior()
     {
-
+        
         //don't let enemy move when trying to attack
         //goes to EnemyMovement script and sets isStopped to true
         enemyMoveScript.StopMovement(true);
 
-        //invoke the scriptable object's AttackTarget function (is abstract since enemies might have different behaviors)
-        enemyScriptableObject.AttackTarget(target);
 
-        //if the scriptable object's attack cooldown isn't running, start a new one..
-        //(HAVE TO START COROUTINE HERE BECAUSE SCRIPTABLE OBJECTS CANNOT USE MONOBEHAVIOUR) *
-        if(!enemyScriptableObject.attackCooldownCoroutineStarted)
-            StartCoroutine(enemyScriptableObject.AttackCooldown());
+        //invoke the scriptable object's AttackTarget function (is abstract since enemies might have different attack behaviors)
+        //don't let enemy attack if their attack is on cooldown
+        //also don't start another coroutine if attack cooldown is ongoing
+        if (!attackOnCooldown)
+        {
+            enemyScriptableObject.AttackTarget(animator, target);
+            StartCoroutine(AttackCooldown());
+        }
+            
     }
 
     private void EnemyHurtBehavior()
@@ -225,5 +234,18 @@ public class EnemyController : MonoBehaviour
 
 
     }
+
+    //the attack cooldown coroutine needs to be inside EnemyController because we shouldn't change variable values in scriptable objects during runtime
+    //also, the attack cooldown is not different between enemies, all enemies will have the same cooldown behavior with exception to the cooldown timer
+    public IEnumerator AttackCooldown()
+    {
+        attackOnCooldown = true;
+
+        //the cooldown timer depends on the scriptable object the enemy has
+        yield return new WaitForSeconds(enemyScriptableObject.attackCooldownTimer);
+
+        attackOnCooldown = false;
+    }
+
 }
 

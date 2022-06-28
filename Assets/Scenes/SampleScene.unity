@@ -372,6 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a99494eb295fb140a5dc581f8f53c6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   enemyMoveScript: {fileID: 0}
   enemyHpScript: {fileID: 0}
   enemyScriptableObject: {fileID: 0}
@@ -735,6 +736,11 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!95 &94210596 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1373278072336133614, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
+  m_PrefabInstance: {fileID: 1336137299}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &119151796
 GameObject:
   m_ObjectHideFlags: 0
@@ -1059,6 +1065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a99494eb295fb140a5dc581f8f53c6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   enemyMoveScript: {fileID: 289929570}
   enemyHpScript: {fileID: 289929571}
   enemyScriptableObject: {fileID: 0}
@@ -2296,6 +2303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a99494eb295fb140a5dc581f8f53c6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   enemyMoveScript: {fileID: 0}
   enemyHpScript: {fileID: 0}
   enemyScriptableObject: {fileID: 0}
@@ -3173,7 +3181,7 @@ PrefabInstance:
     - target: {fileID: 1373278072336133614, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 1ec845dfe06015945b0c6373bb6015e1, type: 2}
+      objectReference: {fileID: 22100000, guid: dad37f3e044819e458c394a4efd1fa11, type: 2}
     - target: {fileID: 1709358543280309288, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
       propertyPath: enemyScriptableObject
       value: 
@@ -3250,6 +3258,10 @@ PrefabInstance:
       propertyPath: enemyScriptableObject
       value: 
       objectReference: {fileID: 11400000, guid: 53c3d25a43b2e6c44a7d9586d2455b3c, type: 2}
+    - target: {fileID: 6875883259916410309, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 94210596}
     - target: {fileID: 6875883259916410309, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
       propertyPath: enemyScriptableObject
       value: 
@@ -4291,6 +4303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a99494eb295fb140a5dc581f8f53c6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   enemyMoveScript: {fileID: 0}
   enemyHpScript: {fileID: 0}
   enemyScriptableObject: {fileID: 0}

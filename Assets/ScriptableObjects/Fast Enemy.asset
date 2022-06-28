@@ -19,11 +19,12 @@ MonoBehaviour:
   attackRange: 4
   attackCooldownTimer: 1.5
   rbMass: 100
-  cooldownCoroutineStarted: 0
-  onCooldown: 0
-  animator: {fileID: 0}
-  attackAnimation1: Attack 1
+  attackCooldownCoroutineStarted: 1
+  attackOnCooldown: 1
+  enemyAnimatorController: {fileID: 22100000, guid: dad37f3e044819e458c394a4efd1fa11, type: 2}
+  lightAttackAnimation: Light Attack
   lightHurtAnimFront: Enemy Light Hurt Front
   lightHurtAnimBehind: Enemy Light Hurt Behind
   heavyHurtAnimFront: Enemy Heavy Hurt Front
   heavyHurtAnimBehind: Enemy Heavy Hurt Behind
+  fastEnemySpecialAttack: 

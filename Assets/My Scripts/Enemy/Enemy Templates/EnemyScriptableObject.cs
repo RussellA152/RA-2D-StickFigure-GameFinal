@@ -26,17 +26,11 @@ public class EnemyScriptableObject : ScriptableObject, IAIAttacks
     [Header("Rigidbody Properties")]
     public float rbMass;
 
-    [HideInInspector]
-    public bool attackCooldownCoroutineStarted = false;
-
-    [HideInInspector]
-    public bool attackOnCooldown = false;
-
-    [Header("Animator Properties")]
-    public Animator animator;
+    [Header("Animator Controller")]
+    public RuntimeAnimatorController enemyAnimatorController; // the animator controller that this enemy will use (determines animation clips that enemy will play)
 
     [Header("Attack Animations")]
-    [SerializeField] public string attackAnimation1;
+    [SerializeField] public string lightAttackAnimation;
 
     //Animations to play when enemy is hit by a light attack (depends on the direction of the light attack)
     [Header("Enemy Light Attack Hurt Animation Names")]
@@ -53,7 +47,7 @@ public class EnemyScriptableObject : ScriptableObject, IAIAttacks
         throw new System.NotImplementedException();
     }
 
-    public virtual void AttackTarget(Transform target)
+    public virtual void AttackTarget(Animator animator, Transform target)
     {
         throw new System.NotImplementedException();
     }
@@ -63,8 +57,4 @@ public class EnemyScriptableObject : ScriptableObject, IAIAttacks
         return attackRange;
     }
 
-    public void InitializeAttackProperties()
-    {
-        throw new System.NotImplementedException();
-    }
 }
