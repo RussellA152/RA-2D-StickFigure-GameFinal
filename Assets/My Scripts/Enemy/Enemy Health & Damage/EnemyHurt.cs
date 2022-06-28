@@ -6,22 +6,24 @@ public class EnemyHurt : MonoBehaviour, IDamageable
 {
     [Header("Required Scripts")]
     [SerializeField] private EnemyController enemyControlScript; //every enemy will have a movement script
+    [SerializeField] private EnemyScriptableObject enemyScriptableObject; //every enemy will have a scriptable object
+    [SerializeField] private EnemyMovement enemyMovementScript;
 
     private IHealth healthScript;
-    private EnemyMovement enemyMovementScript;
+    
 
     private Rigidbody2D rb;
     private Animator animator;
 
     //Animations to play when enemy is hit by a light attack (depends on the direction of the light attack)
-    [Header("Enemy Light Attack Hurt Animation Names")]
-    [SerializeField] private string lightHurtAnimFront;
-    [SerializeField] private string lightHurtAnimBehind;
+    //[Header("Enemy Light Attack Hurt Animation Names")]
+      private string lightHurtAnimFront;
+      private string lightHurtAnimBehind;
 
     //Animations to play when enemy is hit by a heavy attack (depends on the direction of the heavy attack)
-    [Header("Enemy Heavy Attack Hurt Animation Names")]
-    [SerializeField] private string heavyHurtAnimFront;
-    [SerializeField] private string heavyHurtAnimBehind;
+    //[Header("Enemy Heavy Attack Hurt Animation Names")]
+      private string heavyHurtAnimFront;
+      private string heavyHurtAnimBehind;
 
     private int baseLayerInt = 0;
 
@@ -37,10 +39,14 @@ public class EnemyHurt : MonoBehaviour, IDamageable
     {
         healthScript = GetComponent<IHealth>();
         rb = GetComponent<Rigidbody2D>();
-        enemyMovementScript = GetComponent<EnemyMovement>();
-
 
         animator = GetComponent<Animator>();
+
+        //retrieve the animations to play from the scriptable object
+        lightHurtAnimFront = enemyScriptableObject.lightHurtAnimFront;
+        lightHurtAnimBehind = enemyScriptableObject.lightHurtAnimBehind;
+        heavyHurtAnimFront = enemyScriptableObject.heavyHurtAnimFront;
+        heavyHurtAnimBehind = enemyScriptableObject.heavyHurtAnimBehind;
 
         lightHurtAnimFrontHash = Animator.StringToHash(lightHurtAnimFront);
         lightHurtAnimBehindHash = Animator.StringToHash(lightHurtAnimBehind);
@@ -206,8 +212,6 @@ public class EnemyHurt : MonoBehaviour, IDamageable
         //need to getComponent each time enemy is attacked because we can't cache this in Start() because the enemy will be enabled/disabled constantly during runtime
         healthScript.ModifyHealth(-1f * damage);
 
-        //Debug.Log("health = " + GetComponent<EnemyHealth>().enemyHealth);
-
         //change enemy's current state to the Hurt state (they can't move or flip their sprite)
         enemyControlScript.ChangeEnemyState(0f, EnemyController.EnemyState.Hurt);
 
@@ -225,7 +229,6 @@ public class EnemyHurt : MonoBehaviour, IDamageable
         if (animator.HasState(baseLayerInt, animationHash) == true)
         {
             animator.Play(animationHash);
-            //Debug.Log("Enemy hurt animation played!");
         }
             
         else

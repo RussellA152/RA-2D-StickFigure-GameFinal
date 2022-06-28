@@ -27,9 +27,10 @@ public class EnemyScriptableObject : ScriptableObject, IAIAttacks
     public float rbMass;
 
     [HideInInspector]
-    public bool cooldownCoroutineStarted = false;
+    public bool attackCooldownCoroutineStarted = false;
+
     [HideInInspector]
-    public bool onCooldown = false;
+    public bool attackOnCooldown = false;
 
     [Header("Animator Properties")]
     public Animator animator;
@@ -47,19 +48,19 @@ public class EnemyScriptableObject : ScriptableObject, IAIAttacks
     [SerializeField] public string heavyHurtAnimFront;
     [SerializeField] public string heavyHurtAnimBehind;
 
-    public IEnumerator AttackCooldown()
+    public virtual IEnumerator AttackCooldown()
     {
         throw new System.NotImplementedException();
     }
 
-    public void AttackTarget(Transform target)
+    public virtual void AttackTarget(Transform target)
     {
         throw new System.NotImplementedException();
     }
 
     public float GetAttackRange()
     {
-        throw new System.NotImplementedException();
+        return attackRange;
     }
 
     public void InitializeAttackProperties()

@@ -313,10 +313,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyControlScript: {fileID: 0}
-  lightHurtAnimFront: Enemy Light Hurt Front
-  lightHurtAnimBehind: Enemy Light Hurt Behind
-  heavyHurtAnimFront: Enemy Heavy Hurt Front
-  heavyHurtAnimBehind: Enemy Heavy Hurt Behind
+  enemyScriptableObject: {fileID: 0}
+  enemyMovementScript: {fileID: 0}
 --- !u!114 &34355977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,7 +330,7 @@ MonoBehaviour:
   aiPath: {fileID: 0}
   destinationSetter: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  enemyScriptableObject: {fileID: 11400000, guid: 4b37b5569570cf64db1b6e69241b715e, type: 2}
+  enemyScriptableObject: {fileID: 0}
   targetTransform: {fileID: 0}
   facingRightVector: {x: -1, y: 1, z: 1}
   facingLeftVector: {x: 1, y: 1, z: 1}
@@ -348,9 +346,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbca7df4a3459f74083a418ef6a2fcc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  enemyScriptableObject: {fileID: 11400000, guid: 4b37b5569570cf64db1b6e69241b715e, type: 2}
-  attackAnimation1: Attack 1
 --- !u!114 &34355979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,7 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd5d1c65aa8a9a84c94ce1b443cc4899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyScriptableObject: {fileID: 11400000, guid: 4b37b5569570cf64db1b6e69241b715e, type: 2}
+  enemyScriptableObject: {fileID: 0}
   enemyHealth: 0
 --- !u!114 &34355980
 MonoBehaviour:
@@ -379,6 +374,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyMoveScript: {fileID: 0}
   enemyHpScript: {fileID: 0}
+  enemyScriptableObject: {fileID: 0}
   idleStateTransitionTimer: 0
   chaseStateTransitionTimer: 0.6
   attackStateTransitionTimer: 0
@@ -892,10 +888,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyControlScript: {fileID: 289929572}
-  lightHurtAnimFront: Enemy Light Hurt Front
-  lightHurtAnimBehind: Enemy Light Hurt Behind
-  heavyHurtAnimFront: Enemy Heavy Hurt Front
-  heavyHurtAnimBehind: Enemy Heavy Hurt Behind
+  enemyScriptableObject: {fileID: 0}
+  enemyMovementScript: {fileID: 0}
 --- !u!50 &289929565
 Rigidbody2D:
   serializedVersion: 4
@@ -1035,7 +1029,7 @@ MonoBehaviour:
   aiPath: {fileID: 289929567}
   destinationSetter: {fileID: 289929569}
   spriteRenderer: {fileID: 500295218}
-  enemyScriptableObject: {fileID: 11400000, guid: 4b37b5569570cf64db1b6e69241b715e, type: 2}
+  enemyScriptableObject: {fileID: 0}
   targetTransform: {fileID: 0}
   facingRightVector: {x: 1, y: 1, z: 1}
   facingLeftVector: {x: -1, y: 1, z: 1}
@@ -1051,7 +1045,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd5d1c65aa8a9a84c94ce1b443cc4899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyScriptableObject: {fileID: 11400000, guid: 4b37b5569570cf64db1b6e69241b715e, type: 2}
+  enemyScriptableObject: {fileID: 0}
   enemyHealth: 0
 --- !u!114 &289929572
 MonoBehaviour:
@@ -1067,6 +1061,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyMoveScript: {fileID: 289929570}
   enemyHpScript: {fileID: 289929571}
+  enemyScriptableObject: {fileID: 0}
   idleStateTransitionTimer: 0
   chaseStateTransitionTimer: 0.6
   attackStateTransitionTimer: 0
@@ -1082,9 +1077,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbca7df4a3459f74083a418ef6a2fcc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 289929566}
-  enemyScriptableObject: {fileID: 11400000, guid: 4b37b5569570cf64db1b6e69241b715e, type: 2}
-  attackAnimation1: Attack 1
 --- !u!1 &321480153
 GameObject:
   m_ObjectHideFlags: 0
@@ -2245,10 +2237,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyControlScript: {fileID: 0}
-  lightHurtAnimFront: Enemy Light Hurt Front
-  lightHurtAnimBehind: Enemy Light Hurt Behind
-  heavyHurtAnimFront: Enemy Heavy Hurt Front
-  heavyHurtAnimBehind: Enemy Heavy Hurt Behind
+  enemyScriptableObject: {fileID: 0}
+  enemyMovementScript: {fileID: 0}
 --- !u!114 &1192884838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2264,7 +2254,7 @@ MonoBehaviour:
   aiPath: {fileID: 0}
   destinationSetter: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  enemyScriptableObject: {fileID: 11400000, guid: 4b37b5569570cf64db1b6e69241b715e, type: 2}
+  enemyScriptableObject: {fileID: 0}
   targetTransform: {fileID: 0}
   facingRightVector: {x: -1, y: 1, z: 1}
   facingLeftVector: {x: 1, y: 1, z: 1}
@@ -2280,9 +2270,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbca7df4a3459f74083a418ef6a2fcc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  enemyScriptableObject: {fileID: 11400000, guid: 4b37b5569570cf64db1b6e69241b715e, type: 2}
-  attackAnimation1: Attack 1
 --- !u!114 &1192884840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2295,7 +2282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd5d1c65aa8a9a84c94ce1b443cc4899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyScriptableObject: {fileID: 11400000, guid: 4b37b5569570cf64db1b6e69241b715e, type: 2}
+  enemyScriptableObject: {fileID: 0}
   enemyHealth: 0
 --- !u!114 &1192884841
 MonoBehaviour:
@@ -2311,6 +2298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyMoveScript: {fileID: 0}
   enemyHpScript: {fileID: 0}
+  enemyScriptableObject: {fileID: 0}
   idleStateTransitionTimer: 0
   chaseStateTransitionTimer: 0.6
   attackStateTransitionTimer: 0
@@ -3182,10 +3170,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Basic Enemy Template
       objectReference: {fileID: 0}
+    - target: {fileID: 1373278072336133614, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 1ec845dfe06015945b0c6373bb6015e1, type: 2}
     - target: {fileID: 1709358543280309288, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
       propertyPath: enemyScriptableObject
       value: 
-      objectReference: {fileID: 11400000, guid: 4b37b5569570cf64db1b6e69241b715e, type: 2}
+      objectReference: {fileID: 11400000, guid: 53c3d25a43b2e6c44a7d9586d2455b3c, type: 2}
     - target: {fileID: 3305021655998707584, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
       propertyPath: heavyHurtAnimFront
       value: Enemy Heavy Hurt Front
@@ -3195,6 +3187,10 @@ PrefabInstance:
       value: Enemy Light Hurt Front
       objectReference: {fileID: 0}
     - target: {fileID: 3305021655998707584, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
+      propertyPath: enemyMovementScript
+      value: 
+      objectReference: {fileID: 1764001028}
+    - target: {fileID: 3305021655998707584, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
       propertyPath: heavyHurtAnimBehind
       value: Enemy Heavy Hurt Behind
       objectReference: {fileID: 0}
@@ -3202,6 +3198,10 @@ PrefabInstance:
       propertyPath: lightHurtAnimBehind
       value: Enemy Light Hurt Behind
       objectReference: {fileID: 0}
+    - target: {fileID: 3305021655998707584, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
+      propertyPath: enemyScriptableObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 53c3d25a43b2e6c44a7d9586d2455b3c, type: 2}
     - target: {fileID: 5186178840865194877, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -3249,7 +3249,11 @@ PrefabInstance:
     - target: {fileID: 5969129094098281727, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
       propertyPath: enemyScriptableObject
       value: 
-      objectReference: {fileID: 11400000, guid: 4b37b5569570cf64db1b6e69241b715e, type: 2}
+      objectReference: {fileID: 11400000, guid: 53c3d25a43b2e6c44a7d9586d2455b3c, type: 2}
+    - target: {fileID: 6875883259916410309, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
+      propertyPath: enemyScriptableObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 53c3d25a43b2e6c44a7d9586d2455b3c, type: 2}
     - target: {fileID: 6991992000989582143, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
       propertyPath: attackAnimation1
       value: Attack 1
@@ -3257,8 +3261,9 @@ PrefabInstance:
     - target: {fileID: 6991992000989582143, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
       propertyPath: enemyScriptableObject
       value: 
-      objectReference: {fileID: 11400000, guid: 4b37b5569570cf64db1b6e69241b715e, type: 2}
-    m_RemovedComponents: []
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6991992000989582143, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
 --- !u!1 &1445952980
 GameObject:
@@ -3675,6 +3680,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1764001028 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5969129094098281727, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
+  m_PrefabInstance: {fileID: 1336137299}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07ae70d912e451247a85ea2bbff2a684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1777725231
 GameObject:
   m_ObjectHideFlags: 0
@@ -4216,10 +4232,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyControlScript: {fileID: 0}
-  lightHurtAnimFront: Enemy Light Hurt Front
-  lightHurtAnimBehind: Enemy Light Hurt Behind
-  heavyHurtAnimFront: Enemy Heavy Hurt Front
-  heavyHurtAnimBehind: Enemy Heavy Hurt Behind
+  enemyScriptableObject: {fileID: 0}
+  enemyMovementScript: {fileID: 0}
 --- !u!114 &1933262901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4235,7 +4249,7 @@ MonoBehaviour:
   aiPath: {fileID: 0}
   destinationSetter: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  enemyScriptableObject: {fileID: 11400000, guid: 4b37b5569570cf64db1b6e69241b715e, type: 2}
+  enemyScriptableObject: {fileID: 0}
   targetTransform: {fileID: 0}
   facingRightVector: {x: -1, y: 1, z: 1}
   facingLeftVector: {x: 1, y: 1, z: 1}
@@ -4251,9 +4265,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbca7df4a3459f74083a418ef6a2fcc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  enemyScriptableObject: {fileID: 11400000, guid: 4b37b5569570cf64db1b6e69241b715e, type: 2}
-  attackAnimation1: Attack 1
 --- !u!114 &1933262903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4266,7 +4277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd5d1c65aa8a9a84c94ce1b443cc4899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyScriptableObject: {fileID: 11400000, guid: 4b37b5569570cf64db1b6e69241b715e, type: 2}
+  enemyScriptableObject: {fileID: 0}
   enemyHealth: 0
 --- !u!114 &1933262904
 MonoBehaviour:
@@ -4282,6 +4293,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyMoveScript: {fileID: 0}
   enemyHpScript: {fileID: 0}
+  enemyScriptableObject: {fileID: 0}
   idleStateTransitionTimer: 0
   chaseStateTransitionTimer: 0.6
   attackStateTransitionTimer: 0

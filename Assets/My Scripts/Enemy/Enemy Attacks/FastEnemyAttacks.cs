@@ -1,9 +1,11 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FastEnemyAttacks : MonoBehaviour, IAIAttacks
+public class FastEnemyAttacks : MonoBehaviour
 {
+    /*
     [Header("Required Components")]
     [SerializeField] private Animator animator;
 
@@ -41,10 +43,10 @@ public class FastEnemyAttacks : MonoBehaviour, IAIAttacks
                 return;
 
             //if the attack cooldown is on going, don't call it again
-            if (!cooldownCoroutineStarted)
-                StartCoroutine(AttackCooldown());
-            else
-                return;
+            //if (!cooldownCoroutineStarted)
+                //StartCoroutine(AttackCooldown());
+            //else
+                //return;
         }
         
 
@@ -85,4 +87,5 @@ public class FastEnemyAttacks : MonoBehaviour, IAIAttacks
 
         //Debug.Log("enemy attack cooldown finished!");
     }
+    */
 }

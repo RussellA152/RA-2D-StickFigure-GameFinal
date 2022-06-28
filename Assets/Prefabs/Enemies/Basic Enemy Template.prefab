@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5186178840865194877}
   - component: {fileID: 1373278072336133614}
   - component: {fileID: 6875883259916410309}
-  - component: {fileID: 6991992000989582143}
   - component: {fileID: 5969129094098281727}
   - component: {fileID: 3305021655998707584}
   - component: {fileID: 1709358543280309288}
@@ -55,7 +54,7 @@ Animator:
   m_GameObject: {fileID: 732219668646791524}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1ec845dfe06015945b0c6373bb6015e1, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -78,24 +77,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyMoveScript: {fileID: 5969129094098281727}
   enemyHpScript: {fileID: 1709358543280309288}
+  enemyScriptableObject: {fileID: 0}
   idleStateTransitionTimer: 0
   chaseStateTransitionTimer: 0.6
   attackStateTransitionTimer: 0
---- !u!114 &6991992000989582143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 732219668646791524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbca7df4a3459f74083a418ef6a2fcc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 1373278072336133614}
-  enemyScriptableObject: {fileID: 0}
-  attackAnimation1: 
 --- !u!114 &5969129094098281727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,10 +113,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyControlScript: {fileID: 6875883259916410309}
-  lightHurtAnimFront: 
-  lightHurtAnimBehind: 
-  heavyHurtAnimFront: 
-  heavyHurtAnimBehind: 
+  enemyScriptableObject: {fileID: 0}
+  enemyMovementScript: {fileID: 0}
 --- !u!114 &1709358543280309288
 MonoBehaviour:
   m_ObjectHideFlags: 0

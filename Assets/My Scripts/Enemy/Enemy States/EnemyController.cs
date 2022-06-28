@@ -13,7 +13,7 @@ public class EnemyController : MonoBehaviour
     [Header("Required Scripts")]
     [SerializeField] private EnemyMovement enemyMoveScript; //every enemy will have a movement script
     [SerializeField] private EnemyHealth enemyHpScript; // every enemy will have a health script
-    private IAIAttacks enemyAttackScript; //Every enemy will have an attacking script, but might not share the exact same behavior, so we will use an interface 
+    [SerializeField] private EnemyScriptableObject enemyScriptableObject; //Every enemy will have an attacking script, but might not share the exact same behavior, so we will use an interface 
 
 
     [Header("Enemy v. Player Properties")]
@@ -49,7 +49,7 @@ public class EnemyController : MonoBehaviour
     private void OnEnable()
     {
         //since the enemyAttackScript implements an interface (*enemy attack behaviors are abstract*) we have to getComponent the script because serializefield doesn't work on interfaces
-        enemyAttackScript = GetComponent<IAIAttacks>();
+        //enemyAttackScript = GetComponent<IAIAttacks>();
 
         //enemy is in idle state when spawning in
         currentState = EnemyState.Idle;
@@ -64,11 +64,13 @@ public class EnemyController : MonoBehaviour
         followRange = enemyMoveScript.GetEnemyFollowRange();
 
         //retrieve the attacking range from the attacking script
-        attackRange = enemyAttackScript.GetAttackRange();
+        attackRange = enemyScriptableObject.GetAttackRange();
     }
 
     private void Update()
     {
+        //Debug.Log("My state is currently: " + currentState);
+
         //calculate the distance between enemy and player
         // we will need this value to determine when to switch to idle, attacking, or chasing
         if(target != null)
@@ -165,11 +167,18 @@ public class EnemyController : MonoBehaviour
 
     private void EnemyAttackingBehavior()
     {
+
         //don't let enemy move when trying to attack
         //goes to EnemyMovement script and sets isStopped to true
         enemyMoveScript.StopMovement(true);
 
-        enemyAttackScript.AttackTarget(target);
+        //invoke the scriptable object's AttackTarget function (is abstract since enemies might have different behaviors)
+        enemyScriptableObject.AttackTarget(target);
+
+        //if the scriptable object's attack cooldown isn't running, start a new one..
+        //(HAVE TO START COROUTINE HERE BECAUSE SCRIPTABLE OBJECTS CANNOT USE MONOBEHAVIOUR) *
+        if(!enemyScriptableObject.attackCooldownCoroutineStarted)
+            StartCoroutine(enemyScriptableObject.AttackCooldown());
     }
 
     private void EnemyHurtBehavior()
@@ -197,8 +206,6 @@ public class EnemyController : MonoBehaviour
         enemyHpScript.InitializeHealthProperties();
 
         enemyMoveScript.InitializeMovementProperties();
-
-        enemyAttackScript.InitializeAttackProperties();
     }
 
     //how long should ai wait until they change to the given state?
