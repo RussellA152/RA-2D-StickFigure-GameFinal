@@ -17,7 +17,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private AIPath aiPath;
 
     [SerializeField] private AIDestinationSetter destinationSetter; //destination setter script inside of enemy
-    [SerializeField] private SpriteRenderer spriteRenderer;
+    //[SerializeField] private SpriteRenderer spriteRenderer;
 
     private Vector3 startingPosition; //the position of wherever the enemy spawned at
 
@@ -27,7 +27,7 @@ public class EnemyMovement : MonoBehaviour
 
     private float enemyMass; //the mass value of this enemy's rigidbody (DERIVED FROM SCRIPTABLEOBJECT)
     private float enemyWalkingSpeed; // the walking speed of this enemy (using the aiPathing) (DERIVED FROM SCRIPTABLEOBJECT)
-    private Sprite enemySprite; //the sprite of this enemy WHEN SPAWNED (DERIVED FROM SCRIPTABLEOBECT)
+    //private Sprite enemySprite; //the sprite of this enemy WHEN SPAWNED (DERIVED FROM SCRIPTABLEOBECT)
 
 
     //[Header("Pathing Attributes")]
@@ -160,7 +160,7 @@ public class EnemyMovement : MonoBehaviour
             enemyWalkingSpeed = enemyScriptableObject.walkingSpeed;
 
             //set enemy's sprite equal to ScriptableObject's sprite
-            spriteRenderer.sprite = enemyScriptableObject.sprite;
+            //spriteRenderer.sprite = enemyScriptableObject.sprite;
 
             followRange = enemyScriptableObject.followRange;
         }

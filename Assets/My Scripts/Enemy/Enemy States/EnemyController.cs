@@ -17,7 +17,6 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private EnemyHealth enemyHpScript; // every enemy will have a health script
     [SerializeField] private EnemyScriptableObject enemyScriptableObject; //Every enemy will have an attacking script, but might not share the exact same behavior, so we will use an interface 
 
-
     [Header("Enemy v. Player Properties")]
     private Transform target; //enemy's target that they will chase and attack
     private float distanceFromTarget; // the distance from enemy and player
@@ -30,10 +29,12 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float idleStateTransitionTimer;
     [SerializeField] private float chaseStateTransitionTimer;
     [SerializeField] private float attackStateTransitionTimer;
-
+    private Coroutine stateTransitionCoroutine; //a reference to the state transition cooldown coroutine, we have this so that we can stop the coroutine on command
     private bool stateCooldownStarted = false;
 
     private bool attackOnCooldown = false; //is the enemy on attack cooldown? If so, don't let them attack again
+
+
 
     public enum EnemyState
     {
@@ -203,10 +204,15 @@ public class EnemyController : MonoBehaviour
     {
         //if there is already a coroutine going, cancel it, then start a new one
         if (stateCooldownStarted)
-            //NEED TO REPLACED TO STOP THE SPECIFIC COROUTINE, NOT ALL COROUTINES
-            StopAllCoroutines();
+        {
+            //cancel the current transition coroutine
+            StopCoroutine(stateTransitionCoroutine);
+        }
 
-        StartCoroutine(StateTransitionCooldown(cooldownTimer, state));
+        //set this coroutine variable to StartCoroutine()
+        //this is so that we can cancel it when we need to
+        stateTransitionCoroutine = StartCoroutine(StateTransitionCooldown(cooldownTimer,state));
+           
     }
 
     //we will tell the other scripts to begin setting up inside of EnemyController.cs because we need an order of execution
@@ -222,7 +228,6 @@ public class EnemyController : MonoBehaviour
     // a 0 second timer would mean the ai instantly changes to that state
     IEnumerator StateTransitionCooldown(float timeToChangeState, EnemyState state)
     {
-
         stateCooldownStarted = true;
 
         //wait a few seconds, then change the state
@@ -231,7 +236,6 @@ public class EnemyController : MonoBehaviour
         stateCooldownStarted = false;
 
         currentState = state;
-
 
     }
 

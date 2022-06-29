@@ -12,6 +12,7 @@ public class FastEnemySO : EnemyScriptableObject
     [Header("Fast Enemy Special Attack Animation Name")]
     [SerializeField] public string fastEnemySpecialAttack; //a special attack that the fast enemy could do (A barage of punches)
 
+    //this function will probably do more later, but for now, it just plays one animation
     public override void AttackTarget(Animator animator, Transform target)
     {
         // play the attack animation
