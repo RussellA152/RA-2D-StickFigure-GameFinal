@@ -17,7 +17,7 @@ public class FastEnemySO : EnemyScriptableObject
     {
         // play the attack animation
         animator.Play(lightAttackAnimation);
-                
+        
         
     }
 

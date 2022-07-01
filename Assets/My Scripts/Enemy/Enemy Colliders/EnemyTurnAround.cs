@@ -22,7 +22,7 @@ public class EnemyTurnAround : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Player") && !isCollidingWithPlayer)
         {
-            enemyMoveScript.FlipSpriteManually();
+            enemyMoveScript.FlipSpriteManually(0.5f);
             isCollidingWithPlayer = true;
 
         }

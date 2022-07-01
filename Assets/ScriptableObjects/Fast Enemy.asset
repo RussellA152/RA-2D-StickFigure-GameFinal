@@ -15,12 +15,9 @@ MonoBehaviour:
   maxHealth: 400
   walkingSpeed: 10
   followRange: 35
-  sprite: {fileID: 21300000, guid: 0fdbcf28872d9fc43a7b564e95d8f4ea, type: 3}
-  attackRange: 4
-  attackCooldownTimer: 1.5
+  attackRange: 4.5
+  attackCooldownTimer: 2
   rbMass: 100
-  attackCooldownCoroutineStarted: 1
-  attackOnCooldown: 1
   enemyAnimatorController: {fileID: 22100000, guid: dad37f3e044819e458c394a4efd1fa11, type: 2}
   lightAttackAnimation: Light Attack
   lightHurtAnimFront: Enemy Light Hurt Front

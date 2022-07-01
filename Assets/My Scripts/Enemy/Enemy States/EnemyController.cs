@@ -75,13 +75,14 @@ public class EnemyController : MonoBehaviour
         attackRange = enemyScriptableObject.GetAttackRange();
     }
 
+
     private void Update()
     {
         //Debug.Log("My state is currently: " + currentState);
 
         //calculate the distance between enemy and player
         // we will need this value to determine when to switch to idle, attacking, or chasing
-        if(target != null)
+        if (target != null)
             distanceFromTarget = Vector2.Distance(transform.position, target.position);
 
         //only switch states if we have a target ( if there is no target, just remain in Idle )
@@ -143,7 +144,7 @@ public class EnemyController : MonoBehaviour
                 ChangeEnemyState(attackStateTransitionTimer, EnemyState.Attacking);
             }
         }
-            
+
 
     }
 
@@ -169,12 +170,12 @@ public class EnemyController : MonoBehaviour
                 ChangeEnemyState(attackStateTransitionTimer, EnemyState.Attacking);
             }
         }
-        
+
     }
 
     private void EnemyAttackingBehavior()
     {
-        
+
         //don't let enemy move when trying to attack
         //goes to EnemyMovement script and sets isStopped to true
         enemyMoveScript.StopMovement(true);
@@ -188,7 +189,7 @@ public class EnemyController : MonoBehaviour
             enemyScriptableObject.AttackTarget(animator, target);
             StartCoroutine(AttackCooldown());
         }
-            
+
     }
 
     private void EnemyHurtBehavior()
@@ -200,7 +201,7 @@ public class EnemyController : MonoBehaviour
     }
 
     //this function is meant for when other scripts want to change the enemy's state
-    public void ChangeEnemyState(float cooldownTimer,EnemyState state)
+    public void ChangeEnemyState(float cooldownTimer, EnemyState state)
     {
         //if there is already a coroutine going, cancel it, then start a new one
         if (stateCooldownStarted)
@@ -211,8 +212,8 @@ public class EnemyController : MonoBehaviour
 
         //set this coroutine variable to StartCoroutine()
         //this is so that we can cancel it when we need to
-        stateTransitionCoroutine = StartCoroutine(StateTransitionCooldown(cooldownTimer,state));
-           
+        stateTransitionCoroutine = StartCoroutine(StateTransitionCooldown(cooldownTimer, state));
+
     }
 
     //we will tell the other scripts to begin setting up inside of EnemyController.cs because we need an order of execution
@@ -231,7 +232,7 @@ public class EnemyController : MonoBehaviour
         stateCooldownStarted = true;
 
         //wait a few seconds, then change the state
-       yield return new WaitForSeconds(timeToChangeState);
+        yield return new WaitForSeconds(timeToChangeState);
 
         stateCooldownStarted = false;
 
@@ -249,6 +250,11 @@ public class EnemyController : MonoBehaviour
         yield return new WaitForSeconds(enemyScriptableObject.attackCooldownTimer);
 
         attackOnCooldown = false;
+    }
+
+    public EnemyState GetEnemyState()
+    {
+        return currentState;
     }
 
 }

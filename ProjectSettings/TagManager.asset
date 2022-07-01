@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PlayerHurtBox
   - EnemyHurtBox
+  - EnemyAvoidanceBox
   layers:
   - Default
   - TransparentFX

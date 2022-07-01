@@ -40,7 +40,9 @@ Transform:
   - {fileID: 3138034387394515940}
   - {fileID: 3326268074250292989}
   - {fileID: 182126132227809056}
+  - {fileID: 5065201668241321367}
   - {fileID: 9186050855868295986}
+  - {fileID: 4519064026702328420}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -96,7 +98,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aiPath: {fileID: 1345563099117515444}
   destinationSetter: {fileID: 3604796771072279783}
-  spriteRenderer: {fileID: 3215621220825369563}
   enemyScriptableObject: {fileID: 0}
   targetTransform: {fileID: 0}
   facingRightVector: {x: 1, y: 1, z: 1}
@@ -401,6 +402,79 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.22, y: 0.34}
   m_EdgeRadius: 0
+--- !u!1 &5231789376662375190
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5065201668241321367}
+  - component: {fileID: 4790058886287226208}
+  - component: {fileID: 7278350880143975604}
+  m_Layer: 8
+  m_Name: Enemy Avoidance Box
+  m_TagString: EnemyAvoidanceBox
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5065201668241321367
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5231789376662375190}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.63, y: -0.34, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5186178840865194877}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &4790058886287226208
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5231789376662375190}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -1}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 5}
+  m_EdgeRadius: 0
+--- !u!114 &7278350880143975604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5231789376662375190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3acdf8d404dd8045a36aca9974c0395, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyMoveScript: {fileID: 5969129094098281727}
+  enemyControllerScript: {fileID: 6875883259916410309}
+  collider: {fileID: 4790058886287226208}
 --- !u!1 &5329907737196684043
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,7 +487,7 @@ GameObject:
   - component: {fileID: 8404876603222653591}
   - component: {fileID: 2064457975479593907}
   m_Layer: 8
-  m_Name: Enemy Turn Around Collider
+  m_Name: Enemy Back Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -431,7 +505,7 @@ Transform:
   m_LocalScale: {x: 2.64866, y: 2.7341971, z: 1}
   m_Children: []
   m_Father: {fileID: 5186178840865194877}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8404876603222653591
 MonoBehaviour:
@@ -542,3 +616,71 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d9eaeaf0b0248f40ad02ad43c44103e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &6758869840249412664
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4519064026702328420}
+  - component: {fileID: 5361670115556357999}
+  - component: {fileID: 7762117212131525940}
+  m_Layer: 8
+  m_Name: Enemy Head Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &4519064026702328420
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6758869840249412664}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5186178840865194877}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &5361670115556357999
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6758869840249412664}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1
+--- !u!250 &7762117212131525940
+PointEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6758869840249412664}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 128
+  m_ForceMagnitude: 100
+  m_ForceVariation: 0
+  m_DistanceScale: 1
+  m_ForceSource: 0
+  m_ForceTarget: 0
+  m_ForceMode: 0
+  m_Drag: 0
+  m_AngularDrag: 0

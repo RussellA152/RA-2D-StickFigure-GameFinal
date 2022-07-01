@@ -45,7 +45,6 @@ public class EnemyMovement : MonoBehaviour
 
     [Header("Sprite Flipping Properties")]
     private bool flipCoroutineStarted = false; //has the coroutine for sprite flipping started?
-    private float flipSpriteTimer = 0.5f; //how long should it take for enemy to flip?
 
     private void Start()
     {
@@ -88,7 +87,7 @@ public class EnemyMovement : MonoBehaviour
     }
 
     //we can call this function whenever we want to manually flip the sprite, instead of letting AI path determine when to flip
-    public void FlipSpriteManually()
+    public void FlipSpriteManually(float flipSpriteTimer)
     {
         //if the AI is already set to flip, don't start the coroutine again
         if(!flipCoroutineStarted)
