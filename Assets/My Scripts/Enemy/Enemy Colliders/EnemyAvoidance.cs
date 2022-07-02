@@ -60,7 +60,6 @@ public class EnemyAvoidance : MonoBehaviour
         {
             //enemyMoveScript.AllowMovement();
             enemyControllerScript.ChangeEnemyState(0.4f, EnemyController.EnemyState.ChaseTarget);
-            Debug.Log("continue moving! not clumping");
 
             
         }
@@ -73,5 +72,10 @@ public class EnemyAvoidance : MonoBehaviour
         yield return new WaitForSeconds(.3f);
         collider.enabled = true;
         started = false;
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
     }
 }
