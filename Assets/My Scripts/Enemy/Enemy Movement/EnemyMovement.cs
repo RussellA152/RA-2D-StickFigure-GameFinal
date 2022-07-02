@@ -49,7 +49,8 @@ public class EnemyMovement : MonoBehaviour
     private void Start()
     {
         //set target as enemy's destintation
-        destinationSetter.SetTarget(targetTransform);
+        SetNewTarget(targetTransform);
+
 
     }
 
@@ -60,6 +61,7 @@ public class EnemyMovement : MonoBehaviour
         //check if enemy needs to flip their sprite
         FlipSpriteAutomatically();
     }
+
 
     private void EnemyJump()
     {
@@ -92,9 +94,16 @@ public class EnemyMovement : MonoBehaviour
         //if the AI is already set to flip, don't start the coroutine again
         if(!flipCoroutineStarted)
             StartCoroutine(FlipSpriteManuallyCoroutine(flipSpriteTimer));
-        
+
     }
 
+
+    //The AI will change to a new target
+    //they will now chase this target and attack this target based on distance
+    public void SetNewTarget(Transform target)
+    {
+        destinationSetter.SetTarget(target);
+    }
 
     //canMove being true means the AI is allowed to pathfind (enemy is not affected by forces when canMove is true)
     public void AllowMovement()
@@ -117,8 +126,6 @@ public class EnemyMovement : MonoBehaviour
     {
         aiPath.isStopped = shouldStop;
     }
-
-
 
 
     //return the target of this enemy

@@ -13,6 +13,8 @@ public class EnemyTurnAround : MonoBehaviour
 
     private bool isCollidingWithPlayer = false;
 
+    private float turnAroundTimer = 0.5f;
+
     
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -22,7 +24,7 @@ public class EnemyTurnAround : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Player") && !isCollidingWithPlayer)
         {
-            enemyMoveScript.FlipSpriteManually(0.5f);
+            enemyMoveScript.FlipSpriteManually(turnAroundTimer);
             isCollidingWithPlayer = true;
 
         }

@@ -411,8 +411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5065201668241321367}
   - component: {fileID: 4790058886287226208}
-  - component: {fileID: 7278350880143975604}
-  - component: {fileID: 93418712318436417}
+  - component: {fileID: 1267059966755129397}
   m_Layer: 8
   m_Name: Enemy Avoidance Box
   m_TagString: EnemyAvoidanceBox
@@ -460,22 +459,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 5}
   m_EdgeRadius: 0
---- !u!114 &7278350880143975604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5231789376662375190}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3acdf8d404dd8045a36aca9974c0395, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyMoveScript: {fileID: 5969129094098281727}
-  enemyControllerScript: {fileID: 6875883259916410309}
-  collider: {fileID: 4790058886287226208}
---- !u!114 &93418712318436417
+--- !u!114 &1267059966755129397
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -484,9 +468,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5231789376662375190}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9835c968866245f41984b4e91b552bb9, type: 3}
+  m_Script: {fileID: 11500000, guid: e3acdf8d404dd8045a36aca9974c0395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyMoveScript: {fileID: 5969129094098281727}
+  enemyControllerScript: {fileID: 6875883259916410309}
+  avoidanceCollider: {fileID: 4790058886287226208}
 --- !u!1 &5329907737196684043
 GameObject:
   m_ObjectHideFlags: 0
@@ -513,7 +500,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5329907737196684043}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.2, y: -1, z: 0}
+  m_LocalPosition: {x: -1.5, y: -1, z: 0}
   m_LocalScale: {x: 2.64866, y: 2.7341971, z: 1}
   m_Children: []
   m_Father: {fileID: 5186178840865194877}
