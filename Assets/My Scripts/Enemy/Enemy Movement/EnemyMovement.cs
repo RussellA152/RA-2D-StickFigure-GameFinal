@@ -17,20 +17,14 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private AIPath aiPath;
 
     [SerializeField] private AIDestinationSetter destinationSetter; //destination setter script inside of enemy
-    //[SerializeField] private SpriteRenderer spriteRenderer;
-
     private Vector3 startingPosition; //the position of wherever the enemy spawned at
-
 
     [Header("Enemy Configuration Scriptable Object")]
     public EnemyScriptableObject enemyScriptableObject;
 
     private float enemyMass; //the mass value of this enemy's rigidbody (DERIVED FROM SCRIPTABLEOBJECT)
     private float enemyWalkingSpeed; // the walking speed of this enemy (using the aiPathing) (DERIVED FROM SCRIPTABLEOBJECT)
-    //private Sprite enemySprite; //the sprite of this enemy WHEN SPAWNED (DERIVED FROM SCRIPTABLEOBECT)
 
-
-    //[Header("Pathing Attributes")]
     private float followRange; //how far enemy can be to follow player
 
     [Header("Target Properties")]
@@ -44,47 +38,38 @@ public class EnemyMovement : MonoBehaviour
     private Rigidbody2D rb;
 
     [Header("Sprite Flipping Properties")]
+    private bool canFlip = true; // is the enemy allow to turn around?
     private bool flipCoroutineStarted = false; //has the coroutine for sprite flipping started?
 
     private void Start()
     {
         //set target as enemy's destintation
         SetNewTarget(targetTransform);
-
-
     }
 
     private void Update()
     {
-        //Debug.Log("FACING RIGHT = " + enemyFacingRight);
 
-        //check if enemy needs to flip their sprite
+        // always check if enemy needs to flip their sprite/ turn around
         FlipSpriteAutomatically();
     }
 
-
-    private void EnemyJump()
-    {
-
-    }
-
+    //enemy will automatically turn around when moving left or right
+    // can only automatically turn around if canMove and canFlip are true
     private void FlipSpriteAutomatically()
     {
         //enemy must be allowed to move to flip sprite
         //if enemy is moving right... flip sprite to face the right direction
-        if (aiPath.desiredVelocity.x >= 0.01f && aiPath.canMove)
+        if (aiPath.desiredVelocity.x >= 0.01f && aiPath.canMove && canFlip)
         {
             transform.localScale = facingRightVector;
             enemyFacingRight = true;
-            //Debug.Log("turn right automatically");
         }
         // if enemy is moving left.. flip sprite to face left direction
-        else if (aiPath.desiredVelocity.x <= -0.01f && aiPath.canMove)
+        else if (aiPath.desiredVelocity.x <= -0.01f && aiPath.canMove && canFlip)
         {
             transform.localScale = facingLeftVector;
             enemyFacingRight = false;
-
-            //Debug.Log("turn left automatically");
         }
     }
 
@@ -94,7 +79,6 @@ public class EnemyMovement : MonoBehaviour
         //if the AI is already set to flip, don't start the coroutine again
         if(!flipCoroutineStarted)
             StartCoroutine(FlipSpriteManuallyCoroutine(flipSpriteTimer));
-
     }
 
 
@@ -126,7 +110,10 @@ public class EnemyMovement : MonoBehaviour
     {
         aiPath.isStopped = shouldStop;
     }
-
+    public void SetCanFlip(bool boolean)
+    {
+        canFlip = boolean;
+    }
 
     //return the target of this enemy
     public Transform GetEnemyTarget()
@@ -188,8 +175,13 @@ public class EnemyMovement : MonoBehaviour
     {
         flipCoroutineStarted = true;
 
-        //wait some time.. then allow enemy to flip their sprite
+        //while canFlip is false, don't let this enemy turn around (until canFlip is true)
+        while (!canFlip)
+            yield return null;
+
+        //wait some time.. then allow enemy to turn around
         yield return new WaitForSeconds(timeToFlip);
+
 
         //if enemy is facing right direction, turn them left
         if (enemyFacingRight)

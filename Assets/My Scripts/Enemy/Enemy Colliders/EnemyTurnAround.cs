@@ -4,7 +4,7 @@ using UnityEngine;
 
 //this class is responsible for making an enemy turn around when player is behind them
 //basically, there is a collider behind each enemy that when the player touches it, they will turn around
-//this way, the enemy won't attack while facing the opposite direction of the player
+//this way, the enemy won't be stuck attacking while facing the opposite direction of the player
 
 public class EnemyTurnAround : MonoBehaviour
 {

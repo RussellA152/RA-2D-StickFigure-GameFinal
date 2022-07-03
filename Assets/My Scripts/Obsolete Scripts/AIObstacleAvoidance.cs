@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AIObstacleAvoidance : MonoBehaviour
 {
+    /*
     [Header("Required Scripts")]
     [SerializeField] private EnemyController enemyControllerScript;
     [SerializeField] private EnemyMovement enemyMoveScript;
@@ -31,4 +32,5 @@ public class AIObstacleAvoidance : MonoBehaviour
 
 
     }
+    */
 }

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//This class is meant to prevent enemies from clumping and pushing each other to reach their target
+//Enemies will stop moving (go to Idle state) when they get too close to other enemies or obstacles
 public class EnemyAvoidance : MonoBehaviour
 {
     [SerializeField] private EnemyMovement enemyMoveScript;
@@ -11,10 +13,6 @@ public class EnemyAvoidance : MonoBehaviour
     public BoxCollider2D avoidanceCollider;
 
     private bool turnOffCoroutineStarted = false;
-    private float turnOffColliderTimer = 0.3f;
-    
-    private float flipTimer = 0.1f;
-
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -23,7 +21,6 @@ public class EnemyAvoidance : MonoBehaviour
             return;
 
         //if colliding with another enemy
-        // and NOT colliding with another's avoidance box, (basically enemies are facing each other)
         // then force the enemy into idle
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
@@ -32,16 +29,14 @@ public class EnemyAvoidance : MonoBehaviour
 
             if (!turnOffCoroutineStarted)
                 StartCoroutine(TurnOffCollider());
-
-            //Debug.Log("Stop moving!");
         }
 
         //if (!collision.gameObject.CompareTag("EnemyAvoidanceBox"))
-        //{
-            
+        //{      
        // }
        
     }
+
 
     //when this enemy's avoidance box collides with an obstacle or another enemy...
     // turn off their avoidance box (THIS IS to prevent enemy from getting frozen in place when two enemy's avoidance boxes are colliding **)
@@ -54,7 +49,7 @@ public class EnemyAvoidance : MonoBehaviour
         //turn off avoidance box collider
         avoidanceCollider.enabled = false;
 
-        //while the enemy is not in chaseTarget state, don't re-enable the hitbox
+        //while the enemy is not in chaseTarget or attacking state, don't re-enable the hitbox
         while (enemyControllerScript.GetEnemyState() != EnemyController.EnemyState.ChaseTarget && enemyControllerScript.GetEnemyState() != EnemyController.EnemyState.Attacking)
             yield return null;
 

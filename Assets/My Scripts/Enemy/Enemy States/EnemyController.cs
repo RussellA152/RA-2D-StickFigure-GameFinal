@@ -40,7 +40,7 @@ public class EnemyController : MonoBehaviour
     {
         Idle, //enemy is staying still
 
-        Roaming, //enemy is walking around back and forth
+        //Roaming, //enemy is walking around back and forth
 
         ChaseTarget, // enemy is moving towards their target
 
@@ -53,8 +53,6 @@ public class EnemyController : MonoBehaviour
 
     private void OnEnable()
     {
-        //since the enemyAttackScript implements an interface (*enemy attack behaviors are abstract*) we have to getComponent the script because serializefield doesn't work on interfaces
-        //enemyAttackScript = GetComponent<IAIAttacks>();
 
         //enemy is in idle state when spawning in
         currentState = EnemyState.Idle;
@@ -96,10 +94,6 @@ public class EnemyController : MonoBehaviour
 
                     break;
 
-                //doesn't do anything for now
-                case EnemyState.Roaming:
-                    break;
-
                 case EnemyState.ChaseTarget:
                     EnemyChaseBehavior();
 
@@ -129,6 +123,9 @@ public class EnemyController : MonoBehaviour
         //goes to EnemyMovement script and sets isStopped to true
         enemyMoveScript.StopMovement(true);
 
+        //the enemy is allowed to turn around when they are idle
+        enemyMoveScript.SetCanFlip(true);
+
         //check distance between enemy and player
         //if enemy is close to player, chase them (within follow range)
         if (!stateCooldownStarted)
@@ -153,6 +150,9 @@ public class EnemyController : MonoBehaviour
         //goes to EnemyMovement script and sets canMove to true (allowing enemy to walk to enemy)
         //also sets isStopped back to false
         enemyMoveScript.StopMovement(false);
+
+        // the enemy is allowed to turn around when they are chasing their target
+        enemyMoveScript.SetCanFlip(true);
 
         enemyMoveScript.AllowMovement();
 
@@ -180,14 +180,14 @@ public class EnemyController : MonoBehaviour
         //goes to EnemyMovement script and sets isStopped to true
         enemyMoveScript.StopMovement(true);
 
+        //the enemy is not allowed to turn around until they return to idle
+        enemyMoveScript.SetCanFlip(false);
 
         //invoke the scriptable object's AttackTarget function (is abstract since enemies might have different attack behaviors)
         //don't let enemy attack if their attack is on cooldown
-        //also don't start another coroutine if attack cooldown is ongoing
         if (!attackOnCooldown)
         {
             enemyScriptableObject.AttackTarget(animator, target);
-            StartCoroutine(AttackCooldown());
         }
 
     }
@@ -196,6 +196,9 @@ public class EnemyController : MonoBehaviour
     {
         //don't let enemy move at all
         enemyMoveScript.DisableMovement();
+
+        //the enemy is not allowed to turn around until they return to idle
+        enemyMoveScript.SetCanFlip(false);
 
 
     }
@@ -240,18 +243,28 @@ public class EnemyController : MonoBehaviour
 
     }
 
+    //this function will start the Attack Cooldown of the enemy
+    //it is invoked whenever the enemy is finished attacking
+    //also don't start another coroutine if attack cooldown is ongoing
+    public void StartAttackCooldown()
+    {
+        if (!attackOnCooldown)
+        {
+            StartCoroutine(AttackCooldown());
+        }
+    }
+
     //the attack cooldown coroutine needs to be inside EnemyController because we shouldn't change variable values in scriptable objects during runtime
     //also, the attack cooldown is not different between enemies, all enemies will have the same cooldown behavior with exception to the cooldown timer
     public IEnumerator AttackCooldown()
     {
         attackOnCooldown = true;
-
         //the cooldown timer depends on the scriptable object the enemy has
         yield return new WaitForSeconds(enemyScriptableObject.attackCooldownTimer);
-
         attackOnCooldown = false;
     }
 
+    //return the current state of this enemy
     public EnemyState GetEnemyState()
     {
         return currentState;

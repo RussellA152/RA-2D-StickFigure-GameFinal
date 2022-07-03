@@ -9,6 +9,7 @@ public class EnemyAttackAnimationBehavior : StateMachineBehaviour, IAttackAnimat
     private Rigidbody2D rb;
 
     private IDamageDealing enemyHitColliderScript; //EnemyHitCollider.cs script (implements IDamageDealing)
+    private EnemyController enemyControllerScript;
 
     [Header("Damage Type")]
     //type of damage the attack will do (light -- > player flinches, heavy -- > player knocked back )
@@ -32,6 +33,7 @@ public class EnemyAttackAnimationBehavior : StateMachineBehaviour, IAttackAnimat
         rb = animator.transform.gameObject.GetComponent<Rigidbody2D>();
         //find the EnemyHitCollider script located in the hitbox gameobject
         enemyHitColliderScript = animator.transform.gameObject.GetComponentInChildren<IDamageDealing>();
+        enemyControllerScript = animator.transform.gameObject.GetComponent<EnemyController>();
 
         //retrieve what direction the enemy was facing in
         enemyFacingRight = animator.transform.gameObject.GetComponent<EnemyMovement>().GetDirection();
@@ -54,10 +56,11 @@ public class EnemyAttackAnimationBehavior : StateMachineBehaviour, IAttackAnimat
     //}
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        enemyControllerScript.StartAttackCooldown();
+
+    }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

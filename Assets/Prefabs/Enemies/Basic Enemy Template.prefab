@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aiPath: {fileID: 1345563099117515444}
+  enemyControllerScript: {fileID: 6875883259916410309}
   destinationSetter: {fileID: 3604796771072279783}
   enemyScriptableObject: {fileID: 0}
   targetTransform: {fileID: 0}
@@ -410,8 +411,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5065201668241321367}
-  - component: {fileID: 4790058886287226208}
   - component: {fileID: 1267059966755129397}
+  - component: {fileID: 4790058886287226208}
   m_Layer: 8
   m_Name: Enemy Avoidance Box
   m_TagString: EnemyAvoidanceBox
@@ -433,6 +434,21 @@ Transform:
   m_Father: {fileID: 5186178840865194877}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1267059966755129397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5231789376662375190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3acdf8d404dd8045a36aca9974c0395, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyMoveScript: {fileID: 5969129094098281727}
+  enemyControllerScript: {fileID: 6875883259916410309}
+  avoidanceCollider: {fileID: 4790058886287226208}
 --- !u!61 &4790058886287226208
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -459,21 +475,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 5}
   m_EdgeRadius: 0
---- !u!114 &1267059966755129397
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5231789376662375190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3acdf8d404dd8045a36aca9974c0395, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyMoveScript: {fileID: 5969129094098281727}
-  enemyControllerScript: {fileID: 6875883259916410309}
-  avoidanceCollider: {fileID: 4790058886287226208}
 --- !u!1 &5329907737196684043
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,8 +555,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3326268074250292989}
-  - component: {fileID: 1354632572045690308}
   - component: {fileID: 5584963872477177574}
+  - component: {fileID: 1354632572045690308}
   m_Layer: 8
   m_Name: Enemy Hit Box
   m_TagString: Untagged
@@ -577,6 +578,18 @@ Transform:
   m_Father: {fileID: 5186178840865194877}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5584963872477177574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6345397276018936482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d9eaeaf0b0248f40ad02ad43c44103e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!61 &1354632572045690308
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -603,15 +616,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.22, y: 0.34}
   m_EdgeRadius: 0
---- !u!114 &5584963872477177574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6345397276018936482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d9eaeaf0b0248f40ad02ad43c44103e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

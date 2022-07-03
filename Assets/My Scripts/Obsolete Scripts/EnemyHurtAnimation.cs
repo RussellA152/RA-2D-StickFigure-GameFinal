@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class EnemyHurtAnimation : StateMachineBehaviour
 {
-    private EnemyController enemyControllerScript;
+    //private EnemyController enemyControllerScript;
 
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        enemyControllerScript = animator.transform.gameObject.GetComponent<EnemyController>();
+        //enemyControllerScript = animator.transform.gameObject.GetComponent<EnemyController>();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
