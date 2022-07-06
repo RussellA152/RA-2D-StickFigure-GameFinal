@@ -36,4 +36,9 @@ public class PlayerHealth : MonoBehaviour, IHealth
         playerHealth += amount;
 
     }
+
+    public float GetHealth()
+    {
+        return playerHealth;
+    }
 }

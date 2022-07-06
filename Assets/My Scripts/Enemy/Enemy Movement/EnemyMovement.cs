@@ -135,8 +135,10 @@ public class EnemyMovement : MonoBehaviour
 
     // can be virtual, but it won't be for now... (if virtual, then enemies could override this function for subtyping)
     //sets all base values equal to the values inside the scriptable object
-    public void InitializeMovementProperties()
+    public void InitializeMovementProperties(EnemyScriptableObject scriptableObject)
     {
+        enemyScriptableObject = scriptableObject;
+
         // find target (the Player... ideally) (unfortunately we have to do two gameobject.find)
         if(GameObject.Find("Player") != null)
             targetTransform = GameObject.Find("Player").transform;

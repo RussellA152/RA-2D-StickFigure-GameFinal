@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 
 //This script is responsible for changing and setting the current state of the enemy this script is placed on
@@ -10,12 +11,16 @@ public class EnemyController : MonoBehaviour
 {
     private EnemyState currentState;
 
+    private IObjectPool<EnemyController> myPool;
+
     [SerializeField] private Animator animator; // every enemy will have an animator, but the animator controller they use may differ
 
     [Header("Required Scripts")]
     [SerializeField] private EnemyMovement enemyMoveScript; //every enemy will have a movement script
     [SerializeField] private EnemyHealth enemyHpScript; // every enemy will have a health script
+    [SerializeField] private EnemyHurt enemyHurtScript; // every enemy will have a hurt script
     [SerializeField] private EnemyScriptableObject enemyScriptableObject; //Every enemy will have an attacking script, but might not share the exact same behavior, so we will use an interface 
+    
 
     [Header("Enemy v. Player Properties")]
     private Transform target; //enemy's target that they will chase and attack
@@ -31,6 +36,9 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float attackStateTransitionTimer;
     private Coroutine stateTransitionCoroutine; //a reference to the state transition cooldown coroutine, we have this so that we can stop the coroutine on command
     private bool stateCooldownStarted = false;
+
+    [Header("Enemy's Rigidbody")]
+    [SerializeField] private Rigidbody2D rb;
 
     private bool attackOnCooldown = false; //is the enemy on attack cooldown? If so, don't let them attack again
 
@@ -48,35 +56,47 @@ public class EnemyController : MonoBehaviour
 
         Attacking, // enemy is trying to attack player
 
-        Dead
+        Dead //enemy is dead -> can't move and return to object pool
     }
 
     private void OnEnable()
     {
+        //if the enemy does not already have a scriptable object attached, give them a random one from the EnemyManager (generates random scriptable object from list)
+        if(enemyScriptableObject == null)
+            enemyScriptableObject = EnemyManager.enemyManagerInstance.GiveScriptableObject();
 
         //enemy is in idle state when spawning in
         currentState = EnemyState.Idle;
 
-        //set the enemy's animator controller to the scriptable object's animator controller
-        animator.runtimeAnimatorController = enemyScriptableObject.enemyAnimatorController;
-
         //tell other scripts to get their values
-        SetUpEnemyConfiguration();
+        SetUpEnemyConfiguration(enemyScriptableObject);
 
-        //retrieve the enemy's current target from movement script
-        target = enemyMoveScript.GetEnemyTarget();
-
-        //retrieve the following range from the movement script
-        followRange = enemyMoveScript.GetEnemyFollowRange();
-
-        //retrieve the attacking range from the attacking script
-        attackRange = enemyScriptableObject.GetAttackRange();
+        //Freeze the enemy's rigidbody Y position
+        SetRigidbodyYConstraint(true);
     }
 
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
+    }
 
     private void Update()
     {
         //Debug.Log("My state is currently: " + currentState);
+
+        //check if the enemy is alive
+        bool hasDied = enemyHpScript.CheckIfDead();
+
+        //if the enemy is dead, change their state to "Dead", and return from the function
+        //they will not be able to change to another state
+        //we won't use the ChangeEnemyState because then the coroutine could be canceled, which would prevent enemy from dying
+        if (hasDied)
+            currentState = EnemyState.Dead;
+            
 
         //calculate the distance between enemy and player
         // we will need this value to determine when to switch to idle, attacking, or chasing
@@ -110,11 +130,33 @@ public class EnemyController : MonoBehaviour
                     break;
 
                 case EnemyState.Dead:
-
+                    EnemyDeathBehavior();
                     break;
             }
         else
             currentState = EnemyState.Idle;
+    }
+
+    //we will tell the other scripts to begin setting up inside of EnemyController.cs because we need an order of execution
+    private void SetUpEnemyConfiguration(EnemyScriptableObject scriptableObject)
+    {
+        //set the enemy's animator controller to the scriptable object's animator controller
+        animator.runtimeAnimatorController = enemyScriptableObject.enemyAnimatorController;
+
+        enemyHpScript.InitializeHealthProperties(scriptableObject);
+
+        enemyMoveScript.InitializeMovementProperties(scriptableObject);
+
+        enemyHurtScript.InitializeEnemyHurt(scriptableObject);
+
+        //retrieve the enemy's current target from movement script
+        target = enemyMoveScript.GetEnemyTarget();
+
+        //retrieve the following range from the movement script
+        followRange = enemyMoveScript.GetEnemyFollowRange();
+
+        //retrieve the attacking range from the attacking script
+        attackRange = enemyScriptableObject.GetAttackRange();
     }
 
     private void EnemyIdleBehavior()
@@ -125,6 +167,9 @@ public class EnemyController : MonoBehaviour
 
         //the enemy is allowed to turn around when they are idle
         enemyMoveScript.SetCanFlip(true);
+
+        //freeze the enemy's rigidbody Y position
+        SetRigidbodyYConstraint(true);
 
         //check distance between enemy and player
         //if enemy is close to player, chase them (within follow range)
@@ -156,6 +201,9 @@ public class EnemyController : MonoBehaviour
 
         enemyMoveScript.AllowMovement();
 
+        //Freeze the enemy's rigidbody Y position
+        SetRigidbodyYConstraint(true);
+
         //check distance between enemy and player
         //if enemy and player are too far from each other, return to idle
         // also check if player is within the enemy's attacking range, if so, change state into Attacking
@@ -175,7 +223,6 @@ public class EnemyController : MonoBehaviour
 
     private void EnemyAttackingBehavior()
     {
-
         //don't let enemy move when trying to attack
         //goes to EnemyMovement script and sets isStopped to true
         enemyMoveScript.StopMovement(true);
@@ -183,17 +230,22 @@ public class EnemyController : MonoBehaviour
         //the enemy is not allowed to turn around until they return to idle
         enemyMoveScript.SetCanFlip(false);
 
+        //Freeze the enemy's rigidbody Y position
+        SetRigidbodyYConstraint(true);
+
         //invoke the scriptable object's AttackTarget function (is abstract since enemies might have different attack behaviors)
         //don't let enemy attack if their attack is on cooldown
         if (!attackOnCooldown)
-        {
             enemyScriptableObject.AttackTarget(animator, target);
-        }
 
     }
 
     private void EnemyHurtBehavior()
     {
+
+        //Don't freeze the enemy's rigidbody Y position
+        SetRigidbodyYConstraint(false);
+
         //don't let enemy move at all
         enemyMoveScript.DisableMovement();
 
@@ -203,9 +255,34 @@ public class EnemyController : MonoBehaviour
 
     }
 
+    private void EnemyDeathBehavior()
+    {
+        //Don't freeze the enemy's rigidbody Y position
+        SetRigidbodyYConstraint(false);
+
+        //if this enemy has a pool, return this enemy back to the pool
+        if (myPool != null)
+        {
+            myPool.Release(this);
+            Debug.Log("Return me to the pool!");
+        }
+
+        else
+        {
+            Destroy(gameObject);
+            Debug.Log("Destroy me");
+        }
+            
+    }
+
+
+
+
     //this function is meant for when other scripts want to change the enemy's state
     public void ChangeEnemyState(float cooldownTimer, EnemyState state)
     {
+
+
         //if there is already a coroutine going, cancel it, then start a new one
         if (stateCooldownStarted)
         {
@@ -217,14 +294,6 @@ public class EnemyController : MonoBehaviour
         //this is so that we can cancel it when we need to
         stateTransitionCoroutine = StartCoroutine(StateTransitionCooldown(cooldownTimer, state));
 
-    }
-
-    //we will tell the other scripts to begin setting up inside of EnemyController.cs because we need an order of execution
-    private void SetUpEnemyConfiguration()
-    {
-        enemyHpScript.InitializeHealthProperties();
-
-        enemyMoveScript.InitializeMovementProperties();
     }
 
     //how long should ai wait until they change to the given state?
@@ -242,6 +311,9 @@ public class EnemyController : MonoBehaviour
         currentState = state;
 
     }
+
+
+
 
     //this function will start the Attack Cooldown of the enemy
     //it is invoked whenever the enemy is finished attacking
@@ -262,6 +334,38 @@ public class EnemyController : MonoBehaviour
         //the cooldown timer depends on the scriptable object the enemy has
         yield return new WaitForSeconds(enemyScriptableObject.attackCooldownTimer);
         attackOnCooldown = false;
+    }
+
+    private void SetRigidbodyYConstraint(bool boolean)
+    {
+        //prevent enemy from flying towards player when chasing or attacking player
+        if(boolean == true)
+        {
+            rb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
+        }
+         
+        //allow enemy's rigidbody to move in Y direction when hurt or idle (this is so the player can hit enemies into the air)
+        else
+        {
+            rb.constraints = RigidbodyConstraints2D.None;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+
+        }
+            
+    }
+
+
+    //sets this enemy's pool equal to the pool passed into the function (comes from AISpawner)
+    public void SetPool(IObjectPool<EnemyController> pool)
+    {
+        myPool = pool;
+
+        //Debug.Log("My pool is " + myPool);
+    }
+
+    public void GiveScriptableObject(EnemyScriptableObject scriptableObject)
+    {
+        enemyScriptableObject = scriptableObject;
     }
 
     //return the current state of this enemy

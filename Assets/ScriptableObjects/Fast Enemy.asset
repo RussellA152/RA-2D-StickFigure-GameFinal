@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cedb7f96a87a02740aed7fe88eee8dcf, type: 3}
   m_Name: Fast Enemy
   m_EditorClassIdentifier: 
-  maxHealth: 400
+  maxHealth: 100
   walkingSpeed: 10
   followRange: 35
   attackRange: 4.5

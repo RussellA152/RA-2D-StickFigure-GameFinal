@@ -79,10 +79,12 @@ MonoBehaviour:
   animator: {fileID: 1373278072336133614}
   enemyMoveScript: {fileID: 5969129094098281727}
   enemyHpScript: {fileID: 1709358543280309288}
+  enemyHurtScript: {fileID: 3305021655998707584}
   enemyScriptableObject: {fileID: 0}
   idleStateTransitionTimer: 0
   chaseStateTransitionTimer: 0.6
   attackStateTransitionTimer: 0
+  rb: {fileID: 6387468270599271747}
 --- !u!114 &5969129094098281727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,7 +98,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aiPath: {fileID: 1345563099117515444}
-  enemyControllerScript: {fileID: 6875883259916410309}
   destinationSetter: {fileID: 3604796771072279783}
   enemyScriptableObject: {fileID: 0}
   targetTransform: {fileID: 0}
@@ -116,7 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyControlScript: {fileID: 6875883259916410309}
   enemyScriptableObject: {fileID: 0}
-  enemyMovementScript: {fileID: 0}
+  enemyMovementScript: {fileID: 5969129094098281727}
 --- !u!114 &1709358543280309288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,6 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd5d1c65aa8a9a84c94ce1b443cc4899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyControllerScript: {fileID: 6875883259916410309}
   enemyScriptableObject: {fileID: 0}
   enemyHealth: 0
 --- !u!114 &1345563099117515444
@@ -169,7 +171,7 @@ MonoBehaviour:
   slowdownDistance: 5
   pickNextWaypointDist: 2
   endReachedDistance: 3.5
-  alwaysDrawGizmos: 0
+  alwaysDrawGizmos: 1
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
   constrainInsideGraph: 0

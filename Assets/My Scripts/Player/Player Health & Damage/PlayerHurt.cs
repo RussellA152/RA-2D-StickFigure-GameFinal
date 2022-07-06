@@ -68,7 +68,7 @@ public class PlayerHurt : MonoBehaviour, IDamageable
                 if (attackerFacingRight && playerFacingRight)
                 {
                     //Play backward flinch animation
-                    Debug.Log("Backward light hit! Player facing right!");
+                    //Debug.Log("Backward light hit! Player facing right!");
 
                     PlayHurtAnimation(lightHurtAnimBehindHash);
 
@@ -80,7 +80,7 @@ public class PlayerHurt : MonoBehaviour, IDamageable
                 else if(attackerFacingRight && !playerFacingRight)
                 {
                     //Play forward flinch animation
-                    Debug.Log("Forward light hit! Player facing left!");
+                    //Debug.Log("Forward light hit! Player facing left!");
 
                     PlayHurtAnimation(lightHurtAnimFrontHash);
 
@@ -90,7 +90,7 @@ public class PlayerHurt : MonoBehaviour, IDamageable
                 else if (!attackerFacingRight && playerFacingRight)
                 {
                     //Play backward flinch animation
-                    Debug.Log("Forward light hit! Player facing right!");
+                    //Debug.Log("Forward light hit! Player facing right!");
 
                     PlayHurtAnimation(lightHurtAnimFrontHash);
 
@@ -102,7 +102,7 @@ public class PlayerHurt : MonoBehaviour, IDamageable
                 else if (!attackerFacingRight && !playerFacingRight)
                 {
                     //Play forward flinch animation
-                    Debug.Log("Backward light hit! Player facing left!");
+                    //Debug.Log("Backward light hit! Player facing left!");
 
                     PlayHurtAnimation(lightHurtAnimBehindHash);
 
@@ -114,7 +114,7 @@ public class PlayerHurt : MonoBehaviour, IDamageable
                 if (attackerFacingRight && playerFacingRight)
                 {
                     //Play backward flinch animation
-                    Debug.Log("Backward heavy hit! Player facing right!");
+                    //Debug.Log("Backward heavy hit! Player facing right!");
                     //call the TakeDamage function to subtract the health of player 
                     TakeDamage(damage, attackPowerX, attackPowerY);
 
@@ -123,14 +123,14 @@ public class PlayerHurt : MonoBehaviour, IDamageable
                 else if (attackerFacingRight && !playerFacingRight)
                 {
                     //Play forward flinch animation
-                    Debug.Log("Forward heavy hit! Player facing left!");
+                    //Debug.Log("Forward heavy hit! Player facing left!");
                     TakeDamage(damage, attackPowerX, attackPowerY);
                 }
 
                 else if (!attackerFacingRight && playerFacingRight)
                 {
                     //Play backward flinch animation
-                    Debug.Log("Forward heavy hit! Player facing right!");
+                    //Debug.Log("Forward heavy hit! Player facing right!");
                     //call the TakeDamage function to subtract the health of player 
                     TakeDamage(damage, -attackPowerX, attackPowerY);
 
@@ -139,7 +139,7 @@ public class PlayerHurt : MonoBehaviour, IDamageable
                 else if (!attackerFacingRight && !playerFacingRight)
                 {
                     //Play forward flinch animation
-                    Debug.Log("Backward heavy hit! Player facing left!");
+                    //Debug.Log("Backward heavy hit! Player facing left!");
                     TakeDamage(damage, -attackPowerX, attackPowerY);
                 }
                 break;
@@ -148,7 +148,7 @@ public class PlayerHurt : MonoBehaviour, IDamageable
                 if (attackerFacingRight && playerFacingRight)
                 {
                     //Play backward flinch animation
-                    Debug.Log("Backward air hit! Player facing right!");
+                    //Debug.Log("Backward air hit! Player facing right!");
                     //call the TakeDamage function to subtract the health of player 
                     TakeDamage(damage, attackPowerX, attackPowerY);
 
@@ -157,14 +157,14 @@ public class PlayerHurt : MonoBehaviour, IDamageable
                 else if (attackerFacingRight && !playerFacingRight)
                 {
                     //Play forward flinch animation
-                    Debug.Log("Forward air hit! Player facing left!");
+                    //Debug.Log("Forward air hit! Player facing left!");
                     TakeDamage(damage, attackPowerX, attackPowerY);
                 }
 
                 else if (!attackerFacingRight && playerFacingRight)
                 {
                     //Play backward flinch animation
-                    Debug.Log("Forward air hit! Player facing right!");
+                    //Debug.Log("Forward air hit! Player facing right!");
                     //call the TakeDamage function to subtract the health of player 
                     TakeDamage(damage, -attackPowerX, attackPowerY);
 
@@ -173,7 +173,7 @@ public class PlayerHurt : MonoBehaviour, IDamageable
                 else if (!attackerFacingRight && !playerFacingRight)
                 {
                     //Play forward flinch animation
-                    Debug.Log("Backward air hit! Player facing left!");
+                    //Debug.Log("Backward air hit! Player facing left!");
                     TakeDamage(damage, -attackPowerX, attackPowerY);
                 }
                 break;

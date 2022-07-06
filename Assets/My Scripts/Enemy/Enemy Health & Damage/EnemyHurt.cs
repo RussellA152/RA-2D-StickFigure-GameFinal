@@ -17,13 +17,13 @@ public class EnemyHurt : MonoBehaviour, IDamageable
 
     //Animations to play when enemy is hit by a light attack (depends on the direction of the light attack)
     //[Header("Enemy Light Attack Hurt Animation Names")]
-      private string lightHurtAnimFront;
-      private string lightHurtAnimBehind;
+    private string lightHurtAnimFront;
+    private string lightHurtAnimBehind;
 
     //Animations to play when enemy is hit by a heavy attack (depends on the direction of the heavy attack)
     //[Header("Enemy Heavy Attack Hurt Animation Names")]
-      private string heavyHurtAnimFront;
-      private string heavyHurtAnimBehind;
+    private string heavyHurtAnimFront;
+    private string heavyHurtAnimBehind;
 
     private int baseLayerInt = 0;
 
@@ -33,9 +33,8 @@ public class EnemyHurt : MonoBehaviour, IDamageable
     private int heavyHurtAnimFrontHash;
     private int heavyHurtAnimBehindHash;
 
-
-
-    void Start()
+    /*
+    private void OnEnable()
     {
         healthScript = GetComponent<IHealth>();
         rb = GetComponent<Rigidbody2D>();
@@ -53,7 +52,29 @@ public class EnemyHurt : MonoBehaviour, IDamageable
 
         heavyHurtAnimFrontHash = Animator.StringToHash(heavyHurtAnimFront);
         heavyHurtAnimBehindHash = Animator.StringToHash(heavyHurtAnimBehind);
+    }
+    */
 
+    public void InitializeEnemyHurt(EnemyScriptableObject enemyScriptableObjectParameter)
+    {
+        healthScript = GetComponent<IHealth>();
+        rb = GetComponent<Rigidbody2D>();
+
+        animator = GetComponent<Animator>();
+
+        enemyScriptableObject = enemyScriptableObjectParameter;
+
+        //retrieve the animations to play from the scriptable object
+        lightHurtAnimFront = enemyScriptableObject.lightHurtAnimFront;
+        lightHurtAnimBehind = enemyScriptableObject.lightHurtAnimBehind;
+        heavyHurtAnimFront = enemyScriptableObject.heavyHurtAnimFront;
+        heavyHurtAnimBehind = enemyScriptableObject.heavyHurtAnimBehind;
+
+        lightHurtAnimFrontHash = Animator.StringToHash(lightHurtAnimFront);
+        lightHurtAnimBehindHash = Animator.StringToHash(lightHurtAnimBehind);
+
+        heavyHurtAnimFrontHash = Animator.StringToHash(heavyHurtAnimFront);
+        heavyHurtAnimBehindHash = Animator.StringToHash(heavyHurtAnimBehind);
     }
 
     public void OnHurt(Vector3 attacker, DamageType damageType, float damage, float attackPowerX, float attackPowerY)
