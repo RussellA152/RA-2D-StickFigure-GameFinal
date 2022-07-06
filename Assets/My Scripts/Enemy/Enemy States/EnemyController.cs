@@ -339,6 +339,7 @@ public class EnemyController : MonoBehaviour
     private void SetRigidbodyYConstraint(bool boolean)
     {
         //prevent enemy from flying towards player when chasing or attacking player
+        
         if(boolean == true)
         {
             rb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
