@@ -26,6 +26,7 @@ public class EnemyMovement : MonoBehaviour
     private float enemyWalkingSpeed; // the walking speed of this enemy (using the aiPathing) (DERIVED FROM SCRIPTABLEOBJECT)
 
     private float followRange; //how far enemy can be to follow player
+    private float minimumDistanceY = 1.5f; //how much distance between enemy and player allowed until enemy's auto-repath is turned off (prevents enemies from flying towards player)
 
     [Header("Target Properties")]
     [SerializeField] private Transform targetTransform; //the target that the enemy will path towards
@@ -49,7 +50,19 @@ public class EnemyMovement : MonoBehaviour
 
     private void Update()
     {
+        //if the Y distance between the enemy and player gets too high..
+        // then the enemy will not re-calculate their pathfinding (they walk towards the last spot where the player was standing)
+        if(Mathf.Abs(transform.position.y - targetTransform.position.y) >= minimumDistanceY)
+        {
+            aiPath.autoRepath.mode = AutoRepathPolicy.Mode.Never; 
+        }
+        //when the y distance between the enemy and player is close enough
+        // then the enemy can dynamically calculate their pathfinding again
+        else
+        {
+            aiPath.autoRepath.mode = AutoRepathPolicy.Mode.Dynamic;
 
+        }
         // always check if enemy needs to flip their sprite/ turn around
         FlipSpriteAutomatically();
     }

@@ -9,7 +9,7 @@ using UnityEngine;
 //enemies should not respawn in the same level, but only when entering a new area
 public class AISpawner : MonoBehaviour
 {
-    [SerializeField] private LevelManager levelManager;
+    //[SerializeField] private LevelManager levelManager;
 
     ObjectPool<EnemyController> enemyPool; //pool of regular enemies (fast, fat, ranged)
     ObjectPool<EnemyController> bossEnemyPool; //pool of boss enemies (might use?)
@@ -30,6 +30,16 @@ public class AISpawner : MonoBehaviour
 
     }
 
+    private void OnEnable()
+    {
+        //LevelManager.instance.onPlayerEnterNewArea += SpawnAI;
+    }
+
+    private void OnDestroy()
+    {
+        LevelManager.instance.onPlayerEnterNewArea -= SpawnAI;
+    }
+
     private void Update()
     {
         inactiveCount = enemyPool.CountInactive;
@@ -47,8 +57,8 @@ public class AISpawner : MonoBehaviour
     private void Start()
     {
         //var enemy = enemyPool.Get();
-        SpawnAI();
-        
+        LevelManager.instance.onPlayerEnterNewArea += SpawnAI;
+
     }
 
     public void SpawnAI()
@@ -75,8 +85,8 @@ public class AISpawner : MonoBehaviour
     // this is where enemies will receive their scriptable object (to differentiate them *)
     void OnTakeEnemyFromPool(EnemyController enemy)
     {
-        //spawn this enemy in a random location in some area
-        enemy.gameObject.transform.position = ChooseRandomSpawnLocation();
+        //spawn this enemy in a some location in the area (retrieves spawn location from level manager)
+        enemy.gameObject.transform.position = LevelManager.instance.GetSpawnLocation();
 
         enemy.gameObject.SetActive(true);
 
@@ -89,8 +99,4 @@ public class AISpawner : MonoBehaviour
         enemy.gameObject.SetActive(false);
     }
 
-    Vector2 ChooseRandomSpawnLocation()
-    {
-        return levelManager.GetRandomSpawnLocation();
-    }
 }

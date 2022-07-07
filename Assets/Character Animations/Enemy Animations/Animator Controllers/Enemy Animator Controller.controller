@@ -410,7 +410,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Enemy Heavy Hurt Front
-  m_Speed: 0.1
+  m_Speed: 0.08
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 633772276843231480}
@@ -460,7 +460,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Enemy Heavy Hurt Behind
-  m_Speed: 0.1
+  m_Speed: 0.08
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -6347010211153589149}

@@ -24,9 +24,12 @@ public class EnemyController : MonoBehaviour
 
     [Header("Enemy v. Player Properties")]
     private Transform target; //enemy's target that they will chase and attack
-    private float distanceFromTarget; // the distance from enemy and player
+    private float distanceFromTargetX; // the distance from enemy and player in x-axis
+    private float distanceFromTargetY; // the distance from enemy and player in y-axis
     private float followRange; //range that enemy can chase target (taken from enemymovescript)
-    private float attackRange; //range that enemy can attack target (taken from enemyattack script)
+    private float attackRangeX; //range that enemy can attack target (taken from Scriptable Object)
+    private float attackRangeY; //range that enemy can attack target (taken from Scriptable Object)
+    private bool withinAttackRange;
 
     [Header("State Transition Timers")]
     //How long will it take for the AI to change from their current state to one of the following states? (might differ with each enemy.. like with faster or slower enemies)
@@ -72,7 +75,7 @@ public class EnemyController : MonoBehaviour
         SetUpEnemyConfiguration(enemyScriptableObject);
 
         //Freeze the enemy's rigidbody Y position
-        SetRigidbodyYConstraint(true);
+        //SetRigidbodyYConstraint(true);
     }
 
     private void OnDisable()
@@ -96,12 +99,22 @@ public class EnemyController : MonoBehaviour
         //we won't use the ChangeEnemyState because then the coroutine could be canceled, which would prevent enemy from dying
         if (hasDied)
             currentState = EnemyState.Dead;
-            
+
 
         //calculate the distance between enemy and player
-        // we will need this value to determine when to switch to idle, attacking, or chasing
+        //we will need this value to determine when to switch to idle, attacking, or chasing
         if (target != null)
-            distanceFromTarget = Vector2.Distance(transform.position, target.position);
+        {
+            distanceFromTargetX = Mathf.Abs(transform.position.x - target.position.x);
+            distanceFromTargetY = Mathf.Abs(transform.position.y - target.position.y);
+        }
+            
+        //if enemy is close to player (in x & y direction), they are within attacking range and can change to "attacking" state
+        //otherwise, they cannot change to "attacking" state
+        if (distanceFromTargetX <= attackRangeX && distanceFromTargetY <= attackRangeY)
+            withinAttackRange = true;
+        else
+            withinAttackRange = false;
 
         //only switch states if we have a target ( if there is no target, just remain in Idle )
         if (target != null)
@@ -155,8 +168,9 @@ public class EnemyController : MonoBehaviour
         //retrieve the following range from the movement script
         followRange = enemyMoveScript.GetEnemyFollowRange();
 
-        //retrieve the attacking range from the attacking script
-        attackRange = enemyScriptableObject.GetAttackRange();
+        //retrieve the attacking ranges from the attacking script
+        attackRangeX = enemyScriptableObject.GetAttackRangeX();
+        attackRangeY = enemyScriptableObject.GetAttackRangeY();
     }
 
     private void EnemyIdleBehavior()
@@ -169,19 +183,19 @@ public class EnemyController : MonoBehaviour
         enemyMoveScript.SetCanFlip(true);
 
         //freeze the enemy's rigidbody Y position
-        SetRigidbodyYConstraint(true);
+        //SetRigidbodyYConstraint(true);
 
         //check distance between enemy and player
         //if enemy is close to player, chase them (within follow range)
         if (!stateCooldownStarted)
         {
-            if (distanceFromTarget <= followRange && distanceFromTarget > attackRange)
+            if (distanceFromTargetX <= followRange && !withinAttackRange)
             {
                 ChangeEnemyState(chaseStateTransitionTimer, EnemyState.ChaseTarget);
             }
 
             // if the player is within attacking range, attack them instead of chase
-            else if (distanceFromTarget <= attackRange)
+            else if (withinAttackRange)
             {
                 ChangeEnemyState(attackStateTransitionTimer, EnemyState.Attacking);
             }
@@ -202,18 +216,18 @@ public class EnemyController : MonoBehaviour
         enemyMoveScript.AllowMovement();
 
         //Freeze the enemy's rigidbody Y position
-        SetRigidbodyYConstraint(true);
+        //SetRigidbodyYConstraint(true);
 
         //check distance between enemy and player
         //if enemy and player are too far from each other, return to idle
         // also check if player is within the enemy's attacking range, if so, change state into Attacking
         if (!stateCooldownStarted)
         {
-            if (distanceFromTarget > followRange && distanceFromTarget > attackRange)
+            if (distanceFromTargetX > followRange && !withinAttackRange)
             {
                 ChangeEnemyState(idleStateTransitionTimer, EnemyState.Idle);
             }
-            else if (distanceFromTarget <= attackRange)
+            else if (withinAttackRange)
             {
                 ChangeEnemyState(attackStateTransitionTimer, EnemyState.Attacking);
             }
@@ -231,7 +245,7 @@ public class EnemyController : MonoBehaviour
         enemyMoveScript.SetCanFlip(false);
 
         //Freeze the enemy's rigidbody Y position
-        SetRigidbodyYConstraint(true);
+        //SetRigidbodyYConstraint(true);
 
         //invoke the scriptable object's AttackTarget function (is abstract since enemies might have different attack behaviors)
         //don't let enemy attack if their attack is on cooldown
@@ -244,7 +258,7 @@ public class EnemyController : MonoBehaviour
     {
 
         //Don't freeze the enemy's rigidbody Y position
-        SetRigidbodyYConstraint(false);
+        //SetRigidbodyYConstraint(false);
 
         //don't let enemy move at all
         enemyMoveScript.DisableMovement();
@@ -258,7 +272,7 @@ public class EnemyController : MonoBehaviour
     private void EnemyDeathBehavior()
     {
         //Don't freeze the enemy's rigidbody Y position
-        SetRigidbodyYConstraint(false);
+        //SetRigidbodyYConstraint(false);
 
         //if this enemy has a pool, return this enemy back to the pool
         if (myPool != null)

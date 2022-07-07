@@ -20,7 +20,8 @@ public class EnemyScriptableObject : ScriptableObject, IAIAttacks
     //public Animator animatorController; // the animator and the controlle the enemy will use
 
     [Header("Attack Properties")]
-    public float attackRange; //how far enemy can be to attack player
+    public float attackRangeX; //how far enemy can be to attack player in x-direction
+    public float attackRangeY; //how far enemy can be to attack player in y-direction
     public float attackCooldownTimer; //time between each attack
 
     [Header("Rigidbody Properties")]
@@ -52,9 +53,14 @@ public class EnemyScriptableObject : ScriptableObject, IAIAttacks
         throw new System.NotImplementedException();
     }
 
-    public float GetAttackRange()
+    public float GetAttackRangeX()
     {
-        return attackRange;
+        return attackRangeX;
+    }
+
+    public float GetAttackRangeY()
+    {
+        return attackRangeY;
     }
 
 }

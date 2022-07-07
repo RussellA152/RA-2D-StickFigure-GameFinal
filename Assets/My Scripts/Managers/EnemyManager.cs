@@ -17,13 +17,6 @@ public class EnemyManager : MonoBehaviour
         enemyManagerInstance = this;
     }
 
-    void Start()
-    {
-        //InvokeRepeating("PreventFlocking", 0.1f, 0.5f);
-        
-    }
-
-
     void Update()
     {
 

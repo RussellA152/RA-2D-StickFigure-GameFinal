@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cedb7f96a87a02740aed7fe88eee8dcf, type: 3}
   m_Name: Fast Enemy
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 500
   walkingSpeed: 10
   followRange: 35
-  attackRange: 4.5
+  attackRangeX: 4.5
+  attackRangeY: 2
   attackCooldownTimer: 2
   rbMass: 100
   enemyAnimatorController: {fileID: 22100000, guid: dad37f3e044819e458c394a4efd1fa11, type: 2}
