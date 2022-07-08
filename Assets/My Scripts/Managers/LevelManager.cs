@@ -91,7 +91,7 @@ public class LevelManager : MonoBehaviour
             
         }
         //Transform randomLocation = spawnLocations.ElementAt(randomIndex).Key;
-        Debug.Log("Not enough spawn locations for this enemy");
+        Debug.Log("Not enough spawn locations for this enemy. Or some other room has an empty list");
 
         return new Vector2(0,0);
     }
