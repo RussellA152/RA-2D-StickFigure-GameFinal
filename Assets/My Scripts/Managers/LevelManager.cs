@@ -11,8 +11,36 @@ public class LevelManager : MonoBehaviour
 
     private Dictionary<Transform, bool> spawnLocations = new Dictionary<Transform, bool>();  // a dictionary with the keys being the spawn location
                                                                                              // and the values being the "occupied" boolean, which is true or false when an enemy has spawned there or not
-
     public event Action onPlayerEnterNewArea;
+
+    public DungeonSize dungeonSize; //the "DugeonSize" state determines how many rooms we will have
+
+    [Header("All Rooms")]
+    public GameObject[] bottomRooms; //array of all rooms with a bottom door
+    public GameObject[] topRooms; //array of all rooms with a top door
+    public GameObject[] leftRooms; //array of all rooms with a left door
+    public GameObject[] rightRooms; //array of all rooms with a right door
+
+    public GameObject closedRoom; // a "wall" that is about the size of a room that prevents player from leaving dungeon
+
+    [Header("Currently Spawned Rooms")]
+    public List<GameObject> rooms; //list of currently spawned in rooms (always 1 higher than spawned rooms because starting room is included)
+
+    [HideInInspector]
+    public int numberOfSpawnedRooms; //number of rooms that have been spawned
+
+    [HideInInspector]
+    public int roomCap; //max number of rooms that can spawn (random based on the "DungeonSize" state)
+
+    public enum DungeonSize
+    {
+        // different states of a level determine how the room cap
+        // ex. small levels will have a smaller number of rooms than medium or large levels
+        small,
+        medium,
+        large
+    }
+
 
     private void Awake()
     {
@@ -33,9 +61,23 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //TEMPORARY
+        //TEMPORARY *
         //This event system should be called when the player has entered a new area
         EnteringNewAreaEvent();
+
+        switch (dungeonSize)
+        {
+            case DungeonSize.small:
+                roomCap = Random.Range(5, 7);
+                break;
+            case DungeonSize.medium:
+                roomCap = Random.Range(7, 10);
+                break;
+            case DungeonSize.large:
+                roomCap = Random.Range(14, 17);
+                break;
+
+        }
 
     }
 

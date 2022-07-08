@@ -11,17 +11,21 @@ public class DungeonSpawner : MonoBehaviour
     // 3 --> need left door
     // 4 --> need right door
 
-    private DungeonTemplates templates; //a reference to the DungeonTemplates script
+    private LevelManager templates; //a reference to the DungeonTemplates script
 
     private int rand; //a random number that will be used to index through the room lists
 
-    private bool roomsSpawned = false; // a bool that is true or false depending on if all the rooms have finished spawning
+    [HideInInspector]
+    public bool spawned = false; // a bool that is true or false depending on if this spawner spawned a room
 
+    //private float destroyTime = 4f;
 
     private void Start()
     {
-        //finds the Dungeon manager's "Dungeon Templates" script component
-        templates = GameObject.FindGameObjectWithTag("Dungeons").GetComponent<DungeonTemplates>();
+        //Destroy(gameObject, destroyTime);
+
+        //sets "templates" equal to the LevelManager singleton so we can access the list of potential rooms
+        templates = LevelManager.instance;
 
         Invoke("SpawnRooms",0.1f);
     }
@@ -35,31 +39,37 @@ public class DungeonSpawner : MonoBehaviour
     private void SpawnRooms()
     {
         //only spawn rooms while roomsSpawned is false
-        if (!roomsSpawned)
+        if (!spawned && templates.numberOfSpawnedRooms < templates.roomCap)
         {
             switch (openingDirection)
             {
                 case 1:
                     rand = Random.Range(0, templates.bottomRooms.Length);
                     Instantiate(templates.bottomRooms[rand], gameObject.transform.position, new Quaternion());
+                    templates.numberOfSpawnedRooms++;
                     break;
                 case 2:
                     rand = Random.Range(0, templates.topRooms.Length);
                     Instantiate(templates.topRooms[rand], gameObject.transform.position, new Quaternion());
+                    templates.numberOfSpawnedRooms++;
                     break;
                 case 3:
                     rand = Random.Range(0, templates.leftRooms.Length);
                     Instantiate(templates.leftRooms[rand], gameObject.transform.position, new Quaternion());
+                    templates.numberOfSpawnedRooms++;
                     break;
                 case 4:
                     rand = Random.Range(0, templates.rightRooms.Length);
                     Instantiate(templates.rightRooms[rand], gameObject.transform.position, new Quaternion());
+                    templates.numberOfSpawnedRooms++;
                     break;
             }
-        }
+            //set roomsSpawned to true so that we can stop spawning rooms
+            spawned = true;
 
-        //set roomsSpawned to true so that we can stop spawning rooms
-        roomsSpawned = true;
+            //destroy the spawner after it has finished spawning rooms
+            Destroy(gameObject);
+        }
         
     }
 
@@ -69,7 +79,16 @@ public class DungeonSpawner : MonoBehaviour
         //thus we should destory this spawn point to prevent more than one room spawning here
         if (collision.CompareTag("SpawnPoint"))
         {
-            Destroy(gameObject);
+            //check if what we collided with, has a "spawned" bool equal to false
+            // also if this spawner has a "spawned" bool equal to false
+            // then spawn a wall blocking off any opening
+            if(collision.gameObject.GetComponent<DungeonSpawner>().spawned == false && spawned == false)
+            {
+                Instantiate(templates.closedRoom, gameObject.transform.position, Quaternion.identity);
+                Destroy(gameObject);
+            }
+            spawned = true;
+            
         }
     }
 }

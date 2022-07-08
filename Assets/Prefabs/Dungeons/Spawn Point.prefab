@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openingDirection: 0
+  spawned: 0
 --- !u!61 &4528243148909770302
 BoxCollider2D:
   m_ObjectHideFlags: 0
