@@ -27,6 +27,12 @@ public class BasicRoom : MonoBehaviour
     //give the level manager the spawn locations of this area
     private void GiveNewSpawnLocations()
     {
-        LevelManager.instance.UpdateSpawnLocations(spawnLocationsOfThisLevel);
+        if (spawnLocationsOfThisLevel.Count == 0 || spawnLocationsOfThisLevel == null)
+        {
+            Debug.Log("This room doesn't contain any spawn locations! " + gameObject.name);
+            return;
+        }
+        else
+            LevelManager.instance.UpdateSpawnLocations(spawnLocationsOfThisLevel);
     }
 }

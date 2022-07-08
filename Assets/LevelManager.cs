@@ -55,8 +55,9 @@ public class LevelManager : MonoBehaviour
 
     public void UpdateSpawnLocations(List<Transform> spawnLocList)
     {
+
         //clear the spawn locations of the previous room
-        if (spawnLocations != null)
+        if (spawnLocations.Count != 0 || spawnLocations != null)
             spawnLocations.Clear();
 
         //add new spawn locations to this list
@@ -73,17 +74,21 @@ public class LevelManager : MonoBehaviour
         int iterator = 0;
         foreach(Transform location in spawnLocations.Keys)
         {
-            //Debug.Log("for each loop start");
-            if (spawnLocations.ElementAt(iterator).Value == false)
+            if(location != null)
             {
-                iterator++;
-                spawnLocations[location] = true;
+                //Debug.Log("for each loop start");
+                if (spawnLocations.ElementAt(iterator).Value == false)
+                {
+                    iterator++;
+                    spawnLocations[location] = true;
 
-                //Debug.Log("Return a random loc!");
-                return location.position;
+                    //Debug.Log("Return a random loc!");
+                    return location.position;
+                }
+                else
+                    iterator++;
             }
-            else
-                iterator++;
+            
         }
         //Transform randomLocation = spawnLocations.ElementAt(randomIndex).Key;
         Debug.Log("Not enough spawn locations for this enemy");
