@@ -18,16 +18,16 @@ public class DungeonSpawner : MonoBehaviour
     [HideInInspector]
     public bool spawned = false; // a bool that is true or false depending on if this spawner spawned a room
 
-    //private float destroyTime = 4f;
+    private float destroyTime = 4f;
 
     private void Start()
     {
-        //Destroy(gameObject, destroyTime);
+        Destroy(gameObject, destroyTime);
 
         //sets "templates" equal to the LevelManager singleton so we can access the list of potential rooms
         templates = LevelManager.instance;
 
-        Invoke("SpawnRooms",0.1f);
+        Invoke("SpawnRooms",0.4f);
     }
 
     private void Update()
@@ -68,7 +68,7 @@ public class DungeonSpawner : MonoBehaviour
             spawned = true;
 
             //destroy the spawner after it has finished spawning rooms
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
         
     }
@@ -84,7 +84,7 @@ public class DungeonSpawner : MonoBehaviour
             // then spawn a wall blocking off any opening
             if(collision.gameObject.GetComponent<DungeonSpawner>().spawned == false && spawned == false)
             {
-                Instantiate(templates.closedRoom, gameObject.transform.position, Quaternion.identity);
+                //Instantiate(templates.closedRoom, gameObject.transform.position, Quaternion.identity);
                 Destroy(gameObject);
             }
             spawned = true;

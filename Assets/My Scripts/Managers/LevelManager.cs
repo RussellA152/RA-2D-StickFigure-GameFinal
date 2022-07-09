@@ -65,6 +65,7 @@ public class LevelManager : MonoBehaviour
         //This event system should be called when the player has entered a new area
         EnteringNewAreaEvent();
 
+        //set the room cap based on the "DungeonSize" state value
         switch (dungeonSize)
         {
             case DungeonSize.small:
