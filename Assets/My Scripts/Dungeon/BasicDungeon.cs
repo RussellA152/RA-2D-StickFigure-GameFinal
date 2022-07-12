@@ -10,6 +10,12 @@ public class BasicDungeon: MonoBehaviour
 
     private LevelManager templates;
 
+    private int xCoordinateDivider = 140;
+    private int yCoordinateDivider = 100;
+
+    [HideInInspector]
+    public Vector2 roomCoordinate;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,14 +23,21 @@ public class BasicDungeon: MonoBehaviour
 
         templates = LevelManager.instance;
 
-        //add this dungeon the "rooms" list inside of the level manager
+        //add this room to the general "rooms" list inside of LevelManager
         AddDungeon();
+
+        Debug.Log(gameObject.name + " coordinate is " + roomCoordinate);
 
     }
 
     private void OnDestroy()
     {
         LevelManager.instance.onPlayerEnterNewArea -= GiveNewSpawnLocations;
+        //LevelManager.instance.spawnNewRooms -= AddDungeon;
+    }
+    private void OnDisable()
+    {
+        //LevelManager.instance.spawnNewRooms -= AddDungeon;
     }
 
     // Update is called once per frame
@@ -45,8 +58,17 @@ public class BasicDungeon: MonoBehaviour
             LevelManager.instance.UpdateSpawnLocations(spawnLocationsOfThisLevel);
     }
 
+    //This function must be inside of the "BasicDungeon" script because
+    // if this function was inside of DungeonSpawner, then rooms would be added in multiple times
     private void AddDungeon()
     {
         templates.rooms.Add(this.gameObject);
+    }
+
+    private void CreateCoordinate()
+    {
+        //roomCoordinate = new Vector2(transform.position.x / xCoordinateDivider, transform.position.y / yCoordinateDivider);
+        //templates.roomCoordinatesOccupied.Add(roomCoordinate);
+        //templates.roomCoordinates.Push(roomCoordinate);
     }
 }

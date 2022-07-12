@@ -232,7 +232,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a253541213f66d74ea1f0e8d4f217b9f, type: 3}
   m_Name: 
@@ -268,7 +268,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 18
+  orthographic size: 1000
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -481,7 +481,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96cafe58a1a34e44289563d9f5d7ef8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dungeonSize: 1
+  dungeonSize: 2
   bottomRooms:
   - {fileID: 570149326502756555, guid: 48dc9f38638eb0d46b4c38e01044a185, type: 3}
   - {fileID: 570149326502756555, guid: d0190147e45f4c24a99d0437f41d1407, type: 3}
@@ -1054,6 +1054,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 570149326502756555, guid: 5952141b836031b4782683fcfc8d896f, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 962878594553668306, guid: 5952141b836031b4782683fcfc8d896f, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

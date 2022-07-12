@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8191113438874015400}
   - component: {fileID: 5913742899722911543}
   - component: {fileID: 4528243148909770302}
-  - component: {fileID: 3736315243953144412}
+  - component: {fileID: 7371819102538695411}
   m_Layer: 0
   m_Name: Spawn Point
   m_TagString: SpawnPoint
@@ -73,7 +73,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!50 &3736315243953144412
+--- !u!50 &7371819102538695411
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0

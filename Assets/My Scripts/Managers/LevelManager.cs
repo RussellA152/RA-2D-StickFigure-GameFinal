@@ -12,8 +12,9 @@ public class LevelManager : MonoBehaviour
     private Dictionary<Transform, bool> spawnLocations = new Dictionary<Transform, bool>();  // a dictionary with the keys being the spawn location
                                                                                              // and the values being the "occupied" boolean, which is true or false when an enemy has spawned there or not
     public event Action onPlayerEnterNewArea;
+    public event Action spawnNewRooms;
 
-    public DungeonSize dungeonSize; //the "DugeonSize" state determines how many rooms we will have
+    public DungeonSize dungeonSize; //the "DungeonSize" state determines how many rooms we will have
 
     [Header("All Rooms")]
     public GameObject[] bottomRooms; //array of all rooms with a bottom door
@@ -31,6 +32,10 @@ public class LevelManager : MonoBehaviour
 
     [HideInInspector]
     public int roomCap; //max number of rooms that can spawn (random based on the "DungeonSize" state)
+
+    public List<Vector2> roomCoordinatesOccupied = new List<Vector2>();
+
+    //public Stack<Vector2> roomCoordinates = new Stack<Vector2>();
 
     public enum DungeonSize
     {
@@ -65,20 +70,10 @@ public class LevelManager : MonoBehaviour
         //This event system should be called when the player has entered a new area
         EnteringNewAreaEvent();
 
-        //set the room cap based on the "DungeonSize" state value
-        switch (dungeonSize)
-        {
-            case DungeonSize.small:
-                roomCap = Random.Range(5, 7);
-                break;
-            case DungeonSize.medium:
-                roomCap = Random.Range(7, 10);
-                break;
-            case DungeonSize.large:
-                roomCap = Random.Range(14, 17);
-                break;
+        
+        RandomRoomCap();
 
-        }
+        Debug.Log("Room cap is " + roomCap);
 
     }
 
@@ -93,6 +88,32 @@ public class LevelManager : MonoBehaviour
         if (onPlayerEnterNewArea != null)
         {
             onPlayerEnterNewArea();
+        }
+    }
+
+    public void SpawnNewRoomsEvent()
+    {
+        if(spawnNewRooms != null)
+        {
+            spawnNewRooms();
+        }
+    }
+
+    public void RandomRoomCap()
+    {
+        //set the room cap based on the "DungeonSize" state value
+        switch (dungeonSize)
+        {
+            case DungeonSize.small:
+                roomCap = Random.Range(6, 8);
+                break;
+            case DungeonSize.medium:
+                roomCap = Random.Range(8, 11);
+                break;
+            case DungeonSize.large:
+                roomCap = Random.Range(14, 17);
+                break;
+
         }
     }
 

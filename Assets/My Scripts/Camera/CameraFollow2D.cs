@@ -18,7 +18,6 @@ public class CameraFollow2D : MonoBehaviour
 
     private void LateUpdate()
     {
-
         //cameraFollowPosition is the position of camera
         cameraFollowPosition = transform.position;
 

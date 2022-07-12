@@ -86,6 +86,7 @@ MonoBehaviour:
   - {fileID: 570149327414924768}
   - {fileID: 570149327723275079}
   - {fileID: 570149326295288726}
+  roomWasMoved: 1
 --- !u!1 &570149326547281972
 GameObject:
   m_ObjectHideFlags: 0
