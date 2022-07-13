@@ -13,15 +13,18 @@ public class DungeonSpawner : MonoBehaviour
 
     private LevelManager templates; //a reference to the DungeonTemplates script
 
-    private int rand; //a random number that will be used to index through the room lists
+    private int randomRoom; //a random number that will be used to index through the room lists
 
     [HideInInspector]
     public bool spawned = false; // a bool that is true or false depending on if this spawner spawned any rooms
 
     private float destroyTime = 4f; //time until this spawner is destroyed
 
+    private int xCoordinateDivider = 140;
+    private int yCoordinateDivider = 100;
+
     private Vector2 spawnPosition;
-    private Vector2 spawnPositionCheck;
+    //private Vector2 spawnPositionCheck;
 
     private void Start()
     {
@@ -36,90 +39,44 @@ public class DungeonSpawner : MonoBehaviour
 
     private void SpawnRooms()
     {
-        //STARTING ROOM NEEDS TO BE ADDED TO LIST, OTHERWISE ANOTHER ROOM WILL SPAWN ON TOP OF IT
-        //BUT WE DONT ADD STARTING ROOM IN HERE
-        int iterator = 1;
-
         //only spawn rooms while roomsSpawned is false
         if (!spawned && templates.numberOfSpawnedRooms < templates.roomCap)
         {
-            //Debug.Log(gameObject.name + "   is   Spawned  =  " + spawned);
             switch (openingDirection)
             {
                 case 1:
-                    spawnPosition = new Vector2(transform.parent.position.x, transform.parent.position.y + 100);
-                    spawnPositionCheck = new Vector2(spawnPosition.x / 140, spawnPosition.y / 100);
-                    while (templates.roomCoordinatesOccupied.Contains(spawnPositionCheck))
-                    {
-                        iterator++;
-                        spawnPosition = new Vector2(transform.parent.position.x, transform.parent.position.y + (100 * iterator));
-                        spawnPositionCheck = new Vector2(spawnPosition.x / 140, spawnPosition.y / 100);
-                        Debug.Log("contained that spawn spot UP");
-                    }     
-                    rand = Random.Range(0, templates.bottomRooms.Length);
-                    Instantiate(templates.bottomRooms[rand], spawnPosition, new Quaternion());
+                    //pass in a positive y position value so the new room can spawn above this spawner's room
+                    spawnPosition = ChooseSpawnPosition(0f, 100f);
+                    //pick a random room from the bottom rooms list
+                    randomRoom = Random.Range(0, templates.bottomRooms.Length);
+                    //spawn the random room at generated spawn position
+                    Instantiate(templates.bottomRooms[randomRoom], spawnPosition, new Quaternion());
 
-                    templates.roomCoordinatesOccupied.Add(spawnPositionCheck);
-
-                    iterator = 1;
                     break;
                 case 2:
-                    spawnPosition = new Vector2(transform.parent.position.x, transform.parent.position.y - 100);
-                    spawnPositionCheck = new Vector2(spawnPosition.x / 140, spawnPosition.y / 100);
-                    while (templates.roomCoordinatesOccupied.Contains(spawnPositionCheck))
-                    {
-                        iterator++;
-                        spawnPosition = new Vector2(transform.parent.position.x, transform.parent.position.y - (100 * iterator));
-                        spawnPositionCheck = new Vector2(spawnPosition.x / 140, spawnPosition.y / 100);
+                    //pass in a negative y position value so the new room can spawn below this spawner's room
+                    spawnPosition = ChooseSpawnPosition(0f, -100f);
+                    //pick a random room from the top rooms list
+                    randomRoom = Random.Range(0, templates.topRooms.Length);
 
-                        Debug.Log("contained that spawn spot DOWN");
-                    }
+                    Instantiate(templates.topRooms[randomRoom], spawnPosition, new Quaternion());
 
-                    rand = Random.Range(0, templates.topRooms.Length);
-
-                    Instantiate(templates.topRooms[rand], spawnPosition, new Quaternion());
-
-                    templates.roomCoordinatesOccupied.Add(spawnPositionCheck);
-
-                    iterator = 1;
-                    
+                   
                     break;
                 case 3:
-                    spawnPosition = new Vector2(transform.parent.position.x + 140, transform.parent.position.y);
-                    spawnPositionCheck = new Vector2(spawnPosition.x / 140, spawnPosition.y / 100);
-
-                    while (templates.roomCoordinatesOccupied.Contains(spawnPositionCheck))
-                    {
-                        iterator++;
-                        spawnPosition = new Vector2(transform.parent.position.x + (140 * iterator), transform.parent.position.y);
-                        spawnPositionCheck = new Vector2(spawnPosition.x / 140, spawnPosition.y / 100);
-                        Debug.Log("contained that spawn spot RIGHT");
-                    }
-
-                    rand = Random.Range(0, templates.leftRooms.Length);
-                    Instantiate(templates.leftRooms[rand], spawnPosition, new Quaternion());
-                    iterator = 1;
-
-                    templates.roomCoordinatesOccupied.Add(spawnPositionCheck);
+                    //pass in a positive x position value so the new room can spawn to the right of this spawner's room
+                    spawnPosition = ChooseSpawnPosition(140f, 0f);
+                    //pick a random room from the left rooms list
+                    randomRoom = Random.Range(0, templates.leftRooms.Length);
+                    Instantiate(templates.leftRooms[randomRoom], spawnPosition, new Quaternion());
 
                     break;
                 case 4:
-                    spawnPosition = new Vector2(transform.parent.position.x - 140, transform.parent.position.y);
-                    spawnPositionCheck = new Vector2(spawnPosition.x / 140, spawnPosition.y / 100);
-                    while (templates.roomCoordinatesOccupied.Contains(spawnPositionCheck))
-                    {
-                        iterator++;
-                        spawnPosition = new Vector2(transform.parent.position.x - (140 * iterator), transform.parent.position.y);
-                        spawnPositionCheck = new Vector2(spawnPosition.x / 140, spawnPosition.y / 100);
-                        Debug.Log("contained that spawn spot LEFT");
-                    }
-                        
-
-                    rand = Random.Range(0, templates.rightRooms.Length);             
-                    Instantiate(templates.rightRooms[rand], spawnPosition, new Quaternion());
-                    iterator = 1;
-
-                    templates.roomCoordinatesOccupied.Add(spawnPositionCheck);
+                    //pass in a negative x position value so the new room can spawn to the left of this spawner's room
+                    spawnPosition = ChooseSpawnPosition(-140f, 0f);
+                    //pick a random room from the right rooms list
+                    randomRoom = Random.Range(0, templates.rightRooms.Length);             
+                    Instantiate(templates.rightRooms[randomRoom], spawnPosition, new Quaternion());
 
                     break;
             }
@@ -129,31 +86,35 @@ public class DungeonSpawner : MonoBehaviour
             //set roomsSpawned to true so that we can stop spawning rooms
             spawned = true;
 
-            //Debug.Log(transform.parent.gameObject.name + "   is   Spawned  =  " + spawned);
-
         }
         
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private Vector2 ChooseSpawnPosition(float xPosition, float yPosition)
     {
-        //if we collide with another spawn point, then we know another room has been spawned at this spawn point
-        //thus we should destory this spawn point to prevent more than one room spawning here
-        //if (collision.CompareTag("SpawnPoint"))
-        //{
-            //check if what we collided with, has a "spawned" bool equal to false
-            // also if this spawner has a "spawned" bool equal to false
-            // then spawn a wall blocking off any opening
-            //if(collision.gameObject.GetComponent<DungeonSpawner>().spawned == false && spawned == false)
-            //{
-                //Instantiate(templates.closedRoom, gameObject.transform.position, Quaternion.identity);
-                //Debug.Log("Destroy a colliding room!");
-                //Destroy(gameObject);
-            //}
-            //spawned = true;
-            //Debug.Log("Collided with another room!");
-            
-        //}
+        //this multiplier is used to multiply to the xPosition & yPosition if there are rooms on top of each other
+        int positionMultiplier = 1;
+
+        //generate a Vector2 for the new room based on this spawner's room's position
+        // ex. if this spawner is supposed to spawn a room with a bottom door,
+        // cont. then we know we must generate a room on top of this spawner's room (so we add a value to the transform.position.y (about 100))
+        Vector2 newSpawnPosition = new Vector2(transform.parent.position.x + xPosition, transform.parent.position.y + yPosition);
+        Vector2 spawnCoordinate = new Vector2(newSpawnPosition.x / xCoordinateDivider, newSpawnPosition.y / yCoordinateDivider);
+
+        //keep checking if the level manager's roomCoordinate list contains the coordinate
+        while (templates.roomCoordinatesOccupied.Contains(spawnCoordinate))
+        {
+            //increase the increment
+            positionMultiplier++;
+
+            newSpawnPosition = new Vector2(transform.parent.position.x + ( xPosition * positionMultiplier), transform.parent.position.y + ( yPosition * positionMultiplier));
+            spawnCoordinate = new Vector2(newSpawnPosition.x / xCoordinateDivider, newSpawnPosition.y / yCoordinateDivider);
+        }
+
+        //when while ends, we have a found a valid room coordinate, so we add it to the LevelManager's roomCoordinates list
+        templates.roomCoordinatesOccupied.Add(spawnCoordinate);
+
+        return newSpawnPosition;
     }
 
     private void OnDestroy()

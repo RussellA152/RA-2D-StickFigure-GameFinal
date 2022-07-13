@@ -16,6 +16,8 @@ public class BasicDungeon: MonoBehaviour
     [HideInInspector]
     public Vector2 roomCoordinate;
 
+    [SerializeField] private bool isStartingRoom; //is this room, the starting room? If so, we will manually add the coordinates to the list
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,24 +28,14 @@ public class BasicDungeon: MonoBehaviour
         //add this room to the general "rooms" list inside of LevelManager
         AddDungeon();
 
-        Debug.Log(gameObject.name + " coordinate is " + roomCoordinate);
-
+        if (isStartingRoom)
+            CreateCoordinate();
     }
 
     private void OnDestroy()
     {
         LevelManager.instance.onPlayerEnterNewArea -= GiveNewSpawnLocations;
         //LevelManager.instance.spawnNewRooms -= AddDungeon;
-    }
-    private void OnDisable()
-    {
-        //LevelManager.instance.spawnNewRooms -= AddDungeon;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     //give the level manager the spawn locations of this area
@@ -65,10 +57,16 @@ public class BasicDungeon: MonoBehaviour
         templates.rooms.Add(this.gameObject);
     }
 
+    //creates a room coordinate for this room
     private void CreateCoordinate()
     {
-        //roomCoordinate = new Vector2(transform.position.x / xCoordinateDivider, transform.position.y / yCoordinateDivider);
-        //templates.roomCoordinatesOccupied.Add(roomCoordinate);
-        //templates.roomCoordinates.Push(roomCoordinate);
+        roomCoordinate = new Vector2(transform.position.x / xCoordinateDivider, transform.position.y / yCoordinateDivider);
+        templates.roomCoordinatesOccupied.Add(roomCoordinate);
+    }
+
+    //sets the room coordinates equal to the parameter
+    public void SetCoordinates(Vector2 newCoordinate)
+    {
+        roomCoordinate = newCoordinate;
     }
 }

@@ -232,7 +232,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a253541213f66d74ea1f0e8d4f217b9f, type: 3}
   m_Name: 
@@ -268,7 +268,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1000
+  orthographic size: 18
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -485,19 +485,29 @@ MonoBehaviour:
   bottomRooms:
   - {fileID: 570149326502756555, guid: 48dc9f38638eb0d46b4c38e01044a185, type: 3}
   - {fileID: 570149326502756555, guid: d0190147e45f4c24a99d0437f41d1407, type: 3}
+  - {fileID: 570149326502756555, guid: d72d83cc0a124b0449ffb9d6f0606af8, type: 3}
+  - {fileID: 570149326502756555, guid: 6c0700753ea06ea43906a00e00f182ce, type: 3}
+  - {fileID: 570149326502756555, guid: cbdd51dbc0e53a14faf08f8d314a4d9c, type: 3}
   topRooms:
   - {fileID: 570149326502756555, guid: 48dc9f38638eb0d46b4c38e01044a185, type: 3}
   - {fileID: 570149326502756555, guid: a0f147bcb1f821c47a2e04108faf3010, type: 3}
+  - {fileID: 570149326502756555, guid: 6c0700753ea06ea43906a00e00f182ce, type: 3}
+  - {fileID: 570149326502756555, guid: cbdd51dbc0e53a14faf08f8d314a4d9c, type: 3}
   leftRooms:
   - {fileID: 570149326502756555, guid: 2042fb050979a2e4783867f633e8b6e2, type: 3}
   - {fileID: 570149326502756555, guid: bf3ea09a68900254b8194b36dcc36c52, type: 3}
+  - {fileID: 570149326502756555, guid: d72d83cc0a124b0449ffb9d6f0606af8, type: 3}
+  - {fileID: 570149326502756555, guid: 6c0700753ea06ea43906a00e00f182ce, type: 3}
   rightRooms:
   - {fileID: 570149326502756555, guid: aa1299fbaa38f7948a12703499147cf7, type: 3}
   - {fileID: 570149326502756555, guid: bf3ea09a68900254b8194b36dcc36c52, type: 3}
+  - {fileID: 570149326502756555, guid: d72d83cc0a124b0449ffb9d6f0606af8, type: 3}
+  - {fileID: 570149326502756555, guid: cbdd51dbc0e53a14faf08f8d314a4d9c, type: 3}
   closedRoom: {fileID: 570149326502756555, guid: 6cec2dd92c97c22429eb98a0159a4568, type: 3}
   rooms: []
   numberOfSpawnedRooms: 0
   roomCap: 6
+  roomCoordinatesOccupied: []
 --- !u!1 &1672888930
 GameObject:
   m_ObjectHideFlags: 0
