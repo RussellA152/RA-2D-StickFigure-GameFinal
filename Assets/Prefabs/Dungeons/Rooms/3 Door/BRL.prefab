@@ -2344,6 +2344,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 570149326502756553}
     m_Modifications:
     - target: {fileID: 5913742899722911543, guid: e7605e05a0f3dfe4c9d6c8a7fd1bb019, type: 3}
+      propertyPath: room
+      value: 
+      objectReference: {fileID: 570149326502756552}
+    - target: {fileID: 5913742899722911543, guid: e7605e05a0f3dfe4c9d6c8a7fd1bb019, type: 3}
       propertyPath: openingDirection
       value: 4
       objectReference: {fileID: 0}
@@ -2410,6 +2414,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 570149326502756553}
     m_Modifications:
     - target: {fileID: 5913742899722911543, guid: e7605e05a0f3dfe4c9d6c8a7fd1bb019, type: 3}
+      propertyPath: room
+      value: 
+      objectReference: {fileID: 570149326502756552}
+    - target: {fileID: 5913742899722911543, guid: e7605e05a0f3dfe4c9d6c8a7fd1bb019, type: 3}
       propertyPath: openingDirection
       value: 2
       objectReference: {fileID: 0}
@@ -2475,6 +2483,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 570149326502756553}
     m_Modifications:
+    - target: {fileID: 5913742899722911543, guid: e7605e05a0f3dfe4c9d6c8a7fd1bb019, type: 3}
+      propertyPath: room
+      value: 
+      objectReference: {fileID: 570149326502756552}
     - target: {fileID: 5913742899722911543, guid: e7605e05a0f3dfe4c9d6c8a7fd1bb019, type: 3}
       propertyPath: openingDirection
       value: 3

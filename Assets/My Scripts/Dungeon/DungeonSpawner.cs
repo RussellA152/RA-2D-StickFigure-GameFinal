@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class DungeonSpawner : MonoBehaviour
 {
+    [Header("Room properties")]
+    [SerializeField] private BasicDungeon room;
+    [SerializeField] private GameObject door;
+
+    [Header("Door Type To Instantiate")]
     [SerializeField] private int openingDirection;
     // 1 --> need bottom door
     // 2 --> need top door
@@ -16,7 +21,7 @@ public class DungeonSpawner : MonoBehaviour
     private int randomRoom; //a random number that will be used to index through the room lists
 
     [HideInInspector]
-    public bool spawned = false; // a bool that is true or false depending on if this spawner spawned any rooms
+    public bool spawnedRoom = false; // a bool that is true or false depending on if this spawner spawned any rooms
 
     private float destroyTime = 4f; //time until this spawner is destroyed
 
@@ -28,19 +33,20 @@ public class DungeonSpawner : MonoBehaviour
 
     private void Start()
     {
-        Destroy(gameObject, destroyTime);
+        //Destroy(gameObject, destroyTime);
 
         //sets "templates" equal to the LevelManager singleton so we can access the list of potential rooms
         templates = LevelManager.instance;
 
-        Invoke("SpawnRooms", 0.1f);
+        Invoke("SpawnRooms", 0.8f);
 
     }
 
     private void SpawnRooms()
     {
-        //only spawn rooms while roomsSpawned is false
-        if (!spawned && templates.numberOfSpawnedRooms < templates.roomCap)
+        //only a room if this spawner hasn't already
+        // and if we havent reached the cap on room spawns
+        if (!spawnedRoom && templates.numberOfSpawnedRooms < templates.roomCap)
         {
             switch (openingDirection)
             {
@@ -52,16 +58,17 @@ public class DungeonSpawner : MonoBehaviour
                     //spawn the random room at generated spawn position
                     Instantiate(templates.bottomRooms[randomRoom], spawnPosition, new Quaternion());
 
+
                     break;
                 case 2:
                     //pass in a negative y position value so the new room can spawn below this spawner's room
                     spawnPosition = ChooseSpawnPosition(0f, -100f);
                     //pick a random room from the top rooms list
                     randomRoom = Random.Range(0, templates.topRooms.Length);
-
                     Instantiate(templates.topRooms[randomRoom], spawnPosition, new Quaternion());
+                    
 
-                   
+
                     break;
                 case 3:
                     //pass in a positive x position value so the new room can spawn to the right of this spawner's room
@@ -69,6 +76,7 @@ public class DungeonSpawner : MonoBehaviour
                     //pick a random room from the left rooms list
                     randomRoom = Random.Range(0, templates.leftRooms.Length);
                     Instantiate(templates.leftRooms[randomRoom], spawnPosition, new Quaternion());
+                   
 
                     break;
                 case 4:
@@ -77,16 +85,41 @@ public class DungeonSpawner : MonoBehaviour
                     //pick a random room from the right rooms list
                     randomRoom = Random.Range(0, templates.rightRooms.Length);             
                     Instantiate(templates.rightRooms[randomRoom], spawnPosition, new Quaternion());
-
+                    
                     break;
             }
             //number of spawned rooms increments by 1 
             templates.numberOfSpawnedRooms++;
 
-            //set roomsSpawned to true so that we can stop spawning rooms
-            spawned = true;
+            //set spawnedRoom to true to ensure this spawner only creates one room
+            spawnedRoom = true;
 
         }
+
+        //only try to remove doors when all rooms have finished spawning
+        else if (templates.roomGenerationComplete)
+        {
+            switch (openingDirection)
+            {
+                case 1:
+                    //Check if a room above this spawner's room exists
+                    CheckAdjacentRooms(0f, 1f);
+                    break;
+                case 2:
+                    //Check if a room below this spawner's room exists
+                    CheckAdjacentRooms(0f, -1f);
+                    break;
+                case 3:
+                    //Check if a room to the right of this spawner's room exists
+                    CheckAdjacentRooms(1f, 0f);
+                    break;
+                case 4:
+                    //Check if a room to the left of this spawner's room exists
+                    CheckAdjacentRooms(-1f, 0f);
+                    break;
+            }
+        }
+        
         
     }
 
@@ -98,7 +131,7 @@ public class DungeonSpawner : MonoBehaviour
         //generate a Vector2 for the new room based on this spawner's room's position
         // ex. if this spawner is supposed to spawn a room with a bottom door,
         // cont. then we know we must generate a room on top of this spawner's room (so we add a value to the transform.position.y (about 100))
-        Vector2 newSpawnPosition = new Vector2(transform.parent.position.x + xPosition, transform.parent.position.y + yPosition);
+        Vector2 newSpawnPosition = new Vector2(room.transform.position.x + xPosition, room.transform.position.y + yPosition);
         Vector2 spawnCoordinate = new Vector2(newSpawnPosition.x / xCoordinateDivider, newSpawnPosition.y / yCoordinateDivider);
 
         //keep checking if the level manager's roomCoordinate list contains the coordinate
@@ -107,7 +140,7 @@ public class DungeonSpawner : MonoBehaviour
             //increase the increment
             positionMultiplier++;
 
-            newSpawnPosition = new Vector2(transform.parent.position.x + ( xPosition * positionMultiplier), transform.parent.position.y + ( yPosition * positionMultiplier));
+            newSpawnPosition = new Vector2(room.transform.position.x + ( xPosition * positionMultiplier), room.transform.position.y + ( yPosition * positionMultiplier));
             spawnCoordinate = new Vector2(newSpawnPosition.x / xCoordinateDivider, newSpawnPosition.y / yCoordinateDivider);
         }
 
@@ -116,6 +149,27 @@ public class DungeonSpawner : MonoBehaviour
 
         return newSpawnPosition;
     }
+
+    //this function checks if there is a room next to this spawner's room
+    //if so, leave this room alone
+    //if not, then remove this door
+    private void CheckAdjacentRooms(float xCoordinate, float yCoordinate)
+    {
+        //make a vector2 representing a room next to this spawner's room
+        //could be to the left (x - 1) or right (x + 1)
+        //could be below (y - 1) or above (y + 1)
+        Vector2 adjacentRoomCoordinate = new Vector2(room.roomCoordinate.x + xCoordinate, room.roomCoordinate.y + yCoordinate);
+
+        //if the room coordinate list from LevelManager does NOT contain this adjacent room coordinate,
+        // then there is an opening and we should remove this door
+         if ( !templates.roomCoordinatesOccupied.Contains(adjacentRoomCoordinate) )
+        {
+            Debug.Log("REMOVE MY DOOR " + room.gameObject.name);
+        }
+                
+        
+    }
+
 
     private void OnDestroy()
     {

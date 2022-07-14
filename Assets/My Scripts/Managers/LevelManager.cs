@@ -35,7 +35,8 @@ public class LevelManager : MonoBehaviour
 
     public List<Vector2> roomCoordinatesOccupied = new List<Vector2>();
 
-    //public Stack<Vector2> roomCoordinates = new Stack<Vector2>();
+    [HideInInspector]
+    public bool roomGenerationComplete; //are all the rooms finished spawning in?
 
     public enum DungeonSize
     {
@@ -80,7 +81,14 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // if the number of spawned rooms is equal to the room cap
+        // then we know we have reached the max number of rooms
+        // and rooms will stop spawning
+        if (numberOfSpawnedRooms == roomCap)
+            roomGenerationComplete = true;
+        else
+            roomGenerationComplete = false;
+
     }
 
     public void EnteringNewAreaEvent()

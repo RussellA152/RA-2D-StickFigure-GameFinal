@@ -13,7 +13,7 @@ public class BasicDungeon: MonoBehaviour
     private int xCoordinateDivider = 140;
     private int yCoordinateDivider = 100;
 
-    [HideInInspector]
+    
     public Vector2 roomCoordinate;
 
     [SerializeField] private bool isStartingRoom; //is this room, the starting room? If so, we will manually add the coordinates to the list
@@ -28,8 +28,10 @@ public class BasicDungeon: MonoBehaviour
         //add this room to the general "rooms" list inside of LevelManager
         AddDungeon();
 
+        //starting room needs to create its own coordinate because it is not spawned by a dungeonSpawner
         if (isStartingRoom)
             CreateCoordinate();
+
     }
 
     private void OnDestroy()
@@ -61,6 +63,7 @@ public class BasicDungeon: MonoBehaviour
     private void CreateCoordinate()
     {
         roomCoordinate = new Vector2(transform.position.x / xCoordinateDivider, transform.position.y / yCoordinateDivider);
+
         templates.roomCoordinatesOccupied.Add(roomCoordinate);
     }
 

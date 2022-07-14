@@ -47,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnLocationsOfThisLevel: []
+  roomCoordinate: {x: 0, y: 0}
+  isStartingRoom: 0
 --- !u!1 &570149326587470351
 GameObject:
   m_ObjectHideFlags: 0
@@ -1798,6 +1800,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 570149326502756553}
     m_Modifications:
+    - target: {fileID: 5913742899722911543, guid: e7605e05a0f3dfe4c9d6c8a7fd1bb019, type: 3}
+      propertyPath: room
+      value: 
+      objectReference: {fileID: 570149326502756552}
     - target: {fileID: 5913742899722911543, guid: e7605e05a0f3dfe4c9d6c8a7fd1bb019, type: 3}
       propertyPath: openingDirection
       value: 1
