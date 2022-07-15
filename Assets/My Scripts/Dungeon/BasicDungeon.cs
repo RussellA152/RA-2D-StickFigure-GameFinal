@@ -10,8 +10,8 @@ public class BasicDungeon: MonoBehaviour
 
     private LevelManager templates;
 
-    private int xCoordinateDivider = 140;
-    private int yCoordinateDivider = 100;
+    private int xCoordinateDivider = 150;
+    private int yCoordinateDivider = 110;
 
     
     public Vector2 roomCoordinate;

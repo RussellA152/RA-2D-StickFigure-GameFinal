@@ -70,9 +70,10 @@ public class LevelManager : MonoBehaviour
         //TEMPORARY *
         //This event system should be called when the player has entered a new area
         EnteringNewAreaEvent();
-
         
         RandomRoomCap();
+
+        //SpawnNewRoomsEvent();
 
         Debug.Log("Room cap is " + roomCap);
 
