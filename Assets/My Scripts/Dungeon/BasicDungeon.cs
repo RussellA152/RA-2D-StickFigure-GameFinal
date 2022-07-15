@@ -56,7 +56,7 @@ public class BasicDungeon: MonoBehaviour
     // if this function was inside of DungeonSpawner, then rooms would be added in multiple times
     private void AddDungeon()
     {
-        templates.rooms.Add(this.gameObject);
+        templates.spawnedRooms.Add(this.gameObject);
     }
 
     //creates a room coordinate for this room

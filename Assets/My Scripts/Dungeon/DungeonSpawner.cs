@@ -10,7 +10,7 @@ public class DungeonSpawner : MonoBehaviour
     [SerializeField] private GameObject door;
 
     [Header("Door Type To Instantiate")]
-    [SerializeField] private int openingDirection;
+    private int openingDirection;
     // 1 --> need bottom door
     // 2 --> need top door
     // 3 --> need left door
@@ -48,19 +48,26 @@ public class DungeonSpawner : MonoBehaviour
 
     private void SpawnRooms()
     {
-        //only a room if this spawner hasn't already
-        // and if we havent reached the cap on room spawns
+        //only spawn a room if this spawner hasn't already
+        //and if we havent reached the cap on room spawns
         if (!spawnedRoom && templates.numberOfSpawnedRooms < templates.roomCap)
         {
+            //pick a random direction to spawn a room in
+            // 1 --> need bottom door
+            // 2 --> need top door
+            // 3 --> need left door
+            // 4 --> need right door
+            openingDirection = Random.Range(1, 5);
+
             switch (openingDirection)
             {
                 case 1:
                     //pass in a positive y position value so the new room can spawn above this spawner's room
                     spawnPosition = ChooseSpawnPosition(0f, 110f);
                     //pick a random room from the bottom rooms list
-                    randomRoom = Random.Range(0, templates.bottomRooms.Length);
+                    randomRoom = Random.Range(0, templates.allRooms.Length);
                     //spawn the random room at generated spawn position
-                    GameObject bottomRoomSpawned = Instantiate(templates.bottomRooms[randomRoom], spawnPosition, new Quaternion());
+                    GameObject bottomRoomSpawned = Instantiate(templates.allRooms[randomRoom], spawnPosition, new Quaternion());
                     //set the coordinates of this new bottom room
                     bottomRoomSpawned.GetComponent<BasicDungeon>().SetCoordinates(roomCoordinatesToGive);
 
@@ -70,8 +77,8 @@ public class DungeonSpawner : MonoBehaviour
                     //pass in a negative y position value so the new room can spawn below this spawner's room
                     spawnPosition = ChooseSpawnPosition(0f, -110f);
                     //pick a random room from the top rooms list
-                    randomRoom = Random.Range(0, templates.topRooms.Length);
-                    GameObject topRoomSpawned = Instantiate(templates.topRooms[randomRoom], spawnPosition, new Quaternion());
+                    randomRoom = Random.Range(0, templates.allRooms.Length);
+                    GameObject topRoomSpawned = Instantiate(templates.allRooms[randomRoom], spawnPosition, new Quaternion());
                     //set the coordinates of this new top room
                     topRoomSpawned.GetComponent<BasicDungeon>().SetCoordinates(roomCoordinatesToGive);
 
@@ -81,8 +88,8 @@ public class DungeonSpawner : MonoBehaviour
                     //pass in a positive x position value so the new room can spawn to the right of this spawner's room
                     spawnPosition = ChooseSpawnPosition(150f, 0f);
                     //pick a random room from the left rooms list
-                    randomRoom = Random.Range(0, templates.leftRooms.Length);
-                    GameObject leftRoomSpawned = Instantiate(templates.leftRooms[randomRoom], spawnPosition, new Quaternion());
+                    randomRoom = Random.Range(0, templates.allRooms.Length);
+                    GameObject leftRoomSpawned = Instantiate(templates.allRooms[randomRoom], spawnPosition, new Quaternion());
                     //set the coordinates of this new left room
                     leftRoomSpawned.GetComponent<BasicDungeon>().SetCoordinates(roomCoordinatesToGive);
 
@@ -92,8 +99,8 @@ public class DungeonSpawner : MonoBehaviour
                     //pass in a negative x position value so the new room can spawn to the left of this spawner's room
                     spawnPosition = ChooseSpawnPosition(-150f, 0f);
                     //pick a random room from the right rooms list
-                    randomRoom = Random.Range(0, templates.rightRooms.Length);
-                    GameObject rightRoomSpawned = Instantiate(templates.rightRooms[randomRoom], spawnPosition, new Quaternion());
+                    randomRoom = Random.Range(0, templates.allRooms.Length);
+                    GameObject rightRoomSpawned = Instantiate(templates.allRooms[randomRoom], spawnPosition, new Quaternion());
                     //set the coordinates of this new right room
                     rightRoomSpawned.GetComponent<BasicDungeon>().SetCoordinates(roomCoordinatesToGive);
                     break;
@@ -130,6 +137,8 @@ public class DungeonSpawner : MonoBehaviour
 
             newSpawnPosition = new Vector2(room.transform.position.x + ( xPosition * positionMultiplier), room.transform.position.y + ( yPosition * positionMultiplier));
             roomCoordinatesToGive = new Vector2(newSpawnPosition.x / xCoordinateDivider, newSpawnPosition.y / yCoordinateDivider);
+
+            Debug.Log("Move me again!");
         }
 
         //when while ends, we have a found a valid room coordinate, so we add it to the LevelManager's roomCoordinates list
