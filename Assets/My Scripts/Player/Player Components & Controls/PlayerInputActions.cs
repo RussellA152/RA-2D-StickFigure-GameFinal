@@ -129,6 +129,14 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""8a4a42d3-bba7-41e3-ba94-b941559e679d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -1000,6 +1008,28 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""action"": ""Back Heavy Attack Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3754890f-f500-4f9e-933c-8d63d268394f"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""35501238-639c-4e80-bd77-56a4b8f9257e"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1589,6 +1619,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_Player_Slide = m_Player.FindAction("Slide", throwIfNotFound: true);
         m_Player_FlipRight = m_Player.FindAction("Flip Right", throwIfNotFound: true);
         m_Player_FlipLeft = m_Player.FindAction("Flip Left", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1664,6 +1695,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Slide;
     private readonly InputAction m_Player_FlipRight;
     private readonly InputAction m_Player_FlipLeft;
+    private readonly InputAction m_Player_Interact;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1682,6 +1714,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         public InputAction @Slide => m_Wrapper.m_Player_Slide;
         public InputAction @FlipRight => m_Wrapper.m_Player_FlipRight;
         public InputAction @FlipLeft => m_Wrapper.m_Player_FlipLeft;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1733,6 +1766,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @FlipLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlipLeft;
                 @FlipLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlipLeft;
                 @FlipLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlipLeft;
+                @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1779,6 +1815,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @FlipLeft.started += instance.OnFlipLeft;
                 @FlipLeft.performed += instance.OnFlipLeft;
                 @FlipLeft.canceled += instance.OnFlipLeft;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -1949,6 +1988,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnSlide(InputAction.CallbackContext context);
         void OnFlipRight(InputAction.CallbackContext context);
         void OnFlipLeft(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

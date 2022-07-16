@@ -132,7 +132,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 570149326502756553, guid: 5952141b836031b4782683fcfc8d896f, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 570149326502756553, guid: 5952141b836031b4782683fcfc8d896f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -325,7 +325,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 18
+  orthographic size: 25
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -353,7 +353,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &891531173
 GameObject:
@@ -524,7 +524,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1207705364
 MonoBehaviour:
@@ -550,7 +550,7 @@ MonoBehaviour:
   - {fileID: 570149326502756555, guid: 6c0700753ea06ea43906a00e00f182ce, type: 3}
   - {fileID: 570149326502756555, guid: cbdd51dbc0e53a14faf08f8d314a4d9c, type: 3}
   closedRoom: {fileID: 570149326502756555, guid: 6cec2dd92c97c22429eb98a0159a4568, type: 3}
-  rooms: []
+  spawnedRooms: []
   numberOfSpawnedRooms: 0
   roomCap: 6
   roomCoordinatesOccupied: []
@@ -748,7 +748,7 @@ Transform:
   - {fileID: 1672888931}
   - {fileID: 374404468}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1777725233
 BoxCollider2D:
@@ -1084,7 +1084,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2098924377
 MonoBehaviour:

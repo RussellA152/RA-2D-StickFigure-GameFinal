@@ -7,9 +7,14 @@ using UnityEngine;
 //and it will add a door to ensure all rooms connect
 //this script also checks if there aren't any adjacent rooms, then it will remove doors (prevents openings leading to nowhere)
 //only checks for doors AFTER room generation has finished
-public class DoorCheck : MonoBehaviour
+public class AdjacentRoomCheck : MonoBehaviour
 {
     [SerializeField] private BasicDungeon room; //the full room
+
+    //private BasicDungeon roomBelow; // the room BELOW this room
+    //private BasicDungeon roomAbove; // the room ABOVE this room
+    //private BasicDungeon roomLeft; // the room to the LEFT of this room
+    //private BasicDungeon roomRight; // the room to the RIGHT of this room
 
     //the 4 doors of this room (some doors could already be disabled or enabled, it depends on the prefab)
     //but if needed, any door can be disabled or enabled 
@@ -87,6 +92,24 @@ public class DoorCheck : MonoBehaviour
         if (doorToDisable.gameObject.activeSelf)
             doorToDisable.gameObject.SetActive(false);
     }
+    /*
+    public BasicDungeon GetRoomAbove()
+    {
+        return roomAbove;
+    }
+    public BasicDungeon GetRoomBelow()
+    {
+        return roomBelow;
+    }
+    public BasicDungeon GetRoomLeft()
+    {
+        return roomLeft;
+    }
+    public BasicDungeon GetRoomRight()
+    {
+        return roomRight;
+    }
+    */
 
     private void OnDisable()
     {

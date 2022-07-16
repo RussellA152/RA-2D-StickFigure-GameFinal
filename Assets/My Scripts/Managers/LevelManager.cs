@@ -16,7 +16,7 @@ public class LevelManager : MonoBehaviour
 
     public DungeonSize dungeonSize; //the "DungeonSize" state determines how many rooms we will have
 
-    [Header("All Rooms")]
+    [Header("All Rooms That Can Be Spawned")]
     public GameObject[] allRooms; //all room available to spawn
     //public GameObject[] bottomRooms; //array of all rooms with a bottom door
     //public GameObject[] topRooms; //array of all rooms with a top door
@@ -25,7 +25,6 @@ public class LevelManager : MonoBehaviour
 
     public GameObject closedRoom; // a "wall" that is about the size of a room that prevents player from leaving dungeon
 
-    [Header("Currently Spawned Rooms")]
     public List<GameObject> spawnedRooms; //list of currently spawned in rooms (always 1 higher than spawned rooms because starting room is included)
 
     [HideInInspector]

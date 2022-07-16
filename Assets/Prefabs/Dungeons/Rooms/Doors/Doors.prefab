@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1498154974420076222}
   - component: {fileID: 380181056530003197}
   - component: {fileID: 6406310488514091558}
+  - component: {fileID: 2376680229232961248}
   m_Layer: 0
   m_Name: Right Door
   m_TagString: Untagged
@@ -167,6 +168,18 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!114 &2376680229232961248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2916698472010811107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfb73236ed894534db80ddaf44947903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7334178795019466107
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,6 +191,7 @@ GameObject:
   - component: {fileID: 6773203754727550135}
   - component: {fileID: 3608754208225232518}
   - component: {fileID: 8766653433221921448}
+  - component: {fileID: 782567093553658677}
   m_Layer: 0
   m_Name: Bottom Door
   m_TagString: Untagged
@@ -334,6 +348,18 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!114 &782567093553658677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7334178795019466107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfb73236ed894534db80ddaf44947903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8524058238408729081
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,6 +405,7 @@ GameObject:
   - component: {fileID: 5100253726539785122}
   - component: {fileID: 1703526204565742710}
   - component: {fileID: 5468651463207976549}
+  - component: {fileID: 5200731307171705455}
   m_Layer: 0
   m_Name: Left Door
   m_TagString: Untagged
@@ -535,6 +562,18 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!114 &5200731307171705455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8638569189068874856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfb73236ed894534db80ddaf44947903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9187087131778338561
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,6 +585,7 @@ GameObject:
   - component: {fileID: 3039406399667521047}
   - component: {fileID: 6627905595073268924}
   - component: {fileID: 2089562859803666479}
+  - component: {fileID: 4896951875835543921}
   m_Layer: 0
   m_Name: Top Door
   m_TagString: Untagged
@@ -702,3 +742,15 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!114 &4896951875835543921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9187087131778338561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfb73236ed894534db80ddaf44947903, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -7,7 +7,6 @@ public class DungeonSpawner : MonoBehaviour
 {
     [Header("Room properties")]
     [SerializeField] private BasicDungeon room;
-    [SerializeField] private GameObject door;
 
     [Header("Door Type To Instantiate")]
     private int openingDirection;
@@ -71,6 +70,7 @@ public class DungeonSpawner : MonoBehaviour
                     //set the coordinates of this new bottom room
                     bottomRoomSpawned.GetComponent<BasicDungeon>().SetCoordinates(roomCoordinatesToGive);
 
+                    //Debug.Log(room.gameObject.name +" spawned " + bottomRoomSpawned);
 
                     break;
                 case 2:
@@ -82,6 +82,7 @@ public class DungeonSpawner : MonoBehaviour
                     //set the coordinates of this new top room
                     topRoomSpawned.GetComponent<BasicDungeon>().SetCoordinates(roomCoordinatesToGive);
 
+                    //Debug.Log(room.gameObject.name + " spawned " + topRoomSpawned);
 
                     break;
                 case 3:
@@ -93,6 +94,7 @@ public class DungeonSpawner : MonoBehaviour
                     //set the coordinates of this new left room
                     leftRoomSpawned.GetComponent<BasicDungeon>().SetCoordinates(roomCoordinatesToGive);
 
+                    //Debug.Log(room.gameObject.name + " spawned " + leftRoomSpawned);
 
                     break;
                 case 4:
@@ -103,6 +105,8 @@ public class DungeonSpawner : MonoBehaviour
                     GameObject rightRoomSpawned = Instantiate(templates.allRooms[randomRoom], spawnPosition, new Quaternion());
                     //set the coordinates of this new right room
                     rightRoomSpawned.GetComponent<BasicDungeon>().SetCoordinates(roomCoordinatesToGive);
+
+                    //Debug.Log(room.gameObject.name + " spawned " + rightRoomSpawned);
                     break;
             }
             //number of spawned rooms increments by 1 
@@ -138,7 +142,7 @@ public class DungeonSpawner : MonoBehaviour
             newSpawnPosition = new Vector2(room.transform.position.x + ( xPosition * positionMultiplier), room.transform.position.y + ( yPosition * positionMultiplier));
             roomCoordinatesToGive = new Vector2(newSpawnPosition.x / xCoordinateDivider, newSpawnPosition.y / yCoordinateDivider);
 
-            Debug.Log("Move me again!");
+            //Debug.Log("Move me again!");
         }
 
         //when while ends, we have a found a valid room coordinate, so we add it to the LevelManager's roomCoordinates list

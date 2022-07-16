@@ -10,6 +10,8 @@ public class PlayerComponents : MonoBehaviour
 {
     public PlayerInputActions playerControls;
 
+    private InputAction interact; //input action used for interacting with objects (opening doors or picking up items)
+
     private InputAction move; //input action used for WASD movement
     private InputAction jump; //input action used for jumping 
 
@@ -41,7 +43,7 @@ public class PlayerComponents : MonoBehaviour
     private bool playerFacingRight;
     private bool playerIsGrounded;
 
-    //private bool canInteract = true; //this bool determines if the player should be able to move, attack, or jump (set to false when attacked)
+    private bool canInteract = true; //this bool determines if the player should be able to move, attack, or jump (set to false when attacked)
 
     private bool canAttack = true; //this bool determines if the player is allowed to attack
 
@@ -77,6 +79,8 @@ public class PlayerComponents : MonoBehaviour
 
     private void OnEnable()
     {
+        interact = playerControls.Player.Interact;
+
         move = playerControls.Player.Move;
         jump = playerControls.Player.Jump;
 
@@ -95,6 +99,8 @@ public class PlayerComponents : MonoBehaviour
         turnRight = playerControls.Player.FlipRight;
         turnLeft = playerControls.Player.FlipLeft;
 
+        interact.Enable();
+        
         move.Enable();
         jump.Enable();
 
@@ -116,6 +122,8 @@ public class PlayerComponents : MonoBehaviour
     }
     private void OnDisable()
     {
+        interact.Disable();
+
         move.Disable();
         jump.Disable();
 
@@ -135,26 +143,9 @@ public class PlayerComponents : MonoBehaviour
         turnLeft.Disable();
     }
 
-
-    public void SetCanAttack(bool boolean)
+    public void SetCanInteract(bool boolean)
     {
-        canAttack = boolean;
-        canBackAttack = boolean;
-
-    }
-    public void SetCanBackAttack(bool boolean)
-    {
-        canBackAttack = boolean;
-    }
-
-    //retrieves the canAttack boolean
-    public bool GetCanAttack()
-    {
-        return canAttack;
-    }
-    public bool GetCanBackAttack()
-    {
-        return canBackAttack;
+        canInteract = boolean;
     }
 
     public void SetCanMove(bool boolean)
@@ -189,6 +180,32 @@ public class PlayerComponents : MonoBehaviour
     {
         playerIsGrounded = boolean;
     }
+    public void SetCanAttack(bool boolean)
+    {
+        canAttack = boolean;
+        canBackAttack = boolean;
+
+    }
+    public void SetCanBackAttack(bool boolean)
+    {
+        canBackAttack = boolean;
+    }
+
+    public bool GetCanInteract()
+    {
+        return canInteract;
+    }
+
+    //retrieves the canAttack boolean
+    public bool GetCanAttack()
+    {
+        return canAttack;
+    }
+    public bool GetCanBackAttack()
+    {
+        return canBackAttack;
+    }
+
     public bool GetCanJump()
     {
         return canJump;
@@ -258,6 +275,11 @@ public class PlayerComponents : MonoBehaviour
     public bool GetPlayerIsGrounded()
     {
         return playerIsGrounded;
+    }
+
+    public InputAction GetInteractionButton()
+    {
+        return interact;
     }
 
     public InputAction GetMove()
