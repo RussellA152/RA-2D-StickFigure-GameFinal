@@ -14,8 +14,10 @@ public class AISpawner : MonoBehaviour
     ObjectPool<EnemyController> enemyPool; //pool of regular enemies (fast, fat, ranged)
     ObjectPool<EnemyController> bossEnemyPool; //pool of boss enemies (might use?)
 
-    [SerializeField] private int defaultCapacity; // the capacity of enemies (not entirely sure what this does)
-    [SerializeField] private int maximumCapacity; // the maximum number of enemies
+    private int defaultCapacity; // the capacity of enemies (not entirely sure what this does)
+
+    [SerializeField] private int amountToSpawn; // the maximum number of enemies
+    [SerializeField] private int inReserve;
 
     [SerializeField] private int inactiveCount; // amount of inactive enemies
     [SerializeField] private int activeCount; // amount of active enemies
@@ -26,7 +28,7 @@ public class AISpawner : MonoBehaviour
 
     private void Awake()
     {
-        enemyPool = new ObjectPool<EnemyController>(CreateEnemy, OnTakeEnemyFromPool, OnReturnEnemyToPool, null, true, defaultCapacity, maximumCapacity);
+        enemyPool = new ObjectPool<EnemyController>(CreateEnemy, OnTakeEnemyFromPool, OnReturnEnemyToPool, null, true, defaultCapacity, amountToSpawn);
 
     }
 
@@ -45,10 +47,10 @@ public class AISpawner : MonoBehaviour
         inactiveCount = enemyPool.CountInactive;
         activeCount = enemyPool.CountActive;
 
-        //if (enemyPool.CountActive < maximumCapacity)
-        //{
-            //var enemy = enemyPool.Get();
-        //}
+        if (enemyPool.CountActive < amountToSpawn && inReserve > 0)
+        {
+            var enemy = enemyPool.Get();
+        }
 
         
     }
@@ -77,6 +79,8 @@ public class AISpawner : MonoBehaviour
         //set the enemy's pool equal to this pool
         enemy.SetPool(enemyPool);
 
+        
+
         return enemy;
 
     }
@@ -90,6 +94,8 @@ public class AISpawner : MonoBehaviour
 
         enemy.gameObject.SetActive(true);
 
+        inReserve--;
+
         //Debug.Log("Give me a scriptable object!");
     }
 
@@ -97,6 +103,8 @@ public class AISpawner : MonoBehaviour
     void OnReturnEnemyToPool(EnemyController enemy)
     {
         enemy.gameObject.SetActive(false);
+
+        inReserve++;
     }
 
 }

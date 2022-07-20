@@ -325,7 +325,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 25
+  orthographic size: 21
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -355,6 +355,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &698832663 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 570149326502756552, guid: 5952141b836031b4782683fcfc8d896f, type: 3}
+  m_PrefabInstance: {fileID: 284434527}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7afd17efbf91e1b46b5d3d17007f90c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &891531173
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,7 +549,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96cafe58a1a34e44289563d9f5d7ef8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentRoom: {fileID: 698832663}
   dungeonSize: 2
+  dungeonGenerationState: 0
   allRooms:
   - {fileID: 570149326502756555, guid: d0190147e45f4c24a99d0437f41d1407, type: 3}
   - {fileID: 570149326502756555, guid: a0f147bcb1f821c47a2e04108faf3010, type: 3}
@@ -549,12 +562,9 @@ MonoBehaviour:
   - {fileID: 570149326502756555, guid: d72d83cc0a124b0449ffb9d6f0606af8, type: 3}
   - {fileID: 570149326502756555, guid: 6c0700753ea06ea43906a00e00f182ce, type: 3}
   - {fileID: 570149326502756555, guid: cbdd51dbc0e53a14faf08f8d314a4d9c, type: 3}
-  closedRoom: {fileID: 570149326502756555, guid: 6cec2dd92c97c22429eb98a0159a4568, type: 3}
   spawnedRooms: []
   numberOfSpawnedRooms: 0
   roomCap: 6
-  roomCoordinatesOccupied: []
-  roomGenerationComplete: 0
 --- !u!1 &1672888930
 GameObject:
   m_ObjectHideFlags: 0
@@ -601,7 +611,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1704718309
 Transform:
   m_ObjectHideFlags: 0
@@ -1112,8 +1122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 184d473b0289a274a8e7f774aafbb281, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultCapacity: 0
-  maximumCapacity: 5
+  amountToSpawn: 5
+  inReserve: 20
   inactiveCount: 0
   activeCount: 0
   enemyPrefab: {fileID: 6875883259916410309, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}

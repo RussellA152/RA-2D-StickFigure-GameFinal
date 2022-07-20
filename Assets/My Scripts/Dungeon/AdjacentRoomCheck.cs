@@ -18,16 +18,17 @@ public class AdjacentRoomCheck : MonoBehaviour
 
     //the 4 doors of this room (some doors could already be disabled or enabled, it depends on the prefab)
     //but if needed, any door can be disabled or enabled 
-    [SerializeField] private Transform bottomDoor;
-    [SerializeField] private Transform topDoor;
-    [SerializeField] private Transform leftDoor;
-    [SerializeField] private Transform rightDoor;
+    [Header("All Doors")]
+    [SerializeField] private Door bottomDoor;
+    [SerializeField] private Door topDoor;
+    [SerializeField] private Door leftDoor;
+    [SerializeField] private Door rightDoor;
 
-    private LevelManager templates;
+    private LevelManager levelManager;
 
     private void Start()
     {
-        templates = LevelManager.instance;
+        levelManager = LevelManager.instance;
 
         StartCoroutine(WaitUntilRoomGenHasFinished());
 
@@ -36,45 +37,51 @@ public class AdjacentRoomCheck : MonoBehaviour
     IEnumerator WaitUntilRoomGenHasFinished()
     {
         //wait until room generation is complete to check for adjacent rooms
-        while (!templates.roomGenerationComplete)
+        while (levelManager.dungeonGenerationState == LevelManager.GenerationProgress.incomplete)
         {
             yield return null;
         }
+
         //check EVERY direction for a room
 
-        //check for room above
+        //check for room above (will need a neighboring bottom door)
         CheckAdjacentRooms(0f, 1f, topDoor);
-        //check for room below
+        //check for room below (will need a neighboring top door)
         CheckAdjacentRooms(0f, -1f, bottomDoor);
-        //check for room to the right
+        //check for room to the right (will need a neighboring left door)
         CheckAdjacentRooms(1f, 0f, rightDoor);
-        //check for room to the left
+        //check for room to the left (will need a neighboring right door)
         CheckAdjacentRooms(-1f, 0f, leftDoor);
+
+
     }
 
     //this function checks if there is a room next to this spawner's room
     //if so, check if we need to add a door for connection
     //if not, then remove this door (to prevent opening)
-    private void CheckAdjacentRooms(float xCoordinate, float yCoordinate, Transform door)
+    private void CheckAdjacentRooms(float xCoordinate, float yCoordinate, Door door)
     {
         //make a vector2 representing a room next to this spawner's room
         //could be to the left (x - 1) or right (x + 1)
         //could be below (y - 1) or above (y + 1)
-        Vector2 adjacentRoomCoordinate = new Vector2(room.roomCoordinate.x + xCoordinate, room.roomCoordinate.y + yCoordinate);
+        Vector2 adjacentRoomCoordinate = new Vector2(room.localRoomCoordinate.x + xCoordinate, room.localRoomCoordinate.y + yCoordinate);
+        
 
-        //if an adjacent room exists, check if we need to add a door
-        if (templates.roomCoordinatesOccupied.Contains(adjacentRoomCoordinate))
+        //if an adjacent room exists, check the neighboring doors
+        if (levelManager.roomCoordinatesOccupied.ContainsKey(adjacentRoomCoordinate))
         {
-            AddDoor(door);
+            GameObject adjacentRoom = levelManager.roomCoordinatesOccupied[adjacentRoomCoordinate];
+            FindNearbyDoor(door, adjacentRoom);
         }
 
         //if the room coordinate list from LevelManager does NOT contain this adjacent room coordinate,
         //then there is an opening and we should remove this door
-        else if (!templates.roomCoordinatesOccupied.Contains(adjacentRoomCoordinate))
+        if (!levelManager.roomCoordinatesOccupied.ContainsKey(adjacentRoomCoordinate))
         {
-            RemoveDoor(door);
+            RemoveDoor(door.transform);
         }
 
+        
 
     }
 
@@ -91,6 +98,30 @@ public class AdjacentRoomCheck : MonoBehaviour
     {
         if (doorToDisable.gameObject.activeSelf)
             doorToDisable.gameObject.SetActive(false);
+    }
+
+    private void FindNearbyDoor(Door myDoor, GameObject adjacentRoom)
+    {
+        //if a door exists here, find the neighbor
+        if (myDoor.gameObject.activeSelf)
+        {
+            if(myDoor == bottomDoor)
+            {
+                myDoor.SetNeighboringDoor(adjacentRoom.GetComponent<BasicDungeon>().topDoor);
+            }
+            else if (myDoor == topDoor)
+            {
+                myDoor.SetNeighboringDoor(adjacentRoom.GetComponent<BasicDungeon>().bottomDoor);
+            }
+            else if (myDoor == leftDoor)
+            {
+                myDoor.SetNeighboringDoor(adjacentRoom.GetComponent<BasicDungeon>().rightDoor);
+            }
+            else if(myDoor == rightDoor)
+            {
+                myDoor.SetNeighboringDoor(adjacentRoom.GetComponent<BasicDungeon>().leftDoor);
+            }
+        }
     }
     /*
     public BasicDungeon GetRoomAbove()
