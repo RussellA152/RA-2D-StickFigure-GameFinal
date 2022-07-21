@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class BasicDungeon: MonoBehaviour
 {
@@ -11,6 +12,11 @@ public class BasicDungeon: MonoBehaviour
     [Header("Spawn Locations")]
     public List<Transform> spawnLocationsOfThisLevel = new List<Transform>(); //a list of spawn locations dedicated to this level
                                                                               // the spawn locations will be overriden when the player enters a new area
+
+    private Dictionary<Transform, bool> spawnLocations = new Dictionary<Transform, bool>();
+
+    private int numberOfEnemiesCanSpawnHere; //the number of enemies that will spawn in this room (depends on the size of the spawn location list)
+                                             // ex. 3 spawn locations means 3 enemies will need to spawn
 
     [HideInInspector]
     public RoomEnemyCount roomEnemyCountState; //What is the state of the amount of enemies in the room? Is it clear? Or are some enemies still alive?
@@ -51,10 +57,10 @@ public class BasicDungeon: MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //a room will be uncleared by default
-        roomEnemyCountState = RoomEnemyCount.uncleared;
+        //a room will be uncleared by default (cleared when debugging)
+        roomEnemyCountState = RoomEnemyCount.cleared;
 
-        LevelManager.instance.onPlayerEnterNewArea += GiveNewSpawnLocations;
+        //LevelManager.instance.onPlayerEnterNewArea += GiveNewSpawnLocations;
 
         levelManager = LevelManager.instance;
 
@@ -65,20 +71,61 @@ public class BasicDungeon: MonoBehaviour
         if (isStartingRoom)
             CreateCoordinate();
 
+        UpdateSpawnLocationDictionary();
+
         
 
     }
 
     //give the level manager the spawn locations of this area
-    private void GiveNewSpawnLocations()
+    public Vector2 GiveNewSpawnLocations()
     {
-        if (spawnLocationsOfThisLevel.Count == 0 || spawnLocationsOfThisLevel == null)
+        int iterator = 0;
+        foreach (Transform location in spawnLocations.Keys)
         {
-            Debug.Log("This room doesn't contain any spawn locations! " + gameObject.name);
-            return;
+            if (location != null)
+            {
+                //Debug.Log("for each loop start");
+                if (spawnLocations.ElementAt(iterator).Value == false)
+                {
+                    iterator++;
+                    spawnLocations[location] = true;
+
+                    //Debug.Log("Return a random loc!");
+                    return location.position;
+                }
+                else
+                    iterator++;
+            }
+
         }
-        else
-            LevelManager.instance.UpdateSpawnLocations(spawnLocationsOfThisLevel);
+        //Transform randomLocation = spawnLocations.ElementAt(randomIndex).Key;
+        Debug.Log("Not enough spawn locations for this enemy. Or some other room has an empty list. Enemy will spawn at (0,0)");
+
+        return new Vector2(0, 0);
+
+        //if (spawnLocationsOfThisLevel.Count == 0 || spawnLocationsOfThisLevel == null)
+        //{
+        //Debug.Log("This room doesn't contain any spawn locations! " + gameObject.name);
+        //return;
+        //}
+        //else
+        //LevelManager.instance.UpdateSpawnLocations(spawnLocationsOfThisLevel);
+    }
+    private void UpdateSpawnLocationDictionary()
+    {
+        //clear the spawn locations of the previous room
+        if (spawnLocations.Count != 0 || spawnLocations != null)
+            spawnLocations.Clear();
+
+        //add new spawn locations to this list
+        foreach (Transform loc in spawnLocationsOfThisLevel)
+        {
+            //sets the keys to false because no enemy has spawned there yet
+            spawnLocations.Add(loc, false);
+        }
+
+        numberOfEnemiesCanSpawnHere = spawnLocations.Count;
     }
 
     //This function must be inside of the "BasicDungeon" script because
@@ -103,9 +150,15 @@ public class BasicDungeon: MonoBehaviour
         
     }
 
+    //return the numberOfEnemiesCanSpawnHere (needed by AISpawner)
+    public int GetNumberOfEnemiesCanSpawnHere()
+    {
+        return numberOfEnemiesCanSpawnHere;
+    }
+
     private void OnDestroy()
     {
-        LevelManager.instance.onPlayerEnterNewArea -= GiveNewSpawnLocations;
+        //LevelManager.instance.onPlayerEnterNewArea -= GiveNewSpawnLocations;
         //LevelManager.instance.spawnNewRooms -= AddDungeon;
     }
 }

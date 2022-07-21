@@ -32,11 +32,6 @@ public class AISpawner : MonoBehaviour
 
     }
 
-    private void OnEnable()
-    {
-        //LevelManager.instance.onPlayerEnterNewArea += SpawnAI;
-    }
-
     private void OnDestroy()
     {
         LevelManager.instance.onPlayerEnterNewArea -= SpawnAI;
@@ -44,13 +39,20 @@ public class AISpawner : MonoBehaviour
 
     private void Update()
     {
-        inactiveCount = enemyPool.CountInactive;
-        activeCount = enemyPool.CountActive;
-
-        if (enemyPool.CountActive < amountToSpawn && inReserve > 0)
+        if(enemyPool != null)
         {
-            var enemy = enemyPool.Get();
+            inactiveCount = enemyPool.CountInactive;
+            activeCount = enemyPool.CountActive;
         }
+        
+
+
+        //FIXME: this code makes it so that enemies will only spawn the "amountToSpawn"
+        //will respawn enemies when active count drops below "amountToSpawn" number
+        //if (enemyPool.CountActive < amountToSpawn && inReserve > 0)
+        //{
+            //var enemy = enemyPool.Get();
+        //}
 
         
     }
@@ -65,10 +67,20 @@ public class AISpawner : MonoBehaviour
 
     public void SpawnAI()
     {
-        while (enemyPool.CountActive < defaultCapacity)
+        //enemyPool = new ObjectPool<EnemyController>(CreateEnemy, OnTakeEnemyFromPool, OnReturnEnemyToPool, null, true, defaultCapacity, amountToSpawn);
+        //FIXME: this code makes it so that enemies will only spawn the "amountToSpawn"
+        //will respawn enemies when active count drops below "amountToSpawn" number
+        int numberOfEnemiesNeeded = LevelManager.instance.GetCurrentRoom().GetNumberOfEnemiesCanSpawnHere();
+
+        for (int spawnIterator = 0; spawnIterator < numberOfEnemiesNeeded; spawnIterator++)
         {
             var enemy = enemyPool.Get();
         }
+
+        //while (enemyPool.CountActive < amountToSpawn && inReserve > 0)
+        //{
+            //var enemy = enemyPool.Get();
+        //}
     }
 
     EnemyController CreateEnemy()
@@ -79,8 +91,6 @@ public class AISpawner : MonoBehaviour
         //set the enemy's pool equal to this pool
         enemy.SetPool(enemyPool);
 
-        
-
         return enemy;
 
     }
@@ -89,14 +99,14 @@ public class AISpawner : MonoBehaviour
     // this is where enemies will receive their scriptable object (to differentiate them *)
     void OnTakeEnemyFromPool(EnemyController enemy)
     {
+        BasicDungeon roomToSpawnEnemiesInside = LevelManager.instance.GetCurrentRoom();
+
         //spawn this enemy in a some location in the area (retrieves spawn location from level manager)
-        enemy.gameObject.transform.position = LevelManager.instance.GetSpawnLocation();
+        enemy.gameObject.transform.position = LevelManager.instance.GetCurrentRoom().GiveNewSpawnLocations();
 
         enemy.gameObject.SetActive(true);
 
         inReserve--;
-
-        //Debug.Log("Give me a scriptable object!");
     }
 
     //this function performs actions on the enemy when they return to the pool

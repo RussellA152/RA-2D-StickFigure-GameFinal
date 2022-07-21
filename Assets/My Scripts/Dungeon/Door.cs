@@ -37,6 +37,9 @@ public class Door : Interactable
 
         //when player teleports to a new room, the current room of the LevelManager is updated
         LevelManager.instance.UpdateCurrentRoom(neighboringDoor.GetDoorRoom());
+
+        //when player uses the door, we will invoke the "EnteringNewAreaEvent" event system
+        LevelManager.instance.EnteringNewAreaEvent();
     }
 
     public void SetNeighboringDoor(Door door)
@@ -49,4 +52,5 @@ public class Door : Interactable
     {
         return room;
     }
+
 }

@@ -9,10 +9,9 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
 
-    
-    [SerializeField] private BasicDungeon currentRoom; //the current room the player is inside of
+    public BasicDungeon currentRoom; // the room the player is inside of
 
-    private Dictionary<Transform, bool> spawnLocations = new Dictionary<Transform, bool>();  // a dictionary with the keys being the spawn location
+    //private Dictionary<Transform, bool> spawnLocations = new Dictionary<Transform, bool>();  // a dictionary with the keys being the spawn location
                                                                                              // and the values being the "occupied" boolean, which is true or false when an enemy has spawned there or not
     public event Action onPlayerEnterNewArea;
     public event Action spawnNewRooms;
@@ -23,6 +22,10 @@ public class LevelManager : MonoBehaviour
     public GenerationProgress dungeonGenerationState; //the state of the dungeon generation.. is it complete or not?
 
     public GameObject[] allRooms; //all room available to spawn
+    //public GameObject[] bottomRooms; //array of all rooms with a bottom door
+    //public GameObject[] topRooms; //array of all rooms with a top door
+    //public GameObject[] leftRooms; //array of all rooms with a left door
+    //public GameObject[] rightRooms; //array of all rooms with a right door
 
     //public GameObject closedRoom; // a "wall" that is about the size of a room that prevents player from leaving dungeon
 
@@ -73,14 +76,9 @@ public class LevelManager : MonoBehaviour
     {
         //TEMPORARY *
         //This event system should be called when the player has entered a new area
-        //EnteringNewAreaEvent();
+        
         
         RandomRoomCap();
-
-        //SpawnNewRoomsEvent();
-
-        Debug.Log("Room cap is " + roomCap);
-
     }
 
     // Update is called once per frame
@@ -128,14 +126,11 @@ public class LevelManager : MonoBehaviour
                 break;
 
         }
+        Debug.Log("Room cap is " + roomCap);
+
     }
 
-    //updates the currentRoom variable to the room the player is inside of
-    public void UpdateCurrentRoom(BasicDungeon newCurentRoom)
-    {
-        currentRoom = newCurentRoom;
-    }
-
+    /*
     public void UpdateSpawnLocations(List<Transform> spawnLocList)
     {
 
@@ -153,7 +148,6 @@ public class LevelManager : MonoBehaviour
 
     public Vector2 GetSpawnLocation()
     {
-
         int iterator = 0;
         foreach(Transform location in spawnLocations.Keys)
         {
@@ -177,6 +171,19 @@ public class LevelManager : MonoBehaviour
         Debug.Log("Not enough spawn locations for this enemy. Or some other room has an empty list. Enemy will spawn at (0,0)");
 
         return new Vector2(0,0);
+    }
+    */
+
+    //sets the "currentRoom" to the room passed in the function
+    //used when player enters another room from a door
+    public void UpdateCurrentRoom(BasicDungeon newCurrentRoom)
+    {
+        currentRoom = newCurrentRoom;
+    }
+
+    public BasicDungeon GetCurrentRoom()
+    {
+        return currentRoom;
     }
 
     //return a room based on the value of its coordinate
