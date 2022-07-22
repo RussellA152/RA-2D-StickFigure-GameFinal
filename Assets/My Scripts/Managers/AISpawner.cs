@@ -60,7 +60,6 @@ public class AISpawner : MonoBehaviour
 
     private void Start()
     {
-        //var enemy = enemyPool.Get();
         LevelManager.instance.onPlayerEnterNewArea += SpawnAI;
 
     }
