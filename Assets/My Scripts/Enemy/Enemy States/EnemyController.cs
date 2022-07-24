@@ -46,6 +46,9 @@ public class EnemyController : MonoBehaviour
     private bool attackOnCooldown = false; //is the enemy on attack cooldown? If so, don't let them attack again
 
 
+    private BasicDungeon myRoom; //the room this enemy was spawned in
+
+
 
     public enum EnemyState
     {
@@ -73,6 +76,9 @@ public class EnemyController : MonoBehaviour
 
         //tell other scripts to get their values
         SetUpEnemyConfiguration(enemyScriptableObject);
+
+        //the enemy's room would always be the current room inside of OnEnable
+        myRoom = LevelManager.instance.GetCurrentRoom();
 
         //Freeze the enemy's rigidbody Y position
         //SetRigidbodyYConstraint(true);
@@ -286,6 +292,9 @@ public class EnemyController : MonoBehaviour
             Destroy(gameObject);
             Debug.Log("Destroy me");
         }
+
+        //when this enemy dies, their room's "numberOfEnemiesAliveHere" should decrease by 1
+        myRoom.DecrementNumberOfEnemiesAliveInHere();
             
     }
 

@@ -16,7 +16,7 @@ public class AISpawner : MonoBehaviour
 
     private int defaultCapacity; // the capacity of enemies (not entirely sure what this does)
 
-    [SerializeField] private int amountToSpawn; // the maximum number of enemies
+    //[SerializeField] private int amountToSpawn; // the maximum number of enemies
     [SerializeField] private int inReserve;
 
     [SerializeField] private int inactiveCount; // amount of inactive enemies
@@ -28,7 +28,7 @@ public class AISpawner : MonoBehaviour
 
     private void Awake()
     {
-        enemyPool = new ObjectPool<EnemyController>(CreateEnemy, OnTakeEnemyFromPool, OnReturnEnemyToPool, null, true, defaultCapacity, amountToSpawn);
+        enemyPool = new ObjectPool<EnemyController>(CreateEnemy, OnTakeEnemyFromPool, OnReturnEnemyToPool, null, true, defaultCapacity, inReserve);
 
     }
 
@@ -66,20 +66,15 @@ public class AISpawner : MonoBehaviour
 
     public void SpawnAI()
     {
-        //enemyPool = new ObjectPool<EnemyController>(CreateEnemy, OnTakeEnemyFromPool, OnReturnEnemyToPool, null, true, defaultCapacity, amountToSpawn);
-        //FIXME: this code makes it so that enemies will only spawn the "amountToSpawn"
-        //will respawn enemies when active count drops below "amountToSpawn" number
+        //find the number of enemies the spawner will need to create (depends on the current room)
         int numberOfEnemiesNeeded = LevelManager.instance.GetCurrentRoom().GetNumberOfEnemiesCanSpawnHere();
+
 
         for (int spawnIterator = 0; spawnIterator < numberOfEnemiesNeeded; spawnIterator++)
         {
             var enemy = enemyPool.Get();
         }
 
-        //while (enemyPool.CountActive < amountToSpawn && inReserve > 0)
-        //{
-            //var enemy = enemyPool.Get();
-        //}
     }
 
     EnemyController CreateEnemy()
@@ -104,6 +99,9 @@ public class AISpawner : MonoBehaviour
         enemy.gameObject.transform.position = LevelManager.instance.GetCurrentRoom().GiveNewSpawnLocations();
 
         enemy.gameObject.SetActive(true);
+
+        //number of enemies that can spawn in that room should decrease so an excess amount of enemies won't spawn
+        roomToSpawnEnemiesInside.DecrementNumberOfEnemiesCanSpawnHere();
 
         inReserve--;
     }

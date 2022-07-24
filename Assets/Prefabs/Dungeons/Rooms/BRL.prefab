@@ -85,6 +85,7 @@ MonoBehaviour:
   - {fileID: 570149327414924768}
   - {fileID: 570149327723275079}
   - {fileID: 570149326295288726}
+  numberOfEnemiesCanSpawnHere: 5
   roomEnemyCountState: 0
   bottomDoor: {fileID: 2019098813910921092}
   topDoor: {fileID: 6137294433938445760}

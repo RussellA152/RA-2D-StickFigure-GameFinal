@@ -15,8 +15,12 @@ public class BasicDungeon: MonoBehaviour
 
     private Dictionary<Transform, bool> spawnLocations = new Dictionary<Transform, bool>();
 
-    private int numberOfEnemiesCanSpawnHere; //the number of enemies that will spawn in this room (depends on the size of the spawn location list)
-                                             // ex. 3 spawn locations means 3 enemies will need to spawn
+    [SerializeField] private int numberOfEnemiesCanSpawnHere; //the number of enemies that WILL spawn in this room
+                                                              // SHOULD ideally be the number of spawn locations of the room, otherwise enemies will just spawn in a random spot
+
+    private int numberOfEnemiesAliveInRoom; //the number of enemies current alive inside of this room
+                                            //when this value goes to 0, the room will be considered "cleared" and doors will be available to use
+
 
     [HideInInspector]
     public RoomEnemyCount roomEnemyCountState; //What is the state of the amount of enemies in the room? Is it clear? Or are some enemies still alive?
@@ -57,11 +61,14 @@ public class BasicDungeon: MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //numberOfEnemiesAliveInRoom should be equal to the numberOfEnemiesCanSpawnHere AT START
+        //it will decrease later when player kills the enemies in this room
+        numberOfEnemiesAliveInRoom = numberOfEnemiesCanSpawnHere;
+
         //a room will be uncleared by default (cleared when debugging)
-        roomEnemyCountState = RoomEnemyCount.cleared;
+        roomEnemyCountState = RoomEnemyCount.uncleared;
 
-        //LevelManager.instance.onPlayerEnterNewArea += GiveNewSpawnLocations;
-
+        //reference to level manager singleton
         levelManager = LevelManager.instance;
 
         //add this room to the general "rooms" list inside of LevelManager
@@ -71,10 +78,21 @@ public class BasicDungeon: MonoBehaviour
         if (isStartingRoom)
             CreateCoordinate();
 
+        //update the spawn location dictionary with the spawn locations provided in the editor
         UpdateSpawnLocationDictionary();
 
         
 
+    }
+
+    private void Update()
+    {
+        //if no more enemies are alive in here, the room is cleared
+        //otherwise, it is uncleared
+        if (numberOfEnemiesAliveInRoom == 0)
+            roomEnemyCountState = RoomEnemyCount.cleared;
+        else
+            roomEnemyCountState = RoomEnemyCount.uncleared;
     }
 
     //give the level manager the spawn locations of this area
@@ -104,17 +122,10 @@ public class BasicDungeon: MonoBehaviour
 
         return new Vector2(0, 0);
 
-        //if (spawnLocationsOfThisLevel.Count == 0 || spawnLocationsOfThisLevel == null)
-        //{
-        //Debug.Log("This room doesn't contain any spawn locations! " + gameObject.name);
-        //return;
-        //}
-        //else
-        //LevelManager.instance.UpdateSpawnLocations(spawnLocationsOfThisLevel);
     }
     private void UpdateSpawnLocationDictionary()
     {
-        //clear the spawn locations of the previous room
+        //clears the dictionary if it was already populated for whatever reason (kinda obsolete)
         if (spawnLocations.Count != 0 || spawnLocations != null)
             spawnLocations.Clear();
 
@@ -124,8 +135,6 @@ public class BasicDungeon: MonoBehaviour
             //sets the keys to false because no enemy has spawned there yet
             spawnLocations.Add(loc, false);
         }
-
-        numberOfEnemiesCanSpawnHere = spawnLocations.Count;
     }
 
     //This function must be inside of the "BasicDungeon" script because
@@ -156,9 +165,16 @@ public class BasicDungeon: MonoBehaviour
         return numberOfEnemiesCanSpawnHere;
     }
 
-    private void OnDestroy()
+    //decreases "numberOfEnemiesCanSpawnHere" by 1, preventing rooms from spawning more enemies than it is allowed to
+    public void DecrementNumberOfEnemiesCanSpawnHere()
     {
-        //LevelManager.instance.onPlayerEnterNewArea -= GiveNewSpawnLocations;
-        //LevelManager.instance.spawnNewRooms -= AddDungeon;
+        numberOfEnemiesCanSpawnHere--;
+    }
+
+    //decreases "numberOfEnemiesAliveInHere" by 1
+    //when this value becomes 0, the room will considered cleared
+    public void DecrementNumberOfEnemiesAliveInHere()
+    {
+        numberOfEnemiesAliveInRoom--;
     }
 }
