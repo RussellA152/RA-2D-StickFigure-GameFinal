@@ -426,6 +426,17 @@
                 },
                 {
                     "name": "",
+                    "id": "971a58ec-73e9-4155-b559-66c7e5d07b9f",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Flip Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "20f60920-e677-4b9b-a72c-2eea22203af1",
                     "path": "<Keyboard>/a",
                     "interactions": "",
@@ -442,6 +453,17 @@
                     "interactions": "",
                     "processors": "AxisDeadzone(min=0.3)",
                     "groups": "Gamepad",
+                    "action": "Flip Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a1c2fa30-c56e-465f-bf2d-247cfbf9e61d",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "Flip Left",
                     "isComposite": false,
                     "isPartOfComposite": false

@@ -50,6 +50,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void Update()
     {
+
         //if the Y distance between the enemy and player gets too high..
         // then the enemy will not re-calculate their pathfinding (they walk towards the last spot where the player was standing)
         if(Mathf.Abs(transform.position.y - targetTransform.position.y) >= minimumDistanceY)

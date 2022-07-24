@@ -9,7 +9,7 @@ using UnityEngine.Pool;
 //This script also requires the EnemyHealth and EnemyMovement scripts to function
 public class EnemyController : MonoBehaviour
 {
-    private EnemyState currentState;
+    [SerializeField] private EnemyState currentState;
 
     private IObjectPool<EnemyController> myPool;
 
@@ -48,6 +48,8 @@ public class EnemyController : MonoBehaviour
 
     private BasicDungeon myRoom; //the room this enemy was spawned in
 
+    private int walkingHash;
+
 
 
     public enum EnemyState
@@ -80,8 +82,11 @@ public class EnemyController : MonoBehaviour
         //the enemy's room would always be the current room inside of OnEnable
         myRoom = LevelManager.instance.GetCurrentRoom();
 
-        //Freeze the enemy's rigidbody Y position
-        //SetRigidbodyYConstraint(true);
+    }
+
+    private void Start()
+    {
+        walkingHash = Animator.StringToHash("Walking");
     }
 
     private void OnDisable()
@@ -95,7 +100,6 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log("My state is currently: " + currentState);
 
         //check if the enemy is alive
         bool hasDied = enemyHpScript.CheckIfDead();
@@ -181,15 +185,13 @@ public class EnemyController : MonoBehaviour
 
     private void EnemyIdleBehavior()
     {
+        animator.SetBool(walkingHash, false);
         //don't let enemy move in idle state
         //goes to EnemyMovement script and sets isStopped to true
         enemyMoveScript.StopMovement(true);
 
         //the enemy is allowed to turn around when they are idle
         enemyMoveScript.SetCanFlip(true);
-
-        //freeze the enemy's rigidbody Y position
-        //SetRigidbodyYConstraint(true);
 
         //check distance between enemy and player
         //if enemy is close to player, chase them (within follow range)
@@ -212,6 +214,8 @@ public class EnemyController : MonoBehaviour
 
     private void EnemyChaseBehavior()
     {
+        animator.SetBool(walkingHash, true);
+
         //goes to EnemyMovement script and sets canMove to true (allowing enemy to walk to enemy)
         //also sets isStopped back to false
         enemyMoveScript.StopMovement(false);
@@ -220,9 +224,6 @@ public class EnemyController : MonoBehaviour
         enemyMoveScript.SetCanFlip(true);
 
         enemyMoveScript.AllowMovement();
-
-        //Freeze the enemy's rigidbody Y position
-        //SetRigidbodyYConstraint(true);
 
         //check distance between enemy and player
         //if enemy and player are too far from each other, return to idle
@@ -243,6 +244,8 @@ public class EnemyController : MonoBehaviour
 
     private void EnemyAttackingBehavior()
     {
+        animator.SetBool(walkingHash, false);
+
         //don't let enemy move when trying to attack
         //goes to EnemyMovement script and sets isStopped to true
         enemyMoveScript.StopMovement(true);
@@ -250,22 +253,31 @@ public class EnemyController : MonoBehaviour
         //the enemy is not allowed to turn around until they return to idle
         enemyMoveScript.SetCanFlip(false);
 
-        //Freeze the enemy's rigidbody Y position
-        //SetRigidbodyYConstraint(true);
-
         //invoke the scriptable object's AttackTarget function (is abstract since enemies might have different attack behaviors)
         //don't let enemy attack if their attack is on cooldown
         if (!attackOnCooldown)
             enemyScriptableObject.AttackTarget(animator, target);
+
+        
+        if (!stateCooldownStarted)
+        {
+            if (distanceFromTargetX > followRange && !withinAttackRange)
+            {
+                ChangeEnemyState(idleStateTransitionTimer, EnemyState.Idle);
+            }
+            else if (withinAttackRange)
+            {
+                ChangeEnemyState(attackStateTransitionTimer, EnemyState.Attacking);
+            }
+        }
+        
 
     }
 
     private void EnemyHurtBehavior()
     {
 
-        //Don't freeze the enemy's rigidbody Y position
-        //SetRigidbodyYConstraint(false);
-
+        animator.SetBool(walkingHash, false);
         //don't let enemy move at all
         enemyMoveScript.DisableMovement();
 
@@ -277,8 +289,6 @@ public class EnemyController : MonoBehaviour
 
     private void EnemyDeathBehavior()
     {
-        //Don't freeze the enemy's rigidbody Y position
-        //SetRigidbodyYConstraint(false);
 
         //if this enemy has a pool, return this enemy back to the pool
         if (myPool != null)
@@ -358,27 +368,6 @@ public class EnemyController : MonoBehaviour
         yield return new WaitForSeconds(enemyScriptableObject.attackCooldownTimer);
         attackOnCooldown = false;
     }
-
-    private void SetRigidbodyYConstraint(bool boolean)
-    {
-        //prevent enemy from flying towards player when chasing or attacking player
-        
-        if(boolean == true)
-        {
-            rb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation;
-        }
-         
-        //allow enemy's rigidbody to move in Y direction when hurt or idle (this is so the player can hit enemies into the air)
-        else
-        {
-            rb.constraints = RigidbodyConstraints2D.None;
-            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-
-        }
-            
-    }
-
-
     //sets this enemy's pool equal to the pool passed into the function (comes from AISpawner)
     public void SetPool(IObjectPool<EnemyController> pool)
     {
@@ -397,6 +386,7 @@ public class EnemyController : MonoBehaviour
     {
         return currentState;
     }
+
 
 }
 
