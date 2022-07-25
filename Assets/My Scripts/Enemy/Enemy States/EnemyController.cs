@@ -30,6 +30,7 @@ public class EnemyController : MonoBehaviour
     private float attackRangeX; //range that enemy can attack target (taken from Scriptable Object)
     private float attackRangeY; //range that enemy can attack target (taken from Scriptable Object)
     private bool withinAttackRange;
+    private bool isAttacking; //bool representing whether the enemy is finished doing their attack animation
 
     [Header("State Transition Timers")]
     //How long will it take for the AI to change from their current state to one of the following states? (might differ with each enemy.. like with faster or slower enemies)
@@ -185,6 +186,8 @@ public class EnemyController : MonoBehaviour
 
     private void EnemyIdleBehavior()
     {
+
+        //Debug.Log("Idle behavior!");
         animator.SetBool(walkingHash, false);
         //don't let enemy move in idle state
         //goes to EnemyMovement script and sets isStopped to true
@@ -214,6 +217,8 @@ public class EnemyController : MonoBehaviour
 
     private void EnemyChaseBehavior()
     {
+        //Debug.Log("Chase behavior!");
+
         animator.SetBool(walkingHash, true);
 
         //goes to EnemyMovement script and sets canMove to true (allowing enemy to walk to enemy)
@@ -244,6 +249,8 @@ public class EnemyController : MonoBehaviour
 
     private void EnemyAttackingBehavior()
     {
+        //Debug.Log("Attack behavior!");
+
         animator.SetBool(walkingHash, false);
 
         //don't let enemy move when trying to attack
@@ -256,18 +263,22 @@ public class EnemyController : MonoBehaviour
         //invoke the scriptable object's AttackTarget function (is abstract since enemies might have different attack behaviors)
         //don't let enemy attack if their attack is on cooldown
         if (!attackOnCooldown)
+        {
+            SetIsAttacking(true);
             enemyScriptableObject.AttackTarget(animator, target);
+        }
+            
 
         
-        if (!stateCooldownStarted)
+        if (!stateCooldownStarted && !isAttacking)
         {
-            if (distanceFromTargetX > followRange && !withinAttackRange)
+            if (distanceFromTargetX <= followRange && !withinAttackRange)
+            {
+                ChangeEnemyState(chaseStateTransitionTimer, EnemyState.ChaseTarget);
+            }
+            else if (distanceFromTargetX > followRange && !withinAttackRange)
             {
                 ChangeEnemyState(idleStateTransitionTimer, EnemyState.Idle);
-            }
-            else if (withinAttackRange)
-            {
-                ChangeEnemyState(attackStateTransitionTimer, EnemyState.Attacking);
             }
         }
         
@@ -315,12 +326,13 @@ public class EnemyController : MonoBehaviour
     public void ChangeEnemyState(float cooldownTimer, EnemyState state)
     {
 
-
+        //Debug.Log("Starting transition coroutine");
         //if there is already a coroutine going, cancel it, then start a new one
         if (stateCooldownStarted)
         {
             //cancel the current transition coroutine
             StopCoroutine(stateTransitionCoroutine);
+            stateCooldownStarted = false;
         }
 
         //set this coroutine variable to StartCoroutine()
@@ -385,6 +397,11 @@ public class EnemyController : MonoBehaviour
     public EnemyState GetEnemyState()
     {
         return currentState;
+    }
+
+    public void SetIsAttacking(bool boolean)
+    {
+        isAttacking = boolean;
     }
 
 

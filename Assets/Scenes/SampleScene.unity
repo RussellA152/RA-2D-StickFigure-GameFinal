@@ -595,6 +595,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Basic Enemy Template
       objectReference: {fileID: 0}
+    - target: {fileID: 1345563099117515444, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
+      propertyPath: radius
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1709358543280309288, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
       propertyPath: enemyScriptableObject
       value: 
@@ -655,6 +659,10 @@ PrefabInstance:
       propertyPath: enemyScriptableObject
       value: 
       objectReference: {fileID: 11400000, guid: 53c3d25a43b2e6c44a7d9586d2455b3c, type: 2}
+    - target: {fileID: 8404876603222653591, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
 --- !u!1 &1672888930

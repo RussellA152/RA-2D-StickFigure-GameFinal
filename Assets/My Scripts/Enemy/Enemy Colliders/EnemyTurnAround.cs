@@ -20,6 +20,8 @@ public class EnemyTurnAround : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
+        if (this.enabled == false)
+            return;
         //if player goes behind the enemy and collides with the turn around trigger, then invoke the flip sprite function
 
         if (collision.gameObject.CompareTag("Player") && !isCollidingWithPlayer)
@@ -28,6 +30,8 @@ public class EnemyTurnAround : MonoBehaviour
             isCollidingWithPlayer = true;
 
         }
+
+        //Debug.Log("Back collider code invoked");
     }
 
     void Update()

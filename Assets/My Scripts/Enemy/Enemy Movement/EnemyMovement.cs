@@ -34,13 +34,16 @@ public class EnemyMovement : MonoBehaviour
     [Header("Sprite Direction Properties")]
     [SerializeField] private Vector3 facingRightVector; //vector3 representing the enemy facing the right direction
     [SerializeField] private Vector3 facingLeftVector; //vector3 representing the enemy facing the left direction
-    private bool enemyFacingRight; //is the enemy facing the right direction? true if so, false if facing left
+    [SerializeField] private bool enemyFacingRight; //is the enemy facing the right direction? true if so, false if facing left
 
     private Rigidbody2D rb;
 
     [Header("Sprite Flipping Properties")]
     private bool canFlip = true; // is the enemy allow to turn around?
     private bool flipCoroutineStarted = false; //has the coroutine for sprite flipping started?
+
+    
+    public bool isMoving = false; //is this AI moving at all?
 
     private void Start()
     {

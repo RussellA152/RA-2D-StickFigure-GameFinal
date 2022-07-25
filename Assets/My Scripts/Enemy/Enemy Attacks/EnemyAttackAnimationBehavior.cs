@@ -60,6 +60,9 @@ public class EnemyAttackAnimationBehavior : StateMachineBehaviour, IAttackAnimat
     {
         enemyControllerScript.StartAttackCooldown();
 
+        //enemy is no longer attacking at the end of each animation
+        enemyControllerScript.SetIsAttacking(false);
+
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
