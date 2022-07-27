@@ -67,15 +67,6 @@ public class PlayerComponents : MonoBehaviour
 
         hitbox = GameObject.Find("Player Hit Box").GetComponent<BoxCollider2D>();
     }
-    private void Start()
-    {
-
-    }
-
-    private void Update()
-    {
-        //Debug.Log("canMove " + canMove);
-    }
 
     private void OnEnable()
     {

@@ -76,6 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a99494eb295fb140a5dc581f8f53c6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0
   animator: {fileID: 1373278072336133614}
   enemyMoveScript: {fileID: 5969129094098281727}
   enemyHpScript: {fileID: 1709358543280309288}
@@ -98,11 +99,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aiPath: {fileID: 1345563099117515444}
+  seeker: {fileID: 204039071563704008}
   destinationSetter: {fileID: 3604796771072279783}
   enemyScriptableObject: {fileID: 0}
   targetTransform: {fileID: 0}
   facingRightVector: {x: 1, y: 1, z: 1}
   facingLeftVector: {x: -1, y: 1, z: 1}
+  enemyFacingRight: 0
+  isMoving: 0
 --- !u!114 &3305021655998707584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,7 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyControllerScript: {fileID: 6875883259916410309}
   enemyScriptableObject: {fileID: 0}
-  enemyHealth: 0
+  enemyMaxHealth: 0
 --- !u!114 &1345563099117515444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,7 +162,7 @@ MonoBehaviour:
   repathRateCompatibility: NaN
   canSearchCompability: 0
   orientation: 1
-  enableRotation: 0
+  enableRotation: 1
   autoRepath:
     mode: 2
     interval: 2
@@ -172,7 +176,7 @@ MonoBehaviour:
   pickNextWaypointDist: 2
   endReachedDistance: 3.5
   alwaysDrawGizmos: 1
-  slowWhenNotFacingTarget: 1
+  slowWhenNotFacingTarget: 0
   whenCloseToDestination: 0
   constrainInsideGraph: 0
 --- !u!114 &3604796771072279783

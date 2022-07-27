@@ -11,7 +11,8 @@ public class EnemyHealth : MonoBehaviour, IHealth
     public EnemyScriptableObject enemyScriptableObject;
 
     [HideInInspector]
-    public float enemyHealth; //the health value of this enemy (DERIVED FROM SCRIPTABLEOBJECT)
+    public float enemyMaxHealth; //the max health value of this enemy(DERIVED FROM SCRIPTABLEOBJECT)
+    private float enemyHealth; //the current health value of this enemy 
     private bool hasDied; //has the enemy died?
 
 
@@ -25,7 +26,11 @@ public class EnemyHealth : MonoBehaviour, IHealth
 
         //set basic values equal to the ScriptableObject's values
         if(enemyScriptableObject != null)
-            enemyHealth = enemyScriptableObject.maxHealth;
+        {
+            enemyMaxHealth = enemyScriptableObject.maxHealth;
+            enemyHealth = enemyMaxHealth;
+        }
+            
         else
             Debug.Log("This enemy doesn't have a scriptable object! Inside Health Script*");
         
@@ -55,6 +60,13 @@ public class EnemyHealth : MonoBehaviour, IHealth
     {
         //add by a negative number if we should decrease health
         enemyHealth += amount;
+
+    }
+
+    public void ModifyMaxHealth(float amount)
+    {
+        //add by a negative number if we should decrease health
+        //enemyHealth += amount;
 
     }
 

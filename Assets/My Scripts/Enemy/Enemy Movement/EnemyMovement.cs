@@ -43,7 +43,16 @@ public class EnemyMovement : MonoBehaviour
     private bool flipCoroutineStarted = false; //has the coroutine for sprite flipping started?
 
     
-    public bool isMoving = false; //is this AI moving at all?
+    private float curFreezeTime = 0f;
+    private float maxFreezeTime = 1f;
+
+    private float lerpTimer = 0;
+    private float lerpTimerDivider = 10f;
+
+    public bool isMoving = false; //is this AI stuck and can't move?
+
+    private Vector3 curPos;
+    private Vector3 lastPos;
 
     private void Start()
     {
@@ -53,10 +62,14 @@ public class EnemyMovement : MonoBehaviour
 
     private void Update()
     {
+        //Debug.Log("My desired velocity is " + aiPath.desiredVelocity);
+        //Debug.Log("reached destination = " + aiPath.reachedEndOfPath);
+        
+
 
         //if the Y distance between the enemy and player gets too high..
         // then the enemy will not re-calculate their pathfinding (they walk towards the last spot where the player was standing)
-        if(Mathf.Abs(transform.position.y - targetTransform.position.y) >= minimumDistanceY)
+        if (Mathf.Abs(transform.position.y - targetTransform.position.y) >= minimumDistanceY)
         {
             aiPath.autoRepath.mode = AutoRepathPolicy.Mode.Never; 
         }
@@ -69,6 +82,53 @@ public class EnemyMovement : MonoBehaviour
         }
         // always check if enemy needs to flip their sprite/ turn around
         FlipSpriteAutomatically();
+    }
+
+    public void CheckIfFrozen(EnemyController.EnemyState state)
+    {
+        lerpTimer += Time.deltaTime;
+
+        //the current position of this enemy
+        curPos = this.transform.position;
+
+        //if the enemy hasn't move positions
+        //and they are in the chase target state
+        //then they are not moving and we need to start the freeze timer
+        if (curPos == lastPos && state == EnemyController.EnemyState.ChaseTarget)
+        {
+            isMoving = false;
+            curFreezeTime += Time.deltaTime;
+        }
+        //otherwise they are moving and the freeze timer should reset
+        else
+        {
+            isMoving = true;
+            curFreezeTime = 0;
+        }
+
+        //set the latest position to the current positon
+        lastPos = curPos;
+
+        //if the enemy hasn't been moving for some time (about 3 seconds)
+        //give them a small nudge to "unstuck" them
+        if(curFreezeTime > maxFreezeTime)
+        {
+            if (enemyFacingRight)
+            {
+                transform.position = Vector2.Lerp(transform.position, new Vector2(transform.position.x + 0.5f, transform.position.y), lerpTimer / lerpTimerDivider);
+
+            }
+                            
+            else
+            {
+                transform.position = Vector2.Lerp(transform.position, new Vector2(transform.position.x - 0.5f, transform.position.y), lerpTimer / lerpTimerDivider);
+            }
+                
+
+            curFreezeTime = 0;
+            isMoving = true;
+            Debug.Log("Give me a nudge!");
+        }
     }
 
     //enemy will automatically turn around when moving left or right
@@ -217,5 +277,14 @@ public class EnemyMovement : MonoBehaviour
         }
 
         flipCoroutineStarted = false;
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
     }
 }

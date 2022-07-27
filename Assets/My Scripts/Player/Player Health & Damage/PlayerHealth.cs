@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour, IHealth
 {
-    [SerializeField] private float playerHealth; 
+    [SerializeField] private float playerMaxHealth; //the maximum health the player can have
+    private float playerCurrentHealth; //the current health of the player
 
     private void Start()
     {
-        
+        //set current health to max health at beginning of game
+        playerCurrentHealth = playerMaxHealth;
     }
 
     private void Update()
     {
 
         //check if enemy was killed..
-        CheckHealth(playerHealth);
+        CheckHealth(playerCurrentHealth);
 
     }
 
@@ -33,12 +35,20 @@ public class PlayerHealth : MonoBehaviour, IHealth
     public void ModifyHealth(float amount)
     {
         //add by a negative number if we should decrease health
-        playerHealth += amount;
+        playerCurrentHealth += amount;
 
     }
 
+    public void ModifyMaxHealth(float amount)
+    {
+        //add by a negative number if we should decrease health
+        playerMaxHealth += amount;
+
+    }
+
+
     public float GetHealth()
     {
-        return playerHealth;
+        return playerCurrentHealth;
     }
 }

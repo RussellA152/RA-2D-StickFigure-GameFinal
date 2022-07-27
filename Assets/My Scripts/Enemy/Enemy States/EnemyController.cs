@@ -219,6 +219,8 @@ public class EnemyController : MonoBehaviour
     {
         //Debug.Log("Chase behavior!");
 
+        enemyMoveScript.CheckIfFrozen(currentState);
+
         animator.SetBool(walkingHash, true);
 
         //goes to EnemyMovement script and sets canMove to true (allowing enemy to walk to enemy)

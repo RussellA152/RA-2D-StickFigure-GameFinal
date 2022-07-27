@@ -11,6 +11,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class DamageHandler : MonoBehaviour
 {
+    /*
     private Rigidbody2D rb;
 
 
@@ -108,4 +109,5 @@ public class DamageHandler : MonoBehaviour
         //apply attackingPowerX & Y force to enemy based on the direction they are facing
         rb.AddForce(new Vector2(attackPowerX, attackPowerY));
     }
+    */
 }
