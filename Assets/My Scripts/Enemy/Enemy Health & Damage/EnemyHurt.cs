@@ -238,7 +238,9 @@ public class EnemyHurt : MonoBehaviour, IDamageable
 
 
         //apply attackingPowerX & Y force to enemy based on the direction they are facing
-        rb.AddForce(new Vector2(attackPowerX, attackPowerY));
+        //rb.AddForce(new Vector2(attackPowerX, attackPowerY));
+
+        StartCoroutine(WaitUntilEnemyIsHurt(attackPowerX, attackPowerY));
     }
 
 
@@ -254,5 +256,12 @@ public class EnemyHurt : MonoBehaviour, IDamageable
             
         else
             Debug.Log("This animation does not exist!");
+    }
+
+    IEnumerator WaitUntilEnemyIsHurt(float attackPowerX, float attackPowerY)
+    {
+        while (enemyControlScript.GetEnemyState() != EnemyController.EnemyState.Hurt)
+            yield return null;
+        rb.AddForce(new Vector2(attackPowerX, attackPowerY));
     }
 }

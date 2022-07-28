@@ -55,7 +55,7 @@ Animator:
   m_GameObject: {fileID: 732219668646791524}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1ec845dfe06015945b0c6373bb6015e1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -99,14 +99,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aiPath: {fileID: 1345563099117515444}
-  seeker: {fileID: 204039071563704008}
   destinationSetter: {fileID: 3604796771072279783}
   enemyScriptableObject: {fileID: 0}
   targetTransform: {fileID: 0}
   facingRightVector: {x: 1, y: 1, z: 1}
   facingLeftVector: {x: -1, y: 1, z: 1}
   enemyFacingRight: 0
-  isMoving: 0
 --- !u!114 &3305021655998707584
 MonoBehaviour:
   m_ObjectHideFlags: 0

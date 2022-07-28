@@ -25,7 +25,8 @@ public class EnemyMovement : MonoBehaviour
     private float enemyMass; //the mass value of this enemy's rigidbody (DERIVED FROM SCRIPTABLEOBJECT)
     private float enemyWalkingSpeed; // the walking speed of this enemy (using the aiPathing) (DERIVED FROM SCRIPTABLEOBJECT)
 
-    private float followRange; //how far enemy can be to follow player
+    private float followRangeX; //how far enemy can be to follow player in x direction
+    private float followRangeY; //how far enemy can be to follow player in y direction
     private float minimumDistanceY = 1.5f; //how much distance between enemy and player allowed until enemy's auto-repath is turned off (prevents enemies from flying towards player)
 
     [Header("Target Properties")]
@@ -42,30 +43,30 @@ public class EnemyMovement : MonoBehaviour
     private bool canFlip = true; // is the enemy allow to turn around?
     private bool flipCoroutineStarted = false; //has the coroutine for sprite flipping started?
 
-    
-    private float curFreezeTime = 0f;
-    private float maxFreezeTime = 1f;
+    //There is a bug where the enemy stops moving permanently unless they move a little
+    //these values are needed to prevent the enemy from staying frozen 
+    [Header("Prevent Enemy Freeze Properties")]
+    private float differenceInPosition = 0.01f;
+    private float curFreezeTime = 0f; //how long this enemy has been frozen for
+    private float maxFreezeTime = 0.5f;//how long the enemy can be frozen for until they are given a small push to unfreeze them
+    private float pushAmount = 0.001f; //value added to the enemy's current position when they are stuck/frozen
 
-    private float lerpTimer = 0;
-    private float lerpTimerDivider = 10f;
+    private bool isMoving = false; //is this AI stuck and can't move?
 
-    public bool isMoving = false; //is this AI stuck and can't move?
-
-    private Vector3 curPos;
     private Vector3 lastPos;
 
     private void Start()
     {
         //set target as enemy's destintation
         SetNewTarget(targetTransform);
+
+        lastPos = transform.position;
     }
 
     private void Update()
     {
         //Debug.Log("My desired velocity is " + aiPath.desiredVelocity);
         //Debug.Log("reached destination = " + aiPath.reachedEndOfPath);
-        
-
 
         //if the Y distance between the enemy and player gets too high..
         // then the enemy will not re-calculate their pathfinding (they walk towards the last spot where the player was standing)
@@ -82,52 +83,48 @@ public class EnemyMovement : MonoBehaviour
         }
         // always check if enemy needs to flip their sprite/ turn around
         FlipSpriteAutomatically();
+
     }
 
-    public void CheckIfFrozen(EnemyController.EnemyState state)
+    private void FixedUpdate()
     {
-        lerpTimer += Time.deltaTime;
+        
+    }
 
-        //the current position of this enemy
-        curPos = this.transform.position;
 
+    public void CheckIfFrozen()
+    {
         //if the enemy hasn't move positions
         //and they are in the chase target state
         //then they are not moving and we need to start the freeze timer
-        if (curPos == lastPos && state == EnemyController.EnemyState.ChaseTarget)
+        //checking in fixed update makes push occur more often it seems
+        if (Vector3.Distance(transform.position, lastPos) > differenceInPosition)
         {
-            isMoving = false;
-            curFreezeTime += Time.deltaTime;
+            curFreezeTime = 0;
         }
         //otherwise they are moving and the freeze timer should reset
         else
         {
-            isMoving = true;
-            curFreezeTime = 0;
+            curFreezeTime += Time.deltaTime;
         }
 
         //set the latest position to the current positon
-        lastPos = curPos;
+        lastPos = transform.position;
 
         //if the enemy hasn't been moving for some time (about 3 seconds)
-        //give them a small nudge to "unstuck" them
-        if(curFreezeTime > maxFreezeTime)
+        //give them a small push to "unstuck" them
+        if (curFreezeTime > maxFreezeTime)
         {
             if (enemyFacingRight)
-            {
-                transform.position = Vector2.Lerp(transform.position, new Vector2(transform.position.x + 0.5f, transform.position.y), lerpTimer / lerpTimerDivider);
+                transform.Translate(new Vector2(pushAmount, 0f));
 
-            }
-                            
             else
-            {
-                transform.position = Vector2.Lerp(transform.position, new Vector2(transform.position.x - 0.5f, transform.position.y), lerpTimer / lerpTimerDivider);
-            }
-                
+                transform.Translate(new Vector2(-pushAmount, 0f));
 
+            //reset freeze timer after giving a small push to enemy
             curFreezeTime = 0;
-            isMoving = true;
-            Debug.Log("Give me a nudge!");
+
+            Debug.Log("Give me a push!");
         }
     }
 
@@ -198,10 +195,15 @@ public class EnemyMovement : MonoBehaviour
         return targetTransform;
     }
 
-    //return the following range of this enemy
-    public float GetEnemyFollowRange()
+    //return the following range x of this enemy
+    public float GetEnemyFollowRangeX()
     {
-        return followRange;
+        return followRangeX;
+    }
+    //return the following range y of this enemy
+    public float GetEnemyFollowRangeY()
+    {
+        return followRangeY;
     }
     
     //return the direction this enemy is facing
@@ -234,7 +236,8 @@ public class EnemyMovement : MonoBehaviour
             //set enemy's sprite equal to ScriptableObject's sprite
             //spriteRenderer.sprite = enemyScriptableObject.sprite;
 
-            followRange = enemyScriptableObject.followRange;
+            followRangeX = enemyScriptableObject.followRangeX;
+            followRangeY = enemyScriptableObject.followRangeY;
         }
         else
         {

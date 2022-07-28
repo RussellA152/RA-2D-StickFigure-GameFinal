@@ -26,7 +26,9 @@ public class EnemyController : MonoBehaviour
     private Transform target; //enemy's target that they will chase and attack
     private float distanceFromTargetX; // the distance from enemy and player in x-axis
     private float distanceFromTargetY; // the distance from enemy and player in y-axis
-    private float followRange; //range that enemy can chase target (taken from enemymovescript)
+    private float followRangeX; //how far enemy can be to follow player in x direction
+    private float followRangeY; //how far enemy can be to follow player in y direction
+    private bool withinFollowRange;
     private float attackRangeX; //range that enemy can attack target (taken from Scriptable Object)
     private float attackRangeY; //range that enemy can attack target (taken from Scriptable Object)
     private bool withinAttackRange;
@@ -127,6 +129,11 @@ public class EnemyController : MonoBehaviour
         else
             withinAttackRange = false;
 
+        if (distanceFromTargetX <= followRangeX && distanceFromTargetY <= followRangeY)
+            withinFollowRange = true;
+        else
+            withinFollowRange = false;
+
         //only switch states if we have a target ( if there is no target, just remain in Idle )
         if (target != null)
             switch (currentState)
@@ -177,7 +184,8 @@ public class EnemyController : MonoBehaviour
         target = enemyMoveScript.GetEnemyTarget();
 
         //retrieve the following range from the movement script
-        followRange = enemyMoveScript.GetEnemyFollowRange();
+        followRangeX = enemyMoveScript.GetEnemyFollowRangeX();
+        followRangeY = enemyMoveScript.GetEnemyFollowRangeY();
 
         //retrieve the attacking ranges from the attacking script
         attackRangeX = enemyScriptableObject.GetAttackRangeX();
@@ -200,7 +208,7 @@ public class EnemyController : MonoBehaviour
         //if enemy is close to player, chase them (within follow range)
         if (!stateCooldownStarted)
         {
-            if (distanceFromTargetX <= followRange && !withinAttackRange)
+            if (withinFollowRange && !withinAttackRange)
             {
                 ChangeEnemyState(chaseStateTransitionTimer, EnemyState.ChaseTarget);
             }
@@ -219,7 +227,7 @@ public class EnemyController : MonoBehaviour
     {
         //Debug.Log("Chase behavior!");
 
-        enemyMoveScript.CheckIfFrozen(currentState);
+        enemyMoveScript.CheckIfFrozen();
 
         animator.SetBool(walkingHash, true);
 
@@ -237,7 +245,7 @@ public class EnemyController : MonoBehaviour
         // also check if player is within the enemy's attacking range, if so, change state into Attacking
         if (!stateCooldownStarted)
         {
-            if (distanceFromTargetX > followRange && !withinAttackRange)
+            if (!withinFollowRange && !withinAttackRange)
             {
                 ChangeEnemyState(idleStateTransitionTimer, EnemyState.Idle);
             }
@@ -274,11 +282,11 @@ public class EnemyController : MonoBehaviour
         
         if (!stateCooldownStarted && !isAttacking)
         {
-            if (distanceFromTargetX <= followRange && !withinAttackRange)
+            if (withinFollowRange && !withinAttackRange)
             {
                 ChangeEnemyState(chaseStateTransitionTimer, EnemyState.ChaseTarget);
             }
-            else if (distanceFromTargetX > followRange && !withinAttackRange)
+            else if (!withinFollowRange && !withinAttackRange)
             {
                 ChangeEnemyState(idleStateTransitionTimer, EnemyState.Idle);
             }
