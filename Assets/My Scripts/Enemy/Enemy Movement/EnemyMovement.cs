@@ -48,7 +48,7 @@ public class EnemyMovement : MonoBehaviour
     [Header("Prevent Enemy Freeze Properties")]
     private float differenceInPosition = 0.01f;
     private float curFreezeTime = 0f; //how long this enemy has been frozen for
-    private float maxFreezeTime = 0.5f;//how long the enemy can be frozen for until they are given a small push to unfreeze them
+    private float maxFreezeTime = 0.35f;//how long the enemy can be frozen for until they are given a small push to unfreeze them
     private float pushAmount = 0.001f; //value added to the enemy's current position when they are stuck/frozen
 
     private bool isMoving = false; //is this AI stuck and can't move?

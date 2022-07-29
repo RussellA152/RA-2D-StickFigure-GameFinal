@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1345563099117515444}
   - component: {fileID: 3604796771072279783}
   - component: {fileID: 204039071563704008}
-  - component: {fileID: 6387468270599271747}
+  - component: {fileID: -8891431870749144915}
   - component: {fileID: 7383473570951731383}
   m_Layer: 8
   m_Name: Basic Enemy Template
@@ -85,7 +85,7 @@ MonoBehaviour:
   idleStateTransitionTimer: 0
   chaseStateTransitionTimer: 0.6
   attackStateTransitionTimer: 0
-  rb: {fileID: 6387468270599271747}
+  rb: {fileID: 0}
 --- !u!114 &5969129094098281727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,11 +148,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 5
-  radius: 3.5
+  radius: 4
   height: 2
   canMove: 1
   maxSpeed: 2
-  gravity: {x: NaN, y: NaN, z: NaN}
+  gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -160,7 +160,7 @@ MonoBehaviour:
   repathRateCompatibility: NaN
   canSearchCompability: 0
   orientation: 1
-  enableRotation: 1
+  enableRotation: 0
   autoRepath:
     mode: 2
     interval: 2
@@ -219,7 +219,7 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
---- !u!50 &6387468270599271747
+--- !u!50 &-8891431870749144915
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -234,9 +234,9 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 4
+  m_GravityScale: 1
   m_Material: {fileID: 0}
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -276,6 +276,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3138034387394515940}
   - component: {fileID: 3215621220825369563}
+  - component: {fileID: 9091249034838634187}
   m_Layer: 8
   m_Name: Enemy Sprite Renderer
   m_TagString: Untagged
@@ -349,6 +350,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &9091249034838634187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2537430887684809347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e4e85b338ec5f94cbed29646a070bb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4622912823528068189
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,9 +517,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5329907737196684043}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5, y: -1, z: 0}
-  m_LocalScale: {x: 3.3, y: 2.7341971, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.4999999, y: -1, z: 0}
+  m_LocalScale: {x: 3.2999997, y: 2.7341971, z: 1}
   m_Children: []
   m_Father: {fileID: 5186178840865194877}
   m_RootOrder: 4
