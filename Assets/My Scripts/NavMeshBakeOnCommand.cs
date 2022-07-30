@@ -1,24 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Pathfinding;
+using UnityEngine.AI;
+//using Pathfinding;
 
-public class AIGridMover : MonoBehaviour
+public class NavMeshBakeOnCommand : MonoBehaviour
 {
-    [SerializeField] private AstarPath aStarGrid;
+    //[SerializeField] private AstarPath aStarGrid;
 
-    [SerializeField] private Vector2 offset;
+    //[SerializeField] private Vector2 offset;
+
+    [SerializeField] private NavMeshSurface2d navMeshSurface;
+
+    private bool navMeshBaked;
 
     private void Start()
     {
-         
-        LevelManager.instance.onPlayerEnterNewArea += MoveGrid;
+
+        //LevelManager.instance.onPlayerEnterNewArea += BakeNewArea;
+
+        navMeshBaked = false;
+        StartCoroutine(WaitUntilRoomsAreSpawned());
+
     }
+
+
+    IEnumerator WaitUntilRoomsAreSpawned()
+    {
+        //wait until all rooms are finished spawning in
+        while (LevelManager.instance.dungeonGenerationState == LevelManager.GenerationProgress.incomplete)
+            yield return null;
+
+        //trigger the navmesh baking so ai can walk around in each room
+        BakeNewArea();
+
+    }
+
 
     //sets the center component of the aStar grid equal to a new Vector2
     //the Vector2 should represent the position of the current room the player is inside of
-    private void MoveGrid()
-    {
+    //OBSOLETE because we no longer use Astar pathfinding
+    //private void MoveGrid()
+    //{
+        /*
         //get the current room the player is inside of
         BasicDungeon currentRoom = LevelManager.instance.GetCurrentRoom();
 
@@ -38,6 +62,16 @@ public class AIGridMover : MonoBehaviour
 
         //need to scan otherwise ai wouldn't actually know that the graph moved
         graph.Scan();
+        */
+    //}
 
+    private void BakeNewArea()
+    {
+        if (!navMeshBaked)
+        {
+            navMeshSurface.BuildNavMesh();
+            navMeshBaked = true;
+        }
+            
     }
 }

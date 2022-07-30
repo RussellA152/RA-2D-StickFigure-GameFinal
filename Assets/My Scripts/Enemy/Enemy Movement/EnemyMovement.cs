@@ -1,22 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Pathfinding;
+using UnityEngine.AI;
+//using Pathfinding;
 
 //This script will contain states for the AI (ex: Idle, Hostile, Death)
 //It also controls the values of variables inside of the enemy pathfinding scripts 
 
 // EnemyMovement.cs requires the GameObject to have a Rigidbody and the AI pathfinding components
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(AIPath))]
-[RequireComponent(typeof(AIDestinationSetter))]
+//[RequireComponent(typeof(Rigidbody2D))]
+//[RequireComponent(typeof(AIPath))]
+//[RequireComponent(typeof(AIDestinationSetter))]
 public class EnemyMovement : MonoBehaviour
 {
 
     [Header("Required Components")]
-    [SerializeField] private AIPath aiPath;
+    [SerializeField] private NavMeshAgent agent;
+    //[SerializeField] private AIPath aiPath;
 
-    [SerializeField] private AIDestinationSetter destinationSetter; //destination setter script inside of enemy
+    //[SerializeField] private AIDestinationSetter destinationSetter; //destination setter script inside of enemy
     private Vector3 startingPosition; //the position of wherever the enemy spawned at
 
     [Header("Enemy Configuration Scriptable Object")]
@@ -57,6 +59,9 @@ public class EnemyMovement : MonoBehaviour
 
     private void Start()
     {
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+
         //set target as enemy's destintation
         SetNewTarget(targetTransform);
 
@@ -70,18 +75,21 @@ public class EnemyMovement : MonoBehaviour
 
         //if the Y distance between the enemy and player gets too high..
         // then the enemy will not re-calculate their pathfinding (they walk towards the last spot where the player was standing)
-        if (Mathf.Abs(transform.position.y - targetTransform.position.y) >= minimumDistanceY)
-        {
-            aiPath.autoRepath.mode = AutoRepathPolicy.Mode.Never; 
-        }
+        //if (Mathf.Abs(transform.position.y - targetTransform.position.y) >= minimumDistanceY)
+        //{
+        //aiPath.autoRepath.mode = AutoRepathPolicy.Mode.Never; 
+        //}
         //when the y distance between the enemy and player is close enough
         // then the enemy can dynamically calculate their pathfinding again
-        else
-        {
-            aiPath.autoRepath.mode = AutoRepathPolicy.Mode.Dynamic;
+        //else
+        //{
+        //aiPath.autoRepath.mode = AutoRepathPolicy.Mode.Dynamic;
 
-        }
+        //}
         // always check if enemy needs to flip their sprite/ turn around
+        if(agent.enabled)
+            SetNewTarget(targetTransform);
+
         FlipSpriteAutomatically();
 
     }
@@ -115,11 +123,11 @@ public class EnemyMovement : MonoBehaviour
         //give them a small push to "unstuck" them
         if (curFreezeTime > maxFreezeTime)
         {
-            if (enemyFacingRight)
-                transform.Translate(new Vector2(pushAmount, 0f));
+            //if (enemyFacingRight)
+                //transform.Translate(new Vector2(pushAmount, 0f));
 
-            else
-                transform.Translate(new Vector2(-pushAmount, 0f));
+            //else
+                //transform.Translate(new Vector2(-pushAmount, 0f));
 
             //reset freeze timer after giving a small push to enemy
             curFreezeTime = 0;
@@ -134,13 +142,13 @@ public class EnemyMovement : MonoBehaviour
     {
         //enemy must be allowed to move to flip sprite
         //if enemy is moving right... flip sprite to face the right direction
-        if (aiPath.desiredVelocity.x >= 0.01f && aiPath.canMove && canFlip)
+        if (agent.desiredVelocity.x >= 0.01f && canFlip)
         {
             transform.localScale = facingRightVector;
             enemyFacingRight = true;
         }
         // if enemy is moving left.. flip sprite to face left direction
-        else if (aiPath.desiredVelocity.x <= -0.01f && aiPath.canMove && canFlip)
+        else if (agent.desiredVelocity.x <= -0.01f && canFlip)
         {
             transform.localScale = facingLeftVector;
             enemyFacingRight = false;
@@ -160,29 +168,30 @@ public class EnemyMovement : MonoBehaviour
     //they will now chase this target and attack this target based on distance
     public void SetNewTarget(Transform target)
     {
-        destinationSetter.SetTarget(target);
+        agent.SetDestination(target.position);
+        //destinationSetter.SetTarget(target);
     }
 
     //canMove being true means the AI is allowed to pathfind (enemy is not affected by forces when canMove is true)
     public void AllowMovement()
     {
-        
-        aiPath.SetAICanMove(true);
+        agent.enabled = true;
     }
 
     //canMove being false means the AI is not allowed to pathfind (enemy is NOW affected by forces)
     //we call this function when enemy is hit by an attack so that they are affected by the attack power of attacks
     public void DisableMovement()
     {
-        
-        aiPath.SetAICanMove(false);
-        
+
+        agent.enabled = false;
+
     }
     //enemy will come to a stop if shouldStop is true, but is allowed to pathfind still (not able to be affected by forces in this mode)
     // if shouldStop is false, the enemy will resume their movement
     public void StopMovement(bool shouldStop)
     {
-        aiPath.isStopped = shouldStop;
+        if(agent.enabled)
+            agent.isStopped = shouldStop;
     }
     public void SetCanFlip(bool boolean)
     {
@@ -248,7 +257,8 @@ public class EnemyMovement : MonoBehaviour
         rb.mass = enemyMass;
 
         //set enemy's maxSpeed to enemyWalkingSpeed;
-        aiPath.maxSpeed = enemyWalkingSpeed;
+        agent.speed = enemyWalkingSpeed;
+        //aiPath.maxSpeed = enemyWalkingSpeed;
     }
 
     //this coroutine is meant to prevent the enemy from flipping immediately when they need to

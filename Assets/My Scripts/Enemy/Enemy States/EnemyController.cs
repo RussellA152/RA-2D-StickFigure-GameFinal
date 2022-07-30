@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.AI;
 
 
 //This script is responsible for changing and setting the current state of the enemy this script is placed on
@@ -10,6 +11,7 @@ using UnityEngine.Pool;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private EnemyState currentState;
+    [SerializeField] private NavMeshAgent agent;
 
     private IObjectPool<EnemyController> myPool;
 
@@ -49,7 +51,7 @@ public class EnemyController : MonoBehaviour
     private bool attackOnCooldown = false; //is the enemy on attack cooldown? If so, don't let them attack again
 
 
-    private BasicDungeon myRoom; //the room this enemy was spawned in
+    [SerializeField] private BasicDungeon myRoom; //the room this enemy was spawned in
 
     private int walkingHash;
 
@@ -197,6 +199,7 @@ public class EnemyController : MonoBehaviour
 
         //Debug.Log("Idle behavior!");
         animator.SetBool(walkingHash, false);
+        enemyMoveScript.DisableMovement();
         //don't let enemy move in idle state
         //goes to EnemyMovement script and sets isStopped to true
         enemyMoveScript.StopMovement(true);
@@ -227,7 +230,7 @@ public class EnemyController : MonoBehaviour
     {
         //Debug.Log("Chase behavior!");
 
-        enemyMoveScript.CheckIfFrozen();
+        //enemyMoveScript.CheckIfFrozen();
 
         animator.SetBool(walkingHash, true);
 
@@ -266,6 +269,8 @@ public class EnemyController : MonoBehaviour
         //don't let enemy move when trying to attack
         //goes to EnemyMovement script and sets isStopped to true
         enemyMoveScript.StopMovement(true);
+
+        enemyMoveScript.DisableMovement();
 
         //the enemy is not allowed to turn around until they return to idle
         enemyMoveScript.SetCanFlip(false);
@@ -412,6 +417,11 @@ public class EnemyController : MonoBehaviour
     public void SetIsAttacking(bool boolean)
     {
         isAttacking = boolean;
+    }
+
+    public NavMeshAgent GetNavMeshAgent()
+    {
+        return agent;
     }
 
 

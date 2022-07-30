@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Pool;
 using UnityEngine;
+using UnityEngine.AI;
 
 //This class is responsible for spawning in AI and enemies whenever the player enters a new level/area (using event system for that)
 //the idea is that the levels will not be new scenes, so we should re-use enemies that were killed/ignored
@@ -95,8 +96,14 @@ public class AISpawner : MonoBehaviour
     {
         BasicDungeon roomToSpawnEnemiesInside = LevelManager.instance.GetCurrentRoom();
 
+        //retrieve the NavMeshAgent component from the enemy (helps with performance)
+        var navMeshAgent = enemy.GetNavMeshAgent();
+
         //spawn this enemy in a some location in the area (retrieves spawn location from level manager)
-        enemy.gameObject.transform.position = LevelManager.instance.GetCurrentRoom().GiveNewSpawnLocations();
+        //have to use Warp instead of editing the transform.position, otherwise enemies will not spawn in the correct position
+        navMeshAgent.Warp(LevelManager.instance.GetCurrentRoom().GiveNewSpawnLocations());
+
+        //enemy.gameObject.transform.position = LevelManager.instance.GetCurrentRoom().GiveNewSpawnLocations();
 
         enemy.gameObject.SetActive(true);
 

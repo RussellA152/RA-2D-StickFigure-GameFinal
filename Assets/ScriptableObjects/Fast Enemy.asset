@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Fast Enemy
   m_EditorClassIdentifier: 
   maxHealth: 250
-  walkingSpeed: 12
+  walkingSpeed: 10
   followRangeX: 35
   followRangeY: 12
   attackRangeX: 4.5

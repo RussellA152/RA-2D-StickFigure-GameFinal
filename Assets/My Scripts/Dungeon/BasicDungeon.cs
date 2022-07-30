@@ -109,6 +109,7 @@ public class BasicDungeon: MonoBehaviour
                     iterator++;
                     spawnLocations[location] = true;
 
+                    Debug.Log("Location I spawned at was " + location.position);
                     //Debug.Log("Return a random loc!");
                     return location.position;
                 }

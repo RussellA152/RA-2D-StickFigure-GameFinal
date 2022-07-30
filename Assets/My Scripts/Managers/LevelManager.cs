@@ -92,6 +92,8 @@ public class LevelManager : MonoBehaviour
         else
             dungeonGenerationState = GenerationProgress.incomplete;
 
+        //Debug.Log("The current room is " + currentRoom);
+
     }
 
     public void EnteringNewAreaEvent()
