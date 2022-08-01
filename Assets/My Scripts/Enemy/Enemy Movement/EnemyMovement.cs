@@ -30,6 +30,8 @@ public class EnemyMovement : MonoBehaviour
     private float followRangeX; //how far enemy can be to follow player in x direction
     private float followRangeY; //how far enemy can be to follow player in y direction
     private float minimumDistanceY = 1.5f; //how much distance between enemy and player allowed until enemy's auto-repath is turned off (prevents enemies from flying towards player)
+    private bool canAutoSetTarget;
+    private bool canSetTemporaryPath = false;
 
     [Header("Target Properties")]
     [SerializeField] private Transform targetTransform; //the target that the enemy will path towards
@@ -47,49 +49,46 @@ public class EnemyMovement : MonoBehaviour
 
     //There is a bug where the enemy stops moving permanently unless they move a little
     //these values are needed to prevent the enemy from staying frozen 
-    [Header("Prevent Enemy Freeze Properties")]
-    private float differenceInPosition = 0.01f;
-    private float curFreezeTime = 0f; //how long this enemy has been frozen for
-    private float maxFreezeTime = 0.35f;//how long the enemy can be frozen for until they are given a small push to unfreeze them
-    private float pushAmount = 0.001f; //value added to the enemy's current position when they are stuck/frozen
+    //[Header("Prevent Enemy Freeze Properties")]
+    //private float differenceInPosition = 0.01f;
+    //private float curFreezeTime = 0f; //how long this enemy has been frozen for
+    //private float maxFreezeTime = 0.35f;//how long the enemy can be frozen for until they are given a small push to unfreeze them
+    //private float pushAmount = 0.001f; //value added to the enemy's current position when they are stuck/frozen
 
-    private bool isMoving = false; //is this AI stuck and can't move?
-
-    private Vector3 lastPos;
+    private bool isMoving = false; //is this AI moving (if their desired velocity is greater than 0)
 
     private void Start()
     {
         agent.updateRotation = false;
         agent.updateUpAxis = false;
 
-        //set target as enemy's destintation
-        SetNewTarget(targetTransform);
+        canAutoSetTarget = true;
 
-        lastPos = transform.position;
+        //set target as enemy's destintation
+        SetNewTarget(targetTransform.position);
+
+        //lastPos = transform.position;
     }
 
     private void Update()
     {
-        //Debug.Log("My desired velocity is " + aiPath.desiredVelocity);
-        //Debug.Log("reached destination = " + aiPath.reachedEndOfPath);
 
-        //if the Y distance between the enemy and player gets too high..
-        // then the enemy will not re-calculate their pathfinding (they walk towards the last spot where the player was standing)
-        //if (Mathf.Abs(transform.position.y - targetTransform.position.y) >= minimumDistanceY)
-        //{
-        //aiPath.autoRepath.mode = AutoRepathPolicy.Mode.Never; 
-        //}
-        //when the y distance between the enemy and player is close enough
-        // then the enemy can dynamically calculate their pathfinding again
-        //else
-        //{
-        //aiPath.autoRepath.mode = AutoRepathPolicy.Mode.Dynamic;
+        if (Mathf.Abs(agent.desiredVelocity.x) > 0)
+            isMoving = true;
+        else
+            isMoving = false;
 
-        //}
+
+        //always check the y distance between the target and enemy
+        CheckYDistanceFromTarget();
+        
+        //enemy's navmeshagent component must be enabled to set target
+        //also, the bool "canSetTarget" must be true, which is set to false whenever the y distance between the 
+        //player and enemy is too high
+        if (agent.enabled && canAutoSetTarget)
+            SetNewTarget(targetTransform.position);
+
         // always check if enemy needs to flip their sprite/ turn around
-        if(agent.enabled)
-            SetNewTarget(targetTransform);
-
         FlipSpriteAutomatically();
 
     }
@@ -99,40 +98,33 @@ public class EnemyMovement : MonoBehaviour
         
     }
 
-
-    public void CheckIfFrozen()
+    private void CheckYDistanceFromTarget()
     {
-        //if the enemy hasn't move positions
-        //and they are in the chase target state
-        //then they are not moving and we need to start the freeze timer
-        //checking in fixed update makes push occur more often it seems
-        if (Vector3.Distance(transform.position, lastPos) > differenceInPosition)
+        //if the Y distance between the enemy and player gets too high..
+        //then the enemy will not set a destintation to the player's exact position
+        //instead, they will walk towards the last spot where the player was standing (around there..)
+        if (Mathf.Abs(transform.position.y - targetTransform.position.y) >= minimumDistanceY)
         {
-            curFreezeTime = 0;
+            canAutoSetTarget = false;
+
+            //the enemy will move to the last position the player was at before the y distance between the two grew too high
+            //if the player jumps over the enemy, the enemy will most likely move towards the last place the player was at before they jumped
+            if (canSetTemporaryPath && agent.enabled && !agent.isStopped)
+                SetNewTarget(new Vector3(targetTransform.position.x, targetTransform.position.y - minimumDistanceY, targetTransform.position.z));
+
+            //we set this bool to false so that enemy only sets destination once 
+            canSetTemporaryPath = false;
         }
-        //otherwise they are moving and the freeze timer should reset
+
+        //when the player and enemy get close to each other again
+        //the enemy will be able to set that temporary path again
         else
         {
-            curFreezeTime += Time.deltaTime;
-        }
+            canSetTemporaryPath = true;
 
-        //set the latest position to the current positon
-        lastPos = transform.position;
+            //enemy is allowed to set destination each frame again
+            canAutoSetTarget = true;
 
-        //if the enemy hasn't been moving for some time (about 3 seconds)
-        //give them a small push to "unstuck" them
-        if (curFreezeTime > maxFreezeTime)
-        {
-            //if (enemyFacingRight)
-                //transform.Translate(new Vector2(pushAmount, 0f));
-
-            //else
-                //transform.Translate(new Vector2(-pushAmount, 0f));
-
-            //reset freeze timer after giving a small push to enemy
-            curFreezeTime = 0;
-
-            Debug.Log("Give me a push!");
         }
     }
 
@@ -142,13 +134,13 @@ public class EnemyMovement : MonoBehaviour
     {
         //enemy must be allowed to move to flip sprite
         //if enemy is moving right... flip sprite to face the right direction
-        if (agent.desiredVelocity.x >= 0.01f && canFlip)
+        if (agent.desiredVelocity.x >= 0.01f && canFlip && isMoving)
         {
             transform.localScale = facingRightVector;
             enemyFacingRight = true;
         }
         // if enemy is moving left.. flip sprite to face left direction
-        else if (agent.desiredVelocity.x <= -0.01f && canFlip)
+        else if (agent.desiredVelocity.x <= -0.01f && canFlip && isMoving)
         {
             transform.localScale = facingLeftVector;
             enemyFacingRight = false;
@@ -166,9 +158,9 @@ public class EnemyMovement : MonoBehaviour
 
     //The AI will change to a new target
     //they will now chase this target and attack this target based on distance
-    public void SetNewTarget(Transform target)
+    public void SetNewTarget(Vector3 pathPosition)
     {
-        agent.SetDestination(target.position);
+        agent.SetDestination(pathPosition);
         //destinationSetter.SetTarget(target);
     }
 
@@ -290,6 +282,11 @@ public class EnemyMovement : MonoBehaviour
         }
 
         flipCoroutineStarted = false;
+    }
+
+    public bool GetIsMoving()
+    {
+        return isMoving;
     }
 
     private void OnDisable()

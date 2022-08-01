@@ -232,7 +232,7 @@ public class EnemyController : MonoBehaviour
 
         //enemyMoveScript.CheckIfFrozen();
 
-        animator.SetBool(walkingHash, true);
+        animator.SetBool(walkingHash, enemyMoveScript.GetIsMoving());
 
         //goes to EnemyMovement script and sets canMove to true (allowing enemy to walk to enemy)
         //also sets isStopped back to false
