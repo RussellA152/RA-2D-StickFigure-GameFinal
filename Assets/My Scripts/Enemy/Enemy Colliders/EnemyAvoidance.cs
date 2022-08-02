@@ -25,7 +25,9 @@ public class EnemyAvoidance : MonoBehaviour
 
         if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            enemyControllerScript.ChangeEnemyState(0f, EnemyController.EnemyState.Idle);
+            //if the enemy was in the hurt state, don't make them change to idle
+            if(enemyControllerScript.GetEnemyState() != EnemyController.EnemyState.Hurt)
+                enemyControllerScript.ChangeEnemyState(0f, EnemyController.EnemyState.Idle);
 
             if (!turnOffCoroutineStarted)
                 StartCoroutine(TurnOffCollider());

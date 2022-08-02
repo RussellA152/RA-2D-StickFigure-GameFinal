@@ -10,14 +10,9 @@ public class Door : Interactable
 
     private Vector3 teleportPositionOffset = new Vector3(0f,2.5f); //an offset added to the position the player will be teleported to when using a door
 
-    private float lerpTimer = 0;
-    private float timeDivider = 5f;
-
 
     private void Update()
     {
-        lerpTimer += Time.deltaTime;
-
         //only let the player leave the room if they have cleared the enemies inside*
         if (room.roomEnemyCountState == BasicDungeon.RoomEnemyCount.cleared)
             CheckInteraction();
@@ -26,8 +21,7 @@ public class Door : Interactable
     //the interactable action of a door is to teleport to a neighboring door
     public override void InteractableAction()
     {
-        //lerp the player's position to the neighboring door (teleport them)
-        interacter.position = Vector2.Lerp(interacter.position, neighboringDoor.transform.position + teleportPositionOffset, lerpTimer / timeDivider);
+        interacter.position = new Vector3(neighboringDoor.transform.position.x, neighboringDoor.transform.position.y, neighboringDoor.transform.position.z) + teleportPositionOffset;
 
         //don't allow player to use door again for a bit
         StartCooldown();

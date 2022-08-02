@@ -21,7 +21,7 @@ public class LevelManager : MonoBehaviour
     [HideInInspector]
     public GenerationProgress dungeonGenerationState; //the state of the dungeon generation.. is it complete or not?
 
-    public GameObject[] allRooms; //all room available to spawn
+    public BasicDungeon[] allRooms; //all room available to spawn
     //public GameObject[] bottomRooms; //array of all rooms with a bottom door
     //public GameObject[] topRooms; //array of all rooms with a top door
     //public GameObject[] leftRooms; //array of all rooms with a left door
@@ -29,7 +29,7 @@ public class LevelManager : MonoBehaviour
 
     //public GameObject closedRoom; // a "wall" that is about the size of a room that prevents player from leaving dungeon
 
-    public List<GameObject> spawnedRooms; //list of currently spawned in rooms (always 1 higher than spawned rooms because starting room is included)
+    public List<BasicDungeon> spawnedRooms; //list of currently spawned in rooms (always 1 higher than spawned rooms because starting room is included)
 
     [HideInInspector]
     public int numberOfSpawnedRooms; //number of rooms that have been spawned
@@ -37,7 +37,8 @@ public class LevelManager : MonoBehaviour
     [HideInInspector]
     public int roomCap; //max number of rooms that can spawn (random based on the "DungeonSize" state)
 
-    public Dictionary<Vector2,GameObject> roomCoordinatesOccupied = new Dictionary<Vector2,GameObject>();
+    public Dictionary<Vector2,BasicDungeon> roomCoordinatesOccupied = new Dictionary<Vector2,BasicDungeon>();
+
 
     public enum DungeonSize
     {
@@ -189,7 +190,7 @@ public class LevelManager : MonoBehaviour
     }
 
     //return a room based on the value of its coordinate
-    public GameObject GetRoomByCoordinate(Vector2 roomCoordinate)
+    public BasicDungeon GetRoomByCoordinate(Vector2 roomCoordinate)
     {
         return roomCoordinatesOccupied[roomCoordinate];
     }
