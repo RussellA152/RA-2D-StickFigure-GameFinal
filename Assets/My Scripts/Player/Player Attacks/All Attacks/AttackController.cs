@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerComponents))]
 public class AttackController : MonoBehaviour
 {
-    private PlayerComponents playerComponentScript;
+    [SerializeField] private PlayerComponents playerComponentScript;
 
     public static AttackController instance;
 
@@ -58,8 +58,7 @@ public class AttackController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerComponentScript = GetComponent<PlayerComponents>();
-
+        //playerComponentScript = GetComponent<PlayerComponents>();
 
         animator = playerComponentScript.GetAnimator();
 

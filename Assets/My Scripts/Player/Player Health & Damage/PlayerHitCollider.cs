@@ -8,7 +8,7 @@ using UnityEngine;
 // and when the enemy is inside the box collider's trigger, call the deal damage function that will apply the damage and force on the enemy
 public class PlayerHitCollider : MonoBehaviour, IDamageDealing
 {
-    private BoxCollider2D hitbox;
+    [SerializeField] private BoxCollider2D hitbox;
 
     private Transform targetTransform;// the transform of who enters our hitbox collider
 
@@ -22,7 +22,7 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealing
 
     private void Start()
     {
-        hitbox = GetComponent<BoxCollider2D>();
+        //hitbox = GetComponent<BoxCollider2D>();
     }
 
 

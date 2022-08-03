@@ -8,8 +8,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerComponents))]
 public class PlayerMovementInput : MonoBehaviour
 {
-    private CharacterController2D controller;
-    private PlayerComponents playerComponentScript; // using this to get reference to the canMove boolean (will determine if we should calculate user input)
+    [SerializeField] private CharacterController2D controller;
+    [SerializeField] private PlayerComponents playerComponentScript; // using this to get reference to the canMove boolean (will determine if we should calculate user input)
 
     //walking value passed into CharacterController2D's Move() 
     private float horizontalMovement = 0f;
@@ -31,8 +31,8 @@ public class PlayerMovementInput : MonoBehaviour
     private void Start()
     {
 
-        controller = GetComponent<CharacterController2D>();
-        playerComponentScript = GetComponent<PlayerComponents>();
+        //controller = GetComponent<CharacterController2D>();
+        //playerComponentScript = GetComponent<PlayerComponents>();
 
 
         move = playerComponentScript.GetMove();

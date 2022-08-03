@@ -34,7 +34,7 @@ public class ItemStats: Interactable
         Debug.Log("Go to the player's item inventory!");
 
         //add this item to the player's item list
-        interacter.gameObject.GetComponent<PlayerItems>().AddItemToInventory(this);
+        //interacter.gameObject.GetComponent<PlayerItems>().AddItemToInventory(this);
 
         retrieved = true;
     }

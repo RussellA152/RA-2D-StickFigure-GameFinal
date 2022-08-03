@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerItems : MonoBehaviour
 {
 
-    [SerializeField] private List<ItemStats> items = new List<ItemStats>();
+    [SerializeField] private List<Item> items = new List<Item>();
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +19,7 @@ public class PlayerItems : MonoBehaviour
         
     }
 
-    public void AddItemToInventory(ItemStats item)
+    public void AddItemToInventory(Item item)
     {
         //adding given item to the list
         items.Add(item);

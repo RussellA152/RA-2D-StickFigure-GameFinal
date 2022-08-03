@@ -32,13 +32,13 @@ public class PlayerComponents : MonoBehaviour
 
     private float health;
 
-    public Animator animator;
+    [SerializeField] private Animator animator;
 
-    private Rigidbody2D playerRB;
+    [SerializeField] private Rigidbody2D playerRB;
 
-    private BoxCollider2D hitbox; //hitbox used for attacks
+    [SerializeField] private BoxCollider2D hitbox; //hitbox used for attacks
 
-    private BoxCollider2D bodyCollider; //collider used for for collisions between enemies and ground/walls
+    [SerializeField] private BoxCollider2D bodyCollider; //collider used for for collisions between enemies and ground/walls
 
     private bool playerFacingRight;
     private bool playerIsGrounded;
@@ -61,11 +61,11 @@ public class PlayerComponents : MonoBehaviour
     private void Awake()
     {
         playerControls = new PlayerInputActions();
-        animator = GetComponent<Animator>();
-        playerRB = GetComponent<Rigidbody2D>();
-        bodyCollider = GetComponent<BoxCollider2D>();
+        //animator = GetComponent<Animator>();
+        //playerRB = GetComponent<Rigidbody2D>();
+        //bodyCollider = GetComponent<BoxCollider2D>();
 
-        hitbox = GameObject.Find("Player Hit Box").GetComponent<BoxCollider2D>();
+        //hitbox = GameObject.Find("Player Hit Box").GetComponent<BoxCollider2D>();
     }
 
     private void OnEnable()

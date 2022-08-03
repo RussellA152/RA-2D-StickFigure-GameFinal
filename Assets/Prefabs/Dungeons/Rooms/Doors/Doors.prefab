@@ -182,6 +182,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interacter: {fileID: 0}
+  needsButtonPress: 1
   cooldownTimer: 2
   room: {fileID: 0}
 --- !u!61 &7353442006225623023
@@ -392,6 +393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interacter: {fileID: 0}
+  needsButtonPress: 1
   cooldownTimer: 2
   room: {fileID: 0}
 --- !u!61 &6556090531535826917
@@ -636,6 +638,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interacter: {fileID: 0}
+  needsButtonPress: 1
   cooldownTimer: 2
   room: {fileID: 0}
 --- !u!61 &957892069106877114
@@ -846,6 +849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interacter: {fileID: 0}
+  needsButtonPress: 1
   cooldownTimer: 2
   room: {fileID: 0}
 --- !u!61 &2200501172913840958

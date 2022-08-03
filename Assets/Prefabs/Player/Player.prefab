@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 012fa46e795cefe448374b7ea1c77f38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitbox: {fileID: 4332903956781392642}
 --- !u!61 &4332903956781392642
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -179,7 +180,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62889b270223b614d9eaa484631ae84a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: 4332903956958558049}
+  playerRB: {fileID: 4332903956958558058}
+  hitbox: {fileID: 4332903956781392642}
+  bodyCollider: {fileID: 4332903956958558056}
 --- !u!114 &4332903956958558052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,6 +209,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ef045928fe97314798725afae676dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 4332903956958558059}
+  playerComponentScript: {fileID: 4332903956958558062}
 --- !u!114 &4332903956958558063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,6 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 573af71acbc5daa41a28a5195cd706fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerComponentScript: {fileID: 4332903956958558062}
   animator: {fileID: 0}
   isLightAttacking: 0
   isHeavyAttacking: 0
@@ -234,6 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239e2aa382411ee49af5952900954645, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerComponentScript: {fileID: 4332903956958558062}
   runSpeed: 65
   m_JumpForce: 1600
   speedMultiplier: 10
@@ -282,6 +290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 934d3d062fecc34469c22c8e2198038f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerComponentScript: {fileID: 4332903956958558062}
   lightHurtAnimFront: Light Hurt Front
   lightHurtAnimBehind: Light Hurt Behind
   heavyHurtAnimFront: Heavy Hurt Front

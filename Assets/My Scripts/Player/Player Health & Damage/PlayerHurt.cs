@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerHurt : MonoBehaviour, IDamageable
 {
     private IHealth healthScript;
-    private PlayerComponents playerComponentScript;
+    [SerializeField] private PlayerComponents playerComponentScript;
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -31,7 +31,7 @@ public class PlayerHurt : MonoBehaviour, IDamageable
     private void Start()
     {
         healthScript = GetComponent<IHealth>();
-        playerComponentScript = GetComponent<PlayerComponents>();
+        //playerComponentScript = GetComponent<PlayerComponents>();
 
         rb = playerComponentScript.GetRB();
         animator = playerComponentScript.GetAnimator();

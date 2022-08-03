@@ -14,6 +14,8 @@ public class Interactable : MonoBehaviour
 
     private InputAction playerInputButton;
 
+    public bool needsButtonPress; //does the player need to press the interaction button to interact with this?
+
     private bool inTrigger; //is the player in this interactable object's trigger collider?
 
     private bool canInteractWith = true; //is the player allowed to "use" this object?
@@ -22,14 +24,25 @@ public class Interactable : MonoBehaviour
 
     private bool cooldownStarted = false; //has the cooldown coroutine for this object started yet?
 
-    //public bool needsCooldown; //does this interactable object need a cooldown before being able to "use" it again?
+    //public bool needsCooldownAfterInteraction; //does this interactable object need a cooldown before being able to "use" it again?
 
     public void CheckInteraction()
     {
-        //when player is pressing interaction button...
-        if(playerInputButton != null)
+        //if the interaction button isn't null
+        // and if the player needs to press interaction button
+        if (playerInputButton != null && needsButtonPress)
         {
+            //check if they are pressing that button
+            //and if they are in trigger and can interact
             if (playerInputButton.ReadValue<float>() > 0 && inTrigger && canInteractWith)
+                InteractableAction();
+    
+        }
+        //if this object doesn't need to check interaction button
+        //then just check if they're in the trigger and can interact
+        else if (!needsButtonPress)
+        {
+            if (inTrigger && canInteractWith)
                 InteractableAction();
         }
         
@@ -43,9 +56,15 @@ public class Interactable : MonoBehaviour
         {
             interacter = collision.transform;
 
-            playerComponentScript = collision.gameObject.GetComponent<PlayerComponents>();
+            //only fetch interaction button if this item needs it
+            if (needsButtonPress)
+            {
+                playerComponentScript = collision.gameObject.GetComponent<PlayerComponents>();
 
-            playerInputButton = playerComponentScript.GetInteractionButton();
+                playerInputButton = playerComponentScript.GetInteractionButton();
+
+            }
+            
 
             inTrigger = true;
 

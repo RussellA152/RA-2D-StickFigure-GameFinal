@@ -157,7 +157,6 @@ public class BasicDungeon: MonoBehaviour
     public void SetCoordinates(Vector2 newCoordinate)
     {
         localRoomCoordinate = newCoordinate;
-        
     }
 
     //return the numberOfEnemiesCanSpawnHere (needed by AISpawner)

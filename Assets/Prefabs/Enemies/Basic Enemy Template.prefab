@@ -104,6 +104,7 @@ MonoBehaviour:
   facingRightVector: {x: 1, y: 1, z: 1}
   facingLeftVector: {x: -1, y: 1, z: 1}
   enemyFacingRight: 0
+  rb: {fileID: -8891431870749144915}
 --- !u!114 &3305021655998707584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,6 +120,8 @@ MonoBehaviour:
   enemyControlScript: {fileID: 6875883259916410309}
   enemyScriptableObject: {fileID: 0}
   enemyMovementScript: {fileID: 5969129094098281727}
+  rb: {fileID: -8891431870749144915}
+  animator: {fileID: 1373278072336133614}
 --- !u!114 &1709358543280309288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -544,6 +547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d9eaeaf0b0248f40ad02ad43c44103e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitbox: {fileID: 1354632572045690308}
 --- !u!61 &1354632572045690308
 BoxCollider2D:
   m_ObjectHideFlags: 0

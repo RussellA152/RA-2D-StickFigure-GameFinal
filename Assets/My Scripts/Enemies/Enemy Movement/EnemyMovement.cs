@@ -41,7 +41,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private Vector3 facingLeftVector; //vector3 representing the enemy facing the left direction
     [SerializeField] private bool enemyFacingRight; //is the enemy facing the right direction? true if so, false if facing left
 
-    private Rigidbody2D rb;
+    [SerializeField] private Rigidbody2D rb;
 
     [Header("Sprite Flipping Properties")]
     private bool canFlip = true; // is the enemy allow to turn around?
@@ -226,7 +226,7 @@ public class EnemyMovement : MonoBehaviour
         //set starting position to where the enemy spawned
         startingPosition = transform.position;
 
-        rb = GetComponent<Rigidbody2D>();
+        //rb = GetComponent<Rigidbody2D>();
 
         //set basic values equal to the ScriptableObject's values
         if (enemyScriptableObject != null)

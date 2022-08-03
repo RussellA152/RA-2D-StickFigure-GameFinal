@@ -10,7 +10,7 @@ public class CharacterController2D : MonoBehaviour
 {
 	public PlayerInputActions playerControls;
 
-	private PlayerComponents playerComponentScript;
+	[SerializeField] private PlayerComponents playerComponentScript;
 
 	[Header("Speed Properties")]
 	[SerializeField] private float runSpeed = 70f;                              //general movement speed of the player
@@ -134,7 +134,7 @@ public class CharacterController2D : MonoBehaviour
 		isSlidingHash = Animator.StringToHash("isSliding");
 		isRollingHash = Animator.StringToHash("isRolling");
 
-		playerComponentScript = GetComponent<PlayerComponents>();
+		//playerComponentScript = GetComponent<PlayerComponents>();
 
 		jump = playerComponentScript.GetJump();
 		turnLeft = playerComponentScript.GetTurnLeft();

@@ -11,9 +11,9 @@ public class EnemyHurt : MonoBehaviour, IDamageable
 
     private IHealth healthScript;
     
-
-    private Rigidbody2D rb;
-    private Animator animator;
+    [Header("Required Components")]
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Animator animator;
 
     //Animations to play when enemy is hit by a light attack (depends on the direction of the light attack)
     //[Header("Enemy Light Attack Hurt Animation Names")]
@@ -58,9 +58,9 @@ public class EnemyHurt : MonoBehaviour, IDamageable
     public void InitializeEnemyHurt(EnemyScriptableObject enemyScriptableObjectParameter)
     {
         healthScript = GetComponent<IHealth>();
-        rb = GetComponent<Rigidbody2D>();
+        //rb = GetComponent<Rigidbody2D>();
 
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
 
         enemyScriptableObject = enemyScriptableObjectParameter;
 
