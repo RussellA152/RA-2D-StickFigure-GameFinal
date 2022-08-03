@@ -142,7 +142,7 @@ public class BasicDungeon: MonoBehaviour
     // if this function was inside of DungeonSpawner, then rooms would be added in multiple times
     private void AddDungeon()
     {
-        levelManager.spawnedRooms.Add(this);
+        levelManager.spawnedRooms.Add(this.gameObject);
     }
 
     //creates a room coordinate for this room
@@ -150,7 +150,7 @@ public class BasicDungeon: MonoBehaviour
     {
         localRoomCoordinate = new Vector2(transform.position.x / xCoordinateDivider, transform.position.y / yCoordinateDivider);
 
-        levelManager.roomCoordinatesOccupied.Add(localRoomCoordinate,this);
+        levelManager.roomCoordinatesOccupied.Add(localRoomCoordinate,this.gameObject);
     }
 
     //sets the room coordinates equal to the parameter

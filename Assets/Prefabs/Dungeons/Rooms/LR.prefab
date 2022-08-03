@@ -2424,6 +2424,10 @@ PrefabInstance:
       propertyPath: room
       value: 
       objectReference: {fileID: 570149326502756552}
+    - target: {fileID: 2916698472010811107, guid: 3360547f781491d489d0cdb5a34f5c4b, type: 3}
+      propertyPath: m_Name
+      value: LR Right Door
+      objectReference: {fileID: 0}
     - target: {fileID: 3039406399667521047, guid: 3360547f781491d489d0cdb5a34f5c4b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 37.8
@@ -2455,6 +2459,10 @@ PrefabInstance:
     - target: {fileID: 6773203754727550135, guid: 3360547f781491d489d0cdb5a34f5c4b, type: 3}
       propertyPath: m_LocalPosition.y
       value: -37.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7334178795019466107, guid: 3360547f781491d489d0cdb5a34f5c4b, type: 3}
+      propertyPath: m_Name
+      value: LR Bottom Door
       objectReference: {fileID: 0}
     - target: {fileID: 7833885520387847612, guid: 3360547f781491d489d0cdb5a34f5c4b, type: 3}
       propertyPath: m_RootOrder
@@ -2505,8 +2513,16 @@ PrefabInstance:
       value: Doors
       objectReference: {fileID: 0}
     - target: {fileID: 8638569189068874856, guid: 3360547f781491d489d0cdb5a34f5c4b, type: 3}
+      propertyPath: m_Name
+      value: LR Left Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 8638569189068874856, guid: 3360547f781491d489d0cdb5a34f5c4b, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9187087131778338561, guid: 3360547f781491d489d0cdb5a34f5c4b, type: 3}
+      propertyPath: m_Name
+      value: LR Top Door
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3360547f781491d489d0cdb5a34f5c4b, type: 3}

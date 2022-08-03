@@ -10,7 +10,7 @@ using UnityEngine;
 public class AdjacentRoomCheck : MonoBehaviour
 {
     [SerializeField] private BasicDungeon room; //the full room
-    private BasicDungeon adjacentRoom; //the room close to this room
+    //private BasicDungeon adjacentRoom; //the room close to this room
 
     //private BasicDungeon roomBelow; // the room BELOW this room
     //private BasicDungeon roomAbove; // the room ABOVE this room
@@ -71,7 +71,7 @@ public class AdjacentRoomCheck : MonoBehaviour
         //if an adjacent room exists, check the neighboring doors
         if (levelManager.roomCoordinatesOccupied.ContainsKey(adjacentRoomCoordinate))
         {
-            BasicDungeon adjacentRoom = levelManager.roomCoordinatesOccupied[adjacentRoomCoordinate];
+            GameObject adjacentRoom = levelManager.roomCoordinatesOccupied[adjacentRoomCoordinate];
             FindNearbyDoor(door, adjacentRoom);
         }
 
@@ -102,26 +102,27 @@ public class AdjacentRoomCheck : MonoBehaviour
 
     }
 
-    private void FindNearbyDoor(Door myDoor, BasicDungeon adjacentRoom)
+    private void FindNearbyDoor(Door myDoor, GameObject adjacentRoom)
     {
         //if a door exists here, find the neighbor
         if (myDoor.gameObject.activeSelf)
         {
             if(myDoor == bottomDoor)
             {
-                myDoor.SetNeighboringDoor(adjacentRoom.topDoor);
+                
+                myDoor.SetNeighboringDoor(adjacentRoom.GetComponent<BasicDungeon>().topDoor);
             }
             else if (myDoor == topDoor)
             {
-                myDoor.SetNeighboringDoor(adjacentRoom.bottomDoor);
+                myDoor.SetNeighboringDoor(adjacentRoom.GetComponent<BasicDungeon>().bottomDoor);
             }
             else if (myDoor == leftDoor)
             {
-                myDoor.SetNeighboringDoor(adjacentRoom.rightDoor);
+                myDoor.SetNeighboringDoor(adjacentRoom.GetComponent<BasicDungeon>().rightDoor);
             }
             else if(myDoor == rightDoor)
             {
-                myDoor.SetNeighboringDoor(adjacentRoom.leftDoor);
+                myDoor.SetNeighboringDoor(adjacentRoom.GetComponent<BasicDungeon>().leftDoor);
             }
         }
     }
