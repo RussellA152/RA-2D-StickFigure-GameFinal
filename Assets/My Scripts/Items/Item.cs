@@ -8,7 +8,7 @@ using UnityEngine;
 //when picked up, the items will transfer over the player's item inventory (with exception to Instant items)
 public class Item : Interactable
 {
-    private bool dropped = false; //has this item dropped in the world?
+    private bool spawned = false; //has this item spawned in the world?
 
     private bool retrieved = false; //was this picked up by the player?
 
@@ -26,19 +26,19 @@ public class Item : Interactable
 
     private void OnEnable()
     {
-        dropped = true;
+        spawned = true;
     }
     private void OnDisable()
     {
-        //if the item wasn't picked up by the player, allow it to drop again 
+        //if the item wasn't picked up by the player, allow it to spawn again 
         if(!retrieved)
-            dropped = false;
+            spawned = false;
     }
     private void OnDestroy()
     {
-        //if the item wasn't picked up by the player, allow it to drop again
+        //if the item wasn't picked up by the player, allow it to spawn again
         if (!retrieved)
-            dropped = false;
+            spawned = false;
     }
 
     private void Update()
@@ -58,6 +58,7 @@ public class Item : Interactable
         //Debug.Log("Go to the player's item inventory!");
 
         //add this item to the player's item list
+        //Instant items would not transfer to inventory
         if(goesToInventory)
             interacter.gameObject.GetComponent<PlayerItems>().AddItemToInventory(this);
 

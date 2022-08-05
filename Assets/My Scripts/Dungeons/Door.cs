@@ -22,7 +22,7 @@ public class Door : Interactable
     public override void InteractableAction()
     {
         interacter.position = new Vector3(neighboringDoor.transform.position.x, neighboringDoor.transform.position.y, neighboringDoor.transform.position.z) + teleportPositionOffset;
-        Debug.Log("Teleporting to " + neighboringDoor.transform.position.x);
+        //Debug.Log("Teleporting to " + neighboringDoor.transform.position.x);
 
         //don't allow player to use door again for a bit
         StartCooldown();

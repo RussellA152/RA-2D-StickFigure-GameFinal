@@ -477,6 +477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyMoveScript: {fileID: 5969129094098281727}
+  enemyControllerScript: {fileID: 6875883259916410309}
 --- !u!61 &2064457975479593907
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -37,7 +37,7 @@ public class LevelManager : MonoBehaviour
     [HideInInspector]
     public int roomCap; //max number of rooms that can spawn (random based on the "DungeonSize" state)
 
-    public Dictionary<Vector2,GameObject> roomCoordinatesOccupied = new Dictionary<Vector2,GameObject>();
+    public Dictionary<Vector2,BasicDungeon> roomCoordinatesOccupied = new Dictionary<Vector2,BasicDungeon>();
 
 
     public enum DungeonSize
@@ -190,7 +190,7 @@ public class LevelManager : MonoBehaviour
     }
 
     //return a room based on the value of its coordinate
-    public GameObject GetRoomByCoordinate(Vector2 roomCoordinate)
+    public BasicDungeon GetRoomByCoordinate(Vector2 roomCoordinate)
     {
         return roomCoordinatesOccupied[roomCoordinate];
     }

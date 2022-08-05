@@ -31,6 +31,7 @@ public class CombatRoll : StateMachineBehaviour
 
         //disable player's ability walk & jump & attack during roll
         playerCompScript.SetCanMove(false);
+        playerCompScript.SetCanFlip(false);
         playerCompScript.SetCanAttack(false);
 
         rb = playerCompScript.GetRB();
@@ -39,28 +40,26 @@ public class CombatRoll : StateMachineBehaviour
         //turn off layer collision between "Player" and "Enemy", player will roll behind enemies 
         Physics2D.IgnoreLayerCollision(playerLayer, enemyLayer, true);
 
-        //apply force to Vector2.right or Vector2.left depending on which way player is facing
-        if (directionIsRight)
-            rb.AddForce(Vector2.right * rollDistance);
-        else
-            rb.AddForce(Vector2.left * rollDistance);
 
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        //apply force to Vector2.right or Vector2.left depending on which way player is facing
+        if (directionIsRight)
+            rb.AddForce(new Vector2(rollDistance * Time.deltaTime, 0f));
+        else
+            rb.AddForce(new Vector2(-rollDistance * Time.deltaTime, 0f));
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //turn layer collision between "Player" and "Enemy" back on, player will collide with enemies once again
-        Physics2D.IgnoreLayerCollision(playerLayer, enemyLayer, false);
 
         //allow player is move and attack again
         playerCompScript.SetCanMove(true);
         playerCompScript.SetCanAttack(true);
+        playerCompScript.SetCanFlip(true);
     }
 }

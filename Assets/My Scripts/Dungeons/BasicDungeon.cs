@@ -150,7 +150,7 @@ public class BasicDungeon: MonoBehaviour
     {
         localRoomCoordinate = new Vector2(transform.position.x / xCoordinateDivider, transform.position.y / yCoordinateDivider);
 
-        levelManager.roomCoordinatesOccupied.Add(localRoomCoordinate,this.gameObject);
+        levelManager.roomCoordinatesOccupied.Add(localRoomCoordinate,this);
     }
 
     //sets the room coordinates equal to the parameter

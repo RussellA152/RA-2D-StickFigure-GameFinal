@@ -68,19 +68,13 @@ public class DungeonSpawner : MonoBehaviour
 
                     //pick a random number from 0 to the length of the room list
                     randomRoom = Random.Range(0, levelManager.allRooms.Length);
-                    //spawn the random room at generated spawn position
+
+                    //spawn the random bottom room at generated spawn position
                     GameObject bottomRoomSpawned = Instantiate(levelManager.allRooms[randomRoom], spawnPosition, new Quaternion());
 
-                    GiveNewCoordinateForSpawnedRoom(bottomRoomSpawned, roomCoordinatesToGive);
+                    //fetch the room's BasicDungeon component and set its coordinate
+                    GiveNewCoordinateForSpawnedRoom(bottomRoomSpawned.GetComponent<BasicDungeon>(), roomCoordinatesToGive);
 
-                    //grab a room from the list of available rooms (will spawn below this room)
-                    //BasicDungeon randomBottomRoom = levelManager.allRooms[randomRoom];
-
-                    //generate a coordinate for this room that will spawn
-                    //GiveNewCoordinateForSpawnedRoom(randomBottomRoom, roomCoordinatesToGive);
-
-                    //spawn the gameobject of the random room at generated spawn position
-                    //Instantiate(randomBottomRoom.transform.gameObject, spawnPosition, new Quaternion());
 
                     //break out of this loop, and set "spawnedRoom" to true to prevent more rooms from spawning
                     break;
@@ -92,18 +86,11 @@ public class DungeonSpawner : MonoBehaviour
                     //pick a random number from 0 to the length of the room list
                     randomRoom = Random.Range(0, levelManager.allRooms.Length);
 
+                    //spawn the random top room at generated spawn position
                     GameObject topRoomSpawned = Instantiate(levelManager.allRooms[randomRoom], spawnPosition, new Quaternion());
 
-                    GiveNewCoordinateForSpawnedRoom(topRoomSpawned, roomCoordinatesToGive);
-
-                    //grab a room from the list of available rooms (will spawn above this room)
-                    //BasicDungeon randomTopRoom = levelManager.allRooms[randomRoom];
-
-                    //generate a coordinate for this room that will spawn
-                    //GiveNewCoordinateForSpawnedRoom(randomTopRoom, roomCoordinatesToGive);
-
-                    //spawn the gameobject of the random room at generated spawn position
-                    //Instantiate(randomTopRoom.transform.gameObject, spawnPosition, new Quaternion());
+                    //fetch the room's BasicDungeon component and set its coordinate
+                    GiveNewCoordinateForSpawnedRoom(topRoomSpawned.GetComponent<BasicDungeon>(), roomCoordinatesToGive);
 
                     //break out of this loop, and set "spawnedRoom" to true to prevent more rooms from spawning
                     break;
@@ -115,18 +102,11 @@ public class DungeonSpawner : MonoBehaviour
                     //pick a random number from 0 to the length of the room list
                     randomRoom = Random.Range(0, levelManager.allRooms.Length);
 
+                    //spawn the random left room at generated spawn position
                     GameObject leftRoomSpawned = Instantiate(levelManager.allRooms[randomRoom], spawnPosition, new Quaternion());
 
-                    GiveNewCoordinateForSpawnedRoom(leftRoomSpawned, roomCoordinatesToGive);
-
-                    //grab a room from the list of available rooms (will spawn to the left of this room)
-                    //BasicDungeon randomLeftRoom = levelManager.allRooms[randomRoom];
-
-                    //generate a coordinate for this room that will spawn
-                    //GiveNewCoordinateForSpawnedRoom(randomLeftRoom, roomCoordinatesToGive);
-
-                    //spawn the gameobject of the random room at generated spawn position
-                    //Instantiate(randomLeftRoom.transform.gameObject, spawnPosition, new Quaternion());
+                    //fetch the room's BasicDungeon component and set its coordinate
+                    GiveNewCoordinateForSpawnedRoom(leftRoomSpawned.GetComponent<BasicDungeon>(), roomCoordinatesToGive);
 
                     //break out of this loop, and set "spawnedRoom" to true to prevent more rooms from spawning
                     break;
@@ -138,18 +118,11 @@ public class DungeonSpawner : MonoBehaviour
                     //pick a random number from 0 to the length of the room list
                     randomRoom = Random.Range(0, levelManager.allRooms.Length);
 
+                    //spawn the random right room at generated spawn position
                     GameObject rightRoomSpawned = Instantiate(levelManager.allRooms[randomRoom], spawnPosition, new Quaternion());
 
-                    GiveNewCoordinateForSpawnedRoom(rightRoomSpawned, roomCoordinatesToGive);
-
-                    //grab a room from the list of available rooms (will spawn to the right of this room)
-                    //BasicDungeon randomRightRoom = levelManager.allRooms[randomRoom];
-
-                    //generate a coordinate for this room that will spawn
-                    //GiveNewCoordinateForSpawnedRoom(randomRightRoom, roomCoordinatesToGive);
-
-                    //spawn the gameobject of the random room at generated spawn position
-                    //Instantiate(randomRightRoom.transform.gameObject, spawnPosition, new Quaternion());
+                    //fetch the room's BasicDungeon component and set its coordinate
+                    GiveNewCoordinateForSpawnedRoom(rightRoomSpawned.GetComponent<BasicDungeon>(), roomCoordinatesToGive);
 
                     //break out of this loop, and set "spawnedRoom" to true to prevent more rooms from spawning
                     break;
@@ -158,7 +131,6 @@ public class DungeonSpawner : MonoBehaviour
             levelManager.numberOfSpawnedRooms++;
 
             //set spawnedRoom to true to ensure this spawner only creates one room
-            //a dungeon spawner will only make 1 room
             spawnedRoom = true;
 
         }
@@ -188,16 +160,15 @@ public class DungeonSpawner : MonoBehaviour
 
         return newSpawnPosition;
     }
-    private void GiveNewCoordinateForSpawnedRoom(GameObject spawnedRoom, Vector2 coordinateToGive)
+    private void GiveNewCoordinateForSpawnedRoom(BasicDungeon spawnedRoom, Vector2 coordinateToGive)
     {
         //add the coordinate of the spawned room as a key, to the dictionary 
         //add the spawned room (Basic Dungeon component) as a value of the coordinate key, to the dictionary
         levelManager.roomCoordinatesOccupied.Add(roomCoordinatesToGive, spawnedRoom);
 
         //set the coordinates of this new spawned room
-        spawnedRoom.GetComponent<BasicDungeon>().SetCoordinates(roomCoordinatesToGive);
+        //spawnedRoom.GetComponent<BasicDungeon>().SetCoordinates(roomCoordinatesToGive);
+        spawnedRoom.SetCoordinates(roomCoordinatesToGive);
 
-        //set the local coordinates variable of this new spawned room
-        //spawnedRoom.SetCoordinates(roomCoordinatesToGive);
     }
 }

@@ -15,4 +15,10 @@ public class ConsumableItem : MonoBehaviour
     {
         
     }
+
+    //When the player swaps out this item for a different equipment item
+    void EquipmentSwap()
+    {
+
+    }
 }
