@@ -9,7 +9,7 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
 
-    public BasicDungeon currentRoom; // the room the player is inside of
+    public BasicRoom currentRoom; // the room the player is inside of
 
     //private Dictionary<Transform, bool> spawnLocations = new Dictionary<Transform, bool>();  // a dictionary with the keys being the spawn location
                                                                                              // and the values being the "occupied" boolean, which is true or false when an enemy has spawned there or not
@@ -37,7 +37,13 @@ public class LevelManager : MonoBehaviour
     [HideInInspector]
     public int roomCap; //max number of rooms that can spawn (random based on the "DungeonSize" state)
 
-    public Dictionary<Vector2,BasicDungeon> roomCoordinatesOccupied = new Dictionary<Vector2,BasicDungeon>();
+    [HideInInspector]
+    public int maxNumberOfBasicRooms;
+    public int maxNumberOfTreasureRooms;
+    public int maxNumberOfShopRooms;
+    public int maxNumberOfBossRooms;
+
+    public Dictionary<Vector2,BasicRoom> roomCoordinatesOccupied = new Dictionary<Vector2,BasicRoom>();
 
 
     public enum DungeonSize
@@ -75,9 +81,7 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //TEMPORARY *
-        //This event system should be called when the player has entered a new area
-        
+        maxNumberOfBasicRooms = roomCap;
         
         RandomRoomCap();
     }
@@ -179,18 +183,18 @@ public class LevelManager : MonoBehaviour
 
     //sets the "currentRoom" to the room passed in the function
     //used when player enters another room from a door
-    public void UpdateCurrentRoom(BasicDungeon newCurrentRoom)
+    public void UpdateCurrentRoom(BasicRoom newCurrentRoom)
     {
         currentRoom = newCurrentRoom;
     }
 
-    public BasicDungeon GetCurrentRoom()
+    public BasicRoom GetCurrentRoom()
     {
         return currentRoom;
     }
 
     //return a room based on the value of its coordinate
-    public BasicDungeon GetRoomByCoordinate(Vector2 roomCoordinate)
+    public BasicRoom GetRoomByCoordinate(Vector2 roomCoordinate)
     {
         return roomCoordinatesOccupied[roomCoordinate];
     }

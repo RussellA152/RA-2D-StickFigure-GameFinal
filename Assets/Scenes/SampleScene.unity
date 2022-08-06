@@ -2223,9 +2223,14 @@ MonoBehaviour:
   - {fileID: 570149326502756555, guid: d72d83cc0a124b0449ffb9d6f0606af8, type: 3}
   - {fileID: 570149326502756555, guid: 6c0700753ea06ea43906a00e00f182ce, type: 3}
   - {fileID: 570149326502756555, guid: cbdd51dbc0e53a14faf08f8d314a4d9c, type: 3}
+  - {fileID: 570149326502756555, guid: e3f7c3ee2076f95439fb4d276f4078c0, type: 3}
   spawnedRooms: []
   numberOfSpawnedRooms: 0
   roomCap: 6
+  maxNumberOfBasicRooms: 0
+  maxNumberOfTreasureRooms: 2
+  maxNumberOfShopRooms: 1
+  maxNumberOfBossRooms: 1
 --- !u!114 &1207705365
 MonoBehaviour:
   m_ObjectHideFlags: 0

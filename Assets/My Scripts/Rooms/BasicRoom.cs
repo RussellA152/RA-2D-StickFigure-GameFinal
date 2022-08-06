@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class BasicDungeon: MonoBehaviour
+public class BasicRoom: MonoBehaviour
 {
-    public RoomType roomType; // the type of room this is.. could be a boss room, treasure room, or just a regular room
+    //public RoomType roomType; // the type of room this is.. could be a boss room, treasure room, or just a regular room
 
     [SerializeField] private bool isStartingRoom; //Is this room, the starting room? If so, we will manually add the coordinates to the list
+
 
     [Header("Spawn Locations")]
     public List<Transform> spawnLocationsOfThisLevel = new List<Transform>(); //a list of spawn locations dedicated to this level
@@ -46,17 +47,6 @@ public class BasicDungeon: MonoBehaviour
         cleared //if ALL enemies dedicated to this room are dead (doors will allow player to exit)
     }
 
-    public enum RoomType
-    {
-        regularRoom,
-
-        treasureRoom,
-
-        shopRoom,
-
-        bossRoom
-    }
-
 
     // Start is called before the first frame update
     void Start()
@@ -66,15 +56,15 @@ public class BasicDungeon: MonoBehaviour
         numberOfEnemiesAliveInRoom = numberOfEnemiesCanSpawnHere;
 
         //a room will be uncleared by default (cleared when debugging)
-        roomEnemyCountState = RoomEnemyCount.uncleared;
+        //roomEnemyCountState = RoomEnemyCount.uncleared;
 
         //reference to level manager singleton
         levelManager = LevelManager.instance;
 
         //add this room to the general "rooms" list inside of LevelManager
-        AddDungeon();
+        AddRoom();
 
-        //starting room needs to create its own coordinate because it is not spawned by a dungeonSpawner
+        //starting room needs to create its own coordinate because it is not spawned by a roomSpawner
         if (isStartingRoom)
             CreateCoordinate();
 
@@ -86,6 +76,16 @@ public class BasicDungeon: MonoBehaviour
     }
 
     private void Update()
+    {
+        //if no more enemies are alive in here, the room is cleared
+        //otherwise, it is uncleared
+        //if (numberOfEnemiesAliveInRoom == 0)
+            //roomEnemyCountState = RoomEnemyCount.cleared;
+        //else
+            //roomEnemyCountState = RoomEnemyCount.uncleared;
+    }
+
+    public void CheckEnemyCountStatus()
     {
         //if no more enemies are alive in here, the room is cleared
         //otherwise, it is uncleared
@@ -138,9 +138,9 @@ public class BasicDungeon: MonoBehaviour
         }
     }
 
-    //This function must be inside of the "BasicDungeon" script because
-    // if this function was inside of DungeonSpawner, then rooms would be added in multiple times
-    private void AddDungeon()
+    //This function must be inside of the "BasicRoom" script because
+    // if this function was inside of RoomSpawner, then rooms would be added in multiple times
+    private void AddRoom()
     {
         levelManager.spawnedRooms.Add(this.gameObject);
     }
@@ -176,5 +176,14 @@ public class BasicDungeon: MonoBehaviour
     public void DecrementNumberOfEnemiesAliveInHere()
     {
         numberOfEnemiesAliveInRoom--;
+    }
+
+    private void OnDestroy()
+    {
+        levelManager.numberOfSpawnedRooms--;
+    }
+    private void OnDisable()
+    {
+        levelManager.numberOfSpawnedRooms--;
     }
 }

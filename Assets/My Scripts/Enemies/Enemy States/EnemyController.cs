@@ -45,13 +45,12 @@ public class EnemyController : MonoBehaviour
     private Coroutine stateTransitionCoroutine; //a reference to the state transition cooldown coroutine, we have this so that we can stop the coroutine on command
     private bool stateCooldownStarted = false;
 
-    [Header("Enemy's Rigidbody")]
     [SerializeField] private Rigidbody2D rb;
 
     private bool attackOnCooldown = false; //is the enemy on attack cooldown? If so, don't let them attack again
 
-
-    [SerializeField] private BasicDungeon myRoom; //the room this enemy was spawned in
+    [Header("Dedicated Room")]
+    [SerializeField] private BasicRoom myRoom; //the room this enemy was spawned in
 
     private int walkingHash;
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DungeonTemplates : MonoBehaviour
+public class RoomTemplates : MonoBehaviour
 {
     public GameObject[] bottomRooms;
     public GameObject[] topRooms;

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using Random = UnityEngine.Random;
 using UnityEngine;
 
-public class DungeonSpawner : MonoBehaviour
+public class RoomSpawner : MonoBehaviour
 {
     [Header("Room properties")]
-    [SerializeField] private BasicDungeon room;
+    [SerializeField] private BasicRoom room;
 
     [Header("Door Type To Instantiate")]
     private int openingDirection;
@@ -72,8 +72,8 @@ public class DungeonSpawner : MonoBehaviour
                     //spawn the random bottom room at generated spawn position
                     GameObject bottomRoomSpawned = Instantiate(levelManager.allRooms[randomRoom], spawnPosition, new Quaternion());
 
-                    //fetch the room's BasicDungeon component and set its coordinate
-                    GiveNewCoordinateForSpawnedRoom(bottomRoomSpawned.GetComponent<BasicDungeon>(), roomCoordinatesToGive);
+                    //fetch the room's BasicRoom component and set its coordinate
+                    GiveNewCoordinateForSpawnedRoom(bottomRoomSpawned.GetComponent<BasicRoom>(), roomCoordinatesToGive);
 
 
                     //break out of this loop, and set "spawnedRoom" to true to prevent more rooms from spawning
@@ -89,8 +89,8 @@ public class DungeonSpawner : MonoBehaviour
                     //spawn the random top room at generated spawn position
                     GameObject topRoomSpawned = Instantiate(levelManager.allRooms[randomRoom], spawnPosition, new Quaternion());
 
-                    //fetch the room's BasicDungeon component and set its coordinate
-                    GiveNewCoordinateForSpawnedRoom(topRoomSpawned.GetComponent<BasicDungeon>(), roomCoordinatesToGive);
+                    //fetch the room's BasicRoom component and set its coordinate
+                    GiveNewCoordinateForSpawnedRoom(topRoomSpawned.GetComponent<BasicRoom>(), roomCoordinatesToGive);
 
                     //break out of this loop, and set "spawnedRoom" to true to prevent more rooms from spawning
                     break;
@@ -105,8 +105,8 @@ public class DungeonSpawner : MonoBehaviour
                     //spawn the random left room at generated spawn position
                     GameObject leftRoomSpawned = Instantiate(levelManager.allRooms[randomRoom], spawnPosition, new Quaternion());
 
-                    //fetch the room's BasicDungeon component and set its coordinate
-                    GiveNewCoordinateForSpawnedRoom(leftRoomSpawned.GetComponent<BasicDungeon>(), roomCoordinatesToGive);
+                    //fetch the room's BasicRoom component and set its coordinate
+                    GiveNewCoordinateForSpawnedRoom(leftRoomSpawned.GetComponent<BasicRoom>(), roomCoordinatesToGive);
 
                     //break out of this loop, and set "spawnedRoom" to true to prevent more rooms from spawning
                     break;
@@ -121,8 +121,8 @@ public class DungeonSpawner : MonoBehaviour
                     //spawn the random right room at generated spawn position
                     GameObject rightRoomSpawned = Instantiate(levelManager.allRooms[randomRoom], spawnPosition, new Quaternion());
 
-                    //fetch the room's BasicDungeon component and set its coordinate
-                    GiveNewCoordinateForSpawnedRoom(rightRoomSpawned.GetComponent<BasicDungeon>(), roomCoordinatesToGive);
+                    //fetch the room's BasicRoom component and set its coordinate
+                    GiveNewCoordinateForSpawnedRoom(rightRoomSpawned.GetComponent<BasicRoom>(), roomCoordinatesToGive);
 
                     //break out of this loop, and set "spawnedRoom" to true to prevent more rooms from spawning
                     break;
@@ -160,14 +160,14 @@ public class DungeonSpawner : MonoBehaviour
 
         return newSpawnPosition;
     }
-    private void GiveNewCoordinateForSpawnedRoom(BasicDungeon spawnedRoom, Vector2 coordinateToGive)
+    private void GiveNewCoordinateForSpawnedRoom(BasicRoom spawnedRoom, Vector2 coordinateToGive)
     {
         //add the coordinate of the spawned room as a key, to the dictionary 
         //add the spawned room (Basic Dungeon component) as a value of the coordinate key, to the dictionary
         levelManager.roomCoordinatesOccupied.Add(roomCoordinatesToGive, spawnedRoom);
 
         //set the coordinates of this new spawned room
-        //spawnedRoom.GetComponent<BasicDungeon>().SetCoordinates(roomCoordinatesToGive);
+        //spawnedRoom.GetComponent<BasicRoom>().SetCoordinates(roomCoordinatesToGive);
         spawnedRoom.SetCoordinates(roomCoordinatesToGive);
 
     }

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8191113438874015400}
   - component: {fileID: 5913742899722911543}
-  - component: {fileID: 7371819102538695411}
   m_Layer: 0
   m_Name: Spawn Point
   m_TagString: SpawnPoint
@@ -45,27 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   room: {fileID: 0}
-  door: {fileID: 0}
-  openingDirection: 0
   spawnedRoom: 0
---- !u!50 &7371819102538695411
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8750791964639832541}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0

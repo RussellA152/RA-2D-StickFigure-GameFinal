@@ -9,13 +9,13 @@ using UnityEngine;
 //only checks for doors AFTER room generation has finished
 public class AdjacentRoomCheck : MonoBehaviour
 {
-    [SerializeField] private BasicDungeon room; //the full room
-    //private BasicDungeon adjacentRoom; //the room close to this room
+    [SerializeField] private BasicRoom room; //the full room
+    //private BasicRoom adjacentRoom; //the room close to this room
 
-    //private BasicDungeon roomBelow; // the room BELOW this room
-    //private BasicDungeon roomAbove; // the room ABOVE this room
-    //private BasicDungeon roomLeft; // the room to the LEFT of this room
-    //private BasicDungeon roomRight; // the room to the RIGHT of this room
+    //private BasicRoom roomBelow; // the room BELOW this room
+    //private BasicRoom roomAbove; // the room ABOVE this room
+    //private BasicRoom roomLeft; // the room to the LEFT of this room
+    //private BasicRoom roomRight; // the room to the RIGHT of this room
 
     //the 4 doors of this room (some doors could already be disabled or enabled, it depends on the prefab)
     //but if needed, any door can be disabled or enabled 
@@ -71,7 +71,7 @@ public class AdjacentRoomCheck : MonoBehaviour
         //if an adjacent room exists, check the neighboring doors
         if (levelManager.roomCoordinatesOccupied.ContainsKey(adjacentRoomCoordinate))
         {
-            BasicDungeon adjacentRoom = levelManager.roomCoordinatesOccupied[adjacentRoomCoordinate];
+            BasicRoom adjacentRoom = levelManager.roomCoordinatesOccupied[adjacentRoomCoordinate];
             FindNearbyDoor(door, adjacentRoom);
         }
 
@@ -102,7 +102,7 @@ public class AdjacentRoomCheck : MonoBehaviour
 
     }
 
-    private void FindNearbyDoor(Door myDoor, BasicDungeon adjacentRoom)
+    private void FindNearbyDoor(Door myDoor, BasicRoom adjacentRoom)
     {
         //if a door exists here, find the neighbor
         if (myDoor.gameObject.activeSelf)
@@ -126,19 +126,19 @@ public class AdjacentRoomCheck : MonoBehaviour
         }
     }
     /*
-    public BasicDungeon GetRoomAbove()
+    public BasicRoom GetRoomAbove()
     {
         return roomAbove;
     }
-    public BasicDungeon GetRoomBelow()
+    public BasicRoom GetRoomBelow()
     {
         return roomBelow;
     }
-    public BasicDungeon GetRoomLeft()
+    public BasicRoom GetRoomLeft()
     {
         return roomLeft;
     }
-    public BasicDungeon GetRoomRight()
+    public BasicRoom GetRoomRight()
     {
         return roomRight;
     }
