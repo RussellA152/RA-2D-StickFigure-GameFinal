@@ -2,20 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NormalRoom : BaseRoom
+public class EndPointSpawner : MonoBehaviour
 {
     // Start is called before the first frame update
-
-    private void Start()
+    void Start()
     {
-        base.Start();
-        roomEnemyCountState = RoomEnemyCount.uncleared;
-        roomType = RoomType.normal;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        CheckEnemyCountStatus();
+        
     }
 }

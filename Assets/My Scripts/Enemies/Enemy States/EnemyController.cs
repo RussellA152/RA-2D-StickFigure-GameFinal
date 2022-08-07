@@ -50,7 +50,7 @@ public class EnemyController : MonoBehaviour
     private bool attackOnCooldown = false; //is the enemy on attack cooldown? If so, don't let them attack again
 
     [Header("Dedicated Room")]
-    [SerializeField] private BasicRoom myRoom; //the room this enemy was spawned in
+    [SerializeField] private BaseRoom myRoom; //the room this enemy was spawned in
 
     private int walkingHash;
 

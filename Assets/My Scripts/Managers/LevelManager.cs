@@ -9,10 +9,8 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
 
-    public BasicRoom currentRoom; // the room the player is inside of
+    public BaseRoom currentRoom; // the room the player is inside of
 
-    //private Dictionary<Transform, bool> spawnLocations = new Dictionary<Transform, bool>();  // a dictionary with the keys being the spawn location
-                                                                                             // and the values being the "occupied" boolean, which is true or false when an enemy has spawned there or not
     public event Action onPlayerEnterNewArea;
     public event Action spawnNewRooms;
 
@@ -21,29 +19,30 @@ public class LevelManager : MonoBehaviour
     [HideInInspector]
     public GenerationProgress dungeonGenerationState; //the state of the dungeon generation.. is it complete or not?
 
-    public GameObject[] allRooms; //all room available to spawn
-    //public GameObject[] bottomRooms; //array of all rooms with a bottom door
-    //public GameObject[] topRooms; //array of all rooms with a top door
-    //public GameObject[] leftRooms; //array of all rooms with a left door
-    //public GameObject[] rightRooms; //array of all rooms with a right door
-
-    //public GameObject closedRoom; // a "wall" that is about the size of a room that prevents player from leaving dungeon
+    public GameObject[] allNormalRooms; //all room available to spawn
+    public GameObject[] allTreasureRooms; //all room available to spawn
+    public GameObject[] allShopRooms; //all room available to spawn
+    public GameObject[] allBossRooms; //all room available to spawn
 
     public List<GameObject> spawnedRooms; //list of currently spawned in rooms (always 1 higher than spawned rooms because starting room is included)
 
-    [HideInInspector]
-    public int numberOfSpawnedRooms; //number of rooms that have been spawned
+    [Header("Current Amount Spawned")]
+    public int numberOfSpawnedAllRooms; //number of rooms that have been spawned
+    public int numberOfSpawnedNormalRooms; //number of rooms that have been spawned
+    public int numberOfSpawnedTreasureRooms; //number of rooms that have been spawned
+    public int numberOfSpawnedShopRooms; //number of rooms that have been spawned
+    public int numberOfSpawnedBossRooms; //number of rooms that have been spawned
 
-    [HideInInspector]
+    
     public int roomCap; //max number of rooms that can spawn (random based on the "DungeonSize" state)
 
-    [HideInInspector]
-    public int maxNumberOfBasicRooms;
+    [Header("Max Number Can Spawn")]
+    public int maxNumberOfNormalRooms;
     public int maxNumberOfTreasureRooms;
     public int maxNumberOfShopRooms;
     public int maxNumberOfBossRooms;
 
-    public Dictionary<Vector2,BasicRoom> roomCoordinatesOccupied = new Dictionary<Vector2,BasicRoom>();
+    public Dictionary<Vector2,BaseRoom> roomCoordinatesOccupied = new Dictionary<Vector2,BaseRoom>();
 
 
     public enum DungeonSize
@@ -81,7 +80,7 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        maxNumberOfBasicRooms = roomCap;
+        
         
         RandomRoomCap();
     }
@@ -92,7 +91,7 @@ public class LevelManager : MonoBehaviour
         // if the number of spawned rooms is equal to the room cap
         // then we know we have reached the max number of rooms
         // and rooms will stop spawning
-        if (numberOfSpawnedRooms == roomCap)
+        if (numberOfSpawnedAllRooms == roomCap)
             dungeonGenerationState = GenerationProgress.complete;
         else
             dungeonGenerationState = GenerationProgress.incomplete;
@@ -123,78 +122,54 @@ public class LevelManager : MonoBehaviour
         switch (dungeonSize)
         {
             case DungeonSize.small:
-                roomCap = Random.Range(6, 8);
+
+                maxNumberOfNormalRooms = Random.Range(5, 7);
+                maxNumberOfTreasureRooms = 1;
+                maxNumberOfShopRooms = 1;
+                maxNumberOfBossRooms = 1;
                 break;
             case DungeonSize.medium:
-                roomCap = Random.Range(8, 11);
+
+                maxNumberOfNormalRooms = Random.Range(7, 9);
+                maxNumberOfTreasureRooms = Random.Range(1, 3);
+                maxNumberOfShopRooms = 1;
+                maxNumberOfBossRooms = 1;
                 break;
             case DungeonSize.large:
-                roomCap = Random.Range(14, 17);
+
+                maxNumberOfNormalRooms = Random.Range(9, 12);
+                maxNumberOfTreasureRooms = Random.Range(1, 3);
+                maxNumberOfShopRooms = Random.Range(1, 3);
+                maxNumberOfBossRooms = 1;
+
                 break;
 
         }
+        //number of boss rooms not included
+        roomCap = maxNumberOfNormalRooms + maxNumberOfTreasureRooms + maxNumberOfShopRooms + maxNumberOfBossRooms;
+
         Debug.Log("Room cap is " + roomCap);
-
+        Debug.Log("Normal Room Count: " + maxNumberOfNormalRooms);
+        Debug.Log("Treasure Room Count: " + maxNumberOfTreasureRooms);
+        Debug.Log("Shop Room Count: " + maxNumberOfShopRooms);
+        Debug.Log("Boss Room Count: " + maxNumberOfBossRooms);
     }
 
-    /*
-    public void UpdateSpawnLocations(List<Transform> spawnLocList)
-    {
-
-        //clear the spawn locations of the previous room
-        if (spawnLocations.Count != 0 || spawnLocations != null)
-            spawnLocations.Clear();
-
-        //add new spawn locations to this list
-        foreach(Transform loc in spawnLocList)
-        {
-            //sets the keys to false because no enemy has spawned there yet
-            spawnLocations.Add(loc, false);
-        }
-    }
-
-    public Vector2 GetSpawnLocation()
-    {
-        int iterator = 0;
-        foreach(Transform location in spawnLocations.Keys)
-        {
-            if(location != null)
-            {
-                //Debug.Log("for each loop start");
-                if (spawnLocations.ElementAt(iterator).Value == false)
-                {
-                    iterator++;
-                    spawnLocations[location] = true;
-
-                    //Debug.Log("Return a random loc!");
-                    return location.position;
-                }
-                else
-                    iterator++;
-            }
-            
-        }
-        //Transform randomLocation = spawnLocations.ElementAt(randomIndex).Key;
-        Debug.Log("Not enough spawn locations for this enemy. Or some other room has an empty list. Enemy will spawn at (0,0)");
-
-        return new Vector2(0,0);
-    }
-    */
 
     //sets the "currentRoom" to the room passed in the function
     //used when player enters another room from a door
-    public void UpdateCurrentRoom(BasicRoom newCurrentRoom)
+    public void UpdateCurrentRoom(BaseRoom newCurrentRoom)
     {
         currentRoom = newCurrentRoom;
     }
 
-    public BasicRoom GetCurrentRoom()
+    public BaseRoom GetCurrentRoom()
     {
         return currentRoom;
     }
 
     //return a room based on the value of its coordinate
-    public BasicRoom GetRoomByCoordinate(Vector2 roomCoordinate)
+    public BaseRoom GetRoomByCoordinate(Vector2 roomCoordinate)
     {
         return roomCoordinatesOccupied[roomCoordinate];
     }

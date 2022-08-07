@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Door : Interactable
 {
-    [SerializeField] private BasicRoom room; //the room THIS door is inside of 
+    [SerializeField] private BaseRoom room; //the room THIS door is inside of 
 
     private Door neighboringDoor; //the nearby door THIS door will teleport the player to
 
@@ -14,7 +14,7 @@ public class Door : Interactable
     private void Update()
     {
         //only let the player leave the room if they have cleared the enemies inside*
-        if (room.roomEnemyCountState == BasicRoom.RoomEnemyCount.cleared)
+        if (room.roomEnemyCountState == BaseRoom.RoomEnemyCount.cleared)
             CheckInteraction();
     }
 
@@ -43,7 +43,7 @@ public class Door : Interactable
 
     }
 
-    public BasicRoom GetDoorRoom()
+    public BaseRoom GetDoorRoom()
     {
         return room;
     }

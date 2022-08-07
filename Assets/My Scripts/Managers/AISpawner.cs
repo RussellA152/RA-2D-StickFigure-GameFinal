@@ -94,7 +94,7 @@ public class AISpawner : MonoBehaviour
     // this is where enemies will receive their scriptable object (to differentiate them *)
     void OnTakeEnemyFromPool(EnemyController enemy)
     {
-        BasicRoom roomToSpawnEnemiesInside = LevelManager.instance.GetCurrentRoom();
+        BaseRoom roomToSpawnEnemiesInside = LevelManager.instance.GetCurrentRoom();
 
         //retrieve the NavMeshAgent component from the enemy (helps with performance)
         var navMeshAgent = enemy.GetNavMeshAgent();

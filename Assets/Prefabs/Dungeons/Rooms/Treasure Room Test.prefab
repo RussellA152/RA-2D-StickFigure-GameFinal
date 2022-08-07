@@ -95,6 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0507d3889a9d00f4ab89d91017a9f10e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomType: 0
   isStartingRoom: 0
   spawnLocationsOfThisLevel: []
   numberOfEnemiesCanSpawnHere: 0
@@ -104,6 +105,7 @@ MonoBehaviour:
   leftDoor: {fileID: 4926122910458846657}
   rightDoor: {fileID: 3209383378607868238}
   localRoomCoordinate: {x: 0, y: 0}
+  canSpawnOtherRooms: 0
 --- !u!1 &570149326587470351
 GameObject:
   m_ObjectHideFlags: 0
@@ -2241,6 +2243,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2373510729377407769}
     - target: {fileID: 5913742899722911543, guid: e7605e05a0f3dfe4c9d6c8a7fd1bb019, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5913742899722911543, guid: e7605e05a0f3dfe4c9d6c8a7fd1bb019, type: 3}
       propertyPath: openingDirection
       value: 2
       objectReference: {fileID: 0}
@@ -2294,7 +2300,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8750791964639832541, guid: e7605e05a0f3dfe4c9d6c8a7fd1bb019, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7605e05a0f3dfe4c9d6c8a7fd1bb019, type: 3}

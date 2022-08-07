@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 570149326502756553}
-  - component: {fileID: 570149326502756552}
+  - component: {fileID: 4064618322527504393}
   - component: {fileID: 7722328952103255013}
   m_Layer: 0
   m_Name: TB
@@ -36,7 +36,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &570149326502756552
+--- !u!114 &4064618322527504393
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,10 +45,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 570149326502756555}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7afd17efbf91e1b46b5d3d17007f90c7, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e59d7ef975809a40b041b15bd19dc00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomType: 0
   isStartingRoom: 0
   spawnLocationsOfThisLevel:
   - {fileID: 3096540623798088849}
@@ -74,7 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb66b404aecece14bb940d3f8bebd150, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  room: {fileID: 570149326502756552}
+  room: {fileID: 4064618322527504393}
   bottomDoor: {fileID: 2484272723912895622}
   topDoor: {fileID: 7732860366777325250}
   leftDoor: {fileID: 6956198649492743644}
@@ -2349,7 +2348,7 @@ PrefabInstance:
     - target: {fileID: 782567093553658677, guid: 3360547f781491d489d0cdb5a34f5c4b, type: 3}
       propertyPath: room
       value: 
-      objectReference: {fileID: 570149326502756552}
+      objectReference: {fileID: 4064618322527504393}
     - target: {fileID: 1498154974420076222, guid: 3360547f781491d489d0cdb5a34f5c4b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 46.3
@@ -2361,7 +2360,7 @@ PrefabInstance:
     - target: {fileID: 2376680229232961248, guid: 3360547f781491d489d0cdb5a34f5c4b, type: 3}
       propertyPath: room
       value: 
-      objectReference: {fileID: 570149326502756552}
+      objectReference: {fileID: 4064618322527504393}
     - target: {fileID: 2916698472010811107, guid: 3360547f781491d489d0cdb5a34f5c4b, type: 3}
       propertyPath: m_Name
       value: TB Right Door
@@ -2377,7 +2376,7 @@ PrefabInstance:
     - target: {fileID: 4896951875835543921, guid: 3360547f781491d489d0cdb5a34f5c4b, type: 3}
       propertyPath: room
       value: 
-      objectReference: {fileID: 570149326502756552}
+      objectReference: {fileID: 4064618322527504393}
     - target: {fileID: 5100253726539785122, guid: 3360547f781491d489d0cdb5a34f5c4b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -67.6
@@ -2389,7 +2388,7 @@ PrefabInstance:
     - target: {fileID: 5200731307171705455, guid: 3360547f781491d489d0cdb5a34f5c4b, type: 3}
       propertyPath: room
       value: 
-      objectReference: {fileID: 570149326502756552}
+      objectReference: {fileID: 4064618322527504393}
     - target: {fileID: 6773203754727550135, guid: 3360547f781491d489d0cdb5a34f5c4b, type: 3}
       propertyPath: m_LocalPosition.y
       value: -38.3
@@ -2589,7 +2588,7 @@ PrefabInstance:
     - target: {fileID: 5913742899722911543, guid: e7605e05a0f3dfe4c9d6c8a7fd1bb019, type: 3}
       propertyPath: room
       value: 
-      objectReference: {fileID: 570149326502756552}
+      objectReference: {fileID: 4064618322527504393}
     - target: {fileID: 5913742899722911543, guid: e7605e05a0f3dfe4c9d6c8a7fd1bb019, type: 3}
       propertyPath: openingDirection
       value: 1

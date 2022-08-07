@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class BasicRoom: MonoBehaviour
+public class BaseRoom: MonoBehaviour
 {
-    //public RoomType roomType; // the type of room this is.. could be a boss room, treasure room, or just a regular room
+    [HideInInspector]
+    public RoomType roomType; // the type of room this is.. could be a boss room, treasure room, or just a regular room
 
     [SerializeField] private bool isStartingRoom; //Is this room, the starting room? If so, we will manually add the coordinates to the list
 
@@ -26,7 +27,8 @@ public class BasicRoom: MonoBehaviour
     [HideInInspector]
     public RoomEnemyCount roomEnemyCountState; //What is the state of the amount of enemies in the room? Is it clear? Or are some enemies still alive?
 
-    private LevelManager levelManager;
+    [HideInInspector]
+    public LevelManager levelManager;
 
     private int xCoordinateDivider = 150;
     private int yCoordinateDivider = 110;
@@ -40,16 +42,28 @@ public class BasicRoom: MonoBehaviour
     [Header("X & Y Coordinates")]
     public Vector2 localRoomCoordinate; //NOT TO BE CONFUSED with the room coordinate in the Level Manager's dictionary (this is a local version of the same vector2 value*)
 
+    public bool canSpawnOtherRooms; //can this room spawn other rooms?
+
     public enum RoomEnemyCount
     {
         uncleared, //if any enemy dedicated to this room is still alive (doors won't let player exit)
 
         cleared //if ALL enemies dedicated to this room are dead (doors will allow player to exit)
+    
     }
+    
+    public enum RoomType
+    {
+        normal,
+        shop,
+        treasure,
+        boss
+    }
+    
 
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         //numberOfEnemiesAliveInRoom should be equal to the numberOfEnemiesCanSpawnHere AT START
         //it will decrease later when player kills the enemies in this room
@@ -66,23 +80,14 @@ public class BasicRoom: MonoBehaviour
 
         //starting room needs to create its own coordinate because it is not spawned by a roomSpawner
         if (isStartingRoom)
+        {
             CreateCoordinate();
+            levelManager.UpdateCurrentRoom(this);
+        }
+            
 
         //update the spawn location dictionary with the spawn locations provided in the editor
         UpdateSpawnLocationDictionary();
-
-        
-
-    }
-
-    private void Update()
-    {
-        //if no more enemies are alive in here, the room is cleared
-        //otherwise, it is uncleared
-        //if (numberOfEnemiesAliveInRoom == 0)
-            //roomEnemyCountState = RoomEnemyCount.cleared;
-        //else
-            //roomEnemyCountState = RoomEnemyCount.uncleared;
     }
 
     public void CheckEnemyCountStatus()
@@ -138,7 +143,7 @@ public class BasicRoom: MonoBehaviour
         }
     }
 
-    //This function must be inside of the "BasicRoom" script because
+    //This function must be inside of the "BaseRoom" script because
     // if this function was inside of RoomSpawner, then rooms would be added in multiple times
     private void AddRoom()
     {
@@ -180,10 +185,12 @@ public class BasicRoom: MonoBehaviour
 
     private void OnDestroy()
     {
-        levelManager.numberOfSpawnedRooms--;
+        if(levelManager != null)
+            levelManager.numberOfSpawnedAllRooms--;
     }
     private void OnDisable()
     {
-        levelManager.numberOfSpawnedRooms--;
+        if (levelManager != null)
+            levelManager.numberOfSpawnedAllRooms--;
     }
 }
