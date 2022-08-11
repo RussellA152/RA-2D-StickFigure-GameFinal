@@ -137,6 +137,14 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""UseEquipment"",
+                    ""type"": ""Button"",
+                    ""id"": ""f0997201-c67e-44a0-98e5-5ce477f59384"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -1052,6 +1060,28 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9823390b-21a4-4c28-b7f5-090ccd259147"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""UseEquipment"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8c5da7d1-14dc-40b6-9e52-c47da89f1f69"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""UseEquipment"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1642,6 +1672,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_Player_FlipRight = m_Player.FindAction("Flip Right", throwIfNotFound: true);
         m_Player_FlipLeft = m_Player.FindAction("Flip Left", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_UseEquipment = m_Player.FindAction("UseEquipment", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1718,6 +1749,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_FlipRight;
     private readonly InputAction m_Player_FlipLeft;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_UseEquipment;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1737,6 +1769,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         public InputAction @FlipRight => m_Wrapper.m_Player_FlipRight;
         public InputAction @FlipLeft => m_Wrapper.m_Player_FlipLeft;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @UseEquipment => m_Wrapper.m_Player_UseEquipment;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1791,6 +1824,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @UseEquipment.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseEquipment;
+                @UseEquipment.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseEquipment;
+                @UseEquipment.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseEquipment;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1840,6 +1876,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @UseEquipment.started += instance.OnUseEquipment;
+                @UseEquipment.performed += instance.OnUseEquipment;
+                @UseEquipment.canceled += instance.OnUseEquipment;
             }
         }
     }
@@ -2011,6 +2050,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnFlipRight(InputAction.CallbackContext context);
         void OnFlipLeft(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnUseEquipment(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

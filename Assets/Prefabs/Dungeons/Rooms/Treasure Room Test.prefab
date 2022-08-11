@@ -100,6 +100,7 @@ MonoBehaviour:
   spawnLocationsOfThisLevel: []
   numberOfEnemiesCanSpawnHere: 0
   roomEnemyCountState: 0
+  levelManager: {fileID: 0}
   bottomDoor: {fileID: 481203043451540635}
   topDoor: {fileID: 5729943183382851295}
   leftDoor: {fileID: 4926122910458846657}

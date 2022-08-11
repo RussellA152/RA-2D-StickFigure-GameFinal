@@ -9,7 +9,7 @@ public class NormalRoom : BaseRoom
     private void Start()
     {
         base.Start();
-        roomEnemyCountState = RoomEnemyCount.uncleared;
+        roomEnemyCountState = RoomEnemyCount.cleared;
         roomType = RoomType.normal;
     }
 

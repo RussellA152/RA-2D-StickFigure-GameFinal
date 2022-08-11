@@ -24,25 +24,32 @@ public class RoomSpawner : MonoBehaviour
 
     private float destroyTime = 4f; //time until this spawner is destroyed
 
-    private int xCoordinateAdder = 150; //how much we add to the newly spawned room's transform position.x for a spawn location
+    private int xCoordinateAdder = 155; //how much we add to the newly spawned room's transform position.x for a spawn location
     private int yCoordinateAdder = 110; //how much we add to the newly spawned room's transform position.y for a spawn location
 
-    private int xCoordinateDivider = 150; //how much we divide the newly spawned room's transform position.x by.. to get a coordinate
+    private int xCoordinateDivider = 155; //how much we divide the newly spawned room's transform position.x by.. to get a coordinate
     private int yCoordinateDivider = 110; //how much we divide the newly spawned room's transform position.y by.. to get a coordinate
-    
+
+    //these bools allow this spawner to check coordinates in each direction
+    //if they become false, the spawner can't check in that direction
+    //will prevent this spawner from unneccesarily checking level manager's coordinate dictionary 
+    private bool canCheckBelow = true;
+    private bool canCheckAbove = true;
+    private bool canCheckLeft = true;
+    private bool canCheckRight = true;
+
 
     private Vector2 spawnPosition;
     private Vector2 roomCoordinatesToGive;
 
     private void Start()
     {
-        //destroy this spawner after a few seconds
-        //Destroy(gameObject, destroyTime);
-
+        Destroy(gameObject, destroyTime);
         //sets "levelManager" equal to the LevelManager singleton so we can access the list of potential rooms
         levelManager = LevelManager.instance;
-        InvokeRepeating("ChooseRandomRoomType", 0.05f, 0.05f);
-        //InvokeRepeating("SpawnRooms", 0.1f,0.1f);
+
+        //allow room to spawn multiple rooms, until it gets stuck
+        InvokeRepeating("ChooseRandomRoomType", 0.1f, 0.1f);
 
     }
 
@@ -59,10 +66,50 @@ public class RoomSpawner : MonoBehaviour
         {
             case 1:
                 //pass in a positive y position value so the new room can spawn above this spawner's room
-                spawnPosition = ChooseSpawnPosition(0f, yCoordinateAdder);
+                if (canCheckAbove)
+                    spawnPosition = ChooseSpawnPosition(0f, yCoordinateAdder);
+                else
+                    break;
 
                 if (spawnPosition == Vector2.zero)
+                {
+                    canCheckAbove = false;
                     break;
+                }
+                    
+
+                //pick a random number from 0 to the length of the room list
+                randomRoom = Random.Range(0, arrayToUse.Length);
+
+                //spawn the random bottom room at generated spawn position
+                GameObject topRoomSpawned = Instantiate(arrayToUse[randomRoom], spawnPosition, new Quaternion());
+
+                //local cache of the instaniated room's BaseRoom script
+                BaseRoom BaseRoomComponentTop = topRoomSpawned.GetComponent<BaseRoom>();
+
+                //fetch the room's BaseRoom component and set its coordinate
+                GiveNewCoordinateForSpawnedRoom(BaseRoomComponentTop, roomCoordinatesToGive);
+
+                levelManager.numberOfSpawnedAllRooms++;
+                IncrementNumberOfRoomSpawned(roomType);
+
+                //break out of this loop, and set "spawnedRoom" to true to prevent more rooms from spawning
+                break;
+
+            case 2:
+
+                //pass in a negative y position value so the new room can spawn below this spawner's room
+                if (canCheckBelow)
+                    spawnPosition = ChooseSpawnPosition(0f, -yCoordinateAdder);
+                else
+                    break;
+
+                if (spawnPosition == Vector2.zero)
+                {
+                    canCheckBelow = false;
+                    break;
+                }
+                    
 
                 //pick a random number from 0 to the length of the room list
                 randomRoom = Random.Range(0, arrayToUse.Length);
@@ -79,66 +126,23 @@ public class RoomSpawner : MonoBehaviour
                 levelManager.numberOfSpawnedAllRooms++;
                 IncrementNumberOfRoomSpawned(roomType);
 
-                //break out of this loop, and set "spawnedRoom" to true to prevent more rooms from spawning
-                break;
-
-            case 2:
-                //pass in a negative y position value so the new room can spawn below this spawner's room
-                spawnPosition = ChooseSpawnPosition(0f, -yCoordinateAdder);
-
-                if (spawnPosition == Vector2.zero)
-                    break;
-
-                //pick a random number from 0 to the length of the room list
-                randomRoom = Random.Range(0, arrayToUse.Length);
-
-                //spawn the random top room at generated spawn position
-                GameObject topRoomSpawned = Instantiate(arrayToUse[randomRoom], spawnPosition, new Quaternion());
-
-                //local cache of the instaniated room's BaseRoom script
-                BaseRoom BaseRoomComponentTop = topRoomSpawned.GetComponent<BaseRoom>();
-
-                //fetch the room's BaseRoom component and set its coordinate
-                GiveNewCoordinateForSpawnedRoom(BaseRoomComponentTop, roomCoordinatesToGive);
-
-                levelManager.numberOfSpawnedAllRooms++;
-                IncrementNumberOfRoomSpawned(roomType);
-
 
                 //break out of this loop, and set "spawnedRoom" to true to prevent more rooms from spawning
                 break;
 
             case 3:
                 //pass in a positive x position value so the new room can spawn to the right of this spawner's room
-                spawnPosition = ChooseSpawnPosition(xCoordinateAdder, 0f);
-
-                if (spawnPosition == Vector2.zero)
+                if (canCheckRight)
+                    spawnPosition = ChooseSpawnPosition(xCoordinateAdder, 0f);
+                else
                     break;
 
-                //pick a random number from 0 to the length of the room list
-                randomRoom = Random.Range(0, arrayToUse.Length);
-
-                //spawn the random left room at generated spawn position
-                GameObject leftRoomSpawned = Instantiate(arrayToUse[randomRoom], spawnPosition, new Quaternion());
-
-                //local cache of the instaniated room's BaseRoom script
-                BaseRoom BaseRoomComponentLeft = leftRoomSpawned.GetComponent<BaseRoom>();
-
-                //fetch the room's BaseRoom component and set its coordinate
-                GiveNewCoordinateForSpawnedRoom(BaseRoomComponentLeft, roomCoordinatesToGive);
-
-                levelManager.numberOfSpawnedAllRooms++;
-                IncrementNumberOfRoomSpawned(roomType);
-
-                //break out of this loop, and set "spawnedRoom" to true to prevent more rooms from spawning
-                break;
-
-            case 4:
-                //pass in a negative x position value so the new room can spawn to the left of this spawner's room
-                spawnPosition = ChooseSpawnPosition(-xCoordinateAdder, 0f);
-
                 if (spawnPosition == Vector2.zero)
+                {
+                    canCheckRight = false;
                     break;
+                }
+                    
 
                 //pick a random number from 0 to the length of the room list
                 randomRoom = Random.Range(0, arrayToUse.Length);
@@ -157,22 +161,38 @@ public class RoomSpawner : MonoBehaviour
 
                 //break out of this loop, and set "spawnedRoom" to true to prevent more rooms from spawning
                 break;
+
+            case 4:
+                //pass in a negative x position value so the new room can spawn to the left of this spawner's room
+                if (canCheckLeft)
+                    spawnPosition = ChooseSpawnPosition(-xCoordinateAdder, 0f);
+                else
+                    break;
+
+                if (spawnPosition == Vector2.zero)
+                {
+                    canCheckLeft = false;
+                    break;
+                }
+
+                //pick a random number from 0 to the length of the room list
+                randomRoom = Random.Range(0, arrayToUse.Length);
+
+                //spawn the random left room at generated spawn position
+                GameObject leftRoomSpawned = Instantiate(arrayToUse[randomRoom], spawnPosition, new Quaternion());
+
+                //local cache of the instaniated room's BaseRoom script
+                BaseRoom BaseRoomComponentLeft = leftRoomSpawned.GetComponent<BaseRoom>();
+
+                //fetch the room's BaseRoom component and set its coordinate
+                GiveNewCoordinateForSpawnedRoom(BaseRoomComponentLeft, roomCoordinatesToGive);
+
+                levelManager.numberOfSpawnedAllRooms++;
+                IncrementNumberOfRoomSpawned(roomType);
+
+                //break out of this loop, and set "spawnedRoom" to true to prevent more rooms from spawning
+                break;
         }
-
-
-        //only spawn a room if this spawner hasn't already
-        //and if we havent reached the cap on room spawns
-        //if (levelManager.numberOfSpawnedRooms < levelManager.roomCap)
-        //{
-            
-            //number of spawned rooms increments by 1 
-            //levelManager.numberOfSpawnedRooms++;
-            //Debug.Log(levelManager.numberOfSpawnedRooms);
-
-            //set spawnedRoom to true to ensure this spawner only creates one room
-            //spawnedRoom = true;
-
-        //}
         
     }
 
@@ -186,8 +206,9 @@ public class RoomSpawner : MonoBehaviour
                 if(levelManager.numberOfSpawnedNormalRooms < levelManager.maxNumberOfNormalRooms)
                 {
                     SpawnRooms(BaseRoom.RoomType.normal, levelManager.allNormalRooms);
-                    
+
                     //levelManager.numberOfSpawnedNormalRooms++;
+                    //Debug.Log("call invoke");
                 }
                     
                 break;
@@ -195,6 +216,7 @@ public class RoomSpawner : MonoBehaviour
                 if (levelManager.numberOfSpawnedTreasureRooms < levelManager.maxNumberOfTreasureRooms)
                 {
                     SpawnRooms(BaseRoom.RoomType.treasure, levelManager.allTreasureRooms);
+                    //Debug.Log("call invoke");
                     //levelManager.numberOfSpawnedTreasureRooms++;
                 }
                     
@@ -203,19 +225,33 @@ public class RoomSpawner : MonoBehaviour
                 if (levelManager.numberOfSpawnedShopRooms < levelManager.maxNumberOfShopRooms)
                 {
                     SpawnRooms(BaseRoom.RoomType.shop, levelManager.allShopRooms);
+                    //Debug.Log("call invoke");
                     //levelManager.numberOfSpawnedShopRooms++;
                 }
                     
                 break;
             case 4:
-                if (levelManager.numberOfSpawnedBossRooms < levelManager.maxNumberOfBossRooms)
+                //if this room is trying to spawn a boss, it needs to be the last room
+                //typically, only 1 boss room is allowed to spawn
+                if (levelManager.numberOfSpawnedBossRooms < levelManager.maxNumberOfBossRooms && levelManager.numberOfSpawnedAllRooms == levelManager.roomCap - 1)
                 {
                     SpawnRooms(BaseRoom.RoomType.boss, levelManager.allBossRooms);
+                    //Debug.Log("call invoke");
                     //levelManager.numberOfSpawnedBossRooms++;
                 }
                     
                 break;
         }
+        //Debug.Log("call random type function");
+
+        //if the current dungeon has reached all room cap, then cancel the spawning invoke
+        //and then disable this spawner
+        if (levelManager.numberOfSpawnedAllRooms == levelManager.roomCap)
+        {
+            CancelInvoke();
+            this.enabled = false;
+        }
+            
 
     }
 
@@ -253,6 +289,8 @@ public class RoomSpawner : MonoBehaviour
         //keep checking if the level manager's roomCoordinate dictionary contains the coordinate key
         if (levelManager.roomCoordinatesOccupied.ContainsKey(roomCoordinatesToGive))
         {
+
+            //Debug.Log("Prevent spawn");
             return Vector2.zero;
             //increase the increment
             //positionMultiplier++;
@@ -273,5 +311,14 @@ public class RoomSpawner : MonoBehaviour
         //spawnedRoom.GetComponent<BaseRoom>().SetCoordinates(roomCoordinatesToGive);
         spawnedRoom.SetCoordinates(roomCoordinatesToGive);
 
+    }
+
+    private void OnDisable()
+    {
+        CancelInvoke();
+    }
+    private void OnDestroy()
+    {
+        CancelInvoke();
     }
 }

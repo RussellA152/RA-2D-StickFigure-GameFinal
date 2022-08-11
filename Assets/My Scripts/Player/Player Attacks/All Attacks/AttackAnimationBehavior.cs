@@ -39,7 +39,7 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IAttackAnimation
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        attackDamage *= PlayerStats.instance.GetDamageMultiplier();
         //improves performance
         isGroundedHash = Animator.StringToHash("isGrounded");
 

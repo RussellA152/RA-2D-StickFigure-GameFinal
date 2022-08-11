@@ -15,10 +15,10 @@ public class AISpawner : MonoBehaviour
     ObjectPool<EnemyController> enemyPool; //pool of regular enemies (fast, fat, ranged)
     ObjectPool<EnemyController> bossEnemyPool; //pool of boss enemies (might use?)
 
-    private int defaultCapacity; // the capacity of enemies (not entirely sure what this does)
+    [SerializeField] private int defaultCapacity; // the capacity of enemies (not entirely sure what this does)
 
     //[SerializeField] private int amountToSpawn; // the maximum number of enemies
-    [SerializeField] private int inReserve;
+    [SerializeField] private int inReserve = 0;
 
     [SerializeField] private int inactiveCount; // amount of inactive enemies
     [SerializeField] private int activeCount; // amount of active enemies
@@ -29,7 +29,9 @@ public class AISpawner : MonoBehaviour
 
     private void Awake()
     {
-        enemyPool = new ObjectPool<EnemyController>(CreateEnemy, OnTakeEnemyFromPool, OnReturnEnemyToPool, null, true, defaultCapacity, inReserve);
+        enemyPool = new ObjectPool<EnemyController>(CreateEnemy, OnTakeEnemyFromPool, OnReturnEnemyToPool, null, true, defaultCapacity);
+
+        inReserve = defaultCapacity;
 
     }
 
@@ -45,7 +47,6 @@ public class AISpawner : MonoBehaviour
             inactiveCount = enemyPool.CountInactive;
             activeCount = enemyPool.CountActive;
         }
-        
 
 
         //FIXME: this code makes it so that enemies will only spawn the "amountToSpawn"
@@ -70,11 +71,21 @@ public class AISpawner : MonoBehaviour
         //find the number of enemies the spawner will need to create (depends on the current room)
         int numberOfEnemiesNeeded = LevelManager.instance.GetCurrentRoom().GetNumberOfEnemiesCanSpawnHere();
 
-
-        for (int spawnIterator = 0; spawnIterator < numberOfEnemiesNeeded; spawnIterator++)
+        if(numberOfEnemiesNeeded <= inReserve)
         {
-            var enemy = enemyPool.Get();
+            for (int spawnIterator = 0; spawnIterator < numberOfEnemiesNeeded; spawnIterator++)
+            {
+                var enemy = enemyPool.Get();
+            }
         }
+        else if(numberOfEnemiesNeeded > inReserve)
+        {
+            for (int spawnIterator = 0; spawnIterator <= inReserve; spawnIterator++)
+            {
+                var enemy = enemyPool.Get();
+            }
+        }
+        
 
     }
 
@@ -94,6 +105,9 @@ public class AISpawner : MonoBehaviour
     // this is where enemies will receive their scriptable object (to differentiate them *)
     void OnTakeEnemyFromPool(EnemyController enemy)
     {
+
+        enemy.gameObject.SetActive(true);
+
         BaseRoom roomToSpawnEnemiesInside = LevelManager.instance.GetCurrentRoom();
 
         //retrieve the NavMeshAgent component from the enemy (helps with performance)
@@ -105,7 +119,7 @@ public class AISpawner : MonoBehaviour
 
         //enemy.gameObject.transform.position = LevelManager.instance.GetCurrentRoom().GiveNewSpawnLocations();
 
-        enemy.gameObject.SetActive(true);
+        //enemy.gameObject.SetActive(true);
 
         //number of enemies that can spawn in that room should decrease so an excess amount of enemies won't spawn
         roomToSpawnEnemiesInside.DecrementNumberOfEnemiesCanSpawnHere();

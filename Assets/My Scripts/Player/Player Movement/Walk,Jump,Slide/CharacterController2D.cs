@@ -13,7 +13,7 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField] private PlayerComponents playerComponentScript;
 
 	[Header("Speed Properties")]
-	[SerializeField] private float runSpeed = 70f;                              //general movement speed of the player
+	//[SerializeField] private float runSpeed = 70f;                              //general movement speed of the player
 	[SerializeField] private float m_JumpForce = 1400f;                         // Amount of force added when the player jumps.
 	private float minSpeedMultiplierRequirement;                                //this is the minimum value that the player must be moving at in order to increase movement speed (for the speed multiplier to begin)
 																				//we need this value for gamepads, otherwise the player can build up their speed multiplier while moving slow (they should atleast be moving relatively fast)
@@ -216,7 +216,7 @@ public class CharacterController2D : MonoBehaviour
 	{
 
 		//multiply the movement by the running speed set in the inspector
-		move *= runSpeed;
+		move *= PlayerStats.instance.GetRunningSpeed();
 
 		//set isSliding bool parameter inside of player animator to true or false depending on player input
 		if (m_Grounded && canSlide && wantsToSlide)
@@ -431,7 +431,7 @@ public class CharacterController2D : MonoBehaviour
 	//invoked at start and should be invoked whenever the running speed is changed (say we pick up an item that increases our movement speed)
 	public void UpdateMinimumSpeedMultiplierRequirement()
     {
-		minSpeedMultiplierRequirement = runSpeed * 1 / 60; //since movement speed could be changed throughout runtime.. we need to find calculate the minimum speed multiplier requirement 
+		minSpeedMultiplierRequirement = PlayerStats.instance.GetRunningSpeed() * 1 / 60; //since movement speed could be changed throughout runtime.. we need to find calculate the minimum speed multiplier requirement 
 														   //we multiply the runSpeed by a small value like 1/60 so that even small running speeds like 10 will be able to activate the speed multiplier
 														   
 	}

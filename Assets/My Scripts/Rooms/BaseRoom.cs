@@ -30,7 +30,7 @@ public class BaseRoom: MonoBehaviour
     [HideInInspector]
     public LevelManager levelManager;
 
-    private int xCoordinateDivider = 150;
+    private int xCoordinateDivider = 155;
     private int yCoordinateDivider = 110;
 
     [Header("All Doors")]
@@ -94,10 +94,10 @@ public class BaseRoom: MonoBehaviour
     {
         //if no more enemies are alive in here, the room is cleared
         //otherwise, it is uncleared
-        if (numberOfEnemiesAliveInRoom == 0)
-            roomEnemyCountState = RoomEnemyCount.cleared;
-        else
-            roomEnemyCountState = RoomEnemyCount.uncleared;
+        //if (numberOfEnemiesAliveInRoom == 0)
+            //roomEnemyCountState = RoomEnemyCount.cleared;
+        //else
+            //roomEnemyCountState = RoomEnemyCount.uncleared;
     }
 
     //give the level manager the spawn locations of this area
@@ -114,7 +114,7 @@ public class BaseRoom: MonoBehaviour
                     iterator++;
                     spawnLocations[location] = true;
 
-                    Debug.Log("Location I spawned at was " + location.position);
+                    //Debug.Log("Location I spawned at was " + location.position);
                     //Debug.Log("Return a random loc!");
                     return location.position;
                 }

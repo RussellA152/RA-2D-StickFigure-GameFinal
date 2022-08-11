@@ -16,6 +16,8 @@ public class LevelManager : MonoBehaviour
 
     public DungeonSize dungeonSize; //the "DungeonSize" state determines how many rooms we will have
 
+    public int roomCap; //max number of rooms that can spawn (random based on the "DungeonSize" state)
+
     [HideInInspector]
     public GenerationProgress dungeonGenerationState; //the state of the dungeon generation.. is it complete or not?
 
@@ -32,9 +34,6 @@ public class LevelManager : MonoBehaviour
     public int numberOfSpawnedTreasureRooms; //number of rooms that have been spawned
     public int numberOfSpawnedShopRooms; //number of rooms that have been spawned
     public int numberOfSpawnedBossRooms; //number of rooms that have been spawned
-
-    
-    public int roomCap; //max number of rooms that can spawn (random based on the "DungeonSize" state)
 
     [Header("Max Number Can Spawn")]
     public int maxNumberOfNormalRooms;

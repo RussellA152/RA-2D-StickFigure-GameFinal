@@ -30,12 +30,16 @@ public class Interactable : MonoBehaviour
     {
         //if the interaction button isn't null
         // and if the player needs to press interaction button
-        if (playerInputButton != null && needsButtonPress)
+        if (needsButtonPress)
         {
             //check if they are pressing that button
             //and if they are in trigger and can interact
-            if (playerInputButton.ReadValue<float>() > 0 && inTrigger && canInteractWith)
-                InteractableAction();
+            if(playerInputButton != null)
+            {
+                if (playerInputButton.ReadValue<float>() > 0 && inTrigger && canInteractWith)
+                    InteractableAction();
+            }
+            
     
         }
         //if this object doesn't need to check interaction button

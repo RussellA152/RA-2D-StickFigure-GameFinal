@@ -11,7 +11,7 @@ public interface IHealth
     void ModifyHealth(float amount);
 
     //function that will change the entity's max health cap by a certain amount (could decrease it, or increase it)
-    void ModifyMaxHealth(float amount);
+    //void ModifyMaxHealth(float amount);
 
     //return the health value of this enemy
     float GetHealth(); 

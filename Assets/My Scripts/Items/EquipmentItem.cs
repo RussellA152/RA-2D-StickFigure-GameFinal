@@ -2,23 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConsumableItem : MonoBehaviour
+public class EquipmentItem : Item
 {
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        needsButtonPress = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void InteractableAction()
     {
-        
+        base.InteractableAction();
+        GoToInventory();
     }
 
     //When the player swaps out this item for a different equipment item
-    void EquipmentSwap()
-    {
+    //void EquipmentSwap()
+    //{
 
+    //}
+
+    //when picked up.. go to the player's equipment item inventory
+    void GoToInventory()
+    {
+        PlayerStats.instance.AddEquipmentItemToInventory(this);
     }
 }

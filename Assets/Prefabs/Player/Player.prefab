@@ -82,8 +82,8 @@ GameObject:
   - component: {fileID: 4332903956958558057}
   - component: {fileID: 4332903956958558049}
   - component: {fileID: 4332903956958558048}
+  - component: {fileID: 7429946808678574068}
   - component: {fileID: 4332903956958558062}
-  - component: {fileID: 4332903956958558052}
   - component: {fileID: 4332903956958558060}
   - component: {fileID: 4332903956958558063}
   - component: {fileID: 4332903956958558059}
@@ -168,6 +168,23 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &7429946808678574068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4332903956958558070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf14f777912c27c4886f1a9d7ce6d9f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passiveItems: []
+  equipmentItemSlot: {fileID: 0}
+  runningSpeed: 65
+  maxHealth: 200
+  damageMultiplier: 1
 --- !u!114 &4332903956958558062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,19 +201,6 @@ MonoBehaviour:
   playerRB: {fileID: 4332903956958558058}
   hitbox: {fileID: 4332903956781392642}
   bodyCollider: {fileID: 4332903956958558056}
---- !u!114 &4332903956958558052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4332903956958558070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf14f777912c27c4886f1a9d7ce6d9f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  items: []
 --- !u!114 &4332903956958558060
 MonoBehaviour:
   m_ObjectHideFlags: 0

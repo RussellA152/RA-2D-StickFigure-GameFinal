@@ -10,19 +10,8 @@ public class Item : Interactable
 {
     private bool spawned = false; //has this item spawned in the world?
 
-    private bool retrieved = false; //was this picked up by the player?
-
-    public bool goesToInventory; //will this item transfer to the player's inventory?
-
-
-    //SerializeField] private bool retrieved = false; //was this item picked up by the player?
+    private bool retrieved = false; //was this item picked up by the player?
     //if so, the item won't be able to picked up agains
-
-    //[SerializeField] private bool activateOnPickup; //should this item do its action the moment the player picks it up?
-    //used for simple items like health or speed boost
-
-    //[SerializeField] private bool hasPassiveAbility; //does this item have a passive action?
-    //will this item activate continously throughout playthrough?
 
     private void OnEnable()
     {
@@ -47,32 +36,44 @@ public class Item : Interactable
         if (!retrieved)
         {
             CheckInteraction();
+            //Debug.Log("Check interaction!");
 
         }
 
     }
 
+    public void SetRetrieved(bool boolean)
+    {
+        retrieved = boolean;
+    }
+
     //what the item does when the player picks it up
     public override void InteractableAction()
     {
-        //Debug.Log("Go to the player's item inventory!");
-
         //add this item to the player's item list
-        //Instant items would not transfer to inventory
-        if(goesToInventory)
-            interacter.gameObject.GetComponent<PlayerItems>().AddItemToInventory(this);
+        //Instant items will not transfer to inventory
+        //GoToPlayerInventory();
 
-        retrieved = true;
+        SetRetrieved(true);
+
+        Debug.Log("Retrieved item!");
     }
 
+
     //what the item does for the player
-    public virtual void ItemAction(GameObject player)
+    public virtual void ItemAction()
+    {
+
+    }
+    
+    //reverse the effect this item had
+    public virtual void ReverseAction()
     {
 
     }
 
     public virtual void OnDrop()
     {
-
+        
     }
 }

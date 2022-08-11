@@ -63,12 +63,12 @@ public class EnemyHealth : MonoBehaviour, IHealth
 
     }
 
-    public void ModifyMaxHealth(float amount)
-    {
+    //public void ModifyMaxHealth(float amount)
+    //{
         //add by a negative number if we should decrease health
         //enemyHealth += amount;
 
-    }
+    //}
 
     public float GetHealth()
     {

@@ -10,14 +10,6 @@ public class Door : Interactable
 
     private Vector3 teleportPositionOffset = new Vector3(0f,2.5f); //an offset added to the position the player will be teleported to when using a door
 
-
-    private void Update()
-    {
-        //only let the player leave the room if they have cleared the enemies inside*
-        if (room.roomEnemyCountState == BaseRoom.RoomEnemyCount.cleared)
-            CheckInteraction();
-    }
-
     //the interactable action of a door is to teleport to a neighboring door
     public override void InteractableAction()
     {
@@ -46,6 +38,17 @@ public class Door : Interactable
     public BaseRoom GetDoorRoom()
     {
         return room;
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        //only let the player leave the room if they have cleared the enemies inside*
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (room.roomEnemyCountState == BaseRoom.RoomEnemyCount.cleared)
+                CheckInteraction();
+        }
     }
 
 }
