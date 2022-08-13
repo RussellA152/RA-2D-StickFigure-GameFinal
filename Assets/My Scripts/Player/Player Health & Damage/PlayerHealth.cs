@@ -40,8 +40,18 @@ public class PlayerHealth : MonoBehaviour, IHealth
     //ex: player is attacked, decrease it
     public void ModifyHealth(float amount)
     {
-        //add by a negative number if we should decrease health
-        playerCurrentHealth += amount;
+        if(playerCurrentHealth + amount >= playerMaxHealth)
+        {
+            playerCurrentHealth = playerMaxHealth;
+        }
+        else
+        {
+            //add by a negative number if we should decrease health
+            playerCurrentHealth += amount;
+        }
+            
+
+        
 
     }
 

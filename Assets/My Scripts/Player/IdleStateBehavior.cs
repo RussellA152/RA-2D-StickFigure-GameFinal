@@ -9,5 +9,8 @@ public class IdleStateBehavior : StateMachineBehaviour
     {
         //if player is in idle, they're not attacking
         AttackController.instance.SetPlayerIsAttacking(false);
+
+        //if player is in idle (or has return to idle state), they can use their equipment item
+        PlayerStats.instance.SetCanUseEquipment(true);
     }
 }

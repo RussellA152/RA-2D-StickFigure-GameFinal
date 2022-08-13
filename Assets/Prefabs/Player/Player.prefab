@@ -246,7 +246,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerComponentScript: {fileID: 4332903956958558062}
-  runSpeed: 65
   m_JumpForce: 1600
   speedMultiplier: 10
   maxSpeedMultiplier: 20
@@ -281,7 +280,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0b733f6c7e4dc249950cadc74908276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMaxHealth: 200
 --- !u!114 &4332903956958558051
 MonoBehaviour:
   m_ObjectHideFlags: 0

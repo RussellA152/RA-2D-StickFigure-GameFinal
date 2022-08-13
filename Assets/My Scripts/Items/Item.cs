@@ -61,9 +61,9 @@ public class Item : Interactable
 
 
     //what the item does for the player
-    public virtual void ItemAction()
+    public virtual void ItemAction(GameObject player)
     {
-
+        //Debug.Log("Item action!");
     }
     
     //reverse the effect this item had

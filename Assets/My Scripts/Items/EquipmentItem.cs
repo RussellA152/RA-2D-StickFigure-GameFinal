@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EquipmentItem : Item
 {
+    private bool uses; //how many times can this item be used?
+
 
     // Start is called before the first frame update
     void Start()

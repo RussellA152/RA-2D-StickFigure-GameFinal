@@ -26,6 +26,9 @@ public class PlayerHurtAnimationBehavior : StateMachineBehaviour
 
         playerComponentScript.SetCanRoll(false);
 
+        //if player is hurt, they cannot use their equipment item
+        PlayerStats.instance.SetCanUseEquipment(false);
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

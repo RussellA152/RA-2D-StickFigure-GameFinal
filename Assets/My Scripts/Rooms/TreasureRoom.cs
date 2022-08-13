@@ -12,9 +12,4 @@ public class TreasureRoom : BaseRoom
         roomType = RoomType.treasure;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

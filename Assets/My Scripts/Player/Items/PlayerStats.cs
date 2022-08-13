@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerStats : MonoBehaviour
 {
-
     public static PlayerStats instance;
+
+    [SerializeField] private PlayerInputActions playerControls;
+
+    private InputAction useEquipmentBinding;
+
+    private bool canUseEquipment = true;
 
     [SerializeField] private List<PassiveItem> passiveItems = new List<PassiveItem>(); //the list of items
     [SerializeField] private EquipmentItem equipmentItemSlot; //the player's current equipment (can only have 1 at a time)
 
-    [SerializeField] private float runningSpeed;
-    [SerializeField] private float maxHealth;
-    [SerializeField] private float damageMultiplier;
+    [SerializeField] private float runningSpeed; //running speed of the player
+    [SerializeField] private float maxHealth; //max health of the player
+    [SerializeField] private float damageMultiplier; //value multiplied to all player damage (higher would increase all attack damage)
+    [SerializeField] private float procChanceMultiplier;
 
     //[SerializeField] private CharacterController2D playerMovementScript;
     //[SerializeField] private PlayerHealth playerHealthScript;
@@ -27,20 +34,58 @@ public class PlayerStats : MonoBehaviour
         else
         {
             instance = this;
-            Debug.Log("Create player stats  instance");
+            //Debug.Log("Create player stats  instance");
         }
+
+        playerControls = new PlayerInputActions();
 
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        //useEquipmentBinding = playerControls.Player.UseEquipment;
+    }
+
+    private void OnEnable()
+    {
+        useEquipmentBinding = playerControls.Player.UseEquipment;
+
+        useEquipmentBinding.Enable();
+        useEquipmentBinding.performed += UseEquipment;
+    }
+
+    private void OnDisable()
+    {
+        useEquipmentBinding.Disable();
+
+        //Debug.Log("PlayerStats is disabled!");
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+    }
+
+    private void UseEquipment(InputAction.CallbackContext context)
+    {
+        //if the player has an equipment item...
+        if(equipmentItemSlot != null)
+        {
+            //if the player is allowed to use the equipment item
+            //and the item has a sufficient amount of uses.. call the item's action
+            if (canUseEquipment)
+            {
+                Debug.Log("Use equipment!");
+                equipmentItemSlot.ItemAction(this.gameObject);
+            }
+        }
+        else
+        {
+            Debug.Log("You do not have any equipment!");
+        }
+
         
     }
 
@@ -50,8 +95,10 @@ public class PlayerStats : MonoBehaviour
         passiveItems.Add(item);
 
         //if the passive is meant to occur right away, then just call it here
-        if (item.activateOnPickUp)
-            item.ItemAction();
+        //if (item.activateOnPickUp)
+
+        //passiveItems[passiveItems.IndexOf(item)].ItemAction(this.gameObject);
+        item.ItemAction(this.gameObject);
     }
 
     public void AddEquipmentItemToInventory(EquipmentItem item)
@@ -93,6 +140,11 @@ public class PlayerStats : MonoBehaviour
     public void ModifyDamageMultiplier(float amountToIncreaseBy)
     {
         damageMultiplier += amountToIncreaseBy;
+    }
+
+    public void SetCanUseEquipment(bool boolean)
+    {
+        canUseEquipment = boolean;
     }
 
     /*

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using UnityEngine.Events;
 using System.Collections;
 using UnityEngine.InputSystem;
@@ -99,6 +100,13 @@ public class CharacterController2D : MonoBehaviour
 
 	public BoolEvent OnCrouchEvent;
 	private bool m_wasCrouching = false;
+
+
+
+	public event Action onJump; //eventsystem that is called when the player performs a jump
+
+
+
 
     private void OnEnable()
     {
@@ -354,7 +362,7 @@ public class CharacterController2D : MonoBehaviour
         // the grounded condition with checking the coyoteTimeCounter instead
 		if (coyoteTimeCounter > 0f && jumpBufferCounter > 0f && canJump)
 		{
-
+			
 			//reset y velocity when jumping so player can get a high jump height with coyote time
 			m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x,0f);
 
@@ -367,9 +375,16 @@ public class CharacterController2D : MonoBehaviour
 
 			// Add a vertical force to the player.
 			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
-			
+
+			//if the jump eventsystem isn't null, call the onJump eventsystem
+			if(onJump != null)
+            {
+				onJump();
+				//Debug.Log("Jumped!");
+            }
+
 			//set CoyoteTime and jumpBuffer to 0
-            coyoteTimeCounter = 0f;
+			coyoteTimeCounter = 0f;
             jumpBufferCounter = 0f;
 
 			//allow isJumping to be true

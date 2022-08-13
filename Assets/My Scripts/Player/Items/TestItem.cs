@@ -5,7 +5,7 @@ using UnityEngine;
 public class TestItem : PassiveItem
 {
 
-    public override void ItemAction()
+    public override void ItemAction(GameObject player)
     {
         //increase the player's health by 100
         //PlayerStats.instance.GetHealthScript().ModifyMaxHealth(100);
