@@ -94,6 +94,8 @@ public class PlayerStats : MonoBehaviour
         //adding given item to the list
         passiveItems.Add(item);
 
+        //item.CopyScriptableObjectStats();
+
         //if the passive is meant to occur right away, then just call it here
         //if (item.activateOnPickUp)
 

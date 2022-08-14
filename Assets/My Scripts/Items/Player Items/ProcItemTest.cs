@@ -18,9 +18,16 @@ public class ProcItemTest : PassiveItem
             Debug.Log("Jump proc!");
             Debug.Log(this.transform.gameObject.name);
             //Destroy(this.gameObject);
-        }
-
-        
+        }   
         
     }
+
+    public override void CopyStats()
+    {
+        passiveItemScript.procChance = procChance;
+
+        //TEMPORARY DESTROYS OLD PASSIVE ITEM INSTANCE
+        //Destroy(this.gameObject);
+    }
+
 }

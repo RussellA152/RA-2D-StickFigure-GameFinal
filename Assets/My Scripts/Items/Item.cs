@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -57,6 +58,16 @@ public class Item : Interactable
         SetRetrieved(true);
 
         Debug.Log("Retrieved item!");
+    }
+
+    public virtual void AddItem()
+    {
+
+    }
+
+    public virtual void CopyStats()
+    {
+
     }
 
 

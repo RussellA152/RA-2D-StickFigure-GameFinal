@@ -1,9 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class EquipmentItem : Item
 {
+    [HideInInspector]
+    public Type classType;
+
+    [HideInInspector]
+    public EquipmentItem equipmentItemScript;
+
+
     private bool uses; //how many times can this item be used?
 
 
@@ -11,6 +19,7 @@ public class EquipmentItem : Item
     void Start()
     {
         needsButtonPress = true;
+        classType = this.GetType();
     }
 
     public override void InteractableAction()
@@ -24,6 +33,18 @@ public class EquipmentItem : Item
     //{
 
     //}
+
+    public override void AddItem()
+    {
+        //add this equipment item script (includes any deriving class of EquipmentItem to the player gameobject
+        equipmentItemScript = (EquipmentItem) PlayerStats.instance.gameObject.AddComponent(classType);
+
+        //adds the equipment item script to the player's equipment item inventory
+        PlayerStats.instance.AddEquipmentItemToInventory(equipmentItemScript);
+
+        //copies old instance's equipment item stats (instance on the item gameobject) to the new instance of the equipment item (the instance inside of the player)
+        CopyStats();
+    }
 
     //when picked up.. go to the player's equipment item inventory
     void GoToInventory()
