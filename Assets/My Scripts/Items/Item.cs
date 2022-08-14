@@ -51,20 +51,26 @@ public class Item : Interactable
     //what the item does when the player picks it up
     public override void InteractableAction()
     {
-        //add this item to the player's item list
-        //Instant items will not transfer to inventory
-        //GoToPlayerInventory();
-
+        
+        //Set retrived to true so player cannot pick up the item more than once
         SetRetrieved(true);
+
+        //add this new instance of the item to the player's item list
+        //Instant items will not transfer to inventory
+        //AddItem();
+        CopyStats();
 
         Debug.Log("Retrieved item!");
     }
 
-    public virtual void AddItem()
+    //Invoke AddComponent of the item's script to go to the player's inventory
+    //need to AddComponent so the item is attached to the player, not the gameobject it initially spawned with
+    public virtual Item AddItem()
     {
-
+        return this;
     }
 
+    //copies old instance's item stats (instance on the item gameobject) to the new instance of the item (the instance inside of the player)
     public virtual void CopyStats()
     {
 

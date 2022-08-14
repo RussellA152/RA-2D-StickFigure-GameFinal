@@ -22,11 +22,11 @@ public class EquipmentItem : Item
         classType = this.GetType();
     }
 
-    public override void InteractableAction()
-    {
-        base.InteractableAction();
-        GoToInventory();
-    }
+    //public override void InteractableAction()
+    //{
+        //base.InteractableAction();
+        //AddItem();
+    //}
 
     //When the player swaps out this item for a different equipment item
     //void EquipmentSwap()
@@ -34,7 +34,7 @@ public class EquipmentItem : Item
 
     //}
 
-    public override void AddItem()
+    public override Item AddItem()
     {
         //add this equipment item script (includes any deriving class of EquipmentItem to the player gameobject
         equipmentItemScript = (EquipmentItem) PlayerStats.instance.gameObject.AddComponent(classType);
@@ -42,13 +42,10 @@ public class EquipmentItem : Item
         //adds the equipment item script to the player's equipment item inventory
         PlayerStats.instance.AddEquipmentItemToInventory(equipmentItemScript);
 
+        return equipmentItemScript;
+
         //copies old instance's equipment item stats (instance on the item gameobject) to the new instance of the equipment item (the instance inside of the player)
-        CopyStats();
+        //CopyStats();
     }
 
-    //when picked up.. go to the player's equipment item inventory
-    void GoToInventory()
-    {
-        PlayerStats.instance.AddEquipmentItemToInventory(this);
-    }
 }

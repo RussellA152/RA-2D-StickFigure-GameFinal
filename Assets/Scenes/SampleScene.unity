@@ -1846,10 +1846,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interacter: {fileID: 0}
   needsButtonPress: 0
-  cooldownTimer: 0
-  scriptableObjectStats: {fileID: 11400000, guid: bcf42ccb77489df458635233228a814d, type: 2}
-  description: 
+  cooldownTimer: 12
+  passiveItemScript: {fileID: 0}
   procChance: 0.5
+  damage: 50
 --- !u!61 &879423099
 BoxCollider2D:
   m_ObjectHideFlags: 0

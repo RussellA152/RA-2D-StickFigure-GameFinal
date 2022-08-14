@@ -16,11 +16,11 @@ public class PassiveItem : Item
     [HideInInspector]
     public Type classType;
 
+
     [HideInInspector]
     public PassiveItem passiveItemScript;
 
     public float procChance;
-
 
     private void Start()
     {
@@ -28,24 +28,18 @@ public class PassiveItem : Item
         classType = this.GetType();
     }
 
-    public override void InteractableAction()
-    {
-        base.InteractableAction();
-        GoToInventory();
-    }
-
-    //when picked up.. go to the player's passive item inventory
-    void GoToInventory()
-    {
-        AddItem();
-    }
+    //public override void InteractableAction()
+    //{
+        //base.InteractableAction();
+        
+    //}
 
     public virtual void PassiveProcAbility()
     {
         
     }
 
-    public override void AddItem()
+    public override Item AddItem()
     {
         //add this passive item script (includes any deriving class of PassiveItem to the player gameobject
         passiveItemScript = (PassiveItem) PlayerStats.instance.gameObject.AddComponent(classType);
@@ -53,8 +47,12 @@ public class PassiveItem : Item
         //adds the passive item script to the player's passive item inventory
         PlayerStats.instance.AddPassiveItemToInventory(passiveItemScript);
 
+        Debug.Log("Passive item component is of Type: " + passiveItemScript.GetType());
+
+        return passiveItemScript;
+
         //copies old instance's passive item stats (instance on the item gameobject) to the new instance of the passive item (the instance inside of the player)
-        CopyStats();
+        //CopyStats();
     }
 
     public bool ShouldProc()

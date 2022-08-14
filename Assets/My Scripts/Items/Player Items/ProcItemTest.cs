@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class ProcItemTest : PassiveItem
 {
+    public float damage;
     public override void ItemAction(GameObject player)
     {
-        //base.ItemAction(player);
-
         player.GetComponent<CharacterController2D>().onJump += PassiveProcAbility;
     }
 
@@ -24,7 +23,11 @@ public class ProcItemTest : PassiveItem
 
     public override void CopyStats()
     {
-        passiveItemScript.procChance = procChance;
+        ProcItemTest item = (ProcItemTest) AddItem();
+
+        item.procChance = procChance;
+        item.damage = damage;
+        //passiveItemScript.damage = damage;
 
         //TEMPORARY DESTROYS OLD PASSIVE ITEM INSTANCE
         //Destroy(this.gameObject);
