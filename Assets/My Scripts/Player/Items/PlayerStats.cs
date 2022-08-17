@@ -108,6 +108,7 @@ public class PlayerStats : MonoBehaviour
 
     public void AddEquipmentItemToInventory(EquipmentItem item)
     {
+
         //if equipmentItemSlot is not null when you pick an equipment item
         //then the player has to swap out their current equipment for the new equipment
         if(equipmentItemSlot != null)
@@ -120,7 +121,7 @@ public class PlayerStats : MonoBehaviour
         }
 
         equipmentItemSlot = item;
-        equipmentItemOriginal = item.originalGameObject;
+        equipmentItemOriginal = item.originalDroppedInstance;
     }
 
     //return true if the player has an equipment item in their slot

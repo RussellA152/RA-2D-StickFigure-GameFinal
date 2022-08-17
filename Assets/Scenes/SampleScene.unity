@@ -1848,12 +1848,11 @@ MonoBehaviour:
   needsButtonPress: 0
   cooldownTimer: 0
   retrieved: 0
-  equipmentItemScript: {fileID: 0}
+  playerEquipmentInstance: {fileID: 0}
   amountOfCharge: 6
   chargeConsumedPerUse: 2
   hasSufficientCharge: 1
-  inPlayerInventory: 0
-  originalGameObject: {fileID: 0}
+  originalDroppedInstance: {fileID: 0}
   amountToHeal: 100
 --- !u!61 &809350207
 BoxCollider2D:
@@ -2971,12 +2970,11 @@ MonoBehaviour:
   needsButtonPress: 0
   cooldownTimer: 0
   retrieved: 0
-  equipmentItemScript: {fileID: 0}
+  playerEquipmentInstance: {fileID: 0}
   amountOfCharge: 6
   chargeConsumedPerUse: 3
   hasSufficientCharge: 1
-  inPlayerInventory: 0
-  originalGameObject: {fileID: 0}
+  originalDroppedInstance: {fileID: 0}
   damage: 100
 --- !u!61 &1488116364
 BoxCollider2D:

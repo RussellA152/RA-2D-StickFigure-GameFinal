@@ -21,14 +21,14 @@ public class Bomb : EquipmentItem
     public override void CopyStats()
     {
         //downcast Equipment to Potion so we can copy new stats
-        Bomb item = (Bomb)equipmentItemScript;
+        Bomb item = (Bomb)playerEquipmentInstance;
 
 
         item.amountOfCharge = amountOfCharge;
         item.chargeConsumedPerUse = chargeConsumedPerUse;
         item.damage = damage;
 
-        SetNewItemInstance(item);
+        //SetNewItemInstance(item);
 
         
 
