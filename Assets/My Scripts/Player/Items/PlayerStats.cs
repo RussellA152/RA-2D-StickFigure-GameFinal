@@ -11,11 +11,17 @@ public class PlayerStats : MonoBehaviour
 
     private InputAction useEquipmentBinding;
 
+    [SerializeField] private GameObject componentHolder; //gameobject that holds all added components from item
+                                                         //mainly used so that the Player gameobject is not clogged with too many components
+
     private bool canUseEquipment = true;
 
     [SerializeField] private List<PassiveItem> passiveItems = new List<PassiveItem>(); //the list of items
-    [SerializeField] private EquipmentItem equipmentItemSlot; //the player's current equipment (can only have 1 at a time)
 
+    [SerializeField] private EquipmentItem equipmentItemSlot; //the player's current equipment (can only have 1 at a time)
+    [SerializeField] private EquipmentItem equipmentItemOriginal; //the gameobject of the current equipment item (can only have 1 at a time)
+
+    [Header("All Modifiable Stats")]
     [SerializeField] private float runningSpeed; //running speed of the player
     [SerializeField] private float maxHealth; //max health of the player
     [SerializeField] private float damageMultiplier; //value multiplied to all player damage (higher would increase all attack damage)
@@ -77,7 +83,7 @@ public class PlayerStats : MonoBehaviour
             //and the item has a sufficient amount of uses.. call the item's action
             if (canUseEquipment)
             {
-                Debug.Log("Use equipment!");
+                Debug.Log("Try to use equipment!");
                 equipmentItemSlot.ItemAction(this.gameObject);
             }
         }
@@ -94,27 +100,47 @@ public class PlayerStats : MonoBehaviour
         //adding given item to the list
         passiveItems.Add(item);
 
-        //item.CopyScriptableObjectStats();
-
-        //if the passive is meant to occur right away, then just call it here
-        //if (item.activateOnPickUp)
-
-        //passiveItems[passiveItems.IndexOf(item)].ItemAction(this.gameObject);
+        //all items will immediately activate their ability on pick up
+        //stat boost passive items will immediately modify a value
+        //while "proc" items will subscribe to their corresponding event system
         item.ItemAction(this.gameObject);
     }
 
     public void AddEquipmentItemToInventory(EquipmentItem item)
     {
+        //if equipmentItemSlot is not null when you pick an equipment item
+        //then the player has to swap out their current equipment for the new equipment
         if(equipmentItemSlot != null)
         {
-            equipmentItemSlot.SetRetrieved(false);
-
-            Debug.Log("Drop previous equipment item");
-            Debug.Log("Make other item retrievable again");
+            //equipmentItemSlot.SetRetrieved(false);
+            equipmentItemSlot.EquipmentSwap();
+            
+            //Debug.Log("Drop previous equipment item");
+            //Debug.Log("Make other item retrievable again");
         }
 
         equipmentItemSlot = item;
+        equipmentItemOriginal = item.originalGameObject;
     }
+
+    //return true if the player has an equipment item in their slot
+    //otherwise return false
+    //public bool HasAnEquipmentItem()
+    //{
+        //if (equipmentItemSlot != null)
+            //return true;
+        //else
+            //return false;
+    //}
+    
+    //return the component holder
+    //mainly needed when PassiveItem or EquipmentItem need to add a script component
+    public GameObject GetComponentHolder()
+    {
+        return componentHolder;
+    }
+
+
     public float GetRunningSpeed()
     {
         return runningSpeed;
@@ -148,22 +174,5 @@ public class PlayerStats : MonoBehaviour
     {
         canUseEquipment = boolean;
     }
-
-    /*
-    public CharacterController2D GetMovementScript()
-    {
-        return playerMovementScript;
-    }
-
-    public PlayerHealth GetHealthScript()
-    {
-        return playerHealthScript;
-    }
-    public AttackController GetAttackControllerScript()
-    {
-        return playerAttackControllerScript;
-    }
-
-    */
 
 }

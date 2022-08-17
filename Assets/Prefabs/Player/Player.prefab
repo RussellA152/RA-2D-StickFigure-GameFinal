@@ -116,6 +116,7 @@ Transform:
   - {fileID: 4332903957970057215}
   - {fileID: 4332903957122095674}
   - {fileID: 4332903957484743981}
+  - {fileID: 7094239865006618086}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -180,11 +181,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf14f777912c27c4886f1a9d7ce6d9f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  componentHolder: {fileID: 8056597536341626888}
   passiveItems: []
   equipmentItemSlot: {fileID: 0}
   runningSpeed: 65
   maxHealth: 200
   damageMultiplier: 1
+  procChanceMultiplier: 0
 --- !u!114 &4332903956958558062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -576,3 +579,33 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.22, y: 0.34}
   m_EdgeRadius: 0
+--- !u!1 &8056597536341626888
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7094239865006618086}
+  m_Layer: 0
+  m_Name: Item Inventory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7094239865006618086
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8056597536341626888}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4332903956958558057}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

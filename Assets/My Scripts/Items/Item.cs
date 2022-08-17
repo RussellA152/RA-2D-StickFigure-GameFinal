@@ -11,7 +11,7 @@ public class Item : Interactable
 {
     private bool spawned = false; //has this item spawned in the world?
 
-    private bool retrieved = false; //was this item picked up by the player?
+    [SerializeField] private bool retrieved = false; //was this item picked up by the player?
     //if so, the item won't be able to picked up agains
 
     private void OnEnable()
@@ -57,17 +57,14 @@ public class Item : Interactable
 
         //add this new instance of the item to the player's item list
         //Instant items will not transfer to inventory
-        //AddItem();
-        CopyStats();
-
-        Debug.Log("Retrieved item!");
+        AddItem();
     }
 
     //Invoke AddComponent of the item's script to go to the player's inventory
     //need to AddComponent so the item is attached to the player, not the gameobject it initially spawned with
-    public virtual Item AddItem()
+    public virtual void AddItem()
     {
-        return this;
+        
     }
 
     //copies old instance's item stats (instance on the item gameobject) to the new instance of the item (the instance inside of the player)
@@ -78,6 +75,7 @@ public class Item : Interactable
 
 
     //what the item does for the player
+    //passes in player to access components if needed..
     public virtual void ItemAction(GameObject player)
     {
         //Debug.Log("Item action!");

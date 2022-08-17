@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Potion : EquipmentItem
+public class Bomb : EquipmentItem
 {
-    public float amountToHeal;
+    public float damage;
 
     public override void ItemAction(GameObject player)
     {
@@ -12,28 +12,29 @@ public class Potion : EquipmentItem
         //other just do nothing
         if (CheckEquipmentCharge())
         {
-            Debug.Log("Heal Player for one hundred!");
+            Debug.Log("Throw a bomb!");
         }
-  
+
     }
 
 
     public override void CopyStats()
     {
         //downcast Equipment to Potion so we can copy new stats
-        Potion item = (Potion) equipmentItemScript;
+        Bomb item = (Bomb)equipmentItemScript;
+
 
         item.amountOfCharge = amountOfCharge;
         item.chargeConsumedPerUse = chargeConsumedPerUse;
-        item.amountToHeal = amountToHeal;
-
+        item.damage = damage;
 
         SetNewItemInstance(item);
 
         
-        //Debug.Log("Potion new instance is " + equipmentItemScript);
+
+        //Debug.Log("Bomb new instance is " + equipmentItemScript);
 
         //TEMPORARY DESTROYS OLD EQUIPMENT ITEM INSTANCE
-        //this.gameObject.SetActive(false);
+       // this.gameObject.SetActive(false);
     }
 }

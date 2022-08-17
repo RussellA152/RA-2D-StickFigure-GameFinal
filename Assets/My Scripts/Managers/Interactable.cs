@@ -36,7 +36,7 @@ public class Interactable : MonoBehaviour
             //and if they are in trigger and can interact
             if(playerInputButton != null)
             {
-                if (playerInputButton.ReadValue<float>() > 0 && inTrigger && canInteractWith)
+                if (playerInputButton.triggered && inTrigger && canInteractWith)
                     InteractableAction();
             }
             

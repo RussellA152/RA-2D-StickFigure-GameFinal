@@ -11,12 +11,12 @@ public class PassiveItem : Item
 
     //public string description;
 
-    //public string className;
-
     [HideInInspector]
     public Type classType;
 
-
+    //the new passive item instance that will be added to the player's item inventory gameobject
+    //is used for copying stats over from old item instance from the ground, to the new instance inside of the player
+    //this is so that we don't have to hard code all values, we will be able to set variable values in inspector
     [HideInInspector]
     public PassiveItem passiveItemScript;
 
@@ -24,35 +24,30 @@ public class PassiveItem : Item
 
     private void Start()
     {
+        //all passive items need a button to press to pick up
         needsButtonPress = true;
+        //need to fetch the class type so we can add component to the player's passive item inventory using a variable
         classType = this.GetType();
     }
 
-    //public override void InteractableAction()
-    //{
-        //base.InteractableAction();
-        
-    //}
-
+    //if this passive item will proc something while inside of the player's inventory..
+    //subscribe this function to a corresponding event system
     public virtual void PassiveProcAbility()
     {
         
     }
 
-    public override Item AddItem()
+    public override void AddItem()
     {
         //add this passive item script (includes any deriving class of PassiveItem to the player gameobject
-        passiveItemScript = (PassiveItem) PlayerStats.instance.gameObject.AddComponent(classType);
+        //need to convert from Component to PassiveItem so that deriving classes that downcast it to their respective class
+        passiveItemScript = (PassiveItem) PlayerStats.instance.GetComponentHolder().AddComponent(classType);
 
         //adds the passive item script to the player's passive item inventory
         PlayerStats.instance.AddPassiveItemToInventory(passiveItemScript);
 
-        Debug.Log("Passive item component is of Type: " + passiveItemScript.GetType());
-
-        return passiveItemScript;
-
         //copies old instance's passive item stats (instance on the item gameobject) to the new instance of the passive item (the instance inside of the player)
-        //CopyStats();
+        CopyStats();
     }
 
     public bool ShouldProc()
