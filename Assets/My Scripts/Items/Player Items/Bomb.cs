@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//This class doesn't do much at the moment; it is used for testing equipment items
 public class Bomb : EquipmentItem
 {
     public float damage;
@@ -21,7 +22,7 @@ public class Bomb : EquipmentItem
     public override void CopyStats()
     {
         //downcast Equipment to Potion so we can copy new stats
-        Bomb item = (Bomb)playerEquipmentInstance;
+        Bomb item = (Bomb) playerEquipmentInstance;
 
 
         item.amountOfCharge = amountOfCharge;

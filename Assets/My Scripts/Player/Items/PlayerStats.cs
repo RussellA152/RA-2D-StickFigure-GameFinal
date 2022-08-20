@@ -16,7 +16,23 @@ public class PlayerStats : MonoBehaviour
 
     private bool canUseEquipment = true;
 
-    [SerializeField] private List<PassiveItem> passiveItems = new List<PassiveItem>(); //the list of items
+
+    [Header("New Items")]
+    [SerializeField] private List<NewItem> newPassiveItems = new List<NewItem>();
+
+
+    [SerializeField] private NewItem newEquipmentItemSlot; //the player's current equipment (can only have 1 at a time)
+    //[SerializeField] private EquipmentItem newEquipmentItemOriginal; //the gameobject of the current equipment item (can only have 1 at a time)
+
+
+
+
+
+
+
+
+    [Header("Old Items")]
+    [SerializeField] private List<PassiveItem> passiveItems = new List<PassiveItem>(); //the list of passive items
 
     [SerializeField] private EquipmentItem equipmentItemSlot; //the player's current equipment (can only have 1 at a time)
     [SerializeField] private EquipmentItem equipmentItemOriginal; //the gameobject of the current equipment item (can only have 1 at a time)
@@ -58,7 +74,7 @@ public class PlayerStats : MonoBehaviour
         useEquipmentBinding = playerControls.Player.UseEquipment;
 
         useEquipmentBinding.Enable();
-        useEquipmentBinding.performed += UseEquipment;
+        useEquipmentBinding.performed += UsePlayerEquipment;
     }
 
     private void OnDisable()
@@ -74,6 +90,61 @@ public class PlayerStats : MonoBehaviour
         
     }
 
+    private void UsePlayerEquipment(InputAction.CallbackContext context)
+    {
+        //if the player has an equipment item...
+        if (newEquipmentItemSlot != null)
+        {
+            //if the player is allowed to use the equipment item
+            //and the item has a sufficient amount of uses.. call the item's action
+            if (canUseEquipment)
+            {
+                Debug.Log("Try to use equipment!");
+                newEquipmentItemSlot.ItemAction(this.gameObject);
+            }
+        }
+        else
+        {
+            Debug.Log("You do not have any equipment!");
+        }
+
+
+    }
+
+    public void AddPassiveItem(NewItem passiveItem)
+    {
+        //adding given item to the list
+        newPassiveItems.Add(passiveItem);
+
+        //all items will immediately activate their ability on pick up
+        //stat boost passive items will immediately modify a value
+        //while "proc" items will subscribe to their corresponding event system
+        passiveItem.ItemAction(this.gameObject);
+    }
+
+    public void AddEquipmentItem(NewItem equipmentItem)
+    {
+
+        //if equipmentItemSlot is not null when you pick an equipment item
+        //then the player has to swap out their current equipment for the new equipment
+        if (newEquipmentItemSlot != null)
+        {
+            //equipmentItemSlot.SetRetrieved(false);
+            newEquipmentItemSlot.SwapEquipment();
+
+            //Debug.Log("Drop previous equipment item");
+            //Debug.Log("Make other item retrievable again");
+        }
+
+        newEquipmentItemSlot = equipmentItem;
+        //equipmentItemOriginal = equipmentItem.originalDroppedInstance;
+    }
+
+
+
+
+
+    /*
     private void UseEquipment(InputAction.CallbackContext context)
     {
         //if the player has an equipment item...
@@ -94,6 +165,7 @@ public class PlayerStats : MonoBehaviour
 
         
     }
+    */
 
     public void AddPassiveItemToInventory(PassiveItem item)
     {

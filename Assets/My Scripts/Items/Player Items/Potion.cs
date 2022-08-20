@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//This class doesn't do much at the moment; it is used for testing equipment items
 public class Potion : EquipmentItem
 {
     public float amountToHeal;
@@ -9,7 +10,7 @@ public class Potion : EquipmentItem
     public override void ItemAction(GameObject player)
     {
         //only use this item if it has charge
-        //other just do nothing
+        //otherwise just do nothing
         if (CheckEquipmentCharge())
         {
             Debug.Log("Heal Player for one hundred!");
@@ -26,7 +27,6 @@ public class Potion : EquipmentItem
         item.amountOfCharge = amountOfCharge;
         item.chargeConsumedPerUse = chargeConsumedPerUse;
         item.amountToHeal = amountToHeal;
-
 
         //SetNewItemInstance(item);
 
