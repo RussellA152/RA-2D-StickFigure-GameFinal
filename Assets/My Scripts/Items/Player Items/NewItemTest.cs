@@ -13,6 +13,7 @@ public class NewItemTest : NewItem
     {
         Debug.Log("Fetch Stats!");
 
+
         //will fetch from persistant data source but just testing to see if stats would even carry over
         type = ItemType.equipment;
 

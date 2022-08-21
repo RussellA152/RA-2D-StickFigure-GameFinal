@@ -1,15 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public abstract class NewItem : MonoBehaviour
 {
+    public string itemName;
+
     public ItemType type;
 
     public float procChance;
 
     public int amountOfCharge; //how many times can this item be used?
     public int chargeConsumedPerUse; //how much charge will this item consume on each use?
+
+    [SerializeField] private TextAsset textAssetData;
 
     [HideInInspector]
     public bool hasSufficientCharge = true;
