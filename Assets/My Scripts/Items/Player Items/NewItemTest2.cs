@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewItemTest : Item
+public class NewItemTest2 : Item
 {
     public override void ItemAction(GameObject player)
     {
         if (ShouldActivate())
         {
-            PlayerStats.instance.ModifyMaxHealth(200f);
+            Debug.Log("Invoke NewItemTest's ItemAction!");
         }
         
     }
@@ -23,5 +23,13 @@ public class NewItemTest : Item
 
         amountOfCharge = myScriptableObject.amountOfCharge;
         chargeConsumedPerUse = myScriptableObject.chargesConsumedPerUse;
+
+
+        //procChance = myScriptableObject.procChance;
+
+        //will fetch from persistant data source but just testing to see if stats would even carry over
+        //type = ItemScriptableObject.ItemType.equipment;
+
+        //procChance = 50f;
     }
 }

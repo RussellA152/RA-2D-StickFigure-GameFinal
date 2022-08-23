@@ -6,12 +6,22 @@ using UnityEngine;
 public class ItemGiver : Interactable
 {
     //[SerializeField] private NewItem itemToGiveToPlayer; //the item script that this giver will insert in the player's inventory
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private BoxCollider2D triggerCollider;
 
     [Header("Details of Item")]
 
-    [SerializeField] private Sprite itemSprite;
+    [SerializeField] private Item itemToGive;
 
-    [SerializeField] private string scriptToLoad; //the name of the script to give to player (ex. Potion, Bomb)
+    //[SerializeField] private Sprite itemSprite;
+
+    //[SerializeField] private string itemScriptToLoad; //the name of the script to give to player (ex. Potion, Bomb)
+
+    //[SerializeField] private ItemScriptableObject scriptableObject;
+
+    //private Component itemComponent; //the item component added to player using AddComponent()
+
+    //private NewItem itemScript; //the NewItem script of the itemComponent
 
     private bool spawned = false; //has this item spawned in the world?
 
@@ -61,32 +71,79 @@ public class ItemGiver : Interactable
     {
         Debug.Log("Picked up item!");
 
-        //Set retrived to true so player cannot pick up the item more than once
-        SetRetrieved(true);
-
         //add this new instance of the item to the player's item list
-        //Instant items will not transfer to inventory
         AddItemToPlayer();
+
+        
     }
 
     //Invoke AddComponent of the item's script to go to the player's inventory
     //need to AddComponent so the item is attached to the player, not the gameobject it initially spawned with
     public void AddItemToPlayer()
     {
-        //only give item script to player if they its their first time interacting with this ItemGiver
-        if (!gaveItemToPlayer)
-        {
-            //adds any item script this ItemGiver was specificed to add
-            PlayerStats.instance.GetComponentHolder().AddComponent(Type.GetType(scriptToLoad));
+        if(!retrieved){
+            if(itemToGive.type != ItemScriptableObject.ItemType.instant)
+            {
+                this.transform.parent = PlayerStats.instance.GetComponentHolder().transform;
 
-            gaveItemToPlayer = true;
+                itemToGive.enabled = true;
+
+                spriteRenderer.enabled = false;
+                triggerCollider.enabled = false;
+
+            }
+            else
+            {
+                Debug.Log("If this is an instant item, then return to the object pooler immediately");
+            }
+
+
+            //Set retrived to true so player cannot pick up the item more than once
+            SetRetrieved(true);
+
         }
+        //only give item script to player if they its their first time interacting with this ItemGiver
+        //if (!gaveItemToPlayer)
+        //{
+            //adds any item script this ItemGiver was specificed to add, then converts it to NewItem to access methods
+            //itemScript = PlayerStats.instance.GetComponentHolder().AddComponent(Type.GetType(itemScriptToLoad)) as NewItem;
+
+            //OLD (WILL THROW AN EXCEPTION IF CASTING DOESN'T WORK)
+            //NewItem itemScript = (NewItem) PlayerStats.instance.GetComponentHolder().AddComponent(Type.GetType(itemScriptToLoad));
+
+            //if(itemScript != null)
+            //{
+                //itemScript.SetScriptableObject(scriptableObject);
+
+            //}
+            //else
+            //{
+                //Debug.Log("An incorrect script name was provided to this Item Giver!");
+            //}
+
+            //gaveItemToPlayer = true;
+        //}
+        //else
+        //{
+            //itemScript.enabled = true;
+        //}
         
     }
 
 
-    public virtual void OnDrop()
+    public void OnDrop()
     {
+        itemToGive.enabled = false;
+
+        this.transform.SetParent(null);
+
+        spriteRenderer.enabled = true;
+
+        triggerCollider.enabled = true;
+
+        //gaveItemToPlayer = false;
+
+        SetRetrieved(false);
 
     }
 }

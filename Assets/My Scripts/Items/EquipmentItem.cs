@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class EquipmentItem : Item
+public class EquipmentItem : OldItem
 {
     [HideInInspector]
     public Type classType;
@@ -102,7 +102,7 @@ public class EquipmentItem : Item
         //add this equipment item script (includes any deriving class of EquipmentItem to the player gameobject
         //need to convert from Component to EquipmentItem so that deriving classes that downcast it to their respective class
         //adds the equipment item script to the player's equipment item inventory
-        PlayerStats.instance.AddEquipmentItemToInventory(playerEquipmentInstance);
+        //PlayerStats.instance.AddEquipmentItemToInventory(playerEquipmentInstance);
     }
 
     //Need to set playerEquipmentInstance to the new added component instance

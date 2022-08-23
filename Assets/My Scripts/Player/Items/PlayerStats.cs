@@ -18,10 +18,10 @@ public class PlayerStats : MonoBehaviour
 
 
     [Header("New Items")]
-    [SerializeField] private List<NewItem> newPassiveItems = new List<NewItem>();
+    [SerializeField] private List<Item> newPassiveItems = new List<Item>();
 
 
-    [SerializeField] private NewItem newEquipmentItemSlot; //the player's current equipment (can only have 1 at a time)
+    [SerializeField] private Item newEquipmentItemSlot; //the player's current equipment (can only have 1 at a time)
     //[SerializeField] private EquipmentItem newEquipmentItemOriginal; //the gameobject of the current equipment item (can only have 1 at a time)
 
 
@@ -31,11 +31,11 @@ public class PlayerStats : MonoBehaviour
 
 
 
-    [Header("Old Items")]
-    [SerializeField] private List<PassiveItem> passiveItems = new List<PassiveItem>(); //the list of passive items
+    //[Header("Old Items")]
+    //[SerializeField] private List<PassiveItem> passiveItems = new List<PassiveItem>(); //the list of passive items
 
-    [SerializeField] private EquipmentItem equipmentItemSlot; //the player's current equipment (can only have 1 at a time)
-    [SerializeField] private EquipmentItem equipmentItemOriginal; //the gameobject of the current equipment item (can only have 1 at a time)
+    //[SerializeField] private EquipmentItem equipmentItemSlot; //the player's current equipment (can only have 1 at a time)
+    //[SerializeField] private EquipmentItem equipmentItemOriginal; //the gameobject of the current equipment item (can only have 1 at a time)
 
     [Header("All Modifiable Stats")]
     [SerializeField] private float runningSpeed; //running speed of the player
@@ -111,7 +111,7 @@ public class PlayerStats : MonoBehaviour
 
     }
 
-    public void AddPassiveItem(NewItem passiveItem)
+    public void AddPassiveItem(Item passiveItem)
     {
         //adding given item to the list
         newPassiveItems.Add(passiveItem);
@@ -122,7 +122,7 @@ public class PlayerStats : MonoBehaviour
         passiveItem.ItemAction(this.gameObject);
     }
 
-    public void AddEquipmentItem(NewItem equipmentItem)
+    public void AddEquipmentItem(Item equipmentItem)
     {
 
         //if equipmentItemSlot is not null when you pick an equipment item
@@ -130,7 +130,7 @@ public class PlayerStats : MonoBehaviour
         if (newEquipmentItemSlot != null)
         {
             //equipmentItemSlot.SetRetrieved(false);
-            newEquipmentItemSlot.SwapEquipment();
+            newEquipmentItemSlot.itemGiver.OnDrop();
 
             //Debug.Log("Drop previous equipment item");
             //Debug.Log("Make other item retrievable again");
@@ -166,7 +166,7 @@ public class PlayerStats : MonoBehaviour
         
     }
     */
-
+    /*
     public void AddPassiveItemToInventory(PassiveItem item)
     {
         //adding given item to the list
@@ -205,6 +205,7 @@ public class PlayerStats : MonoBehaviour
         //else
             //return false;
     //}
+    */
     
     //return the component holder
     //mainly needed when PassiveItem or EquipmentItem need to add a script component

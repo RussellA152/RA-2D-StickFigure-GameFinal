@@ -1,94 +1,145 @@
-using System.Collections;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-//The Item class will inherit from the Interactable class
-//because items are "interactable," meaning the player should be able to
-//walk up to them and pick them up
-//when picked up, the items will transfer over the player's item inventory (with exception to Instant items)
-public class Item : Interactable
+public abstract class Item : MonoBehaviour
 {
-    private bool spawned = false; //has this item spawned in the world?
+    public string itemName;
 
-    [SerializeField] private bool retrieved = false; //was this item picked up by the player?
-    //if so, the item won't be able to picked up again
+    public ItemScriptableObject myScriptableObject;
+
+    public ItemScriptableObject.ItemType type;
+
+    public float procChance;
+
+    public int amountOfCharge; //how many times can this item be used?
+    public int chargeConsumedPerUse; //how much charge will this item consume on each use?
+
+    private bool hasSufficientCharge = true;
+
+    public ItemGiver itemGiver;
+
+    private bool fetchedStats = false; //has this item already fetched its item stats from its ScriptableObject?
+
+    private void Awake()
+    {
+        this.enabled = false;
+    }
 
     private void OnEnable()
     {
-        spawned = true;
-    }
-    private void OnDisable()
-    {
-        //if the item wasn't picked up by the player, allow it to spawn again 
-        if(!retrieved)
-            spawned = false;
-    }
-    private void OnDestroy()
-    {
-        //if the item wasn't picked up by the player, allow it to spawn again
-        if (!retrieved)
-            spawned = false;
+        OnItemPickup();
     }
 
-    private void Update()
+    /*
+    public enum ItemType
     {
-        //if player hasn't picked up the item, check if they are trying to pick it up
-        if (!retrieved)
+        passive, //items that automatically activate and affect the player without thought or effort
+
+        equipment, //items that require the player to press a button to activate power
+
+        instant //items that immediately affect the player (does not go to any inventory or stay on player)
+    }
+    */
+
+    //what the item does for the player
+    //passes in player to access components if needed..
+    public abstract void ItemAction(GameObject player);
+
+    //take values from persistant data source containing stats for each item
+    public abstract void InitializeValues();
+
+
+    public bool ShouldActivate()
+    {
+        switch (type)
         {
-            CheckInteraction();
-            //Debug.Log("Check interaction!");
+            //not needed for passive items that do not have to proc during gameplay (probably won't even invoke this function)
+            case ItemScriptableObject.ItemType.passive:
+                //check if the item's proc chance was successful
+                //if not, return and do not allow ability to activate
+                if (Random.value < procChance)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
 
+            case ItemScriptableObject.ItemType.equipment:
+                //if this item has sufficient charge, take some away
+                //otherwise, return false and don't allow item to activate its use
+                if (amountOfCharge < chargeConsumedPerUse)
+                {
+                    //when player's equipment item is out of charges we can probably play some sound that
+                    //indicates the item can't be used
+                    Debug.Log("Insufficient Charge");
+
+                    hasSufficientCharge = false;
+                    return false;
+                }
+
+                else
+                {
+                    amountOfCharge -= chargeConsumedPerUse;
+                    hasSufficientCharge = true;
+
+                    return true;
+                }
+
+            //this function is not needed for instant items since they will always activate on pickup (probably won't even invoke this function)
+            case ItemScriptableObject.ItemType.instant:
+                //instant items should always activate
+                return true;
+        }
+
+        return true;
+
+        
+    }
+
+    //public void SwapEquipment()
+    //{
+        
+    //}
+
+    public void OnItemPickup()
+    {
+        //copy values from persistant data source when picked up
+        if (!fetchedStats)
+        {
+            InitializeValues();
+            fetchedStats = true;
+        }
+
+        switch (type)
+        {
+            default:
+
+            case ItemScriptableObject.ItemType.passive:
+                //adds the item of type "Passive" to the player's passive item inventory
+                PlayerStats.instance.AddPassiveItem(this);
+                break;
+            case ItemScriptableObject.ItemType.equipment:
+                //adds the item of type "Equipment" to the player's equipment item inventory
+                PlayerStats.instance.AddEquipmentItem(this);
+                break;
+            case ItemScriptableObject.ItemType.instant:
+                //instant items do not get added to any inventory
+                break;
         }
 
     }
 
-    public void SetRetrieved(bool boolean)
-    {
-        retrieved = boolean;
-    }
+    //public void SetScriptableObject(ItemScriptableObject scriptableObject)
+    //{
+        //set this item's scriptable object to the parameter given
+        //myScriptableObject = scriptableObject;
 
-    //what the item does when the player picks it up
-    public override void InteractableAction()
-    {
-        
-        //Set retrived to true so player cannot pick up the item more than once
-        SetRetrieved(true);
-
-        //add this new instance of the item to the player's item list
-        //Instant items will not transfer to inventory
-        AddItem();
-    }
-
-    //Invoke AddComponent of the item's script to go to the player's inventory
-    //need to AddComponent so the item is attached to the player, not the gameobject it initially spawned with
-    public virtual void AddItem()
-    {
-        
-    }
-
-    //copies old instance's item stats (instance on the item gameobject) to the new instance of the item (the instance inside of the player)
-    public virtual void CopyStats()
-    {
-
-    }
-
-
-    //what the item does for the player
-    //passes in player to access components if needed..
-    public virtual void ItemAction(GameObject player)
-    {
-        //Debug.Log("Item action!");
-    }
-    
-    //reverse the effect this item had
-    public virtual void ReverseAction()
-    {
-
-    }
-
-    public virtual void OnDrop()
-    {
-        
-    }
+        //Debug.Log("Receiving scriptable object?");
+        //InitializeValues();
+    //}
 }

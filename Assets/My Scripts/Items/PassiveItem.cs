@@ -4,7 +4,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using System;
 
-public class PassiveItem : Item
+public class PassiveItem : OldItem
 {
     //public bool activateOnPickUp; //will this item affect the player immediately? EX: Health boost, speed boost, attack boost?
     //but not something that would proc during gameplay
@@ -44,7 +44,7 @@ public class PassiveItem : Item
         passiveItemScript = (PassiveItem) PlayerStats.instance.GetComponentHolder().AddComponent(classType);
 
         //adds the passive item script to the player's passive item inventory
-        PlayerStats.instance.AddPassiveItemToInventory(passiveItemScript);
+        //PlayerStats.instance.AddPassiveItemToInventory(passiveItemScript);
 
         //copies old instance's passive item stats (instance on the item gameobject) to the new instance of the passive item (the instance inside of the player)
         CopyStats();
