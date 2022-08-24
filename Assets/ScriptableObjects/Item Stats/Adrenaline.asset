@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1084e8500baebe6488f27cdcf59bc34a, type: 3}
-  m_Name: Potion
+  m_Name: Adrenaline
   m_EditorClassIdentifier: 
-  itemName: Potion
-  itemType: 1
-  amountOfCharge: 6
-  chargesConsumedPerUse: 4
-  chargeRefilledPerKill: 1
-  procChance: 0
+  itemName: 
+  itemType: 0
+  amountOfCharge: 0
+  chargesConsumedPerUse: 0
+  chargeRefilledPerKill: 0
+  procChance: 1
   procChanceModifier: 0
   maxHealthModifier: 0
-  currentHealthModifier: 150
+  currentHealthModifier: 0
   amountOfMoneyGiven: 0
   moneyMultiplierModifier: 0
   damageOfItem: 0
   rangeOfItem: 0
   damageMultiplierModifier: 0
   damageAbsorptionMultiplierModifier: 0
-  movementSpeedMultiplierModifier: 0
+  movementSpeedMultiplierModifier: 0.3

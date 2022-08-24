@@ -21,8 +21,8 @@ TagManager:
   - Enemy
   - Obstacle
   - Pathfinding
-  - 
-  - 
+  - Item
+  - ItemTrigger
   - 
   - 
   - 

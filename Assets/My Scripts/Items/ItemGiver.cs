@@ -7,7 +7,12 @@ public class ItemGiver : Interactable
 {
     //[SerializeField] private NewItem itemToGiveToPlayer; //the item script that this giver will insert in the player's inventory
     [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private BoxCollider2D triggerCollider;
+    [SerializeField] private BoxCollider2D actualCollider; //box collider without isTrigger checked
+    [SerializeField] private BoxCollider2D triggerCollider; //box collider with isTrigger checked
+
+    //private Transform parent; //the parent gameobject of this item giver
+
+    private Quaternion iniRot;
 
     [Header("Details of Item")]
 
@@ -25,12 +30,21 @@ public class ItemGiver : Interactable
 
     private bool spawned = false; //has this item spawned in the world?
 
-    private bool retrieved = false; //was this item picked up by the player?
+    [SerializeField] private bool retrieved = false; //was this item picked up by the player?
 
     private bool gaveItemToPlayer = false; //did this ItemGiver give the player a NewItem script component?
 
-    
+
     //if so, the item won't be able to picked up again
+
+
+    private void Start()
+    {
+        iniRot = transform.rotation;
+
+        //Always ignore collision between item and player
+        Physics2D.IgnoreLayerCollision(7,11);
+    }
 
     private void OnEnable()
     {
@@ -59,6 +73,12 @@ public class ItemGiver : Interactable
 
         }
 
+
+    }
+
+    private void LateUpdate()
+    {
+        transform.rotation = iniRot;
     }
 
     public void SetRetrieved(bool boolean)
@@ -84,11 +104,15 @@ public class ItemGiver : Interactable
         if(!retrieved){
             if(itemToGive.type != ItemScriptableObject.ItemType.instant)
             {
-                this.transform.parent = PlayerStats.instance.GetComponentHolder().transform;
+                //parent = PlayerStats.instance.GetComponentHolder().transform;
 
-                itemToGive.enabled = true;
+                //this.transform.SetParent(parent);
+
+                if(!itemToGive.enabled)
+                    itemToGive.enabled = true;
 
                 spriteRenderer.enabled = false;
+                actualCollider.enabled = false;
                 triggerCollider.enabled = false;
 
             }
@@ -133,12 +157,19 @@ public class ItemGiver : Interactable
 
     public void OnDrop()
     {
-        itemToGive.enabled = false;
+        if (itemToGive.enabled)
+            itemToGive.enabled = false;
 
-        this.transform.SetParent(null);
+        //drop this item infront of the player
+        transform.position = new Vector2(PlayerStats.instance.GetComponentHolder().transform.position.x, PlayerStats.instance.GetComponentHolder().transform.position.y);
+
+        //parent = null;
+
+        //this.transform.SetParent(null);
 
         spriteRenderer.enabled = true;
 
+        actualCollider.enabled = true;
         triggerCollider.enabled = true;
 
         //gaveItemToPlayer = false;

@@ -182,8 +182,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   componentHolder: {fileID: 8056597536341626888}
-  passiveItems: []
-  equipmentItemSlot: {fileID: 0}
+  newPassiveItems: []
+  newEquipmentItemSlot: {fileID: 0}
   runningSpeed: 65
   maxHealth: 200
   damageMultiplier: 1
@@ -588,7 +588,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7094239865006618086}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Item Inventory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
