@@ -183,7 +183,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interacter: {fileID: 0}
   needsButtonPress: 1
-  cooldownTimer: 2
+  inTrigger: 0
+  canInteractWith: 1
+  cooldownTimer: 1.5
   room: {fileID: 0}
 --- !u!61 &7353442006225623023
 BoxCollider2D:
@@ -394,7 +396,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interacter: {fileID: 0}
   needsButtonPress: 1
-  cooldownTimer: 2
+  inTrigger: 0
+  canInteractWith: 1
+  cooldownTimer: 1.5
   room: {fileID: 0}
 --- !u!61 &6556090531535826917
 BoxCollider2D:
@@ -639,7 +643,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interacter: {fileID: 0}
   needsButtonPress: 1
-  cooldownTimer: 2
+  inTrigger: 0
+  canInteractWith: 1
+  cooldownTimer: 1.5
   room: {fileID: 0}
 --- !u!61 &957892069106877114
 BoxCollider2D:
@@ -850,7 +856,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interacter: {fileID: 0}
   needsButtonPress: 1
-  cooldownTimer: 2
+  inTrigger: 0
+  canInteractWith: 1
+  cooldownTimer: 1.5
   room: {fileID: 0}
 --- !u!61 &2200501172913840958
 BoxCollider2D:

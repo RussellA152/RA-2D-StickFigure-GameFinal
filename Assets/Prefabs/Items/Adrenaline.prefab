@@ -132,8 +132,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1771347619
-  m_SortingLayer: 2
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -212,12 +212,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interacter: {fileID: 0}
   needsButtonPress: 1
+  inTrigger: 0
+  canInteractWith: 1
   cooldownTimer: 0
   spriteRenderer: {fileID: 8782208612927994005}
   actualCollider: {fileID: 8319472469012334985}
   triggerCollider: {fileID: 1462772192432573736}
   itemToGive: {fileID: 8782208612927993994}
-  retrieved: 0
 --- !u!114 &8782208612927993994
 MonoBehaviour:
   m_ObjectHideFlags: 0

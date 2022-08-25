@@ -25,7 +25,15 @@ public abstract class Item : MonoBehaviour
 
     private void Awake()
     {
+        //disabled on awake so that script won't affect player until they pick it up (which enables this script)
         this.enabled = false;
+
+        //copy values from persistant data source when picked up
+        if (!fetchedStats)
+        {
+            InitializeValues();
+            fetchedStats = true;
+        }
     }
 
     private void OnEnable()
@@ -108,13 +116,6 @@ public abstract class Item : MonoBehaviour
 
     public void OnItemPickup()
     {
-        //copy values from persistant data source when picked up
-        if (!fetchedStats)
-        {
-            InitializeValues();
-            fetchedStats = true;
-        }
-
         switch (type)
         {
             default:
@@ -128,6 +129,7 @@ public abstract class Item : MonoBehaviour
                 PlayerStats.instance.AddEquipmentItem(this);
                 break;
             case ItemScriptableObject.ItemType.instant:
+                Debug.Log("Call instant item's action right away");
                 //instant items do not get added to any inventory
                 break;
         }

@@ -5,26 +5,45 @@ using UnityEngine;
 
 //This class will be inherited by other scripts that deal with input interactions
 //ex. player needs to press "e" to open a chest, open a door, or pick up an item
-public class Interactable : MonoBehaviour
+public abstract class Interactable : MonoBehaviour
 {
     [HideInInspector]
     public Transform interacter; //the entity that interacted with this object (usually Player)
 
-    private PlayerComponents playerComponentScript;
+    //private PlayerComponents playerComponentScript;
 
     private InputAction playerInputButton;
 
     public bool needsButtonPress; //does the player need to press the interaction button to interact with this?
 
-    private bool inTrigger; //is the player in this interactable object's trigger collider?
+    [HideInInspector]
+    public bool inTrigger; //is the player in this interactable object's trigger collider?
 
-    public bool canInteractWith = true; //is the player allowed to "use" this object?
+    private bool canInteractWith = true; //is the player allowed to "use" this object?
 
-    public float cooldownTimer; //how long the player needs to wait until they can "use" this object again
+    [SerializeField] private float cooldownTimer; //how long the player needs to wait until they can "use" this object again
 
     private bool cooldownStarted = false; //has the cooldown coroutine for this object started yet?
 
     //public bool needsCooldownAfterInteraction; //does this interactable object need a cooldown before being able to "use" it again?
+
+    private void Awake()
+    {
+        //create a new instance of the player's "interact" binding 
+        //this is so that all interactable gameobjects don't have to GetComponent the "interact" binding from the PlayerComponent script
+        playerInputButton = new PlayerInputActions().Player.Interact;
+    }
+
+    public void OnEnable()
+    {
+        playerInputButton.Enable();
+    }
+
+    public void OnDisable()
+    {
+        playerInputButton.Disable();
+    }
+
 
     public void CheckInteraction()
     {
@@ -39,14 +58,14 @@ public class Interactable : MonoBehaviour
             //and if they are in trigger and can interact
             if (playerInputButton != null)
             {
-                Debug.Log("Invoking check interaction! after input button isnt null" + gameObject.name);
+                //Debug.Log("Invoking check interaction! after input button isnt null " + gameObject.name);
 
-                if (playerInputButton.triggered && inTrigger && canInteractWith)
+                if (playerInputButton.triggered && canInteractWith)
                 {
                     InteractableAction();
-                    Debug.Log("try to invoke interaction (yes button)");
+                    //Debug.Log("Call Interactable action " + gameObject.name);
+                    //Debug.Log("try to invoke interaction (yes button)");
                 }
-                    
             }
             
     
@@ -55,10 +74,10 @@ public class Interactable : MonoBehaviour
         //then just check if they're in the trigger and can interact
         else if (!needsButtonPress)
         {
-            if (inTrigger && canInteractWith)
+            if (canInteractWith)
             {
                 InteractableAction();
-                Debug.Log("try to invoke interaction (no button)");
+                //Debug.Log("try to invoke interaction (no button)");
             }
                 
         }
@@ -74,13 +93,13 @@ public class Interactable : MonoBehaviour
             interacter = collision.transform;
 
             //only fetch interaction button if this item needs it
-            if (needsButtonPress)
-            {
-                playerComponentScript = collision.gameObject.GetComponent<PlayerComponents>();
+            //if (needsButtonPress)
+            //{
+                //playerComponentScript = collision.gameObject.GetComponent<PlayerComponents>();
 
-                playerInputButton = playerComponentScript.GetInteractionButton();
+                //playerInputButton = playerComponentScript.GetInteractionButton();
 
-            }
+            //}
             
 
             inTrigger = true;
@@ -96,10 +115,8 @@ public class Interactable : MonoBehaviour
         }
     }
 
-    public virtual void InteractableAction()
-    {
-
-    }
+    //what the interactable object will do when the player presses the interaction button on it
+    public abstract void InteractableAction();
 
     public void StartCooldown()
     {
@@ -110,7 +127,7 @@ public class Interactable : MonoBehaviour
     //don't let player interact with this object until the cooldown is finished
     private IEnumerator InteractingCooldown()
     {
-        Debug.Log("Cooldown begun");
+        //Debug.Log("Cooldown begun");
         cooldownStarted = true;
 
         canInteractWith = false;

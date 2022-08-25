@@ -12,8 +12,6 @@ public class ItemGiver : Interactable
 
     //private Transform parent; //the parent gameobject of this item giver
 
-    private Quaternion iniRot;
-
     [Header("Details of Item")]
 
     [SerializeField] private Item itemToGive;
@@ -30,7 +28,7 @@ public class ItemGiver : Interactable
 
     private bool spawned = false; //has this item spawned in the world?
 
-    [SerializeField] private bool retrieved = false; //was this item picked up by the player?
+    private bool retrieved = false; //was this item picked up by the player?
 
     private bool gaveItemToPlayer = false; //did this ItemGiver give the player a NewItem script component?
 
@@ -40,18 +38,19 @@ public class ItemGiver : Interactable
 
     private void Start()
     {
-        iniRot = transform.rotation;
-
         //Always ignore collision between item and player
         Physics2D.IgnoreLayerCollision(7,11);
+
     }
 
     private void OnEnable()
     {
+        base.OnEnable();
         spawned = true;
     }
     private void OnDisable()
     {
+        base.OnDisable();
         //if the item wasn't picked up by the player, allow it to spawn again 
         if (!retrieved)
             spawned = false;
@@ -66,22 +65,17 @@ public class ItemGiver : Interactable
     private void Update()
     {
         //if player hasn't picked up the item, check if they are trying to pick it up
-        if (!retrieved)
+        if (!retrieved && inTrigger)
         {
             CheckInteraction();
-            //Debug.Log("Check interaction!");
+            Debug.Log("Check interaction! item giver");
 
         }
 
 
     }
 
-    private void LateUpdate()
-    {
-        transform.rotation = iniRot;
-    }
-
-    public void SetRetrieved(bool boolean)
+    private void SetRetrieved(bool boolean)
     {
         retrieved = boolean;
     }
@@ -99,27 +93,20 @@ public class ItemGiver : Interactable
 
     //Invoke AddComponent of the item's script to go to the player's inventory
     //need to AddComponent so the item is attached to the player, not the gameobject it initially spawned with
-    public void AddItemToPlayer()
+    private void AddItemToPlayer()
     {
         if(!retrieved){
-            if(itemToGive.type != ItemScriptableObject.ItemType.instant)
-            {
-                //parent = PlayerStats.instance.GetComponentHolder().transform;
+            //parent = PlayerStats.instance.GetComponentHolder().transform;
 
-                //this.transform.SetParent(parent);
+            //this.transform.SetParent(parent);
 
-                if(!itemToGive.enabled)
-                    itemToGive.enabled = true;
+            if(!itemToGive.enabled)
+                itemToGive.enabled = true;
 
-                spriteRenderer.enabled = false;
-                actualCollider.enabled = false;
-                triggerCollider.enabled = false;
+            spriteRenderer.enabled = false;
+            actualCollider.enabled = false;
+            triggerCollider.enabled = false;
 
-            }
-            else
-            {
-                Debug.Log("If this is an instant item, then return to the object pooler immediately");
-            }
 
 
             //Set retrived to true so player cannot pick up the item more than once

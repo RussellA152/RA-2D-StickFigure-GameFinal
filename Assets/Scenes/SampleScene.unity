@@ -1714,7 +1714,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8782208612927994007, guid: 2c31194891aa55a4ba5968a27d2dbbce, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c31194891aa55a4ba5968a27d2dbbce, type: 3}
@@ -1915,6 +1915,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interacter: {fileID: 0}
   needsButtonPress: 0
+  inTrigger: 0
   canInteractWith: 1
   cooldownTimer: 0
   retrieved: 0
@@ -2049,6 +2050,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interacter: {fileID: 0}
   needsButtonPress: 0
+  inTrigger: 0
   canInteractWith: 1
   cooldownTimer: 12
   retrieved: 0
@@ -2204,7 +2206,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8782208612927994007, guid: e769b41610a31aa46b25a74801210236, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e769b41610a31aa46b25a74801210236, type: 3}
@@ -2960,7 +2962,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8782208612927994007, guid: 6def795854297f64fbc925832ceee8cf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6def795854297f64fbc925832ceee8cf, type: 3}
@@ -3161,6 +3163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interacter: {fileID: 0}
   needsButtonPress: 0
+  inTrigger: 0
   canInteractWith: 1
   cooldownTimer: 0
   retrieved: 0
@@ -3797,7 +3800,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4332903956958558057, guid: ebfc8aa202773c044af288890ebbab9a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.31
+      value: 24.01
       objectReference: {fileID: 0}
     - target: {fileID: 4332903956958558057, guid: ebfc8aa202773c044af288890ebbab9a, type: 3}
       propertyPath: m_LocalPosition.y
