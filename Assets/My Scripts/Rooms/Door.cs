@@ -13,6 +13,7 @@ public class Door : Interactable
     //the interactable action of a door is to teleport to a neighboring door
     public override void InteractableAction()
     {
+        Debug.Log("Door action invoked!");
         interacter.position = new Vector3(neighboringDoor.transform.position.x, neighboringDoor.transform.position.y, neighboringDoor.transform.position.z) + teleportPositionOffset;
         //Debug.Log("Teleporting to " + neighboringDoor.transform.position.x);
 
@@ -47,7 +48,13 @@ public class Door : Interactable
         if (collision.gameObject.CompareTag("Player"))
         {
             if (room.roomEnemyCountState == BaseRoom.RoomEnemyCount.cleared)
+            {
                 CheckInteraction();
+                //Debug.Log("can interact? " + canInteractWith);
+                //Debug.Log("Check interaction!");
+            }
+                
+            
         }
     }
 

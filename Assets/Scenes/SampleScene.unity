@@ -510,6 +510,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -20.03
       objectReference: {fileID: 0}
+    - target: {fileID: 862756787798686019, guid: 5952141b836031b4782683fcfc8d896f, type: 3}
+      propertyPath: playerInputButton.m_Id
+      value: dcf82fd8-53e1-4d97-8b5d-ea52a039d663
+      objectReference: {fileID: 0}
+    - target: {fileID: 862756787798686019, guid: 5952141b836031b4782683fcfc8d896f, type: 3}
+      propertyPath: playerInputButton.m_Name
+      value: Player Input Button
+      objectReference: {fileID: 0}
     - target: {fileID: 924643885535533426, guid: 5952141b836031b4782683fcfc8d896f, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1704,6 +1712,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Adrenaline
       objectReference: {fileID: 0}
+    - target: {fileID: 8782208612927994007, guid: 2c31194891aa55a4ba5968a27d2dbbce, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c31194891aa55a4ba5968a27d2dbbce, type: 3}
 --- !u!43 &808428446
@@ -1903,6 +1915,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interacter: {fileID: 0}
   needsButtonPress: 0
+  canInteractWith: 1
   cooldownTimer: 0
   retrieved: 0
   playerEquipmentInstance: {fileID: 0}
@@ -2036,6 +2049,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interacter: {fileID: 0}
   needsButtonPress: 0
+  canInteractWith: 1
   cooldownTimer: 12
   retrieved: 0
   passiveItemScript: {fileID: 0}
@@ -2187,6 +2201,10 @@ PrefabInstance:
     - target: {fileID: 8782208612927994007, guid: e769b41610a31aa46b25a74801210236, type: 3}
       propertyPath: m_Name
       value: Bomb
+      objectReference: {fileID: 0}
+    - target: {fileID: 8782208612927994007, guid: e769b41610a31aa46b25a74801210236, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e769b41610a31aa46b25a74801210236, type: 3}
@@ -2940,6 +2958,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Potion
       objectReference: {fileID: 0}
+    - target: {fileID: 8782208612927994007, guid: 6def795854297f64fbc925832ceee8cf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6def795854297f64fbc925832ceee8cf, type: 3}
 --- !u!43 &1394623284
@@ -3139,6 +3161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interacter: {fileID: 0}
   needsButtonPress: 0
+  canInteractWith: 1
   cooldownTimer: 0
   retrieved: 0
   playerEquipmentInstance: {fileID: 0}
@@ -3764,6 +3787,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4332903956958558056, guid: ebfc8aa202773c044af288890ebbab9a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4332903956958558057, guid: ebfc8aa202773c044af288890ebbab9a, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -3814,6 +3841,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7429946808678574068, guid: ebfc8aa202773c044af288890ebbab9a, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8056597536341626888, guid: ebfc8aa202773c044af288890ebbab9a, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:

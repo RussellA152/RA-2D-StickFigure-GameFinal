@@ -18,7 +18,7 @@ public class Interactable : MonoBehaviour
 
     private bool inTrigger; //is the player in this interactable object's trigger collider?
 
-    private bool canInteractWith = true; //is the player allowed to "use" this object?
+    public bool canInteractWith = true; //is the player allowed to "use" this object?
 
     public float cooldownTimer; //how long the player needs to wait until they can "use" this object again
 
@@ -28,16 +28,25 @@ public class Interactable : MonoBehaviour
 
     public void CheckInteraction()
     {
+
+        
         //if the interaction button isn't null
         // and if the player needs to press interaction button
         if (needsButtonPress)
         {
+           
             //check if they are pressing that button
             //and if they are in trigger and can interact
-            if(playerInputButton != null)
+            if (playerInputButton != null)
             {
+                Debug.Log("Invoking check interaction! after input button isnt null" + gameObject.name);
+
                 if (playerInputButton.triggered && inTrigger && canInteractWith)
+                {
                     InteractableAction();
+                    Debug.Log("try to invoke interaction (yes button)");
+                }
+                    
             }
             
     
@@ -47,7 +56,11 @@ public class Interactable : MonoBehaviour
         else if (!needsButtonPress)
         {
             if (inTrigger && canInteractWith)
+            {
                 InteractableAction();
+                Debug.Log("try to invoke interaction (no button)");
+            }
+                
         }
         
     }
@@ -97,6 +110,7 @@ public class Interactable : MonoBehaviour
     //don't let player interact with this object until the cooldown is finished
     private IEnumerator InteractingCooldown()
     {
+        Debug.Log("Cooldown begun");
         cooldownStarted = true;
 
         canInteractWith = false;
