@@ -5,6 +5,7 @@ using UnityEngine;
 //This class doesn't do much at the moment; it is used for testing passive items that proc during gameplay (procs occur when specific event systems are called)
 public class ProcItemTest : PassiveItem
 {
+    /*
     public float damage;
 
     public override void ItemAction(GameObject player)
@@ -33,5 +34,6 @@ public class ProcItemTest : PassiveItem
         //TEMPORARY DESTROYS OLD PASSIVE ITEM INSTANCE
         Destroy(this.gameObject);
     }
+    */
 
 }

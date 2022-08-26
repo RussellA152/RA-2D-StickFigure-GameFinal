@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EquipmentItem : OldItem
 {
+    /*
     [HideInInspector]
     public Type classType;
 
@@ -121,5 +122,6 @@ public class EquipmentItem : OldItem
         //disable original item's gameobject (player has picked it up)
         this.gameObject.SetActive(false);
     }
+    */
 
 }

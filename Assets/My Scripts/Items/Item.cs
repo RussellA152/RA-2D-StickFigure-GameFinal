@@ -65,7 +65,7 @@ public abstract class Item : MonoBehaviour
         switch (type)
         {
             //not needed for passive items that do not have to proc during gameplay (probably won't even invoke this function)
-            case ItemScriptableObject.ItemType.passive:
+            case ItemScriptableObject.ItemType.passiveProc:
                 //check if the item's proc chance was successful
                 //if not, return and do not allow ability to activate
                 if (Random.value < procChance)
@@ -120,8 +120,13 @@ public abstract class Item : MonoBehaviour
         {
             default:
 
-            case ItemScriptableObject.ItemType.passive:
-                //adds the item of type "Passive" to the player's passive item inventory
+            case ItemScriptableObject.ItemType.passiveBuff:
+                //adds the item of type "Passive Buff" to the player's passive item inventory
+                PlayerStats.instance.AddPassiveItem(this);
+                break;
+
+            case ItemScriptableObject.ItemType.passiveProc:
+                //adds the item of type "Passive Proc" to the player's passive item inventory
                 PlayerStats.instance.AddPassiveItem(this);
                 break;
             case ItemScriptableObject.ItemType.equipment:

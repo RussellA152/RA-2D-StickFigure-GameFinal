@@ -68,7 +68,7 @@ public class ItemGiver : Interactable
         if (!retrieved && inTrigger)
         {
             CheckInteraction();
-            Debug.Log("Check interaction! item giver");
+            //Debug.Log("Check interaction! item giver");
 
         }
 

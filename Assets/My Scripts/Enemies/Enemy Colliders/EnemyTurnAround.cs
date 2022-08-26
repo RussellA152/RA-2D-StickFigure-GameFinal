@@ -26,6 +26,7 @@ public class EnemyTurnAround : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Player") && !isCollidingWithPlayer)
         {
+            
             enemyMoveScript.FlipSpriteManually(turnAroundTimer);
             isCollidingWithPlayer = true;
 

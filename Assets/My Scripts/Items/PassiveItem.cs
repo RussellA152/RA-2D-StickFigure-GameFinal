@@ -6,6 +6,7 @@ using System;
 
 public class PassiveItem : OldItem
 {
+    /*
     //public bool activateOnPickUp; //will this item affect the player immediately? EX: Health boost, speed boost, attack boost?
     //but not something that would proc during gameplay
 
@@ -63,5 +64,6 @@ public class PassiveItem : OldItem
             return false;
         }
     }
+    */
 
 }

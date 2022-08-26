@@ -5,6 +5,7 @@ using UnityEngine;
 //This class doesn't do much at the moment; it is used for testing equipment items
 public class Potion : EquipmentItem
 {
+    /*
     public float amountToHeal;
 
     public override void ItemAction(GameObject player)
@@ -36,4 +37,5 @@ public class Potion : EquipmentItem
         //TEMPORARY DESTROYS OLD EQUIPMENT ITEM INSTANCE
         //this.gameObject.SetActive(false);
     }
+    */
 }

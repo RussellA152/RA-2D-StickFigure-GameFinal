@@ -1916,7 +1916,6 @@ MonoBehaviour:
   interacter: {fileID: 0}
   needsButtonPress: 0
   inTrigger: 0
-  canInteractWith: 1
   cooldownTimer: 0
   retrieved: 0
   playerEquipmentInstance: {fileID: 0}
@@ -2051,7 +2050,6 @@ MonoBehaviour:
   interacter: {fileID: 0}
   needsButtonPress: 0
   inTrigger: 0
-  canInteractWith: 1
   cooldownTimer: 12
   retrieved: 0
   passiveItemScript: {fileID: 0}
@@ -3164,7 +3162,6 @@ MonoBehaviour:
   interacter: {fileID: 0}
   needsButtonPress: 0
   inTrigger: 0
-  canInteractWith: 1
   cooldownTimer: 0
   retrieved: 0
   playerEquipmentInstance: {fileID: 0}
@@ -3789,10 +3786,6 @@ PrefabInstance:
     - target: {fileID: 4332903956958558049, guid: ebfc8aa202773c044af288890ebbab9a, type: 3}
       propertyPath: m_Enabled
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4332903956958558056, guid: ebfc8aa202773c044af288890ebbab9a, type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4332903956958558057, guid: ebfc8aa202773c044af288890ebbab9a, type: 3}
       propertyPath: m_RootOrder

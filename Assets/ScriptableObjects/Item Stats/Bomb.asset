@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bomb
   m_EditorClassIdentifier: 
   itemName: Bomb
-  itemType: 1
+  itemType: 2
   amountOfCharge: 5
   chargesConsumedPerUse: 3
   chargeRefilledPerKill: 1

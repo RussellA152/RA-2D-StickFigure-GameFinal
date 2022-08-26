@@ -46,11 +46,13 @@ public class ItemScriptableObject : ScriptableObject
 
     public enum ItemType
     {
-        passive, //items that automatically activate and affect the player without thought or effort
+        passiveBuff, //items that automatically give the player some stat boost without thought or effort (doesn't need proc chance *)
 
-        equipment, //items that require the player to press a button to activate power
+        passiveProc, //items that automatically activate from contextual events like OnHit or OnJump (needs proc chance *)
 
-        instant //items that immediately affect the player (does not go to any inventory or stay on player)
+        equipment, //items that require the player to press a button to activate power (needs charge to activate *)
+
+        instant //items that immediately affect the player (does not go to any inventory or stay on player *)
     }
 
 

@@ -5,6 +5,7 @@ using UnityEngine;
 //This class doesn't do much at the moment; it is used for testing equipment items
 public class Bomb : EquipmentItem
 {
+    /*
     public float damage;
 
     public override void ItemAction(GameObject player)
@@ -38,4 +39,5 @@ public class Bomb : EquipmentItem
         //TEMPORARY DESTROYS OLD EQUIPMENT ITEM INSTANCE
        // this.gameObject.SetActive(false);
     }
+    */
 }

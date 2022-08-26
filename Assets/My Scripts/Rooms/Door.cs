@@ -31,12 +31,14 @@ public class Door : Interactable
     //the interactable action of a door is to teleport to a neighboring door
     public override void InteractableAction()
     {
-        //Debug.Log("Door action invoked!");
+        //Fetch the interacter of this door from base class
+        Transform interacter = base.GetInteracter();
+
+        //set the interacter's position to this door's neighboring door's position
         interacter.position = new Vector3(neighboringDoor.transform.position.x, neighboringDoor.transform.position.y, neighboringDoor.transform.position.z) + teleportPositionOffset;
-        //Debug.Log("Teleporting to " + neighboringDoor.transform.position.x);
 
         //don't allow player to use door again for a bit
-        StartCooldown();
+        base.StartCooldown();
 
         //also need to set the neighboring door on cooldown so that the player doesn't immediately teleport back to the original door 
         neighboringDoor.StartCooldown();

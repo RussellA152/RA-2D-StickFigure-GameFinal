@@ -7,14 +7,14 @@ using UnityEngine;
 //ex. player needs to press "e" to open a chest, open a door, or pick up an item
 public abstract class Interactable : MonoBehaviour
 {
-    [HideInInspector]
-    public Transform interacter; //the entity that interacted with this object (usually Player)
+    
+    private Transform interacter; //the entity that interacted with this object (usually Player)
 
     //private PlayerComponents playerComponentScript;
 
     private InputAction playerInputButton;
 
-    public bool needsButtonPress; //does the player need to press the interaction button to interact with this?
+    [SerializeField] private bool needsButtonPress; //does the player need to press the interaction button to interact with this?
 
     [HideInInspector]
     public bool inTrigger; //is the player in this interactable object's trigger collider?
@@ -34,12 +34,12 @@ public abstract class Interactable : MonoBehaviour
         playerInputButton = new PlayerInputActions().Player.Interact;
     }
 
-    public void OnEnable()
+    protected void OnEnable()
     {
         playerInputButton.Enable();
     }
 
-    public void OnDisable()
+    protected void OnDisable()
     {
         playerInputButton.Disable();
     }
@@ -91,16 +91,17 @@ public abstract class Interactable : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             interacter = collision.transform;
+            Debug.Log("Collision detected!");
 
             //only fetch interaction button if this item needs it
             //if (needsButtonPress)
             //{
-                //playerComponentScript = collision.gameObject.GetComponent<PlayerComponents>();
+            //playerComponentScript = collision.gameObject.GetComponent<PlayerComponents>();
 
-                //playerInputButton = playerComponentScript.GetInteractionButton();
+            //playerInputButton = playerComponentScript.GetInteractionButton();
 
             //}
-            
+
 
             inTrigger = true;
 
@@ -137,6 +138,11 @@ public abstract class Interactable : MonoBehaviour
         canInteractWith = true;
 
         cooldownStarted = false;
+    }
+
+    protected Transform GetInteracter()
+    {
+        return interacter;
     }
 
 

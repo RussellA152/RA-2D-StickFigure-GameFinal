@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Potion
   m_EditorClassIdentifier: 
   itemName: Potion
-  itemType: 1
+  itemType: 2
   amountOfCharge: 6
   chargesConsumedPerUse: 4
   chargeRefilledPerKill: 1

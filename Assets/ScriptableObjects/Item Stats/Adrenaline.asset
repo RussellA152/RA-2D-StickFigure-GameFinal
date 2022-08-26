@@ -17,7 +17,7 @@ MonoBehaviour:
   amountOfCharge: 0
   chargesConsumedPerUse: 0
   chargeRefilledPerKill: 0
-  procChance: 1
+  procChance: 0
   procChanceModifier: 0
   maxHealthModifier: 0
   currentHealthModifier: 0
