@@ -18,7 +18,7 @@ public class ObjectHurt : MonoBehaviour, IDamageable
     }
 
 
-    public void OnHurt(Vector3 attacker, DamageType damageType, float damage, float attackPowerX, float attackPowerY)
+    public void OnHurt(Vector3 attacker, IDamageAttributes.DamageType damageType, float damage, float attackPowerX, float attackPowerY)
     {
         throw new System.NotImplementedException();
     }

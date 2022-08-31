@@ -1,6 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+//using System;
+//using System.Collections;
+//using System.Collections.Generic;
+using UnityEngine.InputSystem;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,14 +18,21 @@ public abstract class Item : MonoBehaviour
     public int amountOfCharge; //how many times can this item be used?
     public int chargeConsumedPerUse; //how much charge will this item consume on each use?
 
-    private bool hasSufficientCharge = true;
+    //private bool hasSufficientCharge = true;
 
-    public ItemGiver itemGiver;
+    //public ItemGiver itemGiver;
 
     private bool fetchedStats = false; //has this item already fetched its item stats from its ScriptableObject?
 
+    private InputAction useEquipmentBinding;
+
+    //private bool wasActiveEquipment = false;
+
     private void Awake()
     {
+        //playerControls = new PlayerInputActions();
+        useEquipmentBinding = new PlayerInputActions().Player.UseEquipment;
+
         //disabled on awake so that script won't affect player until they pick it up (which enables this script)
         this.enabled = false;
 
@@ -34,23 +42,22 @@ public abstract class Item : MonoBehaviour
             InitializeValues();
             fetchedStats = true;
         }
+        
     }
 
     private void OnEnable()
     {
         OnItemPickup();
+        useEquipmentBinding.performed += UseEquipmentOnCommand;
+        useEquipmentBinding.Enable();
     }
 
-    /*
-    public enum ItemType
+    private void OnDisable()
     {
-        passive, //items that automatically activate and affect the player without thought or effort
 
-        equipment, //items that require the player to press a button to activate power
-
-        instant //items that immediately affect the player (does not go to any inventory or stay on player)
+        useEquipmentBinding.performed -= UseEquipmentOnCommand;
+        useEquipmentBinding.Disable();
     }
-    */
 
     //what the item does for the player
     //passes in player to access components if needed..
@@ -64,6 +71,9 @@ public abstract class Item : MonoBehaviour
     {
         switch (type)
         {
+            case ItemScriptableObject.ItemType.passiveBuff:
+                return true;
+
             //not needed for passive items that do not have to proc during gameplay (probably won't even invoke this function)
             case ItemScriptableObject.ItemType.passiveProc:
                 //check if the item's proc chance was successful
@@ -86,14 +96,14 @@ public abstract class Item : MonoBehaviour
                     //indicates the item can't be used
                     Debug.Log("Insufficient Charge");
 
-                    hasSufficientCharge = false;
+                    //hasSufficientCharge = false;
                     return false;
                 }
 
                 else
                 {
                     amountOfCharge -= chargeConsumedPerUse;
-                    hasSufficientCharge = true;
+                    //hasSufficientCharge = true;
 
                     return true;
                 }
@@ -109,10 +119,6 @@ public abstract class Item : MonoBehaviour
         
     }
 
-    //public void SwapEquipment()
-    //{
-        
-    //}
 
     public void OnItemPickup()
     {
@@ -122,31 +128,37 @@ public abstract class Item : MonoBehaviour
 
             case ItemScriptableObject.ItemType.passiveBuff:
                 //adds the item of type "Passive Buff" to the player's passive item inventory
-                PlayerStats.instance.AddPassiveItem(this);
+                ItemAction(PlayerStats.instance.GetPlayer());
                 break;
 
             case ItemScriptableObject.ItemType.passiveProc:
                 //adds the item of type "Passive Proc" to the player's passive item inventory
-                PlayerStats.instance.AddPassiveItem(this);
+                ItemAction(PlayerStats.instance.GetPlayer());
                 break;
             case ItemScriptableObject.ItemType.equipment:
-                //adds the item of type "Equipment" to the player's equipment item inventory
-                PlayerStats.instance.AddEquipmentItem(this);
+
+                ItemManager.instance.activeEquipmentSlot = this;
+
                 break;
             case ItemScriptableObject.ItemType.instant:
-                Debug.Log("Call instant item's action right away");
                 //instant items do not get added to any inventory
+                ItemAction(PlayerStats.instance.GetPlayer());
                 break;
         }
 
     }
 
-    //public void SetScriptableObject(ItemScriptableObject scriptableObject)
-    //{
-        //set this item's scriptable object to the parameter given
-        //myScriptableObject = scriptableObject;
-
-        //Debug.Log("Receiving scriptable object?");
-        //InitializeValues();
-    //}
+    private void UseEquipmentOnCommand(InputAction.CallbackContext context)
+    {
+        //if this item is an equipment type, then invoke ItemAction() when the UseEquipment binding is peformed
+        //player must also be allowed to use the equipment (ex. they cannot if they are in a knockdown state or dead)
+        if (PlayerStats.instance.CanUseEquipment && type == ItemScriptableObject.ItemType.equipment && this.enabled)
+        {
+            ItemAction(PlayerStats.instance.GetPlayer());
+        }
+        else
+        {
+            Debug.Log("Only equipment items should activate from this binding!");
+        }
+    }
 }

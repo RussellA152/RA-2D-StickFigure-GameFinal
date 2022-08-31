@@ -210,14 +210,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de11c8f8881002e4e83ffaed61d521d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interacter: {fileID: 0}
   needsButtonPress: 1
   inTrigger: 0
-  canInteractWith: 1
   cooldownTimer: 0
+  rb: {fileID: 3135146213717763128}
   spriteRenderer: {fileID: 8782208612927994005}
   actualCollider: {fileID: 8319472469012334985}
   triggerCollider: {fileID: 1462772192432573736}
+  displayRotation: 0
   itemToGive: {fileID: 8782208612927993994}
 --- !u!114 &8782208612927993994
 MonoBehaviour:

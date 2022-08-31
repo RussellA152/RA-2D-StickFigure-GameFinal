@@ -9,6 +9,7 @@ public class NewItemTest : Item
         if (ShouldActivate())
         {
             PlayerStats.instance.ModifyMaxHealth(200f);
+            Debug.Log("Used potion!");
         }
         
     }

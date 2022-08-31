@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAttackAnimationBehavior : StateMachineBehaviour, IAttackAnimation
+public class EnemyAttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
 {
     private BoxCollider2D hitbox;
 
@@ -13,7 +13,7 @@ public class EnemyAttackAnimationBehavior : StateMachineBehaviour, IAttackAnimat
 
     [Header("Damage Type")]
     //type of damage the attack will do (light -- > player flinches, heavy -- > player knocked back )
-    public DamageType damageType;
+    public IDamageAttributes.DamageType damageType;
 
     [Header("Damage & Force")]
     [SerializeField] private float attackDamage; //damage of the attack

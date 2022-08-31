@@ -77,7 +77,7 @@ public class EnemyHurt : MonoBehaviour, IDamageable
         heavyHurtAnimBehindHash = Animator.StringToHash(heavyHurtAnimBehind);
     }
 
-    public void OnHurt(Vector3 attacker, DamageType damageType, float damage, float attackPowerX, float attackPowerY)
+    public void OnHurt(Vector3 attacker, IDamageAttributes.DamageType damageType, float damage, float attackPowerX, float attackPowerY)
     {
 
         //find the direction the attacker is facing
@@ -92,10 +92,10 @@ public class EnemyHurt : MonoBehaviour, IDamageable
         //do something depending on what attack was performed on this enemy and what direction the attack came from
         switch (damageType)
         {
-            case DamageType.none:
+            case IDamageAttributes.DamageType.none:
                 break;
 
-            case DamageType.light:
+            case IDamageAttributes.DamageType.light:
 
                 //if the attacker's sprite is facing the right direction, and the enemy's sprite is also facing right
                 if (attackerFacingRight && enemyFacingRight)
@@ -143,7 +143,7 @@ public class EnemyHurt : MonoBehaviour, IDamageable
                 }
                 break;
 
-            case DamageType.heavy:
+            case IDamageAttributes.DamageType.heavy:
                 if (attackerFacingRight && enemyFacingRight)
                 {
                     //Play backward heavy animation
@@ -189,7 +189,7 @@ public class EnemyHurt : MonoBehaviour, IDamageable
                 }
                 break;
 
-            case DamageType.air:
+            case IDamageAttributes.DamageType.air:
                 if (attackerFacingRight && enemyFacingRight)
                 {
                     //Play backward air animation

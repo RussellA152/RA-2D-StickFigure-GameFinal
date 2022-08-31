@@ -9,19 +9,19 @@ public class PlayerStats : MonoBehaviour
 
     [SerializeField] private PlayerInputActions playerControls;
 
-    private InputAction useEquipmentBinding;
+    //public InputAction useEquipmentBinding { public get; private set; }
 
-    [SerializeField] private GameObject componentHolder; //gameobject that holds all added components from item
+    //[SerializeField] private GameObject componentHolder; //gameobject that holds all added components from item
                                                          //mainly used so that the Player gameobject is not clogged with too many components
 
-    private bool canUseEquipment = true;
+    public bool CanUseEquipment { get; private set; }
 
 
-    [Header("New Items")]
-    [SerializeField] private List<Item> newPassiveItems = new List<Item>();
+    //[Header("New Items")]
+    //[SerializeField] private List<Item> newPassiveItems = new List<Item>();
 
 
-    [SerializeField] private Item newEquipmentItemSlot; //the player's current equipment (can only have 1 at a time)
+    //[SerializeField] private Item newEquipmentItemSlot; //the player's current equipment (can only have 1 at a time)
     //[SerializeField] private EquipmentItem newEquipmentItemOriginal; //the gameobject of the current equipment item (can only have 1 at a time)
 
 
@@ -59,7 +59,7 @@ public class PlayerStats : MonoBehaviour
             //Debug.Log("Create player stats  instance");
         }
 
-        playerControls = new PlayerInputActions();
+        //playerControls = new PlayerInputActions();
 
     }
 
@@ -71,15 +71,15 @@ public class PlayerStats : MonoBehaviour
 
     private void OnEnable()
     {
-        useEquipmentBinding = playerControls.Player.UseEquipment;
+        //useEquipmentBinding = playerControls.Player.UseEquipment;
 
-        useEquipmentBinding.Enable();
-        useEquipmentBinding.performed += UsePlayerEquipment;
+        //useEquipmentBinding.Enable();
+        //useEquipmentBinding.performed += UsePlayerEquipment;
     }
 
     private void OnDisable()
     {
-        useEquipmentBinding.Disable();
+        //useEquipmentBinding.Disable();
 
         //Debug.Log("PlayerStats is disabled!");
     }
@@ -93,20 +93,20 @@ public class PlayerStats : MonoBehaviour
     private void UsePlayerEquipment(InputAction.CallbackContext context)
     {
         //if the player has an equipment item...
-        if (newEquipmentItemSlot != null)
-        {
+        //if (newEquipmentItemSlot != null)
+        //{
             //if the player is allowed to use the equipment item
             //and the item has a sufficient amount of uses.. call the item's action
-            if (canUseEquipment)
-            {
-                Debug.Log("Try to use equipment!");
-                newEquipmentItemSlot.ItemAction(this.gameObject);
-            }
-        }
-        else
-        {
-            Debug.Log("You do not have any equipment!");
-        }
+            //if (canUseEquipment)
+            //{
+                //Debug.Log("Try to use equipment!");
+                //newEquipmentItemSlot.ItemAction(this.gameObject);
+            //}
+        //}
+        //else
+        //{
+            //Debug.Log("You do not have any equipment!");
+        //}
 
 
     }
@@ -114,12 +114,12 @@ public class PlayerStats : MonoBehaviour
     public void AddPassiveItem(Item passiveItem)
     {
         //adding given item to the list
-        newPassiveItems.Add(passiveItem);
+        //newPassiveItems.Add(passiveItem);
 
         //all items will immediately activate their ability on pick up
         //stat boost passive items will immediately modify a value
         //while "proc" items will subscribe to their corresponding event system
-        passiveItem.ItemAction(this.gameObject);
+        //passiveItem.ItemAction(this.gameObject);
     }
 
     public void AddEquipmentItem(Item equipmentItem)
@@ -127,16 +127,16 @@ public class PlayerStats : MonoBehaviour
 
         //if equipmentItemSlot is not null when you pick an equipment item
         //then the player has to swap out their current equipment for the new equipment
-        if (newEquipmentItemSlot != null)
-        {
+        //if (newEquipmentItemSlot != null)
+        //{
             //equipmentItemSlot.SetRetrieved(false);
-            newEquipmentItemSlot.itemGiver.OnDrop();
+            //newEquipmentItemSlot.itemGiver.OnDrop();
 
             //Debug.Log("Drop previous equipment item");
             //Debug.Log("Make other item retrievable again");
-        }
+        //}
 
-        newEquipmentItemSlot = equipmentItem;
+        //newEquipmentItemSlot = equipmentItem;
         //equipmentItemOriginal = equipmentItem.originalDroppedInstance;
     }
 
@@ -209,10 +209,10 @@ public class PlayerStats : MonoBehaviour
     
     //return the component holder
     //mainly needed when PassiveItem or EquipmentItem need to add a script component
-    public GameObject GetComponentHolder()
-    {
-        return componentHolder;
-    }
+    //public GameObject GetComponentHolder()
+    //{
+        //return componentHolder;
+    //}
 
 
     public float GetRunningSpeed()
@@ -246,7 +246,12 @@ public class PlayerStats : MonoBehaviour
 
     public void SetCanUseEquipment(bool boolean)
     {
-        canUseEquipment = boolean;
+        CanUseEquipment = boolean;
+    }
+
+    public GameObject GetPlayer()
+    {
+        return this.transform.gameObject;
     }
 
 }

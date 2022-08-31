@@ -46,6 +46,8 @@ public class ItemScriptableObject : ScriptableObject
 
     public enum ItemType
     {
+        //passive, //items that automatically affect the player (MAY OR MAY NOT REQUIRE PROC CHANCE, depends on the item)
+
         passiveBuff, //items that automatically give the player some stat boost without thought or effort (doesn't need proc chance *)
 
         passiveProc, //items that automatically activate from contextual events like OnHit or OnJump (needs proc chance *)

@@ -7,7 +7,7 @@ using UnityEngine;
 public interface IDamageable
 {
     // when the gameobject is attacked... make them take damage and apply force to them in a certain direction
-    public void OnHurt(Vector3 attacker, DamageType damageType, float damage, float attackPowerX, float attackPowerY);
+    public void OnHurt(Vector3 attacker, IDamageAttributes.DamageType damageType, float damage, float attackPowerX, float attackPowerY);
 
     // when the gameobject is attacked... make them take damage that will be subtracted to their health (this function is typically called by OnHurt())
     public void TakeDamage(float damage, float attackPowerX, float attackPowerY);

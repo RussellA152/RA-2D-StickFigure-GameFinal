@@ -5,7 +5,7 @@ using UnityEngine;
 
 // AttackAnimationBehavior requires the PlayerComponents script
 [RequireComponent(typeof(PlayerComponents))]
-public class AttackAnimationBehavior : StateMachineBehaviour, IAttackAnimation
+public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
 {
     //I made this script because I want the transitions to use the same animation as the attacks that came before it (makes attacking animations stick out longer without awkwardly idling during attacks)
     //But I don't want hitboxes to appear twice, so I am tieing the enabling of hitboxes during attack animations to this script, if the animation has a hitbox during it, then enable it at start, and disable it when it ends
@@ -15,7 +15,7 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IAttackAnimation
 
     [Header("Damage Type")]
     //type of damage the attack will do (light -- > enemy flinches, heavy -- > enemy knocked back )
-    public DamageType damageType;
+    public IDamageAttributes.DamageType damageType;
 
     private PlayerComponents playerComponentScript; //we will use the player component script in order to invoke the setCanInteract() function
 

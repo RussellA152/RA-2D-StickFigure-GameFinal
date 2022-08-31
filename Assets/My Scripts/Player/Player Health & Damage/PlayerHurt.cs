@@ -45,7 +45,7 @@ public class PlayerHurt : MonoBehaviour, IDamageable
 
     }
 
-    public void OnHurt(Vector3 attacker, DamageType damageType, float damage, float attackPowerX, float attackPowerY)
+    public void OnHurt(Vector3 attacker, IDamageAttributes.DamageType damageType, float damage, float attackPowerX, float attackPowerY)
     {
         //find the direction the attacker is facing
         Vector3 directionOfAttacker = attacker - transform.position;
@@ -59,10 +59,10 @@ public class PlayerHurt : MonoBehaviour, IDamageable
         //do something depending on what attack was performed on the player and what direction the attack came from
         switch (damageType)
         {
-            case DamageType.none:
+            case IDamageAttributes.DamageType.none:
                 break;
 
-            case DamageType.light:
+            case IDamageAttributes.DamageType.light:
 
                 //if the attacker's sprite is facing the right direction, and the player's sprite is also facing right
                 if (attackerFacingRight && playerFacingRight)
@@ -110,7 +110,7 @@ public class PlayerHurt : MonoBehaviour, IDamageable
                 }
                 break;
 
-            case DamageType.heavy:
+            case IDamageAttributes.DamageType.heavy:
                 if (attackerFacingRight && playerFacingRight)
                 {
                     //Play backward flinch animation
@@ -144,7 +144,7 @@ public class PlayerHurt : MonoBehaviour, IDamageable
                 }
                 break;
 
-            case DamageType.air:
+            case IDamageAttributes.DamageType.air:
                 if (attackerFacingRight && playerFacingRight)
                 {
                     //Play backward flinch animation

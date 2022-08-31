@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewItemTest2 : Item
+public class NewItemTest2 : Item//, IDamageAttributes
 {
     public override void ItemAction(GameObject player)
     {

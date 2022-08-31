@@ -6,11 +6,14 @@ using UnityEngine;
 public class ItemGiver : Interactable
 {
     //[SerializeField] private NewItem itemToGiveToPlayer; //the item script that this giver will insert in the player's inventory
+    [SerializeField] private Rigidbody2D rb;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private BoxCollider2D actualCollider; //box collider without isTrigger checked
     [SerializeField] private BoxCollider2D triggerCollider; //box collider with isTrigger checked
 
-    //private Transform parent; //the parent gameobject of this item giver
+    private Transform parent; //the parent gameobject of this item giver
+
+    [SerializeField] private bool displayRotation;
 
     [Header("Details of Item")]
 
@@ -70,7 +73,12 @@ public class ItemGiver : Interactable
             CheckInteraction();
             //Debug.Log("Check interaction! item giver");
 
+            //Debug.Log(gameObject.name + " local rotation is " + transform.localRotation);
+
         }
+
+        //if (displayRotation)
+            //Debug.Log(gameObject.name + " rotation is " + transform.localRotation);
 
 
     }
@@ -96,9 +104,27 @@ public class ItemGiver : Interactable
     private void AddItemToPlayer()
     {
         if(!retrieved){
+
+            //if the player already has an equipment item, then invoke the swapEquipment event system
+            if(ItemManager.instance.activeEquipmentSlot != null && itemToGive.type == ItemScriptableObject.ItemType.equipment)
+            {
+                //call the event system so that the previous equipment item's itemgiver will call its OnDrop
+                //this allows us to not need to know about other itemgivers
+                ItemManager.instance.SwapActiveEquipment();
+
+                //now this item giver will subscribe to event system
+                ItemManager.instance.swapEquipmentEvent += OnDrop;
+            }
+            //otherwise, subscribe this OnDrop to the swapEquipment event system
+            else if(ItemManager.instance.activeEquipmentSlot == null && itemToGive.type == ItemScriptableObject.ItemType.equipment)
+            {
+                ItemManager.instance.swapEquipmentEvent += OnDrop;
+            }
+
+            parent = ItemManager.instance.GetItemHolder().transform;
             //parent = PlayerStats.instance.GetComponentHolder().transform;
 
-            //this.transform.SetParent(parent);
+            this.transform.SetParent(parent);
 
             if(!itemToGive.enabled)
                 itemToGive.enabled = true;
@@ -111,6 +137,8 @@ public class ItemGiver : Interactable
 
             //Set retrived to true so player cannot pick up the item more than once
             SetRetrieved(true);
+
+
 
         }
         //only give item script to player if they its their first time interacting with this ItemGiver
@@ -144,15 +172,18 @@ public class ItemGiver : Interactable
 
     public void OnDrop()
     {
+        Debug.Log("Dropping item " + gameObject.name);
         if (itemToGive.enabled)
-            itemToGive.enabled = false;
+            itemToGive.enabled = false;   
+
+        parent = null;
+
+        this.transform.SetParent(null);
 
         //drop this item infront of the player
-        transform.position = new Vector2(PlayerStats.instance.GetComponentHolder().transform.position.x, PlayerStats.instance.GetComponentHolder().transform.position.y);
+        //transform.position = new Vector2(PlayerStats.instance.GetComponentHolder().transform.position.x, PlayerStats.instance.GetComponentHolder().transform.position.y);
 
-        //parent = null;
-
-        //this.transform.SetParent(null);
+        
 
         spriteRenderer.enabled = true;
 
@@ -162,6 +193,9 @@ public class ItemGiver : Interactable
         //gaveItemToPlayer = false;
 
         SetRetrieved(false);
+
+        //unsubscribe after being dropped
+        ItemManager.instance.swapEquipmentEvent -= OnDrop;
 
     }
 }

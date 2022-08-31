@@ -11,7 +11,7 @@ public class EnemyHitCollider : MonoBehaviour, IDamageDealing
 
 
     //temporary damage values updated by the attack animation
-    private DamageType tempDamageType;
+    private IDamageAttributes.DamageType tempDamageType;
     private float tempAttackDamage;
     private float tempAttackPowerX;
     private float tempAttackPowerY;
@@ -58,7 +58,7 @@ public class EnemyHitCollider : MonoBehaviour, IDamageDealing
 
     }
 
-    public void DealDamage(Transform attacker, DamageType damageType, float damage, float attackPowerX, float attackPowerY)
+    public void DealDamage(Transform attacker, IDamageAttributes.DamageType damageType, float damage, float attackPowerX, float attackPowerY)
     {
         if (targetTransform != null)
         {
@@ -75,7 +75,7 @@ public class EnemyHitCollider : MonoBehaviour, IDamageDealing
     }
 
     //this function is updated by the enemy's attack animations
-    public void UpdateAttackValues(DamageType damageType, float damage, float attackPowerX, float attackPowerY)
+    public void UpdateAttackValues(IDamageAttributes.DamageType damageType, float damage, float attackPowerX, float attackPowerY)
     {
         tempDamageType = damageType;
         tempAttackDamage = damage;
@@ -84,7 +84,7 @@ public class EnemyHitCollider : MonoBehaviour, IDamageDealing
     }
     private void ResetAttackValues()
     {
-        tempDamageType = DamageType.none;
+        tempDamageType = IDamageAttributes.DamageType.none;
         tempAttackDamage = 0f;
         tempAttackPowerX = 0f;
         tempAttackPowerY = 0f;
