@@ -61,7 +61,7 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
         JoltThisObject(playerFacingRight, joltForceX, joltForceY);
 
         //invoke hitbox's function updates damage values
-        hitbox.gameObject.GetComponent<IDamageDealing>().UpdateAttackValues(damageType, attackDamage, attackingPowerX, attackingPowerY);
+        hitbox.gameObject.GetComponent<IDamageDealingCharacter>().UpdateAttackValues(damageType, attackDamage, attackingPowerX, attackingPowerY);
 
     }
 

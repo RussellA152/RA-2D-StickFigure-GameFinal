@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHitCollider : MonoBehaviour, IDamageDealing
+public class EnemyHitCollider : MonoBehaviour, IDamageDealingCharacter
 {
     [SerializeField] private BoxCollider2D hitbox; // the hitbox gameobject that this script is placed in
 

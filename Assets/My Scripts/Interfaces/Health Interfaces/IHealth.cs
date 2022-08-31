@@ -14,5 +14,8 @@ public interface IHealth
     //void ModifyMaxHealth(float amount);
 
     //return the health value of this enemy
-    float GetHealth(); 
+    float GetHealth();
+
+    //return a bool representing whether the player is alive or not 
+    public bool CheckIfAlive();
 }

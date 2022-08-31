@@ -106,12 +106,12 @@ public class EnemyController : MonoBehaviour
     {
 
         //check if the enemy is alive
-        bool hasDied = enemyHpScript.CheckIfDead();
+        bool isAlive = enemyHpScript.CheckIfAlive();
 
         //if the enemy is dead, change their state to "Dead", and return from the function
         //they will not be able to change to another state
         //we won't use the ChangeEnemyState because then the coroutine could be canceled, which would prevent enemy from dying
-        if (hasDied)
+        if (!isAlive)
             currentState = EnemyState.Dead;
 
 

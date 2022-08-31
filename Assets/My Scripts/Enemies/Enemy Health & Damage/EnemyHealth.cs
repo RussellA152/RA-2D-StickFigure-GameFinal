@@ -13,7 +13,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
     [HideInInspector]
     public float enemyMaxHealth; //the max health value of this enemy(DERIVED FROM SCRIPTABLEOBJECT)
     private float enemyHealth; //the current health value of this enemy 
-    private bool hasDied; //has the enemy died?
+    private bool isAlive; //is the enemy alive?
 
 
 
@@ -22,7 +22,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
     {
         enemyScriptableObject = scriptableObject;
 
-        hasDied = false;
+        isAlive = true;
 
         //set basic values equal to the ScriptableObject's values
         if(enemyScriptableObject != null)
@@ -50,7 +50,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
         //if enemy reaches 0 health, disable their game object (FOR NOW, WE WILL USE OBJECT POOLING LATER)
         if (health <= 0f)
         {
-            hasDied = true;
+            isAlive = false;
             Debug.Log(this.gameObject.name + " has died!");
 
         }
@@ -75,8 +75,8 @@ public class EnemyHealth : MonoBehaviour, IHealth
         return enemyHealth;
     }
 
-    public bool CheckIfDead()
+    public bool CheckIfAlive()
     {
-        return hasDied;
+        return isAlive;
     }
 }

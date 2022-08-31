@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1084e8500baebe6488f27cdcf59bc34a, type: 3}
   m_Name: Adrenaline
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: Adrenaline
   itemType: 0
   amountOfCharge: 0
   chargesConsumedPerUse: 0

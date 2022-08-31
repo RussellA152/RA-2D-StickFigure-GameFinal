@@ -7,11 +7,15 @@ public class PlayerHealth : MonoBehaviour, IHealth
     private float playerMaxHealth; //the maximum health the player can have
     private float playerCurrentHealth; //the current health of the player
 
+    private bool isAlive; //is the player alive?
+
     private void Start()
     {
         //set current health to max health at beginning of game
         playerMaxHealth = PlayerStats.instance.GetMaxHealth();
         playerCurrentHealth = playerMaxHealth;
+
+        isAlive = true;
     }
 
     private void Update()
@@ -30,6 +34,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
         if (health <= 0f)
         {
             Debug.Log(this.gameObject.name + " has died!");
+            isAlive = false;
             gameObject.SetActive(false);
 
         }
@@ -67,5 +72,10 @@ public class PlayerHealth : MonoBehaviour, IHealth
     public float GetHealth()
     {
         return playerCurrentHealth;
+    }
+
+    public bool CheckIfAlive()
+    {
+        return isAlive;
     }
 }

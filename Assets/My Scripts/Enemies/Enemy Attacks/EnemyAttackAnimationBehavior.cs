@@ -44,7 +44,7 @@ public class EnemyAttackAnimationBehavior : StateMachineBehaviour, IDamageAttrib
         //invoke jolt movement 
         JoltThisObject(enemyFacingRight, joltForceX, joltForceY);
 
-        hitbox.gameObject.GetComponent<IDamageDealing>().UpdateAttackValues(damageType, attackDamage, attackingPowerX, attackingPowerY);
+        hitbox.gameObject.GetComponent<IDamageDealingCharacter>().UpdateAttackValues(damageType, attackDamage, attackingPowerX, attackingPowerY);
 
 
     }
