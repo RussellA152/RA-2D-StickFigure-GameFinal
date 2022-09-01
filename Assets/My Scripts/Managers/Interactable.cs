@@ -90,17 +90,9 @@ public abstract class Interactable : MonoBehaviour
         //grab a reference to the PlayerComponent script
         if (collision.gameObject.CompareTag("Player"))
         {
+            //interacter is always the player (because player has "Player" tag)
             interacter = collision.transform;
             Debug.Log("Collision detected!");
-
-            //only fetch interaction button if this item needs it
-            //if (needsButtonPress)
-            //{
-            //playerComponentScript = collision.gameObject.GetComponent<PlayerComponents>();
-
-            //playerInputButton = playerComponentScript.GetInteractionButton();
-
-            //}
 
 
             inTrigger = true;

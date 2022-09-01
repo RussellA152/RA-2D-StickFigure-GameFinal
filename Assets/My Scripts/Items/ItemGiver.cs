@@ -21,23 +21,15 @@ public class ItemGiver : Interactable
 
     //[SerializeField] private Sprite itemSprite;
 
-    //[SerializeField] private string itemScriptToLoad; //the name of the script to give to player (ex. Potion, Bomb)
-
-    //[SerializeField] private ItemScriptableObject scriptableObject;
-
-    //private Component itemComponent; //the item component added to player using AddComponent()
-
-    //private NewItem itemScript; //the NewItem script of the itemComponent
-
     private bool spawned = false; //has this item spawned in the world?
 
     private bool retrieved = false; //was this item picked up by the player?
 
-    private bool gaveItemToPlayer = false; //did this ItemGiver give the player a NewItem script component?
+    private float dropForceX = 1750f; //how much force is applied to this ItemGiver when it is dropped onto the ground (x direction)
+    private float dropForceY = 0f; //how much force is applied to this ItemGiver when it is dropped onto the ground (y direction)
 
-
-    //if so, the item won't be able to picked up again
-
+    private float dropOffsetX = 1f; //the offset applied to this ItemGiver when dropped (x direction)
+    private float dropOffsetY = 0.1f; //the offset applied to this ItemGiver when dropped (y direction)
 
     private void Start()
     {
@@ -49,11 +41,13 @@ public class ItemGiver : Interactable
     private void OnEnable()
     {
         base.OnEnable();
+
         spawned = true;
     }
     private void OnDisable()
     {
         base.OnDisable();
+
         //if the item wasn't picked up by the player, allow it to spawn again 
         if (!retrieved)
             spawned = false;
@@ -71,18 +65,11 @@ public class ItemGiver : Interactable
         if (!retrieved && inTrigger)
         {
             CheckInteraction();
-            //Debug.Log("Check interaction! item giver");
-
-            //Debug.Log(gameObject.name + " local rotation is " + transform.localRotation);
-
         }
-
-        //if (displayRotation)
-            //Debug.Log(gameObject.name + " rotation is " + transform.localRotation);
-
 
     }
 
+    //set "retrieved" to either true or false
     private void SetRetrieved(bool boolean)
     {
         retrieved = boolean;
@@ -92,6 +79,9 @@ public class ItemGiver : Interactable
     public override void InteractableAction()
     {
         Debug.Log("Picked up item!");
+
+        //start interaction cooldown after interacting with this ItemGiver
+        StartCooldown();
 
         //add this new instance of the item to the player's item list
         AddItemToPlayer();
@@ -121,80 +111,73 @@ public class ItemGiver : Interactable
                 ItemManager.instance.swapEquipmentEvent += OnDrop;
             }
 
+            //set the parent of this ItemGiver to ItemManager's item holder gameobject
             parent = ItemManager.instance.GetItemHolder().transform;
-            //parent = PlayerStats.instance.GetComponentHolder().transform;
-
             this.transform.SetParent(parent);
 
+            //enable the Item script belonging to this ItemGiver
             if(!itemToGive.enabled)
                 itemToGive.enabled = true;
 
+            //disable the sprite renderer of this ItemGiver
             spriteRenderer.enabled = false;
+            //disable all colliders belonging to this ItemGiver
             actualCollider.enabled = false;
             triggerCollider.enabled = false;
-
-
 
             //Set retrived to true so player cannot pick up the item more than once
             SetRetrieved(true);
 
 
-
         }
-        //only give item script to player if they its their first time interacting with this ItemGiver
-        //if (!gaveItemToPlayer)
-        //{
-            //adds any item script this ItemGiver was specificed to add, then converts it to NewItem to access methods
-            //itemScript = PlayerStats.instance.GetComponentHolder().AddComponent(Type.GetType(itemScriptToLoad)) as NewItem;
-
-            //OLD (WILL THROW AN EXCEPTION IF CASTING DOESN'T WORK)
-            //NewItem itemScript = (NewItem) PlayerStats.instance.GetComponentHolder().AddComponent(Type.GetType(itemScriptToLoad));
-
-            //if(itemScript != null)
-            //{
-                //itemScript.SetScriptableObject(scriptableObject);
-
-            //}
-            //else
-            //{
-                //Debug.Log("An incorrect script name was provided to this Item Giver!");
-            //}
-
-            //gaveItemToPlayer = true;
-        //}
-        //else
-        //{
-            //itemScript.enabled = true;
-        //}
-        
     }
 
 
     public void OnDrop()
     {
+        //reset the velocity of this ItemGiver when dropped so it does not drop too far away from player
+        //without, spamming pick up will send ItemGiver too far away
+        rb.velocity = Vector2.zero;
+
         Debug.Log("Dropping item " + gameObject.name);
+        //disable the Item script belonging to this ItemGiver
         if (itemToGive.enabled)
             itemToGive.enabled = false;   
 
+        //set the parent of this itemgiver to null
         parent = null;
-
         this.transform.SetParent(null);
 
-        //drop this item infront of the player
-        //transform.position = new Vector2(PlayerStats.instance.GetComponentHolder().transform.position.x, PlayerStats.instance.GetComponentHolder().transform.position.y);
 
-        
-
+        //re-enable the sprite of this item
         spriteRenderer.enabled = true;
 
+        //re-enable the colliders of this item
         actualCollider.enabled = true;
         triggerCollider.enabled = true;
 
-        //gaveItemToPlayer = false;
+        Transform interacter = GetInteracter();
 
+        //if the interacter (player) is facing right, then this item will have force applied in the right direction
+        if (interacter.localScale.x == 1)
+        {
+            //drop this item infront of the player (the interacter is always the player)
+            transform.localPosition = new Vector2(interacter.position.x + dropOffsetX, interacter.position.y + dropOffsetY);
+            rb.AddForce(new Vector2(dropForceX, dropForceY));
+        }
+        //if the interacter (player) is facing left, then this item will have force applied in the left direction    
+        else if (interacter.localScale.x == -1)
+        {
+            //drop this item infront of the player (the interacter is always the player)
+            transform.localPosition = new Vector2(interacter.position.x - dropOffsetX, interacter.position.y + dropOffsetY);
+            rb.AddForce(new Vector2(-dropForceX, dropForceY));
+        }
+            
+
+        //allow this item to be picked up again
         SetRetrieved(false);
 
-        //unsubscribe after being dropped
+        //unsubscribe from SwapEquipment event after being dropped
         ItemManager.instance.swapEquipmentEvent -= OnDrop;
 
     }
