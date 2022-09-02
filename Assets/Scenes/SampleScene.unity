@@ -1714,7 +1714,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8782208612927994007, guid: 2c31194891aa55a4ba5968a27d2dbbce, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c31194891aa55a4ba5968a27d2dbbce, type: 3}
@@ -2193,7 +2193,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8782208612927994007, guid: e769b41610a31aa46b25a74801210236, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e769b41610a31aa46b25a74801210236, type: 3}
@@ -2953,7 +2953,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8782208612927994007, guid: 6def795854297f64fbc925832ceee8cf, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6def795854297f64fbc925832ceee8cf, type: 3}
@@ -3426,6 +3426,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1350342c05e9f9c488b3e2b40ee97210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeItems: []
+  passiveItemsToSpawn:
+  - {fileID: 8782208612927993994, guid: 2c31194891aa55a4ba5968a27d2dbbce, type: 3}
+  equipmentItemsToSpawn:
+  - {fileID: 8782208612927993994, guid: e769b41610a31aa46b25a74801210236, type: 3}
+  - {fileID: 8782208612927993994, guid: 6def795854297f64fbc925832ceee8cf, type: 3}
+  instantItemsToSpawn:
+  - {fileID: 8782208612927993994, guid: f2ccac70313837c4781bf7289d613a2b, type: 3}
+  defaultPassiveCapacity: 15
+  defaultEquipmentCapacity: 15
+  defaultInstantCapacity: 15
 --- !u!4 &1736830284
 Transform:
   m_ObjectHideFlags: 0

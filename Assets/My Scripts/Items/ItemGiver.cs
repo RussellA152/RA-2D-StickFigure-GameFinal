@@ -21,7 +21,7 @@ public class ItemGiver : Interactable
 
     //[SerializeField] private Sprite itemSprite;
 
-    private bool spawned = false; //has this item spawned in the world?
+    //private bool spawned = false; //has this item spawned in the world?
 
     private bool retrieved = false; //was this item picked up by the player?
 
@@ -42,21 +42,21 @@ public class ItemGiver : Interactable
     {
         base.OnEnable();
 
-        spawned = true;
+        //spawned = true;
     }
     private void OnDisable()
     {
         base.OnDisable();
 
         //if the item wasn't picked up by the player, allow it to spawn again 
-        if (!retrieved)
-            spawned = false;
+        //if (!retrieved)
+            //spawned = false;
     }
     private void OnDestroy()
     {
         //if the item wasn't picked up by the player, allow it to spawn again
-        if (!retrieved)
-            spawned = false;
+        //if (!retrieved)
+            //spawned = false;
     }
 
     private void Update()

@@ -3,6 +3,7 @@
 //using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine;
+using UnityEngine.Pool;
 using Random = UnityEngine.Random;
 
 public abstract class Item : MonoBehaviour
@@ -25,6 +26,8 @@ public abstract class Item : MonoBehaviour
     private bool fetchedStats = false; //has this item already fetched its item stats from its ScriptableObject?
 
     private InputAction useEquipmentBinding;
+
+    private IObjectPool<Item> myPool;
 
     //private bool wasActiveEquipment = false;
 
@@ -160,5 +163,16 @@ public abstract class Item : MonoBehaviour
         {
             Debug.Log("Only equipment items should activate from this binding!");
         }
+    }
+
+    //sets this item's pool equal to th pool based into the function (comes from ItemSpawner)
+    public void SetPool(IObjectPool<Item> pool)
+    {
+        myPool = pool;
+    }
+
+    public IObjectPool<Item> GetMyPool()
+    {
+        return myPool;
     }
 }
