@@ -113,6 +113,7 @@ public class ItemGiver : Interactable
 
             //set the parent of this ItemGiver to ItemManager's item holder gameobject
             parent = ItemManager.instance.GetItemHolder().transform;
+
             this.transform.SetParent(parent);
 
             //enable the Item script belonging to this ItemGiver

@@ -44,6 +44,9 @@ public class BaseRoom: MonoBehaviour
 
     public bool canSpawnOtherRooms; //can this room spawn other rooms?
 
+    [SerializeField] private int numberOfItems;
+    [SerializeField] private List<Transform> itemDisplayList = new List<Transform>();
+
     public enum RoomEnemyCount
     {
         uncleared, //if any enemy dedicated to this room is still alive (doors won't let player exit)
@@ -163,6 +166,10 @@ public class BaseRoom: MonoBehaviour
     {
         localRoomCoordinate = newCoordinate;
     }
+    public List<Transform> GetItemDisplayTransformList()
+    {
+        return itemDisplayList;
+    }
 
     //return the numberOfEnemiesCanSpawnHere (needed by AISpawner)
     public int GetNumberOfEnemiesCanSpawnHere()
@@ -182,6 +189,17 @@ public class BaseRoom: MonoBehaviour
     {
         numberOfEnemiesAliveInRoom--;
     }
+
+    public int GetNumberOfItems()
+    {
+        return numberOfItems;
+    }
+
+    public void ModifyNumberOfItems(int amount)
+    {
+        numberOfItems += amount;
+    }
+
 
     private void OnDestroy()
     {

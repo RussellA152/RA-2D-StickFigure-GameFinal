@@ -92,7 +92,7 @@ public abstract class Interactable : MonoBehaviour
         {
             //interacter is always the player (because player has "Player" tag)
             interacter = collision.transform;
-            Debug.Log("Collision detected!");
+            //Debug.Log("Collision detected!");
 
 
             inTrigger = true;

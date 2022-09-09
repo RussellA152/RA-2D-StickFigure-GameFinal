@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
 public class BossRoom : BaseRoom
 {
     private Vector2 positionToSpawnAt;
-
+    //[SerializeField] private List<Transform> itemDisplayList = new List<Transform>();
+    //[SerializeField] private int numberOfItems;
+    //[SerializeField] private int amountOfItemDisplays;
+    //[SerializeField] private Transform[] itemDisplayTransforms;
 
     // Start is called before the first frame update
     void Start()
@@ -14,9 +16,24 @@ public class BossRoom : BaseRoom
         base.Start();
         roomEnemyCountState = BaseRoom.RoomEnemyCount.cleared;
         roomType = RoomType.boss;
-
+        //itemDisplayTransforms = new Transform[amountOfItemDisplays];
         //StartCoroutine("SpawnBossRoom");
     }
+    //public List<Transform> GetItemDisplayTransformList()
+    //{
+        //return itemDisplayList;
+    //}
+
+    //public int GetNumberOfItems()
+    //{
+        //return numberOfItems;
+    //}
+
+    //public void ModifyNumberOfItems(int amount)
+    //{
+        //numberOfItems += amount;
+    //}
+
     /*
     IEnumerator SpawnBossRoom()
     {

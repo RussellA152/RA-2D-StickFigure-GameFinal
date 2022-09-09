@@ -36,44 +36,77 @@ public class ItemSpawner : MonoBehaviour
 
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        //SpawnItem(ItemScriptableObject.ItemType.passiveBuff);
-        //SpawnItem(ItemScriptableObject.ItemType.passiveProc);
-        SpawnItem(ItemScriptableObject.ItemType.equipment);
-        //SpawnItem(ItemScriptableObject.ItemType.instant);
+        LevelManager.instance.onPlayerEnterNewArea += SpawnRandomItem;
     }
 
-    public void SpawnItem(ItemScriptableObject.ItemType itemType)
+    private void OnDisable()
+    {
+        LevelManager.instance.onPlayerEnterNewArea -= SpawnRandomItem;
+    }
+
+    public void SpawnRandomItem()
+    {
+        //items won't spawn inside of normal rooms, only shop,treasure, or boss rooms
+        if(LevelManager.instance.GetCurrentRoom().roomType != BaseRoom.RoomType.normal)
+        {
+            //create a random number from 1-3 (decides what kind of item to spawn)
+            int random = Random.Range(1, 4);
+
+            switch (random)
+            {
+                //if the item we will spawn is of type PassiveBuff
+                case 1:
+                    var passiveBuffItem = passiveItemPool.Get();
+                    Debug.Log("Spawn passive buff item");
+                    //PickRandomSpawnLocation(passiveBuffItem);
+                    break;
+
+                //if the item we will spawn is of type PassiveProc
+                case 2:
+                    var passiveProcItem = passiveItemPool.Get();
+                    Debug.Log("Spawn passive proc item");
+                    //PickRandomSpawnLocation(passiveProcItem);
+                    break;
+
+                //if the item we will spawn is of type Equipment
+                case 3:
+                    var equipmentItem = equipmentItemPool.Get();
+                    Debug.Log("Spawn equipment item");
+                    //PickRandomSpawnLocation(equipmentItem);
+                    break;
+            }
+        }
+
+        
+    }
+
+    public void SpawnItemFromType(ItemScriptableObject.ItemType itemType)
     {
         switch (itemType)
         {
             //if the item we will spawn is of type PassiveBuff
             case ItemScriptableObject.ItemType.passiveBuff:
                 var passiveBuffItem = passiveItemPool.Get();
-                //PickRandomSpawnLocation(passiveBuffItem);
                 break;
 
             //if the item we will spawn is of type PassiveProc
             case ItemScriptableObject.ItemType.passiveProc:
                 var passiveProcItem = passiveItemPool.Get();
-                //PickRandomSpawnLocation(passiveProcItem);
                 break;
 
             //if the item we will spawn is of type Equipment
             case ItemScriptableObject.ItemType.equipment:
                 var equipmentItem = equipmentItemPool.Get();
-                //PickRandomSpawnLocation(equipmentItem);
                 break;
 
             //if the item we will spawn is of type Instant
             case ItemScriptableObject.ItemType.instant:
                 var instantItem = instantItemPool.Get();
-                //PickRandomSpawnLocation(instantItem);
                 
                 break;
         }
-
 
     }
 
@@ -122,8 +155,10 @@ public class ItemSpawner : MonoBehaviour
         //need to add this item to the activeItems list
         activeItems.Add(item);
 
+        SpawnItemInCurrentRoom(item);
+
         //pick a random spawn location for this item
-        PickRandomSpawnLocation(item);
+        //PickRandomSpawnLocation(item);
 
         //inReserve--;
     }
@@ -140,10 +175,50 @@ public class ItemSpawner : MonoBehaviour
         //inReserve++;
     }
 
+    private void SpawnItemInCurrentRoom(Item item)
+    {
+        List<Transform> itemDisplayList = null;
+
+        //for loop through each item display transforms inside of the current room (the room must be a shop, treasure, or boss room)
+        switch (LevelManager.instance.GetCurrentRoom().roomType)
+        {
+            case BaseRoom.RoomType.treasure:
+                itemDisplayList = LevelManager.instance.GetCurrentRoom().GetItemDisplayTransformList();
+                
+                break;
+            case BaseRoom.RoomType.shop:
+                itemDisplayList = LevelManager.instance.GetCurrentRoom().GetItemDisplayTransformList();
+
+                break;
+            case BaseRoom.RoomType.boss:
+                itemDisplayList = LevelManager.instance.GetCurrentRoom().GetItemDisplayTransformList();
+                break;
+        }
+
+        if(itemDisplayList.Count != 0)
+        {
+            foreach (Transform displayTransform in itemDisplayList)
+            {
+                Debug.Log("Entering for each loop");
+                if (displayTransform != null)
+                {
+                    Debug.Log("Placing an item on a display");
+                    item.transform.localPosition = displayTransform.position;
+                    itemDisplayList.Remove(displayTransform);
+                    break;
+                }
+            }
+        }
+        
+
+        
+    }
+
     //will pick a random spawn location from the current room (The room must contain an item display)
     public void PickRandomSpawnLocation(Item item)
     {
-        item.transform.position = new Vector2(10f, 10f);
+        //testing
+        //item.transform.position = new Vector2(10f, 10f);
 
     }
 }

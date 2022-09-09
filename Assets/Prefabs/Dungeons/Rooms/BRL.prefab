@@ -78,6 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e59d7ef975809a40b041b15bd19dc00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomType: 0
   isStartingRoom: 0
   spawnLocationsOfThisLevel:
   - {fileID: 570149327516219613}
@@ -87,11 +88,13 @@ MonoBehaviour:
   - {fileID: 570149326295288726}
   numberOfEnemiesCanSpawnHere: 5
   roomEnemyCountState: 0
+  levelManager: {fileID: 0}
   bottomDoor: {fileID: 2019098813910921092}
   topDoor: {fileID: 6137294433938445760}
   leftDoor: {fileID: 6842602386079786718}
   rightDoor: {fileID: 3900910162115932753}
   localRoomCoordinate: {x: 0, y: 0}
+  canSpawnOtherRooms: 0
 --- !u!114 &6243524948201178211
 MonoBehaviour:
   m_ObjectHideFlags: 0
