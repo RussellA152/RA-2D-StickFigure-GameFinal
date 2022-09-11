@@ -32,51 +32,64 @@ public class ItemSpawner : MonoBehaviour
 
         instantItemPool = new ObjectPool<Item>(CreateInstantItem, OnTakeItemFromPool, OnReturnItemToPool, null, true, defaultInstantCapacity);
 
-        //inReserve = defaultCapacity;
-
     }
 
     private void OnEnable()
     {
-        LevelManager.instance.onPlayerEnterNewArea += SpawnRandomItem;
+        //subscribe RepeatSpawn to the onPlayerEnterNewArea
+        //when player enters a room, spawn items inside of that room (if needed)
+        LevelManager.instance.onPlayerEnterNewArea += RepeatSpawn;
     }
 
     private void OnDisable()
     {
-        LevelManager.instance.onPlayerEnterNewArea -= SpawnRandomItem;
+        LevelManager.instance.onPlayerEnterNewArea -= RepeatSpawn;
+    }
+
+    //This function will call "SpawnRandomItem" for as many times as the current rooom needs
+    //Ex. if the current room needs 2 items, then this function will call "SpawnRandomItem" 2 times
+    private void RepeatSpawn()
+    {
+        //get the current room and its number of items needed
+        BaseRoom currentRoom = LevelManager.instance.GetCurrentRoom();
+        int numberOfItemsNeeded = currentRoom.GetNumberOfItems();
+
+        for(int i = 0; i < numberOfItemsNeeded; i++)
+        {
+            SpawnRandomItem();
+
+            currentRoom.ModifyNumberOfItems(-1);
+
+        }
     }
 
     public void SpawnRandomItem()
     {
-        //items won't spawn inside of normal rooms, only shop,treasure, or boss rooms
-        if(LevelManager.instance.GetCurrentRoom().roomType != BaseRoom.RoomType.normal)
+        //create a random number from 1-3 (decides what kind of item to spawn)
+        int random = Random.Range(1, 4);
+
+        switch (random)
         {
-            //create a random number from 1-3 (decides what kind of item to spawn)
-            int random = Random.Range(1, 4);
+            //if the item we will spawn is of type PassiveBuff
+            case 1:
+                var passiveBuffItem = passiveItemPool.Get();
+                Debug.Log("Spawn passive buff item");
+                //PickRandomSpawnLocation(passiveBuffItem);
+                break;
 
-            switch (random)
-            {
-                //if the item we will spawn is of type PassiveBuff
-                case 1:
-                    var passiveBuffItem = passiveItemPool.Get();
-                    Debug.Log("Spawn passive buff item");
-                    //PickRandomSpawnLocation(passiveBuffItem);
-                    break;
+            //if the item we will spawn is of type PassiveProc
+            case 2:
+                var passiveProcItem = passiveItemPool.Get();
+                Debug.Log("Spawn passive proc item");
+                //PickRandomSpawnLocation(passiveProcItem);
+                break;
 
-                //if the item we will spawn is of type PassiveProc
-                case 2:
-                    var passiveProcItem = passiveItemPool.Get();
-                    Debug.Log("Spawn passive proc item");
-                    //PickRandomSpawnLocation(passiveProcItem);
-                    break;
-
-                //if the item we will spawn is of type Equipment
-                case 3:
-                    var equipmentItem = equipmentItemPool.Get();
-                    Debug.Log("Spawn equipment item");
-                    //PickRandomSpawnLocation(equipmentItem);
-                    break;
-            }
+            //if the item we will spawn is of type Equipment
+            case 3:
+                var equipmentItem = equipmentItemPool.Get();
+                Debug.Log("Spawn equipment item");
+                //PickRandomSpawnLocation(equipmentItem);
+                break;
         }
 
         
@@ -157,10 +170,6 @@ public class ItemSpawner : MonoBehaviour
 
         SpawnItemInCurrentRoom(item);
 
-        //pick a random spawn location for this item
-        //PickRandomSpawnLocation(item);
-
-        //inReserve--;
     }
 
     //this function performs actions on the item when they return to the pool
@@ -172,7 +181,6 @@ public class ItemSpawner : MonoBehaviour
         //need to remove this item to the activeItems list
         activeItems.Remove(item);
 
-        //inReserve++;
     }
 
     private void SpawnItemInCurrentRoom(Item item)
@@ -195,16 +203,25 @@ public class ItemSpawner : MonoBehaviour
                 break;
         }
 
+        //if this room's itemDisplayList has a length greater than 0..
         if(itemDisplayList.Count != 0)
         {
+            //iterate through the room's itemDisplayList
             foreach (Transform displayTransform in itemDisplayList)
             {
                 Debug.Log("Entering for each loop");
+                //if this transform element isn't null
                 if (displayTransform != null)
                 {
                     Debug.Log("Placing an item on a display");
+
+                    //set the randomly chosen item's position to the transform element's position
                     item.transform.localPosition = displayTransform.position;
+
+                    //now remove this transform element from the itemDisplayList
+                    //we remove this element so that the items won't try to be placed on the same transform
                     itemDisplayList.Remove(displayTransform);
+
                     break;
                 }
             }
@@ -215,10 +232,10 @@ public class ItemSpawner : MonoBehaviour
     }
 
     //will pick a random spawn location from the current room (The room must contain an item display)
-    public void PickRandomSpawnLocation(Item item)
-    {
+    //public void PickRandomSpawnLocation(Item item)
+    //{
         //testing
         //item.transform.position = new Vector2(10f, 10f);
 
-    }
+    //}
 }

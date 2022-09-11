@@ -42,6 +42,10 @@ public class ItemGiver : Interactable
     {
         base.OnEnable();
 
+        //set isKinematic to true onEnable so that item will stay on top of a display
+        rb.isKinematic = true;
+
+
         //spawned = true;
     }
     private void OnDisable()
@@ -95,6 +99,9 @@ public class ItemGiver : Interactable
     {
         if(!retrieved){
 
+            //when picked up, set isKinematic to true to prevent item from moving 
+            rb.isKinematic = true;
+
             //if the player already has an equipment item, then invoke the swapEquipment event system
             if(ItemManager.instance.activeEquipmentSlot != null && itemToGive.type == ItemScriptableObject.ItemType.equipment)
             {
@@ -136,6 +143,9 @@ public class ItemGiver : Interactable
 
     public void OnDrop()
     {
+        //when dropped, set isKinematic to false to allow item to fall to the ground
+        rb.isKinematic = false;
+
         //reset the velocity of this ItemGiver when dropped so it does not drop too far away from player
         //without, spamming pick up will send ItemGiver too far away
         rb.velocity = Vector2.zero;

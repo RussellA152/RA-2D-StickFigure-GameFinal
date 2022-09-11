@@ -15,7 +15,8 @@ public class BaseRoom: MonoBehaviour
     public List<Transform> spawnLocationsOfThisLevel = new List<Transform>(); //a list of spawn locations dedicated to this level
                                                                               // the spawn locations will be overriden when the player enters a new area
 
-    private Dictionary<Transform, bool> spawnLocations = new Dictionary<Transform, bool>();
+    private Dictionary<Transform, bool> spawnLocations = new Dictionary<Transform, bool>(); // a dictionary of the spawn locations dedicated to this level
+                                                                                            // key = transform (transform position), value = bool (is occupied?)
 
     [SerializeField] private int numberOfEnemiesCanSpawnHere; //the number of enemies that WILL spawn in this room
                                                               // SHOULD ideally be the number of spawn locations of the room, otherwise enemies will just spawn in a random spot
@@ -71,9 +72,6 @@ public class BaseRoom: MonoBehaviour
         //numberOfEnemiesAliveInRoom should be equal to the numberOfEnemiesCanSpawnHere AT START
         //it will decrease later when player kills the enemies in this room
         numberOfEnemiesAliveInRoom = numberOfEnemiesCanSpawnHere;
-
-        //a room will be uncleared by default (cleared when debugging)
-        //roomEnemyCountState = RoomEnemyCount.uncleared;
 
         //reference to level manager singleton
         levelManager = LevelManager.instance;
@@ -134,7 +132,7 @@ public class BaseRoom: MonoBehaviour
     }
     private void UpdateSpawnLocationDictionary()
     {
-        //clears the dictionary if it was already populated for whatever reason (kinda obsolete)
+        //clears the dictionary if it was already populated for whatever reason
         if (spawnLocations.Count != 0 || spawnLocations != null)
             spawnLocations.Clear();
 
