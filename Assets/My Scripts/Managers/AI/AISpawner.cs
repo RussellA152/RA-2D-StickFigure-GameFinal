@@ -113,7 +113,7 @@ public class AISpawner : MonoBehaviour
         //retrieve the NavMeshAgent component from the enemy (helps with performance)
         var navMeshAgent = enemy.GetNavMeshAgent();
 
-        //spawn this enemy in a some location in the area (retrieves spawn location from level manager)
+        //spawn this enemy in a some location in the area (retrieves spawn location from a room)
         //have to use Warp instead of editing the transform.position, otherwise enemies will not spawn in the correct position
         navMeshAgent.Warp(LevelManager.instance.GetCurrentRoom().GiveNewSpawnLocations());
 

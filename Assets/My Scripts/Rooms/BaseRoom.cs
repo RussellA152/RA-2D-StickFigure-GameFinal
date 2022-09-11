@@ -80,6 +80,7 @@ public class BaseRoom: MonoBehaviour
         AddRoom();
 
         //starting room needs to create its own coordinate because it is not spawned by a roomSpawner
+        // the current room is always the starting room at the start of the current level/run
         if (isStartingRoom)
         {
             CreateCoordinate();
@@ -101,7 +102,7 @@ public class BaseRoom: MonoBehaviour
             //roomEnemyCountState = RoomEnemyCount.uncleared;
     }
 
-    //give the level manager the spawn locations of this area
+    //give the AISpawner the spawn locations needed for enemies
     public Vector2 GiveNewSpawnLocations()
     {
         int iterator = 0;
@@ -115,8 +116,6 @@ public class BaseRoom: MonoBehaviour
                     iterator++;
                     spawnLocations[location] = true;
 
-                    //Debug.Log("Location I spawned at was " + location.position);
-                    //Debug.Log("Return a random loc!");
                     return location.position;
                 }
                 else

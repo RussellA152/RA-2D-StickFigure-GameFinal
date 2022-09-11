@@ -9,14 +9,14 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
 
-    public BaseRoom currentRoom; // the room the player is inside of
+    private BaseRoom currentRoom; // the room the player is inside of
 
     public event Action onPlayerEnterNewArea;
     public event Action spawnNewRooms;
 
-    public DungeonSize dungeonSize; //the "DungeonSize" state determines how many rooms we will have
+    [SerializeField] private DungeonSize dungeonSize; //the "DungeonSize" state determines how many rooms we will have
 
-    public int roomCap; //max number of rooms that can spawn (random based on the "DungeonSize" state)
+    private int roomCap; //max number of rooms that can spawn (random based on the "DungeonSize" state)
 
     [HideInInspector]
     public GenerationProgress dungeonGenerationState; //the state of the dungeon generation.. is it complete or not?
@@ -36,11 +36,14 @@ public class LevelManager : MonoBehaviour
     public int numberOfSpawnedBossRooms; //number of rooms that have been spawned
 
     [Header("Max Number Can Spawn")]
+    // max number of room types that can spawn (can be set in inspector, but dungeon size will determine this)
+    // the smaller the dungeon size, the smaller the max number of room types can spawn
     public int maxNumberOfNormalRooms;
     public int maxNumberOfTreasureRooms;
     public int maxNumberOfShopRooms;
     public int maxNumberOfBossRooms;
 
+    // a dictionary that holds a room coordinate as a key, and a BaseRoom as a value
     public Dictionary<Vector2,BaseRoom> roomCoordinatesOccupied = new Dictionary<Vector2,BaseRoom>();
 
 
@@ -154,6 +157,11 @@ public class LevelManager : MonoBehaviour
         Debug.Log("Boss Room Count: " + maxNumberOfBossRooms);
     }
 
+    //return the value of the max number of rooms that can spawn in this run/generation
+    public int GetRoomCap()
+    {
+        return roomCap;
+    }
 
     //sets the "currentRoom" to the room passed in the function
     //used when player enters another room from a door

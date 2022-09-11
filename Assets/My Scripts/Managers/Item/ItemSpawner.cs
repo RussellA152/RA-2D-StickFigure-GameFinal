@@ -38,6 +38,7 @@ public class ItemSpawner : MonoBehaviour
     {
         //subscribe RepeatSpawn to the onPlayerEnterNewArea
         //when player enters a room, spawn items inside of that room (if needed)
+        // currentRoom is always updated before onPlayerEnterNewArea is invoked, so its safe to use current room in ItemSpawner
         LevelManager.instance.onPlayerEnterNewArea += RepeatSpawn;
     }
 

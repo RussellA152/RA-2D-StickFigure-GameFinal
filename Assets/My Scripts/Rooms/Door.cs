@@ -44,6 +44,7 @@ public class Door : Interactable
         neighboringDoor.StartCooldown();
 
         //when player teleports to a new room, the current room of the LevelManager is updated
+        //this should be called before invoking the "EnteringNewAreaEvent" so that the event system can safely have an updated CurrentRoom
         LevelManager.instance.UpdateCurrentRoom(neighboringDoor.GetDoorRoom());
 
         //when player uses the door, we will invoke the "EnteringNewAreaEvent" event system

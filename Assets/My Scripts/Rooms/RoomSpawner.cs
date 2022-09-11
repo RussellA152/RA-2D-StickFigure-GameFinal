@@ -53,6 +53,65 @@ public class RoomSpawner : MonoBehaviour
 
     }
 
+    private void ChooseRandomRoomType()
+    {
+        int randomRoomType = Random.Range(1, 5);
+
+        switch (randomRoomType)
+        {
+            case 1:
+                if (levelManager.numberOfSpawnedNormalRooms < levelManager.maxNumberOfNormalRooms)
+                {
+                    SpawnRooms(BaseRoom.RoomType.normal, levelManager.allNormalRooms);
+
+                    //levelManager.numberOfSpawnedNormalRooms++;
+                    //Debug.Log("call invoke");
+                }
+
+                break;
+            case 2:
+                if (levelManager.numberOfSpawnedTreasureRooms < levelManager.maxNumberOfTreasureRooms)
+                {
+                    SpawnRooms(BaseRoom.RoomType.treasure, levelManager.allTreasureRooms);
+                    //Debug.Log("call invoke");
+                    //levelManager.numberOfSpawnedTreasureRooms++;
+                }
+
+                break;
+            case 3:
+                if (levelManager.numberOfSpawnedShopRooms < levelManager.maxNumberOfShopRooms)
+                {
+                    SpawnRooms(BaseRoom.RoomType.shop, levelManager.allShopRooms);
+                    //Debug.Log("call invoke");
+                    //levelManager.numberOfSpawnedShopRooms++;
+                }
+
+                break;
+            case 4:
+                //if this room is trying to spawn a boss, it needs to be the last room
+                //typically, only 1 boss room is allowed to spawn
+                if (levelManager.numberOfSpawnedBossRooms < levelManager.maxNumberOfBossRooms && levelManager.numberOfSpawnedAllRooms == levelManager.GetRoomCap() - 1)
+                {
+                    SpawnRooms(BaseRoom.RoomType.boss, levelManager.allBossRooms);
+                    //Debug.Log("call invoke");
+                    //levelManager.numberOfSpawnedBossRooms++;
+                }
+
+                break;
+        }
+        //Debug.Log("call random type function");
+
+        //if the current dungeon has reached all room cap, then cancel the spawning invoke
+        //and then disable this spawner
+        if (levelManager.numberOfSpawnedAllRooms == levelManager.GetRoomCap())
+        {
+            CancelInvoke();
+            this.enabled = false;
+        }
+
+
+    }
+
     private void SpawnRooms(BaseRoom.RoomType roomType, GameObject[] arrayToUse)
     {
         //pick a random direction to spawn a room in
@@ -196,65 +255,6 @@ public class RoomSpawner : MonoBehaviour
         
     }
 
-    private void ChooseRandomRoomType()
-    {
-        int randomRoomType = Random.Range(1, 5);
-
-        switch (randomRoomType)
-        {
-            case 1:
-                if(levelManager.numberOfSpawnedNormalRooms < levelManager.maxNumberOfNormalRooms)
-                {
-                    SpawnRooms(BaseRoom.RoomType.normal, levelManager.allNormalRooms);
-
-                    //levelManager.numberOfSpawnedNormalRooms++;
-                    //Debug.Log("call invoke");
-                }
-                    
-                break;
-            case 2:
-                if (levelManager.numberOfSpawnedTreasureRooms < levelManager.maxNumberOfTreasureRooms)
-                {
-                    SpawnRooms(BaseRoom.RoomType.treasure, levelManager.allTreasureRooms);
-                    //Debug.Log("call invoke");
-                    //levelManager.numberOfSpawnedTreasureRooms++;
-                }
-                    
-                break;
-            case 3:
-                if (levelManager.numberOfSpawnedShopRooms < levelManager.maxNumberOfShopRooms)
-                {
-                    SpawnRooms(BaseRoom.RoomType.shop, levelManager.allShopRooms);
-                    //Debug.Log("call invoke");
-                    //levelManager.numberOfSpawnedShopRooms++;
-                }
-                    
-                break;
-            case 4:
-                //if this room is trying to spawn a boss, it needs to be the last room
-                //typically, only 1 boss room is allowed to spawn
-                if (levelManager.numberOfSpawnedBossRooms < levelManager.maxNumberOfBossRooms && levelManager.numberOfSpawnedAllRooms == levelManager.roomCap - 1)
-                {
-                    SpawnRooms(BaseRoom.RoomType.boss, levelManager.allBossRooms);
-                    //Debug.Log("call invoke");
-                    //levelManager.numberOfSpawnedBossRooms++;
-                }
-                    
-                break;
-        }
-        //Debug.Log("call random type function");
-
-        //if the current dungeon has reached all room cap, then cancel the spawning invoke
-        //and then disable this spawner
-        if (levelManager.numberOfSpawnedAllRooms == levelManager.roomCap)
-        {
-            CancelInvoke();
-            this.enabled = false;
-        }
-            
-
-    }
-
     private void IncrementNumberOfRoomSpawned(BaseRoom.RoomType roomType)
     {
         switch (roomType)
@@ -287,16 +287,10 @@ public class RoomSpawner : MonoBehaviour
         roomCoordinatesToGive = new Vector2(newSpawnPosition.x / xCoordinateDivider, newSpawnPosition.y / yCoordinateDivider);
 
         //keep checking if the level manager's roomCoordinate dictionary contains the coordinate key
+        //return Vector2.zero if the room coordinate is already occupied
         if (levelManager.roomCoordinatesOccupied.ContainsKey(roomCoordinatesToGive))
         {
-
-            //Debug.Log("Prevent spawn");
             return Vector2.zero;
-            //increase the increment
-            //positionMultiplier++;
-
-            //newSpawnPosition = new Vector2(room.transform.position.x + ( xPosition * positionMultiplier), room.transform.position.y + ( yPosition * positionMultiplier));
-            //roomCoordinatesToGive = new Vector2(newSpawnPosition.x / xCoordinateDivider, newSpawnPosition.y / yCoordinateDivider);
         }
 
         return newSpawnPosition;

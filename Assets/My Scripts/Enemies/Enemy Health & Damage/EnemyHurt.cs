@@ -260,6 +260,7 @@ public class EnemyHurt : MonoBehaviour, IDamageable
 
     IEnumerator WaitUntilEnemyIsHurt(float attackPowerX, float attackPowerY)
     {
+        //Wait until the enemy has changed to the hurt state to apply a force on them
         while (enemyControlScript.GetEnemyState() != EnemyController.EnemyState.Hurt)
             yield return null;
         rb.AddForce(new Vector2(attackPowerX, attackPowerY));
