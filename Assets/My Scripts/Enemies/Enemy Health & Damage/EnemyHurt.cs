@@ -15,6 +15,9 @@ public class EnemyHurt : MonoBehaviour, IDamageable
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Animator animator;
 
+    [SerializeField] private float gravityWhenFlinching;
+    [SerializeField] private float gravityWhenKnockedDown;
+
     //Animations to play when enemy is hit by a light attack (depends on the direction of the light attack)
     //[Header("Enemy Light Attack Hurt Animation Names")]
     private string lightHurtAnimFront;
@@ -32,6 +35,8 @@ public class EnemyHurt : MonoBehaviour, IDamageable
     private int lightHurtAnimBehindHash;
     private int heavyHurtAnimFrontHash;
     private int heavyHurtAnimBehindHash;
+
+    private bool isKnockedDown = false; // is this enemy in a "knocked down" state? 
 
     /*
     private void OnEnable()
@@ -54,6 +59,11 @@ public class EnemyHurt : MonoBehaviour, IDamageable
         heavyHurtAnimBehindHash = Animator.StringToHash(heavyHurtAnimBehind);
     }
     */
+
+    private void Update()
+    {
+        //Debug.Log("is enemy knocked down?  " + isKnockedDown);
+    }
 
     public void InitializeEnemyHurt(EnemyScriptableObject enemyScriptableObjectParameter)
     {
@@ -96,6 +106,8 @@ public class EnemyHurt : MonoBehaviour, IDamageable
                 break;
 
             case IDamageAttributes.DamageType.light:
+
+                SetRBGravity(gravityWhenFlinching);
 
                 //if the attacker's sprite is facing the right direction, and the enemy's sprite is also facing right
                 if (attackerFacingRight && enemyFacingRight)
@@ -144,6 +156,16 @@ public class EnemyHurt : MonoBehaviour, IDamageable
                 break;
 
             case IDamageAttributes.DamageType.heavy:
+
+                SetRBGravity(gravityWhenKnockedDown);
+
+                if (isKnockedDown)
+                {
+                    Debug.Log("Hit mid air by heavy!");
+                }
+
+                SetIsKnockedDown(true);
+
                 if (attackerFacingRight && enemyFacingRight)
                 {
                     //Play backward heavy animation
@@ -252,6 +274,7 @@ public class EnemyHurt : MonoBehaviour, IDamageable
         if (animator.HasState(baseLayerInt, animationHash) == true)
         {
             animator.Play(animationHash);
+            Debug.Log("Playing an enemy hurt animation");
         }
             
         else
@@ -263,6 +286,22 @@ public class EnemyHurt : MonoBehaviour, IDamageable
         //Wait until the enemy has changed to the hurt state to apply a force on them
         while (enemyControlScript.GetEnemyState() != EnemyController.EnemyState.Hurt)
             yield return null;
+
+        if (isKnockedDown)
+        {
+            rb.velocity = Vector2.zero;
+        }
+
         rb.AddForce(new Vector2(attackPowerX, attackPowerY));
+    }
+
+    public void SetIsKnockedDown(bool boolean)
+    {
+        isKnockedDown = boolean;
+    }
+
+    public void SetRBGravity(float amount)
+    {
+        rb.gravityScale = amount;
     }
 }

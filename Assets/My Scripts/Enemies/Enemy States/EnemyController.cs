@@ -47,12 +47,21 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private Rigidbody2D rb;
 
+    [SerializeField] private Vector2 minimumVelocityUntilStopped; // how low should this enemy's velocity reached to be considered "stopped"?
+    [SerializeField] private float gravityWhenIdle;
+
     private bool attackOnCooldown = false; //is the enemy on attack cooldown? If so, don't let them attack again
 
     [Header("Dedicated Room")]
     [SerializeField] private BaseRoom myRoom; //the room this enemy was spawned in
 
+
+
     private int walkingHash;
+
+    private bool isHurt = false;
+    private bool stopped;
+    private int stoppedHash;
 
 
 
@@ -91,6 +100,8 @@ public class EnemyController : MonoBehaviour
     private void Start()
     {
         walkingHash = Animator.StringToHash("Walking");
+        stoppedHash = Animator.StringToHash("Stopped");
+
     }
 
     private void OnDisable()
@@ -113,6 +124,11 @@ public class EnemyController : MonoBehaviour
         //we won't use the ChangeEnemyState because then the coroutine could be canceled, which would prevent enemy from dying
         if (!isAlive)
             currentState = EnemyState.Dead;
+
+        if (rb.velocity.x <= minimumVelocityUntilStopped.x && rb.velocity.y <= minimumVelocityUntilStopped.y)
+            animator.SetBool(stoppedHash, true);
+        else
+            animator.SetBool(stoppedHash, false);
 
 
         //calculate the distance between enemy and player
@@ -195,6 +211,7 @@ public class EnemyController : MonoBehaviour
 
     private void EnemyIdleBehavior()
     {
+        isHurt = false;
 
         //Debug.Log("Idle behavior!");
         animator.SetBool(walkingHash, false);
@@ -206,17 +223,22 @@ public class EnemyController : MonoBehaviour
         //the enemy is allowed to turn around when they are idle
         enemyMoveScript.SetCanFlip(true);
 
+        enemyHurtScript.SetIsKnockedDown(false);
+        enemyHurtScript.SetRBGravity(gravityWhenIdle);
+
+
+
         //check distance between enemy and player
         //if enemy is close to player, chase them (within follow range)
         if (!stateCooldownStarted)
         {
-            if (withinFollowRange && !withinAttackRange)
+            if (withinFollowRange && !withinAttackRange && !isHurt)
             {
                 ChangeEnemyState(chaseStateTransitionTimer, EnemyState.ChaseTarget);
             }
 
             // if the player is within attacking range, attack them instead of chase
-            else if (withinAttackRange)
+            else if (withinAttackRange && !isHurt)
             {
                 ChangeEnemyState(attackStateTransitionTimer, EnemyState.Attacking);
             }
@@ -263,6 +285,9 @@ public class EnemyController : MonoBehaviour
     {
         //Debug.Log("Attack behavior!");
 
+        //if (isHurt)
+            //ChangeEnemyState(0f, EnemyState.Hurt);
+
         animator.SetBool(walkingHash, false);
 
         //don't let enemy move when trying to attack
@@ -301,6 +326,7 @@ public class EnemyController : MonoBehaviour
 
     private void EnemyHurtBehavior()
     {
+        isHurt = true;
 
         animator.SetBool(walkingHash, false);
         //don't let enemy move at all

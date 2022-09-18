@@ -1721,7 +1721,7 @@ MonoBehaviour:
   damageType: 1
   attackDamage: 20
   attackingPowerX: 12000
-  attackingPowerY: 0
+  attackingPowerY: 10000
   joltForceX: 500
   joltForceY: 0
 --- !u!114 &-3170488162557796640
@@ -1844,7 +1844,7 @@ MonoBehaviour:
   damageType: 1
   attackDamage: 20
   attackingPowerX: 12000
-  attackingPowerY: 0
+  attackingPowerY: 10000
   joltForceX: 500
   joltForceY: 0
 --- !u!1101 &-2772697269554074870
@@ -2297,8 +2297,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageType: 2
   attackDamage: 40
-  attackingPowerX: 40000
-  attackingPowerY: 20000
+  attackingPowerX: 10000
+  attackingPowerY: 50000
   joltForceX: 1000
   joltForceY: 0
 --- !u!1102 &-1215099197619369295
@@ -2830,7 +2830,7 @@ MonoBehaviour:
   damageType: 1
   attackDamage: 40
   attackingPowerX: 12000
-  attackingPowerY: 0
+  attackingPowerY: 10000
   joltForceX: 1500
   joltForceY: 0
 --- !u!1101 &193169169946245021
@@ -3622,7 +3622,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -96890588181203755}
-    m_Position: {x: -100, y: 90, z: 0}
+    m_Position: {x: -110, y: 90, z: 0}
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: 1514594096764517698}
@@ -4745,7 +4745,7 @@ MonoBehaviour:
   damageType: 1
   attackDamage: 20
   attackingPowerX: 12000
-  attackingPowerY: 0
+  attackingPowerY: 10000
   joltForceX: 500
   joltForceY: 0
 --- !u!1102 &8180898813625264346
@@ -4756,7 +4756,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Single Heavy Attack
-  m_Speed: 0.2
+  m_Speed: 0.3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -4295316120362360633}

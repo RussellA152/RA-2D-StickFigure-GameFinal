@@ -610,6 +610,10 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 1584
       objectReference: {fileID: 0}
+    - target: {fileID: 4826893230794269866, guid: 5952141b836031b4782683fcfc8d896f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 18.6
+      objectReference: {fileID: 0}
     - target: {fileID: 4836041785865056587, guid: 5952141b836031b4782683fcfc8d896f, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -2763,6 +2767,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6345397276018936482, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6875883259916410309, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -3479,6 +3487,8 @@ MonoBehaviour:
   - {fileID: 8782208612927993994, guid: 6def795854297f64fbc925832ceee8cf, type: 3}
   instantItemsToSpawn:
   - {fileID: 8782208612927993994, guid: f2ccac70313837c4781bf7289d613a2b, type: 3}
+  passiveItemsArray: []
+  equipmentItemsArray: []
   defaultPassiveCapacity: 15
   defaultEquipmentCapacity: 15
   defaultInstantCapacity: 15

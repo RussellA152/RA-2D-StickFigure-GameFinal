@@ -6,17 +6,30 @@ using UnityEngine;
 
 public class ItemSpawner : MonoBehaviour
 {
+    // 3 object pools that contain passive, equipment, and instant items
     ObjectPool<Item> passiveItemPool; 
     ObjectPool<Item> equipmentItemPool; 
     ObjectPool<Item> instantItemPool;
 
+    // A list of item prefabs that are in the game world (items that have been spawned in (picked up by player, or not))
     [SerializeField] private List<Item> activeItems = new List<Item>();
 
     [Header("Items to Pool")]
-    [SerializeField] private Item[] passiveItemsToSpawn;
-    [SerializeField] private Item[] equipmentItemsToSpawn;
-    [SerializeField] private Item[] instantItemsToSpawn;
+    // These are the lists of items that you can drag item prefabs into from the inspector
+    // These lists are mutable, so we can remove elements from them, which we will do when an item is spawned (with exception to Instant items)
+    [SerializeField] private List<Item> passiveItemsToSpawn; 
+    [SerializeField] private List<Item> equipmentItemsToSpawn;
+    [SerializeField] private List<Item> instantItemsToSpawn;
 
+
+    // These are the array of items copied from the lists above, 
+    // They act as backups/references to all items in the game, and you cannot remove elements from them
+    // Instant items don't have an array because we won't remove them from the above list
+    [SerializeField] private Item[] passiveItemsArray;
+    [SerializeField] private Item[] equipmentItemsArray; 
+
+
+    // The amount of items that the respective object pool will pre-allocate
     [SerializeField] private int defaultPassiveCapacity;
     [SerializeField] private int defaultEquipmentCapacity;
     [SerializeField] private int defaultInstantCapacity;
@@ -31,6 +44,19 @@ public class ItemSpawner : MonoBehaviour
         equipmentItemPool = new ObjectPool<Item>(CreateEquipmentItem, OnTakeItemFromPool, OnReturnItemToPool, null, true, defaultEquipmentCapacity);
 
         instantItemPool = new ObjectPool<Item>(CreateInstantItem, OnTakeItemFromPool, OnReturnItemToPool, null, true, defaultInstantCapacity);
+
+        passiveItemsArray = new Item[passiveItemsToSpawn.Count];
+        equipmentItemsArray = new Item[equipmentItemsToSpawn.Count];
+
+        // copy item elements from serialized array, to a list
+        TransferItemsFromListToArray(passiveItemsToSpawn, passiveItemsArray);
+        TransferItemsFromListToArray(equipmentItemsToSpawn,equipmentItemsArray);
+
+
+    }
+
+    private void Start()
+    {
 
     }
 
@@ -69,31 +95,52 @@ public class ItemSpawner : MonoBehaviour
         //create a random number from 1-3 (decides what kind of item to spawn)
         int random = Random.Range(1, 4);
 
-        switch (random)
+        if(passiveItemsToSpawn.Count == 0 && equipmentItemsToSpawn.Count == 0)
         {
-            //if the item we will spawn is of type PassiveBuff
-            case 1:
-                var passiveBuffItem = passiveItemPool.Get();
-                Debug.Log("Spawn passive buff item");
-                //PickRandomSpawnLocation(passiveBuffItem);
-                break;
 
-            //if the item we will spawn is of type PassiveProc
-            case 2:
-                var passiveProcItem = passiveItemPool.Get();
-                Debug.Log("Spawn passive proc item");
-                //PickRandomSpawnLocation(passiveProcItem);
-                break;
-
-            //if the item we will spawn is of type Equipment
-            case 3:
-                var equipmentItem = equipmentItemPool.Get();
-                Debug.Log("Spawn equipment item");
-                //PickRandomSpawnLocation(equipmentItem);
-                break;
+            return;
         }
 
-        
+        if(random == 1)
+        {
+            if (passiveItemsToSpawn.Count == 0)
+            {
+                random = 3;
+            }
+            else
+            {
+                var passiveBuffItem = passiveItemPool.Get();
+                return;
+            }
+        }
+
+        if(random == 2)
+        {
+            if (passiveItemsToSpawn.Count == 0)
+            {
+                random = 3;
+            }
+            else
+            {
+                var passiveProcItem = passiveItemPool.Get();
+                return;
+
+            }
+        }
+
+        if(random == 3)
+        {
+            if (equipmentItemsToSpawn.Count == 0)
+            {
+                random = 1;
+            }
+            else
+            {
+                var equipmentItem = equipmentItemPool.Get();
+                return;
+            }
+        }
+ 
     }
 
     public void SpawnItemFromType(ItemScriptableObject.ItemType itemType)
@@ -127,11 +174,13 @@ public class ItemSpawner : MonoBehaviour
     Item CreatePassiveItem()
     {
         //create a random index from 0 to the length of the passive item list 
-        int randomIndex = Random.Range(0, passiveItemsToSpawn.Length);
+        int randomIndex = Random.Range(0, passiveItemsToSpawn.Count);
 
         var passiveItem = Instantiate(passiveItemsToSpawn[randomIndex]);
 
         passiveItem.SetPool(passiveItemPool);
+
+        passiveItemsToSpawn.RemoveAt(randomIndex);
 
         return passiveItem;
     }
@@ -139,19 +188,21 @@ public class ItemSpawner : MonoBehaviour
     Item CreateEquipmentItem()
     {
         //create a random index from 0 to the length of the equipment item list 
-        int randomIndex = Random.Range(0, equipmentItemsToSpawn.Length);
+        int randomIndex = Random.Range(0, equipmentItemsToSpawn.Count);
 
         var equipmentItem = Instantiate(equipmentItemsToSpawn[randomIndex]);
 
         equipmentItem.SetPool(equipmentItemPool);
+
+        equipmentItemsToSpawn.RemoveAt(randomIndex);
 
         return equipmentItem;
     }
 
     Item CreateInstantItem()
     {
-        //create a random index from 0 to the length of the instant item list 
-        int randomIndex = Random.Range(0, instantItemsToSpawn.Length);
+        //create a random index from 0 to the length of the instant item array 
+        int randomIndex = Random.Range(0, instantItemsToSpawn.Count);
 
         var instantItem = Instantiate(instantItemsToSpawn[randomIndex]);
 
@@ -227,9 +278,17 @@ public class ItemSpawner : MonoBehaviour
                 }
             }
         }
-        
+           
+    }
 
-        
+    private void TransferItemsFromListToArray(List<Item> list, Item[] array)
+    {
+
+        for(int i = 0; i < list.Count; i++)
+        {
+            Debug.Log("List of i: " + list[i] + "Array of i: " + array[i]);
+            array[i] = list[i];
+        }
     }
 
     //will pick a random spawn location from the current room (The room must contain an item display)
