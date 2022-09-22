@@ -35,6 +35,9 @@ public class EnemyAttackAnimationBehavior : StateMachineBehaviour, IDamageAttrib
         enemyHitColliderScript = animator.transform.gameObject.GetComponentInChildren<IDamageDealing>();
         enemyControllerScript = animator.transform.gameObject.GetComponent<EnemyController>();
 
+        //when this enemy throws an attack (decrease their aggression level)
+        //enemyControllerScript.DecreaseAggressionLevelOnAttack();
+
         //retrieve what direction the enemy was facing in
         enemyFacingRight = animator.transform.gameObject.GetComponent<EnemyMovement>().GetDirection();
 

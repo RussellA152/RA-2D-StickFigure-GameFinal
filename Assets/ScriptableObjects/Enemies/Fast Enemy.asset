@@ -19,6 +19,11 @@ MonoBehaviour:
   attackRangeX: 4.5
   attackRangeY: 2
   attackCooldownTimer: 2
+  aggressionLevelTreshold: 10
+  minAggressionLevelIncrease: 0.02
+  maxAggressionLevelIncrease: 5
+  aggressionLevelIncreaseOnHurt: 4
+  aggressionLevelDecreaseOnAttack: 10
   rbMass: 100
   enemyAnimatorController: {fileID: 22100000, guid: dad37f3e044819e458c394a4efd1fa11, type: 2}
   lightAttackAnimation: Light Attack

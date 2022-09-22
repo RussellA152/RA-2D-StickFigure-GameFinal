@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 
 //This script is responsible for changing and setting the current state of the enemy this script is placed on
@@ -22,15 +23,26 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private EnemyHealth enemyHpScript; // every enemy will have a health script
     [SerializeField] private EnemyHurt enemyHurtScript; // every enemy will have a hurt script
     [SerializeField] private EnemyScriptableObject enemyScriptableObject; //Every enemy will have an attacking script, but might not share the exact same behavior, so we will use an interface 
-    
+
 
     [Header("Enemy v. Player Properties")]
     private Transform target; //enemy's target that they will chase and attack
+
+    //private bool isAggressive; //if the enemy's aggression level has reached the threhold, then set this true
+    //[SerializeField] private float aggressionLevel; //how aggressive the enemy currently is (increases and decreases depending on state of enemy)
+    //private float aggressionLevelThreshold; //how aggressive the enemy must become to attack the player
+    //private float minAggressionLevelIncrease; //the minimum the enemy's aggression will increase when not fighting
+    //private float maxAggressionLevelIncrease; //the maximum the enemy's aggression will increase when not fighting
+    //private float aggressionLevelIncreaseOnHurt; //how much the enemy's aggression level will increase when hit
+    //private float aggressionLevelDecreaseOnAttack; //how much the enemy's aggression level will decrease when attacking
+
     private float distanceFromTargetX; // the distance from enemy and player in x-axis
     private float distanceFromTargetY; // the distance from enemy and player in y-axis
+
     private float followRangeX; //how far enemy can be to follow player in x direction
     private float followRangeY; //how far enemy can be to follow player in y direction
     private bool withinFollowRange;
+
     private float attackRangeX; //range that enemy can attack target (taken from Scriptable Object)
     private float attackRangeY; //range that enemy can attack target (taken from Scriptable Object)
     private bool withinAttackRange;
@@ -55,12 +67,9 @@ public class EnemyController : MonoBehaviour
     [Header("Dedicated Room")]
     [SerializeField] private BaseRoom myRoom; //the room this enemy was spawned in
 
-
-
     private int walkingHash;
 
     private bool isHurt = false;
-    private bool stopped;
     private int stoppedHash;
 
 
@@ -83,7 +92,7 @@ public class EnemyController : MonoBehaviour
     private void OnEnable()
     {
         //if the enemy does not already have a scriptable object attached, give them a random one from the EnemyManager (generates random scriptable object from list)
-        if(enemyScriptableObject == null)
+        if (enemyScriptableObject == null)
             enemyScriptableObject = EnemyManager.enemyManagerInstance.GiveScriptableObject();
 
         //enemy is in idle state when spawning in
@@ -94,6 +103,9 @@ public class EnemyController : MonoBehaviour
 
         //the enemy's room would always be the current room inside of OnEnable
         myRoom = LevelManager.instance.GetCurrentRoom();
+
+        //enemy's aggression level is reset or set to 0 when spawning in
+        //aggressionLevel = 0;
 
     }
 
@@ -129,6 +141,18 @@ public class EnemyController : MonoBehaviour
             animator.SetBool(stoppedHash, true);
         else
             animator.SetBool(stoppedHash, false);
+        /*
+        //if the enemy's aggression level becomes higher than the threshold, then set it equal to the threshold
+        if (aggressionLevel >= aggressionLevelThreshold)
+        {
+            aggressionLevel = aggressionLevelThreshold;
+            isAggressive = true;
+        }
+        else
+        {
+            isAggressive = false;
+        }
+        */
 
 
         //calculate the distance between enemy and player
@@ -138,7 +162,7 @@ public class EnemyController : MonoBehaviour
             distanceFromTargetX = Mathf.Abs(transform.position.x - target.position.x);
             distanceFromTargetY = Mathf.Abs(transform.position.y - target.position.y);
         }
-            
+
         //if enemy is close to player (in x & y direction), they are within attacking range and can change to "attacking" state
         //otherwise, they cannot change to "attacking" state
         if (distanceFromTargetX <= attackRangeX && distanceFromTargetY <= attackRangeY)
@@ -207,6 +231,13 @@ public class EnemyController : MonoBehaviour
         //retrieve the attacking ranges from the attacking script
         attackRangeX = enemyScriptableObject.GetAttackRangeX();
         attackRangeY = enemyScriptableObject.GetAttackRangeY();
+        /*
+        aggressionLevelThreshold = enemyScriptableObject.GetAggressionLevelThreshold();
+        minAggressionLevelIncrease = enemyScriptableObject.GetMinAggressionLevelIncrease();
+        maxAggressionLevelIncrease = enemyScriptableObject.GetMaxAggressionLevelIncrease();
+        aggressionLevelDecreaseOnAttack = enemyScriptableObject.GetAggressionLevelDecreaseOnAttack();
+        aggressionLevelIncreaseOnHurt = enemyScriptableObject.GetAggressionLevelIncreaseOnHurt();
+        */
     }
 
     private void EnemyIdleBehavior()
@@ -226,19 +257,19 @@ public class EnemyController : MonoBehaviour
         enemyHurtScript.SetIsKnockedDown(false);
         enemyHurtScript.SetRBGravity(gravityWhenIdle);
 
-
+        //IncreaseAggressionLevelIdle();
 
         //check distance between enemy and player
         //if enemy is close to player, chase them (within follow range)
         if (!stateCooldownStarted)
         {
-            if (withinFollowRange && !withinAttackRange && !isHurt)
+            if (withinFollowRange && !withinAttackRange && !isHurt) //&& isAggressive)
             {
                 ChangeEnemyState(chaseStateTransitionTimer, EnemyState.ChaseTarget);
             }
 
             // if the player is within attacking range, attack them instead of chase
-            else if (withinAttackRange && !isHurt)
+            else if (withinAttackRange && !isHurt)// && isAggressive)
             {
                 ChangeEnemyState(attackStateTransitionTimer, EnemyState.Attacking);
             }
@@ -286,7 +317,7 @@ public class EnemyController : MonoBehaviour
         //Debug.Log("Attack behavior!");
 
         //if (isHurt)
-            //ChangeEnemyState(0f, EnemyState.Hurt);
+        //ChangeEnemyState(0f, EnemyState.Hurt);
 
         animator.SetBool(walkingHash, false);
 
@@ -306,9 +337,9 @@ public class EnemyController : MonoBehaviour
             SetIsAttacking(true);
             enemyScriptableObject.AttackTarget(animator, target);
         }
-            
 
-        
+
+
         if (!stateCooldownStarted && !isAttacking)
         {
             if (withinFollowRange && !withinAttackRange)
@@ -320,12 +351,14 @@ public class EnemyController : MonoBehaviour
                 ChangeEnemyState(idleStateTransitionTimer, EnemyState.Idle);
             }
         }
-        
+
 
     }
 
     private void EnemyHurtBehavior()
     {
+        //IncreaseAggressionLevelHurt();
+
         isHurt = true;
 
         animator.SetBool(walkingHash, false);
@@ -334,6 +367,7 @@ public class EnemyController : MonoBehaviour
 
         //the enemy is not allowed to turn around until they return to idle
         enemyMoveScript.SetCanFlip(false);
+
 
 
     }
@@ -356,7 +390,7 @@ public class EnemyController : MonoBehaviour
 
         //when this enemy dies, their room's "numberOfEnemiesAliveHere" should decrease by 1
         myRoom.DecrementNumberOfEnemiesAliveInHere();
-            
+
     }
 
 
@@ -396,9 +430,37 @@ public class EnemyController : MonoBehaviour
         currentState = state;
 
     }
+    /*
+    private void IncreaseAggressionLevelIdle()
+    {
+        if (aggressionLevel <= aggressionLevelThreshold)
+        {
+            // create a random number to increase the enemy's aggression level by
+            float aggressionLevelIncrease = Random.Range(minAggressionLevelIncrease, maxAggressionLevelIncrease);
+            // add the increase to the aggression level
+            aggressionLevel += aggressionLevelIncrease * Time.deltaTime;
+        }
+    }
+    */
+    /*
+    public void IncreaseAggressionLevelHurt()
+    {
+        if (aggressionLevel <= aggressionLevelThreshold)
+        {
+            aggressionLevel += aggressionLevelIncreaseOnHurt;
+        }
+    }
+    /*
+    /*
 
-
-
+    public void DecreaseAggressionLevelOnAttack()
+    {
+        if (aggressionLevel >= aggressionLevelDecreaseOnAttack)
+            aggressionLevel -= aggressionLevelDecreaseOnAttack;
+        else
+            aggressionLevel = 0f;
+    }
+    */
 
     //this function will start the Attack Cooldown of the enemy
     //it is invoked whenever the enemy is finished attacking
@@ -451,4 +513,3 @@ public class EnemyController : MonoBehaviour
 
 
 }
-

@@ -24,6 +24,12 @@ public class EnemyScriptableObject : ScriptableObject, IAIAttacks
     public float attackRangeX; //how far enemy can be to attack player in x-direction
     public float attackRangeY; //how far enemy can be to attack player in y-direction
     public float attackCooldownTimer; //time between each attack
+    public float aggressionLevelTreshold; // the value the enemy's aggression level must reach to attack the player (higher values mean it takes longer for enemy to become very aggressive)
+    public float minAggressionLevelIncrease; //the minimum the enemy's aggression will increase when not fighting
+    public float maxAggressionLevelIncrease; //the maximum the enemy's aggression will increase when not fighting
+    public float aggressionLevelIncreaseOnHurt; //how much the enemy's aggression level will increase when hit
+    public float aggressionLevelDecreaseOnAttack; //how much the enemy's aggression level will decrease when attacking
+
 
     [Header("Rigidbody Properties")]
     public float rbMass;
@@ -62,6 +68,27 @@ public class EnemyScriptableObject : ScriptableObject, IAIAttacks
     public float GetAttackRangeY()
     {
         return attackRangeY;
+    }
+
+    public float GetAggressionLevelThreshold()
+    {
+        return aggressionLevelTreshold;
+    }
+    public float GetMinAggressionLevelIncrease()
+    {
+        return minAggressionLevelIncrease;
+    }
+    public float GetMaxAggressionLevelIncrease()
+    {
+        return maxAggressionLevelIncrease;
+    }
+    public float GetAggressionLevelIncreaseOnHurt()
+    {
+        return aggressionLevelIncreaseOnHurt;
+    }
+    public float GetAggressionLevelDecreaseOnAttack()
+    {
+        return aggressionLevelDecreaseOnAttack;
     }
 
 }

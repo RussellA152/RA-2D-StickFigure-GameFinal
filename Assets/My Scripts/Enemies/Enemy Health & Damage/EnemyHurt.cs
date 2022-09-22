@@ -114,8 +114,8 @@ public class EnemyHurt : MonoBehaviour, IDamageable
                 {
                     //Play backward flinch animation
                     //Debug.Log("Backward light hit! enemy facing right!");
-
-                    PlayHurtAnimation(lightHurtAnimBehindHash);
+                    if (!isKnockedDown)
+                        PlayHurtAnimation(lightHurtAnimBehindHash);
 
                     //call the TakeDamage function to subtract the health of enemy 
                     TakeDamage(damage, attackPowerX, attackPowerY);
@@ -127,7 +127,8 @@ public class EnemyHurt : MonoBehaviour, IDamageable
                     //Play forward flinch animation
                     //Debug.Log("Forward light hit! enemy facing left!");
 
-                    PlayHurtAnimation(lightHurtAnimFrontHash);
+                    if (!isKnockedDown)
+                        PlayHurtAnimation(lightHurtAnimFrontHash);
 
                     TakeDamage(damage, attackPowerX, attackPowerY);
                 }
@@ -137,7 +138,8 @@ public class EnemyHurt : MonoBehaviour, IDamageable
                     //Play backward flinch animation
                     //Debug.Log("Forward light hit! enemy facing right!");
 
-                    PlayHurtAnimation(lightHurtAnimFrontHash);
+                    if(!isKnockedDown)
+                        PlayHurtAnimation(lightHurtAnimFrontHash);
 
                     //call the TakeDamage function to subtract the health of enemy 
                     TakeDamage(damage, -attackPowerX, attackPowerY);
@@ -148,8 +150,8 @@ public class EnemyHurt : MonoBehaviour, IDamageable
                 {
                     //Play forward flinch animation
                     //Debug.Log("Backward light hit! enemy facing left!");
-
-                    PlayHurtAnimation(lightHurtAnimBehindHash);
+                    if (!isKnockedDown)
+                        PlayHurtAnimation(lightHurtAnimBehindHash);
 
                     TakeDamage(damage, -attackPowerX, attackPowerY);
                 }

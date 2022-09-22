@@ -125,8 +125,8 @@ MonoBehaviour:
   enemyMovementScript: {fileID: 5969129094098281727}
   rb: {fileID: -8891431870749144915}
   animator: {fileID: 1373278072336133614}
-  gravityWhenFlinching: 1.5
-  gravityWhenKnockedDown: 1.5
+  gravityWhenFlinching: 1.75
+  gravityWhenKnockedDown: 1.75
 --- !u!114 &1709358543280309288
 MonoBehaviour:
   m_ObjectHideFlags: 0
