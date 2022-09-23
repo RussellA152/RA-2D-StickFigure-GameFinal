@@ -140,7 +140,7 @@ public abstract class Item : MonoBehaviour
                 break;
             case ItemScriptableObject.ItemType.equipment:
 
-                ItemManager.instance.activeEquipmentSlot = this;
+                ItemSwapper.instance.activeEquipmentSlot = this;
 
                 break;
             case ItemScriptableObject.ItemType.instant:

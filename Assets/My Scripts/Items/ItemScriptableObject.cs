@@ -10,6 +10,8 @@ public class ItemScriptableObject : ScriptableObject
 
     public ItemType itemType;
 
+    public int itemPrice; // how much does this item cost when it is inside a shop?
+
     [Header("Charge Properties")]
     public int amountOfCharge; //how many charges does this item have
 

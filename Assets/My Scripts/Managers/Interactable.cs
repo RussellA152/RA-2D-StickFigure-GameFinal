@@ -19,7 +19,7 @@ public abstract class Interactable : MonoBehaviour
     [HideInInspector]
     public bool inTrigger; //is the player in this interactable object's trigger collider?
 
-    private bool canInteractWith = true; //is the player allowed to "use" this object?
+    [SerializeField] private bool canInteractWith = true; //is the player allowed to "use" this object?
 
     [SerializeField] private float cooldownTimer; //how long the player needs to wait until they can "use" this object again
 
@@ -90,6 +90,8 @@ public abstract class Interactable : MonoBehaviour
         //grab a reference to the PlayerComponent script
         if (collision.gameObject.CompareTag("Player"))
         {
+            Debug.Log("Player has entered my trigger: " + gameObject.name);
+
             //interacter is always the player (because player has "Player" tag)
             interacter = collision.transform;
             //Debug.Log("Collision detected!");

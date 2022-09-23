@@ -46,7 +46,7 @@ public class BaseRoom: MonoBehaviour
     public bool canSpawnOtherRooms; //can this room spawn other rooms?
 
     [SerializeField] private int numberOfItems;
-    [SerializeField] private List<Transform> itemDisplayList = new List<Transform>();
+    [SerializeField] private List<ItemLocker> itemDisplayList = new List<ItemLocker>();
 
     public enum RoomEnemyCount
     {
@@ -163,7 +163,7 @@ public class BaseRoom: MonoBehaviour
     {
         localRoomCoordinate = newCoordinate;
     }
-    public List<Transform> GetItemDisplayTransformList()
+    public List<ItemLocker> GetItemDisplayTransformList()
     {
         return itemDisplayList;
     }

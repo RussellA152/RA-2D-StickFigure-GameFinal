@@ -1,5 +1,24 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &6866096915054038621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 490296484351922708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 195113016ceae6b48be9cc0af365c62e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  needsButtonPress: 0
+  inTrigger: 0
+  canInteractWith: 1
+  cooldownTimer: 1
+  objectToUnlock: {fileID: 0}
+  unlockedObject: 0
+  conditionFullfilled: 0
 --- !u!1 &570149326502756555
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,7 +82,7 @@ MonoBehaviour:
   canSpawnOtherRooms: 0
   numberOfItems: 1
   itemDisplayList:
-  - {fileID: 8680316722657362701}
+  - {fileID: 6866096915054038621}
 --- !u!114 &6508963260491174593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2107,6 +2126,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f6a431bc8679af45a2552d91dcf0302, type: 3}
+--- !u!1 &490296484351922708 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5156431680222223192, guid: 0f6a431bc8679af45a2552d91dcf0302, type: 3}
+  m_PrefabInstance: {fileID: 4702515871247763788}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8680316722657362701 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4121954007805332033, guid: 0f6a431bc8679af45a2552d91dcf0302, type: 3}

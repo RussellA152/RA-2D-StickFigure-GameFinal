@@ -103,23 +103,23 @@ public class ItemGiver : Interactable, ILockable
             rb.isKinematic = true;
 
             //if the player already has an equipment item, then invoke the swapEquipment event system
-            if(ItemManager.instance.activeEquipmentSlot != null && itemToGive.type == ItemScriptableObject.ItemType.equipment)
+            if(ItemSwapper.instance.activeEquipmentSlot != null && itemToGive.type == ItemScriptableObject.ItemType.equipment)
             {
                 //call the event system so that the previous equipment item's itemgiver will call its OnDrop
                 //this allows us to not need to know about other itemgivers
-                ItemManager.instance.SwapActiveEquipment();
+                ItemSwapper.instance.SwapActiveEquipment();
 
                 //now this item giver will subscribe to event system
-                ItemManager.instance.swapEquipmentEvent += OnDrop;
+                ItemSwapper.instance.swapEquipmentEvent += OnDrop;
             }
             //otherwise, subscribe this OnDrop to the swapEquipment event system
-            else if(ItemManager.instance.activeEquipmentSlot == null && itemToGive.type == ItemScriptableObject.ItemType.equipment)
+            else if(ItemSwapper.instance.activeEquipmentSlot == null && itemToGive.type == ItemScriptableObject.ItemType.equipment)
             {
-                ItemManager.instance.swapEquipmentEvent += OnDrop;
+                ItemSwapper.instance.swapEquipmentEvent += OnDrop;
             }
 
             //set the parent of this ItemGiver to ItemManager's item holder gameobject
-            parent = ItemManager.instance.GetItemHolder().transform;
+            parent = ItemSwapper.instance.GetItemHolder().transform;
 
             this.transform.SetParent(parent);
 
@@ -189,7 +189,7 @@ public class ItemGiver : Interactable, ILockable
         SetRetrieved(false);
 
         //unsubscribe from SwapEquipment event after being dropped
-        ItemManager.instance.swapEquipmentEvent -= OnDrop;
+        ItemSwapper.instance.swapEquipmentEvent -= OnDrop;
 
     }
 
