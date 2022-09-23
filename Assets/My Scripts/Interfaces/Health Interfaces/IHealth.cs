@@ -17,5 +17,5 @@ public interface IHealth
     float GetHealth();
 
     //return a bool representing whether the player is alive or not 
-    public bool CheckIfAlive();
+    bool CheckIfAlive();
 }

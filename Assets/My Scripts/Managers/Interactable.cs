@@ -136,6 +136,10 @@ public abstract class Interactable : MonoBehaviour
     {
         return interacter;
     }
+    public void SetCanInteract(bool boolean)
+    {
+        canInteractWith = boolean;
+    }
 
 
 }

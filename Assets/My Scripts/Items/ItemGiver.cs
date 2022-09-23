@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemGiver : Interactable
+public class ItemGiver : Interactable, ILockable
 {
     //[SerializeField] private NewItem itemToGiveToPlayer; //the item script that this giver will insert in the player's inventory
     [SerializeField] private Rigidbody2D rb;
@@ -191,5 +191,17 @@ public class ItemGiver : Interactable
         //unsubscribe from SwapEquipment event after being dropped
         ItemManager.instance.swapEquipmentEvent -= OnDrop;
 
+    }
+
+    public void AddLock()
+    {
+        // don't allow player to interact/pick up this itemgiver's item
+        SetCanInteract(false);
+    }
+
+    public void RemoveLock()
+    {
+        // allow player to interact/pick up this itemgiver's item
+        SetCanInteract(true);
     }
 }

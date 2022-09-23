@@ -34,6 +34,8 @@ public class ItemSpawner : MonoBehaviour
     [SerializeField] private int defaultEquipmentCapacity;
     [SerializeField] private int defaultInstantCapacity;
 
+    [SerializeField] private ShopLock shopLockPrefab;
+
     private void Awake()
     {
         //creating all three item pools
@@ -248,6 +250,16 @@ public class ItemSpawner : MonoBehaviour
                 break;
             case BaseRoom.RoomType.shop:
                 itemDisplayList = LevelManager.instance.GetCurrentRoom().GetItemDisplayTransformList();
+
+                // any item that spawns in a shop room will have a paywall to pick it up (we lock it here)
+                // GetComponent ILockable (the itemGiver) and call AddLock()
+                //ILockable itemGiver = item.gameObject.GetComponent<ILockable>();
+
+                //itemGiver.AddLock();
+
+                //ShopLock shopLock = item.gameObject.AddComponent<ShopLock>();
+
+                //shopLock.SetLockedObject(itemGiver);
 
                 break;
             case BaseRoom.RoomType.boss:
