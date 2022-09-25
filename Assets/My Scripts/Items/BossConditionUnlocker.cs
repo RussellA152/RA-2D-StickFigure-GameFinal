@@ -2,20 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossLock : ItemLocker
+// The player defeat the boss in the room to unlock this locked object (usually an Item)
+public class BossConditionUnlocker : Unlocker
 {
     public override void CheckIfConditionIsFullfilled()
     {
+        // TEMPORARY (REMOVE LATER) *** 
+        conditionFullfilled = true;
+
         // might need BossRoom to tell this lock that the boss was killed?
         // or have a boss was killed event system to unlock this item (probably this)
-        Debug.Log("Check if boss was killed");
-
-        if (conditionFullfilled)
+        if (!conditionFullfilled)
         {
-            // if the player had sufficient funds for this item, then remove the lock
-            objectToUnlock.RemoveLock();
+            Debug.Log("Check if boss was killed");
 
-            unlockedObject = true;
+        }
+        else
+        {
+            UnlockItem();
         }
 
 

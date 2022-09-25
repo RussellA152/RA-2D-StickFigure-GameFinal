@@ -64,7 +64,7 @@ MonoBehaviour:
   localRoomCoordinate: {x: 0, y: 0}
   canSpawnOtherRooms: 0
   numberOfItems: 3
-  itemDisplayList:
+  UnlockerList:
   - {fileID: 266575380710903516}
   - {fileID: 7938354113022008828}
   - {fileID: 487668139851054671}
@@ -1821,6 +1821,8 @@ MonoBehaviour:
   needsButtonPress: 1
   inTrigger: 0
   cooldownTimer: 1
+  gameObjectToUnlock: {fileID: 0}
+  conditionFullfilled: 0
 --- !u!1 &4008522662359411990
 GameObject:
   m_ObjectHideFlags: 0
@@ -1892,6 +1894,8 @@ MonoBehaviour:
   needsButtonPress: 1
   inTrigger: 0
   cooldownTimer: 1
+  gameObjectToUnlock: {fileID: 0}
+  conditionFullfilled: 0
 --- !u!61 &9114347062827665700
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1933,6 +1937,8 @@ MonoBehaviour:
   needsButtonPress: 1
   inTrigger: 0
   cooldownTimer: 1
+  gameObjectToUnlock: {fileID: 0}
+  conditionFullfilled: 0
 --- !u!1001 &896690482953383854
 PrefabInstance:
   m_ObjectHideFlags: 0

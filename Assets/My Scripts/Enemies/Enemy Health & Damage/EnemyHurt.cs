@@ -294,7 +294,7 @@ public class EnemyHurt : MonoBehaviour, IDamageable
             rb.velocity = Vector2.zero;
         }
 
-        rb.AddForce(new Vector2(attackPowerX, attackPowerY));
+        rb.AddForce(new Vector2(attackPowerX, attackPowerY), ForceMode2D.Impulse);
     }
 
     public void SetIsKnockedDown(bool boolean)

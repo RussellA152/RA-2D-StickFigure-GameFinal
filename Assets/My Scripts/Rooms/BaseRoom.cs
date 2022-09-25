@@ -46,7 +46,7 @@ public class BaseRoom: MonoBehaviour
     public bool canSpawnOtherRooms; //can this room spawn other rooms?
 
     [SerializeField] private int numberOfItems;
-    [SerializeField] private List<ItemLocker> itemDisplayList = new List<ItemLocker>();
+    [SerializeField] private List<Unlocker> UnlockerList = new List<Unlocker>(); // a list of ItemLockers (these will lock the items when spawned)
 
     public enum RoomEnemyCount
     {
@@ -163,9 +163,9 @@ public class BaseRoom: MonoBehaviour
     {
         localRoomCoordinate = newCoordinate;
     }
-    public List<ItemLocker> GetItemDisplayTransformList()
+    public List<Unlocker> GetUnlockerList()
     {
-        return itemDisplayList;
+        return UnlockerList;
     }
 
     //return the numberOfEnemiesCanSpawnHere (needed by AISpawner)

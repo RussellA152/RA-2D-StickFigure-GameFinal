@@ -242,55 +242,64 @@ public class ItemManager : MonoBehaviour
 
     private void SpawnItemInCurrentRoom(Item item)
     {
-        List<ItemLocker> lockList = null;
+        // the unlocker list is a list of Unlocker's that each Item Room contains (this is where items will be placed on)
+        List<Unlocker> unlockerList = null;
 
-        //for loop through each item display transforms inside of the current room (the room must be a shop, treasure, or boss room)
+        // check what room the player is currently in, to spawn an item inside
+        // pass in the current random item, the room's dedicated unlockerList (a list that holds ItemLockers), and a bool representing whether we should lock the item or not into SetLock()
         switch (LevelManager.instance.GetCurrentRoom().roomType)
         {
             case BaseRoom.RoomType.treasure:
-                lockList = LevelManager.instance.GetCurrentRoom().GetItemDisplayTransformList();
-                SetLock(item, lockList, false);
+                unlockerList = LevelManager.instance.GetCurrentRoom().GetUnlockerList();
+                // treasure rooms will not have locked items (the player can freely pick up items)
+                SetLock(item, unlockerList, false);
 
                 break;
             case BaseRoom.RoomType.shop:
-                lockList = LevelManager.instance.GetCurrentRoom().GetItemDisplayTransformList();
-                SetLock(item, lockList, true);
-
-                //put code there
+                unlockerList = LevelManager.instance.GetCurrentRoom().GetUnlockerList();
+                // shop rooms will have locked items with a paywall
+                SetLock(item, unlockerList, true);
 
                 break;
             case BaseRoom.RoomType.boss:
-                lockList = LevelManager.instance.GetCurrentRoom().GetItemDisplayTransformList();
-                SetLock(item, lockList, true);
+                unlockerList = LevelManager.instance.GetCurrentRoom().GetUnlockerList();
+                // boss room will have locked items with a condition that the boss must be killed
+                SetLock(item, unlockerList, true);
                 break;
         }
            
     }
 
-    private void SetLock(Item item, List<ItemLocker> lockList, bool shouldLock)
+    private void SetLock(Item item, List<Unlocker> unlockerList, bool shouldLock)
     {
-        //if this room's itemDisplayList has a length greater than 0..
-        if (lockList.Count != 0)
+        //if this room's unlockerList has a length greater than 0..
+        if (unlockerList.Count != 0)
         {
-            //iterate through the room's itemDisplayList
-            foreach (ItemLocker _lock in lockList)
+            //iterate through the room's UnlockerList
+            foreach (Unlocker unlocker in unlockerList)
             {
-                //if this lock component isn't null
-                if (_lock != null)
+                //if this ItemLocker component isn't null
+                if (unlocker != null)
                 {
-                    //set the randomly chosen item's position to the lock's transform position
-                    item.transform.localPosition = _lock.gameObject.transform.position;
+                    //set the randomly chosen item's position to the lock's gameObject transform position
+                    item.transform.localPosition = unlocker.gameObject.transform.position;
 
                     // set the randomly chosen item's parent to the lock's gameobject
-                    item.transform.SetParent(_lock.gameObject.transform);
+                    item.transform.SetParent(unlocker.gameObject.transform);
 
-                    // if we should lock this item, call the lock's LockItems() function
+                    // if we should lock this item, call the item's AddLock() function
                     if (shouldLock)
-                        _lock.LockItems();
+                    {
+                        // locks item... (ItemGiver implements ILockable)
+                        item.gameObject.GetComponent<ILockable>().AddLock();
 
-                    //now remove this lock element from the itemLockList
+                        //set the unlocker's :lockedGameObject" variable equal to this newly spawned item's gameobject
+                        unlocker.SetGameObjectToUnlock(item.gameObject);
+                    }
+
+                    //now remove this lock element from the UnlockerList
                     //we remove this element so that the items won't try to be placed on the same transform
-                    lockList.Remove(_lock);
+                    unlockerList.Remove(unlocker);
 
                     break;
                 }

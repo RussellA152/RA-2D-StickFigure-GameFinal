@@ -440,7 +440,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: Velocity
-    m_EventTreshold: 1.55
+    m_EventTreshold: 1.35
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7746354132150577750}
   m_Solo: 0
@@ -1272,8 +1272,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageType: 2
   attackDamage: 30
-  attackingPowerX: 50000
-  attackingPowerY: 20000
+  attackingPowerX: 800
+  attackingPowerY: 400
   joltForceX: 1000
   joltForceY: 0
 --- !u!1102 &-4507273775334180747
@@ -1720,8 +1720,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageType: 1
   attackDamage: 20
-  attackingPowerX: 12000
-  attackingPowerY: 10000
+  attackingPowerX: 150
+  attackingPowerY: 150
   joltForceX: 500
   joltForceY: 0
 --- !u!114 &-3170488162557796640
@@ -1843,8 +1843,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageType: 1
   attackDamage: 20
-  attackingPowerX: 12000
-  attackingPowerY: 10000
+  attackingPowerX: 150
+  attackingPowerY: 150
   joltForceX: 500
   joltForceY: 0
 --- !u!1101 &-2772697269554074870
@@ -2209,7 +2209,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Attack 4
-  m_Speed: 0.15
+  m_Speed: 0.2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -4336944977506907097}
@@ -2297,8 +2297,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageType: 2
   attackDamage: 40
-  attackingPowerX: 10000
-  attackingPowerY: 50000
+  attackingPowerX: 200
+  attackingPowerY: 1200
   joltForceX: 1000
   joltForceY: 0
 --- !u!1102 &-1215099197619369295
@@ -2829,8 +2829,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageType: 1
   attackDamage: 40
-  attackingPowerX: 12000
-  attackingPowerY: 10000
+  attackingPowerX: 150
+  attackingPowerY: 150
   joltForceX: 1500
   joltForceY: 0
 --- !u!1101 &193169169946245021
@@ -3316,8 +3316,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageType: 1
   attackDamage: 20
-  attackingPowerX: 30000
-  attackingPowerY: 0
+  attackingPowerX: 300
+  attackingPowerY: 300
   joltForceX: 500
   joltForceY: 0
 --- !u!1101 &1844816730347360954
@@ -3712,8 +3712,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageType: 2
   attackDamage: 50
-  attackingPowerX: 80000
-  attackingPowerY: 30000
+  attackingPowerX: 1300
+  attackingPowerY: 600
   joltForceX: 0
   joltForceY: 0
 --- !u!1101 &3823287536300520025
@@ -3851,7 +3851,7 @@ AnimatorStateMachine:
     m_Position: {x: 600, y: 90, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1443625528296104738}
-    m_Position: {x: 170, y: 180, z: 0}
+    m_Position: {x: 180, y: 180, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5363771655508918029}
     m_Position: {x: 600, y: 180, z: 0}
@@ -4744,8 +4744,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageType: 1
   attackDamage: 20
-  attackingPowerX: 12000
-  attackingPowerY: 10000
+  attackingPowerX: 150
+  attackingPowerY: 150
   joltForceX: 500
   joltForceY: 0
 --- !u!1102 &8180898813625264346

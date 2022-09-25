@@ -14,10 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   needsButtonPress: 0
   inTrigger: 0
-  canInteractWith: 1
   cooldownTimer: 1
-  objectToUnlock: {fileID: 0}
-  unlockedObject: 0
+  gameObjectToUnlock: {fileID: 0}
   conditionFullfilled: 0
 --- !u!1 &570149326502756555
 GameObject:
@@ -81,7 +79,7 @@ MonoBehaviour:
   localRoomCoordinate: {x: 0, y: 0}
   canSpawnOtherRooms: 0
   numberOfItems: 1
-  itemDisplayList:
+  UnlockerList:
   - {fileID: 6866096915054038621}
 --- !u!114 &6508963260491174593
 MonoBehaviour:

@@ -21,6 +21,8 @@ public class NewItemTest2 : Item//, IDamageAttributes
 
         type = myScriptableObject.itemType;
 
+        itemPrice = myScriptableObject.itemPrice;
+
         amountOfCharge = myScriptableObject.amountOfCharge;
         chargeConsumedPerUse = myScriptableObject.chargesConsumedPerUse;
 

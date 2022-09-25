@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Pool;
 using Random = UnityEngine.Random;
 
-public abstract class Item : MonoBehaviour
+public abstract class Item : MonoBehaviour, IPriceable
 {
     public string itemName;
 
@@ -18,6 +18,8 @@ public abstract class Item : MonoBehaviour
 
     public int amountOfCharge; //how many times can this item be used?
     public int chargeConsumedPerUse; //how much charge will this item consume on each use?
+
+    public int itemPrice;
 
     //private bool hasSufficientCharge = true;
 
@@ -174,5 +176,11 @@ public abstract class Item : MonoBehaviour
     public IObjectPool<Item> GetMyPool()
     {
         return myPool;
+    }
+
+    // returns the price of this item
+    public int GetPrice()
+    {
+        return itemPrice;
     }
 }

@@ -2,26 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PaywallLock : ItemLocker
+// The player must pay with their money to unlock the locked object (usually an Item)
+public class PaywallUnlocker : Unlocker
 {
-    private int priceOfItem;
+    [SerializeField] private int priceOfItem;
     private bool fetchedPriceOfItem = false; // has this locker grabbed a reference to the item's price?
 
     public override void CheckIfConditionIsFullfilled()
     {
+        // TEMPORARY (REMOVE LATER) *** 
+        conditionFullfilled = true;
+
         // check if this locker hasn't grabbed a reference to the item's price already so we don't have to GetComponent more than once
         if (!fetchedPriceOfItem)
             CheckPriceOfItem();
 
-        Debug.Log("Check if player has enough money");
-
-
-        if (conditionFullfilled)
+        if (!conditionFullfilled)
+        {
+            Debug.Log("Check if player has enough money");
+        }
+        
+        else
         {
             // if the player had sufficient funds for this item, then remove the lock
-            itemToUnlock.RemoveLock();
-
-            unlockedObject = true;
+            //itemToUnlock.RemoveLock();
+            UnlockItem();
         }
         
 
@@ -31,7 +36,8 @@ public class PaywallLock : ItemLocker
 
     private void CheckPriceOfItem()
     {
-        //priceOfItem = objectToUnlock.gameObject.GetComponent<ItemScriptableObject>().itemPrice;
+        // fetch the price of this locked gameobject
+        priceOfItem = gameObjectToUnlock.GetComponent<IPriceable>().GetPrice();
 
         fetchedPriceOfItem = true;
 

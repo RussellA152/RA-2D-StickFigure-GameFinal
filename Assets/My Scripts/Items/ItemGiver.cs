@@ -13,7 +13,7 @@ public class ItemGiver : Interactable, ILockable
 
     private Transform parent; //the parent gameobject of this item giver
 
-    [SerializeField] private bool displayRotation;
+    //[SerializeField] private bool displayRotation;
 
     [Header("Details of Item")]
 
@@ -102,22 +102,8 @@ public class ItemGiver : Interactable, ILockable
             //when picked up, set isKinematic to true to prevent item from moving 
             rb.isKinematic = true;
 
-            //if the player already has an equipment item, then invoke the swapEquipment event system
-            if(ItemSwapper.instance.activeEquipmentSlot != null && itemToGive.type == ItemScriptableObject.ItemType.equipment)
-            {
-                //call the event system so that the previous equipment item's itemgiver will call its OnDrop
-                //this allows us to not need to know about other itemgivers
-                ItemSwapper.instance.SwapActiveEquipment();
-
-                //now this item giver will subscribe to event system
-                ItemSwapper.instance.swapEquipmentEvent += OnDrop;
-            }
-            //otherwise, subscribe this OnDrop to the swapEquipment event system
-            else if(ItemSwapper.instance.activeEquipmentSlot == null && itemToGive.type == ItemScriptableObject.ItemType.equipment)
-            {
-                ItemSwapper.instance.swapEquipmentEvent += OnDrop;
-            }
-
+            SwapOutOldEquipmentItem();
+            
             //set the parent of this ItemGiver to ItemManager's item holder gameobject
             parent = ItemSwapper.instance.GetItemHolder().transform;
 
@@ -140,7 +126,30 @@ public class ItemGiver : Interactable, ILockable
         }
     }
 
+    // This function checks if the player is currently trying to pick up an item of type: equipment
+    //      If the item is of type: equipment, check if they already have an equipment item slotted
+    //          if they do not, subscribe OnDrop() to the swapEquipmentEvent
+    //          if they did have an equipment item slotted, then invoke the swapEquipmentEvent which will force the previous equipment item to call OnDrop(), then make subscribe THIS OnDrop to the same event system
+    private void SwapOutOldEquipmentItem()
+    {
+        //if the player already has an equipment item, then invoke the swapEquipment event system
+        if (ItemSwapper.instance.activeEquipmentSlot != null && itemToGive.type == ItemScriptableObject.ItemType.equipment)
+        {
+            //call the event system so that the previous equipment item's itemgiver will call its OnDrop
+            //this allows us to not need to know about other itemgivers
+            ItemSwapper.instance.SwapActiveEquipment();
 
+            //now this item giver will subscribe to event system
+            ItemSwapper.instance.swapEquipmentEvent += OnDrop;
+        }
+        //otherwise, subscribe this OnDrop to the swapEquipment event system
+        else if (ItemSwapper.instance.activeEquipmentSlot == null && itemToGive.type == ItemScriptableObject.ItemType.equipment)
+        {
+            ItemSwapper.instance.swapEquipmentEvent += OnDrop;
+        }
+    }
+
+    // drops the item to the ground
     public void OnDrop()
     {
         //when dropped, set isKinematic to false to allow item to fall to the ground
@@ -197,11 +206,17 @@ public class ItemGiver : Interactable, ILockable
     {
         // don't allow player to interact/pick up this itemgiver's item
         SetCanInteract(false);
+
+        // when locked, don't let player collide with trigger until unlocked
+        triggerCollider.enabled = false;
     }
 
     public void RemoveLock()
     {
         // allow player to interact/pick up this itemgiver's item
         SetCanInteract(true);
+
+        // when unlocked, allow player to collide with trigger
+        triggerCollider.enabled = true;
     }
 }

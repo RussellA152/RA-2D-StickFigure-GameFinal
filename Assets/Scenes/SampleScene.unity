@@ -1923,6 +1923,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   needsButtonPress: 0
   inTrigger: 0
+  canInteractWith: 1
   cooldownTimer: 0
   retrieved: 0
 --- !u!61 &809350207
@@ -2050,6 +2051,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   needsButtonPress: 0
   inTrigger: 0
+  canInteractWith: 1
   cooldownTimer: 12
   retrieved: 0
 --- !u!61 &879423099
@@ -2736,6 +2738,10 @@ PrefabInstance:
       propertyPath: enemyScriptableObject
       value: 
       objectReference: {fileID: 11400000, guid: 53c3d25a43b2e6c44a7d9586d2455b3c, type: 2}
+    - target: {fileID: 7339406185074056689, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
 --- !u!43 &1342587725
@@ -3164,6 +3170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   needsButtonPress: 0
   inTrigger: 0
+  canInteractWith: 1
   cooldownTimer: 0
   retrieved: 0
 --- !u!61 &1488116364
