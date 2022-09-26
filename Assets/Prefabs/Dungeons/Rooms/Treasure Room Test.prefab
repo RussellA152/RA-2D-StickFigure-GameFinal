@@ -1827,6 +1827,7 @@ MonoBehaviour:
   cooldownTimer: 0
   gameObjectToUnlock: {fileID: 0}
   conditionFullfilled: 0
+  priceOfItem: 0
 --- !u!1 &3017283706554827115
 GameObject:
   m_ObjectHideFlags: 0
@@ -1968,6 +1969,7 @@ MonoBehaviour:
   cooldownTimer: 0
   gameObjectToUnlock: {fileID: 0}
   conditionFullfilled: 0
+  priceOfItem: 0
 --- !u!114 &2855009616962026402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1985,6 +1987,7 @@ MonoBehaviour:
   cooldownTimer: 0
   gameObjectToUnlock: {fileID: 0}
   conditionFullfilled: 0
+  priceOfItem: 0
 --- !u!1001 &896690482953383854
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2561,7 +2564,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8750791964639832541, guid: e7605e05a0f3dfe4c9d6c8a7fd1bb019, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7605e05a0f3dfe4c9d6c8a7fd1bb019, type: 3}

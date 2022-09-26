@@ -43,7 +43,7 @@ public class BaseRoom: MonoBehaviour
     [Header("X & Y Coordinates")]
     public Vector2 localRoomCoordinate; //NOT TO BE CONFUSED with the room coordinate in the Level Manager's dictionary (this is a local version of the same vector2 value*)
 
-    public bool canSpawnOtherRooms; //can this room spawn other rooms?
+    //public bool canSpawnOtherRooms; //can this room spawn other rooms?
 
     [SerializeField] private int numberOfItems;
     [SerializeField] private List<Unlocker> UnlockerList = new List<Unlocker>(); // a list of ItemLockers (these will lock the items when spawned)
@@ -83,7 +83,7 @@ public class BaseRoom: MonoBehaviour
         // the current room is always the starting room at the start of the current level/run
         if (isStartingRoom)
         {
-            CreateCoordinate();
+            //CreateCoordinate();
             levelManager.UpdateCurrentRoom(this);
         }
             

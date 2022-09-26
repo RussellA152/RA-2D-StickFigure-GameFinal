@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e59d7ef975809a40b041b15bd19dc00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomType: 0
   isStartingRoom: 0
   spawnLocationsOfThisLevel:
   - {fileID: 5335889936962235030}
@@ -56,11 +57,15 @@ MonoBehaviour:
   - {fileID: 8351033411652747827}
   numberOfEnemiesCanSpawnHere: 4
   roomEnemyCountState: 0
+  levelManager: {fileID: 0}
   bottomDoor: {fileID: 7224667287039095948}
   topDoor: {fileID: 3272542392093839048}
   leftDoor: {fileID: 2788754765315423702}
   rightDoor: {fileID: 5648844535878035801}
   localRoomCoordinate: {x: 0, y: 0}
+  canSpawnOtherRooms: 0
+  numberOfItems: 0
+  UnlockerList: []
 --- !u!114 &2889336962526705978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2639,7 +2644,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8750791964639832541, guid: e7605e05a0f3dfe4c9d6c8a7fd1bb019, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7605e05a0f3dfe4c9d6c8a7fd1bb019, type: 3}

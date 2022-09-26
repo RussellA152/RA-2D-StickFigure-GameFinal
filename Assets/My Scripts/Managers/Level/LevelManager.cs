@@ -9,14 +9,19 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
 
+
     private BaseRoom currentRoom; // the room the player is inside of
+
+    //[SerializeField] private GameObject entryRoom;
+    //private Vector3 entryRoomPosition = new Vector3(0f, 0f, 0f);
+
 
     public event Action onPlayerEnterNewArea;
     public event Action spawnNewRooms;
 
     [SerializeField] private DungeonSize dungeonSize; //the "DungeonSize" state determines how many rooms we will have
 
-    private int roomCap; //max number of rooms that can spawn (random based on the "DungeonSize" state)
+    [SerializeField] private int roomCap; //max number of rooms that can spawn (random based on the "DungeonSize" state)
 
     [HideInInspector]
     public GenerationProgress dungeonGenerationState; //the state of the dungeon generation.. is it complete or not?
@@ -85,6 +90,8 @@ public class LevelManager : MonoBehaviour
         
         
         RandomRoomCap();
+
+        //SpawnEntryRoom();
     }
 
     // Update is called once per frame
@@ -117,6 +124,11 @@ public class LevelManager : MonoBehaviour
             spawnNewRooms();
         }
     }
+
+    //public void SpawnEntryRoom()
+    //{
+        //Instantiate(entryRoom,entryRoomPosition,new Quaternion());
+    //}
 
     public void RandomRoomCap()
     {
