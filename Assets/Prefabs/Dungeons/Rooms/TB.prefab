@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e59d7ef975809a40b041b15bd19dc00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomType: 0
   isStartingRoom: 0
   spawnLocationsOfThisLevel:
   - {fileID: 3096540623798088849}
@@ -56,11 +57,14 @@ MonoBehaviour:
   - {fileID: 7119954049975416440}
   numberOfEnemiesCanSpawnHere: 4
   roomEnemyCountState: 0
+  levelManager: {fileID: 0}
   bottomDoor: {fileID: 2484272723912895622}
   topDoor: {fileID: 7732860366777325250}
   leftDoor: {fileID: 6956198649492743644}
   rightDoor: {fileID: 603058294024974675}
   localRoomCoordinate: {x: 0, y: 0}
+  numberOfItems: 0
+  UnlockerList: []
 --- !u!114 &7722328952103255013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1180,8 +1184,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 144130753
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 1.1, y: 1.1, z: 0}
@@ -1764,7 +1768,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 144130753
-  m_SortingLayer: 1
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 2, y: 2, z: 0}

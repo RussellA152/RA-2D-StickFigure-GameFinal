@@ -83,7 +83,8 @@ public class BaseRoom: MonoBehaviour
         // the current room is always the starting room at the start of the current level/run
         if (isStartingRoom)
         {
-            //CreateCoordinate();
+            // remove this after making new room spawner
+            CreateCoordinate();
             levelManager.UpdateCurrentRoom(this);
         }
             

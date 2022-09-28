@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// ItemGiver is the physical, interactable part of an Item
+// This is what gives an Item the logic of being picked up and dropped
 public class ItemGiver : Interactable, ILockable
 {
     //[SerializeField] private NewItem itemToGiveToPlayer; //the item script that this giver will insert in the player's inventory
@@ -19,9 +21,8 @@ public class ItemGiver : Interactable, ILockable
 
     [SerializeField] private Item itemToGive;
 
-    //[SerializeField] private Sprite itemSprite;
 
-    //private bool spawned = false; //has this item spawned in the world?
+    //[SerializeField] private Vector2 positionInRoom; // the position where this ItemGiver is in the room
 
     private bool retrieved = false; //was this item picked up by the player?
 
@@ -36,13 +37,15 @@ public class ItemGiver : Interactable, ILockable
         //Always ignore collision between item and player
         Physics2D.IgnoreLayerCollision(7,11);
 
+        //LevelManager.instance.onPlayerEnterNewArea += ResetPositionInRoom;
+
     }
 
     private void OnEnable()
     {
         base.OnEnable();
 
-        //set isKinematic to true onEnable so that item will stay on top of a display
+        // set isKinematic to true onEnable so that item will stay on top of a display (not effected by physics until dropped onto ground)
         rb.isKinematic = true;
 
 
@@ -219,4 +222,18 @@ public class ItemGiver : Interactable, ILockable
         // when unlocked, allow player to collide with trigger
         triggerCollider.enabled = true;
     }
+
+    // when the player walks into a new room, return to the initial position this ItemGiver was enabled at
+    // this prevents player from bringing items into another room
+    /*
+    public void SetPositionInRoom(Vector2 position)
+    {
+        positionInRoom = position;
+    }
+
+    private void ResetPositionInRoom()
+    {
+        this.transform.position = positionInRoom;
+    }
+    */
 }

@@ -14,8 +14,8 @@ public abstract class Unlocker : Interactable
     [HideInInspector]
     private bool unlockedObject = false; // has this Unlocker already unlocked its given gameObject?
 
-    [HideInInspector]
-    public bool conditionFullfilled; // has the Player fullfilled this unlocker's needs to unlock the gameobject
+    //[HideInInspector]
+    //public bool conditionFulfilled; // has the Player fullfilled this unlocker's needs to unlock the gameobject
 
     private void Update()
     {
@@ -27,10 +27,10 @@ public abstract class Unlocker : Interactable
 
     public override void InteractableAction()
     {
-        CheckIfConditionIsFullfilled();
+        CheckIfConditionIsFulfilled();
     }
 
-    public abstract void CheckIfConditionIsFullfilled();
+    public abstract void CheckIfConditionIsFulfilled();
 
 
     // set "lockedItem" equal to item passed through

@@ -5,28 +5,33 @@ using UnityEngine;
 // The player must pay with their money to unlock the locked object (usually an Item)
 public class PaywallUnlocker : Unlocker
 {
-    [SerializeField] private int priceOfItem;
+    [SerializeField] private int priceOfObject;
     private bool fetchedPriceOfItem = false; // has this locker grabbed a reference to the item's price?
 
-    public override void CheckIfConditionIsFullfilled()
+    public override void CheckIfConditionIsFulfilled()
     {
         // TEMPORARY (REMOVE LATER) *** 
-        conditionFullfilled = true;
+        //conditionFulfilled = true;
 
         // check if this locker hasn't grabbed a reference to the item's price already so we don't have to GetComponent more than once
         if (!fetchedPriceOfItem)
             CheckPriceOfItem();
 
-        if (!conditionFullfilled)
+        // if the player has enough money to unlock this gameobject
+        if (PlayerStats.instance.GetPlayerMoney() >= priceOfObject)
         {
-            Debug.Log("Check if player has enough money");
+            // tell the locked gameobject to remove its lock
+            UnlockItem();
+
+            // subtract the player's money by priceOfObject amount
+            PlayerStats.instance.ModifyPlayerMoney(-priceOfObject);
         }
         
         else
         {
-            // if the player had sufficient funds for this item, then remove the lock
-            //itemToUnlock.RemoveLock();
-            UnlockItem();
+            // Play a failure/unsuccessful purchase sound effect
+
+            Debug.Log("Not enough money");
         }
         
 
@@ -37,7 +42,7 @@ public class PaywallUnlocker : Unlocker
     private void CheckPriceOfItem()
     {
         // fetch the price of this locked gameobject
-        priceOfItem = gameObjectToUnlock.GetComponent<IPriceable>().GetPrice();
+        priceOfObject = gameObjectToUnlock.GetComponent<IPriceable>().GetPrice();
 
         fetchedPriceOfItem = true;
 

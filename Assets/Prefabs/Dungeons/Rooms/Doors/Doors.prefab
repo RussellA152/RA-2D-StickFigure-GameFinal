@@ -158,8 +158,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 144130753
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 2, y: 2, z: 0}
@@ -181,10 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfb73236ed894534db80ddaf44947903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interacter: {fileID: 0}
   needsButtonPress: 1
   inTrigger: 0
-  canInteractWith: 1
   cooldownTimer: 1.5
   room: {fileID: 0}
 --- !u!61 &7353442006225623023
@@ -371,8 +369,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 144130753
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 2, y: 2, z: 0}
@@ -394,10 +392,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfb73236ed894534db80ddaf44947903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interacter: {fileID: 0}
   needsButtonPress: 1
   inTrigger: 0
-  canInteractWith: 1
   cooldownTimer: 1.5
   room: {fileID: 0}
 --- !u!61 &6556090531535826917
@@ -618,8 +614,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 144130753
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 2, y: 2, z: 0}
@@ -641,10 +637,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfb73236ed894534db80ddaf44947903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interacter: {fileID: 0}
   needsButtonPress: 1
   inTrigger: 0
-  canInteractWith: 1
   cooldownTimer: 1.5
   room: {fileID: 0}
 --- !u!61 &957892069106877114
@@ -831,8 +825,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 144130753
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 2, y: 2, z: 0}
@@ -854,10 +848,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfb73236ed894534db80ddaf44947903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interacter: {fileID: 0}
   needsButtonPress: 1
   inTrigger: 0
-  canInteractWith: 1
   cooldownTimer: 1.5
   room: {fileID: 0}
 --- !u!61 &2200501172913840958

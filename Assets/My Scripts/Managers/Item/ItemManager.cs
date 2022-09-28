@@ -287,6 +287,8 @@ public class ItemManager : MonoBehaviour
                     // set the randomly chosen item's parent to the lock's gameobject
                     item.transform.SetParent(unlocker.gameObject.transform);
 
+                    //item.transform.GetComponent<ItemGiver>().SetPositionInRoom(unlocker.transform.position);
+
                     // if we should lock this item, call the item's AddLock() function
                     if (shouldLock)
                     {

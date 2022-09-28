@@ -10,7 +10,8 @@ public class EnemyManager : MonoBehaviour
 
     public List<EnemyScriptableObject> enemyScriptableObjects = new List<EnemyScriptableObject>();
 
-    public event Action onEnemyEvent;
+    //public event Action onEnemyEvent;
+    public event Action onBossKill; // an action that will occur when the boss is killed
 
     private void Awake()
     {
@@ -22,12 +23,18 @@ public class EnemyManager : MonoBehaviour
 
     }
 
-    public void RandomEventSystem()
+    //public void RandomEventSystem()
+    //{
+        //if(onEnemyEvent != null)
+        //{
+            //onEnemyEvent();
+        //}
+    //}
+
+    public void BossKilledEventSystem()
     {
-        if(onEnemyEvent != null)
-        {
-            onEnemyEvent();
-        }
+        if (onBossKill != null)
+            onBossKill();
     }
 
     public EnemyScriptableObject GiveScriptableObject()

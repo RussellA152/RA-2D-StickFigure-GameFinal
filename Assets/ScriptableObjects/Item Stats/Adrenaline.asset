@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Adrenaline
   itemType: 0
+  itemPrice: 8
   amountOfCharge: 0
   chargesConsumedPerUse: 0
   chargeRefilledPerKill: 0

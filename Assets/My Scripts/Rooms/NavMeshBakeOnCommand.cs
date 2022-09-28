@@ -17,14 +17,14 @@ public class NavMeshBakeOnCommand : MonoBehaviour
     private void Start()
     {
 
-        //LevelManager.instance.onPlayerEnterNewArea += BakeNewArea;
+        LevelManager.instance.onAllRoomsSpawned += BakeNewArea;
 
         navMeshBaked = false;
-        StartCoroutine(WaitUntilRoomsAreSpawned());
+        //StartCoroutine(WaitUntilRoomsAreSpawned());
 
     }
 
-
+    /*
     IEnumerator WaitUntilRoomsAreSpawned()
     {
         //wait until all rooms are finished spawning in
@@ -35,6 +35,8 @@ public class NavMeshBakeOnCommand : MonoBehaviour
         BakeNewArea();
 
     }
+    */
+
 
 
     //sets the center component of the aStar grid equal to a new Vector2
@@ -67,6 +69,7 @@ public class NavMeshBakeOnCommand : MonoBehaviour
 
     private void BakeNewArea()
     {
+        Debug.Log("Baked?");
         if (!navMeshBaked)
         {
             navMeshSurface.BuildNavMesh();

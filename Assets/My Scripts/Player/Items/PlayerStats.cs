@@ -37,11 +37,13 @@ public class PlayerStats : MonoBehaviour
     //[SerializeField] private EquipmentItem equipmentItemSlot; //the player's current equipment (can only have 1 at a time)
     //[SerializeField] private EquipmentItem equipmentItemOriginal; //the gameobject of the current equipment item (can only have 1 at a time)
 
+    [SerializeField] private int money; // the amount of money the player has 
+
     [Header("All Modifiable Stats")]
-    [SerializeField] private float runningSpeed; //running speed of the player
-    [SerializeField] private float maxHealth; //max health of the player
-    [SerializeField] private float damageMultiplier; //value multiplied to all player damage (higher would increase all attack damage)
-    [SerializeField] private float procChanceMultiplier;
+    [SerializeField] private float runningSpeed; // the running speed of the player
+    [SerializeField] private float maxHealth; // the max health of the player
+    [SerializeField] private float damageMultiplier; // a value multiplied to all player damage (higher would increase all attack damage)
+    [SerializeField] private float procChanceMultiplier; // a value multiplied to all proc chances of Items 
 
     //[SerializeField] private CharacterController2D playerMovementScript;
     //[SerializeField] private PlayerHealth playerHealthScript;
@@ -213,6 +215,16 @@ public class PlayerStats : MonoBehaviour
     //{
         //return componentHolder;
     //}
+
+    public int GetPlayerMoney()
+    {
+        return money;
+    }
+
+    public void ModifyPlayerMoney(int amount)
+    {
+        money += amount;
+    }
 
 
     public float GetRunningSpeed()

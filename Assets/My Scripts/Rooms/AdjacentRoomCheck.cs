@@ -31,10 +31,13 @@ public class AdjacentRoomCheck : MonoBehaviour
     {
         levelManager = LevelManager.instance;
 
-        StartCoroutine(WaitUntilRoomGenHasFinished());
+        levelManager.onAllRoomsSpawned += CheckAllDirections;
+
+        //StartCoroutine(WaitUntilRoomGenHasFinished());
 
     }
-
+    
+    /*
     IEnumerator WaitUntilRoomGenHasFinished()
     {
         //wait until room generation is complete to check for adjacent rooms
@@ -42,8 +45,6 @@ public class AdjacentRoomCheck : MonoBehaviour
         {
             yield return null;
         }
-
-        //check EVERY direction for a room
 
         //check for room above (will need a neighboring bottom door)
         CheckAdjacentRooms(0f, 1f, topDoor);
@@ -54,6 +55,22 @@ public class AdjacentRoomCheck : MonoBehaviour
         //check for room to the left (will need a neighboring right door)
         CheckAdjacentRooms(-1f, 0f, leftDoor);
 
+    }
+    */
+    
+
+    private void CheckAllDirections()
+    {
+        //check EVERY direction for a room
+        Debug.Log("Check all rooms");
+        //check for room above (will need a neighboring bottom door)
+        CheckAdjacentRooms(0f, 1f, topDoor);
+        //check for room below (will need a neighboring top door)
+        CheckAdjacentRooms(0f, -1f, bottomDoor);
+        //check for room to the right (will need a neighboring left door)
+        CheckAdjacentRooms(1f, 0f, rightDoor);
+        //check for room to the left (will need a neighboring right door)
+        CheckAdjacentRooms(-1f, 0f, leftDoor);
 
     }
 

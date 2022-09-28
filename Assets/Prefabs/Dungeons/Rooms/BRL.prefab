@@ -94,7 +94,8 @@ MonoBehaviour:
   leftDoor: {fileID: 6842602386079786718}
   rightDoor: {fileID: 3900910162115932753}
   localRoomCoordinate: {x: 0, y: 0}
-  canSpawnOtherRooms: 0
+  numberOfItems: 0
+  UnlockerList: []
 --- !u!114 &6243524948201178211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1244,8 +1245,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 144130753
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 1.1, y: 1.1, z: 0}
@@ -1918,7 +1919,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 144130753
-  m_SortingLayer: 1
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 2, y: 2, z: 0}

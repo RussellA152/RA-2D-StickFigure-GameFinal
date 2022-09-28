@@ -18,6 +18,7 @@ public class LevelManager : MonoBehaviour
 
     public event Action onPlayerEnterNewArea;
     public event Action spawnNewRooms;
+    public event Action onAllRoomsSpawned;
 
     [SerializeField] private DungeonSize dungeonSize; //the "DungeonSize" state determines how many rooms we will have
 
@@ -88,10 +89,12 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         
-        
+        // generate a room cap
         RandomRoomCap();
 
-        //SpawnEntryRoom();
+        // Start a coroutine that waits until the number of spawned rooms has reached the room cap (WON'T STOP IF ROOM SPAWNER DOESN'T WORK)
+        StartCoroutine("WaitUntilRoomsAreSpawned");
+
     }
 
     // Update is called once per frame
@@ -125,14 +128,17 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    //public void SpawnEntryRoom()
-    //{
-        //Instantiate(entryRoom,entryRoomPosition,new Quaternion());
-    //}
+    public void RoomsFinishedSpawningEvent()
+    {
+        if (onAllRoomsSpawned != null)
+        {
+            onAllRoomsSpawned();
+        }
+    }
 
     public void RandomRoomCap()
     {
-        //set the room cap based on the "DungeonSize" state value
+        // set the room cap based on the "DungeonSize" state value
         switch (dungeonSize)
         {
             case DungeonSize.small:
@@ -167,6 +173,17 @@ public class LevelManager : MonoBehaviour
         Debug.Log("Treasure Room Count: " + maxNumberOfTreasureRooms);
         Debug.Log("Shop Room Count: " + maxNumberOfShopRooms);
         Debug.Log("Boss Room Count: " + maxNumberOfBossRooms);
+    }
+
+    IEnumerator WaitUntilRoomsAreSpawned()
+    {
+        //wait until all rooms are finished spawning in
+        while (dungeonGenerationState == GenerationProgress.incomplete)
+            yield return null;
+
+        // start event system when all rooms have spawned in
+        RoomsFinishedSpawningEvent();
+
     }
 
     //return the value of the max number of rooms that can spawn in this run/generation
