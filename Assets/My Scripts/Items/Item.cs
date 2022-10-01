@@ -81,9 +81,10 @@ public abstract class Item : MonoBehaviour, IPriceable
 
             //not needed for passive items that do not have to proc during gameplay (probably won't even invoke this function)
             case ItemScriptableObject.ItemType.passiveProc:
-                //check if the item's proc chance was successful
-                //if not, return and do not allow ability to activate
-                if (Random.value < procChance)
+                // check if the item's proc chance was successful
+                // if not, return and do not allow ability to activate
+                // multiply proc chance by PlayerStat's proc chance multiplier
+                if (Random.value < (procChance * PlayerStats.instance.GetProcChanceMultiplier()))
                 {
                     return true;
                 }
@@ -146,8 +147,12 @@ public abstract class Item : MonoBehaviour, IPriceable
 
                 break;
             case ItemScriptableObject.ItemType.instant:
-                //instant items do not get added to any inventory
+                // instant items do not get added to any inventory
                 ItemAction(PlayerStats.instance.GetPlayer());
+
+                // an instant will immediately return to their respective pool when picked up (no need to hold it anywhere)
+                if(myPool != null)
+                    myPool.Release(this);
                 break;
         }
 

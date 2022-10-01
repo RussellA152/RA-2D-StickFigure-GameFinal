@@ -6,6 +6,7 @@ public class CombatRoll : StateMachineBehaviour
 {
 
     [Header("Speed Properties")]
+    [SerializeField] private float minimumRollDistance; // minimum distance the player will roll
     [SerializeField] private float rollDistance; // How far the player will roll
 
     [Header("Layers That Will Ignore Each Other")]
@@ -13,6 +14,10 @@ public class CombatRoll : StateMachineBehaviour
     [SerializeField] private int enemyLayer;
 
     private bool directionIsRight;
+
+    [SerializeField] private float rollCancellationValue; // how much does TurnRight or TurnLeft binding need to reach to cancel this roll
+
+    
 
 
 
@@ -30,7 +35,7 @@ public class CombatRoll : StateMachineBehaviour
         animator.transform.gameObject.GetComponent<PlayerMovementInput>().SetRolling(false);
 
         //disable player's ability walk & jump & attack during roll
-        playerCompScript.SetCanMove(false);
+        //playerCompScript.SetCanMove(false);
         playerCompScript.SetCanFlip(false);
         playerCompScript.SetCanAttack(false);
 
@@ -46,11 +51,38 @@ public class CombatRoll : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //apply force to Vector2.right or Vector2.left depending on which way player is facing
+        // if the player is facing right, and tries to move backwards (left), then cancel the roll's force
         if (directionIsRight)
-            rb.AddForce(new Vector2(rollDistance * Time.deltaTime, 0f));
+        {
+            if (playerCompScript.GetTurnLeft().ReadValue<float>() > 0)
+            {
+                rb.AddForce(new Vector2(minimumRollDistance * Time.deltaTime, 0f));
+                OnStateExit(animator, stateInfo, layerIndex);
+            }
+                
+            else
+                rb.AddForce(new Vector2(rollDistance * Time.deltaTime, 0f));
+
+        }
         else
-            rb.AddForce(new Vector2(-rollDistance * Time.deltaTime, 0f));
+        {
+            if (playerCompScript.GetTurnRight().ReadValue<float>() > 0)
+            {
+                rb.AddForce(new Vector2(-minimumRollDistance * Time.deltaTime, 0f));
+                OnStateExit(animator, stateInfo, layerIndex);
+            }
+                
+            else
+                rb.AddForce(new Vector2(-rollDistance * Time.deltaTime, 0f));
+        }
+
+
+
+        //apply force to Vector2.right or Vector2.left depending on which way player is facing
+        //if (directionIsRight)
+            //rb.AddForce(new Vector2(rollDistance * Time.deltaTime, 0f));
+        //else
+            //rb.AddForce(new Vector2(-rollDistance * Time.deltaTime, 0f));
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
@@ -58,7 +90,7 @@ public class CombatRoll : StateMachineBehaviour
     {
 
         //allow player is move and attack again
-        playerCompScript.SetCanMove(true);
+        //playerCompScript.SetCanMove(true);
         playerCompScript.SetCanAttack(true);
         playerCompScript.SetCanFlip(true);
     }

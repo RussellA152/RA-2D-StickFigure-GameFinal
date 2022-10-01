@@ -4306,9 +4306,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1157d805467b014f8172b02290dc47e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minimumRollDistance: 50000
   rollDistance: 110000
   playerLayer: 7
   enemyLayer: 8
+  rollCancellationValue: 0.25
 --- !u!1101 &6864281054876725912
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

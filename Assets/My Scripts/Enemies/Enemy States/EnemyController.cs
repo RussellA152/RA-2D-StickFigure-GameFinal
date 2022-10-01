@@ -134,8 +134,8 @@ public class EnemyController : MonoBehaviour
         //if the enemy is dead, change their state to "Dead", and return from the function
         //they will not be able to change to another state
         //we won't use the ChangeEnemyState because then the coroutine could be canceled, which would prevent enemy from dying
-        if (!isAlive)
-            currentState = EnemyState.Dead;
+        //if (!isAlive)
+            //currentState = EnemyState.Dead;
 
         if (rb.velocity.x <= minimumVelocityUntilStopped.x && rb.velocity.y <= minimumVelocityUntilStopped.y)
             animator.SetBool(stoppedHash, true);
@@ -374,6 +374,17 @@ public class EnemyController : MonoBehaviour
 
     private void EnemyDeathBehavior()
     {
+        //Debug.Log("Died!");
+
+        //when this enemy dies, their room's "numberOfEnemiesAliveHere" should decrease by 1
+        if(myRoom != null)
+            myRoom.DecrementNumberOfEnemiesAliveInHere();
+
+        // Set "recentDeadEnemyPosition" to this killed enemy's current transform position
+        EnemyManager.enemyManagerInstance.SetDeadEnemyPosition(transform.position);
+
+        // invoke onEnemyKill eventsystem when any enemy dies
+        EnemyManager.enemyManagerInstance.EnemyKilledEventSystem();
 
         //if this enemy has a pool, return this enemy back to the pool
         if (myPool != null)
@@ -388,8 +399,6 @@ public class EnemyController : MonoBehaviour
             Debug.Log("Destroy me");
         }
 
-        //when this enemy dies, their room's "numberOfEnemiesAliveHere" should decrease by 1
-        myRoom.DecrementNumberOfEnemiesAliveInHere();
 
     }
 

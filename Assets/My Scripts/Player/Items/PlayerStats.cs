@@ -256,6 +256,15 @@ public class PlayerStats : MonoBehaviour
         damageMultiplier += amountToIncreaseBy;
     }
 
+    public float GetProcChanceMultiplier()
+    {
+        return procChanceMultiplier;
+    }
+    public void ModifyProcChanceMultiplier(float amountToIncreaseBy)
+    {
+        procChanceMultiplier += amountToIncreaseBy;      
+    }
+
     public void SetCanUseEquipment(bool boolean)
     {
         CanUseEquipment = boolean;

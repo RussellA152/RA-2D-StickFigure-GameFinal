@@ -218,7 +218,7 @@ MonoBehaviour:
   runningSpeed: 65
   maxHealth: 200
   damageMultiplier: 1
-  procChanceMultiplier: 0
+  procChanceMultiplier: 1
 --- !u!114 &4332903956958558062
 MonoBehaviour:
   m_ObjectHideFlags: 0

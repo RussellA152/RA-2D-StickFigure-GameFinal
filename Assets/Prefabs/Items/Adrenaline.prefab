@@ -249,6 +249,7 @@ MonoBehaviour:
   actualCollider: {fileID: 8782208612927994006}
   triggerCollider: {fileID: 1462772192432573736}
   itemToGive: {fileID: 8782208612927993994}
+  kinematicOnEnable: 1
 --- !u!114 &8782208612927993994
 MonoBehaviour:
   m_ObjectHideFlags: 0

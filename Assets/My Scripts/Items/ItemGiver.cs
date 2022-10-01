@@ -21,6 +21,8 @@ public class ItemGiver : Interactable, ILockable
 
     [SerializeField] private Item itemToGive;
 
+    [SerializeField] private bool kinematicOnEnable; // should this item be kinematic when enabled?
+
 
     //[SerializeField] private Vector2 positionInRoom; // the position where this ItemGiver is in the room
 
@@ -45,8 +47,11 @@ public class ItemGiver : Interactable, ILockable
     {
         base.OnEnable();
 
-        // set isKinematic to true onEnable so that item will stay on top of a display (not effected by physics until dropped onto ground)
-        rb.isKinematic = true;
+        if (kinematicOnEnable)
+            // set isKinematic to true onEnable so that item will stay on top of a display (not effected by physics until dropped onto ground)
+            rb.isKinematic = true;
+        else
+            rb.isKinematic = false;
 
 
         //spawned = true;

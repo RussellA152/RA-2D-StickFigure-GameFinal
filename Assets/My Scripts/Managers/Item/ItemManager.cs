@@ -100,16 +100,19 @@ public class ItemManager : MonoBehaviour
         //create a random number from 1-3 (decides what kind of item to spawn)
         int random = Random.Range(1, 4);
 
+        // if both item counts are empty...
         if(passiveItemsToSpawn.Count == 0 && equipmentItemsToSpawn.Count == 0)
         {
 
             return;
         }
 
+        // if random was 1, spawn a passive item
         if(random == 1)
         {
             if (passiveItemsToSpawn.Count == 0)
             {
+                // if we don't have enough passive items, spawn an equipment
                 random = 3;
             }
             else
@@ -137,6 +140,7 @@ public class ItemManager : MonoBehaviour
         {
             if (equipmentItemsToSpawn.Count == 0)
             {
+                // if we don't have enough equipment items, spawn a passive item
                 random = 1;
             }
             else
@@ -147,7 +151,7 @@ public class ItemManager : MonoBehaviour
         }
  
     }
-
+    /*
     public void SpawnItemFromType(ItemScriptableObject.ItemType itemType)
     {
         switch (itemType)
@@ -175,7 +179,7 @@ public class ItemManager : MonoBehaviour
         }
 
     }
-
+    */
     Item CreatePassiveItem()
     {
         //create a random index from 0 to the length of the passive item list 
@@ -225,7 +229,10 @@ public class ItemManager : MonoBehaviour
         //need to add this item to the activeItems list
         activeItems.Add(item);
 
-        SpawnItemInCurrentRoom(item);
+        // only non-instant item types will spawn in the current room (on displays with a potential lock)
+        // instant items will spawn as drops from enemies
+        if(item.type != ItemScriptableObject.ItemType.instant)
+            SpawnItemInCurrentRoom(item);
 
     }
 
@@ -307,6 +314,25 @@ public class ItemManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void SpawnInstantItemAtLocation(Vector2 positionToSpawn)
+    {
+        // only spawn an instant item if there are some in reserve (in the instant item object pool)
+        if (instantItemsToSpawn.Count != 0)
+        {
+            // fetch an instant item from pool
+            var instantItem = instantItemPool.Get();
+
+            // spawn the instant item at "positionToSpawn" (usually where an enemy died)
+            SpawnItemAtPosition(instantItem, positionToSpawn);
+
+        }
+    }
+
+    private void SpawnItemAtPosition(Item item, Vector2 position)
+    {
+        item.transform.position = position;
     }
 
     // transfer every Item from list to an array for backup
