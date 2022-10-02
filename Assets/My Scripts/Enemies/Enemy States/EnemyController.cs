@@ -68,11 +68,10 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private BaseRoom myRoom; //the room this enemy was spawned in
 
     private int walkingHash;
+    private int deadHash;
 
     private bool isHurt = false;
     private int stoppedHash;
-
-
 
     public enum EnemyState
     {
@@ -113,6 +112,7 @@ public class EnemyController : MonoBehaviour
     {
         walkingHash = Animator.StringToHash("Walking");
         stoppedHash = Animator.StringToHash("Stopped");
+        deadHash = Animator.StringToHash("Dead");
 
     }
 
@@ -129,13 +129,14 @@ public class EnemyController : MonoBehaviour
     {
 
         //check if the enemy is alive
-        bool isAlive = enemyHpScript.CheckIfAlive();
+        //bool isAlive = enemyHpScript.CheckIfAlive();
 
-        //if the enemy is dead, change their state to "Dead", and return from the function
-        //they will not be able to change to another state
+        //if the enemy is dead, change their parameter "Dead" to true
+        //they should not be able to change to another state
         //we won't use the ChangeEnemyState because then the coroutine could be canceled, which would prevent enemy from dying
         //if (!isAlive)
-            //currentState = EnemyState.Dead;
+            //animator.SetBool(deadHash, true);
+            
 
         if (rb.velocity.x <= minimumVelocityUntilStopped.x && rb.velocity.y <= minimumVelocityUntilStopped.y)
             animator.SetBool(stoppedHash, true);

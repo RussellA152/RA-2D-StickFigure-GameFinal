@@ -123,6 +123,7 @@ MonoBehaviour:
   enemyControlScript: {fileID: 6875883259916410309}
   enemyScriptableObject: {fileID: 0}
   enemyMovementScript: {fileID: 5969129094098281727}
+  enemyHealthScript: {fileID: 1709358543280309288}
   rb: {fileID: -8891431870749144915}
   animator: {fileID: 1373278072336133614}
   gravityWhenFlinching: 1.75
@@ -141,7 +142,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyControllerScript: {fileID: 6875883259916410309}
   enemyScriptableObject: {fileID: 0}
+  animator: {fileID: 1373278072336133614}
   enemyMaxHealth: 0
+  deathAnimationStartName: Death Animation Start
+  collider: {fileID: 7383473570951731383}
 --- !u!195 &1716254764283327715
 NavMeshAgent:
   m_ObjectHideFlags: 0

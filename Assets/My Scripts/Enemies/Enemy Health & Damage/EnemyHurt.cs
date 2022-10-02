@@ -8,6 +8,7 @@ public class EnemyHurt : MonoBehaviour, IDamageable
     [SerializeField] private EnemyController enemyControlScript; //every enemy will have a movement script
     [SerializeField] private EnemyScriptableObject enemyScriptableObject; //every enemy will have a scriptable object
     [SerializeField] private EnemyMovement enemyMovementScript;
+    [SerializeField] private EnemyHealth enemyHealthScript;
 
     private IHealth healthScript;
     
@@ -89,6 +90,10 @@ public class EnemyHurt : MonoBehaviour, IDamageable
 
     public void OnHurt(Vector3 attacker, IDamageAttributes.DamageType damageType, float damage, float attackPowerX, float attackPowerY)
     {
+        // if this enemy is dead, don't let them take anymore damage or play any new animations
+        if (!enemyHealthScript.CheckIfAlive())
+            return;
+
 
         //find the direction the attacker is facing
         Vector3 directionOfAttacker = attacker - transform.position;

@@ -10,10 +10,18 @@ public class EnemyHealth : MonoBehaviour, IHealth
     [Header("Enemy Configuration Scriptable Object")]
     public EnemyScriptableObject enemyScriptableObject;
 
+    [SerializeField] private Animator animator;
+
     [HideInInspector]
     public float enemyMaxHealth; //the max health value of this enemy(DERIVED FROM SCRIPTABLEOBJECT)
     private float enemyHealth; //the current health value of this enemy 
     private bool isAlive; //is the enemy alive?
+
+    [SerializeField] private string deathAnimationStartName; // the name of the death animation start
+
+    private bool playedDeathAnimation = false;
+
+    [SerializeField] private BoxCollider2D collider;
 
 
 
@@ -53,6 +61,14 @@ public class EnemyHealth : MonoBehaviour, IHealth
             isAlive = false;
             Debug.Log(this.gameObject.name + " has died!");
 
+            // if this enemy hasn't played their death animation, play it when they die (only once)
+            if (!playedDeathAnimation)
+            {
+                // play death animation
+                animator.Play(deathAnimationStartName);
+                playedDeathAnimation = true;
+            }
+                
         }
     }
 
