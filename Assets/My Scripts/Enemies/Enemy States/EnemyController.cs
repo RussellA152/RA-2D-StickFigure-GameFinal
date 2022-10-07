@@ -393,7 +393,6 @@ public class EnemyController : MonoBehaviour
             myPool.Release(this);
             Debug.Log("Return me to the pool!");
         }
-
         else
         {
             Destroy(gameObject);

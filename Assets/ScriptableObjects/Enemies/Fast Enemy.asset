@@ -16,6 +16,7 @@ MonoBehaviour:
   walkingSpeed: 10
   followRangeX: 35
   followRangeY: 12
+  dropChance: 0.25
   attackRangeX: 4.5
   attackRangeY: 2
   attackCooldownTimer: 2
