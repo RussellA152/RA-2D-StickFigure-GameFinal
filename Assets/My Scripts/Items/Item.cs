@@ -84,7 +84,7 @@ public abstract class Item : MonoBehaviour, IPriceable
                 // check if the item's proc chance was successful
                 // if not, return and do not allow ability to activate
                 // multiply proc chance by PlayerStat's proc chance multiplier
-                return Random.value < (procChance * PlayerStats.instance.GetProcChanceMultiplier());
+                return Random.value <= (procChance * PlayerStats.instance.GetProcChanceMultiplier());
 
             case ItemScriptableObject.ItemType.equipment:
                 //if this item has sufficient charge, take some away

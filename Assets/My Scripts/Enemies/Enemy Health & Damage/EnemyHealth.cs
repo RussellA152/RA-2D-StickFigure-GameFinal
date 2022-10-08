@@ -14,7 +14,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
 
     [HideInInspector]
     public float enemyMaxHealth; //the max health value of this enemy(DERIVED FROM SCRIPTABLEOBJECT)
-    private float enemyHealth; //the current health value of this enemy 
+    [SerializeField] private float enemyHealth; //the current health value of this enemy 
     private bool isAlive; //is the enemy alive?
 
     [SerializeField] private string deathAnimationStartName; // the name of the death animation start
@@ -59,7 +59,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
         if (health <= 0f)
         {
             isAlive = false;
-            Debug.Log(this.gameObject.name + " has died!");
+            //Debug.Log(this.gameObject.name + " has died!");
 
             // if this enemy hasn't played their death animation, play it when they die (only once)
             if (!playedDeathAnimation)

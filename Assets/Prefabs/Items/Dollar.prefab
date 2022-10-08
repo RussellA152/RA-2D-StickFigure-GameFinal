@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de11c8f8881002e4e83ffaed61d521d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  needsButtonPress: 1
+  needsButtonPress: 0
   inTrigger: 0
   cooldownTimer: 1
   rb: {fileID: 3135146213717763128}
@@ -302,6 +302,7 @@ MonoBehaviour:
   actualCollider: {fileID: 8782208612927994006}
   triggerCollider: {fileID: 1462772192432573736}
   itemToGive: {fileID: 8782208612927993994}
+  kinematicOnEnable: 0
 --- !u!114 &8782208612927993994
 MonoBehaviour:
   m_ObjectHideFlags: 0

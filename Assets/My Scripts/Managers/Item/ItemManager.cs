@@ -7,6 +7,9 @@ using System;
 
 public class ItemManager : MonoBehaviour
 {
+    public static ItemManager instance;
+
+
     // 3 object pools that contain passive, equipment, and instant items
     ObjectPool<Item> passiveItemPool; 
     ObjectPool<Item> equipmentItemPool; 
@@ -41,6 +44,15 @@ public class ItemManager : MonoBehaviour
 
     private void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            instance = this;
+        }
+
         //creating all three item pools
         //all three use the same OnTake and OnReturn functions
         //however, they use different Constructor functions and have different default capacities

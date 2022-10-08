@@ -25,11 +25,11 @@ public class EnemyGroundCheck : MonoBehaviour
             isGrounded = true;
             animator.SetBool(isGroundedHash, true);
         }
-        else
-        {
-            isGrounded = false;
-            animator.SetBool(isGroundedHash, false);
-        }
+        //else
+        //{
+            //isGrounded = false;
+            //animator.SetBool(isGroundedHash, false);
+        //}
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -39,11 +39,11 @@ public class EnemyGroundCheck : MonoBehaviour
             isGrounded = true;
             animator.SetBool(isGroundedHash, true);
         }
-        else
-        {
-            isGrounded = false;
-            animator.SetBool(isGroundedHash, false);
-        }
+        //else
+        //{
+            //isGrounded = false;
+            //animator.SetBool(isGroundedHash, false);
+        //}
     }
 
     private void OnTriggerExit2D(Collider2D collision)

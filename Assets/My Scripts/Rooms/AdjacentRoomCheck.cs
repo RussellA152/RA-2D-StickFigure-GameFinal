@@ -62,7 +62,7 @@ public class AdjacentRoomCheck : MonoBehaviour
     private void CheckAllDirections()
     {
         //check EVERY direction for a room
-        Debug.Log("Check all rooms");
+        //Debug.Log("Check all rooms");
         //check for room above (will need a neighboring bottom door)
         CheckAdjacentRooms(0f, 1f, topDoor);
         //check for room below (will need a neighboring top door)

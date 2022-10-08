@@ -281,11 +281,11 @@ public class EnemyHurt : MonoBehaviour, IDamageable
         if (animator.HasState(baseLayerInt, animationHash) == true)
         {
             animator.Play(animationHash);
-            Debug.Log("Playing an enemy hurt animation");
+            //Debug.Log("Playing an enemy hurt animation");
         }
             
-        else
-            Debug.Log("This animation does not exist!");
+        //else
+            //Debug.Log("This animation does not exist!");
     }
 
     IEnumerator WaitUntilEnemyIsHurt(float attackPowerX, float attackPowerY)

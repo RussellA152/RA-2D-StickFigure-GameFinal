@@ -28,6 +28,8 @@ public class EnemyController : MonoBehaviour
     [Header("Enemy v. Player Properties")]
     private Transform target; //enemy's target that they will chase and attack
 
+    private float dropChance; // the chance for this enemy to drop an instant item upon death (retrieved from ScriptableObject)
+
     //private bool isAggressive; //if the enemy's aggression level has reached the threhold, then set this true
     //[SerializeField] private float aggressionLevel; //how aggressive the enemy currently is (increases and decreases depending on state of enemy)
     //private float aggressionLevelThreshold; //how aggressive the enemy must become to attack the player
@@ -232,6 +234,8 @@ public class EnemyController : MonoBehaviour
         //retrieve the attacking ranges from the attacking script
         attackRangeX = enemyScriptableObject.GetAttackRangeX();
         attackRangeY = enemyScriptableObject.GetAttackRangeY();
+
+        dropChance = enemyScriptableObject.dropChance;
         /*
         aggressionLevelThreshold = enemyScriptableObject.GetAggressionLevelThreshold();
         minAggressionLevelIncrease = enemyScriptableObject.GetMinAggressionLevelIncrease();
@@ -375,14 +379,19 @@ public class EnemyController : MonoBehaviour
 
     private void EnemyDeathBehavior()
     {
-        //Debug.Log("Died!");
+        //Debug.Log("Enemy Died! Inside EnemyController.");
 
         //when this enemy dies, their room's "numberOfEnemiesAliveHere" should decrease by 1
         if(myRoom != null)
             myRoom.DecrementNumberOfEnemiesAliveInHere();
-
-        // Set "recentDeadEnemyPosition" to this killed enemy's current transform position
-        EnemyManager.enemyManagerInstance.SetDeadEnemyPosition(transform.position);
+        
+        // if this enemy should drop an item, tell ItemManager to spawn an instant item at this dead enemy's position (random chance)
+        if(Random.value <= dropChance)
+        {
+            Debug.Log("Drop an item on my dead body!");
+            ItemManager.instance.SpawnInstantItemAtLocation(this.transform.position);
+        }
+            
 
         // invoke onEnemyKill eventsystem when any enemy dies
         EnemyManager.enemyManagerInstance.EnemyKilledEventSystem();
@@ -391,12 +400,12 @@ public class EnemyController : MonoBehaviour
         if (myPool != null)
         {
             myPool.Release(this);
-            Debug.Log("Return me to the pool!");
+            //Debug.Log("Return me to the pool!");
         }
         else
         {
             Destroy(gameObject);
-            Debug.Log("Destroy me");
+            //Debug.Log("Destroy me");
         }
 
 

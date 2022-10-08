@@ -28,12 +28,14 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //Debug.Log("Detected something!");
         //update our target
         targetTransform = collision.transform;
 
         //checking if trigger collided with EnemyHurtBox tag (located only on the hurtbox child gameobject on each enemy)
         if (targetTransform.CompareTag("EnemyHurtBox"))
         {
+            Debug.Log("Detected enemy collision!");
             //the hurtbox is a child of the enemy, so set the target equal to the parent
             targetTransform = targetTransform.parent;
 
