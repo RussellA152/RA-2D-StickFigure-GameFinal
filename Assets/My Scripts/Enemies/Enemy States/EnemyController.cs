@@ -92,6 +92,9 @@ public class EnemyController : MonoBehaviour
 
     private void OnEnable()
     {
+        // when enabled, set layer to "Enemy" (this is because enemies are set to "IgnorePlayer" layer when performing death animation)
+        SetLayer("Enemy");
+
         //if the enemy does not already have a scriptable object attached, give them a random one from the EnemyManager (generates random scriptable object from list)
         if (enemyScriptableObject == null)
             enemyScriptableObject = EnemyManager.enemyManagerInstance.GiveScriptableObject();
@@ -137,8 +140,8 @@ public class EnemyController : MonoBehaviour
         //they should not be able to change to another state
         //we won't use the ChangeEnemyState because then the coroutine could be canceled, which would prevent enemy from dying
         //if (!isAlive)
-            //animator.SetBool(deadHash, true);
-            
+        //animator.SetBool(deadHash, true);
+
 
         if (rb.velocity.x <= minimumVelocityUntilStopped.x && rb.velocity.y <= minimumVelocityUntilStopped.y)
             animator.SetBool(stoppedHash, true);
@@ -382,16 +385,16 @@ public class EnemyController : MonoBehaviour
         //Debug.Log("Enemy Died! Inside EnemyController.");
 
         //when this enemy dies, their room's "numberOfEnemiesAliveHere" should decrease by 1
-        if(myRoom != null)
+        if (myRoom != null)
             myRoom.DecrementNumberOfEnemiesAliveInHere();
-        
+
         // if this enemy should drop an item, tell ItemManager to spawn an instant item at this dead enemy's position (random chance)
-        if(Random.value <= dropChance)
+        if (Random.value <= dropChance)
         {
             Debug.Log("Drop an item on my dead body!");
             ItemManager.instance.SpawnInstantItemAtLocation(this.transform.position);
         }
-            
+
 
         // invoke onEnemyKill eventsystem when any enemy dies
         EnemyManager.enemyManagerInstance.EnemyKilledEventSystem();
@@ -489,6 +492,11 @@ public class EnemyController : MonoBehaviour
         {
             StartCoroutine(AttackCooldown());
         }
+    }
+
+    public void SetLayer(string layer)
+    {
+        this.gameObject.layer = LayerMask.NameToLayer(layer);
     }
 
     //the attack cooldown coroutine needs to be inside EnemyController because we shouldn't change variable values in scriptable objects during runtime

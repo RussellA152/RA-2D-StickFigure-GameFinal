@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using Random = UnityEngine.Random;
 using UnityEngine.Pool;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using System;
 
 public class ItemManager : MonoBehaviour
 {
     public static ItemManager instance;
+
+
+    [SerializeField] private Transform itemHolder; // gameobject that holds retrieved Items as children
+
+    private InputAction useEquipmentBinding;
 
 
     // 3 object pools that contain passive, equipment, and instant items
@@ -29,9 +35,10 @@ public class ItemManager : MonoBehaviour
     // These are the array of items copied from the lists above, 
     // They act as backups/references to all items in the game, and you cannot remove elements from them
     // Instant items don't have an array because we won't remove them from the above list
-    [SerializeField] private Item[] passiveItemsArray;
-    [SerializeField] private Item[] equipmentItemsArray; 
+    private Item[] passiveItemsArray;
+    private Item[] equipmentItemsArray;
 
+    private bool calledIgnored = false;
 
     // The amount of items that the respective object pool will pre-allocate
     [SerializeField] private int defaultPassiveCapacity;
@@ -44,6 +51,7 @@ public class ItemManager : MonoBehaviour
 
     private void Awake()
     {
+        useEquipmentBinding = new PlayerInputActions().Player.CombatRoll;
         if (instance != null && instance != this)
         {
             Destroy(this);
@@ -74,7 +82,18 @@ public class ItemManager : MonoBehaviour
 
     private void Start()
     {
+        useEquipmentBinding.Enable();
+        //StartCoroutine(TestItemReturn(3f));
+    }
 
+    private void Update()
+    {
+        if (useEquipmentBinding.triggered && !calledIgnored)
+        {
+            Debug.Log("Return items on command!");
+            calledIgnored = true;
+            ReturnIgnoredItems();
+        }
     }
 
     private void OnEnable()
@@ -197,10 +216,13 @@ public class ItemManager : MonoBehaviour
         //create a random index from 0 to the length of the passive item list 
         int randomIndex = Random.Range(0, passiveItemsToSpawn.Count);
 
+        // instantiate the randomly chosen item
         var passiveItem = Instantiate(passiveItemsToSpawn[randomIndex]);
 
+        // set the object pool of the item (so it remembers which object to return to)
         passiveItem.SetPool(passiveItemPool);
 
+        // remove item from dedicated list to prevent duplicates from spawning
         passiveItemsToSpawn.RemoveAt(randomIndex);
 
         return passiveItem;
@@ -248,14 +270,40 @@ public class ItemManager : MonoBehaviour
 
     }
 
-    //this function performs actions on the item when they return to the pool
-    //We will release/return items back into the pool when they are ignored by the player until a loop
+    // this function performs actions on the item when they return to the pool
+    // We will release/return items back into the pool when they are ignored by the player till the end of the game
     void OnReturnItemToPool(Item item)
     {
         item.gameObject.SetActive(false);
 
         //need to remove this item to the activeItems list
         activeItems.Remove(item);
+
+        // when an item returns to pool, it should be placed back into drop pools again (able to be dropped again)
+        // without this, the item won't be able to be randomly chosen for spawn anymore
+        switch (item.type)
+        {
+            //if the item we will spawn is of type PassiveBuff
+            case ItemScriptableObject.ItemType.passiveBuff:
+                passiveItemsToSpawn.Add(item);
+                break;
+
+            //if the item we will spawn is of type PassiveProc
+            case ItemScriptableObject.ItemType.passiveProc:
+                passiveItemsToSpawn.Add(item);
+                break;
+
+            //if the item we will spawn is of type Equipment
+            case ItemScriptableObject.ItemType.equipment:
+                equipmentItemsToSpawn.Add(item);
+                break;
+
+            //if the item we will spawn is of type Instant
+            case ItemScriptableObject.ItemType.instant:
+                instantItemsToSpawn.Add(item);
+
+                break;
+        }
 
     }
 
@@ -355,6 +403,35 @@ public class ItemManager : MonoBehaviour
         {
             Debug.Log("List of i: " + list[i] + "Array of i: " + array[i]);
             array[i] = list[i];
+        }
+    }
+    
+    IEnumerator TestItemReturn(float timer)
+    {
+        Debug.Log("Starting Item Return Coroutine!");
+        yield return new WaitForSeconds(timer);
+
+        ReturnIgnoredItems();
+    }
+
+    // this function will check all items in the game world, and check if the player has picked them up
+    // if the player has not picked them up after beating the level, they will return the pool
+    private void ReturnIgnoredItems()
+    {
+        // iterate through all items that have been dropped into the world (meaning.. active)
+        for(int i = activeItems.Count - 1; i >= 0; i--)
+        {
+            // if an item is disabled (always disabled when spawned in),
+            // and their parent gameobject is not this ItemManager (when picked up, their parent becomes the itemHolder),
+            // then this item was never picked up by the player, and should return to pool
+            if(!activeItems[i].enabled && activeItems[i].transform.parent != itemHolder)
+            {
+                Debug.Log("Returned " + activeItems[i].gameObject.name);
+                // return to this pool
+                OnReturnItemToPool(activeItems[i]);
+                //activeItems[i].ReturnToPool();
+            }
+
         }
     }
 }

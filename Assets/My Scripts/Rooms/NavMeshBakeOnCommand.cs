@@ -69,7 +69,7 @@ public class NavMeshBakeOnCommand : MonoBehaviour
 
     private void BakeNewArea()
     {
-        Debug.Log("Baked?");
+        //Debug.Log("Baked?");
         if (!navMeshBaked)
         {
             navMeshSurface.BuildNavMesh();

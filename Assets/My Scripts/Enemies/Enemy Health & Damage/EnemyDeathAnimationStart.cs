@@ -6,10 +6,6 @@ public class EnemyDeathAnimationStart : StateMachineBehaviour
 {
     private EnemyController enemyControllerScript;
 
-    //[Header("Layers That Will Ignore Each Other")]
-    //[SerializeField] private int playerLayer;
-    //[SerializeField] private int enemyLayer;
-
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -18,8 +14,9 @@ public class EnemyDeathAnimationStart : StateMachineBehaviour
         // change to hurt state at the start of the death animation (to prevent enemy from switching to another state)
         enemyControllerScript.ChangeEnemyState(0f, EnemyController.EnemyState.Hurt);
 
-        //turn off layer collision between "Player" and "Enemy", so that this enemy corpse doesn't block player
-        //Physics2D.IgnoreLayerCollision(playerLayer, enemyLayer, true);
+        // change this enemy's layer to "IgnorePlayer", this is so that the enemy stops colliding with player (when dead)
+        enemyControllerScript.SetLayer("IgnorePlayer");
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

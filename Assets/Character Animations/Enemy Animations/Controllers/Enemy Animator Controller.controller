@@ -617,7 +617,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Death Animation End
-  m_Speed: 0.25
+  m_Speed: 0.08
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours:
@@ -676,8 +676,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc1088893bfab354db048a1223c0bce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerLayer: 7
-  enemyLayer: 8
 --- !u!1107 &3765848773574007480
 AnimatorStateMachine:
   serializedVersion: 6
