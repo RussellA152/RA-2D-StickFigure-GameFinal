@@ -162,6 +162,7 @@ public abstract class Item : MonoBehaviour, IPriceable
                 ItemAction(PlayerStats.instance.GetPlayer());
 
                 // an instant will immediately return to their respective pool when picked up (no need to hold it anywhere)
+                //ReturnToPool();
                 if (myPool != null)
                     myPool.Release(this);
                 break;
@@ -188,13 +189,13 @@ public abstract class Item : MonoBehaviour, IPriceable
     {
         myPool = pool;
     }
-
-    //public void ReturnToPool()
-    //{
-        //if (myPool != null)
-            //myPool.Release(this);
-    //}
-
+    /*
+    public void ReturnToPool()
+    {
+        if (myPool != null)
+            myPool.Release(this);
+    }
+    */
     public IObjectPool<Item> GetMyPool()
     {
         return myPool;

@@ -54,7 +54,7 @@ Animator:
   m_GameObject: {fileID: 732219668646791524}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1ec845dfe06015945b0c6373bb6015e1, type: 2}
+  m_Controller: {fileID: 22100000, guid: dad37f3e044819e458c394a4efd1fa11, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -89,6 +89,7 @@ MonoBehaviour:
   minimumVelocityUntilStopped: {x: 0.25, y: 0.25}
   gravityWhenIdle: 4
   myRoom: {fileID: 0}
+  spriteRenderer: {fileID: 3215621220825369563}
 --- !u!114 &5969129094098281727
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -112,10 +112,16 @@ public class ItemGiver : Interactable, ILockable
 
             SwapOutOldEquipmentItem();
             
-            //set the parent of this ItemGiver to ItemManager's item holder gameobject
-            parent = ItemSwapper.instance.GetItemHolder().transform;
+            // only set parent of itemToGive to ItemHolder if the item is NOT of type Instant
+            // this is because instant items are disabled and return to pool when picked up 
+            if(itemToGive.type != ItemScriptableObject.ItemType.instant)
+            {
+                //set the parent of this ItemGiver to ItemManager's item holder gameobject
+                parent = ItemSwapper.instance.GetItemHolder().transform;
 
-            this.transform.SetParent(parent);
+                this.transform.SetParent(parent);
+            }
+            
 
             //enable the Item script belonging to this ItemGiver
             if(!itemToGive.enabled)

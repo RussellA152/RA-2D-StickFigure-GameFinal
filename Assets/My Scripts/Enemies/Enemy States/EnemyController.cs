@@ -69,6 +69,9 @@ public class EnemyController : MonoBehaviour
     [Header("Dedicated Room")]
     [SerializeField] private BaseRoom myRoom; //the room this enemy was spawned in
 
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    Color enemyColor = new Color(255,255,255,255);
+
     private int walkingHash;
     private int deadHash;
 
@@ -92,6 +95,7 @@ public class EnemyController : MonoBehaviour
 
     private void OnEnable()
     {
+
         // when enabled, set layer to "Enemy" (this is because enemies are set to "IgnorePlayer" layer when performing death animation)
         SetLayer("Enemy");
 
@@ -108,6 +112,8 @@ public class EnemyController : MonoBehaviour
         //the enemy's room would always be the current room inside of OnEnable
         myRoom = LevelManager.instance.GetCurrentRoom();
 
+        //Debug.Log("Is it enabled now? " + spriteRenderer.enabled);
+
         //enemy's aggression level is reset or set to 0 when spawning in
         //aggressionLevel = 0;
 
@@ -123,6 +129,14 @@ public class EnemyController : MonoBehaviour
 
     private void OnDisable()
     {
+        // fixes a bug where enemies would respawn invisible after dying (probably due to death animation disabling sprite renderer)
+        if (!spriteRenderer.enabled)
+            spriteRenderer.enabled = true;
+
+
+        // fixes a bug where enemies remained transparent when respawning (probably due to death animation lowering enemy's sprite renderer's A value)
+        spriteRenderer.color = enemyColor;
+
         StopAllCoroutines();
     }
     private void OnDestroy()
@@ -402,6 +416,7 @@ public class EnemyController : MonoBehaviour
         //if this enemy has a pool, return this enemy back to the pool
         if (myPool != null)
         {
+            Debug.Log("Return to pool enemy!");
             myPool.Release(this);
             //Debug.Log("Return me to the pool!");
         }

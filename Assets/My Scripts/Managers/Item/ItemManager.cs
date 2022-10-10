@@ -45,12 +45,23 @@ public class ItemManager : MonoBehaviour
     [SerializeField] private int defaultEquipmentCapacity;
     [SerializeField] private int defaultInstantCapacity;
 
+    [Header("Active number of items")]
+    [SerializeField] private int activePassiveCount;
+    [SerializeField] private int activeEquipmentCount;
+    [SerializeField] private int activeInstantCount;
+
+    [Header("Inactive number of items")]
+    [SerializeField] private int inactivePassiveCount;
+    [SerializeField] private int inactiveEquipmentCount;
+    [SerializeField] private int inactiveInstantCount;
+
     //public Action spawnItemsInARoomEvent; // this eventsystem is invoked when a set of items has spawned inside of a room
-                                          // we will have our shop and treasure rooms subscribe to this eventsystem in OnEnable(), but they won't actually
-                                          // do anything until they have all the items in their room (if a room needs 3 items, and it has those 3 items
+    // we will have our shop and treasure rooms subscribe to this eventsystem in OnEnable(), but they won't actually
+    // do anything until they have all the items in their room (if a room needs 3 items, and it has those 3 items
 
     private void Awake()
     {
+        // debugging button to instantly return items to pool (TEMPORARY)
         useEquipmentBinding = new PlayerInputActions().Player.CombatRoll;
         if (instance != null && instance != this)
         {
@@ -88,12 +99,23 @@ public class ItemManager : MonoBehaviour
 
     private void Update()
     {
+        // TEMP (USING FOR DEBUGGING IGNORED ITEMS RETURNING TO POOLS)
         if (useEquipmentBinding.triggered && !calledIgnored)
         {
             Debug.Log("Return items on command!");
             calledIgnored = true;
             ReturnIgnoredItems();
         }
+
+        activePassiveCount = passiveItemPool.CountActive;
+        inactivePassiveCount = passiveItemPool.CountInactive;
+
+        activeEquipmentCount = equipmentItemPool.CountActive;
+        inactiveEquipmentCount = equipmentItemPool.CountInactive;
+
+        activeInstantCount = instantItemPool.CountActive;
+        inactiveInstantCount = instantItemPool.CountInactive;
+
     }
 
     private void OnEnable()
@@ -299,8 +321,9 @@ public class ItemManager : MonoBehaviour
                 break;
 
             //if the item we will spawn is of type Instant
+            // then do not re-add to a list because instant items are not removed from list in the first place
             case ItemScriptableObject.ItemType.instant:
-                instantItemsToSpawn.Add(item);
+                //instantItemsToSpawn.Add(item);
 
                 break;
         }
@@ -378,16 +401,23 @@ public class ItemManager : MonoBehaviour
 
     public void SpawnInstantItemAtLocation(Vector2 positionToSpawn)
     {
+        // fetch an instant item from pool
+        var instantItem = instantItemPool.Get();
+
+        // spawn the instant item at "positionToSpawn" (usually where an enemy died)
+        SpawnItemAtPosition(instantItem, positionToSpawn);
+
+
         // only spawn an instant item if there are some in reserve (in the instant item object pool)
-        if (instantItemsToSpawn.Count != 0)
-        {
-            // fetch an instant item from pool
-            var instantItem = instantItemPool.Get();
+        //if (instantItemsToSpawn.Count != 0)
+        //{
+        // fetch an instant item from pool
+        //var instantItem = instantItemPool.Get();
 
-            // spawn the instant item at "positionToSpawn" (usually where an enemy died)
-            SpawnItemAtPosition(instantItem, positionToSpawn);
+        // spawn the instant item at "positionToSpawn" (usually where an enemy died)
+        //SpawnItemAtPosition(instantItem, positionToSpawn);
 
-        }
+        //}
     }
 
     private void SpawnItemAtPosition(Item item, Vector2 position)
@@ -428,6 +458,7 @@ public class ItemManager : MonoBehaviour
             {
                 Debug.Log("Returned " + activeItems[i].gameObject.name);
                 // return to this pool
+                //activeItems[i].ReturnToPool();
                 OnReturnItemToPool(activeItems[i]);
                 //activeItems[i].ReturnToPool();
             }

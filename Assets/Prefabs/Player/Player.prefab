@@ -216,7 +216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   money: 500
   runningSpeed: 65
-  maxHealth: 200
+  maxHealth: 1200
   damageMultiplier: 1
   procChanceMultiplier: 1
 --- !u!114 &4332903956958558062

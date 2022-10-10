@@ -30,7 +30,11 @@ public class EnemyHealth : MonoBehaviour, IHealth
     {
         enemyScriptableObject = scriptableObject;
 
+        // need to reset this value each time enemy is enabled
         isAlive = true;
+
+        // need to reset this value each time enemy is enabled
+        playedDeathAnimation = false;
 
         //set basic values equal to the ScriptableObject's values
         if(enemyScriptableObject != null)
