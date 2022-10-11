@@ -37,14 +37,13 @@ public abstract class Item : MonoBehaviour, IPriceable
 
     private void Awake()
     {
-        //Debug.Log("MY AWAKE! " + gameObject.name);
+        Debug.Log("MY AWAKE! " + gameObject.name);
 
-        // don't create a new binding every time awake is called
-        //if(useEquipmentBinding == null)
-        //{
+        if(useEquipmentBinding == null)
+        {
             //Debug.Log("Create binding! " + gameObject.name);
-            //useEquipmentBinding = new PlayerInputActions().Player.UseEquipment;
-        //}
+            useEquipmentBinding = new PlayerInputActions().Player.UseEquipment;
+        }
             
 
         //disabled on awake so that script won't affect player until they pick it up (which enables this script)
@@ -62,15 +61,8 @@ public abstract class Item : MonoBehaviour, IPriceable
 
     private void OnEnable()
     {
-        // don't create a new binding every time awake is called
-        // calling this here, because Awake is being called each time an Item is taken from pool
-        if (useEquipmentBinding == null)
-        {
-            Debug.Log("Create binding! " + gameObject.name);
-            useEquipmentBinding = new PlayerInputActions().Player.UseEquipment;
-        }
+        //OnItemPickup();
 
-        OnItemPickup();
         useEquipmentBinding.performed += UseEquipmentOnCommand;
         useEquipmentBinding.Enable();
     }
@@ -158,13 +150,13 @@ public abstract class Item : MonoBehaviour, IPriceable
 
                 break;
             case ItemScriptableObject.ItemType.instant:
+                Debug.Log("Instant item was picked up!");
                 // instant items do not get added to any inventory
                 ItemAction(PlayerStats.instance.GetPlayer());
 
                 // an instant will immediately return to their respective pool when picked up (no need to hold it anywhere)
-                //ReturnToPool();
-                if (myPool != null)
-                    myPool.Release(this);
+                ReturnToPool();
+                
                 break;
         }
 
@@ -189,13 +181,13 @@ public abstract class Item : MonoBehaviour, IPriceable
     {
         myPool = pool;
     }
-    /*
+    
     public void ReturnToPool()
     {
         if (myPool != null)
             myPool.Release(this);
     }
-    */
+    
     public IObjectPool<Item> GetMyPool()
     {
         return myPool;

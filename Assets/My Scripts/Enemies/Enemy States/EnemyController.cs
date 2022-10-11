@@ -416,7 +416,7 @@ public class EnemyController : MonoBehaviour
         //if this enemy has a pool, return this enemy back to the pool
         if (myPool != null)
         {
-            Debug.Log("Return to pool enemy!");
+            //Debug.Log("Return to pool enemy!");
             myPool.Release(this);
             //Debug.Log("Return me to the pool!");
         }

@@ -59,6 +59,7 @@ public class ItemGiver : Interactable, ILockable
     private void OnDisable()
     {
         base.OnDisable();
+        SetRetrieved(false);
 
         //if the item wasn't picked up by the player, allow it to spawn again 
         //if (!retrieved)
@@ -90,7 +91,7 @@ public class ItemGiver : Interactable, ILockable
     //what the item does when the player picks it up
     public override void InteractableAction()
     {
-        Debug.Log("Picked up item!");
+        //Debug.Log("Picked up item!");
 
         //start interaction cooldown after interacting with this ItemGiver
         StartCooldown();
@@ -135,6 +136,9 @@ public class ItemGiver : Interactable, ILockable
 
             //Set retrived to true so player cannot pick up the item more than once
             SetRetrieved(true);
+
+            // item was picked up, call "OnItemPickup"
+            itemToGive.OnItemPickup();
 
 
         }

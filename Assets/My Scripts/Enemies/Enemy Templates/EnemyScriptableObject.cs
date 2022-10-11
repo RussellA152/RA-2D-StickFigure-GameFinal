@@ -15,6 +15,7 @@ public class EnemyScriptableObject : ScriptableObject, IAIAttacks
     public float walkingSpeed;
     public float followRangeX; //x distance enemy must be to chase player
     public float followRangeY; //y distance enemy must be to chase player
+    [Range(0.0f, 1.0f)]
     public float dropChance; // chance for this enemy to drop an item upon death
 
     //[Header("Basic Animation Properties")]

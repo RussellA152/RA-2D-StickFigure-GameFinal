@@ -55,6 +55,7 @@ public class ItemManager : MonoBehaviour
     [SerializeField] private int inactiveEquipmentCount;
     [SerializeField] private int inactiveInstantCount;
 
+
     //public Action spawnItemsInARoomEvent; // this eventsystem is invoked when a set of items has spawned inside of a room
     // we will have our shop and treasure rooms subscribe to this eventsystem in OnEnable(), but they won't actually
     // do anything until they have all the items in their room (if a room needs 3 items, and it has those 3 items
@@ -153,8 +154,8 @@ public class ItemManager : MonoBehaviour
         //create a random number from 1-3 (decides what kind of item to spawn)
         int random = Random.Range(1, 4);
 
-        // if both item counts are empty...
-        if(passiveItemsToSpawn.Count == 0 && equipmentItemsToSpawn.Count == 0)
+        // if both item list counts are empty...
+        if(passiveItemsToSpawn.Count <= 0 && equipmentItemsToSpawn.Count <= 0)
         {
 
             return;
@@ -163,7 +164,7 @@ public class ItemManager : MonoBehaviour
         // if random was 1, spawn a passive item
         if(random == 1)
         {
-            if (passiveItemsToSpawn.Count == 0)
+            if (passiveItemsToSpawn.Count <= 0)
             {
                 // if we don't have enough passive items, spawn an equipment
                 random = 3;
@@ -177,7 +178,7 @@ public class ItemManager : MonoBehaviour
 
         if(random == 2)
         {
-            if (passiveItemsToSpawn.Count == 0)
+            if (passiveItemsToSpawn.Count <= 0)
             {
                 random = 3;
             }
@@ -191,7 +192,7 @@ public class ItemManager : MonoBehaviour
 
         if(random == 3)
         {
-            if (equipmentItemsToSpawn.Count == 0)
+            if (equipmentItemsToSpawn.Count <= 0)
             {
                 // if we don't have enough equipment items, spawn a passive item
                 random = 1;
@@ -285,10 +286,31 @@ public class ItemManager : MonoBehaviour
         //need to add this item to the activeItems list
         activeItems.Add(item);
 
-        // only non-instant item types will spawn in the current room (on displays with a potential lock)
-        // instant items will spawn as drops from enemies
-        if(item.type != ItemScriptableObject.ItemType.instant)
-            SpawnItemInCurrentRoom(item);
+        switch (item.type)
+        {
+            //if the item we will spawn is of type PassiveBuff
+            case ItemScriptableObject.ItemType.passiveBuff:
+                SpawnItemInCurrentRoom(item);
+
+                break;
+
+            //if the item we will spawn is of type PassiveProc
+            case ItemScriptableObject.ItemType.passiveProc:
+                SpawnItemInCurrentRoom(item);
+                break;
+
+            //if the item we will spawn is of type Equipment
+            case ItemScriptableObject.ItemType.equipment:
+                SpawnItemInCurrentRoom(item);
+                break;
+
+            // only non-instant item types will spawn in the current room (on displays with a potential lock)
+            // instant items will spawn as drops from enemies
+            case ItemScriptableObject.ItemType.instant:
+                    
+
+                break;
+        }
 
     }
 
@@ -296,9 +318,13 @@ public class ItemManager : MonoBehaviour
     // We will release/return items back into the pool when they are ignored by the player till the end of the game
     void OnReturnItemToPool(Item item)
     {
+        // separate the item from its parent (usually ItemHolder)
+        item.transform.SetParent(null);
+
+        // disable item gameobject
         item.gameObject.SetActive(false);
 
-        //need to remove this item to the activeItems list
+        //need to remove this item to the activeItems list (it is not active in the game world anymore)
         activeItems.Remove(item);
 
         // when an item returns to pool, it should be placed back into drop pools again (able to be dropped again)
@@ -322,10 +348,10 @@ public class ItemManager : MonoBehaviour
 
             //if the item we will spawn is of type Instant
             // then do not re-add to a list because instant items are not removed from list in the first place
-            case ItemScriptableObject.ItemType.instant:
+            //case ItemScriptableObject.ItemType.instant:
                 //instantItemsToSpawn.Add(item);
 
-                break;
+                //break;
         }
 
     }
@@ -404,6 +430,8 @@ public class ItemManager : MonoBehaviour
         // fetch an instant item from pool
         var instantItem = instantItemPool.Get();
 
+        //Debug.Log("is instant item null? " + instantItem);
+
         // spawn the instant item at "positionToSpawn" (usually where an enemy died)
         SpawnItemAtPosition(instantItem, positionToSpawn);
 
@@ -423,6 +451,7 @@ public class ItemManager : MonoBehaviour
     private void SpawnItemAtPosition(Item item, Vector2 position)
     {
         item.transform.position = position;
+        //Debug.Log("Where is this item spawning?" + item.transform.position);
     }
 
     // transfer every Item from list to an array for backup
@@ -458,9 +487,7 @@ public class ItemManager : MonoBehaviour
             {
                 Debug.Log("Returned " + activeItems[i].gameObject.name);
                 // return to this pool
-                //activeItems[i].ReturnToPool();
-                OnReturnItemToPool(activeItems[i]);
-                //activeItems[i].ReturnToPool();
+                activeItems[i].ReturnToPool();
             }
 
         }
