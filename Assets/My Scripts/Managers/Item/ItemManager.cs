@@ -22,7 +22,8 @@ public class ItemManager : MonoBehaviour
     ObjectPool<Item> instantItemPool;
 
     // A list of item prefabs that are in the game world (items that have been spawned in (picked up by player, or not))
-    [SerializeField] private List<Item> activeItems = new List<Item>();
+    //[SerializeField] private List<Item> activeItems = new List<Item>();
+    private Dictionary<Item, Item> activeItems = new Dictionary<Item, Item>(); // dictionary (key = Item, value = bool representing if the item is active in the game world or not (aka dropped on the map))
 
     [Header("Items to Pool")]
     // These are the lists of items that you can drag item prefabs into from the inspector
@@ -85,9 +86,14 @@ public class ItemManager : MonoBehaviour
         passiveItemsArray = new Item[passiveItemsToSpawn.Count];
         equipmentItemsArray = new Item[equipmentItemsToSpawn.Count];
 
+        // Transfer all elements from each item list to a dictionary
+        CopyItemsToDictionary(passiveItemsToSpawn);
+        CopyItemsToDictionary(equipmentItemsToSpawn);
+        CopyItemsToDictionary(instantItemsToSpawn);
+
         // copy item elements from serialized array, to a list
-        TransferItemsFromListToArray(passiveItemsToSpawn, passiveItemsArray);
-        TransferItemsFromListToArray(equipmentItemsToSpawn,equipmentItemsArray);
+        //TransferItemsFromListToArray(passiveItemsToSpawn, passiveItemsArray);
+        //TransferItemsFromListToArray(equipmentItemsToSpawn,equipmentItemsArray);
 
 
     }
@@ -283,9 +289,6 @@ public class ItemManager : MonoBehaviour
         //set item active
         item.gameObject.SetActive(true);
 
-        //need to add this item to the activeItems list
-        activeItems.Add(item);
-
         switch (item.type)
         {
             //if the item we will spawn is of type PassiveBuff
@@ -325,7 +328,8 @@ public class ItemManager : MonoBehaviour
         item.gameObject.SetActive(false);
 
         //need to remove this item to the activeItems list (it is not active in the game world anymore)
-        activeItems.Remove(item);
+        //activeItems[item] = false;
+        //activeItems.Remove(item);
 
         // when an item returns to pool, it should be placed back into drop pools again (able to be dropped again)
         // without this, the item won't be able to be randomly chosen for spawn anymore
@@ -333,17 +337,18 @@ public class ItemManager : MonoBehaviour
         {
             //if the item we will spawn is of type PassiveBuff
             case ItemScriptableObject.ItemType.passiveBuff:
-                passiveItemsToSpawn.Add(item);
+                passiveItemsToSpawn.Add(activeItems[item]);
+                //passiveItemsToSpawn.Add(item);
                 break;
 
             //if the item we will spawn is of type PassiveProc
             case ItemScriptableObject.ItemType.passiveProc:
-                passiveItemsToSpawn.Add(item);
+                passiveItemsToSpawn.Add(activeItems[item]);
                 break;
 
             //if the item we will spawn is of type Equipment
             case ItemScriptableObject.ItemType.equipment:
-                equipmentItemsToSpawn.Add(item);
+                equipmentItemsToSpawn.Add(activeItems[item]);
                 break;
 
             //if the item we will spawn is of type Instant
@@ -435,23 +440,23 @@ public class ItemManager : MonoBehaviour
         // spawn the instant item at "positionToSpawn" (usually where an enemy died)
         SpawnItemAtPosition(instantItem, positionToSpawn);
 
-
-        // only spawn an instant item if there are some in reserve (in the instant item object pool)
-        //if (instantItemsToSpawn.Count != 0)
-        //{
-        // fetch an instant item from pool
-        //var instantItem = instantItemPool.Get();
-
-        // spawn the instant item at "positionToSpawn" (usually where an enemy died)
-        //SpawnItemAtPosition(instantItem, positionToSpawn);
-
-        //}
     }
+
+    
 
     private void SpawnItemAtPosition(Item item, Vector2 position)
     {
         item.transform.position = position;
         //Debug.Log("Where is this item spawning?" + item.transform.position);
+    }
+
+    private void CopyItemsToDictionary(List<Item> list)
+    {
+        for(int i = 0; i < list.Count; i++)
+        {
+            // add all potential items and set bool to false ("false" means the item is not active in the game world)
+            activeItems.Add(list[i], list[i]);
+        }
     }
 
     // transfer every Item from list to an array for backup
@@ -464,30 +469,32 @@ public class ItemManager : MonoBehaviour
             array[i] = list[i];
         }
     }
-    
-    IEnumerator TestItemReturn(float timer)
-    {
-        Debug.Log("Starting Item Return Coroutine!");
-        yield return new WaitForSeconds(timer);
 
-        ReturnIgnoredItems();
-    }
+
+    //DEBUGGING FUNCTIONS FOR RETURNING ITEMS TO POOL (TEMPORARY)
+
+    //IEnumerator TestItemReturn(float timer)
+    //{
+    //Debug.Log("Starting Item Return Coroutine!");
+    //yield return new WaitForSeconds(timer);
+
+    //ReturnIgnoredItems();
+    //}
 
     // this function will check all items in the game world, and check if the player has picked them up
     // if the player has not picked them up after beating the level, they will return the pool
+
     private void ReturnIgnoredItems()
     {
         // iterate through all items that have been dropped into the world (meaning.. active)
-        for(int i = activeItems.Count - 1; i >= 0; i--)
+        foreach (Item item in activeItems.Values)
         {
             // if an item is disabled (always disabled when spawned in),
             // and their parent gameobject is not this ItemManager (when picked up, their parent becomes the itemHolder),
             // then this item was never picked up by the player, and should return to pool
-            if(!activeItems[i].enabled && activeItems[i].transform.parent != itemHolder)
+            if(!item.enabled && item.transform.parent != itemHolder)
             {
-                Debug.Log("Returned " + activeItems[i].gameObject.name);
-                // return to this pool
-                activeItems[i].ReturnToPool();
+                item.ReturnToPool();
             }
 
         }

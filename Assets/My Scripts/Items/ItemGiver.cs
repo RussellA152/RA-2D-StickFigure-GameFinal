@@ -26,7 +26,7 @@ public class ItemGiver : Interactable, ILockable
 
     //[SerializeField] private Vector2 positionInRoom; // the position where this ItemGiver is in the room
 
-    private bool retrieved = false; //was this item picked up by the player?
+    [SerializeField] private bool retrieved = false; //was this item picked up by the player?
 
     private float dropForceX = 1750f; //how much force is applied to this ItemGiver when it is dropped onto the ground (x direction)
     private float dropForceY = 0f; //how much force is applied to this ItemGiver when it is dropped onto the ground (y direction)
@@ -47,19 +47,31 @@ public class ItemGiver : Interactable, ILockable
     {
         base.OnEnable();
 
+        // allow ItemGiver to be interactable and picked up again if enabled again (this is for object pooling purposes)
+        SetRetrieved(false);
+        SetCanInteract(true);
+
         if (kinematicOnEnable)
             // set isKinematic to true onEnable so that item will stay on top of a display (not effected by physics until dropped onto ground)
             rb.isKinematic = true;
         else
             rb.isKinematic = false;
 
+        // disable itemToGive so that it will be enabled when picked up (this is for object pooling purposes)
+        itemToGive.enabled = false;
+
+        // enable spriteRenderer when ItemGiver is enabled (this is for object pooling purposes)
+        spriteRenderer.enabled = true;
+
+        // make sure colliders are enabled when ItemGiver is enabled  (this is for object pooling purposes)
+        actualCollider.enabled = true;
+        triggerCollider.enabled = true;
 
         //spawned = true;
     }
     private void OnDisable()
     {
         base.OnDisable();
-        SetRetrieved(false);
 
         //if the item wasn't picked up by the player, allow it to spawn again 
         //if (!retrieved)

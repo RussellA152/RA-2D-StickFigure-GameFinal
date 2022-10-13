@@ -47,7 +47,7 @@ public abstract class Item : MonoBehaviour, IPriceable
             
 
         //disabled on awake so that script won't affect player until they pick it up (which enables this script)
-        this.enabled = false;
+        //this.enabled = false;
 
         //copy values from persistant data source when picked up
         //if (!fetchedStats)
