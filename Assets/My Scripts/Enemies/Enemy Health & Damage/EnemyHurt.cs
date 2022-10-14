@@ -9,6 +9,7 @@ public class EnemyHurt : MonoBehaviour, IDamageable
     [SerializeField] private EnemyScriptableObject enemyScriptableObject; //every enemy will have a scriptable object
     [SerializeField] private EnemyMovement enemyMovementScript;
     [SerializeField] private EnemyHealth enemyHealthScript;
+    [SerializeField] private EnemyGroundCheck enemyGroundCheckScript; // will use this to disable the ground check when an enemy is knocked into the air (prevents them from getting back up mid animation)
 
     private IHealth healthScript;
     
@@ -18,6 +19,10 @@ public class EnemyHurt : MonoBehaviour, IDamageable
 
     [SerializeField] private float gravityWhenFlinching;
     [SerializeField] private float gravityWhenKnockedDown;
+
+
+    [Header("Timers")]
+    [SerializeField] private float timeGroundCheckIsDisabled; // how long will the ground check be disabled when an enemy FIRST goes into a knockdown state (to be juggled...)
 
     //Animations to play when enemy is hit by a light attack (depends on the direction of the light attack)
     //[Header("Enemy Light Attack Hurt Animation Names")]
@@ -37,7 +42,7 @@ public class EnemyHurt : MonoBehaviour, IDamageable
     private int heavyHurtAnimFrontHash;
     private int heavyHurtAnimBehindHash;
 
-    private bool isKnockedDown = false; // is this enemy in a "knocked down" state? 
+    private bool isKnockedDown = false; // is this enemy in a "knocked down" state? (if so, do not play any other hurt animations like the flinch if in knockdown state)
 
     /*
     private void OnEnable()
@@ -107,6 +112,7 @@ public class EnemyHurt : MonoBehaviour, IDamageable
         //do something depending on what attack was performed on this enemy and what direction the attack came from
         switch (damageType)
         {
+            // if the damageType was "none" don't play an animation (could be something like DOT, if we were to make that)
             case IDamageAttributes.DamageType.none:
                 break;
 
@@ -154,7 +160,7 @@ public class EnemyHurt : MonoBehaviour, IDamageable
                 else if (!attackerFacingRight && !enemyFacingRight)
                 {
                     //Play forward flinch animation
-                    //Debug.Log("Backward light hit! enemy facing left!");
+                    // only if this enemy isnt "knockedDown"
                     if (!isKnockedDown)
                         PlayHurtAnimation(lightHurtAnimBehindHash);
 
@@ -164,6 +170,10 @@ public class EnemyHurt : MonoBehaviour, IDamageable
 
             case IDamageAttributes.DamageType.heavy:
 
+                // before setting the enemy in a knockdown state, disable the ground check for a small amount of time to prevent them getting back on their feet mid air (mid animation)
+                if (!isKnockedDown)
+                    enemyGroundCheckScript.DisableGroundCheck(1f);
+
                 SetRBGravity(gravityWhenKnockedDown);
 
                 if (isKnockedDown)
@@ -171,7 +181,11 @@ public class EnemyHurt : MonoBehaviour, IDamageable
                     Debug.Log("Hit mid air by heavy!");
                 }
 
+                
+
                 SetIsKnockedDown(true);
+
+                
 
                 if (attackerFacingRight && enemyFacingRight)
                 {

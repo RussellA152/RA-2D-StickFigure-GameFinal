@@ -344,7 +344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bcdc20dc630907469b3c280d9dbdbfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackName: Attack 4
+  attackName: Combo 4 Light
   heavyAttackName: 
   backAttackName: Back Light Attack
   backHeavyAttackName: Back Heavy Attack
@@ -633,8 +633,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bcdc20dc630907469b3c280d9dbdbfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackName: Attack 2
-  heavyAttackName: Heavy Attack 1
+  attackName: Combo 2 Light
+  heavyAttackName: Combo 1 Heavy
   backAttackName: Back Light Attack
   backHeavyAttackName: Back Heavy Attack
   allowMovementDuringAnim: 0
@@ -859,10 +859,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: 2
-  attackDamage: 0
-  attackingPowerX: 0
-  attackingPowerY: 0
-  joltForceX: 0
+  attackDamage: 100
+  attackingPowerX: 300
+  attackingPowerY: 600
+  joltForceX: 400
   joltForceY: 0
 --- !u!1101 &-5643098270777370237
 AnimatorStateTransition:
@@ -1028,7 +1028,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Attack 1 Transition
+  m_Name: Combo 1 Light Transition
   m_Speed: 0.05
   m_CycleOffset: 0
   m_Transitions:
@@ -1149,7 +1149,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Attack 1
+  m_Name: Combo 1 Light
   m_Speed: 0.15
   m_CycleOffset: 0
   m_Transitions:
@@ -1579,7 +1579,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Heavy Transition 1
+  m_Name: Combo 1 Heavy Transition
   m_Speed: 0.05
   m_CycleOffset: 0
   m_Transitions:
@@ -1594,7 +1594,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 9ced2dedc278d854da91f68bf4d9e2e6, type: 2}
+  m_Motion: {fileID: 7400000, guid: 446e34b13452b6145a76a5fb25ef49a3, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -2097,7 +2097,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Attack 3
+  m_Name: Combo 3 Light
   m_Speed: 0.15
   m_CycleOffset: 0
   m_Transitions:
@@ -2208,7 +2208,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Attack 4
+  m_Name: Combo 4 Light
   m_Speed: 0.15
   m_CycleOffset: 0
   m_Transitions:
@@ -2366,7 +2366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bcdc20dc630907469b3c280d9dbdbfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackName: Attack 3
+  attackName: Combo 3 Light
   heavyAttackName: 
   backAttackName: Back Light Attack
   backHeavyAttackName: Back Heavy Attack
@@ -2401,7 +2401,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Single Heavy Transition
-  m_Speed: 0.05
+  m_Speed: 0.15
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -24345218728594037}
@@ -3369,8 +3369,8 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Heavy Attack 1
-  m_Speed: 0.1
+  m_Name: Combo 1 Heavy
+  m_Speed: 0.35
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 5803501384023743359}
@@ -3384,7 +3384,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 9ced2dedc278d854da91f68bf4d9e2e6, type: 2}
+  m_Motion: {fileID: 7400000, guid: f2558253f1968d64ea6c6e98854028ea, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -3789,7 +3789,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bcdc20dc630907469b3c280d9dbdbfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackName: Attack 1
+  attackName: Combo 1 Light
   heavyAttackName: Single Heavy Attack
   backAttackName: Back Light Attack
   backHeavyAttackName: Back Heavy Attack
@@ -4340,7 +4340,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Attack 2
+  m_Name: Combo 2 Light
   m_Speed: 0.15
   m_CycleOffset: 0
   m_Transitions:
@@ -4533,7 +4533,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackName: 
-  heavyAttackName: Heavy Attack 1 P2
+  heavyAttackName: 
   backAttackName: Back Light Attack
   backHeavyAttackName: Back Heavy Attack
   allowMovementDuringAnim: 0
@@ -4758,7 +4758,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Single Heavy Attack
-  m_Speed: 0.3
+  m_Speed: 0.25
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -4295316120362360633}

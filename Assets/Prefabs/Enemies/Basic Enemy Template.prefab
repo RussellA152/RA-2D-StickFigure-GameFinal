@@ -125,10 +125,12 @@ MonoBehaviour:
   enemyScriptableObject: {fileID: 0}
   enemyMovementScript: {fileID: 5969129094098281727}
   enemyHealthScript: {fileID: 1709358543280309288}
+  enemyGroundCheckScript: {fileID: 2251135107146388378}
   rb: {fileID: -8891431870749144915}
   animator: {fileID: 1373278072336133614}
   gravityWhenFlinching: 1.75
   gravityWhenKnockedDown: 1.75
+  timeGroundCheckIsDisabled: 0.5
 --- !u!114 &1709358543280309288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -643,3 +645,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1373278072336133614}
+  groundCheckCollider: {fileID: 4196157862625571926}
