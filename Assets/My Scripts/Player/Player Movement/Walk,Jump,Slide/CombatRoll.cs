@@ -32,7 +32,7 @@ public class CombatRoll : StateMachineBehaviour
         playerCompScript = animator.transform.gameObject.GetComponent<PlayerComponents>();
 
         //set PlayerMovementInput's "rolling" boolean to false so that the player is not stuck infinite rolling (we must call this in this script so that users will be able to roll properly at any frame rate)
-        animator.transform.gameObject.GetComponent<PlayerMovementInput>().SetRolling(false);
+        animator.transform.gameObject.GetComponent<PlayerMovementInput>().SetIsRolling(false);
 
         //disable player's ability walk & jump & attack during roll
         //playerCompScript.SetCanMove(false);
@@ -54,7 +54,7 @@ public class CombatRoll : StateMachineBehaviour
         // if the player is facing right, and tries to move backwards (left), then cancel the roll's force
         if (directionIsRight)
         {
-            if (playerCompScript.GetTurnLeft().ReadValue<float>() > 0)
+            if (playerCompScript.GetMove().x < 0)
             {
                 rb.AddForce(new Vector2(minimumRollDistance * Time.deltaTime, 0f));
                 OnStateExit(animator, stateInfo, layerIndex);
@@ -66,7 +66,7 @@ public class CombatRoll : StateMachineBehaviour
         }
         else
         {
-            if (playerCompScript.GetTurnRight().ReadValue<float>() > 0)
+            if (playerCompScript.GetMove().x > 0)
             {
                 rb.AddForce(new Vector2(-minimumRollDistance * Time.deltaTime, 0f));
                 OnStateExit(animator, stateInfo, layerIndex);

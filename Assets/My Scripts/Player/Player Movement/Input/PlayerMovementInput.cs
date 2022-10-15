@@ -14,17 +14,21 @@ public class PlayerMovementInput : MonoBehaviour
     //walking value passed into CharacterController2D's Move() 
     private float horizontalMovement = 0f;
     //bools passed into CharacterController2D's Move() 
-    private bool jumping = false; 
-    private bool sliding = false;
-    private bool rolling;
+    private bool isJumping = false; 
+    private bool isSliding = false;
+    private bool isRolling;
+    private bool isAttacking;
+    private bool isGrounded;
+    private bool canWalk;
+    private bool canRoll;
 
     private float jumpBufferTime = 0.3f; //adds a buffer so player jumps as soon as they touch the ground, instead of having to wait until they land to press space
     private float jumpBufferCounter;
 
-    private InputAction move;
-    private InputAction jump;
-    private InputAction slide;
-    private InputAction roll;
+    //private InputAction move;
+    //private InputAction jump;
+    //private InputAction slide;
+    //private InputAction roll;
 
     private bool canSlide; //determines if the player can slide (retrieved from playerComponents script)
 
@@ -35,15 +39,15 @@ public class PlayerMovementInput : MonoBehaviour
         //playerComponentScript = GetComponent<PlayerComponents>();
 
 
-        move = playerComponentScript.GetMove();
-        jump = playerComponentScript.GetJump();
+        //move = playerComponentScript.GetMove();
+        //jump = playerComponentScript.GetJump();
 
-        slide = playerComponentScript.GetSlide();
-        roll = playerComponentScript.GetRoll();
+        //slide = playerComponentScript.GetSlide();
+        //roll = playerComponentScript.GetRoll();
 
-        //subscribe the slide and roll to their respective functions
-        slide.performed += SlideInput;
-        slide.canceled += SlideInput;
+        ////subscribe the slide and roll to their respective functions
+        //slide.performed += SlideInput;
+        //slide.canceled += SlideInput;
     }
 
 
@@ -55,95 +59,138 @@ public class PlayerMovementInput : MonoBehaviour
     private void Update()
     {
         //update canWalk and canRoll to see if the player is allowed to roll or walk
-        bool canWalk = playerComponentScript.GetCanWalk();
-        bool canRoll = playerComponentScript.GetCanRoll();
+        canWalk = playerComponentScript.GetCanWalk();
+        canRoll = playerComponentScript.GetCanRoll();
 
         //update isAttacking to see if player is currently attacking
-        bool isAttacking = AttackController.instance.GetPlayerIsAttacking();
+        isAttacking = AttackController.instance.GetPlayerIsAttacking();
 
         //update isGrounded to see if player is currently grounded
-        bool isGrounded = playerComponentScript.GetPlayerIsGrounded();
+        isGrounded = playerComponentScript.GetPlayerIsGrounded();
 
         canSlide = playerComponentScript.GetCanSlide();
 
-        CheckRoll(isAttacking, canRoll, isGrounded, sliding);
+        jumpBufferCounter -= Time.deltaTime;
 
-        CheckWalk(canWalk);
+        //CheckRoll(isAttacking, canRoll, isGrounded, isSliding);
 
-        CheckJump();
-            
+        //CheckWalk(canWalk);
+
+        //CheckJump();
+
 
     }
     private void FixedUpdate()
     {
         //Pass input values into the Move() function from CharacterController2D
         //the crouch (second parameter) is false because the game will probably not feature a crouch button (unless I implement a crouch sweep or something)
-        controller.Move(horizontalMovement * Time.fixedDeltaTime, false, jumping, sliding,rolling, jumpBufferCounter);
+        controller.Move(horizontalMovement * Time.fixedDeltaTime, false, isJumping, isSliding,isRolling, jumpBufferCounter);
 
         //after calling Move, set jumping back to false (will be true when player input for jumping is detected)
-        jumping = false;
+        isJumping = false;
 
     }
 
-    //check for walking input from player
-    private void CheckWalk(bool canWalk)
+    public void PlayerMove(float input)
     {
-        if (canWalk == true)
+        if (canWalk)
         {
-            //using new input system
-            Vector2 movementInput = move.ReadValue<Vector2>();
-            horizontalMovement = movementInput.x;
+            horizontalMovement = input;
         }
         else
+        {
             horizontalMovement = 0f;
+        }
+    }
+    public void Jump()
+    {
+        isJumping = true;
+        jumpBufferCounter = jumpBufferTime;
     }
 
-    //check for roll input from player
-    private void CheckRoll(bool playerIsAttacking,bool canRoll,bool isGrounded, bool isSliding)
+    public void Roll(bool hasRolled)
     {
-        //if player is allowed to roll (they must be grounded, not attacking, and not sliding)
-        if (canRoll && roll.triggered && isGrounded && !playerIsAttacking && !sliding)
+        if (canRoll && hasRolled && isGrounded && !isAttacking && !isSliding)
         {
-            SetRolling(true);
+            SetIsRolling(true);
         }
     }
-
-    //check for jump input from player
-    private void CheckJump()
-    {
-        //if player pressed jump button..
-        //also start jump buffer counter
-        if (jump.triggered)
-        {
-            jumping = true;
-            jumpBufferCounter = jumpBufferTime;
-        }
-        else
-        {
-            jumpBufferCounter -= Time.deltaTime;
-        }
-    }
-    //check for slide input from player 
-    private void SlideInput(InputAction.CallbackContext context)
+    public void Slide(InputAction.CallbackContext context)
     {
         //if player is holding slide button, then slide, otherwise stop (will be interrupted if player is no longer grounded)
         if (context.performed)
         {
-            sliding = true;
+            isSliding = true;
 
             //although this is a movement ability, it deals damage to enemies that it comes into contact with, so we must set PlayerIsAttacking to true here
             AttackController.instance.SetPlayerIsAttacking(true);
-            
+
         }
         else if (context.canceled)
         {
-            sliding = false;
+            isSliding = false;
         }
     }
 
-    public void SetRolling(bool boolean)
+    ////check for walking input from player
+    //private void CheckWalk(bool canWalk)
+    //{
+    //    if (canWalk == true)
+    //    {
+    //        //using new input system
+    //        Vector2 movementInput = move.ReadValue<Vector2>();
+    //        horizontalMovement = movementInput.x;
+    //    }
+    //    else
+    //        horizontalMovement = 0f;
+    //}
+
+    ////check for roll input from player
+    //private void CheckRoll(bool playerIsAttacking,bool canRoll,bool isGrounded, bool isSliding)
+    //{
+    //    //if player is allowed to roll (they must be grounded, not attacking, and not sliding)
+    //    if (canRoll && roll.triggered && isGrounded && !playerIsAttacking && !isSliding)
+    //    {
+    //        SetIsRolling(true);
+    //    }
+    //}
+
+    ////check for jump input from player
+    //private void CheckJump()
+    //{
+    //    //if player pressed jump button..
+    //    //also start jump buffer counter
+    //    if (jump.triggered)
+    //    {
+    //        isJumping = true;
+    //        jumpBufferCounter = jumpBufferTime;
+    //    }
+    //    else
+    //    {
+    //        jumpBufferCounter -= Time.deltaTime;
+    //    }
+    //}
+    ////check for slide input from player 
+    //private void SlideInput(InputAction.CallbackContext context)
+    //{
+    //    //if player is holding slide button, then slide, otherwise stop (will be interrupted if player is no longer grounded)
+    //    if (context.performed)
+    //    {
+    //        isSliding = true;
+
+    //        //although this is a movement ability, it deals damage to enemies that it comes into contact with, so we must set PlayerIsAttacking to true here
+    //        AttackController.instance.SetPlayerIsAttacking(true);
+
+    //    }
+    //    else if (context.canceled)
+    //    {
+    //        isSliding = false;
+    //    }
+    //}
+
+    public void SetIsRolling(bool boolean)
     {
-        rolling = boolean;
+        isRolling = boolean;
     }
 
 

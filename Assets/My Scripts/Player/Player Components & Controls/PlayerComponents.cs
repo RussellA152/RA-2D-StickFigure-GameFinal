@@ -27,8 +27,8 @@ public class PlayerComponents : MonoBehaviour
     private InputAction backHeavyAttackLeft; //input action used for performing a back heavy attack in the left direction
     private InputAction backHeavyAttackRight; //input action used for performing a back heavy attack in the right direction
 
-    private InputAction turnRight; //input action used for turning player to face right direction
-    private InputAction turnLeft; //input action used for turning player to face left direction
+    //private InputAction turnRight; //input action used for turning player to face right direction
+    //private InputAction turnLeft; //input action used for turning player to face left direction
 
     private float health;
 
@@ -87,8 +87,8 @@ public class PlayerComponents : MonoBehaviour
         backHeavyAttackLeft = playerControls.Player.BackHeavyAttackLeft;
         backHeavyAttackRight = playerControls.Player.BackHeavyAttackRight;
 
-        turnRight = playerControls.Player.FlipRight;
-        turnLeft = playerControls.Player.FlipLeft;
+        //turnRight = playerControls.Player.FlipRight;
+        //turnLeft = playerControls.Player.FlipLeft;
 
         interact.Enable();
         
@@ -107,8 +107,8 @@ public class PlayerComponents : MonoBehaviour
         backHeavyAttackLeft.Enable();
         backHeavyAttackRight.Enable();
 
-        turnRight.Enable();
-        turnLeft.Enable();
+        //turnRight.Enable();
+        //turnLeft.Enable();
 
     }
     private void OnDisable()
@@ -130,8 +130,8 @@ public class PlayerComponents : MonoBehaviour
         backHeavyAttackLeft.Disable();
         backHeavyAttackRight.Disable();
 
-        turnRight.Disable();
-        turnLeft.Disable();
+        //turnRight.Disable();
+        //turnLeft.Disable();
     }
 
     public void SetCanInteract(bool boolean)
@@ -273,9 +273,9 @@ public class PlayerComponents : MonoBehaviour
         return interact;
     }
 
-    public InputAction GetMove()
+    public Vector2 GetMove()
     {
-        return move;
+        return move.ReadValue<Vector2>();
     }
 
     public InputAction GetJump()
@@ -320,14 +320,14 @@ public class PlayerComponents : MonoBehaviour
         return backHeavyAttackRight;
     }
 
-    public InputAction GetTurnRight()
-    {
-        return turnRight;
-    }
-    public InputAction GetTurnLeft()
-    {
-        return turnLeft;
-    }
+    //public InputAction GetTurnRight()
+    //{
+        //return turnRight;
+    //}
+    //public InputAction GetTurnLeft()
+    //{
+        //return turnLeft;
+    //}
 
 
 }
