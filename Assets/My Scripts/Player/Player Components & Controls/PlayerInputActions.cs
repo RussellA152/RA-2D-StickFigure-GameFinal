@@ -115,6 +115,22 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""Flip Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""b71512b7-2180-4da9-b856-2b524ed1b98f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Flip Left"",
+                    ""type"": ""Button"",
+                    ""id"": ""cc5806a5-a807-431c-9a55-0601f8c65891"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""8a4a42d3-bba7-41e3-ba94-b941559e679d"",
@@ -126,14 +142,6 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""name"": ""UseEquipment"",
                     ""type"": ""Button"",
                     ""id"": ""f0997201-c67e-44a0-98e5-5ce477f59384"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Flip"",
-                    ""type"": ""Button"",
-                    ""id"": ""8c185cb4-8220-4768-bea2-0da0258b2a4a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -412,6 +420,72 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Slide"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""85228ab0-583c-4d53-a580-513cb46fd54a"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Flip Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dc5d1517-e542-435a-9332-5a8ed8a9c81a"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": ""AxisDeadzone(min=0.3)"",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Flip Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""971a58ec-73e9-4155-b559-66c7e5d07b9f"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Flip Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""20f60920-e677-4b9b-a72c-2eea22203af1"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Flip Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d6055502-a9f4-4d01-b7e1-db227d2e0296"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": ""AxisDeadzone(min=0.3)"",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Flip Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a1c2fa30-c56e-465f-bf2d-247cfbf9e61d"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Flip Left"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1008,105 +1082,6 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""action"": ""UseEquipment"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""a6c39619-7961-418d-8b0a-f5c0945dc0ef"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Flip"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""d3ee78f8-a95f-47f8-b5dd-951d1826a559"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Flip"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""0345a7bb-1e05-4a21-a159-6a33df1c0ab6"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Flip"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""f86d9662-279f-4a5c-bfa7-6b1c1c93a89d"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Flip"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""b0733ef8-142c-4c72-bff3-8250eb074973"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Flip"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""97eeb330-cb6d-4890-a1f7-3cff535f0b6e"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Flip"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""8e80c19c-522b-4a2d-95f4-bbaa9da97fae"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Flip"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""0d9a6806-de43-4137-84f1-d7e8561c1055"",
-                    ""path"": ""<Gamepad>/leftStick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Flip"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""75a0ae33-11ea-4c20-b14d-2b140d113dd4"",
-                    ""path"": ""<Gamepad>/leftStick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Flip"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -1694,9 +1669,10 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_Player_BackHeavyAttackRight = m_Player.FindAction("Back Heavy Attack Right", throwIfNotFound: true);
         m_Player_CombatRoll = m_Player.FindAction("Combat Roll", throwIfNotFound: true);
         m_Player_Slide = m_Player.FindAction("Slide", throwIfNotFound: true);
+        m_Player_FlipRight = m_Player.FindAction("Flip Right", throwIfNotFound: true);
+        m_Player_FlipLeft = m_Player.FindAction("Flip Left", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_UseEquipment = m_Player.FindAction("UseEquipment", throwIfNotFound: true);
-        m_Player_Flip = m_Player.FindAction("Flip", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1770,9 +1746,10 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_BackHeavyAttackRight;
     private readonly InputAction m_Player_CombatRoll;
     private readonly InputAction m_Player_Slide;
+    private readonly InputAction m_Player_FlipRight;
+    private readonly InputAction m_Player_FlipLeft;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_UseEquipment;
-    private readonly InputAction m_Player_Flip;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1789,9 +1766,10 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         public InputAction @BackHeavyAttackRight => m_Wrapper.m_Player_BackHeavyAttackRight;
         public InputAction @CombatRoll => m_Wrapper.m_Player_CombatRoll;
         public InputAction @Slide => m_Wrapper.m_Player_Slide;
+        public InputAction @FlipRight => m_Wrapper.m_Player_FlipRight;
+        public InputAction @FlipLeft => m_Wrapper.m_Player_FlipLeft;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @UseEquipment => m_Wrapper.m_Player_UseEquipment;
-        public InputAction @Flip => m_Wrapper.m_Player_Flip;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1837,15 +1815,18 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Slide.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSlide;
                 @Slide.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSlide;
                 @Slide.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSlide;
+                @FlipRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlipRight;
+                @FlipRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlipRight;
+                @FlipRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlipRight;
+                @FlipLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlipLeft;
+                @FlipLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlipLeft;
+                @FlipLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlipLeft;
                 @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @UseEquipment.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseEquipment;
                 @UseEquipment.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseEquipment;
                 @UseEquipment.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUseEquipment;
-                @Flip.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlip;
-                @Flip.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlip;
-                @Flip.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlip;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1886,15 +1867,18 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Slide.started += instance.OnSlide;
                 @Slide.performed += instance.OnSlide;
                 @Slide.canceled += instance.OnSlide;
+                @FlipRight.started += instance.OnFlipRight;
+                @FlipRight.performed += instance.OnFlipRight;
+                @FlipRight.canceled += instance.OnFlipRight;
+                @FlipLeft.started += instance.OnFlipLeft;
+                @FlipLeft.performed += instance.OnFlipLeft;
+                @FlipLeft.canceled += instance.OnFlipLeft;
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
                 @UseEquipment.started += instance.OnUseEquipment;
                 @UseEquipment.performed += instance.OnUseEquipment;
                 @UseEquipment.canceled += instance.OnUseEquipment;
-                @Flip.started += instance.OnFlip;
-                @Flip.performed += instance.OnFlip;
-                @Flip.canceled += instance.OnFlip;
             }
         }
     }
@@ -2063,9 +2047,10 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnBackHeavyAttackRight(InputAction.CallbackContext context);
         void OnCombatRoll(InputAction.CallbackContext context);
         void OnSlide(InputAction.CallbackContext context);
+        void OnFlipRight(InputAction.CallbackContext context);
+        void OnFlipLeft(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnUseEquipment(InputAction.CallbackContext context);
-        void OnFlip(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

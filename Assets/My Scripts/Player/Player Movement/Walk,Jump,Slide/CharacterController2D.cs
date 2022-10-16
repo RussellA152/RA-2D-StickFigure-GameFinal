@@ -145,8 +145,8 @@ public class CharacterController2D : MonoBehaviour
 		//playerComponentScript = GetComponent<PlayerComponents>();
 
 		jump = playerComponentScript.GetJump();
-		//turnLeft = playerComponentScript.GetTurnLeft();
-		//turnRight = playerComponentScript.GetTurnRight();
+		turnLeft = playerComponentScript.GetTurnLeft();
+		turnRight = playerComponentScript.GetTurnRight();
 		m_Rigidbody2D = playerComponentScript.GetRB();
 		animator = playerComponentScript.GetAnimator();
 
@@ -343,20 +343,18 @@ public class CharacterController2D : MonoBehaviour
 			//setting the animator's velocity equal to animVelocity
 			animator.SetFloat(velocityHash, animVelocity);
 
-			Flip(move);
-
 			// If the input is moving the player right and the player is facing left...
-			//if (turnRight.ReadValue<float>() > 0 && turnLeft.ReadValue<float>() == 0 && !m_FacingRight && canFlip)
-			//{
+			if (turnRight.ReadValue<float>() > 0 && turnLeft.ReadValue<float>() == 0 && !m_FacingRight && canFlip)
+			{
 				// ... flip the player.
-				//Flip();
-			//}
+				Flip();
+			}
 			// Otherwise if the input is moving the player left and the player is facing right...
-			//else if (turnLeft.ReadValue<float>() > 0  && turnRight.ReadValue<float>() == 0 && m_FacingRight && canFlip)
-			//{
+			else if (turnLeft.ReadValue<float>() > 0  && turnRight.ReadValue<float>() == 0 && m_FacingRight && canFlip)
+			{
 				// ... flip the player.
-				//Flip();
-			//}
+				Flip();
+			}
             
 		}
 		// If the player should jump...
@@ -396,31 +394,24 @@ public class CharacterController2D : MonoBehaviour
 	}
 
 
-	private void Flip(float input)
+	private void Flip()
 	{
-		// If the player can flip..
-		// and the player is facing right and trying to move left, then flip sprite
-		// otherwise, if the player is facing left and trying to move right, then flip sprite
-        if (canFlip && (m_FacingRight && input < 0 || !m_FacingRight && input > 0))
-        {
-			// Switch the way the player is labelled as facing.
-			m_FacingRight = !m_FacingRight;
+		// Switch the way the player is labelled as facing.
+		m_FacingRight = !m_FacingRight;
 
-			//reset back attack timer
-			backAttackTimer = 0.35f;
+		//reset back attack timer
+		backAttackTimer = 0.35f;
 
-			//player has turned around, they are now allowed to perform a back attack
-			playerComponentScript.SetCanBackAttack(true);
-			//reset speed multiplier (fixes bug where player can keep momentum when turning around
-			speedMultiplier = 10f;
+		//player has turned around, they are now allowed to perform a back attack
+		playerComponentScript.SetCanBackAttack(true);
+		//reset speed multiplier (fixes bug where player can keep momentum when turning around
+		speedMultiplier = 10f;
 
 
-			// Multiply the player's x local scale by -1.
-			Vector3 theScale = transform.localScale;
-			theScale.x *= -1;
-			transform.localScale = theScale;
-		}
-		
+		// Multiply the player's x local scale by -1.
+		Vector3 theScale = transform.localScale;
+		theScale.x *= -1;
+		transform.localScale = theScale;
 	}
 
 	private void ApplyFallMultiplier()
