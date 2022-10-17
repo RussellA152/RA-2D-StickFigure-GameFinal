@@ -15,11 +15,16 @@ public class AttackTransitionBehavior : StateMachineBehaviour
     public string heavyAttackName; //name of heavy attack
     public string backAttackName; //name of back attack
     public string backHeavyAttackName; //name of back heavy attack
+    public string jumpLightAttackName; //name of jump light attack
+    public string jumpHeavyAttackName; //name of jump heavy attack
 
     [Header("Allow Movement During This Transition?")]
     [SerializeField] private bool allowMovementDuringAnim; //this bool determines if the player is allowed to move during this transition (used for Idle animation, otherwise player can't move in Idle state)
     private PlayerComponents playerComponentScript; //we will use the player component script in order to invoke the setCan"action" functions
 
+    //[Header("Allow Attack in Mid-Air?")]
+
+    //[SerializeField] private bool allowAttackMidAir; //this bool determines if the player is allowed to use this attack during this transition even when not grounded
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -88,6 +93,23 @@ public class AttackTransitionBehavior : StateMachineBehaviour
             }
         }
 
+        else if (AttackController.instance.isJumpLightAttacking)
+        {
+            if (jumpLightAttackName != "")
+            {
+                AttackController.instance.animator.Play(jumpLightAttackName);
+                //Debug.Log("Back ATTACK!");
+            }
+        }
+        else if (AttackController.instance.isJumpHeavyAttacking)
+        {
+            if (jumpHeavyAttackName != "")
+            {
+                AttackController.instance.animator.Play(jumpHeavyAttackName);
+                //Debug.Log("Back ATTACK!");
+            }
+        }
+
 
     }
 
@@ -125,6 +147,25 @@ public class AttackTransitionBehavior : StateMachineBehaviour
             playerComponentScript.SetCanBackAttack(false);
 
         }
+
+        if (AttackController.instance.isJumpLightAttacking)
+        {
+            AttackController.instance.isJumpLightAttacking = false;
+            //if player did a regular attack, dont let them do a back attack
+            playerComponentScript.SetCanBackAttack(false);
+
+        }
+
+        if (AttackController.instance.isJumpHeavyAttacking)
+        {
+            AttackController.instance.isJumpHeavyAttacking = false;
+            //if player did a regular attack, dont let them do a back attack
+            playerComponentScript.SetCanBackAttack(false);
+
+        }
+
+        // player is no longer attacking (is set to true, when player starts to attack or transitions to another attack)
+        //animator.SetBool("isAttacking", false);
 
 
     }

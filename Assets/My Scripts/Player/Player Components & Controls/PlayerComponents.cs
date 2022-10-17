@@ -48,7 +48,10 @@ public class PlayerComponents : MonoBehaviour
     private bool canAttack = true; //this bool determines if the player is allowed to attack
 
     //(Set to false by default since player hasn't turned around at the start of the game
-    private bool canBackAttack = false; //this bool determines if the player to perform a back attack (turning around and attacking) 
+    private bool canBackAttack = false; //this bool determines if the player is allowed to perform a back attack (turning around and attacking) 
+
+    private bool canJumpAttack = true; // this bool determines if the player is allowed to perform a jump attack (also the same as an attack when not grounded)
+
     private bool canMove = true; //this bool determines if the player is allowed to walk and jump (both)
     private bool canSlide = true; //this bool determines if the player is allowed to slide
     private bool canRoll = true; //this bool determines if the player can perform a forward roll
@@ -175,8 +178,15 @@ public class PlayerComponents : MonoBehaviour
     {
         canAttack = boolean;
         canBackAttack = boolean;
+        canJumpAttack = boolean;
 
     }
+
+    public void SetCanJumpAttack(bool boolean)
+    {
+        canJumpAttack = boolean;
+    }
+
     public void SetCanBackAttack(bool boolean)
     {
         canBackAttack = boolean;
@@ -195,6 +205,11 @@ public class PlayerComponents : MonoBehaviour
     public bool GetCanBackAttack()
     {
         return canBackAttack;
+    }
+
+    public bool GetCanJumpAttack()
+    {
+        return canJumpAttack;
     }
 
     public bool GetCanJump()

@@ -20,6 +20,7 @@ public class AttackController : MonoBehaviour
 
     private bool canAttack; //determines if player is allowed to attack
     private bool canBackAttack; //determines if player is allowed to do a back attack
+    private bool canJumpAttack;
 
     [HideInInspector]
     //isAttacking is true if the player successfully performs any attack
@@ -33,6 +34,12 @@ public class AttackController : MonoBehaviour
     public bool isBackAttacking = false;
     [HideInInspector]
     public bool isBackHeavyAttacking = false;
+
+    [HideInInspector]
+    public bool isJumpLightAttacking = false;
+
+    [HideInInspector]
+    public bool isJumpHeavyAttacking = false;
 
     //keybindings needed to perform each attack
     private InputAction lightAttack;
@@ -79,9 +86,12 @@ public class AttackController : MonoBehaviour
         
         canAttack = playerComponentScript.GetCanAttack();
         canBackAttack = playerComponentScript.GetCanBackAttack();
+        canJumpAttack = playerComponentScript.GetCanJumpAttack();
 
         Attack();
 
+        Debug.Log("can jump attack?: " + canJumpAttack);
+        Debug.Log("can jump attack? player comp: " + playerComponentScript.GetCanJumpAttack());
 
 
     }
@@ -149,6 +159,20 @@ public class AttackController : MonoBehaviour
 
             PlayerHasAttackedEvent();
             //Debug.Log("HEAVY ATTACK!");
+        }
+
+        else if(lightAttack.triggered && canJumpAttack && !isJumpLightAttacking && !isGrounded)
+        {
+            isJumpLightAttacking = true;
+            SetPlayerIsAttacking(true);
+            PlayerHasAttackedEvent();
+        }
+
+        else if (heavyAttack.triggered && canJumpAttack && !isJumpHeavyAttacking && !isGrounded)
+        {
+            isJumpHeavyAttacking = true;
+            SetPlayerIsAttacking(true);
+            PlayerHasAttackedEvent();
         }
     }
 

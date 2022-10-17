@@ -44,6 +44,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float maxHealth; // the max health of the player
     [SerializeField] private float damageMultiplier; // a value multiplied to all player damage (higher would increase all attack damage)
     [SerializeField] private float procChanceMultiplier; // a value multiplied to all proc chances of Items 
+    [SerializeField] private float playerGravity; // the amount of gravity applied to the player
 
     //[SerializeField] private CharacterController2D playerMovementScript;
     //[SerializeField] private PlayerHealth playerHealthScript;
@@ -69,6 +70,8 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
         //useEquipmentBinding = playerControls.Player.UseEquipment;
+
+        
     }
 
     private void OnEnable()

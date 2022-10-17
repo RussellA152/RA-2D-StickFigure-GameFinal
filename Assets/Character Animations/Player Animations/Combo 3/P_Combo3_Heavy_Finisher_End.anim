@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: P_Combo1_Heavy_Hold
+  m_Name: P_Combo3_Heavy_Finisher_End
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,7 +20,9 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: fed263629fe85ff459a4b707f7f71d96, type: 3}
+      value: {fileID: 21300000, guid: a8e6769e32f4ada4eac2b6a35bf89688, type: 3}
+    - time: 0.016666668
+      value: {fileID: 21300000, guid: 15a6907c048797141b3ee7449b0fdad4, type: 3}
     attribute: m_Sprite
     path: Player Sprite Renderer
     classID: 212
@@ -40,13 +42,14 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: fed263629fe85ff459a4b707f7f71d96, type: 3}
+    - {fileID: 21300000, guid: a8e6769e32f4ada4eac2b6a35bf89688, type: 3}
+    - {fileID: 21300000, guid: 15a6907c048797141b3ee7449b0fdad4, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.016666668
+    m_StopTime: 0.033333335
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

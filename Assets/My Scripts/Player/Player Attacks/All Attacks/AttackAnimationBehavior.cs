@@ -39,6 +39,8 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        //animator.SetBool("isAttacking", true);
+
         attackDamage *= PlayerStats.instance.GetDamageMultiplier();
         //improves performance
         isGroundedHash = Animator.StringToHash("isGrounded");
@@ -88,6 +90,6 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
             rb.AddForce(new Vector2(powerX, powerY));
         //if player is facing left, then multiply force by negative 1 to prevent player from jolting backwards
         else
-            rb.AddForce(new Vector2(-powerX, -powerY));
+            rb.AddForce(new Vector2(-powerX, powerY));
     }
 }
