@@ -5,17 +5,17 @@ using UnityEngine;
 public class CombatRoll : StateMachineBehaviour
 {
 
-    [Header("Speed Properties")]
-    [SerializeField] private float minimumRollDistance; // minimum distance the player will roll
-    [SerializeField] private float rollDistance; // How far the player will roll
+    //[Header("Speed Properties")]
+    //[SerializeField] private float minimumRollDistance; // minimum distance the player will roll
+    //[SerializeField] private float rollDistance; // How far the player will roll
 
     [Header("Layers That Will Ignore Each Other")]
     [SerializeField] private int playerLayer;
     [SerializeField] private int enemyLayer;
 
-    private bool directionIsRight;
+    //private bool directionIsRight;
 
-    [SerializeField] private float rollCancellationValue; // how much does TurnRight or TurnLeft binding need to reach to cancel this roll
+    //[SerializeField] private float rollCancellationValue; // how much does TurnRight or TurnLeft binding need to reach to cancel this roll
 
     
 
@@ -32,15 +32,15 @@ public class CombatRoll : StateMachineBehaviour
         playerCompScript = animator.transform.gameObject.GetComponent<PlayerComponents>();
 
         //set PlayerMovementInput's "rolling" boolean to false so that the player is not stuck infinite rolling (we must call this in this script so that users will be able to roll properly at any frame rate)
-        animator.transform.gameObject.GetComponent<PlayerMovementInput>().SetRolling(false);
+        //animator.transform.gameObject.GetComponent<PlayerMovementInput>().SetRolling(false);
 
         //disable player's ability walk & jump & attack during roll
         //playerCompScript.SetCanMove(false);
         playerCompScript.SetCanFlip(false);
         playerCompScript.SetCanAttack(false);
 
-        rb = playerCompScript.GetRB();
-        directionIsRight = playerCompScript.GetPlayerDirection();
+        //rb = playerCompScript.GetRB();
+        //directionIsRight = playerCompScript.GetPlayerDirection();
 
         //turn off layer collision between "Player" and "Enemy", player will roll behind enemies 
         Physics2D.IgnoreLayerCollision(playerLayer, enemyLayer, true);
@@ -52,29 +52,29 @@ public class CombatRoll : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         // if the player is facing right, and tries to move backwards (left), then cancel the roll's force
-        if (directionIsRight)
-        {
-            if (playerCompScript.GetTurnLeft().ReadValue<float>() > 0)
-            {
-                rb.AddForce(new Vector2(minimumRollDistance * Time.deltaTime, 0f));
-                OnStateExit(animator, stateInfo, layerIndex);
-            }
+        //if (directionIsRight)
+        //{
+        //    if (playerCompScript.GetTurnLeft().ReadValue<float>() > 0)
+        //    {
+        //        rb.AddForce(new Vector2(minimumRollDistance * Time.deltaTime, 0f));
+        //        OnStateExit(animator, stateInfo, layerIndex);
+        //    }
                 
-            else
-                rb.AddForce(new Vector2(rollDistance * Time.deltaTime, 0f));
+        //    else
+        //        rb.AddForce(new Vector2(rollDistance * Time.deltaTime, 0f));
 
-        }
-        else
-        {
-            if (playerCompScript.GetTurnRight().ReadValue<float>() > 0)
-            {
-                rb.AddForce(new Vector2(-minimumRollDistance * Time.deltaTime, 0f));
-                OnStateExit(animator, stateInfo, layerIndex);
-            }
+        //}
+        //else
+        //{
+        //    if (playerCompScript.GetTurnRight().ReadValue<float>() > 0)
+        //    {
+        //        rb.AddForce(new Vector2(-minimumRollDistance * Time.deltaTime, 0f));
+        //        OnStateExit(animator, stateInfo, layerIndex);
+        //    }
                 
-            else
-                rb.AddForce(new Vector2(-rollDistance * Time.deltaTime, 0f));
-        }
+        //    else
+        //        rb.AddForce(new Vector2(-rollDistance * Time.deltaTime, 0f));
+        //}
 
 
 
@@ -93,5 +93,8 @@ public class CombatRoll : StateMachineBehaviour
         //playerCompScript.SetCanMove(true);
         playerCompScript.SetCanAttack(true);
         playerCompScript.SetCanFlip(true);
+
+        //turn back on layer collision between "Player" and "Enemy"
+        Physics2D.IgnoreLayerCollision(playerLayer, enemyLayer, false);
     }
 }

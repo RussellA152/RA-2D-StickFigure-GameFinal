@@ -12,6 +12,7 @@ public class CharacterController2D : MonoBehaviour
 	public PlayerInputActions playerControls;
 
 	[SerializeField] private PlayerComponents playerComponentScript;
+	[SerializeField] private PlayerMovementInput playerInputScript;
 
 	[Header("Speed Properties")]
 	//[SerializeField] private float runSpeed = 70f;                              //general movement speed of the player
@@ -19,8 +20,9 @@ public class CharacterController2D : MonoBehaviour
 	private float minSpeedMultiplierRequirement;                                //this is the minimum value that the player must be moving at in order to increase movement speed (for the speed multiplier to begin)
 																				//we need this value for gamepads, otherwise the player can build up their speed multiplier while moving slow (they should atleast be moving relatively fast)
 	[SerializeField] private float speedMultiplier = 10f;                       // this float is applied to the regular movement speed (allows movement to gradually increase)
-	[SerializeField] private float maxSpeedMultiplier = 20f;					//this is the maximum value that the speed multiplier can reach, speed multiplier won't go further than this (increasing this value means player will increase speed more)
-	
+	[SerializeField] private float maxSpeedMultiplier = 20f;                    //this is the maximum value that the speed multiplier can reach, speed multiplier won't go further than this (increasing this value means player will increase speed more)
+	[SerializeField] private float minimumRollDistance;
+	[SerializeField] private float maximumRollDistance;
 	
 
 	[Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;          // Amount of maxSpeed applied to crouching movement. 1 = 100%
@@ -28,6 +30,8 @@ public class CharacterController2D : MonoBehaviour
 
 	[Header("Cooldowns")]
 	[SerializeField] private float rollCooldownTimer;
+	[SerializeField] private float rollDuration;
+	private float rollDurationStored; // a stored value that remembers the rollDuration's value (because rollDuration is being subtracted and modified during gameplay, we need to remember its value)
 	//[SerializeField] private float slideCooldownTimer;
 	private bool rollCooldownCoroutineOccurred = false; //this bool is used for making sure the roll cooldown coroutine only occurs once
 	//private bool slideCooldownCoroutineOccurred = false; //this bool is used for making sure the slide cooldown coroutine only occurs once
@@ -89,6 +93,7 @@ public class CharacterController2D : MonoBehaviour
 
 
 	private float backAttackTimer = 0.35f; //time allowed for player to perform a back attack (once this hits 0, the player must turn around again to perform a back attack)
+	private float backAttackTimerStored; // a float variable that remembers the original value of the backAttackTimer (we need this because backAttackTimer is modified during gameplay, and need to reset it often)
 
 	[Header("Events")]
 	[Space]
@@ -131,6 +136,8 @@ public class CharacterController2D : MonoBehaviour
 
     private void Start()
     {
+		rollDurationStored = rollDuration;
+		backAttackTimerStored = backAttackTimer;
 
 		isWalking = false;
 
@@ -241,17 +248,19 @@ public class CharacterController2D : MonoBehaviour
         if (canRoll && wantsToRoll  && m_Grounded)
         {
 			//set isRolling bool parameter inside of player animator to true or false depending on player input
-			animator.SetBool(isRollingHash, wantsToRoll);
+			//animator.SetBool(isRollingHash, wantsToRoll);
+
+			PlayerRoll();
 
 			//if the roll cooldown coroutine is already running, don't run it again (only one at a time)
-			if(!rollCooldownCoroutineOccurred)
-			StartCoroutine(RollCooldown());
+			//if(!rollCooldownCoroutineOccurred)
+				//StartCoroutine(RollCooldown());
 
 		}
-        else
-        {
-			animator.SetBool(isRollingHash, false);
-		}
+        //else
+        //{
+			//animator.SetBool(isRollingHash, false);
+		//}
 		
 
 		//if player is moving and grounded, play walking animation
@@ -400,7 +409,7 @@ public class CharacterController2D : MonoBehaviour
 		m_FacingRight = !m_FacingRight;
 
 		//reset back attack timer
-		backAttackTimer = 0.35f;
+		backAttackTimer = backAttackTimerStored;
 
 		//player has turned around, they are now allowed to perform a back attack
 		playerComponentScript.SetCanBackAttack(true);
@@ -463,8 +472,60 @@ public class CharacterController2D : MonoBehaviour
 
 	}
 
+	private void PlayerRoll()
+    {
+		rollDuration -= Time.fixedDeltaTime;
+
+		//set isRolling bool parameter inside of player animator to true or false depending on player input
+		animator.SetBool(isRollingHash, true);
+
+		playerComponentScript.SetCanMove(false);
+
+		// if the player is facing right, and tries to move backwards (left), then cancel the roll's force
+		if (m_FacingRight && rollDuration > 0f)
+		{
+		    if (playerComponentScript.GetTurnLeft().ReadValue<float>() > 0)
+		    {
+				m_Rigidbody2D.velocity = Vector2.zero;
+				rollDuration = 0f;
+				//m_Rigidbody2D.AddForce(new Vector2(minimumRollDistance * Time.fixedDeltaTime, 0f));
+				//OnStateExit(animator, stateInfo, layerIndex);
+			}
+
+		    else
+				m_Rigidbody2D.AddForce(new Vector2(maximumRollDistance * Time.fixedDeltaTime, 0f));
+
+		}
+		else
+		{
+		    if (playerComponentScript.GetTurnRight().ReadValue<float>() > 0 && rollDuration > 0f)
+		    {
+				m_Rigidbody2D.velocity = Vector2.zero;
+				rollDuration = 0f;
+				//m_Rigidbody2D.AddForce(new Vector2(-minimumRollDistance * Time.fixedDeltaTime, 0f));
+				//OnStateExit(animator, stateInfo, layerIndex);
+			}
+
+		    else
+				m_Rigidbody2D.AddForce(new Vector2(-maximumRollDistance * Time.fixedDeltaTime, 0f));
+		}
+
+		if(rollDuration <= 0f)
+        {
+			if (!rollCooldownCoroutineOccurred)
+				StartCoroutine(RollCooldown());
+
+			animator.SetBool(isRollingHash, false);
+			// the player is no longer rolling (set this false so the player will stop rolling (prevents them from getting infinitely stuck))
+			playerInputScript.SetRolling(false);
+			
+		}
+			
+	}
+
 	IEnumerator RollCooldown()
     {
+
 		//Debug.Log("Roll cooldown started");
 
 		//cooldown coroutine has occurred
@@ -475,6 +536,9 @@ public class CharacterController2D : MonoBehaviour
 
 		//wait a certain amount of time, then allow the player to roll again (roll input is still detected from PlayerMovementInput.cs , but nothing will happen if canRoll is false)
 		yield return new WaitForSeconds(rollCooldownTimer);
+
+		// reset rollDuration timer
+		rollDuration = rollDurationStored;
 
 		//cooldown coroutine has finished
 		rollCooldownCoroutineOccurred = false;

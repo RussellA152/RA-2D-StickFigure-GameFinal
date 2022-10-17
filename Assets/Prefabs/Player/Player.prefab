@@ -280,12 +280,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerComponentScript: {fileID: 4332903956958558062}
+  playerInputScript: {fileID: 4332903956958558060}
   m_JumpForce: 1600
   speedMultiplier: 10
   maxSpeedMultiplier: 20
+  minimumRollDistance: 15000
+  maximumRollDistance: 32500
   m_CrouchSpeed: 0.36
   m_MovementSmoothing: 0.05
-  rollCooldownTimer: 1
+  rollCooldownTimer: 0.8
+  rollDuration: 0.45
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2
