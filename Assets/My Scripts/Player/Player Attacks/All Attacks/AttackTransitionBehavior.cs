@@ -116,7 +116,9 @@ public class AttackTransitionBehavior : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+        // reset the player's gravity after attack animation ends (this might be bad code if we ever decide to change the player's gravity from stuff like items or other animations)
+        // reset the value because AttackAnimationBehavior modifies it, now it should be set back to normal
+        PlayerStats.instance.ResetGravity();
 
         if (AttackController.instance.isLightAttacking)
         {

@@ -7,6 +7,9 @@ public class PlayerStats : MonoBehaviour
 {
     public static PlayerStats instance;
 
+
+    [SerializeField] private Rigidbody2D rb;
+
     [SerializeField] private PlayerInputActions playerControls;
 
     //public InputAction useEquipmentBinding { public get; private set; }
@@ -39,7 +42,10 @@ public class PlayerStats : MonoBehaviour
 
     [SerializeField] private int money; // the amount of money the player has 
 
+    private float defaultGravity; // the amount of gravity applied to the player from the inspector
+
     [Header("All Modifiable Stats")]
+    [SerializeField] private float gravityApplied; // the amount of gravity applied to the player
     [SerializeField] private float runningSpeed; // the running speed of the player
     [SerializeField] private float maxHealth; // the max health of the player
     [SerializeField] private float damageMultiplier; // a value multiplied to all player damage (higher would increase all attack damage)
@@ -64,6 +70,10 @@ public class PlayerStats : MonoBehaviour
 
         //playerControls = new PlayerInputActions();
 
+
+        // sets "defaultGravity" to whatever was set in the inspector
+        defaultGravity = rb.gravityScale;
+        playerGravity = defaultGravity;
     }
 
     // Start is called before the first frame update
@@ -71,6 +81,7 @@ public class PlayerStats : MonoBehaviour
     {
         //useEquipmentBinding = playerControls.Player.UseEquipment;
 
+        
         
     }
 
@@ -218,6 +229,18 @@ public class PlayerStats : MonoBehaviour
     //{
         //return componentHolder;
     //}
+
+    // set the player's gravity scale back to whatever they had in Awake()
+    public void ResetGravity()
+    {
+        rb.gravityScale = playerGravity;
+    }
+
+    // set the player's gravity scale back to "amount"
+    public void SetPlayerGravity(float amount)
+    {
+        rb.gravityScale = amount;
+    }
 
     public int GetPlayerMoney()
     {

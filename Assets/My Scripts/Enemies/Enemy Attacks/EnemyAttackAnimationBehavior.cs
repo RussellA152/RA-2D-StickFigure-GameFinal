@@ -88,5 +88,10 @@ public class EnemyAttackAnimationBehavior : StateMachineBehaviour, IDamageAttrib
         else
             rb.AddForce(new Vector2(-powerX, -powerY));
     }
+
+    public void SetEntityGravity(float amountOfGravity)
+    {
+        throw new System.NotImplementedException();
+    }
 }
 

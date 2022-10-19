@@ -214,11 +214,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf14f777912c27c4886f1a9d7ce6d9f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 4332903956958558058}
   money: 500
+  gravityApplied: 5
   runningSpeed: 65
   maxHealth: 1200
   damageMultiplier: 1
   procChanceMultiplier: 1
+  playerGravity: 0
 --- !u!114 &4332903956958558062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,6 +270,8 @@ MonoBehaviour:
   isHeavyAttacking: 0
   isBackAttacking: 0
   isBackHeavyAttacking: 0
+  isJumpLightAttacking: 0
+  isJumpHeavyAttacking: 0
 --- !u!114 &4332903956958558059
 MonoBehaviour:
   m_ObjectHideFlags: 0

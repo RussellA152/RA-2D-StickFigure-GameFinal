@@ -34,6 +34,8 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
     [SerializeField] private float joltForceX; //determines how far the player will 'jolt' forward in the x-direction when attacking (Should be a high value)
     [SerializeField] private float joltForceY; //determines how far the player will 'jolt' forward in the y-direction when attacking (Should be a high value)
 
+    [SerializeField] private float gravityDuringAttack; // how much gravity is applied to player during this attack?  
+
     private int isGroundedHash; //hash value for animator's isGrounded parameter
 
 
@@ -65,6 +67,9 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
         //invoke hitbox's function updates damage values
         hitbox.gameObject.GetComponent<IDamageDealingCharacter>().UpdateAttackValues(damageType, attackDamage, attackingPowerX, attackingPowerY);
 
+        if (gravityDuringAttack != 0)
+            SetEntityGravity(gravityDuringAttack);
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -81,7 +86,7 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        
     }
 
     public void JoltThisObject(bool directionIsRight, float powerX, float powerY)
@@ -91,5 +96,11 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
         //if player is facing left, then multiply force by negative 1 to prevent player from jolting backwards
         else
             rb.AddForce(new Vector2(-powerX, powerY));
+    }
+
+    // set the player's gravity to "gravityDuringAttack" amount
+    public void SetEntityGravity(float amountOfGravity)
+    {
+        PlayerStats.instance.SetPlayerGravity(amountOfGravity);
     }
 }
