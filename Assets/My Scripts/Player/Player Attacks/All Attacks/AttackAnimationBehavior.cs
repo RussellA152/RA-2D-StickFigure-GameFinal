@@ -36,9 +36,9 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
 
     [SerializeField] private float gravityDuringAttack; // how much gravity is applied to player during this attack?  
 
-    private int isGroundedHash; //hash value for animator's isGrounded parameter
+    private int isGroundedHash; //hash value for animator's isGrounded parameter (for performance)
 
-    [SerializeField] private bool turnOffEnemyCollision;
+    [SerializeField] private bool turnOffEnemyCollision; // should this attack tell player's colliders to ignore enemy collision?
 
     [SerializeField] private bool resetYVelocityOnAttack; // will the player's rigidbody Y velocity reset when they attack?
 
@@ -71,8 +71,10 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
         //invoke hitbox's function updates damage values
         hitbox.gameObject.GetComponent<IDamageDealingCharacter>().UpdateAttackValues(damageType, attackDamage, attackingPowerX, attackingPowerY);
 
+        // if gravity is set to 0 in inspector, then we're not trying to change player's gravity during the attack
         if (gravityDuringAttack != 0)
             SetEntityGravity(gravityDuringAttack);
+
 
         if (turnOffEnemyCollision)
         {
