@@ -25,7 +25,7 @@ TagManager:
   - ItemTrigger
   - Interactive
   - IgnorePlayer
-  - 
+  - IgnoreEnemy
   - 
   - 
   - 

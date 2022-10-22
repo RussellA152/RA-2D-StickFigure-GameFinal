@@ -130,7 +130,7 @@ SpriteRenderer:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c8d8f559305742a4dbb08bce7e44812c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.29803923, g: 0.8, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -296,6 +296,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   needsButtonPress: 1
   inTrigger: 0
+  canInteractWith: 1
   cooldownTimer: 1
   rb: {fileID: 3135146213717763128}
   spriteRenderer: {fileID: 426237373980793840}
@@ -303,6 +304,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 1462772192432573736}
   itemToGive: {fileID: 8782208612927993994}
   kinematicOnEnable: 1
+  retrieved: 0
 --- !u!114 &8782208612927993994
 MonoBehaviour:
   m_ObjectHideFlags: 0

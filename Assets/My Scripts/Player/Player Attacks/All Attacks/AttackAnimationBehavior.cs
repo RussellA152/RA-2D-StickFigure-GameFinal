@@ -18,7 +18,7 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
     public IDamageAttributes.DamageType damageType;
 
     private PlayerComponents playerComponentScript; //we will use the player component script in order to invoke the setCanInteract() function
-
+    private PlayerCollisionLayerChange playerCollisionLayerScript;
     private Rigidbody2D rb;
 
     private BoxCollider2D hitbox;
@@ -37,6 +37,8 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
     [SerializeField] private float gravityDuringAttack; // how much gravity is applied to player during this attack?  
 
     private int isGroundedHash; //hash value for animator's isGrounded parameter
+
+    [SerializeField] private bool turnOffEnemyCollision;
 
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -70,6 +72,13 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
         if (gravityDuringAttack != 0)
             SetEntityGravity(gravityDuringAttack);
 
+        if (turnOffEnemyCollision)
+        {
+            playerCollisionLayerScript = animator.transform.GetComponent<PlayerCollisionLayerChange>();
+            playerCollisionLayerScript.SetIgnoreEnemyLayer();
+        }
+           
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -86,7 +95,7 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+        playerCollisionLayerScript.ResetLayer();
     }
 
     public void JoltThisObject(bool directionIsRight, float powerX, float powerY)

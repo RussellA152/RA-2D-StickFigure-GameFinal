@@ -959,6 +959,7 @@ MonoBehaviour:
   joltForceX: 400
   joltForceY: 0
   gravityDuringAttack: 0
+  turnOffEnemyCollision: 0
 --- !u!1101 &-5643098270777370237
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1380,6 +1381,7 @@ MonoBehaviour:
   joltForceX: 1000
   joltForceY: 0
   gravityDuringAttack: 0
+  turnOffEnemyCollision: 0
 --- !u!1101 &-4597652512210092598
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1876,6 +1878,7 @@ MonoBehaviour:
   joltForceX: 500
   joltForceY: 0
   gravityDuringAttack: 0
+  turnOffEnemyCollision: 0
 --- !u!114 &-3170488162557796640
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2002,6 +2005,7 @@ MonoBehaviour:
   joltForceX: 500
   joltForceY: 0
   gravityDuringAttack: 0
+  turnOffEnemyCollision: 0
 --- !u!1101 &-2772697269554074870
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2127,6 +2131,7 @@ MonoBehaviour:
   joltForceX: 3000
   joltForceY: -250
   gravityDuringAttack: 1.5
+  turnOffEnemyCollision: 0
 --- !u!1101 &-2094912714502090359
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2503,6 +2508,7 @@ MonoBehaviour:
   joltForceX: 1000
   joltForceY: 0
   gravityDuringAttack: 0
+  turnOffEnemyCollision: 0
 --- !u!1102 &-1215099197619369295
 AnimatorState:
   serializedVersion: 6
@@ -3093,6 +3099,7 @@ MonoBehaviour:
   joltForceX: 1500
   joltForceY: 0
   gravityDuringAttack: 0
+  turnOffEnemyCollision: 0
 --- !u!1101 &193169169946245021
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -3610,6 +3617,7 @@ MonoBehaviour:
   joltForceX: 500
   joltForceY: 0
   gravityDuringAttack: 0
+  turnOffEnemyCollision: 0
 --- !u!1101 &1844816730347360954
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -4033,6 +4041,7 @@ MonoBehaviour:
   joltForceX: 0
   joltForceY: 0
   gravityDuringAttack: 0
+  turnOffEnemyCollision: 0
 --- !u!1102 &3484926702511012820
 AnimatorState:
   serializedVersion: 6
@@ -4383,6 +4392,7 @@ MonoBehaviour:
   joltForceX: 2200
   joltForceY: 1750
   gravityDuringAttack: 2.5
+  turnOffEnemyCollision: 0
 --- !u!1101 &4853136426890989727
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -4986,6 +4996,7 @@ MonoBehaviour:
   joltForceX: 0
   joltForceY: 0
   gravityDuringAttack: 0
+  turnOffEnemyCollision: 0
 --- !u!1107 &7812341550167220144
 AnimatorStateMachine:
   serializedVersion: 6
@@ -5189,6 +5200,7 @@ MonoBehaviour:
   joltForceX: 500
   joltForceY: 0
   gravityDuringAttack: 0
+  turnOffEnemyCollision: 0
 --- !u!1102 &8180898813625264346
 AnimatorState:
   serializedVersion: 6
