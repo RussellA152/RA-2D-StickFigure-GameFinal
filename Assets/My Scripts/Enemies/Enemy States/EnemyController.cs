@@ -69,6 +69,8 @@ public class EnemyController : MonoBehaviour
     [Header("Dedicated Room")]
     [SerializeField] private BaseRoom myRoom; //the room this enemy was spawned in
 
+    [SerializeField] private BoxCollider2D backCollider; // disable back collider when an enemy dies (re-enable when they spawn)
+
     [SerializeField] private SpriteRenderer spriteRenderer;
     Color enemyColor = new Color(255,255,255,255);
 
@@ -111,6 +113,8 @@ public class EnemyController : MonoBehaviour
 
         //the enemy's room would always be the current room inside of OnEnable
         myRoom = LevelManager.instance.GetCurrentRoom();
+
+        backCollider.enabled = true;
 
         //Debug.Log("Is it enabled now? " + spriteRenderer.enabled);
 
@@ -398,6 +402,8 @@ public class EnemyController : MonoBehaviour
     {
         //Debug.Log("Enemy Died! Inside EnemyController.");
 
+        backCollider.enabled = false;
+
         //when this enemy dies, their room's "numberOfEnemiesAliveHere" should decrease by 1
         if (myRoom != null)
             myRoom.DecrementNumberOfEnemiesAliveInHere();
@@ -425,6 +431,8 @@ public class EnemyController : MonoBehaviour
             Destroy(gameObject);
             //Debug.Log("Destroy me");
         }
+
+        
 
 
     }

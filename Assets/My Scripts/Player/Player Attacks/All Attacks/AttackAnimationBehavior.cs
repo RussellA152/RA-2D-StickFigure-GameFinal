@@ -40,6 +40,8 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
 
     [SerializeField] private bool turnOffEnemyCollision;
 
+    [SerializeField] private bool resetYVelocityOnAttack; // will the player's rigidbody Y velocity reset when they attack?
+
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -77,7 +79,7 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
             playerCollisionLayerScript = animator.transform.GetComponent<PlayerCollisionLayerChange>();
             playerCollisionLayerScript.SetIgnoreEnemyLayer();
         }
-           
+
 
     }
 
@@ -95,11 +97,16 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        playerCollisionLayerScript.ResetLayer();
+        if(playerCollisionLayerScript != null)
+            playerCollisionLayerScript.ResetLayer();
     }
 
     public void JoltThisObject(bool directionIsRight, float powerX, float powerY)
     {
+        // if this attack is supposed to reset y velocity on attack
+        if (resetYVelocityOnAttack)
+            playerComponentScript.GetRB().velocity = Vector2.zero;
+
         if (directionIsRight)
             rb.AddForce(new Vector2(powerX, powerY));
         //if player is facing left, then multiply force by negative 1 to prevent player from jolting backwards

@@ -10,6 +10,8 @@ using UnityEngine;
 public class AttackTransitionBehavior : StateMachineBehaviour
 {
 
+    //private PlayerCollisionLayerChange playerCollisionLayerScript;
+
     [Header("Name of Attack Animation To Be Played")]
     public string attackName; //name of light attack
     public string heavyAttackName; //name of heavy attack
@@ -22,6 +24,8 @@ public class AttackTransitionBehavior : StateMachineBehaviour
     [SerializeField] private bool allowMovementDuringAnim; //this bool determines if the player is allowed to move during this transition (used for Idle animation, otherwise player can't move in Idle state)
     private PlayerComponents playerComponentScript; //we will use the player component script in order to invoke the setCan"action" functions
 
+    //[SerializeField] private bool turnOffEnemyCollision;
+
     //[Header("Allow Attack in Mid-Air?")]
 
     //[SerializeField] private bool allowAttackMidAir; //this bool determines if the player is allowed to use this attack during this transition even when not grounded
@@ -30,7 +34,8 @@ public class AttackTransitionBehavior : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         //retrieve component script
-        playerComponentScript = animator.transform.gameObject.GetComponent<PlayerComponents>();
+        if(playerComponentScript == null)
+            playerComponentScript = animator.transform.gameObject.GetComponent<PlayerComponents>();
 
         //let player flip during attack transition period
         playerComponentScript.SetCanFlip(true);
@@ -42,12 +47,22 @@ public class AttackTransitionBehavior : StateMachineBehaviour
         else
             playerComponentScript.SetCanMove(false);
 
+        Debug.Log("Get component");
+
+        //if (turnOffEnemyCollision)
+        //{
+        //playerCollisionLayerScript = animator.transform.GetComponent<PlayerCollisionLayerChange>();
+        //playerCollisionLayerScript.SetIgnoreEnemyLayer();
+        //}
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         //If player fails to meet any of the following conditions below, the player will return to the Idle state 
+
+        
 
         // if we press back button (could be 'a' or 'd') + left click, play the corresponding back light attack
         if (AttackController.instance.isBackAttacking)
@@ -119,6 +134,9 @@ public class AttackTransitionBehavior : StateMachineBehaviour
         // reset the player's gravity after attack animation ends (this might be bad code if we ever decide to change the player's gravity from stuff like items or other animations)
         // reset the value because AttackAnimationBehavior modifies it, now it should be set back to normal
         PlayerStats.instance.ResetGravity();
+
+        //if(playerCollisionLayerScript != null)
+            //playerCollisionLayerScript.ResetLayer();
 
         if (AttackController.instance.isLightAttacking)
         {
