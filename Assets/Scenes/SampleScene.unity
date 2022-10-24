@@ -1415,7 +1415,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4332903956958558057, guid: ebfc8aa202773c044af288890ebbab9a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.9
+      value: -4.52
       objectReference: {fileID: 0}
     - target: {fileID: 4332903956958558057, guid: ebfc8aa202773c044af288890ebbab9a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1449,13 +1449,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4332903956958558059, guid: ebfc8aa202773c044af288890ebbab9a, type: 3}
-      propertyPath: rollDuration
-      value: 0.4
-      objectReference: {fileID: 0}
     - target: {fileID: 4332903956958558070, guid: ebfc8aa202773c044af288890ebbab9a, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4332903957792595815, guid: ebfc8aa202773c044af288890ebbab9a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.43
       objectReference: {fileID: 0}
     - target: {fileID: 7429946808678574068, guid: ebfc8aa202773c044af288890ebbab9a, type: 3}
       propertyPath: m_Enabled
