@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -21,6 +22,8 @@ public class AttackController : MonoBehaviour
     private bool canAttack; //determines if player is allowed to attack
     private bool canBackAttack; //determines if player is allowed to do a back attack
     private bool canJumpAttack;
+    private bool canJumpHeavyAttack;
+    private bool canGroundSlam;
 
     [HideInInspector]
     //isAttacking is true if the player successfully performs any attack
@@ -51,6 +54,17 @@ public class AttackController : MonoBehaviour
     private InputAction backHeavyAttackLeft;
     private InputAction backHeavyAttackRight;
 
+    [Header("Attack Timers")]
+    [SerializeField] private float backAttackTimer; // when player turns around, how much time do they have to perform a back attack (once this hits 0, the player must turn around again to perform a back attack)
+    private float backAttackTimerStored; // a float variable that remembers the original value of the backAttackTimer (we need this because backAttackTimer is modified during gameplay, and need to reset it often)
+    [SerializeField] private float jumpHeavyAttackCooldown; // when player performs a jump heavy attack, how long do they need to wait to perform it again?
+    private float jumpHeavyAttackCooldownStored; // a float variable that remembers the original value of the jump heavy attack cooldown (we need this because backAttackTimer is modified during gameplay, and need to reset it often)
+
+    private Coroutine jumpHeavyAttackCooldownCoroutine;
+    private bool jumpHeavyAttackCooldownStarted;
+
+    private int groundSlamHash;
+
     private void Awake()
     {
         instance = this;
@@ -66,6 +80,11 @@ public class AttackController : MonoBehaviour
     void Start()
     {
         //playerComponentScript = GetComponent<PlayerComponents>();
+
+        backAttackTimerStored = backAttackTimer;
+        jumpHeavyAttackCooldownStored = jumpHeavyAttackCooldown;
+
+        groundSlamHash = Animator.StringToHash("canGroundSlam");
 
         animator = playerComponentScript.GetAnimator();
 
@@ -87,11 +106,21 @@ public class AttackController : MonoBehaviour
         canAttack = playerComponentScript.GetCanAttack();
         canBackAttack = playerComponentScript.GetCanBackAttack();
         canJumpAttack = playerComponentScript.GetCanJumpAttack();
+        canJumpHeavyAttack = playerComponentScript.GetCanJumpHeavyAttack();
 
         Attack();
 
-        Debug.Log("can jump attack?: " + canJumpAttack);
-        Debug.Log("can jump attack? player comp: " + playerComponentScript.GetCanJumpAttack());
+        // back attack timer is always counting down
+        // decrement back attack timer until it hits 0 (player can no longer back attack)
+        if (backAttackTimer > 0f)
+            backAttackTimer -= Time.deltaTime;
+        else
+            backAttackTimer = 0f;
+
+        CheckBackAttack();
+
+        //Debug.Log("can jump attack?: " + canJumpAttack);
+        //Debug.Log("can jump attack? player comp: " + playerComponentScript.GetCanJumpAttack());
 
 
     }
@@ -168,15 +197,29 @@ public class AttackController : MonoBehaviour
             PlayerHasAttackedEvent();
         }
 
-        else if (heavyAttack.triggered && canJumpAttack && !isJumpHeavyAttacking && !isGrounded)
+        else if (heavyAttack.triggered && canJumpHeavyAttack && !isJumpHeavyAttacking && !isGrounded)
         {
             isJumpHeavyAttacking = true;
             SetPlayerIsAttacking(true);
             PlayerHasAttackedEvent();
+
+            //if (!jumpHeavyAttackCooldownStarted)
+                //StartCoroutine(StartJumpHeavyAttackCooldown(jumpHeavyAttackCooldown));
+
+            //if (jumpHeavyAttackCooldownStarted)
+            //{
+            //    //cancel the current transition coroutine
+            //    StopCoroutine(jumpHeavyAttackCooldownCoroutine);
+            //    jumpHeavyAttackCooldownStarted = false;
+            //}
+
+            //set this coroutine variable to StartCoroutine()
+            //this is so that we can cancel it when we need to
+            //jumpHeavyAttackCooldownCoroutine = StartCoroutine(StartJumpHeavyAttackCooldown(jumpHeavyAttackCooldown));
         }
     }
 
-    //Event system that occurs when the player attacks *
+    //Event system that occurs when the player attacks * (doesn't have to land)
     public void PlayerHasAttackedEvent()
     {
         if(onAttackStart != null)
@@ -203,5 +246,34 @@ public class AttackController : MonoBehaviour
     {
         return isAttacking;
     }
-        
+
+    public void CheckBackAttack()
+    {
+        //if back attack timer reaches 0, then the player must turn around again
+        if (backAttackTimer <= 0f)
+            playerComponentScript.SetCanBackAttack(false);
+        //Debug.Log(backAttackTimer);
+    }
+
+    public void ResetBackAttackTimer()
+    {
+        backAttackTimer = backAttackTimerStored;
+        playerComponentScript.SetCanBackAttack(true);
+    }
+
+    //IEnumerator StartJumpHeavyAttackCooldown(float cooldown)
+    //{
+    //    playerComponentScript.SetCanJumpHeavyAttack(false);
+
+    //    jumpHeavyAttackCooldownStarted = true;
+
+    //    yield return new WaitForSeconds(cooldown);
+
+    //    jumpHeavyAttackCooldownStarted = false;
+
+    //    jumpHeavyAttackCooldown = jumpHeavyAttackCooldownStored;
+    //    playerComponentScript.SetCanJumpHeavyAttack(true);
+    //}
+
+
 }

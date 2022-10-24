@@ -21,6 +21,8 @@ public class JumpHeavyAttackAnticipation : StateMachineBehaviour
     {
         //if(animator.transform.)
 
+        //AttackController.instance.star
+
         //retrieve component script
         if (playerComponentScript == null)
             playerComponentScript = animator.transform.gameObject.GetComponent<PlayerComponents>();

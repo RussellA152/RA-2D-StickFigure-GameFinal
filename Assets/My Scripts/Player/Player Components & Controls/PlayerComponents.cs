@@ -51,6 +51,9 @@ public class PlayerComponents : MonoBehaviour
     private bool canBackAttack = false; //this bool determines if the player is allowed to perform a back attack (turning around and attacking) 
 
     private bool canJumpAttack = true; // this bool determines if the player is allowed to perform a jump attack (also the same as an attack when not grounded)
+    private bool canJumpHeavyAttack = true; // this bool determines if the player is allowed to perform a jump heavy attack (also the same as a heavy attack when not grounded)
+    private bool canGroundSlam = true; // this bool determines if the player is allowed to perform the ground slam attack (this is technically a jump heavy attack, but we need to treat it a little separately
+                                       // because this attack will have a cooldown because its big power (we don't necessarily want a cooldown for the other moves)
 
     private bool canMove = true; //this bool determines if the player is allowed to walk and jump (both)
     private bool canSlide = true; //this bool determines if the player is allowed to slide
@@ -179,12 +182,26 @@ public class PlayerComponents : MonoBehaviour
         canAttack = boolean;
         canBackAttack = boolean;
         canJumpAttack = boolean;
+        canJumpHeavyAttack = boolean;
 
     }
 
     public void SetCanJumpAttack(bool boolean)
     {
         canJumpAttack = boolean;
+        canJumpHeavyAttack = boolean;
+        canGroundSlam = boolean;
+    }
+
+    public void SetCanJumpHeavyAttack(bool boolean)
+    {
+        canJumpHeavyAttack = boolean;
+        canGroundSlam = boolean;
+    }
+
+    public void SetCanGroundSlam(bool boolean)
+    {
+        canGroundSlam = boolean;
     }
 
     public void SetCanBackAttack(bool boolean)
@@ -210,6 +227,15 @@ public class PlayerComponents : MonoBehaviour
     public bool GetCanJumpAttack()
     {
         return canJumpAttack;
+    }
+
+    public bool GetCanJumpHeavyAttack()
+    {
+        return canJumpHeavyAttack;
+    }
+    public bool GetCanGroundSlam()
+    {
+        return canGroundSlam;
     }
 
     public bool GetCanJump()

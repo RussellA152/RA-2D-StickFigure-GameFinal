@@ -273,6 +273,8 @@ MonoBehaviour:
   isBackHeavyAttacking: 0
   isJumpLightAttacking: 0
   isJumpHeavyAttacking: 0
+  backAttackTimer: 0.35
+  jumpHeavyAttackCooldown: 4
 --- !u!114 &4332903956958558059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,6 +355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1042a9bea1715b945b47e1ee2e370f99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCollider: {fileID: 4332903956958558056}
   headCollider: {fileID: 6511568788506303734}
   legCollider: {fileID: 4181447012132963715}
 --- !u!50 &4332903956958558058
@@ -644,7 +647,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7354980139197630804}
   - component: {fileID: 4181447012132963715}
-  - component: {fileID: 8213358033581457270}
   m_Layer: 7
   m_Name: Leg Collider
   m_TagString: Untagged
@@ -682,22 +684,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -2.64}
   serializedVersion: 2
   m_Radius: 1
---- !u!70 &8213358033581457270
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5024609729151222773}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -2.64}
-  m_Size: {x: 1.16, y: 2.11}
-  m_Direction: 0
 --- !u!1 &5770650599197034168
 GameObject:
   m_ObjectHideFlags: 0

@@ -92,8 +92,8 @@ public class CharacterController2D : MonoBehaviour
 	private InputAction turnLeft;
 
 
-	private float backAttackTimer = 0.35f; //time allowed for player to perform a back attack (once this hits 0, the player must turn around again to perform a back attack)
-	private float backAttackTimerStored; // a float variable that remembers the original value of the backAttackTimer (we need this because backAttackTimer is modified during gameplay, and need to reset it often)
+	//private float backAttackTimer = 0.35f; //time allowed for player to perform a back attack (once this hits 0, the player must turn around again to perform a back attack)
+	//private float backAttackTimerStored; // a float variable that remembers the original value of the backAttackTimer (we need this because backAttackTimer is modified during gameplay, and need to reset it often)
 
 	[Header("Events")]
 	[Space]
@@ -137,7 +137,7 @@ public class CharacterController2D : MonoBehaviour
     private void Start()
     {
 		rollDurationStored = rollDuration;
-		backAttackTimerStored = backAttackTimer;
+		//backAttackTimerStored = backAttackTimer;
 
 		isWalking = false;
 
@@ -167,14 +167,14 @@ public class CharacterController2D : MonoBehaviour
 
 		//Debug.Log("Speed multiplier = " + speedMultiplier);
 
-		//decrement back attack timer until it hits 0 (player can no longer back attack
-		if (backAttackTimer > 0f)
-			backAttackTimer -= Time.deltaTime;
-		else
-			backAttackTimer = 0f;
+		//decrement back attack timer until it hits 0 (player can no longer back attack)
+		//if (backAttackTimer > 0f)
+		//	backAttackTimer -= Time.deltaTime;
+		//else
+		//	backAttackTimer = 0f;
 
 		//check if back attack should be true or false depending on timer
-		CheckBackAttack();
+		//CheckBackAttack();
 
 		//always updating the canMove bool to check if player is allowed to move and jump
 		UpdatePlayerComponents();
@@ -409,10 +409,11 @@ public class CharacterController2D : MonoBehaviour
 		m_FacingRight = !m_FacingRight;
 
 		//reset back attack timer
-		backAttackTimer = backAttackTimerStored;
+		AttackController.instance.ResetBackAttackTimer();
+		//backAttackTimer = backAttackTimerStored;
 
 		//player has turned around, they are now allowed to perform a back attack
-		playerComponentScript.SetCanBackAttack(true);
+		//playerComponentScript.SetCanBackAttack(true);
 		//reset speed multiplier (fixes bug where player can keep momentum when turning around
 		speedMultiplier = 10f;
 
@@ -444,13 +445,13 @@ public class CharacterController2D : MonoBehaviour
     }
 
 
-	private void CheckBackAttack()
-    {
-		//if back attack timer reaches 0, then the player must turn around again
-		if (backAttackTimer <= 0f)
-			playerComponentScript.SetCanBackAttack(false);
-		//Debug.Log(backAttackTimer);
-	}
+	//private void CheckBackAttack()
+ //   {
+	//	//if back attack timer reaches 0, then the player must turn around again
+	//	if (backAttackTimer <= 0f)
+	//		playerComponentScript.SetCanBackAttack(false);
+	//	//Debug.Log(backAttackTimer);
+	//}
 
 	//invoked at start and should be invoked whenever the running speed is changed (say we pick up an item that increases our movement speed)
 	public void UpdateMinimumSpeedMultiplierRequirement()

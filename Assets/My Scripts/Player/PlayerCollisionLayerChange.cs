@@ -8,7 +8,7 @@ using UnityEngine;
 // ex. combo 3 heavy will send player into a flying knee, but collider will block player's upward force when it touches an enemy, so we turn it to a different layer for a brief moment
 public class PlayerCollisionLayerChange : MonoBehaviour
 {
-    //[SerializeField] private BoxCollider2D mainCollider;
+    [SerializeField] private BoxCollider2D mainCollider;
     [SerializeField] private CircleCollider2D headCollider;
     [SerializeField] private CircleCollider2D legCollider;
 
@@ -24,14 +24,14 @@ public class PlayerCollisionLayerChange : MonoBehaviour
 
     public void SetIgnoreEnemyLayer()
     {
-        //mainCollider.gameObject.layer = LayerMask.NameToLayer("IgnoreEnemy");
+        mainCollider.gameObject.layer = ignoreEnemyLayerHash;
         headCollider.gameObject.layer = ignoreEnemyLayerHash;
         legCollider.gameObject.layer = ignoreEnemyLayerHash;
     }
 
     public void ResetLayer()
     {
-        //mainCollider.gameObject.layer = LayerMask.NameToLayer("Player");
+        mainCollider.gameObject.layer = playerLayerHash;
         headCollider.gameObject.layer = playerLayerHash;
         legCollider.gameObject.layer = playerLayerHash;
     }
