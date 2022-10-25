@@ -17,6 +17,7 @@ public class EnemyScriptableObject : ScriptableObject, IAIAttacks
     public float followRangeY; //y distance enemy must be to chase player
     [Range(0.0f, 1.0f)]
     public float dropChance; // chance for this enemy to drop an item upon death
+    public float getUpTimer; // how long does it take for this enemy to get back up from the ground (always the same for each attack)
 
     //[Header("Basic Animation Properties")]
     //public Sprite sprite; //while we could just set the sprite renderer in the inspector... when the enemy dies, they will be disabled, and they should reappear on scene with the idle sprite

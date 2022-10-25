@@ -30,7 +30,9 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
     [SerializeField] private float attackingPowerX; //amount of force applied to enemy that is hit by this attack in x-direction
     [SerializeField] private float attackingPowerY; //amount of force applied to enemy that is hit by this attack in y-direction
 
+
     [Header("Jolt Force Applied To Player")]
+    [SerializeField] private ForceMode2D forceMode; // the force mode applied to the jolt force
     [SerializeField] private float joltForceX; //determines how far the player will 'jolt' forward in the x-direction when attacking (Should be a high value)
     [SerializeField] private float joltForceY; //determines how far the player will 'jolt' forward in the y-direction when attacking (Should be a high value)
 
@@ -110,10 +112,10 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
             playerComponentScript.GetRB().velocity = Vector2.zero;
 
         if (directionIsRight)
-            rb.AddForce(new Vector2(powerX, powerY));
+            rb.AddForce(new Vector2(powerX, powerY),forceMode);
         //if player is facing left, then multiply force by negative 1 to prevent player from jolting backwards
         else
-            rb.AddForce(new Vector2(-powerX, powerY));
+            rb.AddForce(new Vector2(-powerX, powerY), forceMode);
     }
 
     // set the player's gravity to "gravityDuringAttack" amount

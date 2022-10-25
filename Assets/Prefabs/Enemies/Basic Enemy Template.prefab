@@ -90,8 +90,8 @@ MonoBehaviour:
   minimumVelocityUntilStopped: {x: 0.25, y: 0.25}
   gravityWhenIdle: 4
   myRoom: {fileID: 0}
-  backCollider: {fileID: 2064457975479593907}
   spriteRenderer: {fileID: 3215621220825369563}
+  timeToGetUp: 4
 --- !u!114 &5969129094098281727
 MonoBehaviour:
   m_ObjectHideFlags: 0

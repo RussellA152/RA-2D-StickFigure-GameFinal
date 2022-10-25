@@ -78,6 +78,10 @@ public class EnemyController : MonoBehaviour
     private int deadHash;
 
     private bool isHurt = false;
+
+    private float timeToGetUp; // how long does it take for enemy to get back from the floor (this timer needs to reach zero, and the enemy's velocity must be zero)
+    private float timeToGetUpStored; // variable that remembers the original value of the timeToGetUp (for resetting)
+
     private int stoppedHash;
 
     public enum EnemyState
@@ -160,11 +164,8 @@ public class EnemyController : MonoBehaviour
         //if (!isAlive)
         //animator.SetBool(deadHash, true);
 
-
-        if (rb.velocity.x <= minimumVelocityUntilStopped.x && rb.velocity.y <= minimumVelocityUntilStopped.y)
-            animator.SetBool(stoppedHash, true);
-        else
-            animator.SetBool(stoppedHash, false);
+        
+            
         /*
         //if the enemy's aggression level becomes higher than the threshold, then set it equal to the threshold
         if (aggressionLevel >= aggressionLevelThreshold)
@@ -257,6 +258,9 @@ public class EnemyController : MonoBehaviour
         attackRangeY = enemyScriptableObject.GetAttackRangeY();
 
         dropChance = enemyScriptableObject.dropChance;
+
+        timeToGetUp = enemyScriptableObject.getUpTimer;
+        timeToGetUpStored = timeToGetUp;
         /*
         aggressionLevelThreshold = enemyScriptableObject.GetAggressionLevelThreshold();
         minAggressionLevelIncrease = enemyScriptableObject.GetMinAggressionLevelIncrease();
@@ -384,6 +388,26 @@ public class EnemyController : MonoBehaviour
     private void EnemyHurtBehavior()
     {
         //IncreaseAggressionLevelHurt();
+
+        // if the enemy's velocity reaches a certain minimum value, then they will get back up from their hurt state
+        if ((rb.velocity.x <= minimumVelocityUntilStopped.x && rb.velocity.y <= minimumVelocityUntilStopped.y))
+        {
+            timeToGetUp -= Time.deltaTime;
+
+            if (timeToGetUp <= 0f)
+            {
+                animator.SetBool(stoppedHash, true);
+                // timeToGetUpStored needs to remember the original value of timeToGetUp
+                timeToGetUp = timeToGetUpStored;
+            }
+
+        }
+
+        else
+        {
+            timeToGetUp = timeToGetUpStored;
+            animator.SetBool(stoppedHash, false);
+        }
 
         isHurt = true;
 

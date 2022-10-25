@@ -103,6 +103,7 @@ MonoBehaviour:
   attackDamage: 0
   attackingPowerX: 500
   attackingPowerY: 1500
+  forceMode: 0
   joltForceX: 0
   joltForceY: 100
   gravityDuringAttack: 0
@@ -249,6 +250,7 @@ MonoBehaviour:
   attackDamage: 0
   attackingPowerX: 500
   attackingPowerY: 1500
+  forceMode: 0
   joltForceX: 0
   joltForceY: 100
   gravityDuringAttack: 0
@@ -391,6 +393,7 @@ MonoBehaviour:
   attackDamage: 0
   attackingPowerX: 250
   attackingPowerY: 300
+  forceMode: 0
   joltForceX: 200
   joltForceY: 100
   gravityDuringAttack: 1
@@ -1071,6 +1074,34 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1102 &-6745758987466070888
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Combo 4 Heavy Transition
+  m_Speed: 0.01
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: -2142957663013642756}
+  m_StateMachineBehaviours:
+  - {fileID: -1126113258105739766}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 24d03c98b43210e46ac9b1614673ce89, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!114 &-6631401594209044092
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1105,6 +1136,28 @@ AnimatorStateTransition:
   m_TransitionOffset: 0
   m_ExitTime: 0.7
   m_HasExitTime: 0
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1101 &-6422262874744980775
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 3892705385775658279}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 1
+  m_HasExitTime: 1
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -1310,6 +1363,7 @@ MonoBehaviour:
   attackDamage: 100
   attackingPowerX: 300
   attackingPowerY: 600
+  forceMode: 0
   joltForceX: 400
   joltForceY: 0
   gravityDuringAttack: 0
@@ -1341,6 +1395,28 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &-5694766972695345990
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageType: 2
+  attackDamage: 150
+  attackingPowerX: 1500
+  attackingPowerY: 400
+  forceMode: 1
+  joltForceX: 400
+  joltForceY: 0
+  gravityDuringAttack: 0
+  turnOffEnemyCollision: 0
+  resetYVelocityOnAttack: 0
 --- !u!114 &-5691126544980079572
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1840,6 +1916,7 @@ MonoBehaviour:
   attackDamage: 30
   attackingPowerX: 800
   attackingPowerY: 400
+  forceMode: 0
   joltForceX: 1000
   joltForceY: 0
   gravityDuringAttack: 0
@@ -1984,7 +2061,7 @@ AnimatorStateMachine:
     m_Position: {x: 600, y: 410, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2436071785153772845}
-    m_Position: {x: 470, y: 700, z: 0}
+    m_Position: {x: 1050, y: 610, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -1993,7 +2070,7 @@ AnimatorStateMachine:
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 990, y: 110, z: 0}
-  m_ParentStateMachinePosition: {x: 960, y: 240, z: 0}
+  m_ParentStateMachinePosition: {x: 1300, y: 240, z: 0}
   m_DefaultState: {fileID: 6472572054837862086}
 --- !u!1101 &-4336944977506907097
 AnimatorStateTransition:
@@ -2401,6 +2478,25 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &-3614545054893482564
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bcdc20dc630907469b3c280d9dbdbfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackName: 
+  heavyAttackName: 
+  backAttackName: Back Light Attack
+  backHeavyAttackName: Back Heavy Attack
+  jumpLightAttackName: 
+  jumpHeavyAttackName: 
+  allowMovementDuringAnim: 0
 --- !u!1102 &-3580506331798525060
 AnimatorState:
   serializedVersion: 6
@@ -2525,6 +2621,7 @@ MonoBehaviour:
   attackDamage: 20
   attackingPowerX: 150
   attackingPowerY: 150
+  forceMode: 0
   joltForceX: 500
   joltForceY: 0
   gravityDuringAttack: 0
@@ -2653,6 +2750,7 @@ MonoBehaviour:
   attackDamage: 20
   attackingPowerX: 150
   attackingPowerY: 150
+  forceMode: 0
   joltForceX: 500
   joltForceY: 0
   gravityDuringAttack: 0
@@ -2843,6 +2941,7 @@ MonoBehaviour:
   attackDamage: 150
   attackingPowerX: 1000
   attackingPowerY: -1000
+  forceMode: 0
   joltForceX: 3000
   joltForceY: -250
   gravityDuringAttack: 1.5
@@ -2867,6 +2966,28 @@ AnimatorStateTransition:
   m_ExitTime: 0
   m_HasExitTime: 1
   m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1101 &-2142957663013642756
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -96890588181203755}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.5
+  m_HasExitTime: 1
+  m_HasFixedDuration: 0
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
@@ -3358,6 +3479,7 @@ MonoBehaviour:
   attackDamage: 40
   attackingPowerX: 200
   attackingPowerY: 1200
+  forceMode: 0
   joltForceX: 1000
   joltForceY: 0
   gravityDuringAttack: 0
@@ -3416,6 +3538,25 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-1126113258105739766
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bcdc20dc630907469b3c280d9dbdbfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackName: 
+  heavyAttackName: Combo 4 Heavy Finisher Anticipation
+  backAttackName: Back Light Attack
+  backHeavyAttackName: Back Heavy Attack
+  jumpLightAttackName: 
+  jumpHeavyAttackName: 
+  allowMovementDuringAnim: 0
 --- !u!114 &-1052389640869901484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3435,6 +3576,28 @@ MonoBehaviour:
   jumpLightAttackName: 
   jumpHeavyAttackName: 
   allowMovementDuringAnim: 0
+--- !u!1101 &-952266862708538642
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 4463089980338977331}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.5
+  m_HasExitTime: 1
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &-874275366542719681
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -4023,6 +4186,7 @@ MonoBehaviour:
   attackDamage: 40
   attackingPowerX: 150
   attackingPowerY: 150
+  forceMode: 0
   joltForceX: 1500
   joltForceY: 0
   gravityDuringAttack: 0
@@ -4072,6 +4236,34 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &353833513042760110
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Combo 4 Heavy
+  m_Speed: 0.2
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: 4738294459186992201}
+  m_StateMachineBehaviours:
+  - {fileID: 6569771635080096746}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: b926713c0f08e9547961b54443041748, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1101 &354111853293027909
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -4658,6 +4850,7 @@ MonoBehaviour:
   attackDamage: 20
   attackingPowerX: 300
   attackingPowerY: 300
+  forceMode: 0
   joltForceX: 500
   joltForceY: 0
   gravityDuringAttack: 0
@@ -4704,6 +4897,28 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2731022555564531330}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.5
+  m_HasExitTime: 1
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1101 &1971884995085609920
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -96890588181203755}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
@@ -5156,7 +5371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackName: 
-  heavyAttackName: 
+  heavyAttackName: Combo 4 Heavy
   backAttackName: Back Light Attack
   backHeavyAttackName: Back Heavy Attack
   jumpLightAttackName: 
@@ -5265,6 +5480,7 @@ MonoBehaviour:
   attackDamage: 50
   attackingPowerX: 2000
   attackingPowerY: 800
+  forceMode: 0
   joltForceX: 0
   joltForceY: 0
   gravityDuringAttack: 0
@@ -5357,6 +5573,34 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &3892705385775658279
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Combo 4 Heavy Finisher
+  m_Speed: 0.5
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: -952266862708538642}
+  m_StateMachineBehaviours:
+  - {fileID: -5694766972695345990}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 6a83b318ea00fea4d9964e32decefdd2, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!114 &3903264628587163198
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5604,6 +5848,34 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1102 &4463089980338977331
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Combo 4 Heavy Finisher Transition
+  m_Speed: 0.02
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: 1971884995085609920}
+  m_StateMachineBehaviours:
+  - {fileID: -3614545054893482564}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: f89cf1ae9dcf93a4182b2bbf8751c066, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1107 &4485709841718707602
 AnimatorStateMachine:
   serializedVersion: 6
@@ -5627,7 +5899,7 @@ AnimatorStateMachine:
     m_Position: {x: 580, y: -30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1641715076788669449}
-    m_Position: {x: 200, y: 90, z: 0}
+    m_Position: {x: 190, y: 90, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1215099197619369295}
     m_Position: {x: 600, y: 90, z: 0}
@@ -5773,6 +6045,28 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &4738294459186992201
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -6745758987466070888}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.5
+  m_HasExitTime: 1
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1109 &4748791205036673048
 AnimatorTransition:
   m_ObjectHideFlags: 1
@@ -5837,6 +6131,7 @@ MonoBehaviour:
   attackDamage: 100
   attackingPowerX: 400
   attackingPowerY: 1100
+  forceMode: 0
   joltForceX: 2200
   joltForceY: 1750
   gravityDuringAttack: 2.5
@@ -5956,6 +6251,7 @@ MonoBehaviour:
   attackDamage: 0
   attackingPowerX: 250
   attackingPowerY: 300
+  forceMode: 0
   joltForceX: 200
   joltForceY: 100
   gravityDuringAttack: 1
@@ -6325,6 +6621,28 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 0, z: 0}
   m_DefaultState: {fileID: -7746354132150577750}
+--- !u!114 &6569771635080096746
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageType: 2
+  attackDamage: 150
+  attackingPowerX: 500
+  attackingPowerY: 200
+  forceMode: 0
+  joltForceX: 2500
+  joltForceY: 0
+  gravityDuringAttack: 0
+  turnOffEnemyCollision: 0
+  resetYVelocityOnAttack: 0
 --- !u!114 &6652507660826063919
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6481,7 +6799,7 @@ AnimatorStateMachine:
     m_Position: {x: 520, y: -240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 886769651235236107}
-    m_Position: {x: 260, y: 110, z: 0}
+    m_Position: {x: 240, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7861935543624724058}
     m_Position: {x: 560, y: 80, z: 0}
@@ -6497,6 +6815,21 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: -1582187209250728123}
     m_Position: {x: 560, y: 280, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 353833513042760110}
+    m_Position: {x: 260, y: 540, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -6745758987466070888}
+    m_Position: {x: 570, y: 540, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 4463089980338977331}
+    m_Position: {x: 660, y: 660, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 3892705385775658279}
+    m_Position: {x: 320, y: 660, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 8646098596291066417}
+    m_Position: {x: 20, y: 660, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -6664,11 +6997,34 @@ MonoBehaviour:
   attackDamage: 0
   attackingPowerX: 0
   attackingPowerY: 0
+  forceMode: 0
   joltForceX: 0
   joltForceY: 0
   gravityDuringAttack: 0
   turnOffEnemyCollision: 0
   resetYVelocityOnAttack: 0
+--- !u!1101 &7606730220646536198
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -96890588181203755}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.5
+  m_HasExitTime: 1
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &7642590431571175461
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -6966,6 +7322,7 @@ MonoBehaviour:
   attackDamage: 20
   attackingPowerX: 150
   attackingPowerY: 150
+  forceMode: 0
   joltForceX: 500
   joltForceY: 0
   gravityDuringAttack: 0
@@ -7040,6 +7397,7 @@ MonoBehaviour:
   attackDamage: 0
   attackingPowerX: 250
   attackingPowerY: 300
+  forceMode: 0
   joltForceX: 200
   joltForceY: 100
   gravityDuringAttack: 1
@@ -7061,6 +7419,7 @@ MonoBehaviour:
   attackDamage: 0
   attackingPowerX: 250
   attackingPowerY: 300
+  forceMode: 0
   joltForceX: 200
   joltForceY: 100
   gravityDuringAttack: 1
@@ -7144,6 +7503,33 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &8646098596291066417
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Combo 4 Heavy Finisher Anticipation
+  m_Speed: 0.04
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: -6422262874744980775}
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: fe163b2d1e73a474995976be9f7ddc67, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1101 &8727402147693560525
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
