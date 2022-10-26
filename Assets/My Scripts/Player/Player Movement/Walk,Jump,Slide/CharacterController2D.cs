@@ -257,6 +257,12 @@ public class CharacterController2D : MonoBehaviour
 				//StartCoroutine(RollCooldown());
 
 		}
+		// if player is no longer grounded at any point during the roll, the roll will cancel
+		else if (!m_Grounded)
+        {
+			playerInputScript.SetRolling(false);
+			animator.SetBool(isRollingHash, false);
+		}
         //else
         //{
 			//animator.SetBool(isRollingHash, false);

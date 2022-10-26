@@ -134,13 +134,13 @@ public class EnemyMovement : MonoBehaviour
     {
         //enemy must be allowed to move to flip sprite
         //if enemy is moving right... flip sprite to face the right direction
-        if (agent.desiredVelocity.x >= 0.01f && canFlip && isMoving)
+        if ( canFlip && agent.desiredVelocity.x >= 0.01f && isMoving)
         {
             transform.localScale = facingRightVector;
             enemyFacingRight = true;
         }
         // if enemy is moving left.. flip sprite to face left direction
-        else if (agent.desiredVelocity.x <= -0.01f && canFlip && isMoving)
+        else if (canFlip && agent.desiredVelocity.x <= -0.01f && isMoving)
         {
             transform.localScale = facingLeftVector;
             enemyFacingRight = false;

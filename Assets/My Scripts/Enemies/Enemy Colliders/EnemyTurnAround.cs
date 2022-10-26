@@ -10,6 +10,7 @@ public class EnemyTurnAround : MonoBehaviour
 {
     [Header("Required Components")]
     [SerializeField] private EnemyMovement enemyMoveScript;
+    [SerializeField] private EnemyController enemyControllerScript;
 
     private bool isCollidingWithPlayer = false;
 
@@ -24,7 +25,7 @@ public class EnemyTurnAround : MonoBehaviour
             return;
         //if player goes behind the enemy and collides with the turn around trigger, then invoke the flip sprite function
 
-        if (collision.gameObject.CompareTag("Player") && !isCollidingWithPlayer)
+        if (collision.gameObject.CompareTag("Player") && !isCollidingWithPlayer && enemyControllerScript.GetEnemyState() != EnemyController.EnemyState.Hurt)
         {
             
             enemyMoveScript.FlipSpriteManually(turnAroundTimer);

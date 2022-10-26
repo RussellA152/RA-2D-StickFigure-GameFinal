@@ -69,7 +69,7 @@ public class EnemyController : MonoBehaviour
     [Header("Dedicated Room")]
     [SerializeField] private BaseRoom myRoom; //the room this enemy was spawned in
 
-    //[SerializeField] private BoxCollider2D backCollider; // disable back collider when an enemy dies (re-enable when they spawn)
+    [SerializeField] private BoxCollider2D avoidanceBox; // disable avoidanceBox when dying
 
     [SerializeField] private SpriteRenderer spriteRenderer;
     Color enemyColor = new Color(255,255,255,255);
@@ -79,7 +79,8 @@ public class EnemyController : MonoBehaviour
 
     private bool isHurt = false;
 
-    private float timeToGetUp; // how long does it take for enemy to get back from the floor (this timer needs to reach zero, and the enemy's velocity must be zero)
+    [Space(20)]
+    [SerializeField] private float timeToGetUp; // how long does it take for enemy to get back from the floor (this timer needs to reach zero, and the enemy's velocity must be zero)
     private float timeToGetUpStored; // variable that remembers the original value of the timeToGetUp (for resetting)
 
     private int stoppedHash;
@@ -118,7 +119,8 @@ public class EnemyController : MonoBehaviour
         //the enemy's room would always be the current room inside of OnEnable
         myRoom = LevelManager.instance.GetCurrentRoom();
 
-        //backCollider.enabled = true;
+        avoidanceBox.enabled = true;
+
 
         //Debug.Log("Is it enabled now? " + spriteRenderer.enabled);
 
@@ -389,25 +391,32 @@ public class EnemyController : MonoBehaviour
     {
         //IncreaseAggressionLevelHurt();
 
+        // if get up timer is less than or equal to 0, it means the enemy has been on the ground for enough time
+        if (timeToGetUp <= 0f)
+        {
+            animator.SetBool(stoppedHash, true);
+
+            // timeToGetUpStored needs to remember the original value of timeToGetUp
+            timeToGetUp = timeToGetUpStored;
+        }
+
         // if the enemy's velocity reaches a certain minimum value, then they will get back up from their hurt state
-        if ((rb.velocity.x <= minimumVelocityUntilStopped.x && rb.velocity.y <= minimumVelocityUntilStopped.y))
+        // needs to be absolute value of velocity because velocity is negative when enemies are falling back down from the air
+        if ((Mathf.Abs(rb.velocity.x) <= minimumVelocityUntilStopped.x && Mathf.Abs(rb.velocity.y) <= minimumVelocityUntilStopped.y))
         {
             timeToGetUp -= Time.deltaTime;
 
-            if (timeToGetUp <= 0f)
-            {
-                animator.SetBool(stoppedHash, true);
-                // timeToGetUpStored needs to remember the original value of timeToGetUp
-                timeToGetUp = timeToGetUpStored;
-            }
-
         }
 
-        else
+        // if the enemy's velocity is increased again, then they will not get back up from their hurt state
+        // I chose 2 because then light attacks don't push enemies far enough for them to get stuck in a loop of being knocked down
+        else if ((Mathf.Abs(rb.velocity.x) >= 3.5f || Mathf.Abs(rb.velocity.y) >= 3.5f))
         {
             timeToGetUp = timeToGetUpStored;
             animator.SetBool(stoppedHash, false);
         }
+
+
 
         isHurt = true;
 
@@ -426,7 +435,7 @@ public class EnemyController : MonoBehaviour
     {
         //Debug.Log("Enemy Died! Inside EnemyController.");
 
-        //backCollider.enabled = false;
+        avoidanceBox.enabled = false;
 
         //when this enemy dies, their room's "numberOfEnemiesAliveHere" should decrease by 1
         if (myRoom != null)

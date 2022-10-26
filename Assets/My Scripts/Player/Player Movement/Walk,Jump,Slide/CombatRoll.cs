@@ -30,6 +30,7 @@ public class CombatRoll : StateMachineBehaviour
 
         //retrieve player components
         playerCompScript = animator.transform.gameObject.GetComponent<PlayerComponents>();
+        
 
         //set PlayerMovementInput's "rolling" boolean to false so that the player is not stuck infinite rolling (we must call this in this script so that users will be able to roll properly at any frame rate)
         //animator.transform.gameObject.GetComponent<PlayerMovementInput>().SetRolling(false);

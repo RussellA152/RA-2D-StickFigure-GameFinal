@@ -87,11 +87,12 @@ MonoBehaviour:
   chaseStateTransitionTimer: 0
   attackStateTransitionTimer: 0
   rb: {fileID: -8891431870749144915}
-  minimumVelocityUntilStopped: {x: 0.25, y: 0.25}
+  minimumVelocityUntilStopped: {x: 0.2, y: 0.2}
   gravityWhenIdle: 4
   myRoom: {fileID: 0}
+  avoidanceBox: {fileID: 4790058886287226208}
   spriteRenderer: {fileID: 3215621220825369563}
-  timeToGetUp: 4
+  timeToGetUp: 0
 --- !u!114 &5969129094098281727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -495,6 +496,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyMoveScript: {fileID: 5969129094098281727}
+  enemyControllerScript: {fileID: 6875883259916410309}
 --- !u!61 &2064457975479593907
 BoxCollider2D:
   m_ObjectHideFlags: 0
