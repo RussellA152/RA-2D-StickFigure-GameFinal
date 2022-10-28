@@ -410,7 +410,7 @@ public class EnemyController : MonoBehaviour
 
         // if the enemy's velocity is increased again, then they will not get back up from their hurt state
         // I chose 2 because then light attacks don't push enemies far enough for them to get stuck in a loop of being knocked down
-        else if ((Mathf.Abs(rb.velocity.x) >= 3.5f || Mathf.Abs(rb.velocity.y) >= 3.5f))
+        else if ((Mathf.Abs(rb.velocity.x) >= 5f || Mathf.Abs(rb.velocity.y) >= 5f))
         {
             timeToGetUp = timeToGetUpStored;
             animator.SetBool(stoppedHash, false);
