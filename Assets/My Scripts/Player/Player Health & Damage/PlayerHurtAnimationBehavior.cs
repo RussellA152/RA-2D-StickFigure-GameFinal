@@ -7,8 +7,6 @@ public class PlayerHurtAnimationBehavior : StateMachineBehaviour
 
     private PlayerComponents playerComponentScript; //we will use the player component script in order to disable movement
 
-    [SerializeField] private bool endOfKnockdownState; // will this animation be the end of the player's knockdown state?
-
     [SerializeField] private bool allowMovementOnStateExit; // this is used for when we have multiple chains of hurt animations (for the heavy hurt for example)
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -59,11 +57,6 @@ public class PlayerHurtAnimationBehavior : StateMachineBehaviour
             playerComponentScript.SetCanRoll(true);
 
             
-        }
-
-        if (endOfKnockdownState)
-        {
-            animator.transform.gameObject.GetComponent<PlayerHurt>().SetIsKnockedDown(false);
         }
         
     }

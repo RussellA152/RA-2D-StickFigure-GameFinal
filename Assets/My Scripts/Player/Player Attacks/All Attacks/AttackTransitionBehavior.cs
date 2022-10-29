@@ -24,6 +24,9 @@ public class AttackTransitionBehavior : StateMachineBehaviour
     [SerializeField] private bool allowMovementDuringAnim; //this bool determines if the player is allowed to move during this transition (used for Idle animation, otherwise player can't move in Idle state)
     private PlayerComponents playerComponentScript; //we will use the player component script in order to invoke the setCan"action" functions
 
+    [Space(20)]
+    [SerializeField] private bool resetGravityOnStateExit; // should the player's gravity reset OnStateExit?
+
     //[SerializeField] private bool turnOffEnemyCollision;
 
     //[Header("Allow Attack in Mid-Air?")]
@@ -133,7 +136,8 @@ public class AttackTransitionBehavior : StateMachineBehaviour
     {
         // reset the player's gravity after attack animation ends (this might be bad code if we ever decide to change the player's gravity from stuff like items or other animations)
         // reset the value because AttackAnimationBehavior modifies it, now it should be set back to normal
-        PlayerStats.instance.ResetGravity();
+        if(resetGravityOnStateExit)
+            PlayerStats.instance.ResetGravity();
 
         //if(playerCollisionLayerScript != null)
             //playerCollisionLayerScript.ResetLayer();

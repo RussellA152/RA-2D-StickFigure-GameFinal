@@ -228,6 +228,19 @@ MonoBehaviour:
   gravityDuringAttack: 0
   turnOffEnemyCollision: 0
   resetYVelocityOnAttack: 0
+--- !u!114 &-8460407152273185881
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a38c20a7453ab02448d4ce2041d46f46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endOfKnockdownState: 1
 --- !u!114 &-8387847421302786296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -247,6 +260,7 @@ MonoBehaviour:
   jumpLightAttackName: 
   jumpHeavyAttackName: 
   allowMovementDuringAnim: 0
+  resetGravityOnStateExit: 1
 --- !u!1102 &-8383072558413139639
 AnimatorState:
   serializedVersion: 6
@@ -293,6 +307,7 @@ MonoBehaviour:
   jumpLightAttackName: 
   jumpHeavyAttackName: Combo 3 Finisher
   allowMovementDuringAnim: 0
+  resetGravityOnStateExit: 1
 --- !u!1102 &-8352506448186878782
 AnimatorState:
   serializedVersion: 6
@@ -608,6 +623,7 @@ MonoBehaviour:
   jumpLightAttackName: 
   jumpHeavyAttackName: 
   allowMovementDuringAnim: 0
+  resetGravityOnStateExit: 0
 --- !u!114 &-7831326710310975870
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -627,6 +643,7 @@ MonoBehaviour:
   jumpLightAttackName: 
   jumpHeavyAttackName: 
   allowMovementDuringAnim: 0
+  resetGravityOnStateExit: 0
 --- !u!1102 &-7814254326632273274
 AnimatorState:
   serializedVersion: 6
@@ -847,7 +864,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Heavy Hurt Front End
-  m_Speed: 0.1
+  m_Speed: 0.08
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -5906880995141201080}
@@ -1067,6 +1084,7 @@ MonoBehaviour:
   jumpLightAttackName: 
   jumpHeavyAttackName: 
   allowMovementDuringAnim: 0
+  resetGravityOnStateExit: 0
 --- !u!1101 &-6926484590721706312
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1130,6 +1148,7 @@ MonoBehaviour:
   jumpLightAttackName: 
   jumpHeavyAttackName: 
   allowMovementDuringAnim: 0
+  resetGravityOnStateExit: 0
 --- !u!1102 &-6761910278824410491
 AnimatorState:
   serializedVersion: 6
@@ -1347,7 +1366,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dd214815c8c4854c95ac16464e6eabd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endOfKnockdownState: 1
   allowMovementOnStateExit: 1
 --- !u!1102 &-6248034744691862984
 AnimatorState:
@@ -1420,6 +1438,7 @@ MonoBehaviour:
   jumpLightAttackName: Jump Attack 1
   jumpHeavyAttackName: Jump Heavy Attack Anticipation
   allowMovementDuringAnim: 1
+  resetGravityOnStateExit: 0
 --- !u!1101 &-5924192798968783776
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1461,6 +1480,7 @@ MonoBehaviour:
   jumpLightAttackName: 
   jumpHeavyAttackName: 
   allowMovementDuringAnim: 1
+  resetGravityOnStateExit: 0
 --- !u!1101 &-5906880995141201080
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1840,6 +1860,7 @@ MonoBehaviour:
   jumpLightAttackName: Jump Attack 2
   jumpHeavyAttackName: Jump Heavy Attack Anticipation
   allowMovementDuringAnim: 0
+  resetGravityOnStateExit: 0
 --- !u!1101 &-4981033339883271935
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2655,6 +2676,7 @@ MonoBehaviour:
   jumpLightAttackName: 
   jumpHeavyAttackName: 
   allowMovementDuringAnim: 0
+  resetGravityOnStateExit: 0
 --- !u!1102 &-3580506331798525060
 AnimatorState:
   serializedVersion: 6
@@ -2804,6 +2826,7 @@ MonoBehaviour:
   jumpLightAttackName: 
   jumpHeavyAttackName: 
   allowMovementDuringAnim: 0
+  resetGravityOnStateExit: 0
 --- !u!1101 &-3135887821146915841
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2900,7 +2923,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Heavy Hurt Back Start
-  m_Speed: 0.1
+  m_Speed: 0.3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -6926484590721706312}
@@ -3261,7 +3284,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dd214815c8c4854c95ac16464e6eabd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endOfKnockdownState: 1
   allowMovementOnStateExit: 1
 --- !u!1101 &-2094912714502090359
 AnimatorStateTransition:
@@ -3485,7 +3507,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dd214815c8c4854c95ac16464e6eabd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endOfKnockdownState: 0
   allowMovementOnStateExit: 0
 --- !u!1102 &-1641715076788669449
 AnimatorState:
@@ -3550,6 +3571,7 @@ MonoBehaviour:
   jumpLightAttackName: Jump Attack 1
   jumpHeavyAttackName: Jump Heavy Attack Anticipation
   allowMovementDuringAnim: 1
+  resetGravityOnStateExit: 0
 --- !u!1102 &-1582187209250728123
 AnimatorState:
   serializedVersion: 6
@@ -3695,7 +3717,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Heavy Hurt Back End
-  m_Speed: 0.1
+  m_Speed: 0.08
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1161581875760676249}
@@ -3876,6 +3898,7 @@ MonoBehaviour:
   jumpLightAttackName: 
   jumpHeavyAttackName: 
   allowMovementDuringAnim: 0
+  resetGravityOnStateExit: 0
 --- !u!114 &-1052389640869901484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3895,6 +3918,7 @@ MonoBehaviour:
   jumpLightAttackName: 
   jumpHeavyAttackName: 
   allowMovementDuringAnim: 0
+  resetGravityOnStateExit: 0
 --- !u!1101 &-952266862708538642
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -3961,6 +3985,7 @@ MonoBehaviour:
   jumpLightAttackName: 
   jumpHeavyAttackName: 
   allowMovementDuringAnim: 0
+  resetGravityOnStateExit: 0
 --- !u!1101 &-830494808414706731
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -4292,6 +4317,7 @@ MonoBehaviour:
   jumpLightAttackName: 
   jumpHeavyAttackName: 
   allowMovementDuringAnim: 0
+  resetGravityOnStateExit: 0
 --- !u!1101 &-367424455089454425
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -4376,12 +4402,13 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Hurt Back Get Up
-  m_Speed: 0.2
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 5975999646364439995}
   m_StateMachineBehaviours:
   - {fileID: -6262442521623011805}
+  - {fileID: 7433015946991367606}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -4535,6 +4562,28 @@ AnimatorStateTransition:
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 0
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1101 &100836318086608622
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -96890588181203755}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 1
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -5178,7 +5227,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dd214815c8c4854c95ac16464e6eabd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endOfKnockdownState: 0
   allowMovementOnStateExit: 0
 --- !u!1107 &1538655715377161641
 AnimatorStateMachine:
@@ -5826,6 +5874,7 @@ MonoBehaviour:
   jumpLightAttackName: 
   jumpHeavyAttackName: 
   allowMovementDuringAnim: 0
+  resetGravityOnStateExit: 0
 --- !u!1107 &3297704623643483786
 AnimatorStateMachine:
   serializedVersion: 6
@@ -5915,7 +5964,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Heavy Hurt Back Loop
-  m_Speed: 0.1
+  m_Speed: 0.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 8349483317110826329}
@@ -6234,6 +6283,7 @@ MonoBehaviour:
   jumpLightAttackName: 
   jumpHeavyAttackName: 
   allowMovementDuringAnim: 1
+  resetGravityOnStateExit: 0
 --- !u!114 &4389036399616105236
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6677,6 +6727,7 @@ MonoBehaviour:
   jumpLightAttackName: Jump Attack 3
   jumpHeavyAttackName: Jump Heavy Attack Anticipation
   allowMovementDuringAnim: 0
+  resetGravityOnStateExit: 0
 --- !u!114 &5177378179141828590
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6781,7 +6832,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Heavy Hurt Front Start
-  m_Speed: 0.1
+  m_Speed: 0.3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 2065437352371426552}
@@ -7065,11 +7116,13 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Hurt Front Get Up
-  m_Speed: 0.2
+  m_Speed: 1
   m_CycleOffset: 0
-  m_Transitions: []
+  m_Transitions:
+  - {fileID: 100836318086608622}
   m_StateMachineBehaviours:
   - {fileID: -2120250727790758187}
+  - {fileID: -8460407152273185881}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -7245,6 +7298,7 @@ MonoBehaviour:
   jumpLightAttackName: 
   jumpHeavyAttackName: Jump Heavy Attack Anticipation
   allowMovementDuringAnim: 0
+  resetGravityOnStateExit: 0
 --- !u!1101 &7120978712240087540
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -7390,6 +7444,7 @@ MonoBehaviour:
   jumpLightAttackName: 
   jumpHeavyAttackName: 
   allowMovementDuringAnim: 0
+  resetGravityOnStateExit: 0
 --- !u!1102 &7361716577833042941
 AnimatorState:
   serializedVersion: 6
@@ -7418,6 +7473,19 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &7433015946991367606
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a38c20a7453ab02448d4ce2041d46f46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endOfKnockdownState: 1
 --- !u!1101 &7484329526715237625
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -7506,6 +7574,7 @@ MonoBehaviour:
   jumpLightAttackName: 
   jumpHeavyAttackName: 
   allowMovementDuringAnim: 0
+  resetGravityOnStateExit: 0
 --- !u!1101 &7606730220646536198
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -7627,6 +7696,7 @@ MonoBehaviour:
   jumpLightAttackName: 
   jumpHeavyAttackName: 
   allowMovementDuringAnim: 0
+  resetGravityOnStateExit: 0
 --- !u!1102 &7861935543624724058
 AnimatorState:
   serializedVersion: 6
@@ -7743,7 +7813,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dd214815c8c4854c95ac16464e6eabd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endOfKnockdownState: 0
   allowMovementOnStateExit: 1
 --- !u!114 &8020108903586339367
 MonoBehaviour:
@@ -7764,6 +7833,7 @@ MonoBehaviour:
   jumpLightAttackName: 
   jumpHeavyAttackName: 
   allowMovementDuringAnim: 0
+  resetGravityOnStateExit: 0
 --- !u!1101 &8075325903898891747
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -7869,7 +7939,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Heavy Hurt Front Loop
-  m_Speed: 0.1
+  m_Speed: 0.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1118020655415969630}
@@ -8021,13 +8091,13 @@ AnimatorStateMachine:
     m_Position: {x: -30, y: 220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5486414064326933148}
-    m_Position: {x: 840, y: 340, z: 0}
+    m_Position: {x: 600, y: -90, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8248117914529756582}
-    m_Position: {x: 840, y: 430, z: 0}
+    m_Position: {x: 600, y: 0, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7291105333998053533}
-    m_Position: {x: 840, y: 510, z: 0}
+    m_Position: {x: 600, y: 80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1411206108391906687}
     m_Position: {x: 580, y: 450, z: 0}
@@ -8039,7 +8109,7 @@ AnimatorStateMachine:
     m_Position: {x: 580, y: 280, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6458717725844241903}
-    m_Position: {x: 840, y: 600, z: 0}
+    m_Position: {x: 600, y: 170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -92408672904205893}
     m_Position: {x: 580, y: 570, z: 0}
@@ -8190,6 +8260,7 @@ MonoBehaviour:
   jumpLightAttackName: Jump Attack 4
   jumpHeavyAttackName: Jump Heavy Attack Anticipation
   allowMovementDuringAnim: 0
+  resetGravityOnStateExit: 0
 --- !u!114 &9123667387343672059
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8202,7 +8273,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dd214815c8c4854c95ac16464e6eabd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endOfKnockdownState: 0
   allowMovementOnStateExit: 1
 --- !u!1101 &9201745048176970995
 AnimatorStateTransition:

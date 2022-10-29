@@ -347,10 +347,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb90098b4dd1aed4fb10755936046cc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageType: 2
+  damageType: 1
   attackDamage: 20
-  attackingPowerX: 1000
-  attackingPowerY: 1000
+  attackingPowerX: 800
+  attackingPowerY: 0
   joltForceX: 10000
   joltForceY: 0
 --- !u!1102 &-1233105822085669242

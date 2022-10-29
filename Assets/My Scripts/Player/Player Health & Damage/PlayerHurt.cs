@@ -30,6 +30,9 @@ public class PlayerHurt : MonoBehaviour, IDamageable
 
     private bool isKnockedDown = false; // is the player in a "knocked down" state? (if so, do not play any other hurt animations like the flinch if in knockdown state)
 
+    //[Space(20)]
+    //[SerializeField] private float gravityWhenKnockedDown; // how much gravity is applied to the player when they're in knockdown state
+
     private void Start()
     {
         healthScript = GetComponent<IHealth>();
@@ -116,15 +119,21 @@ public class PlayerHurt : MonoBehaviour, IDamageable
                 }
                 break;
 
+
+
+
             case IDamageAttributes.DamageType.heavy:
 
                 SetIsKnockedDown(true);
+
+                //SetRBGravity(gravityWhenKnockedDown);
 
                 if (attackerFacingRight && playerFacingRight)
                 {
                     //Play backward flinch animation
                     //Debug.Log("Backward heavy hit! Player facing right!");
                     
+
                     PlayHurtAnimation(heavyHurtAnimBehindHash);
 
                     //call the TakeDamage function to subtract the health of player 
@@ -164,6 +173,10 @@ public class PlayerHurt : MonoBehaviour, IDamageable
                     TakeDamage(damage, -attackPowerX, attackPowerY);
                 }
                 break;
+
+
+
+
 
             case IDamageAttributes.DamageType.air:
                 if (attackerFacingRight && playerFacingRight)
@@ -225,10 +238,10 @@ public class PlayerHurt : MonoBehaviour, IDamageable
         isKnockedDown = boolean;
     }
 
-    public void SetRBGravity(float amount)
-    {
-        rb.gravityScale = amount;
-    }
+    //public void SetRBGravity(float amount)
+    //{
+        //rb.gravityScale = amount;
+    //}
 
 
     public void PlayHurtAnimation(int animationHash)
