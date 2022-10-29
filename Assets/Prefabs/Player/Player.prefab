@@ -341,8 +341,8 @@ MonoBehaviour:
   playerComponentScript: {fileID: 4332903956958558062}
   lightHurtAnimFront: Light Hurt Front
   lightHurtAnimBehind: Light Hurt Behind
-  heavyHurtAnimFront: Heavy Hurt Front
-  heavyHurtAnimBehind: Heavy Hurt Behind
+  heavyHurtAnimFront: Heavy Hurt Front Start
+  heavyHurtAnimBehind: Heavy Hurt Back Start
 --- !u!114 &2777042746695490095
 MonoBehaviour:
   m_ObjectHideFlags: 0

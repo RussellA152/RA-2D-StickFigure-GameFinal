@@ -40,7 +40,7 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
             //the hurtbox is a child of the enemy, so set the target equal to the parent
             targetTransform = targetTransform.parent;
 
-            //Debug.Log("Enemy entered player's hitbox!");
+            Debug.Log("Hit an enemy!  " + targetTransform.gameObject.name);
 
             enemyInsideTrigger = true;
 
@@ -64,7 +64,7 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
         {
             enemyInsideTrigger = false;
 
-            ResetAttackValues();
+            //ResetAttackValues();
         }
     }
 
@@ -74,7 +74,7 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
         {
             if (enemyInsideTrigger)
             {
-
+                Debug.Log("Deal damage to " + targetTransform.gameObject.name);
                 //calls the receiver's OnHurt function which will apply the damage and force of this attack (receiverWasPlayer is false because this is the player's hit collider)
                 targetTransform.gameObject.GetComponent<IDamageable>().OnHurt(attacker.position, damageType, damage, attackPowerX, attackPowerY);
 

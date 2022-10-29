@@ -7,6 +7,10 @@ public class PlayerHurtAnimationBehavior : StateMachineBehaviour
 
     private PlayerComponents playerComponentScript; //we will use the player component script in order to disable movement
 
+    [SerializeField] private bool endOfKnockdownState; // will this animation be the end of the player's knockdown state?
+
+    [SerializeField] private bool allowMovementOnStateExit; // this is used for when we have multiple chains of hurt animations (for the heavy hurt for example)
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -40,17 +44,28 @@ public class PlayerHurtAnimationBehavior : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        playerComponentScript.SetCanMove(true);
+        if (allowMovementOnStateExit)
+        {
+            playerComponentScript.SetCanMove(true);
 
-        playerComponentScript.SetCanAttack(true);
+            playerComponentScript.SetCanAttack(true);
 
-        playerComponentScript.SetCanBackAttack(true);
+            playerComponentScript.SetCanBackAttack(true);
 
-        playerComponentScript.SetCanFlip(true);
+            playerComponentScript.SetCanFlip(true);
 
-        playerComponentScript.SetCanSlide(true);
+            playerComponentScript.SetCanSlide(true);
 
-        playerComponentScript.SetCanRoll(true);
+            playerComponentScript.SetCanRoll(true);
+
+            
+        }
+
+        if (endOfKnockdownState)
+        {
+            animator.transform.gameObject.GetComponent<PlayerHurt>().SetIsKnockedDown(false);
+        }
+        
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

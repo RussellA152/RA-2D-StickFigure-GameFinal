@@ -47,7 +47,7 @@ public class AttackTransitionBehavior : StateMachineBehaviour
         else
             playerComponentScript.SetCanMove(false);
 
-        Debug.Log("Get component");
+        //Debug.Log("Get component");
 
         //if (turnOffEnemyCollision)
         //{

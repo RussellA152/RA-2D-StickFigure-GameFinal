@@ -28,6 +28,8 @@ public class PlayerHurt : MonoBehaviour, IDamageable
     private int heavyHurtAnimFrontHash;
     private int heavyHurtAnimBehindHash;
 
+    private bool isKnockedDown = false; // is the player in a "knocked down" state? (if so, do not play any other hurt animations like the flinch if in knockdown state)
+
     private void Start()
     {
         healthScript = GetComponent<IHealth>();
@@ -70,7 +72,8 @@ public class PlayerHurt : MonoBehaviour, IDamageable
                     //Play backward flinch animation
                     //Debug.Log("Backward light hit! Player facing right!");
 
-                    PlayHurtAnimation(lightHurtAnimBehindHash);
+                    if (!isKnockedDown)
+                        PlayHurtAnimation(lightHurtAnimBehindHash);
 
                     //call the TakeDamage function to subtract the health of player 
                     TakeDamage(damage, attackPowerX, attackPowerY);
@@ -82,7 +85,8 @@ public class PlayerHurt : MonoBehaviour, IDamageable
                     //Play forward flinch animation
                     //Debug.Log("Forward light hit! Player facing left!");
 
-                    PlayHurtAnimation(lightHurtAnimFrontHash);
+                    if (!isKnockedDown)
+                        PlayHurtAnimation(lightHurtAnimFrontHash);
 
                     TakeDamage(damage, attackPowerX, attackPowerY);
                 }
@@ -92,7 +96,8 @@ public class PlayerHurt : MonoBehaviour, IDamageable
                     //Play backward flinch animation
                     //Debug.Log("Forward light hit! Player facing right!");
 
-                    PlayHurtAnimation(lightHurtAnimFrontHash);
+                    if (!isKnockedDown)
+                        PlayHurtAnimation(lightHurtAnimFrontHash);
 
                     //call the TakeDamage function to subtract the health of player 
                     TakeDamage(damage, -attackPowerX, attackPowerY);
@@ -104,17 +109,24 @@ public class PlayerHurt : MonoBehaviour, IDamageable
                     //Play forward flinch animation
                     //Debug.Log("Backward light hit! Player facing left!");
 
-                    PlayHurtAnimation(lightHurtAnimBehindHash);
+                    if (!isKnockedDown)
+                        PlayHurtAnimation(lightHurtAnimBehindHash);
 
                     TakeDamage(damage, -attackPowerX, attackPowerY);
                 }
                 break;
 
             case IDamageAttributes.DamageType.heavy:
+
+                SetIsKnockedDown(true);
+
                 if (attackerFacingRight && playerFacingRight)
                 {
                     //Play backward flinch animation
                     //Debug.Log("Backward heavy hit! Player facing right!");
+                    
+                    PlayHurtAnimation(heavyHurtAnimBehindHash);
+
                     //call the TakeDamage function to subtract the health of player 
                     TakeDamage(damage, attackPowerX, attackPowerY);
 
@@ -123,6 +135,9 @@ public class PlayerHurt : MonoBehaviour, IDamageable
                 else if (attackerFacingRight && !playerFacingRight)
                 {
                     //Play forward flinch animation
+                    
+                    PlayHurtAnimation(heavyHurtAnimFrontHash);
+
                     //Debug.Log("Forward heavy hit! Player facing left!");
                     TakeDamage(damage, attackPowerX, attackPowerY);
                 }
@@ -131,6 +146,9 @@ public class PlayerHurt : MonoBehaviour, IDamageable
                 {
                     //Play backward flinch animation
                     //Debug.Log("Forward heavy hit! Player facing right!");
+
+                    
+                    PlayHurtAnimation(heavyHurtAnimFrontHash);
                     //call the TakeDamage function to subtract the health of player 
                     TakeDamage(damage, -attackPowerX, attackPowerY);
 
@@ -139,6 +157,9 @@ public class PlayerHurt : MonoBehaviour, IDamageable
                 else if (!attackerFacingRight && !playerFacingRight)
                 {
                     //Play forward flinch animation
+
+                    
+                    PlayHurtAnimation(heavyHurtAnimBehindHash);
                     //Debug.Log("Backward heavy hit! Player facing left!");
                     TakeDamage(damage, -attackPowerX, attackPowerY);
                 }
@@ -190,8 +211,23 @@ public class PlayerHurt : MonoBehaviour, IDamageable
 
         //Debug.Log("PLAYER WAS HIT!");
 
+        if (isKnockedDown)
+        {
+            rb.velocity = Vector2.zero;
+        }
+
         //apply attackingPowerX & Y force to enemy based on the direction they are facing
         rb.AddForce(new Vector2(attackPowerX, attackPowerY));
+    }
+
+    public void SetIsKnockedDown(bool boolean)
+    {
+        isKnockedDown = boolean;
+    }
+
+    public void SetRBGravity(float amount)
+    {
+        rb.gravityScale = amount;
     }
 
 
@@ -202,9 +238,9 @@ public class PlayerHurt : MonoBehaviour, IDamageable
         if (animator.HasState(baseLayerInt, animationHash) == true)
         {
             animator.Play(animationHash);
-            Debug.Log("Enemy hurt animation played!");
+            //Debug.Log("Enemy hurt animation played!");
         }
-        else
-            Debug.Log("This animation does not exist!");
+        //else
+            //Debug.Log("This animation does not exist!");
     }
 }

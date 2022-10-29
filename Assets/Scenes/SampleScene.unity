@@ -420,7 +420,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 732219668646791524, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
       propertyPath: m_Name
-      value: Basic Enemy Template (1)
+      value: Test Enemy 2
       objectReference: {fileID: 0}
     - target: {fileID: 732219668646791524, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
       propertyPath: m_IsActive
@@ -990,7 +990,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 732219668646791524, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
       propertyPath: m_Name
-      value: Basic Enemy Template
+      value: Test Enemy 1
       objectReference: {fileID: 0}
     - target: {fileID: 732219668646791524, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
       propertyPath: m_IsActive
@@ -1493,6 +1493,14 @@ PrefabInstance:
     - target: {fileID: 570149326502756555, guid: 5952141b836031b4782683fcfc8d896f, type: 3}
       propertyPath: m_Name
       value: Entry Room
+      objectReference: {fileID: 0}
+    - target: {fileID: 570149326910626818, guid: 5952141b836031b4782683fcfc8d896f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 570149327623157080, guid: 5952141b836031b4782683fcfc8d896f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5569540807513197775, guid: 5952141b836031b4782683fcfc8d896f, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[0].m_Data
