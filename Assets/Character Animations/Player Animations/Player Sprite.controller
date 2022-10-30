@@ -1142,7 +1142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackName: 
-  heavyAttackName: Combo 2 Finisher
+  heavyAttackName: Combo 2 Finisher Start
   backAttackName: Back Light Attack
   backHeavyAttackName: Back Heavy Attack
   jumpLightAttackName: 
@@ -1299,6 +1299,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a9eb0c898cb0104fb98e1bf6983984b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1101 &-6344389531096287962
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -6263851877394456462}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 1
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1102 &-6337757382797590848
 AnimatorState:
   serializedVersion: 6
@@ -1334,7 +1356,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Combo 2 Finisher
-  m_Speed: 0.25
+  m_Speed: 0.3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -2743535935351797523}
@@ -3784,7 +3806,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Combo 2 Heavy
-  m_Speed: 0.4
+  m_Speed: 0.45
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -7969171647648849448}
@@ -4402,7 +4424,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Hurt Back Get Up
-  m_Speed: 1
+  m_Speed: 0.2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 5975999646364439995}
@@ -4417,7 +4439,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 7e15c46a70821194b8462b604db545eb, type: 2}
+  m_Motion: {fileID: 7400000, guid: b5244bcec4a13f2419f99027d758187d, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -5020,6 +5042,33 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &1187895795214204615
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Combo 2 Finisher Start
+  m_Speed: 0.25
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: -6344389531096287962}
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: e1705e762f8c1d548ac5836d74bfc34c, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1101 &1208487779764832549
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -7116,7 +7165,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Hurt Front Get Up
-  m_Speed: 1
+  m_Speed: 0.2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 100836318086608622}
@@ -7131,7 +7180,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 7e15c46a70821194b8462b604db545eb, type: 2}
+  m_Motion: {fileID: 7400000, guid: 7b429bff45faf2d489b1abe9db9a6737, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -7380,7 +7429,7 @@ AnimatorStateMachine:
     m_Position: {x: 60, y: 70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1506109112735803404}
-    m_Position: {x: 530, y: 70, z: 0}
+    m_Position: {x: 540, y: 80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8346050017538226305}
     m_Position: {x: 510, y: 150, z: 0}
@@ -7390,6 +7439,9 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: -2736318679608801950}
     m_Position: {x: 290, y: 70, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 1187895795214204615}
+    m_Position: {x: -130, y: 150, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

@@ -343,7 +343,6 @@ MonoBehaviour:
   lightHurtAnimBehind: Light Hurt Behind
   heavyHurtAnimFront: Heavy Hurt Front Start
   heavyHurtAnimBehind: Heavy Hurt Back Start
-  gravityWhenKnockedDown: 1.75
 --- !u!114 &2777042746695490095
 MonoBehaviour:
   m_ObjectHideFlags: 0
