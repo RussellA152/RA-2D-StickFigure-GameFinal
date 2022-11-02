@@ -321,6 +321,12 @@ public class EnemyHurt : MonoBehaviour, IDamageable
         isKnockedDown = boolean;
     }
 
+    // return "isKnockedDown" needed by EnemyBackColliderAttack script
+    public bool GetIsKnockedDown()
+    {
+        return isKnockedDown;
+    }
+
     public void SetRBGravity(float amount)
     {
         rb.gravityScale = amount;

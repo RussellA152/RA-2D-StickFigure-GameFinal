@@ -330,6 +330,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 182126132227809056}
+  - component: {fileID: 2483455483916810711}
   - component: {fileID: 7533428447087600626}
   m_Layer: 8
   m_Name: Enemy Hurt Box
@@ -352,6 +353,27 @@ Transform:
   m_Father: {fileID: 5186178840865194877}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2483455483916810711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4622912823528068189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00a3e625879e8594384bde07a71dd72c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyHurtScript: {fileID: 3305021655998707584}
+  myHurtCollider: {fileID: 7533428447087600626}
+  rb: {fileID: -8891431870749144915}
+  damageType: 2
+  damageOnCollision: 30
+  forceOnCollisionX: 1000
+  forceOnCollisionY: 500
+  velocityRequirementX: 10
+  velocityRequirementY: 10
 --- !u!61 &7533428447087600626
 BoxCollider2D:
   m_ObjectHideFlags: 0

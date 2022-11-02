@@ -1882,7 +1882,7 @@ MonoBehaviour:
   jumpLightAttackName: Jump Attack 2
   jumpHeavyAttackName: Jump Heavy Attack Anticipation
   allowMovementDuringAnim: 0
-  resetGravityOnStateExit: 0
+  resetGravityOnStateExit: 1
 --- !u!1101 &-4981033339883271935
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -3940,7 +3940,7 @@ MonoBehaviour:
   jumpLightAttackName: 
   jumpHeavyAttackName: 
   allowMovementDuringAnim: 0
-  resetGravityOnStateExit: 0
+  resetGravityOnStateExit: 1
 --- !u!1101 &-952266862708538642
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -6776,7 +6776,7 @@ MonoBehaviour:
   jumpLightAttackName: Jump Attack 3
   jumpHeavyAttackName: Jump Heavy Attack Anticipation
   allowMovementDuringAnim: 0
-  resetGravityOnStateExit: 0
+  resetGravityOnStateExit: 1
 --- !u!114 &5177378179141828590
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7347,7 +7347,7 @@ MonoBehaviour:
   jumpLightAttackName: 
   jumpHeavyAttackName: Jump Heavy Attack Anticipation
   allowMovementDuringAnim: 0
-  resetGravityOnStateExit: 0
+  resetGravityOnStateExit: 1
 --- !u!1101 &7120978712240087540
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -8312,7 +8312,7 @@ MonoBehaviour:
   jumpLightAttackName: Jump Attack 4
   jumpHeavyAttackName: Jump Heavy Attack Anticipation
   allowMovementDuringAnim: 0
-  resetGravityOnStateExit: 0
+  resetGravityOnStateExit: 1
 --- !u!114 &9123667387343672059
 MonoBehaviour:
   m_ObjectHideFlags: 1
