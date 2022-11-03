@@ -32,4 +32,9 @@ public class ObjectHurt : MonoBehaviour, IDamageable
     {
         throw new System.NotImplementedException();
     }
+
+    public bool GetIsKnockedDown()
+    {
+        throw new System.NotImplementedException();
+    }
 }

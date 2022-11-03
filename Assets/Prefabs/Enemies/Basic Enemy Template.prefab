@@ -82,7 +82,9 @@ MonoBehaviour:
   enemyMoveScript: {fileID: 5969129094098281727}
   enemyHpScript: {fileID: 1709358543280309288}
   enemyHurtScript: {fileID: 3305021655998707584}
+  enemyGroundCheckScript: {fileID: 2251135107146388378}
   enemyScriptableObject: {fileID: 0}
+  isGrounded: 0
   idleStateTransitionTimer: 0
   chaseStateTransitionTimer: 0
   attackStateTransitionTimer: 0
@@ -365,15 +367,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a3e625879e8594384bde07a71dd72c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHurtScript: {fileID: 3305021655998707584}
   myHurtCollider: {fileID: 7533428447087600626}
   rb: {fileID: -8891431870749144915}
   damageType: 2
   damageOnCollision: 30
   forceOnCollisionX: 1000
   forceOnCollisionY: 500
-  velocityRequirementX: 10
-  velocityRequirementY: 10
+  velocityRequirementX: 9.5
+  velocityRequirementY: 9.5
 --- !u!61 &7533428447087600626
 BoxCollider2D:
   m_ObjectHideFlags: 0

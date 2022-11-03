@@ -229,7 +229,6 @@ public class CharacterController2D : MonoBehaviour
 	}
 	public void Move(float move, bool crouch, bool jump, bool wantsToSlide, bool wantsToRoll,float jumpBufferCounter)
 	{
-
 		//multiply the movement by the running speed set in the inspector
 		move *= PlayerStats.instance.GetRunningSpeed();
 

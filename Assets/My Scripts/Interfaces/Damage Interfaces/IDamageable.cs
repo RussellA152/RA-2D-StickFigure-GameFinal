@@ -15,4 +15,6 @@ public interface IDamageable
     //plays the hurt animation depending on the damage type and direction of the attack
     //takes in an animationHash value using StringToHash
     public void PlayHurtAnimation(int animationHash);
+
+    public bool GetIsKnockedDown();
 }

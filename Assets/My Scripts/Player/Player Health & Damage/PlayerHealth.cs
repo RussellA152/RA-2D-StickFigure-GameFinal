@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour, IHealth
 {
+    [SerializeField] private Animator animator;
+
     private float playerMaxHealth; //the maximum health the player can have
     private float playerCurrentHealth; //the current health of the player
 
     private bool isAlive; //is the player alive?
+
+    private int isAliveHash; // the "isAlive" parameter from the player's animator controller
 
     private void Start()
     {
@@ -16,6 +20,10 @@ public class PlayerHealth : MonoBehaviour, IHealth
         playerCurrentHealth = playerMaxHealth;
 
         isAlive = true;
+
+        isAliveHash = Animator.StringToHash("isAlive");
+
+        animator.SetBool(isAliveHash, isAlive);
     }
 
     private void Update()
@@ -35,7 +43,9 @@ public class PlayerHealth : MonoBehaviour, IHealth
         {
             Debug.Log(this.gameObject.name + " has died!");
             isAlive = false;
-            gameObject.SetActive(false);
+
+            animator.SetBool(isAliveHash, isAlive);
+
 
         }
     }

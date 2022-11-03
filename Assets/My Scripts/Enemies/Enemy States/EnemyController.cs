@@ -22,7 +22,9 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private EnemyMovement enemyMoveScript; //every enemy will have a movement script
     [SerializeField] private EnemyHealth enemyHpScript; // every enemy will have a health script
     [SerializeField] private EnemyHurt enemyHurtScript; // every enemy will have a hurt script
+    [SerializeField] private EnemyGroundCheck enemyGroundCheckScript; // every enemy will have a ground check script
     [SerializeField] private EnemyScriptableObject enemyScriptableObject; //Every enemy will have an attacking script, but might not share the exact same behavior, so we will use an interface 
+    
 
 
     [Header("Enemy v. Player Properties")]
@@ -37,6 +39,8 @@ public class EnemyController : MonoBehaviour
     //private float maxAggressionLevelIncrease; //the maximum the enemy's aggression will increase when not fighting
     //private float aggressionLevelIncreaseOnHurt; //how much the enemy's aggression level will increase when hit
     //private float aggressionLevelDecreaseOnAttack; //how much the enemy's aggression level will decrease when attacking
+
+    [SerializeField] private bool isGrounded; // is the enemy grounded?
 
     private float distanceFromTargetX; // the distance from enemy and player in x-axis
     private float distanceFromTargetY; // the distance from enemy and player in y-axis
@@ -166,8 +170,8 @@ public class EnemyController : MonoBehaviour
         //if (!isAlive)
         //animator.SetBool(deadHash, true);
 
-        
-            
+
+
         /*
         //if the enemy's aggression level becomes higher than the threshold, then set it equal to the threshold
         if (aggressionLevel >= aggressionLevelThreshold)
@@ -180,7 +184,7 @@ public class EnemyController : MonoBehaviour
             isAggressive = false;
         }
         */
-
+        isGrounded = enemyGroundCheckScript.GetIsGrounded();
 
         //calculate the distance between enemy and player
         //we will need this value to determine when to switch to idle, attacking, or chasing
@@ -278,10 +282,22 @@ public class EnemyController : MonoBehaviour
 
         //Debug.Log("Idle behavior!");
         animator.SetBool(walkingHash, false);
-        enemyMoveScript.DisableMovement();
-        //don't let enemy move in idle state
-        //goes to EnemyMovement script and sets isStopped to true
-        enemyMoveScript.StopMovement(true);
+
+        if (isGrounded)
+        {
+            enemyMoveScript.DisableMovement();
+            //don't let enemy move in idle state
+            //goes to EnemyMovement script and sets isStopped to true
+            enemyMoveScript.StopMovement(true);
+        }
+        else
+        {
+            enemyMoveScript.AllowMovement();
+            //don't let enemy move in idle state
+            //goes to EnemyMovement script and sets isStopped to true
+            enemyMoveScript.StopMovement(false);
+        }
+        
 
         //the enemy is allowed to turn around when they are idle
         enemyMoveScript.SetCanFlip(true);
@@ -325,7 +341,10 @@ public class EnemyController : MonoBehaviour
         // the enemy is allowed to turn around when they are chasing their target
         enemyMoveScript.SetCanFlip(true);
 
-        enemyMoveScript.AllowMovement();
+        if(isGrounded)
+            enemyMoveScript.AllowMovement();
+        else
+            enemyMoveScript.DisableMovement();
 
         //check distance between enemy and player
         //if enemy and player are too far from each other, return to idle
@@ -391,20 +410,22 @@ public class EnemyController : MonoBehaviour
     {
         //IncreaseAggressionLevelHurt();
 
-        // if get up timer is less than or equal to 0, it means the enemy has been on the ground for enough time
-        if (timeToGetUp <= 0f)
-        {
-            animator.SetBool(stoppedHash, true);
-
-            // timeToGetUpStored needs to remember the original value of timeToGetUp
-            timeToGetUp = timeToGetUpStored;
-        }
 
         // if the enemy's velocity reaches a certain minimum value, then they will get back up from their hurt state
         // needs to be absolute value of velocity because velocity is negative when enemies are falling back down from the air
         if ((Mathf.Abs(rb.velocity.x) <= minimumVelocityUntilStopped.x && Mathf.Abs(rb.velocity.y) <= minimumVelocityUntilStopped.y))
         {
-            timeToGetUp -= Time.deltaTime;
+
+            // if get up timer is less than or equal to 0, it means the enemy has been on the ground for enough time
+            if (timeToGetUp <= 0f)
+            {
+                animator.SetBool(stoppedHash, true);
+
+                // timeToGetUpStored needs to remember the original value of timeToGetUp
+                timeToGetUp = timeToGetUpStored;
+            }
+
+            timeToGetUp -= Time.deltaTime;    
 
         }
 

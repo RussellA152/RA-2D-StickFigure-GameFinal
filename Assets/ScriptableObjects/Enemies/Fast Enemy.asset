@@ -17,7 +17,7 @@ MonoBehaviour:
   followRangeX: 35
   followRangeY: 12
   dropChance: 1
-  getUpTimer: 0.8
+  getUpTimer: 0.9
   attackRangeX: 4.5
   attackRangeY: 2
   attackCooldownTimer: 2

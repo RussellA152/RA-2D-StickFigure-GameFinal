@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: P_Jump_Attack_Heavy_Recover
+  m_Name: P_Jump_Attack_Heavy_Anticipation
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,13 +20,11 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 13de3c40ca244354ba0d5ebe7992c603, type: 3}
+      value: {fileID: 21300000, guid: abdebbff22053f74daaef95c6e5b2cf2, type: 3}
     - time: 0.016666668
-      value: {fileID: 21300000, guid: bc95faeace8d4314c9fab0ada079fb6f, type: 3}
+      value: {fileID: 21300000, guid: 1db541cefc6a3424b811b7595842bb98, type: 3}
     - time: 0.033333335
-      value: {fileID: 21300000, guid: 3903f78667b597046aa9f487bb697f99, type: 3}
-    - time: 0.05
-      value: {fileID: 21300000, guid: 730888bc49afac644a1d2b72b5149c0a, type: 3}
+      value: {fileID: 21300000, guid: ec3b007e145f5fd44926f5a43fb4e2f1, type: 3}
     attribute: m_Sprite
     path: Player Sprite Renderer
     classID: 212
@@ -46,16 +44,15 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 13de3c40ca244354ba0d5ebe7992c603, type: 3}
-    - {fileID: 21300000, guid: bc95faeace8d4314c9fab0ada079fb6f, type: 3}
-    - {fileID: 21300000, guid: 3903f78667b597046aa9f487bb697f99, type: 3}
-    - {fileID: 21300000, guid: 730888bc49afac644a1d2b72b5149c0a, type: 3}
+    - {fileID: 21300000, guid: abdebbff22053f74daaef95c6e5b2cf2, type: 3}
+    - {fileID: 21300000, guid: 1db541cefc6a3424b811b7595842bb98, type: 3}
+    - {fileID: 21300000, guid: ec3b007e145f5fd44926f5a43fb4e2f1, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.06666667
+    m_StopTime: 0.050000004
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

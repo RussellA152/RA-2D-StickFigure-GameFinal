@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBackColliderAttack : MonoBehaviour, IDamageDealing
+public class HurtCollision : MonoBehaviour, IDamageDealing
 {
-    [SerializeField] private EnemyHurt enemyHurtScript;
+    [SerializeField] private IDamageable hurtScript;
 
     
 
@@ -28,6 +28,12 @@ public class EnemyBackColliderAttack : MonoBehaviour, IDamageDealing
     [SerializeField] private float velocityRequirementX; // when enemy is knocked down, their X velocity must be high enough to knock down other enemies behind them
     [SerializeField] private float velocityRequirementY; // when enemy is knocked down, their Y velocity must be high enough to knock down other enemies behind them
 
+    private void Start()
+    {
+        // hurt script is in parent gameobject for both Player and Enemy
+        hurtScript = GetComponentInParent<IDamageable>();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //update our target
@@ -37,7 +43,7 @@ public class EnemyBackColliderAttack : MonoBehaviour, IDamageDealing
         // is the enemy NOT colliding with themself?
         // is enemy knocked down?
         // and is the velocity of enemy high enough to hurt another enemy?
-        if (targetTransform.CompareTag("EnemyHurtBox") && targetTransform.gameObject != this.myHurtCollider && enemyHurtScript.GetIsKnockedDown() && (Mathf.Abs(rb.velocity.x) >= velocityRequirementX || Mathf.Abs(rb.velocity.y) >= velocityRequirementY))
+        if (targetTransform.CompareTag("EnemyHurtBox") && targetTransform.gameObject != this.myHurtCollider && hurtScript.GetIsKnockedDown() && (Mathf.Abs(rb.velocity.x) >= velocityRequirementX || Mathf.Abs(rb.velocity.y) >= velocityRequirementY))
         {
             //the hurtbox is a child of the player, so set the target equal to the parent
             targetTransform = targetTransform.parent;
@@ -45,13 +51,13 @@ public class EnemyBackColliderAttack : MonoBehaviour, IDamageDealing
 
             enemyInsideTrigger = true;
 
-            // if the enemy that was collided with was not in a hurt state (apply a force on them)
-            if(targetTransform.GetComponent<EnemyController>().GetEnemyState() != EnemyController.EnemyState.Hurt)
+            // if the enemy that was collided with was NOT in a knocked down state
+            if(!targetTransform.GetComponent<IDamageable>().GetIsKnockedDown())
             {
                 
                 DealDamage(this.transform, damageType, damageOnCollision, forceOnCollisionX, forceOnCollisionY);
             }
-            // if the enemy that was collided with was in a hurt state (do not apply any force on them)
+            // if the enemy that was collided with was in a knocked down state (do not apply any force on them)
             else
             {
                 DealDamage(this.transform, damageType, damageOnCollision, 0f, 0f);

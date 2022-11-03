@@ -238,6 +238,11 @@ public class PlayerHurt : MonoBehaviour, IDamageable
         isKnockedDown = boolean;
     }
 
+    public bool GetIsKnockedDown()
+    {
+        return isKnockedDown;
+    }
+
     //public void SetRBGravity(float amount)
     //{
         //rb.gravityScale = amount;

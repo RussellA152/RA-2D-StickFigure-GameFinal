@@ -5,6 +5,7 @@ using UnityEngine;
 public class JumpHeavyAttackAnticipation : StateMachineBehaviour
 {
     private PlayerComponents playerComponentScript; //we will use the player component script in order to invoke the setCan"action" functions
+    private PlayerCollisionLayerChange playerCollisionLayerScript;
 
     private Rigidbody2D rb;
 
@@ -23,11 +24,17 @@ public class JumpHeavyAttackAnticipation : StateMachineBehaviour
 
         //AttackController.instance.star
 
+        playerCollisionLayerScript = animator.transform.GetComponent<PlayerCollisionLayerChange>();
+
+        playerCollisionLayerScript.SetIgnoreEnemyLayer();
+
         //retrieve component script
         if (playerComponentScript == null)
             playerComponentScript = animator.transform.gameObject.GetComponent<PlayerComponents>();
 
         rb = playerComponentScript.GetRB();
+
+        playerComponentScript.SetCanJump(false);
 
         //retrive which way player is facing
         playerFacingRight = playerComponentScript.GetPlayerDirection();
@@ -37,6 +44,7 @@ public class JumpHeavyAttackAnticipation : StateMachineBehaviour
         //if player is facing left, then multiply force by negative 1 to prevent player from jolting backwards
         else
             rb.AddForce(new Vector2(-joltForceX, joltForceY));
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -48,7 +56,8 @@ public class JumpHeavyAttackAnticipation : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+        playerCollisionLayerScript.ResetLayer();
+        Debug.Log("Exit jump heavy loop!");
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

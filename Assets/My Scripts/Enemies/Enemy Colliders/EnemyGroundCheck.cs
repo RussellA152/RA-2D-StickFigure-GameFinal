@@ -28,7 +28,7 @@ public class EnemyGroundCheck : MonoBehaviour
     {
         if (collision.gameObject.layer == groundLayerInt)
         {
-            //isGrounded = true;
+            isGrounded = true;
             animator.SetBool(isGroundedHash, true);
         }
         //else
@@ -42,7 +42,7 @@ public class EnemyGroundCheck : MonoBehaviour
     {
         if (collision.gameObject.layer == groundLayerInt)
         {
-            //isGrounded = true;
+            isGrounded = true;
             animator.SetBool(isGroundedHash, true);
         }
         //else
@@ -83,5 +83,10 @@ public class EnemyGroundCheck : MonoBehaviour
         groundCheckCollider.enabled = false;
         yield return new WaitForSeconds(timer);
         groundCheckCollider.enabled = true;
+    }
+
+    public bool GetIsGrounded()
+    {
+        return isGrounded;
     }
 }
