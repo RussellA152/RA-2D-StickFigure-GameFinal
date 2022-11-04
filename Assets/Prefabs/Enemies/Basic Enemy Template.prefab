@@ -689,3 +689,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1373278072336133614}
   groundCheckCollider: {fileID: 4196157862625571926}
+  enemyGameObject: {fileID: 732219668646791524}

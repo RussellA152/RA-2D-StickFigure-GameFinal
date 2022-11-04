@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyGroundCheck : MonoBehaviour
 {
+    
     private bool isGrounded; // is the enemy grounded?
 
     [SerializeField] private Animator animator;
@@ -16,12 +17,26 @@ public class EnemyGroundCheck : MonoBehaviour
     private bool disableGroundCheckCoroutineStarted; // has the disable ground check coroutine started?
     private Coroutine disableGroundCheckCoroutine; // a coroutine variable that stores the disable ground check coroutine
 
+    private int enemyLayer;
+
+    [SerializeField] private GameObject enemyGameObject;
+
+    private float timerUntilUnstuck = 2f;
+    private float timerStored = 2f;
+    private float timeUntilCollisionTurnsBackOn = 0.5f;
+
+    private bool collidingWithEnemy = false;
+
+    private bool collisionTurnOnStartedCoroutine = false;
+
     private void Start()
     {
         // caching "Grounded" parameter from animator for performance
         isGroundedHash = Animator.StringToHash("Grounded");
         // caching "Ground" layer from inspector for performance
         groundLayerInt = LayerMask.NameToLayer("Ground");
+
+        enemyLayer = LayerMask.NameToLayer("Enemy");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -45,10 +60,21 @@ public class EnemyGroundCheck : MonoBehaviour
             isGrounded = true;
             animator.SetBool(isGroundedHash, true);
         }
+
+        // if player is colliding with "Enemy" layer and they're not grounded..
+        // then collidingWithEnemy is true
+        if (collision.gameObject.layer == enemyLayer && !isGrounded)
+        {
+            collidingWithEnemy = true;
+        }
+        else
+        {
+            collidingWithEnemy = false;
+        }
         //else
         //{
-            //isGrounded = false;
-            //animator.SetBool(isGroundedHash, false);
+        //isGrounded = false;
+        //animator.SetBool(isGroundedHash, false);
         //}
     }
 
@@ -88,5 +114,49 @@ public class EnemyGroundCheck : MonoBehaviour
     public bool GetIsGrounded()
     {
         return isGrounded;
+    }
+
+
+    private void Update()
+    {
+
+        if (timerUntilUnstuck <= 0f)
+        {
+            //collisionLayerScript.SetIgnoreEnemyLayer();
+            SetIgnoreEnemyLayer();
+
+            if (!collisionTurnOnStartedCoroutine)
+                StartCoroutine(TurnCollisionBackOn(timeUntilCollisionTurnsBackOn));
+
+        }
+
+        if (collidingWithEnemy)
+        {
+            timerUntilUnstuck -= Time.deltaTime;
+        }
+        else
+        {
+            timerUntilUnstuck = timerStored;
+        }
+    }
+
+    IEnumerator TurnCollisionBackOn(float timer)
+    {
+        collisionTurnOnStartedCoroutine = true;
+
+        yield return new WaitForSeconds(timer);
+
+        ResetEnemyLayer();
+
+        collisionTurnOnStartedCoroutine = false;
+    }
+
+    private void SetIgnoreEnemyLayer()
+    {
+        enemyGameObject.layer = LayerMask.NameToLayer("IgnoreEnemy");
+    }
+    private void ResetEnemyLayer()
+    {
+        enemyGameObject.layer = LayerMask.NameToLayer("Enemy");
     }
 }

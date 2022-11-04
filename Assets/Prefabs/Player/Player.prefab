@@ -220,7 +220,7 @@ MonoBehaviour:
   money: 500
   gravityApplied: 5
   runningSpeed: 65
-  maxHealth: 1200
+  maxHealth: 1
   damageMultiplier: 1
   procChanceMultiplier: 1
   playerGravity: 0
@@ -274,8 +274,9 @@ MonoBehaviour:
   isBackHeavyAttacking: 0
   isJumpLightAttacking: 0
   isJumpHeavyAttacking: 0
+  isGroundSlamming: 0
   backAttackTimer: 0.35
-  jumpHeavyAttackCooldown: 4
+  groundSlamCooldown: 0
 --- !u!114 &4332903956958558059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -327,7 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0b733f6c7e4dc249950cadc74908276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: 4332903956958558049}
 --- !u!114 &4332903956958558051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -649,6 +650,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7354980139197630804}
   - component: {fileID: 4181447012132963715}
+  - component: {fileID: 4742245903537251682}
   m_Layer: 7
   m_Name: Leg Collider
   m_TagString: Untagged
@@ -686,6 +688,20 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -2.64}
   serializedVersion: 2
   m_Radius: 1
+--- !u!114 &4742245903537251682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5024609729151222773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c038ba58169591446941124196731c21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCompScript: {fileID: 4332903956958558062}
+  collisionLayerScript: {fileID: 2777042746695490095}
 --- !u!1 &5770650599197034168
 GameObject:
   m_ObjectHideFlags: 0

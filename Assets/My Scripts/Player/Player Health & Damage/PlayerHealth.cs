@@ -41,7 +41,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
         //if player reaches 0 health, disable their game object (FOR NOW, WE WILL USE OBJECT POOLING LATER)
         if (health <= 0f)
         {
-            Debug.Log(this.gameObject.name + " has died!");
+            //Debug.Log(this.gameObject.name + " has died!");
             isAlive = false;
 
             animator.SetBool(isAliveHash, isAlive);

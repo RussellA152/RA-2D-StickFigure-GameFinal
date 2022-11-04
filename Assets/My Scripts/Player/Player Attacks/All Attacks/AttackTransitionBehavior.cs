@@ -19,6 +19,7 @@ public class AttackTransitionBehavior : StateMachineBehaviour
     public string backHeavyAttackName; //name of back heavy attack
     public string jumpLightAttackName; //name of jump light attack
     public string jumpHeavyAttackName; //name of jump heavy attack
+    public string groundSlamAttackName; //name of ground slam attack
 
     [Header("Allow Movement During This Transition?")]
     [SerializeField] private bool allowMovementDuringAnim; //this bool determines if the player is allowed to move during this transition (used for Idle animation, otherwise player can't move in Idle state)
@@ -127,6 +128,15 @@ public class AttackTransitionBehavior : StateMachineBehaviour
                 //Debug.Log("Back ATTACK!");
             }
         }
+        //else if (AttackController.instance.isGroundSlamming)
+        //{
+        //    if (groundSlamAttackName != "")
+        //    {
+        //        AttackController.instance.animator.Play(groundSlamAttackName);
+        //        //Debug.Log("Back ATTACK!");
+        //    }
+        //}
+
 
 
     }
@@ -180,9 +190,17 @@ public class AttackTransitionBehavior : StateMachineBehaviour
 
         }
 
+        if (AttackController.instance.isGroundSlamming)
+        {
+            AttackController.instance.isGroundSlamming = false;
+            Debug.Log("Start Ground Slam cooldown");
+            AttackController.instance.StartGroundSlamCooldown();
+        }
+
         if (AttackController.instance.isJumpHeavyAttacking)
         {
-            AttackController.instance.isJumpHeavyAttacking = false;
+            AttackController.instance.isJumpHeavyAttacking = false; ;
+            //Debug.Log("Heavy attack!");
             //if player did a regular attack, dont let them do a back attack
             playerComponentScript.SetCanBackAttack(false);
 

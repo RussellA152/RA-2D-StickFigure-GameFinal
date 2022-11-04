@@ -23,6 +23,7 @@ public class JumpHeavyAttackAnticipation : StateMachineBehaviour
         //if(animator.transform.)
 
         //AttackController.instance.star
+        //AttackController.instance.isGroundSlamming = true;
 
         playerCollisionLayerScript = animator.transform.GetComponent<PlayerCollisionLayerChange>();
 

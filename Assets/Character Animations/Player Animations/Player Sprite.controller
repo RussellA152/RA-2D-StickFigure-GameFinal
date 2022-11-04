@@ -59,28 +59,6 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!114 &-8922103455966611436
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageType: 2
-  attackDamage: 0
-  attackingPowerX: 500
-  attackingPowerY: 1500
-  forceMode: 0
-  joltForceX: 0
-  joltForceY: 100
-  gravityDuringAttack: 0
-  turnOffEnemyCollision: 0
-  resetYVelocityOnAttack: 0
 --- !u!1101 &-8908570319301394034
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -259,6 +237,7 @@ MonoBehaviour:
   backHeavyAttackName: 
   jumpLightAttackName: 
   jumpHeavyAttackName: 
+  groundSlamAttackName: 
   allowMovementDuringAnim: 0
   resetGravityOnStateExit: 1
 --- !u!1102 &-8383072558413139639
@@ -306,6 +285,7 @@ MonoBehaviour:
   backHeavyAttackName: 
   jumpLightAttackName: 
   jumpHeavyAttackName: Combo 3 Finisher
+  groundSlamAttackName: 
   allowMovementDuringAnim: 0
   resetGravityOnStateExit: 1
 --- !u!1102 &-8352506448186878782
@@ -359,34 +339,6 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: de433659476ad964684b7cf39ba15f37, type: 2}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &-8224163280144423521
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Jump Heavy Attack End
-  m_Speed: 0.25
-  m_CycleOffset: 0
-  m_Transitions:
-  - {fileID: -2265118354208302433}
-  m_StateMachineBehaviours:
-  - {fileID: -1052389640869901484}
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 6f6afe1dd94aea64cadbf6509f3bdbad, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -622,6 +574,7 @@ MonoBehaviour:
   backHeavyAttackName: Back Heavy Attack
   jumpLightAttackName: 
   jumpHeavyAttackName: 
+  groundSlamAttackName: 
   allowMovementDuringAnim: 0
   resetGravityOnStateExit: 0
 --- !u!114 &-7831326710310975870
@@ -642,36 +595,9 @@ MonoBehaviour:
   backHeavyAttackName: Back Heavy Attack
   jumpLightAttackName: 
   jumpHeavyAttackName: 
+  groundSlamAttackName: 
   allowMovementDuringAnim: 0
   resetGravityOnStateExit: 0
---- !u!1102 &-7814254326632273274
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Jump Heavy Attack Anticipation
-  m_Speed: 0.6
-  m_CycleOffset: 0
-  m_Transitions:
-  - {fileID: 1870576670980388019}
-  m_StateMachineBehaviours:
-  - {fileID: -5691126544980079572}
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 5c0488903449d04429dc8212fa53d97e, type: 2}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1101 &-7758563310901304590
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -977,6 +903,28 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &-7206488167181654456
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 2303996855925483635}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.5
+  m_HasExitTime: 1
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1107 &-7148796482674228716
 AnimatorStateMachine:
   serializedVersion: 6
@@ -992,7 +940,7 @@ AnimatorStateMachine:
     m_Position: {x: 360, y: 130, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: -3674383791153053731}
-    m_Position: {x: 360, y: 220, z: 0}
+    m_Position: {x: 360, y: 230, z: 0}
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
@@ -1083,6 +1031,7 @@ MonoBehaviour:
   backHeavyAttackName: Back Heavy Attack
   jumpLightAttackName: 
   jumpHeavyAttackName: 
+  groundSlamAttackName: 
   allowMovementDuringAnim: 0
   resetGravityOnStateExit: 0
 --- !u!1101 &-6926484590721706312
@@ -1147,6 +1096,7 @@ MonoBehaviour:
   backHeavyAttackName: Back Heavy Attack
   jumpLightAttackName: 
   jumpHeavyAttackName: 
+  groundSlamAttackName: 
   allowMovementDuringAnim: 0
   resetGravityOnStateExit: 0
 --- !u!1102 &-6761910278824410491
@@ -1458,7 +1408,8 @@ MonoBehaviour:
   backAttackName: 
   backHeavyAttackName: 
   jumpLightAttackName: Jump Attack 1
-  jumpHeavyAttackName: Jump Heavy Attack Anticipation
+  jumpHeavyAttackName: CheckIfCanGroundSlam
+  groundSlamAttackName: 
   allowMovementDuringAnim: 1
   resetGravityOnStateExit: 0
 --- !u!1101 &-5924192798968783776
@@ -1501,6 +1452,7 @@ MonoBehaviour:
   backHeavyAttackName: 
   jumpLightAttackName: 
   jumpHeavyAttackName: 
+  groundSlamAttackName: 
   allowMovementDuringAnim: 1
   resetGravityOnStateExit: 0
 --- !u!1101 &-5906880995141201080
@@ -1523,6 +1475,31 @@ AnimatorStateTransition:
   m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 1
+  m_HasExitTime: 1
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1101 &-5822279598550153475
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: canGroundSlam
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -3592785484021644452}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
   m_HasExitTime: 1
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
@@ -1598,21 +1575,6 @@ MonoBehaviour:
   gravityDuringAttack: 0
   turnOffEnemyCollision: 0
   resetYVelocityOnAttack: 0
---- !u!114 &-5691126544980079572
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eaa35ed8b76ed184bb44a07f61cbf8ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpHeightRequirementToAttack: 0
-  joltForceX: 0
-  joltForceY: -1800
 --- !u!1101 &-5643098270777370237
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1632,6 +1594,28 @@ AnimatorStateTransition:
   m_ExitTime: 1
   m_HasExitTime: 1
   m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1101 &-5565371703743943057
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -3592785484021644452}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0.75
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
@@ -1883,7 +1867,8 @@ MonoBehaviour:
   backAttackName: Back Light Attack
   backHeavyAttackName: Back Heavy Attack
   jumpLightAttackName: Jump Attack 2
-  jumpHeavyAttackName: Jump Heavy Attack Anticipation
+  jumpHeavyAttackName: CheckIfCanGroundSlam
+  groundSlamAttackName: 
   allowMovementDuringAnim: 0
   resetGravityOnStateExit: 1
 --- !u!1101 &-4981033339883271935
@@ -2385,7 +2370,7 @@ AnimatorStateTransition:
     m_ConditionEvent: isGrounded
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 2731022555564531330}
+  m_DstState: {fileID: 0}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
@@ -2410,7 +2395,7 @@ AnimatorStateTransition:
     m_ConditionEvent: isGrounded
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 2731022555564531330}
+  m_DstState: {fileID: 0}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
@@ -2604,20 +2589,20 @@ AnimatorStateMachine:
   m_Name: Jump Heavy Attack
   m_ChildStates:
   - serializedVersion: 1
-    m_State: {fileID: -7814254326632273274}
-    m_Position: {x: 280, y: 120, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 2731022555564531330}
-    m_Position: {x: 550, y: 120, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -8224163280144423521}
-    m_Position: {x: 1060, y: 120, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: -2206141589852355091}
-    m_Position: {x: 810, y: 120, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: -54993652918983426}
     m_Position: {x: 280, y: 290, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 239350025952702647}
+    m_Position: {x: 780, y: 0, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -3592785484021644452}
+    m_Position: {x: 70, y: 70, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 2303996855925483635}
+    m_Position: {x: 530, y: 0, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -1302143625511460414}
+    m_Position: {x: 270, y: 0, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -2627,7 +2612,7 @@ AnimatorStateMachine:
   m_EntryPosition: {x: -100, y: 130, z: 0}
   m_ExitPosition: {x: 1170, y: 310, z: 0}
   m_ParentStateMachinePosition: {x: 1440, y: 50, z: 0}
-  m_DefaultState: {fileID: -7814254326632273274}
+  m_DefaultState: {fileID: -54993652918983426}
 --- !u!1102 &-3620840774055565295
 AnimatorState:
   serializedVersion: 6
@@ -2700,8 +2685,37 @@ MonoBehaviour:
   backHeavyAttackName: Back Heavy Attack
   jumpLightAttackName: 
   jumpHeavyAttackName: 
+  groundSlamAttackName: 
   allowMovementDuringAnim: 0
   resetGravityOnStateExit: 0
+--- !u!1102 &-3592785484021644452
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Jump Heavy Attack Anticipation
+  m_Speed: 0.6
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: 7206751346194289254}
+  m_StateMachineBehaviours:
+  - {fileID: 5733408560014808066}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 5c0488903449d04429dc8212fa53d97e, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &-3580506331798525060
 AnimatorState:
   serializedVersion: 6
@@ -2875,6 +2889,7 @@ MonoBehaviour:
   backHeavyAttackName: 
   jumpLightAttackName: 
   jumpHeavyAttackName: 
+  groundSlamAttackName: 
   allowMovementDuringAnim: 0
   resetGravityOnStateExit: 0
 --- !u!1101 &-3135887821146915841
@@ -3096,7 +3111,7 @@ AnimatorTransition:
   m_Name: 
   m_Conditions: []
   m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -7814254326632273274}
+  m_DstState: {fileID: 0}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
@@ -3157,55 +3172,28 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!1101 &-2265118354208302433
-AnimatorStateTransition:
+--- !u!114 &-2365248635621506602
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5669e1f9d9608794ab1dcc923d5fa7c1, type: 3}
   m_Name: 
-  m_Conditions: []
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -96890588181203755}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0
-  m_ExitTime: 1
-  m_HasExitTime: 1
-  m_HasFixedDuration: 0
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
---- !u!1102 &-2206141589852355091
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Jump Heavy Hold
-  m_Speed: 0.025
-  m_CycleOffset: 0
-  m_Transitions:
-  - {fileID: 7642590431571175461}
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 6903030c554360f4a84d1419ce1ac9c0, type: 2}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
+  m_EditorClassIdentifier: 
+  damageType: 2
+  attackDamage: 0
+  attackingPowerX: 500
+  attackingPowerY: 1500
+  forceMode: 0
+  joltForceX: 0
+  joltForceY: 100
+  gravityDuringAttack: 0
+  turnOffEnemyCollision: 0
+  resetYVelocityOnAttack: 0
 --- !u!1102 &-2195363042920039236
 AnimatorState:
   serializedVersion: 6
@@ -3619,7 +3607,8 @@ MonoBehaviour:
   backAttackName: 
   backHeavyAttackName: 
   jumpLightAttackName: Jump Attack 1
-  jumpHeavyAttackName: Jump Heavy Attack Anticipation
+  jumpHeavyAttackName: CheckIfCanGroundSlam
+  groundSlamAttackName: 
   allowMovementDuringAnim: 1
   resetGravityOnStateExit: 0
 --- !u!1102 &-1582187209250728123
@@ -3826,6 +3815,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df6cd3a55f82bd44b072b442e55c40e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1102 &-1302143625511460414
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Jump Heavy Attack
+  m_Speed: 0.4
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: 6590472493141335950}
+  m_StateMachineBehaviours:
+  - {fileID: -2365248635621506602}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 1700ed53cecc4bc4b8c3f9fc06a1916c, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &-1258990824581685774
 AnimatorState:
   serializedVersion: 6
@@ -3947,28 +3964,9 @@ MonoBehaviour:
   backHeavyAttackName: Back Heavy Attack
   jumpLightAttackName: 
   jumpHeavyAttackName: 
+  groundSlamAttackName: 
   allowMovementDuringAnim: 0
   resetGravityOnStateExit: 0
---- !u!114 &-1052389640869901484
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bcdc20dc630907469b3c280d9dbdbfa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackName: 
-  heavyAttackName: 
-  backAttackName: 
-  backHeavyAttackName: 
-  jumpLightAttackName: 
-  jumpHeavyAttackName: 
-  allowMovementDuringAnim: 0
-  resetGravityOnStateExit: 1
 --- !u!1101 &-952266862708538642
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -4034,6 +4032,7 @@ MonoBehaviour:
   backHeavyAttackName: Back Heavy Attack
   jumpLightAttackName: 
   jumpHeavyAttackName: 
+  groundSlamAttackName: 
   allowMovementDuringAnim: 0
   resetGravityOnStateExit: 0
 --- !u!1101 &-830494808414706731
@@ -4367,8 +4366,31 @@ MonoBehaviour:
   backHeavyAttackName: Back Heavy Attack
   jumpLightAttackName: 
   jumpHeavyAttackName: 
+  groundSlamAttackName: 
   allowMovementDuringAnim: 0
   resetGravityOnStateExit: 0
+--- !u!1101 &-434829206907739435
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 239350025952702647}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.5
+  m_HasExitTime: 1
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &-367424455089454425
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -4484,7 +4506,9 @@ AnimatorState:
   m_Name: CheckIfCanGroundSlam
   m_Speed: 1
   m_CycleOffset: 0
-  m_Transitions: []
+  m_Transitions:
+  - {fileID: -5822279598550153475}
+  - {fileID: 6755922234383091776}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -4494,7 +4518,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
+  m_Motion: {fileID: 7400000, guid: 796201d466dfa4d4db9e4232ce84a5cd, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -4577,7 +4601,7 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 0
+    m_DefaultBool: 1
     m_Controller: {fileID: 9100000}
   - m_Name: isAlive
     m_Type: 4
@@ -4711,6 +4735,34 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &239350025952702647
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Jump Heavy Attack End
+  m_Speed: 0.25
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: 2845492652553867735}
+  m_StateMachineBehaviours:
+  - {fileID: 396388636595547222}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 6f6afe1dd94aea64cadbf6509f3bdbad, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &353833513042760110
 AnimatorState:
   serializedVersion: 6
@@ -4761,6 +4813,27 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &396388636595547222
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bcdc20dc630907469b3c280d9dbdbfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackName: 
+  heavyAttackName: 
+  backAttackName: 
+  backHeavyAttackName: 
+  jumpLightAttackName: 
+  jumpHeavyAttackName: 
+  groundSlamAttackName: 
+  allowMovementDuringAnim: 0
+  resetGravityOnStateExit: 1
 --- !u!1101 &491355772285834739
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -4779,28 +4852,6 @@ AnimatorStateTransition:
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 0
-  m_HasFixedDuration: 0
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
---- !u!1101 &548773561029159270
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions: []
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -2206141589852355091}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0
-  m_ExitTime: 0.5
-  m_HasExitTime: 1
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -5266,9 +5317,9 @@ AnimatorStateMachine:
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: 7812341550167220144}
-    second: []
   - first: {fileID: 6496870065685537018}
+    second: []
+  - first: {fileID: 7812341550167220144}
     second: []
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
@@ -5443,31 +5494,6 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!1101 &1870576670980388019
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: isGrounded
-    m_EventTreshold: 0
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 2731022555564531330}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0
-  m_ExitTime: 0.5
-  m_HasExitTime: 1
-  m_HasFixedDuration: 0
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
 --- !u!1101 &1971884995085609920
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -5537,6 +5563,33 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &2303996855925483635
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Jump Heavy Hold
+  m_Speed: 0.025
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: -434829206907739435}
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 6903030c554360f4a84d1419ce1ac9c0, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1101 &2376596208537504563
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -5745,9 +5798,9 @@ AnimatorStateMachine:
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: 4565386627695345526}
-    second: []
   - first: {fileID: 1538655715377161641}
+    second: []
+  - first: {fileID: 4565386627695345526}
     second: []
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
@@ -5781,34 +5834,6 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &2731022555564531330
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Jump Heavy Attack
-  m_Speed: 0.4
-  m_CycleOffset: 0
-  m_Transitions:
-  - {fileID: 548773561029159270}
-  m_StateMachineBehaviours:
-  - {fileID: -8922103455966611436}
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 1700ed53cecc4bc4b8c3f9fc06a1916c, type: 2}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1101 &2805771674468685591
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -5827,6 +5852,28 @@ AnimatorStateTransition:
   m_TransitionOffset: 0
   m_ExitTime: 0.75
   m_HasExitTime: 0
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1101 &2845492652553867735
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -96890588181203755}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 1
+  m_HasExitTime: 1
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -5904,7 +5951,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions: []
   m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -8224163280144423521}
+  m_DstState: {fileID: 0}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
@@ -5984,6 +6031,7 @@ MonoBehaviour:
   backHeavyAttackName: Back Heavy Attack
   jumpLightAttackName: 
   jumpHeavyAttackName: 
+  groundSlamAttackName: 
   allowMovementDuringAnim: 0
   resetGravityOnStateExit: 0
 --- !u!1107 &3297704623643483786
@@ -6001,7 +6049,7 @@ AnimatorStateMachine:
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: 1514594096764517698}
-    m_Position: {x: -110, y: 250, z: 0}
+    m_Position: {x: -100, y: 250, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: 2667175908007912112}
     m_Position: {x: -110, y: -10, z: 0}
@@ -6394,6 +6442,7 @@ MonoBehaviour:
   backHeavyAttackName: Back Heavy Attack
   jumpLightAttackName: 
   jumpHeavyAttackName: 
+  groundSlamAttackName: 
   allowMovementDuringAnim: 1
   resetGravityOnStateExit: 0
 --- !u!114 &4389036399616105236
@@ -6573,6 +6622,31 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &4544446804616165027
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: isGrounded
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -1302143625511460414}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.5
+  m_HasExitTime: 1
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1107 &4565386627695345526
 AnimatorStateMachine:
   serializedVersion: 6
@@ -6719,6 +6793,28 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 70, y: -50, z: 0}
   m_ParentStateMachinePosition: {x: 780, y: 110, z: 0}
   m_DefaultState: {fileID: 7872090074603349312}
+--- !u!1101 &4832478148133253634
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 239350025952702647}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.5
+  m_HasExitTime: 1
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!114 &4852723965588471181
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -6837,7 +6933,8 @@ MonoBehaviour:
   backAttackName: Back Light Attack
   backHeavyAttackName: Back Heavy Attack
   jumpLightAttackName: Jump Attack 3
-  jumpHeavyAttackName: Jump Heavy Attack Anticipation
+  jumpHeavyAttackName: CheckIfCanGroundSlam
+  groundSlamAttackName: 
   allowMovementDuringAnim: 0
   resetGravityOnStateExit: 1
 --- !u!114 &5177378179141828590
@@ -7008,6 +7105,21 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &5733408560014808066
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaa35ed8b76ed184bb44a07f61cbf8ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpHeightRequirementToAttack: 0
+  joltForceX: 0
+  joltForceY: -1800
 --- !u!1101 &5748339122062817194
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -7277,6 +7389,28 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1101 &6493949492118877699
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -96890588181203755}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 1
+  m_HasExitTime: 1
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1107 &6496870065685537018
 AnimatorStateMachine:
   serializedVersion: 6
@@ -7327,6 +7461,28 @@ MonoBehaviour:
   gravityDuringAttack: 0
   turnOffEnemyCollision: 0
   resetYVelocityOnAttack: 0
+--- !u!1101 &6590472493141335950
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 2303996855925483635}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.5
+  m_HasExitTime: 1
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!114 &6652507660826063919
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7341,6 +7497,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerLayer: 7
   enemyLayer: 8
+--- !u!1101 &6755922234383091776
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: canGroundSlam
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -96890588181203755}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0
+  m_HasExitTime: 1
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1102 &6907380062422621218
 AnimatorState:
   serializedVersion: 6
@@ -7408,7 +7589,8 @@ MonoBehaviour:
   backAttackName: Back Light Attack
   backHeavyAttackName: Back Heavy Attack
   jumpLightAttackName: 
-  jumpHeavyAttackName: Jump Heavy Attack Anticipation
+  jumpHeavyAttackName: CheckIfCanGroundSlam
+  groundSlamAttackName: 
   allowMovementDuringAnim: 0
   resetGravityOnStateExit: 1
 --- !u!1101 &7120978712240087540
@@ -7540,6 +7722,31 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &7206751346194289254
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: isGrounded
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -1302143625511460414}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.5
+  m_HasExitTime: 1
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!114 &7306714277331329878
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7558,6 +7765,7 @@ MonoBehaviour:
   backHeavyAttackName: Back Heavy Attack
   jumpLightAttackName: 
   jumpHeavyAttackName: 
+  groundSlamAttackName: 
   allowMovementDuringAnim: 0
   resetGravityOnStateExit: 0
 --- !u!1102 &7361716577833042941
@@ -7610,7 +7818,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions: []
   m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -8224163280144423521}
+  m_DstState: {fileID: 0}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
@@ -7710,6 +7918,7 @@ MonoBehaviour:
   backHeavyAttackName: Back Heavy Attack
   jumpLightAttackName: 
   jumpHeavyAttackName: 
+  groundSlamAttackName: 
   allowMovementDuringAnim: 0
   resetGravityOnStateExit: 0
 --- !u!1101 &7606730220646536198
@@ -7722,28 +7931,6 @@ AnimatorStateTransition:
   m_Conditions: []
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -96890588181203755}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0
-  m_ExitTime: 0.5
-  m_HasExitTime: 1
-  m_HasFixedDuration: 0
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
---- !u!1101 &7642590431571175461
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions: []
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -8224163280144423521}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
@@ -7832,6 +8019,7 @@ MonoBehaviour:
   backHeavyAttackName: 
   jumpLightAttackName: 
   jumpHeavyAttackName: 
+  groundSlamAttackName: 
   allowMovementDuringAnim: 0
   resetGravityOnStateExit: 0
 --- !u!1102 &7861935543624724058
@@ -7969,6 +8157,7 @@ MonoBehaviour:
   backHeavyAttackName: Back Heavy Attack
   jumpLightAttackName: 
   jumpHeavyAttackName: 
+  groundSlamAttackName: 
   allowMovementDuringAnim: 0
   resetGravityOnStateExit: 0
 --- !u!1101 &8075325903898891747
@@ -8395,7 +8584,8 @@ MonoBehaviour:
   backAttackName: Back Light Attack
   backHeavyAttackName: Back Heavy Attack
   jumpLightAttackName: Jump Attack 4
-  jumpHeavyAttackName: Jump Heavy Attack Anticipation
+  jumpHeavyAttackName: CheckIfCanGroundSlam
+  groundSlamAttackName: 
   allowMovementDuringAnim: 0
   resetGravityOnStateExit: 1
 --- !u!114 &9123667387343672059

@@ -44,6 +44,9 @@ public class AttackController : MonoBehaviour
     [HideInInspector]
     public bool isJumpHeavyAttacking = false;
 
+    [HideInInspector]
+    public bool isGroundSlamming = false;
+
     //keybindings needed to perform each attack
     private InputAction lightAttack;
     private InputAction heavyAttack;
@@ -57,11 +60,11 @@ public class AttackController : MonoBehaviour
     [Header("Attack Timers")]
     [SerializeField] private float backAttackTimer; // when player turns around, how much time do they have to perform a back attack (once this hits 0, the player must turn around again to perform a back attack)
     private float backAttackTimerStored; // a float variable that remembers the original value of the backAttackTimer (we need this because backAttackTimer is modified during gameplay, and need to reset it often)
-    [SerializeField] private float jumpHeavyAttackCooldown; // when player performs a jump heavy attack, how long do they need to wait to perform it again?
-    private float jumpHeavyAttackCooldownStored; // a float variable that remembers the original value of the jump heavy attack cooldown (we need this because backAttackTimer is modified during gameplay, and need to reset it often)
+    [SerializeField] private float groundSlamCooldown; // when player performs a jump heavy attack, how long do they need to wait to perform it again?
+    //private float jumpHeavyAttackCooldownStored; // a float variable that remembers the original value of the jump heavy attack cooldown (we need this because backAttackTimer is modified during gameplay, and need to reset it often)
 
-    private Coroutine jumpHeavyAttackCooldownCoroutine;
-    private bool jumpHeavyAttackCooldownStarted;
+    private Coroutine groundSlamCooldownCoroutine;
+    private bool groundSlamCooldownStarted;
 
     private int groundSlamHash;
 
@@ -82,7 +85,7 @@ public class AttackController : MonoBehaviour
         //playerComponentScript = GetComponent<PlayerComponents>();
 
         backAttackTimerStored = backAttackTimer;
-        jumpHeavyAttackCooldownStored = jumpHeavyAttackCooldown;
+        //jumpHeavyAttackCooldownStored = jumpHeavyAttackCooldown;
 
         groundSlamHash = Animator.StringToHash("canGroundSlam");
 
@@ -197,7 +200,14 @@ public class AttackController : MonoBehaviour
             PlayerHasAttackedEvent();
         }
 
-        else if (heavyAttack.triggered && canJumpHeavyAttack && !isJumpHeavyAttacking && !isGrounded)
+        //else if (heavyAttack.triggered && canGroundSlam && !isGroundSlamming && !isGrounded)
+        //{
+        //    //isGroundSlamming = true;
+        //    SetPlayerIsAttacking(true);
+        //    PlayerHasAttackedEvent();
+        //}
+
+        else if (heavyAttack.triggered && canJumpHeavyAttack && !isJumpHeavyAttacking && !isGroundSlamming && !isGrounded)
         {
             isJumpHeavyAttacking = true;
             SetPlayerIsAttacking(true);
@@ -261,19 +271,28 @@ public class AttackController : MonoBehaviour
         playerComponentScript.SetCanBackAttack(true);
     }
 
-    //IEnumerator StartJumpHeavyAttackCooldown(float cooldown)
-    //{
-    //    playerComponentScript.SetCanJumpHeavyAttack(false);
+    public void StartGroundSlamCooldown()
+    {
+        if (!groundSlamCooldownStarted)
+            StartCoroutine(GroundSlamCooldownCoroutine(groundSlamCooldown));
+    }
 
-    //    jumpHeavyAttackCooldownStarted = true;
+    IEnumerator GroundSlamCooldownCoroutine(float cooldown)
+    {
+        animator.SetBool(groundSlamHash, false);
+        playerComponentScript.SetCanGroundSlam(false);
 
-    //    yield return new WaitForSeconds(cooldown);
+        groundSlamCooldownStarted = true;
 
-    //    jumpHeavyAttackCooldownStarted = false;
+        yield return new WaitForSeconds(cooldown);
 
-    //    jumpHeavyAttackCooldown = jumpHeavyAttackCooldownStored;
-    //    playerComponentScript.SetCanJumpHeavyAttack(true);
-    //}
+        groundSlamCooldownStarted = false;
+
+        animator.SetBool(groundSlamHash, true);
+
+        //groundSlamCooldown = groundSlamCooldownStored;
+        playerComponentScript.SetCanGroundSlam(true);
+    }
 
 
 }
