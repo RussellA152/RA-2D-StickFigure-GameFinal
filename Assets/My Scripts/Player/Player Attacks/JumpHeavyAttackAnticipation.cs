@@ -25,8 +25,10 @@ public class JumpHeavyAttackAnticipation : StateMachineBehaviour
         //AttackController.instance.star
         //AttackController.instance.isGroundSlamming = true;
 
+        
         playerCollisionLayerScript = animator.transform.GetComponent<PlayerCollisionLayerChange>();
 
+        // Prevent player from colliding with enemy
         playerCollisionLayerScript.SetIgnoreEnemyLayer();
 
         //retrieve component script
@@ -57,8 +59,8 @@ public class JumpHeavyAttackAnticipation : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        playerCollisionLayerScript.ResetLayer();
-        Debug.Log("Exit jump heavy loop!");
+        //playerCollisionLayerScript.ResetLayer();
+        //Debug.Log("Exit jump heavy loop!");
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

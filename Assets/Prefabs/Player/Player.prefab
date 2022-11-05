@@ -220,7 +220,7 @@ MonoBehaviour:
   money: 500
   gravityApplied: 5
   runningSpeed: 65
-  maxHealth: 1
+  maxHealth: 300
   damageMultiplier: 1
   procChanceMultiplier: 1
   playerGravity: 0
@@ -572,7 +572,7 @@ SpriteRenderer:
   m_SortingLayerID: -1771347619
   m_SortingLayer: 1
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: df85131b5aef36448a2017d1a63ef17b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0fdbcf28872d9fc43a7b564e95d8f4ea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
