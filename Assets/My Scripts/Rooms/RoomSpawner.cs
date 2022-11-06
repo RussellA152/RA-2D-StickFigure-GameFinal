@@ -24,11 +24,11 @@ public class RoomSpawner : MonoBehaviour
 
     private float destroyTime = 4f; //time until this spawner is destroyed
 
-    private int xCoordinateAdder = 155; //how much we add to the newly spawned room's transform position.x for a spawn location
-    private int yCoordinateAdder = 110; //how much we add to the newly spawned room's transform position.y for a spawn location
+    private int xCoordinateAdder = 137; //how much we add to the newly spawned room's transform position.x for a spawn location
+    private int yCoordinateAdder = 56; //how much we add to the newly spawned room's transform position.y for a spawn location
 
-    private int xCoordinateDivider = 155; //how much we divide the newly spawned room's transform position.x by.. to get a coordinate
-    private int yCoordinateDivider = 110; //how much we divide the newly spawned room's transform position.y by.. to get a coordinate
+    private int xCoordinateDivider = 137; //how much we divide the newly spawned room's transform position.x by.. to get a coordinate
+    private int yCoordinateDivider = 56; //how much we divide the newly spawned room's transform position.y by.. to get a coordinate
 
     //these bools allow this spawner to check coordinates in each direction
     //if they become false, the spawner can't check in that direction

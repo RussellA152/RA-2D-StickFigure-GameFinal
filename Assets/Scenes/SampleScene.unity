@@ -2146,6 +2146,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 570149327836259834, guid: 5952141b836031b4782683fcfc8d896f, type: 3}
+      propertyPath: m_ChunkCullingBounds.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 570149327836259834, guid: 5952141b836031b4782683fcfc8d896f, type: 3}
+      propertyPath: m_ChunkCullingBounds.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 570149327836259835, guid: 5952141b836031b4782683fcfc8d896f, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[5].m_Data
       value: 
@@ -2176,11 +2184,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3544241472888954066, guid: 5952141b836031b4782683fcfc8d896f, type: 3}
       propertyPath: m_ChunkCullingBounds.x
-      value: 1.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3544241472888954066, guid: 5952141b836031b4782683fcfc8d896f, type: 3}
       propertyPath: m_ChunkCullingBounds.y
-      value: 1.1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4013593203202456782, guid: 5952141b836031b4782683fcfc8d896f, type: 3}
       propertyPath: m_ChunkCullingBounds.x
