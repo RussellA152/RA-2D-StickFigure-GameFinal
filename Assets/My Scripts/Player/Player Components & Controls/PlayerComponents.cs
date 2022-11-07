@@ -61,6 +61,7 @@ public class PlayerComponents : MonoBehaviour
 
     private bool canJump = true; //this bool determines if the player is allowed to walk (only)
     private bool canWalk = true; //this bool determines if the player is allowed to jump (only)
+    private bool canClimb = true;
     private bool canFlip = true; //this bool determines if the player's sprite is allowed to flip
 
 
@@ -149,6 +150,7 @@ public class PlayerComponents : MonoBehaviour
     {
         canJump = boolean;
         canWalk = boolean;
+        canClimb = boolean;
     }
     public void SetCanJump(bool boolean)
     {
@@ -157,6 +159,11 @@ public class PlayerComponents : MonoBehaviour
     public void SetCanWalk(bool boolean)
     {
         canJump = boolean;
+    }
+
+    public void SetCanClimb(bool boolean)
+    {
+        canClimb = boolean;
     }
 
     public void SetCanSlide(bool boolean)
@@ -183,6 +190,7 @@ public class PlayerComponents : MonoBehaviour
         canBackAttack = boolean;
         canJumpAttack = boolean;
         canJumpHeavyAttack = boolean;
+        canGroundSlam = boolean;
 
     }
 
@@ -245,6 +253,11 @@ public class PlayerComponents : MonoBehaviour
     public bool GetCanWalk()
     {
         return canWalk;
+    }
+
+    public bool GetCanClimb()
+    {
+        return canClimb;
     }
 
     public bool GetCanSlide()

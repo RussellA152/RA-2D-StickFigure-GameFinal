@@ -21,6 +21,9 @@ public class CharacterController2D : MonoBehaviour
 																				//we need this value for gamepads, otherwise the player can build up their speed multiplier while moving slow (they should atleast be moving relatively fast)
 	[SerializeField] private float speedMultiplier = 10f;                       // this float is applied to the regular movement speed (allows movement to gradually increase)
 	[SerializeField] private float maxSpeedMultiplier = 20f;                    //this is the maximum value that the speed multiplier can reach, speed multiplier won't go further than this (increasing this value means player will increase speed more)
+
+	[SerializeField] private float climbSpeed;
+
 	[SerializeField] private float minimumRollDistance;
 	[SerializeField] private float maximumRollDistance;
 	
@@ -65,12 +68,18 @@ public class CharacterController2D : MonoBehaviour
 
 
 	private bool isWalking; //bool if player is walking
+	private bool isClimbing;
+	private bool wantsToClimb;
+
 	private bool canMove; //determines if player can walk and jump (retrieved from playerComponents script)
 	private bool canWalk; //determines if player can walk (retrieved from playerComponents script)
 	private bool canJump; //determines if player can jump (retrieved from playerComponents script)
+	private bool canClimb; // determines if the player can climb ladder (retrieved from playerComponents script)
 	private bool canFlip; //determines if the player's sprite can flip (retrieved from playerComponents script)
 	private bool canRoll; //determines if the player can roll (retrieved from playerComponents script)
 	private bool canSlide; //determines if the player can slide (retrieved from playerComponents script)
+
+	
 
 	[HideInInspector]
 	public Animator animator;
@@ -84,6 +93,7 @@ public class CharacterController2D : MonoBehaviour
 	private int isGroundedHash; //hash value of our animator's isGrounded parameter
 	private int isSlidingHash; //hash value of our animator's isSliding parameter
 	private int isRollingHash; //hash value of our animator's isRolling parameter
+	private int isClimbingHash; // hash value of our animator's isClimbing parameter
 
 
 	//private InputAction move;
@@ -109,6 +119,8 @@ public class CharacterController2D : MonoBehaviour
 
 
 	public event Action onJump; //eventsystem that is called when the player performs a jump
+
+
 
 
 
@@ -148,6 +160,7 @@ public class CharacterController2D : MonoBehaviour
 		isJumpingHash = Animator.StringToHash("isJumping");
 		isSlidingHash = Animator.StringToHash("isSliding");
 		isRollingHash = Animator.StringToHash("isRolling");
+		isClimbingHash = Animator.StringToHash("isClimbing");
 
 		//playerComponentScript = GetComponent<PlayerComponents>();
 
@@ -162,7 +175,25 @@ public class CharacterController2D : MonoBehaviour
 	
     }
 
-    private void Update()
+	private void OnTriggerStay2D(Collider2D collision)
+	{
+		if (canClimb && !AttackController.instance.GetPlayerIsAttacking() && collision.gameObject.CompareTag("Ladder")){
+			//isClimbing = true;
+			wantsToClimb = true;
+        }
+
+	}
+
+	private void OnTriggerExit2D(Collider2D collision)
+	{
+		if (collision.gameObject.CompareTag("Ladder")){
+			isClimbing = false;
+			wantsToClimb = false;
+		}
+	}
+
+
+	private void Update()
     {
 
 		//Debug.Log("Speed multiplier = " + speedMultiplier);
@@ -178,6 +209,13 @@ public class CharacterController2D : MonoBehaviour
 
 		//always updating the canMove bool to check if player is allowed to move and jump
 		UpdatePlayerComponents();
+
+        if (!isClimbing && wantsToClimb && playerComponentScript.GetInteractionButton().triggered)
+        {
+			m_Rigidbody2D.velocity = Vector2.zero;
+			m_Rigidbody2D.AddForce(new Vector2(0f, 200f));
+			isClimbing = true;
+        }
 
 
 		//if grounded, animator's isJumping is set to false, and isGrounded parameter is set to true
@@ -226,6 +264,8 @@ public class CharacterController2D : MonoBehaviour
 					
 			}
 		}
+
+		Climb();
 	}
 	public void Move(float move, bool crouch, bool jump, bool wantsToSlide, bool wantsToRoll,float jumpBufferCounter)
 	{
@@ -407,6 +447,23 @@ public class CharacterController2D : MonoBehaviour
 		}
 	}
 
+	private void Climb()
+    {
+		// when player is climbing, gravity is set to 0 and player is shot upwards
+		if (isClimbing)
+		{
+			animator.SetBool(isClimbingHash, true);
+			PlayerStats.instance.SetPlayerGravity(0f);
+			m_Rigidbody2D.velocity += Vector2.up * climbSpeed * Time.fixedDeltaTime;
+			//m_Rigidbody2D.AddForce(new Vector2(0f, climbSpeed));
+		}
+		else
+		{
+			animator.SetBool(isClimbingHash, false);
+			PlayerStats.instance.ResetGravity();
+		}
+	}
+
 
 	private void Flip()
 	{
@@ -432,12 +489,12 @@ public class CharacterController2D : MonoBehaviour
 	private void ApplyFallMultiplier()
     {
 		//if we are currently falling, then we will apply the fallMultipler on the player
-		if (m_Rigidbody2D.velocity.y < 0)
+		if (m_Rigidbody2D.velocity.y < 0 && !isClimbing)
 		{
 			m_Rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
 		}
 		//if we are rising (jumping), and we let go of the jump button, then we should have a low jump multiplier applied
-		else if (m_Rigidbody2D.velocity.y > 0 && jump.ReadValue<float>() == 0f)
+		else if (m_Rigidbody2D.velocity.y > 0 && jump.ReadValue<float>() == 0f && !isClimbing)
 		{
 			m_Rigidbody2D.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
 		}
@@ -475,6 +532,7 @@ public class CharacterController2D : MonoBehaviour
 		canFlip = playerComponentScript.GetCanFlip();
 		canRoll = playerComponentScript.GetCanRoll();
 		canSlide = playerComponentScript.GetCanSlide();
+		canClimb = playerComponentScript.GetCanClimb();
 
 	}
 

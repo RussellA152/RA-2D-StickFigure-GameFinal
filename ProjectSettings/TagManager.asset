@@ -9,6 +9,7 @@ TagManager:
   - EnemyAvoidanceBox
   - SpawnPoint
   - Dungeons
+  - Ladder
   layers:
   - Default
   - TransparentFX

@@ -44,6 +44,8 @@ public class AttackTransitionBehavior : StateMachineBehaviour
         //let player flip during attack transition period
         playerComponentScript.SetCanFlip(true);
 
+        playerComponentScript.SetCanClimb(true);
+
         // IF this animation allows movement during animation then allow player to move (instead the animation will move player a little)
         // we also set canAttack to false inside of "AttackAnimationBehavior.cs"
         if (allowMovementDuringAnim)

@@ -66,6 +66,7 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
         rb = playerComponentScript.GetRB();
 
         playerComponentScript.SetCanFlip(false);
+        playerComponentScript.SetCanClimb(false);
 
         //invoke jolt movement 
         JoltThisObject(playerFacingRight, joltForceX, joltForceY);
