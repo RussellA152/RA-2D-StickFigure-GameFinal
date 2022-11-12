@@ -2239,6 +2239,10 @@ PrefabInstance:
       propertyPath: m_ChunkCullingBounds.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 570149326910626816, guid: 5952141b836031b4782683fcfc8d896f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 72c9a0803ead9b0459dcdaa1e396b05e, type: 2}
     - target: {fileID: 570149326910626818, guid: 5952141b836031b4782683fcfc8d896f, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -2446,7 +2450,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4332903956958558057, guid: ebfc8aa202773c044af288890ebbab9a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.64
+      value: -5.59
       objectReference: {fileID: 0}
     - target: {fileID: 4332903956958558057, guid: ebfc8aa202773c044af288890ebbab9a, type: 3}
       propertyPath: m_LocalPosition.z

@@ -24,7 +24,9 @@ public class PlayerHurtGetUp : StateMachineBehaviour
         // once get up animation ends, the player is no longer in a knockdown state
         if (endOfKnockdownState)
         {
-            animator.transform.gameObject.GetComponent<PlayerHurt>().SetIsKnockedDown(false);
+            PlayerHurt playerHurtScript = animator.transform.gameObject.GetComponent<PlayerHurt>();
+            playerHurtScript.SetIsKnockedDown(false);
+
         }
     }
 

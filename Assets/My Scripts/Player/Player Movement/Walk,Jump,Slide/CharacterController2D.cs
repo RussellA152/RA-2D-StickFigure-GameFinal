@@ -177,7 +177,7 @@ public class CharacterController2D : MonoBehaviour
 
 	private void OnTriggerStay2D(Collider2D collision)
 	{
-		if (canClimb && !AttackController.instance.GetPlayerIsAttacking() && collision.gameObject.CompareTag("Ladder")){
+		if (!AttackController.instance.GetPlayerIsAttacking() && canClimb && collision.gameObject.CompareTag("Ladder")){
 			//isClimbing = true;
 			wantsToClimb = true;
         }
@@ -210,7 +210,9 @@ public class CharacterController2D : MonoBehaviour
 		//always updating the canMove bool to check if player is allowed to move and jump
 		UpdatePlayerComponents();
 
-        if (!isClimbing && wantsToClimb && playerComponentScript.GetInteractionButton().triggered)
+		// if the player isn't already climbing, and they are not attacking
+		// and they are pressing the interaction button, then let them climb on a ladder
+        if (!isClimbing && !AttackController.instance.GetPlayerIsAttacking() && wantsToClimb && playerComponentScript.GetInteractionButton().triggered)
         {
 			m_Rigidbody2D.velocity = Vector2.zero;
 			m_Rigidbody2D.AddForce(new Vector2(0f, 200f));
@@ -264,7 +266,7 @@ public class CharacterController2D : MonoBehaviour
 					
 			}
 		}
-
+		
 		Climb();
 	}
 	public void Move(float move, bool crouch, bool jump, bool wantsToSlide, bool wantsToRoll,float jumpBufferCounter)

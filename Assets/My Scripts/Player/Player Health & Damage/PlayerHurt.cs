@@ -230,7 +230,7 @@ public class PlayerHurt : MonoBehaviour, IDamageable
         }
 
         //apply attackingPowerX & Y force to enemy based on the direction they are facing
-        rb.AddForce(new Vector2(attackPowerX, attackPowerY));
+        rb.AddForce(new Vector2(attackPowerX, attackPowerY), ForceMode2D.Impulse);
     }
 
     public void SetIsKnockedDown(bool boolean)

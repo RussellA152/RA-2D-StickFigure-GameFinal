@@ -349,8 +349,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageType: 1
   attackDamage: 20
-  attackingPowerX: 800
-  attackingPowerY: 0
+  attackingPowerX: 50
+  attackingPowerY: 10
   joltForceX: 10000
   joltForceY: 0
 --- !u!1102 &-1233105822085669242
