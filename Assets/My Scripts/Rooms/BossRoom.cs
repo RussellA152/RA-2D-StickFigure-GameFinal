@@ -5,6 +5,9 @@ using UnityEngine;
 public class BossRoom : BaseRoom
 {
     private Vector2 positionToSpawnAt;
+    [SerializeField] private Transform centerOfRoom;
+
+
     //[SerializeField] private List<Transform> itemDisplayList = new List<Transform>();
     //[SerializeField] private int numberOfItems;
     //[SerializeField] private int amountOfItemDisplays;
@@ -18,6 +21,11 @@ public class BossRoom : BaseRoom
         roomType = RoomType.boss;
         //itemDisplayTransforms = new Transform[amountOfItemDisplays];
         //StartCoroutine("SpawnBossRoom");
+    }
+
+    public Transform GetCenterOfRoom()
+    {
+        return centerOfRoom;
     }
     //public List<Transform> GetItemDisplayTransformList()
     //{

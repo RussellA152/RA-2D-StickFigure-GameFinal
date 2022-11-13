@@ -29,7 +29,7 @@ GameObject:
   - component: {fileID: 6601631012170971678}
   - component: {fileID: 6508963260491174593}
   m_Layer: 0
-  m_Name: Boss Room Test
+  m_Name: Boss Room
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -51,6 +51,7 @@ Transform:
   - {fileID: 1631994152517130184}
   - {fileID: 6766367606833678305}
   - {fileID: 8680316722657362701}
+  - {fileID: 2180625401902497991}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -80,6 +81,7 @@ MonoBehaviour:
   numberOfItems: 1
   UnlockerList:
   - {fileID: 6866096915054038621}
+  centerOfRoom: {fileID: 2180625401902497991}
 --- !u!114 &6508963260491174593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1019,6 +1021,36 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!1 &1957885722159552892
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2180625401902497991}
+  m_Layer: 0
+  m_Name: Center
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2180625401902497991
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1957885722159552892}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 26, y: -7.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 570149326502756553}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4008522662359411990
 GameObject:
   m_ObjectHideFlags: 0
@@ -1348,6 +1380,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8971604134719034820, guid: 4c93ee5d85254cf47bb799765aa95b2d, type: 3}
+      propertyPath: m_Color.b
+      value: 0.2921858
+      objectReference: {fileID: 0}
+    - target: {fileID: 8971604134719034820, guid: 4c93ee5d85254cf47bb799765aa95b2d, type: 3}
+      propertyPath: m_Color.g
+      value: 0.2921858
+      objectReference: {fileID: 0}
+    - target: {fileID: 8971604134719034820, guid: 4c93ee5d85254cf47bb799765aa95b2d, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9245283
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c93ee5d85254cf47bb799765aa95b2d, type: 3}
 --- !u!4 &8143197865247425524 stripped
@@ -1412,14 +1456,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f6a431bc8679af45a2552d91dcf0302, type: 3}
---- !u!1 &490296484351922708 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5156431680222223192, guid: 0f6a431bc8679af45a2552d91dcf0302, type: 3}
-  m_PrefabInstance: {fileID: 4702515871247763788}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8680316722657362701 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4121954007805332033, guid: 0f6a431bc8679af45a2552d91dcf0302, type: 3}
+  m_PrefabInstance: {fileID: 4702515871247763788}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &490296484351922708 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5156431680222223192, guid: 0f6a431bc8679af45a2552d91dcf0302, type: 3}
   m_PrefabInstance: {fileID: 4702515871247763788}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5274211406512054991
@@ -1495,6 +1539,10 @@ PrefabInstance:
       propertyPath: room
       value: 
       objectReference: {fileID: 6601631012170971678}
+    - target: {fileID: 5913742899722911543, guid: e7605e05a0f3dfe4c9d6c8a7fd1bb019, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5913742899722911543, guid: e7605e05a0f3dfe4c9d6c8a7fd1bb019, type: 3}
       propertyPath: openingDirection
       value: 2

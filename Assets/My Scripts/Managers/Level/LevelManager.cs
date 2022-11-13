@@ -199,9 +199,18 @@ public class LevelManager : MonoBehaviour
         currentRoom = newCurrentRoom;
     }
 
+    // return the current room the player is inside of
     public BaseRoom GetCurrentRoom()
     {
+        
         return currentRoom;
+    }
+
+    // return the boss room gameobject
+    public BossRoom GetBossRoom()
+    {
+        
+        return spawnedRooms[spawnedRooms.Count - 1].GetComponent<BossRoom>();
     }
 
     //return a room based on the value of its coordinate

@@ -12,6 +12,9 @@ public class PlayerHurtAnimationBehavior : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        // sometimes a move that the player performs that has layer collision ignored with enemies (ex. roll or ground pound),
+        // can be interrupted by an attack (uncommon, but it can happen)
+        // so if the player is ignoring layer collision with an enemy and they get hurt, then turn back on the layer collision
 
         playerComponentScript = animator.transform.gameObject.GetComponent<PlayerComponents>();
 
@@ -27,6 +30,8 @@ public class PlayerHurtAnimationBehavior : StateMachineBehaviour
         playerComponentScript.SetCanSlide(false);
 
         playerComponentScript.SetCanRoll(false);
+
+        playerComponentScript.SetCanClimb(false);
 
         //if player is hurt, they cannot use their equipment item
         PlayerStats.instance.SetCanUseEquipment(false);
@@ -56,7 +61,9 @@ public class PlayerHurtAnimationBehavior : StateMachineBehaviour
 
             playerComponentScript.SetCanRoll(true);
 
-            
+            playerComponentScript.SetCanClimb(true);
+
+
         }
         
     }

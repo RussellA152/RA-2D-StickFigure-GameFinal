@@ -212,7 +212,7 @@ public class CharacterController2D : MonoBehaviour
 
 		// if the player isn't already climbing, and they are not attacking
 		// and they are pressing the interaction button, then let them climb on a ladder
-        if (!isClimbing && !AttackController.instance.GetPlayerIsAttacking() && wantsToClimb && playerComponentScript.GetInteractionButton().triggered)
+        if (canClimb && !isClimbing && !AttackController.instance.GetPlayerIsAttacking() && wantsToClimb && playerComponentScript.GetInteractionButton().triggered)
         {
 			m_Rigidbody2D.velocity = Vector2.zero;
 			m_Rigidbody2D.AddForce(new Vector2(0f, 200f));

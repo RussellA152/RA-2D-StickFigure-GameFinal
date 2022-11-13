@@ -6,6 +6,7 @@ public class PlayerHurt : MonoBehaviour, IDamageable
 {
     private IHealth healthScript;
     [SerializeField] private PlayerComponents playerComponentScript;
+    [SerializeField] private PlayerCollisionLayerChange playerCollisionLayerScript;
 
     private Rigidbody2D rb;
     private Animator animator;
@@ -52,6 +53,12 @@ public class PlayerHurt : MonoBehaviour, IDamageable
 
     public void OnHurt(Vector3 attacker, IDamageAttributes.DamageType damageType, float damage, float attackPowerX, float attackPowerY)
     {
+        // would normally do this in a Hurt state in a state machine, but Player doesn't have a state behavior machine, which I might make in the future for cleaner code
+        // so for now, we will check if the player's collision layer is set to "IgnoreEnemy" if so, then theres a good chance that the player was hit during something like the Roll
+        // or Ground Slam, so we need to set their collision layers back to "Player"
+        if (playerCollisionLayerScript.GetIgnoreLayerIsOnBoolean())
+            playerCollisionLayerScript.ResetLayer();
+
         //find the direction the attacker is facing
         Vector3 directionOfAttacker = attacker - transform.position;
         
