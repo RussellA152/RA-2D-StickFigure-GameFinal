@@ -44,12 +44,12 @@ public class RoomSpawner : MonoBehaviour
 
     private void Start()
     {
-        Destroy(gameObject, destroyTime);
+        //Destroy(gameObject, destroyTime);
         //sets "levelManager" equal to the LevelManager singleton so we can access the list of potential rooms
         levelManager = LevelManager.instance;
 
         //allow room to spawn multiple rooms, until it gets stuck
-        InvokeRepeating("ChooseRandomRoomType", 0.1f, 0.1f);
+        Invoke(nameof(ChooseRandomRoomType), 0.1f);
 
     }
 
@@ -57,48 +57,82 @@ public class RoomSpawner : MonoBehaviour
     {
         int randomRoomType = Random.Range(1, 5);
 
-        switch (randomRoomType)
+        if(randomRoomType == 1)
         {
-            case 1:
-                if (levelManager.numberOfSpawnedNormalRooms < levelManager.maxNumberOfNormalRooms)
-                {
-                    SpawnRooms(BaseRoom.RoomType.normal, levelManager.allNormalRooms);
-
-                    //levelManager.numberOfSpawnedNormalRooms++;
-                    //Debug.Log("call invoke");
-                }
-
-                break;
-            case 2:
-                if (levelManager.numberOfSpawnedTreasureRooms < levelManager.maxNumberOfTreasureRooms)
-                {
-                    SpawnRooms(BaseRoom.RoomType.treasure, levelManager.allTreasureRooms);
-                    //Debug.Log("call invoke");
-                    //levelManager.numberOfSpawnedTreasureRooms++;
-                }
-
-                break;
-            case 3:
-                if (levelManager.numberOfSpawnedShopRooms < levelManager.maxNumberOfShopRooms)
-                {
-                    SpawnRooms(BaseRoom.RoomType.shop, levelManager.allShopRooms);
-                    //Debug.Log("call invoke");
-                    //levelManager.numberOfSpawnedShopRooms++;
-                }
-
-                break;
-            case 4:
-                //if this room is trying to spawn a boss, it needs to be the last room
-                //typically, only 1 boss room is allowed to spawn
-                if (levelManager.numberOfSpawnedBossRooms < levelManager.maxNumberOfBossRooms && levelManager.numberOfSpawnedAllRooms == levelManager.GetRoomCap() - 1)
-                {
-                    SpawnRooms(BaseRoom.RoomType.boss, levelManager.allBossRooms);
-                    //Debug.Log("call invoke");
-                    //levelManager.numberOfSpawnedBossRooms++;
-                }
-
-                break;
+            if (levelManager.numberOfSpawnedNormalRooms < levelManager.maxNumberOfNormalRooms)
+                SpawnRooms(BaseRoom.RoomType.normal, levelManager.allNormalRooms);
+            else
+                randomRoomType = 2;        
         }
+
+
+        if (randomRoomType == 2)
+        {
+            if (levelManager.numberOfSpawnedTreasureRooms < levelManager.maxNumberOfTreasureRooms)
+                SpawnRooms(BaseRoom.RoomType.treasure, levelManager.allTreasureRooms);
+            else
+                randomRoomType = 3;
+        }
+        if(randomRoomType == 3)
+        {
+            if (levelManager.numberOfSpawnedShopRooms < levelManager.maxNumberOfShopRooms)
+                SpawnRooms(BaseRoom.RoomType.shop, levelManager.allShopRooms);
+            else
+                randomRoomType = 4;
+        }
+        if (randomRoomType == 4)
+        {
+            if (levelManager.numberOfSpawnedBossRooms < levelManager.maxNumberOfBossRooms && levelManager.numberOfSpawnedAllRooms == levelManager.GetRoomCap() - 1)
+                SpawnRooms(BaseRoom.RoomType.boss, levelManager.allBossRooms);
+            else
+            {
+                // a little bit of recursion, but this is trying to make sure that if a room tried to spawn a boss room, when it couldn't be spawned, then spawn a new room instead
+                ChooseRandomRoomType();
+            }
+        }
+
+        //switch (randomRoomType)
+        //{
+        //    case 1:
+        //        if (levelManager.numberOfSpawnedNormalRooms < levelManager.maxNumberOfNormalRooms)
+        //        {
+        //            SpawnRooms(BaseRoom.RoomType.normal, levelManager.allNormalRooms);
+
+        //            //levelManager.numberOfSpawnedNormalRooms++;
+        //            //Debug.Log("call invoke");
+        //        }
+
+        //        break;
+        //    case 2:
+        //        if (levelManager.numberOfSpawnedTreasureRooms < levelManager.maxNumberOfTreasureRooms)
+        //        {
+        //            SpawnRooms(BaseRoom.RoomType.treasure, levelManager.allTreasureRooms);
+        //            //Debug.Log("call invoke");
+        //            //levelManager.numberOfSpawnedTreasureRooms++;
+        //        }
+
+        //        break;
+        //    case 3:
+        //        if (levelManager.numberOfSpawnedShopRooms < levelManager.maxNumberOfShopRooms)
+        //        {
+        //            SpawnRooms(BaseRoom.RoomType.shop, levelManager.allShopRooms);
+        //            //Debug.Log("call invoke");
+        //            //levelManager.numberOfSpawnedShopRooms++;
+        //        }
+
+        //        break;
+        //    case 4:
+        //        //if this room is trying to spawn a boss, it needs to be the last room
+        //        //typically, only 1 boss room is allowed to spawn
+        //        if (levelManager.numberOfSpawnedBossRooms < levelManager.maxNumberOfBossRooms && levelManager.numberOfSpawnedAllRooms == levelManager.GetRoomCap() - 1)
+        //        {
+        //            SpawnRooms(BaseRoom.RoomType.boss, levelManager.allBossRooms);
+        //            //Debug.Log("call invoke");
+        //            //levelManager.numberOfSpawnedBossRooms++;
+        //        }
+
+        //        break;
+        //}
         //Debug.Log("call random type function");
 
         //if the current dungeon has reached all room cap, then cancel the spawning invoke
@@ -125,16 +159,16 @@ public class RoomSpawner : MonoBehaviour
         {
             case 1:
                 //pass in a positive y position value so the new room can spawn above this spawner's room
-                if (canCheckAbove)
-                    spawnPosition = ChooseSpawnPosition(0f, yCoordinateAdder);
-                else
-                    break;
+                //if (canCheckAbove)
+                //    spawnPosition = ChooseSpawnPosition(0f, yCoordinateAdder);
+                //else
+                //    break;
 
-                if (spawnPosition == Vector2.zero)
-                {
-                    canCheckAbove = false;
-                    break;
-                }
+                //if (spawnPosition == Vector2.zero)
+                //{
+                //    canCheckAbove = false;
+                //    break;
+                //}
                     
 
                 //pick a random number from 0 to the length of the room list
@@ -158,16 +192,16 @@ public class RoomSpawner : MonoBehaviour
             case 2:
 
                 //pass in a negative y position value so the new room can spawn below this spawner's room
-                if (canCheckBelow)
-                    spawnPosition = ChooseSpawnPosition(0f, -yCoordinateAdder);
-                else
-                    break;
+                //if (canCheckBelow)
+                //    spawnPosition = ChooseSpawnPosition(0f, -yCoordinateAdder);
+                //else
+                //    break;
 
-                if (spawnPosition == Vector2.zero)
-                {
-                    canCheckBelow = false;
-                    break;
-                }
+                //if (spawnPosition == Vector2.zero)
+                //{
+                //    canCheckBelow = false;
+                //    break;
+                //}
                     
 
                 //pick a random number from 0 to the length of the room list
@@ -191,16 +225,16 @@ public class RoomSpawner : MonoBehaviour
 
             case 3:
                 //pass in a positive x position value so the new room can spawn to the right of this spawner's room
-                if (canCheckRight)
-                    spawnPosition = ChooseSpawnPosition(xCoordinateAdder, 0f);
-                else
-                    break;
+                //if (canCheckRight)
+                //    spawnPosition = ChooseSpawnPosition(xCoordinateAdder, 0f);
+                //else
+                //    break;
 
-                if (spawnPosition == Vector2.zero)
-                {
-                    canCheckRight = false;
-                    break;
-                }
+                //if (spawnPosition == Vector2.zero)
+                //{
+                //    canCheckRight = false;
+                //    break;
+                //}
                     
 
                 //pick a random number from 0 to the length of the room list
@@ -223,16 +257,16 @@ public class RoomSpawner : MonoBehaviour
 
             case 4:
                 //pass in a negative x position value so the new room can spawn to the left of this spawner's room
-                if (canCheckLeft)
-                    spawnPosition = ChooseSpawnPosition(-xCoordinateAdder, 0f);
-                else
-                    break;
+                //if (canCheckLeft)
+                //    spawnPosition = ChooseSpawnPosition(-xCoordinateAdder, 0f);
+                //else
+                //    break;
 
-                if (spawnPosition == Vector2.zero)
-                {
-                    canCheckLeft = false;
-                    break;
-                }
+                //if (spawnPosition == Vector2.zero)
+                //{
+                //    canCheckLeft = false;
+                //    break;
+                //}
 
                 //pick a random number from 0 to the length of the room list
                 randomRoom = Random.Range(0, arrayToUse.Length);
@@ -252,6 +286,9 @@ public class RoomSpawner : MonoBehaviour
                 //break out of this loop, and set "spawnedRoom" to true to prevent more rooms from spawning
                 break;
         }
+
+        // disable this spawner once it has spawned a room
+        this.enabled = false;
         
     }
 
@@ -288,9 +325,15 @@ public class RoomSpawner : MonoBehaviour
 
         //keep checking if the level manager's roomCoordinate dictionary contains the coordinate key
         //return Vector2.zero if the room coordinate is already occupied
-        if (levelManager.roomCoordinatesOccupied.ContainsKey(roomCoordinatesToGive))
+        //if (levelManager.roomCoordinatesOccupied.ContainsKey(roomCoordinatesToGive))
+        //{
+        //    return Vector2.zero;
+        //}
+
+        while (levelManager.roomCoordinatesOccupied.ContainsKey(roomCoordinatesToGive))
         {
-            return Vector2.zero;
+            newSpawnPosition = new Vector2(room.transform.position.x + xPosition, room.transform.position.y + yPosition);
+            roomCoordinatesToGive = new Vector2(newSpawnPosition.x / xCoordinateDivider, newSpawnPosition.y / yCoordinateDivider);
         }
 
         return newSpawnPosition;

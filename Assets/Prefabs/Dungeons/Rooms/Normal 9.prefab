@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 3132716122374679945}
   - component: {fileID: 1345770703150482194}
   m_Layer: 0
-  m_Name: TBR
+  m_Name: Normal 9
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1858,7 +1858,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8750791964639832541, guid: e7605e05a0f3dfe4c9d6c8a7fd1bb019, type: 3}
       propertyPath: m_Name
-      value: Spawn Point 1
+      value: Room Spawner
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7605e05a0f3dfe4c9d6c8a7fd1bb019, type: 3}
