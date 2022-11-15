@@ -49,6 +49,8 @@ public class LevelManager : MonoBehaviour
     public int maxNumberOfShopRooms;
     public int maxNumberOfBossRooms;
 
+    public List<Vector2> coordinates = new List<Vector2>(); // a list of all coordinates occupied (vector2 only)
+
     // a dictionary that holds a room coordinate as a key, and a BaseRoom as a value
     public Dictionary<Vector2,BaseRoom> roomCoordinatesOccupied = new Dictionary<Vector2,BaseRoom>();
 
@@ -80,6 +82,9 @@ public class LevelManager : MonoBehaviour
             instance = this;
         }
 
+        // generate a room cap
+        RandomRoomCap();
+
     }
     private void OnEnable()
     {
@@ -90,10 +95,12 @@ public class LevelManager : MonoBehaviour
     {
         
         // generate a room cap
-        RandomRoomCap();
+        //RandomRoomCap();
 
         // Start a coroutine that waits until the number of spawned rooms has reached the room cap (WON'T STOP IF ROOM SPAWNER DOESN'T WORK)
         StartCoroutine("WaitUntilRoomsAreSpawned");
+
+        //onAllRoomsSpawned += CheckForDuplicateKeys;
 
     }
 
@@ -218,4 +225,24 @@ public class LevelManager : MonoBehaviour
     {
         return roomCoordinatesOccupied[roomCoordinate];
     }
+
+    //private void CheckForDuplicateKeys()
+    //{
+    //    if (coordinates.Count != coordinates.Distinct().Count())
+    //    {
+    //        Debug.Log("THERE ARE DUPLICATE COORDINATES!");
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("No duplicate coordinates found");
+    //    }
+    //}
+
+    //private void DeleteRoomOnTopOfBossRoom()
+    //{
+    //    foreach(Vector2 coordinate in coordinates)
+    //    {
+    //        if(GetRoomByCoordinate(coordinate).GetComponent<BossRoom>() != null)
+    //    }
+    //}
 }

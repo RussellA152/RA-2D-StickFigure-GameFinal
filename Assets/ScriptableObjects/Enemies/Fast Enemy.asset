@@ -20,6 +20,7 @@ MonoBehaviour:
   getUpTimer: 0.9
   attackRangeX: 4.5
   attackRangeY: 2
+  specialAttackChance: 0.25
   attackCooldownTimer: 2
   aggressionLevelTreshold: 10
   minAggressionLevelIncrease: 0.02
@@ -28,9 +29,9 @@ MonoBehaviour:
   aggressionLevelDecreaseOnAttack: 10
   rbMass: 100
   enemyAnimatorController: {fileID: 22100000, guid: dad37f3e044819e458c394a4efd1fa11, type: 2}
-  lightAttackAnimation: Light Attack
+  commonAttackAnimation: Light Attack
+  specialAttackAnimation: 
   lightHurtAnimFront: Enemy Light Hurt Front
   lightHurtAnimBehind: Enemy Light Hurt Behind
   heavyHurtAnimFront: Enemy Heavy Hurt Front
   heavyHurtAnimBehind: Enemy Heavy Hurt Behind
-  fastEnemySpecialAttack: 

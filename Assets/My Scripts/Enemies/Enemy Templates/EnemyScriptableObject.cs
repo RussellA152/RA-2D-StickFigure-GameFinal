@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Random = UnityEngine.Random;
 using UnityEngine;
 
 
@@ -26,7 +27,9 @@ public class EnemyScriptableObject : ScriptableObject, IAIAttacks
     [Header("Attack Properties")]
     public float attackRangeX; //how far enemy can be to attack player in x-direction
     public float attackRangeY; //how far enemy can be to attack player in y-direction
+    public float specialAttackChance; // chance to perform a special attack (instead of regular attack)
     public float attackCooldownTimer; //time between each attack
+    [Header("Obsolete")]
     public float aggressionLevelTreshold; // the value the enemy's aggression level must reach to attack the player (higher values mean it takes longer for enemy to become very aggressive)
     public float minAggressionLevelIncrease; //the minimum the enemy's aggression will increase when not fighting
     public float maxAggressionLevelIncrease; //the maximum the enemy's aggression will increase when not fighting
@@ -41,7 +44,8 @@ public class EnemyScriptableObject : ScriptableObject, IAIAttacks
     public RuntimeAnimatorController enemyAnimatorController; // the animator controller that this enemy will use (determines animation clips that enemy will play)
 
     [Header("Attack Animations")]
-    [SerializeField] public string lightAttackAnimation;
+    [SerializeField] public string commonAttackAnimation;
+    [SerializeField] public string specialAttackAnimation;
 
     //Animations to play when enemy is hit by a light attack (depends on the direction of the light attack)
     [Header("Enemy Light Attack Hurt Animation Names")]

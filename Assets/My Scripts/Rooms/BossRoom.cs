@@ -6,6 +6,7 @@ public class BossRoom : BaseRoom
 {
     private Vector2 positionToSpawnAt;
     [SerializeField] private Transform centerOfRoom;
+    private BaseRoom potentialRoomOnTop;
 
 
     //[SerializeField] private List<Transform> itemDisplayList = new List<Transform>();
@@ -20,7 +21,28 @@ public class BossRoom : BaseRoom
         roomEnemyCountState = BaseRoom.RoomEnemyCount.cleared;
         roomType = RoomType.boss;
         //itemDisplayTransforms = new Transform[amountOfItemDisplays];
-        //StartCoroutine("SpawnBossRoom");
+        //StartCoroutine("SpawnBossRoom")
+
+        //localRoomCoordinate = new Vector2(0, 0);
+        //transform.position = new Vector2(0f, 0f);
+        levelManager.onAllRoomsSpawned += CheckIfRoomIsOnTop;
+    }
+
+    private void CheckIfRoomIsOnTop()
+    {
+        // check if there is a room that has the same coordinates as the boss room
+        foreach(BaseRoom room in levelManager.roomCoordinatesOccupied.Values)
+        {
+            if(room.localRoomCoordinate == localRoomCoordinate && room != this)
+            {
+                Debug.Log("THERE IS A ROOM THAT HAS THE SAME COORDINATE AS THE BOSS ROOM!");
+                Destroy(room.gameObject);
+            }
+            //else
+            //{
+            //    Debug.Log("There is no room on top of the boss room.");
+            //}
+        }
     }
 
     public Transform GetCenterOfRoom()
