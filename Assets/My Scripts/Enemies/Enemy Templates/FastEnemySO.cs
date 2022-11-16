@@ -13,8 +13,9 @@ public class FastEnemySO : EnemyScriptableObject
     //this function will probably do more later, but for now, it just plays one animation
     public override void AttackTarget(Animator animator, Transform target)
     {
+        //Debug.Log("How often am I called?");
         // if special attack chance procs, then perform a special attack
-        if(Random.value <= specialAttackChance)
+        if (Random.value <= specialAttackChance)
         {
             Debug.Log("Enemy performed a special attack!");
             animator.Play(specialAttackAnimation);
@@ -22,6 +23,7 @@ public class FastEnemySO : EnemyScriptableObject
         else
         {
             // play common attack animation
+            Debug.Log("Enemy performed a common attack!");
             animator.Play(commonAttackAnimation);
         }
         

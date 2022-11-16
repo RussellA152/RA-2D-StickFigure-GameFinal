@@ -297,7 +297,10 @@ public class EnemyController : MonoBehaviour
             //goes to EnemyMovement script and sets isStopped to true
             enemyMoveScript.StopMovement(false);
         }
-        
+
+
+        // enemy is not attacking if they are in Idle state
+        SetIsAttacking(false);
 
         //the enemy is allowed to turn around when they are idle
         enemyMoveScript.SetCanFlip(true);
@@ -391,7 +394,7 @@ public class EnemyController : MonoBehaviour
 
 
 
-        if (!stateCooldownStarted && !isAttacking)
+        if (!isAttacking && !stateCooldownStarted)
         {
             if (withinFollowRange && !withinAttackRange)
             {
@@ -410,7 +413,7 @@ public class EnemyController : MonoBehaviour
     {
         //IncreaseAggressionLevelHurt();
 
-
+        SetIsAttacking(false);
         // if the enemy's velocity reaches a certain minimum value, then they will get back up from their hurt state
         // needs to be absolute value of velocity because velocity is negative when enemies are falling back down from the air
         if ((Mathf.Abs(rb.velocity.x) <= minimumVelocityUntilStopped.x && Mathf.Abs(rb.velocity.y) <= minimumVelocityUntilStopped.y))
@@ -455,6 +458,7 @@ public class EnemyController : MonoBehaviour
     private void EnemyDeathBehavior()
     {
         //Debug.Log("Enemy Died! Inside EnemyController.");
+        SetIsAttacking(false);
 
         avoidanceBox.enabled = false;
 
@@ -567,6 +571,7 @@ public class EnemyController : MonoBehaviour
     {
         if (!attackOnCooldown)
         {
+            Debug.Log("Cooldown activated!");
             StartCoroutine(AttackCooldown());
         }
     }

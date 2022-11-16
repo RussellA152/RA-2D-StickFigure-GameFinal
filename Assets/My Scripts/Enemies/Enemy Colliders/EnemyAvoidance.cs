@@ -40,7 +40,7 @@ public class EnemyAvoidance : MonoBehaviour
     }
 
 
-    //when this enemy's avoidance box collides with an obstacle or another enemy...
+    // when this enemy's avoidance box collides with an obstacle or another enemy...
     // turn off their avoidance box (THIS IS to prevent enemy from getting frozen in place when two enemy's avoidance boxes are colliding **)
     // and then wait until the enemy returns to their ChaseTarget state (automatically happens during Idle)..
     // and then re-enable the avoidance collider

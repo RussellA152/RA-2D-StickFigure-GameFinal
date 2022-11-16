@@ -14,6 +14,7 @@ public class EnemyIdleAnimationBehavior : StateMachineBehaviour
 
         //when returning to the idle animation, tell EnemyController to return to idle state
         enemyControllerScript.ChangeEnemyState(0f, EnemyController.EnemyState.Idle);
+        //enemyControllerScript.SetIsAttacking(false);
 
     }
 

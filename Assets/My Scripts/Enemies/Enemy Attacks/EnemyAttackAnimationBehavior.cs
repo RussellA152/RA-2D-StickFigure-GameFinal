@@ -35,6 +35,8 @@ public class EnemyAttackAnimationBehavior : StateMachineBehaviour, IDamageAttrib
         enemyHitColliderScript = animator.transform.gameObject.GetComponentInChildren<IDamageDealing>();
         enemyControllerScript = animator.transform.gameObject.GetComponent<EnemyController>();
 
+        enemyControllerScript.StartAttackCooldown();
+
         //when this enemy throws an attack (decrease their aggression level)
         //enemyControllerScript.DecreaseAggressionLevelOnAttack();
 
@@ -61,10 +63,10 @@ public class EnemyAttackAnimationBehavior : StateMachineBehaviour, IDamageAttrib
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        enemyControllerScript.StartAttackCooldown();
+        //enemyControllerScript.StartAttackCooldown();
 
         //enemy is no longer attacking at the end of each animation
-        enemyControllerScript.SetIsAttacking(false);
+        //enemyControllerScript.SetIsAttacking(false);
 
     }
 
