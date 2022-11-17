@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
 
-public class CutsceneManager : MonoBehaviour
+public class Cutscene : MonoBehaviour
 {
     [SerializeField] private Animator cameraAnimator;
 

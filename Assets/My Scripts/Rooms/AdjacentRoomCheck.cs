@@ -83,7 +83,6 @@ public class AdjacentRoomCheck : MonoBehaviour
         //could be to the left (x - 1) or right (x + 1)
         //could be below (y - 1) or above (y + 1)
         Vector2 adjacentRoomCoordinate = new Vector2(room.localRoomCoordinate.x + xCoordinate, room.localRoomCoordinate.y + yCoordinate);
-        
 
         //if an adjacent room exists, check the neighboring doors
         if (levelManager.roomCoordinatesOccupied.ContainsKey(adjacentRoomCoordinate))

@@ -26,10 +26,13 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
     private bool playerFacingRight; // represents direction player is facing (retrieved from playerComponents script)
 
     [Header("Damage & Force")]
-    [SerializeField] private float attackDamage; //damage of the attack
-    [SerializeField] private float attackingPowerX; //amount of force applied to enemy that is hit by this attack in x-direction
-    [SerializeField] private float attackingPowerY; //amount of force applied to enemy that is hit by this attack in y-direction
-
+    [SerializeField] private float attackDamage; // damage of the attack
+    [SerializeField] private float attackingPowerX; // amount of force applied to enemy that is hit by this attack in x-direction
+    [SerializeField] private float attackingPowerY; // amount of force applied to enemy that is hit by this attack in y-direction
+    [SerializeField] private float screenShakePower; // amount of screenshake to apply
+    [SerializeField] private float screenShakeDuration; // duration of screenshake
+    [SerializeField] private int hitStopRestoreTime; // how quickly it will take for the hitstop to recover or for timescale to reset (higher values = quicker hitstop duration)
+    [SerializeField] private float hitStopDelay; // how long will hitstop delay last?
 
     [Header("Jolt Force Applied To Player")]
     [SerializeField] private ForceMode2D forceMode; // the force mode applied to the jolt force
@@ -71,8 +74,12 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
         //invoke jolt movement 
         JoltThisObject(playerFacingRight, joltForceX, joltForceY);
 
+
         //invoke hitbox's function updates damage values
-        hitbox.gameObject.GetComponent<IDamageDealingCharacter>().UpdateAttackValues(damageType, attackDamage, attackingPowerX, attackingPowerY);
+        hitbox.gameObject.GetComponent<IDamageDealingCharacter>().UpdateAttackValues(damageType, attackDamage, attackingPowerX, attackingPowerY, screenShakePower, screenShakeDuration);
+
+        // set restore time based on the attack animation (ideally, a stronger attack like the ground slam or footdive should have a smaller restore time to make hitstop last longer)
+        hitbox.gameObject.GetComponent<PlayerHitCollider>().SetHitStopValues(hitStopRestoreTime, hitStopDelay);
 
         // if gravity is set to 0 in inspector, then we're not trying to change player's gravity during the attack
         if (gravityDuringAttack != 0)

@@ -38,6 +38,8 @@ MonoBehaviour:
   attackDamage: 35
   attackingPowerX: 100
   attackingPowerY: 25
+  screenShakePower: 3
+  screenShakeDuration: 0.1
   joltForceX: 20000
   joltForceY: 0
 --- !u!1102 &-6971768953997106131
@@ -171,6 +173,8 @@ MonoBehaviour:
   attackDamage: 0
   attackingPowerX: 0
   attackingPowerY: 0
+  screenShakePower: 0
+  screenShakeDuration: 0
   joltForceX: 0
   joltForceY: 0
 --- !u!1101 &-5909232420724027272
@@ -457,6 +461,8 @@ MonoBehaviour:
   attackDamage: 15
   attackingPowerX: 40
   attackingPowerY: 10
+  screenShakePower: 1.5
+  screenShakeDuration: 0.05
   joltForceX: 10000
   joltForceY: 0
 --- !u!1102 &-1233105822085669242

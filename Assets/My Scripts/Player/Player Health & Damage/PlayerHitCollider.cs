@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 
 // This script should be placed on the hit box of the player
@@ -8,7 +9,11 @@ using UnityEngine;
 // and when the enemy is inside the box collider's trigger, call the deal damage function that will apply the damage and force on the enemy
 public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
 {
+    [SerializeField] CinemachineImpulseSource impulseSource;
+    [SerializeField] private HitStop hitStopScript;
+
     [SerializeField] private BoxCollider2D hitbox;
+
 
     private Transform targetTransform;// the transform of who enters our hitbox collider
 
@@ -19,10 +24,14 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
     private float tempAttackDamage;
     private float tempAttackPowerX;
     private float tempAttackPowerY;
+    private float tempScreenShakePower;
+    private float tempScreenShakeDuration;
+    private int tempHitStopRestoreTimer;
+    private float tempHitStopDelay;
 
     private void Start()
     {
-        //hitbox = GetComponent<BoxCollider2D>();
+
     }
 
 
@@ -46,6 +55,7 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
 
             //now that enemy is inside the trigger, call the deal damage function
             DealDamage(transform.parent, tempDamageType, tempAttackDamage, tempAttackPowerX, tempAttackPowerY);
+            //ResetAttackValues();
         }
         else
         {
@@ -78,7 +88,22 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
                 //calls the receiver's OnHurt function which will apply the damage and force of this attack (receiverWasPlayer is false because this is the player's hit collider)
                 targetTransform.gameObject.GetComponent<IDamageable>().OnHurt(attacker.position, damageType, damage, attackPowerX, attackPowerY);
 
+                // formula for making attacks with high attack power have longer hitstops
+                //int hitStopRestoreTime = (int) Mathf.Abs((50 / attackPowerY) * 10000);
+                //Debug.Log("Restore Time: " +  hitStopRestoreTime);
+
+                // clear any screenshakes that occured previously (this is so screenshakes don't stack)
+                CinemachineImpulseManager.Instance.Clear();
+                
+
                 //Debug.Log("Player hit enemy!");
+                hitStopScript.StopTime(0.05f, tempHitStopRestoreTimer, tempHitStopDelay);
+
+                // change duration of the screenshake 
+                impulseSource.m_ImpulseDefinition.m_TimeEnvelope.m_SustainTime = tempScreenShakeDuration;
+
+                // generate an impulse to shake the screen
+                impulseSource.GenerateImpulse(tempScreenShakePower);
 
                 //set target to null afterwards to prevent player from dealing damage to enemy without any collision
                 targetTransform = null;
@@ -88,12 +113,20 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
     }
 
     //this function is updated by the player's attack animations
-    public void UpdateAttackValues(IDamageAttributes.DamageType damageType, float damage, float attackPowerX, float attackPowerY)
+    public void UpdateAttackValues(IDamageAttributes.DamageType damageType, float damage, float attackPowerX, float attackPowerY, float screenShakePower, float screenShakeDuration)
     {
         tempDamageType = damageType;
         tempAttackDamage = damage;
         tempAttackPowerX = attackPowerX;
         tempAttackPowerY = attackPowerY;
+        tempScreenShakePower = screenShakePower;
+        tempScreenShakeDuration = screenShakeDuration;
+    }
+
+    public void SetHitStopValues(int restoreTime, float delay)
+    {
+        tempHitStopRestoreTimer = restoreTime;
+        tempHitStopDelay = delay;
     }
 
     private void ResetAttackValues()
@@ -102,6 +135,8 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
         tempAttackDamage = 0f;
         tempAttackPowerX = 0f;
         tempAttackPowerY = 0f;
+        tempScreenShakePower = 0f;
+        tempHitStopRestoreTimer = 0;
 
     }
 

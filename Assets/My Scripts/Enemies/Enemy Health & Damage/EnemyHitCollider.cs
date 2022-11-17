@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class EnemyHitCollider : MonoBehaviour, IDamageDealingCharacter
 {
     [SerializeField] private BoxCollider2D hitbox; // the hitbox gameobject that this script is placed in
+
+    [SerializeField] CinemachineImpulseSource impulseSource;
 
     private Transform targetTransform; //the gameobject inside of the enemy's hit collider
     private bool playerInsideTrigger; // is the player inside of enemy's hit collider?
@@ -15,6 +18,8 @@ public class EnemyHitCollider : MonoBehaviour, IDamageDealingCharacter
     private float tempAttackDamage;
     private float tempAttackPowerX;
     private float tempAttackPowerY;
+    private float tempScreenShakePower;
+    private float tempScreenShakeDuration;
 
     private void OnEnable()
     {
@@ -67,6 +72,12 @@ public class EnemyHitCollider : MonoBehaviour, IDamageDealingCharacter
                 //calls the receiver's OnHurt function which will apply the damage and force of this attack (receiverWasPlayer is false because this is the enemy's hit collider)
                 targetTransform.gameObject.GetComponent<IDamageable>().OnHurt(attacker.position, damageType, damage, attackPowerX, attackPowerY);
 
+                // change duration of the screenshake 
+                impulseSource.m_ImpulseDefinition.m_TimeEnvelope.m_SustainTime = tempScreenShakeDuration;
+
+                // generate an impulse to shake the screen
+                impulseSource.GenerateImpulse(tempScreenShakePower);
+
                 //set target to null afterwards to prevent enemy from dealing damage to player without any collision
                 targetTransform = null;
             }
@@ -75,12 +86,14 @@ public class EnemyHitCollider : MonoBehaviour, IDamageDealingCharacter
     }
 
     //this function is updated by the enemy's attack animations
-    public void UpdateAttackValues(IDamageAttributes.DamageType damageType, float damage, float attackPowerX, float attackPowerY)
+    public void UpdateAttackValues(IDamageAttributes.DamageType damageType, float damage, float attackPowerX, float attackPowerY, float screenShakePower, float screenShakeDuration)
     {
         tempDamageType = damageType;
         tempAttackDamage = damage;
         tempAttackPowerX = attackPowerX;
         tempAttackPowerY = attackPowerY;
+        tempScreenShakePower = screenShakePower;
+        tempScreenShakeDuration = screenShakeDuration;
     }
     private void ResetAttackValues()
     {
@@ -88,6 +101,8 @@ public class EnemyHitCollider : MonoBehaviour, IDamageDealingCharacter
         tempAttackDamage = 0f;
         tempAttackPowerX = 0f;
         tempAttackPowerY = 0f;
+        tempScreenShakePower = 0f;
+        tempScreenShakeDuration = 0f;
 
     }
 

@@ -6,7 +6,7 @@ public class Door : Interactable
 {
     [SerializeField] private BaseRoom room; //the room THIS door is inside of 
 
-    private Door neighboringDoor; //the nearby door THIS door will teleport the player to
+    [SerializeField] private Door neighboringDoor; //the nearby door THIS door will teleport the player to
 
     private Vector3 teleportPositionOffset = new Vector3(0f,2.5f); //an offset added to the position the player will be teleported to when using a door
 

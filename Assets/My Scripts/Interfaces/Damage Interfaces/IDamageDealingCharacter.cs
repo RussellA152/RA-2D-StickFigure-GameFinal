@@ -9,5 +9,5 @@ using UnityEngine;
 public interface IDamageDealingCharacter : IDamageDealing
 {
     // attack animations will update the damage values that the hit collider will apply to targets
-    public void UpdateAttackValues(IDamageAttributes.DamageType damageType, float damage, float attackPowerX, float attackPowerY);
+    public void UpdateAttackValues(IDamageAttributes.DamageType damageType, float damage, float attackPowerX, float attackPowerY, float screenShakePower, float screenShakeDuration);
 }

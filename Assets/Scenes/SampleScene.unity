@@ -1394,7 +1394,7 @@ GameObject:
   - component: {fileID: 1015784190}
   - component: {fileID: 1015784191}
   m_Layer: 0
-  m_Name: Cutscene Manager
+  m_Name: Screen Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1441,6 +1441,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1035004934}
   - component: {fileID: 1035004933}
+  - component: {fileID: 1035004935}
   m_Layer: 0
   m_Name: CM Follow Camera
   m_TagString: Untagged
@@ -1502,6 +1503,22 @@ Transform:
   m_Father: {fileID: 109071388}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1035004935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035004932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ApplyAfter: 2
+  m_ChannelMask: 1
+  m_Gain: 1
+  m_Use2DDistance: 1
 --- !u!1 &1068434188
 GameObject:
   m_ObjectHideFlags: 0
@@ -3428,7 +3445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 184d473b0289a274a8e7f774aafbb281, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultCapacity: 15
+  defaultCapacity: 20
   inReserve: 0
   inactiveCount: 0
   activeCount: 0

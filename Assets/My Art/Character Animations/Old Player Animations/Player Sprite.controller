@@ -200,6 +200,10 @@ MonoBehaviour:
   attackDamage: 0
   attackingPowerX: 500
   attackingPowerY: 1500
+  screenShakePower: 0
+  screenShakeDuration: 0
+  hitStopRestoreTime: 0
+  hitStopDelay: 0
   forceMode: 0
   joltForceX: 0
   joltForceY: 100
@@ -283,7 +287,7 @@ MonoBehaviour:
   heavyAttackName: 
   backAttackName: 
   backHeavyAttackName: 
-  jumpLightAttackName: 
+  jumpLightAttackName: Jump Attack 1
   jumpHeavyAttackName: Combo 3 Finisher
   groundSlamAttackName: 
   allowMovementDuringAnim: 0
@@ -360,6 +364,10 @@ MonoBehaviour:
   attackDamage: 0
   attackingPowerX: 250
   attackingPowerY: 300
+  screenShakePower: 2
+  screenShakeDuration: 0.1
+  hitStopRestoreTime: 1000
+  hitStopDelay: 0.03
   forceMode: 0
   joltForceX: 200
   joltForceY: 100
@@ -1546,6 +1554,10 @@ MonoBehaviour:
   attackDamage: 50
   attackingPowerX: 200
   attackingPowerY: 500
+  screenShakePower: 2
+  screenShakeDuration: 0
+  hitStopRestoreTime: 700
+  hitStopDelay: 0.05
   forceMode: 0
   joltForceX: 400
   joltForceY: 0
@@ -1594,6 +1606,10 @@ MonoBehaviour:
   attackDamage: 150
   attackingPowerX: 1500
   attackingPowerY: 400
+  screenShakePower: 5
+  screenShakeDuration: 0.1
+  hitStopRestoreTime: 200
+  hitStopDelay: 0.2
   forceMode: 1
   joltForceX: 400
   joltForceY: 0
@@ -2108,6 +2124,10 @@ MonoBehaviour:
   attackDamage: 30
   attackingPowerX: 800
   attackingPowerY: 400
+  screenShakePower: 4
+  screenShakeDuration: 0.1
+  hitStopRestoreTime: 400
+  hitStopDelay: 0.09
   forceMode: 0
   joltForceX: 1000
   joltForceY: 0
@@ -2501,6 +2521,10 @@ MonoBehaviour:
   attackDamage: 100
   attackingPowerX: 1000
   attackingPowerY: 600
+  screenShakePower: 4
+  screenShakeDuration: 0.1
+  hitStopRestoreTime: 500
+  hitStopDelay: 0.1
   forceMode: 0
   joltForceX: 3500
   joltForceY: 1000
@@ -2892,6 +2916,10 @@ MonoBehaviour:
   attackDamage: 20
   attackingPowerX: 150
   attackingPowerY: 150
+  screenShakePower: 2
+  screenShakeDuration: 0.1
+  hitStopRestoreTime: 1000
+  hitStopDelay: 0.03
   forceMode: 0
   joltForceX: 500
   joltForceY: 0
@@ -3076,6 +3104,10 @@ MonoBehaviour:
   attackDamage: 20
   attackingPowerX: 150
   attackingPowerY: 150
+  screenShakePower: 2
+  screenShakeDuration: 0.1
+  hitStopRestoreTime: 1000
+  hitStopDelay: 0.03
   forceMode: 0
   joltForceX: 500
   joltForceY: 0
@@ -3240,6 +3272,10 @@ MonoBehaviour:
   attackDamage: 0
   attackingPowerX: 500
   attackingPowerY: 1500
+  screenShakePower: 8
+  screenShakeDuration: 0.25
+  hitStopRestoreTime: 50
+  hitStopDelay: 0.25
   forceMode: 0
   joltForceX: 0
   joltForceY: 100
@@ -3290,6 +3326,10 @@ MonoBehaviour:
   attackDamage: 150
   attackingPowerX: 1000
   attackingPowerY: -1000
+  screenShakePower: 5
+  screenShakeDuration: 0.1
+  hitStopRestoreTime: 500
+  hitStopDelay: 0.18
   forceMode: 0
   joltForceX: 3000
   joltForceY: -250
@@ -3968,6 +4008,10 @@ MonoBehaviour:
   attackDamage: 40
   attackingPowerX: 200
   attackingPowerY: 1200
+  screenShakePower: 3
+  screenShakeDuration: 0
+  hitStopRestoreTime: 800
+  hitStopDelay: 0.05
   forceMode: 0
   joltForceX: 1000
   joltForceY: 0
@@ -4154,6 +4198,10 @@ MonoBehaviour:
   attackDamage: 100
   attackingPowerX: 300
   attackingPowerY: -1000
+  screenShakePower: 3
+  screenShakeDuration: 0.1
+  hitStopRestoreTime: 500
+  hitStopDelay: 0.08
   forceMode: 0
   joltForceX: 400
   joltForceY: 0
@@ -4224,7 +4272,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Single Heavy Transition
-  m_Speed: 0.15
+  m_Speed: 0.4
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -24345218728594037}
@@ -4844,6 +4892,10 @@ MonoBehaviour:
   attackDamage: 40
   attackingPowerX: 150
   attackingPowerY: 150
+  screenShakePower: 2
+  screenShakeDuration: 0.1
+  hitStopRestoreTime: 1000
+  hitStopDelay: 0.03
   forceMode: 0
   joltForceX: 1500
   joltForceY: 0
@@ -5625,6 +5677,10 @@ MonoBehaviour:
   attackDamage: 20
   attackingPowerX: 300
   attackingPowerY: 300
+  screenShakePower: 2
+  screenShakeDuration: 0.1
+  hitStopRestoreTime: 1000
+  hitStopDelay: 0.05
   forceMode: 0
   joltForceX: 500
   joltForceY: 0
@@ -6276,6 +6332,10 @@ MonoBehaviour:
   attackDamage: 50
   attackingPowerX: 2000
   attackingPowerY: 800
+  screenShakePower: 5
+  screenShakeDuration: 0.1
+  hitStopRestoreTime: 500
+  hitStopDelay: 0.1
   forceMode: 0
   joltForceX: 0
   joltForceY: 0
@@ -6353,6 +6413,10 @@ MonoBehaviour:
   attackDamage: 100
   attackingPowerX: 300
   attackingPowerY: 1000
+  screenShakePower: 3
+  screenShakeDuration: 0.1
+  hitStopRestoreTime: 500
+  hitStopDelay: 0.08
   forceMode: 0
   joltForceX: 400
   joltForceY: 0
@@ -7022,6 +7086,10 @@ MonoBehaviour:
   attackDamage: 100
   attackingPowerX: 400
   attackingPowerY: 1100
+  screenShakePower: 5
+  screenShakeDuration: 0.1
+  hitStopRestoreTime: 600
+  hitStopDelay: 0.08
   forceMode: 0
   joltForceX: 2200
   joltForceY: 1750
@@ -7144,6 +7212,10 @@ MonoBehaviour:
   attackDamage: 0
   attackingPowerX: 250
   attackingPowerY: 300
+  screenShakePower: 2
+  screenShakeDuration: 0.1
+  hitStopRestoreTime: 1000
+  hitStopDelay: 0.03
   forceMode: 0
   joltForceX: 200
   joltForceY: 100
@@ -7646,6 +7718,10 @@ MonoBehaviour:
   attackDamage: 150
   attackingPowerX: 500
   attackingPowerY: 200
+  screenShakePower: 3
+  screenShakeDuration: 0.1
+  hitStopRestoreTime: 200
+  hitStopDelay: 0.1
   forceMode: 0
   joltForceX: 2500
   joltForceY: 0
@@ -8414,6 +8490,10 @@ MonoBehaviour:
   attackDamage: 20
   attackingPowerX: 150
   attackingPowerY: 150
+  screenShakePower: 2
+  screenShakeDuration: 0.1
+  hitStopRestoreTime: 1000
+  hitStopDelay: 0.03
   forceMode: 0
   joltForceX: 500
   joltForceY: 0
@@ -8516,6 +8596,10 @@ MonoBehaviour:
   attackDamage: 0
   attackingPowerX: 250
   attackingPowerY: 300
+  screenShakePower: 2
+  screenShakeDuration: 0.1
+  hitStopRestoreTime: 1000
+  hitStopDelay: 0.03
   forceMode: 0
   joltForceX: 200
   joltForceY: 100
@@ -8538,6 +8622,10 @@ MonoBehaviour:
   attackDamage: 0
   attackingPowerX: 250
   attackingPowerY: 300
+  screenShakePower: 2
+  screenShakeDuration: 0.1
+  hitStopRestoreTime: 1000
+  hitStopDelay: 0.03
   forceMode: 0
   joltForceX: 200
   joltForceY: 100
