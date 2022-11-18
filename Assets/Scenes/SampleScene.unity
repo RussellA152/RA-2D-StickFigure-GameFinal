@@ -1399,7 +1399,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1015784190
 Transform:
   m_ObjectHideFlags: 0
@@ -1478,7 +1478,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.5723832, y: 1}
+    m_SensorSize: {x: 2.4230769, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2095,7 +2095,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.5723832, y: 1}
+    m_SensorSize: {x: 2.4230769, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3174,7 +3174,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.5723832, y: 1}
+    m_SensorSize: {x: 2.4230769, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3445,7 +3445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 184d473b0289a274a8e7f774aafbb281, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultCapacity: 20
+  defaultCapacity: 15
   inReserve: 0
   inactiveCount: 0
   activeCount: 0

@@ -3326,7 +3326,7 @@ MonoBehaviour:
   attackDamage: 150
   attackingPowerX: 1000
   attackingPowerY: -1000
-  screenShakePower: 5
+  screenShakePower: 4
   screenShakeDuration: 0.1
   hitStopRestoreTime: 500
   hitStopDelay: 0.18
@@ -5534,9 +5534,9 @@ AnimatorStateMachine:
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: 7812341550167220144}
-    second: []
   - first: {fileID: 6496870065685537018}
+    second: []
+  - first: {fileID: 7812341550167220144}
     second: []
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -50, y: -120, z: 0}
@@ -6020,9 +6020,9 @@ AnimatorStateMachine:
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: 4565386627695345526}
-    second: []
   - first: {fileID: 1538655715377161641}
+    second: []
+  - first: {fileID: 4565386627695345526}
     second: []
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
@@ -7086,7 +7086,7 @@ MonoBehaviour:
   attackDamage: 100
   attackingPowerX: 400
   attackingPowerY: 1100
-  screenShakePower: 5
+  screenShakePower: 4
   screenShakeDuration: 0.1
   hitStopRestoreTime: 600
   hitStopDelay: 0.08

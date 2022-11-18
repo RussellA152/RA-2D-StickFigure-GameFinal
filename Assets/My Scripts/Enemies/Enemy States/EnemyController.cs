@@ -110,6 +110,8 @@ public class EnemyController : MonoBehaviour
         // when enabled, set layer to "Enemy" (this is because enemies are set to "IgnorePlayer" layer when performing death animation)
         SetLayer("Enemy");
 
+        enemyColor = spriteRenderer.color;
+
         //if the enemy does not already have a scriptable object attached, give them a random one from the EnemyManager (generates random scriptable object from list)
         if (enemyScriptableObject == null)
             enemyScriptableObject = EnemyManager.enemyManagerInstance.GiveScriptableObject();
