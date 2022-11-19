@@ -1399,7 +1399,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1015784190
 Transform:
   m_ObjectHideFlags: 0
@@ -1478,7 +1478,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.4230769, y: 1}
+    m_SensorSize: {x: 2.5723832, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2095,7 +2095,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.4230769, y: 1}
+    m_SensorSize: {x: 2.5723832, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2481,12 +2481,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 732219668646791524, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1373278072336133614, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1373278072336133614, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: dad37f3e044819e458c394a4efd1fa11, type: 2}
     - target: {fileID: 1709358543280309288, guid: 40b5adf9ab5b04b40a5f5a53c658206c, type: 3}
       propertyPath: enemyScriptableObject
       value: 
@@ -3174,7 +3178,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.4230769, y: 1}
+    m_SensorSize: {x: 2.5723832, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

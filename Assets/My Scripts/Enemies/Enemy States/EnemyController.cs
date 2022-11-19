@@ -84,7 +84,7 @@ public class EnemyController : MonoBehaviour
     private bool isHurt = false;
 
     [Space(20)]
-    [SerializeField] private float timeToGetUp; // how long does it take for enemy to get back from the floor (this timer needs to reach zero, and the enemy's velocity must be zero)
+    private float timeToGetUp; // how long does it take for enemy to get back from the floor (this timer needs to reach zero, and the enemy's velocity must be zero)
     private float timeToGetUpStored; // variable that remembers the original value of the timeToGetUp (for resetting)
 
     private int stoppedHash;

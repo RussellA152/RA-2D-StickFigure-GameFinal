@@ -172,7 +172,7 @@ public class EnemyHurt : MonoBehaviour, IDamageable
 
                 // before setting the enemy in a knockdown state, disable the ground check for a small amount of time to prevent them getting back on their feet mid air (mid animation)
                 if (!isKnockedDown)
-                    enemyGroundCheckScript.DisableGroundCheck(1f);
+                    enemyGroundCheckScript.DisableGroundCheck(timeGroundCheckIsDisabled);
 
                 SetRBGravity(gravityWhenKnockedDown);
 

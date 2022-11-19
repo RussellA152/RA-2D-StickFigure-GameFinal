@@ -29,9 +29,9 @@ MonoBehaviour:
   aggressionLevelDecreaseOnAttack: 10
   rbMass: 100
   enemyAnimatorController: {fileID: 22100000, guid: dad37f3e044819e458c394a4efd1fa11, type: 2}
-  commonAttackAnimation: Common Attack
+  commonAttackAnimation: Common Attack Anticipation
   specialAttackAnimation: Special Attack Anticipation
   lightHurtAnimFront: Enemy Light Hurt Front
   lightHurtAnimBehind: Enemy Light Hurt Behind
   heavyHurtAnimFront: Enemy Heavy Hurt Front
-  heavyHurtAnimBehind: Enemy Heavy Hurt Behind
+  heavyHurtAnimBehind: Enemy Heavy Hurt Back
