@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class EnemyDeathAnimationEnd : StateMachineBehaviour
 {
-    private EnemyController enemyControllerScript;
+    //private EnemyController enemyControllerScript;
 
-    [SerializeField] private float timeUntilDeath; // how long does it take (after this enemy starts, for this enemy to change to death state in EnemyController)
+    //[SerializeField] private float timeUntilDeath; // how long does it take (after this enemy starts, for this enemy to change to death state in EnemyController)
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        enemyControllerScript = animator.transform.gameObject.GetComponent<EnemyController>();
+        //enemyControllerScript = animator.transform.gameObject.GetComponent<EnemyController>();
         
         
         //enemyControllerScript.ChangeEnemyState(0f, EnemyController.EnemyState.Dead);
@@ -20,16 +20,15 @@ public class EnemyDeathAnimationEnd : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(timeUntilDeath <= 0f)
-            enemyControllerScript.ChangeEnemyState(0f, EnemyController.EnemyState.Dead);
-        timeUntilDeath -= Time.deltaTime;
+        //if(timeUntilDeath <= 0f)
+        //enemyControllerScript.ChangeEnemyState(0f, EnemyController.EnemyState.Dead);
+        //timeUntilDeath -= Time.deltaTime;
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         //enemyControllerScript.ChangeEnemyState(0f, EnemyController.EnemyState.Dead);
-
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

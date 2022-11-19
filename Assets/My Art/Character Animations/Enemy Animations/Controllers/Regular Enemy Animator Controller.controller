@@ -200,7 +200,7 @@ AnimatorStateMachine:
     m_Position: {x: 610, y: 100, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2030326275598923430}
-    m_Position: {x: 890, y: 100, z: 0}
+    m_Position: {x: 610, y: 250, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -208,7 +208,7 @@ AnimatorStateMachine:
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 50, y: 110, z: 0}
-  m_ExitPosition: {x: 840, y: 300, z: 0}
+  m_ExitPosition: {x: 850, y: 470, z: 0}
   m_ParentStateMachinePosition: {x: 30, y: 240, z: 0}
   m_DefaultState: {fileID: 717990159234875668}
 --- !u!1102 &-6193481753867491985
@@ -625,12 +625,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1eff1fb940deb9046a6bfb7e6190d324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeUntilDeath: 1.5
 --- !u!114 &-1740175617462771769
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -750,7 +749,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: Dead
+  - m_Name: isAlive
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0

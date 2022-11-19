@@ -891,10 +891,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myHurtCollider: {fileID: 249668012047143270}
   rb: {fileID: 4332903956958558058}
+  impulseSource: {fileID: 8987135411161480422}
   damageType: 2
   damageOnCollision: 30
   forceOnCollisionX: 700
   forceOnCollisionY: 400
+  screenShakePower: 1.5
+  screenShakeDuration: 0.1
   velocityRequirementX: 8
   velocityRequirementY: 8
 --- !u!61 &249668012047143270

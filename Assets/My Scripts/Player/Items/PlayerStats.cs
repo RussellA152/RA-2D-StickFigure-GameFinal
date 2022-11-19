@@ -80,7 +80,7 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
         //useEquipmentBinding = playerControls.Player.UseEquipment;
-
+        
         
         
     }

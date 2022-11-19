@@ -93,8 +93,9 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
                 //Debug.Log("Restore Time: " +  hitStopRestoreTime);
 
                 // clear any screenshakes that occured previously (this is so screenshakes don't stack)
+                // only for player's attacks
                 CinemachineImpulseManager.Instance.Clear();
-                
+
 
                 //Debug.Log("Player hit enemy!");
                 hitStopScript.StopTime(0.05f, tempHitStopRestoreTimer, tempHitStopDelay);

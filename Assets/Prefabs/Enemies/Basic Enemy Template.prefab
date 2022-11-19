@@ -88,7 +88,9 @@ MonoBehaviour:
   idleStateTransitionTimer: 0
   chaseStateTransitionTimer: 0
   attackStateTransitionTimer: 0
+  timeUntilDespawn: 3
   rb: {fileID: -8891431870749144915}
+  hurtBox: {fileID: 4622912823528068189}
   minimumVelocityUntilStopped: {x: 0.2, y: 0.2}
   gravityWhenIdle: 4
   myRoom: {fileID: 0}
@@ -134,7 +136,7 @@ MonoBehaviour:
   animator: {fileID: 1373278072336133614}
   gravityWhenFlinching: 1.75
   gravityWhenKnockedDown: 1.75
-  timeGroundCheckIsDisabled: 0.5
+  timeGroundCheckIsDisabled: 0.3
 --- !u!114 &1709358543280309288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,8 +152,6 @@ MonoBehaviour:
   enemyControllerScript: {fileID: 6875883259916410309}
   enemyScriptableObject: {fileID: 0}
   animator: {fileID: 1373278072336133614}
-  enemyMaxHealth: 0
-  enemyHealth: 0
   deathAnimationStartName: Death Animation Start
   collider: {fileID: 7383473570951731383}
 --- !u!195 &1716254764283327715
@@ -368,10 +368,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myHurtCollider: {fileID: 7533428447087600626}
   rb: {fileID: -8891431870749144915}
+  impulseSource: {fileID: 4140990424374056812}
   damageType: 2
   damageOnCollision: 30
   forceOnCollisionX: 1000
   forceOnCollisionY: 500
+  screenShakePower: 1.5
+  screenShakeDuration: 0.1
   velocityRequirementX: 9.5
   velocityRequirementY: 9.5
 --- !u!61 &7533428447087600626

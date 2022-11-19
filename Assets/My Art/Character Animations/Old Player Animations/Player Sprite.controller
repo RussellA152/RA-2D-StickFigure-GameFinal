@@ -361,7 +361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: 1
-  attackDamage: 0
+  attackDamage: 15
   attackingPowerX: 250
   attackingPowerY: 300
   screenShakePower: 2
@@ -1551,7 +1551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: 2
-  attackDamage: 50
+  attackDamage: 35
   attackingPowerX: 200
   attackingPowerY: 500
   screenShakePower: 2
@@ -1603,7 +1603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: 2
-  attackDamage: 150
+  attackDamage: 60
   attackingPowerX: 1500
   attackingPowerY: 400
   screenShakePower: 5
@@ -2121,7 +2121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: 2
-  attackDamage: 30
+  attackDamage: 25
   attackingPowerX: 800
   attackingPowerY: 400
   screenShakePower: 4
@@ -2518,7 +2518,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: 2
-  attackDamage: 100
+  attackDamage: 50
   attackingPowerX: 1000
   attackingPowerY: 600
   screenShakePower: 4
@@ -2647,7 +2647,7 @@ AnimatorStateMachine:
     m_Position: {x: 780, y: 0, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3592785484021644452}
-    m_Position: {x: 70, y: 70, z: 0}
+    m_Position: {x: 270, y: 140, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2303996855925483635}
     m_Position: {x: 540, y: 0, z: 0}
@@ -2913,7 +2913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: 1
-  attackDamage: 20
+  attackDamage: 15
   attackingPowerX: 150
   attackingPowerY: 150
   screenShakePower: 2
@@ -3101,7 +3101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: 1
-  attackDamage: 20
+  attackDamage: 15
   attackingPowerX: 150
   attackingPowerY: 150
   screenShakePower: 2
@@ -3269,7 +3269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: 2
-  attackDamage: 0
+  attackDamage: 40
   attackingPowerX: 500
   attackingPowerY: 1500
   screenShakePower: 8
@@ -3323,7 +3323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: 2
-  attackDamage: 150
+  attackDamage: 50
   attackingPowerX: 1000
   attackingPowerY: -1000
   screenShakePower: 4
@@ -4005,7 +4005,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: 2
-  attackDamage: 40
+  attackDamage: 15
   attackingPowerX: 200
   attackingPowerY: 1200
   screenShakePower: 3
@@ -4195,7 +4195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: 2
-  attackDamage: 100
+  attackDamage: 15
   attackingPowerX: 300
   attackingPowerY: -1000
   screenShakePower: 3
@@ -4889,7 +4889,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: 1
-  attackDamage: 40
+  attackDamage: 25
   attackingPowerX: 150
   attackingPowerY: 150
   screenShakePower: 2
@@ -5674,7 +5674,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: 1
-  attackDamage: 20
+  attackDamage: 15
   attackingPowerX: 300
   attackingPowerY: 300
   screenShakePower: 2
@@ -6410,7 +6410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: 2
-  attackDamage: 100
+  attackDamage: 15
   attackingPowerX: 300
   attackingPowerY: 1000
   screenShakePower: 3
@@ -7083,7 +7083,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: 2
-  attackDamage: 100
+  attackDamage: 35
   attackingPowerX: 400
   attackingPowerY: 1100
   screenShakePower: 4
@@ -7209,7 +7209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: 1
-  attackDamage: 0
+  attackDamage: 15
   attackingPowerX: 250
   attackingPowerY: 300
   screenShakePower: 2
@@ -7715,7 +7715,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: 2
-  attackDamage: 150
+  attackDamage: 25
   attackingPowerX: 500
   attackingPowerY: 200
   screenShakePower: 3
@@ -8487,7 +8487,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: 1
-  attackDamage: 20
+  attackDamage: 15
   attackingPowerX: 150
   attackingPowerY: 150
   screenShakePower: 2
@@ -8593,7 +8593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: 1
-  attackDamage: 0
+  attackDamage: 15
   attackingPowerX: 250
   attackingPowerY: 300
   screenShakePower: 2
@@ -8619,7 +8619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: 1
-  attackDamage: 0
+  attackDamage: 15
   attackingPowerX: 250
   attackingPowerY: 300
   screenShakePower: 2

@@ -41,6 +41,7 @@ public class EnemyController : MonoBehaviour
     //private float aggressionLevelDecreaseOnAttack; //how much the enemy's aggression level will decrease when attacking
 
     [SerializeField] private bool isGrounded; // is the enemy grounded?
+     private bool hasDespawned = false; // has the enemy despawned yet?
 
     private float distanceFromTargetX; // the distance from enemy and player in x-axis
     private float distanceFromTargetY; // the distance from enemy and player in y-axis
@@ -60,10 +61,13 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float idleStateTransitionTimer;
     [SerializeField] private float chaseStateTransitionTimer;
     [SerializeField] private float attackStateTransitionTimer;
+    [SerializeField] private float timeUntilDespawn; // time until enemy despawns
+
     private Coroutine stateTransitionCoroutine; //a reference to the state transition cooldown coroutine, we have this so that we can stop the coroutine on command
     private bool stateCooldownStarted = false;
 
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private GameObject hurtBox;
 
     [SerializeField] private Vector2 minimumVelocityUntilStopped; // how low should this enemy's velocity reached to be considered "stopped"?
     [SerializeField] private float gravityWhenIdle;
@@ -101,11 +105,15 @@ public class EnemyController : MonoBehaviour
 
         Attacking, // enemy is trying to attack player
 
+        Dying, // enemy is in death animation (not yet despawned)
+
         Dead //enemy is dead -> can't move and return to object pool
     }
 
     private void OnEnable()
     {
+
+        //animator.SetBool("isAlive", true);
 
         // when enabled, set layer to "Enemy" (this is because enemies are set to "IgnorePlayer" layer when performing death animation)
         SetLayer("Enemy");
@@ -121,6 +129,10 @@ public class EnemyController : MonoBehaviour
 
         //tell other scripts to get their values
         SetUpEnemyConfiguration(enemyScriptableObject);
+
+        hurtBox.SetActive(true);
+
+        hasDespawned = false;
 
         //the enemy's room would always be the current room inside of OnEnable
         myRoom = LevelManager.instance.GetCurrentRoom();
@@ -152,6 +164,9 @@ public class EnemyController : MonoBehaviour
 
         // fixes a bug where enemies remained transparent when respawning (probably due to death animation lowering enemy's sprite renderer's A value)
         spriteRenderer.color = enemyColor;
+
+        // might fix a bug where an enemy is stuck in the "IgnorePlayer" layer
+        SetLayer("Enemy");
 
         StopAllCoroutines();
     }
@@ -231,6 +246,11 @@ public class EnemyController : MonoBehaviour
 
                 case EnemyState.Hurt:
                     EnemyHurtBehavior();
+
+                    break;
+
+                case EnemyState.Dying:
+                    EnemyDyingBehavior();
 
                     break;
 
@@ -457,12 +477,63 @@ public class EnemyController : MonoBehaviour
 
     }
 
+    private void EnemyDyingBehavior()
+    {
+        SetIsAttacking(false);
+
+        animator.SetBool(walkingHash, false);
+        //don't let enemy move at all
+        enemyMoveScript.DisableMovement();
+
+        //the enemy is not allowed to turn around until they return to idle
+        enemyMoveScript.SetCanFlip(false);
+
+        SetLayer("IgnorePlayer");
+
+
+        avoidanceBox.enabled = false;
+        hurtBox.SetActive(false);
+
+        if ((Mathf.Abs(rb.velocity.x) <= minimumVelocityUntilStopped.x && Mathf.Abs(rb.velocity.y) <= minimumVelocityUntilStopped.y))
+        {
+
+            // if get up timer is less than or equal to 0, it means the enemy has been on the ground for enough time
+            if (timeToGetUp <= 0f)
+            {
+                animator.SetBool(stoppedHash, true);
+
+                // timeToGetUpStored needs to remember the original value of timeToGetUp
+                timeToGetUp = timeToGetUpStored;
+            }
+
+            timeToGetUp -= Time.deltaTime;
+
+            timeUntilDespawn -= Time.deltaTime;
+
+            // only allow enemy to despawn when stopped and grounded
+            if (timeUntilDespawn <= 0f && !hasDespawned && isGrounded)
+            {
+                Debug.Log("DESPAWN!");
+                currentState = EnemyState.Dead;
+            }
+
+        }
+
+        
+
+    }
+
     private void EnemyDeathBehavior()
     {
         //Debug.Log("Enemy Died! Inside EnemyController.");
-        SetIsAttacking(false);
+        //SetIsAttacking(false);
 
-        avoidanceBox.enabled = false;
+        //avoidanceBox.enabled = false;
+        //hurtBox.SetActive(false);
+
+        //timeUntilDespawn -= Time.deltaTime;
+
+        hasDespawned = true;
 
         //when this enemy dies, their room's "numberOfEnemiesAliveHere" should decrease by 1
         if (myRoom != null)
@@ -491,6 +562,8 @@ public class EnemyController : MonoBehaviour
             Destroy(gameObject);
             //Debug.Log("Destroy me");
         }
+
+        
 
         
 

@@ -35,9 +35,11 @@ public class HitStop : MonoBehaviour
 
     public void StopTime(float changeTime, int restoreSpeed, float delay)
     {
+
+        //StartCoroutine(DoHitStop(delay));
         speed = restoreSpeed;
 
-        if(delay > 0)
+        if (delay > 0)
         {
             StopCoroutine(StartTimeAgain(delay));
             StartCoroutine(StartTimeAgain(delay));
@@ -47,6 +49,13 @@ public class HitStop : MonoBehaviour
             restoreTime = true;
         }
         Time.timeScale = changeTime;
+    }
+
+    IEnumerator DoHitStop(float seconds)
+    {
+        Time.timeScale = 0.1f;
+        yield return new WaitForSecondsRealtime(seconds);
+        Time.timeScale = 1f;
     }
     IEnumerator StartTimeAgain(float amount)
     {

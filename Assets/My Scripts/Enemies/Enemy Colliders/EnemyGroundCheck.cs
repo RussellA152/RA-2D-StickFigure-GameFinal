@@ -35,7 +35,6 @@ public class EnemyGroundCheck : MonoBehaviour
         isGroundedHash = Animator.StringToHash("Grounded");
         // caching "Ground" layer from inspector for performance
         groundLayerInt = LayerMask.NameToLayer("Ground");
-
         enemyLayer = LayerMask.NameToLayer("Enemy");
     }
 

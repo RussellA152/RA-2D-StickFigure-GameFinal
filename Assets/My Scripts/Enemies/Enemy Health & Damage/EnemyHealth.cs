@@ -13,8 +13,8 @@ public class EnemyHealth : MonoBehaviour, IHealth
     [SerializeField] private Animator animator;
 
     [HideInInspector]
-    public float enemyMaxHealth; //the max health value of this enemy(DERIVED FROM SCRIPTABLEOBJECT)
-    [SerializeField] private float enemyHealth; //the current health value of this enemy 
+    private float enemyMaxHealth; //the max health value of this enemy(DERIVED FROM SCRIPTABLEOBJECT)
+    private float enemyHealth; //the current health value of this enemy 
     private bool isAlive; //is the enemy alive?
 
     [SerializeField] private string deathAnimationStartName; // the name of the death animation start
@@ -69,6 +69,7 @@ public class EnemyHealth : MonoBehaviour, IHealth
             if (!playedDeathAnimation)
             {
                 // play death animation
+                //animator.SetBool("isAlive", false);
                 animator.Play(deathAnimationStartName);
                 playedDeathAnimation = true;
             }

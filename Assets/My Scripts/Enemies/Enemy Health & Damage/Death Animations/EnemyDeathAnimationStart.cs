@@ -12,10 +12,10 @@ public class EnemyDeathAnimationStart : StateMachineBehaviour
         enemyControllerScript = animator.transform.gameObject.GetComponent<EnemyController>();
 
         // change to hurt state at the start of the death animation (to prevent enemy from switching to another state)
-        enemyControllerScript.ChangeEnemyState(0f, EnemyController.EnemyState.Hurt);
+        enemyControllerScript.ChangeEnemyState(0f, EnemyController.EnemyState.Dying);
 
         // change this enemy's layer to "IgnorePlayer", this is so that the enemy stops colliding with player (when dead)
-        enemyControllerScript.SetLayer("IgnorePlayer");
+        //enemyControllerScript.SetLayer("IgnorePlayer");
 
     }
 

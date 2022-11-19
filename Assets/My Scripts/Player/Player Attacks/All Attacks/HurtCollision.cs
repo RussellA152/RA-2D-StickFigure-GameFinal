@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 public class HurtCollision : MonoBehaviour, IDamageDealing
@@ -16,6 +17,10 @@ public class HurtCollision : MonoBehaviour, IDamageDealing
     private Transform targetTransform; //the gameobject inside of the enemy's hit collider
     private bool enemyInsideTrigger; // is an enemy inside of enemy's hit collider?
 
+    [SerializeField] CinemachineImpulseSource impulseSource;
+
+    
+
     [Header("Damage Type")]
     public IDamageAttributes.DamageType damageType;
 
@@ -23,6 +28,10 @@ public class HurtCollision : MonoBehaviour, IDamageDealing
     [SerializeField] private float damageOnCollision; // how much damage does the other enemy take when they collide with this knocked down enemy?
     [SerializeField] private float forceOnCollisionX; // how much X force is applied to the other enemy take when they collide with this knocked down enemy?
     [SerializeField] private float forceOnCollisionY; // how much Y force is applied to the other enemy take when they collide with this knocked down enemy?
+
+    [Header("Screenshake Values")]
+    [SerializeField] private float screenShakePower;
+    [SerializeField] private float screenShakeDuration;
 
     [Header("Velocity Needed For Collision")]
     [SerializeField] private float velocityRequirementX; // when enemy is knocked down, their X velocity must be high enough to knock down other enemies behind them
@@ -96,6 +105,12 @@ public class HurtCollision : MonoBehaviour, IDamageDealing
                 // if this enemy is falling down, then apply a negative Y force to the other enemy
                 if (rb.velocity.y <= -1 * velocityRequirementY)
                     attackPowerY = -1 * attackPowerY;
+
+                // change duration of the screenshake 
+                impulseSource.m_ImpulseDefinition.m_TimeEnvelope.m_SustainTime = screenShakeDuration;
+
+                // generate an impulse to shake the screen
+                impulseSource.GenerateImpulse(screenShakePower);
 
                 //calls the receiver's OnHurt function which will apply the damage and force of this attack (receiverWasPlayer is false because this is the enemy's hit collider)
                 targetTransform.gameObject.GetComponent<IDamageable>().OnHurt(attacker.position, damageType, damage, attackPowerX, attackPowerY);
