@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Fast_Enemy_Light_Hurt_Front
+  m_Name: Fast_Enemy_Light_Hurt_Back
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,11 +20,11 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 0ac453b8c6774cc4bb0f94b3f58727e8, type: 3}
+      value: {fileID: 21300000, guid: fa55b8107e06751409e23111c327b3a1, type: 3}
     - time: 0.016666668
-      value: {fileID: 21300000, guid: 12b16efb12a0f8b4a8829d113f5d3edf, type: 3}
+      value: {fileID: 21300000, guid: 3c8c77aa80f12dd4f939da7fb332eb2c, type: 3}
     - time: 0.033333335
-      value: {fileID: 21300000, guid: 1e1245f9b57bb964db7ce9918e5f805f, type: 3}
+      value: {fileID: 21300000, guid: 466843d0538a0ae43935073195acfd5f, type: 3}
     attribute: m_Sprite
     path: Enemy Sprite Renderer
     classID: 212
@@ -44,9 +44,9 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 0ac453b8c6774cc4bb0f94b3f58727e8, type: 3}
-    - {fileID: 21300000, guid: 12b16efb12a0f8b4a8829d113f5d3edf, type: 3}
-    - {fileID: 21300000, guid: 1e1245f9b57bb964db7ce9918e5f805f, type: 3}
+    - {fileID: 21300000, guid: fa55b8107e06751409e23111c327b3a1, type: 3}
+    - {fileID: 21300000, guid: 3c8c77aa80f12dd4f939da7fb332eb2c, type: 3}
+    - {fileID: 21300000, guid: 466843d0538a0ae43935073195acfd5f, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

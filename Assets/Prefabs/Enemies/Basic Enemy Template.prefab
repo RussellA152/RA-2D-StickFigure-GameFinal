@@ -88,7 +88,6 @@ MonoBehaviour:
   idleStateTransitionTimer: 0
   chaseStateTransitionTimer: 0
   attackStateTransitionTimer: 0
-  timeUntilDespawn: 3
   rb: {fileID: -8891431870749144915}
   hurtBox: {fileID: 4622912823528068189}
   minimumVelocityUntilStopped: {x: 0.2, y: 0.2}

@@ -18,6 +18,7 @@ MonoBehaviour:
   followRangeY: 12
   dropChance: 1
   getUpTimer: 0.9
+  despawnTimer: 2.5
   attackRangeX: 4.5
   attackRangeY: 2
   specialAttackChance: 0.25

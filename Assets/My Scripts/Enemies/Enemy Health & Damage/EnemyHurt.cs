@@ -95,9 +95,7 @@ public class EnemyHurt : MonoBehaviour, IDamageable
 
     public void OnHurt(Vector3 attacker, IDamageAttributes.DamageType damageType, float damage, float attackPowerX, float attackPowerY)
     {
-        // if this enemy is dead, don't let them take anymore damage or play any new animations
-        if (!enemyHealthScript.CheckIfAlive())
-            return;
+        
 
 
         //find the direction the attacker is facing
@@ -292,7 +290,8 @@ public class EnemyHurt : MonoBehaviour, IDamageable
     {
         //if the animation exists in the base layer...
         //play it, otherwise log that it doesn't exist
-        if (animator.HasState(baseLayerInt, animationHash) == true)
+        // also, enemy must be alive to play a new animation
+        if (animator.HasState(baseLayerInt, animationHash) == true && enemyHealthScript.CheckIfAlive())
         {
             animator.Play(animationHash);
             //Debug.Log("Playing an enemy hurt animation");
@@ -305,8 +304,13 @@ public class EnemyHurt : MonoBehaviour, IDamageable
     IEnumerator WaitUntilEnemyIsHurt(float attackPowerX, float attackPowerY)
     {
         //Wait until the enemy has changed to the hurt state to apply a force on them
-        while (enemyControlScript.GetEnemyState() != EnemyController.EnemyState.Hurt)
+
+        while (enemyControlScript.GetEnemyState() != EnemyController.EnemyState.Hurt && enemyControlScript.GetEnemyState() != EnemyController.EnemyState.Dying)
+        {
+            Debug.Log("Null, wait until I'm not hurt or dying");
             yield return null;
+        }
+            
 
         if (isKnockedDown)
         {

@@ -61,7 +61,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float idleStateTransitionTimer;
     [SerializeField] private float chaseStateTransitionTimer;
     [SerializeField] private float attackStateTransitionTimer;
-    [SerializeField] private float timeUntilDespawn; // time until enemy despawns
+    private float timeUntilDespawn; // time until enemy despawns
 
     private Coroutine stateTransitionCoroutine; //a reference to the state transition cooldown coroutine, we have this so that we can stop the coroutine on command
     private bool stateCooldownStarted = false;
@@ -289,6 +289,8 @@ public class EnemyController : MonoBehaviour
 
         timeToGetUp = enemyScriptableObject.getUpTimer;
         timeToGetUpStored = timeToGetUp;
+
+        timeUntilDespawn = enemyScriptableObject.despawnTimer;
         /*
         aggressionLevelThreshold = enemyScriptableObject.GetAggressionLevelThreshold();
         minAggressionLevelIncrease = enemyScriptableObject.GetMinAggressionLevelIncrease();
@@ -304,6 +306,8 @@ public class EnemyController : MonoBehaviour
 
         //Debug.Log("Idle behavior!");
         animator.SetBool(walkingHash, false);
+
+        animator.SetBool(stoppedHash, true);
 
         if (isGrounded)
         {
@@ -356,6 +360,19 @@ public class EnemyController : MonoBehaviour
         //Debug.Log("Chase behavior!");
 
         //enemyMoveScript.CheckIfFrozen();
+
+        if ((Mathf.Abs(rb.velocity.x) <= minimumVelocityUntilStopped.x && Mathf.Abs(rb.velocity.y) <= minimumVelocityUntilStopped.y))
+        {
+
+             animator.SetBool(stoppedHash, true);
+
+
+        }
+
+        else if ((Mathf.Abs(rb.velocity.x) >= 5f || Mathf.Abs(rb.velocity.y) >= 5f))
+        {
+            animator.SetBool(stoppedHash, false);
+        }
 
         animator.SetBool(walkingHash, enemyMoveScript.GetIsMoving());
 
@@ -435,6 +452,12 @@ public class EnemyController : MonoBehaviour
     {
         //IncreaseAggressionLevelHurt();
 
+        // just in case the enemy gets stuck in hurt state instead of changing to Dying state (was a bug before)
+        if (!enemyHpScript.CheckIfAlive())
+            currentState = EnemyState.Dying;
+
+        isHurt = true;
+
         SetIsAttacking(false);
         // if the enemy's velocity reaches a certain minimum value, then they will get back up from their hurt state
         // needs to be absolute value of velocity because velocity is negative when enemies are falling back down from the air
@@ -464,7 +487,7 @@ public class EnemyController : MonoBehaviour
 
 
 
-        isHurt = true;
+        
 
         animator.SetBool(walkingHash, false);
         //don't let enemy move at all
@@ -484,15 +507,18 @@ public class EnemyController : MonoBehaviour
         animator.SetBool(walkingHash, false);
         //don't let enemy move at all
         enemyMoveScript.DisableMovement();
+        //enemyMoveScript.StopMovement(true);
 
         //the enemy is not allowed to turn around until they return to idle
         enemyMoveScript.SetCanFlip(false);
 
         SetLayer("IgnorePlayer");
 
+        isHurt = true;
+
 
         avoidanceBox.enabled = false;
-        hurtBox.SetActive(false);
+        //hurtBox.SetActive(false);
 
         if ((Mathf.Abs(rb.velocity.x) <= minimumVelocityUntilStopped.x && Mathf.Abs(rb.velocity.y) <= minimumVelocityUntilStopped.y))
         {

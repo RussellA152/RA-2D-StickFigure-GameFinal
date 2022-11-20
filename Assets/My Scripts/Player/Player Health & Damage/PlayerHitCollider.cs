@@ -29,9 +29,11 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
     private int tempHitStopRestoreTimer;
     private float tempHitStopDelay;
 
+    private int ignorePlayerLayer;
+
     private void Start()
     {
-
+        ignorePlayerLayer = LayerMask.NameToLayer("IgnorePlayer");
     }
 
 
@@ -42,7 +44,7 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
         targetTransform = collision.transform;
 
         //checking if trigger collided with EnemyHurtBox tag (located only on the hurtbox child gameobject on each enemy)
-        if (targetTransform.CompareTag("EnemyHurtBox"))
+        if (targetTransform.CompareTag("EnemyHurtBox") && targetTransform.transform.parent.gameObject.layer != ignorePlayerLayer)
         {
             //Debug.Log("Detected enemy collision!");
 
@@ -98,7 +100,11 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
 
 
                 //Debug.Log("Player hit enemy!");
-                hitStopScript.StopTime(0.05f, tempHitStopRestoreTimer, tempHitStopDelay);
+
+                // do a hitstop when landing an attack
+                hitStopScript.Stop(tempHitStopDelay);
+
+               // hitStopScript.StopTime(0.05f, tempHitStopRestoreTimer, tempHitStopDelay);
 
                 // change duration of the screenshake 
                 impulseSource.m_ImpulseDefinition.m_TimeEnvelope.m_SustainTime = tempScreenShakeDuration;
