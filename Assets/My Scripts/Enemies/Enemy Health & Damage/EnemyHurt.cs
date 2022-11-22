@@ -284,6 +284,11 @@ public class EnemyHurt : MonoBehaviour, IDamageable
         StartCoroutine(WaitUntilEnemyIsHurt(attackPowerX, attackPowerY));
     }
 
+    public void PlayParticleEffect()
+    {
+
+    }
+
 
     //plays the hurt animation (depending on the damage type and direction of the attack)
     public void PlayHurtAnimation(int animationHash)
@@ -307,7 +312,7 @@ public class EnemyHurt : MonoBehaviour, IDamageable
 
         while (enemyControlScript.GetEnemyState() != EnemyController.EnemyState.Hurt && enemyControlScript.GetEnemyState() != EnemyController.EnemyState.Dying)
         {
-            Debug.Log("Null, wait until I'm not hurt or dying");
+            //Debug.Log("Null, wait until I'm not hurt or dying");
             yield return null;
         }
             

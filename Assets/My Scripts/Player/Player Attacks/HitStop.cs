@@ -11,6 +11,8 @@ public class HitStop : MonoBehaviour
     {
         // if the cinemachine impulses do not ignore timescale, then the hitstop will freeze the screenshakes as well (which we don't want)
         CinemachineImpulseManager.Instance.IgnoreTimeScale = true;
+
+        
     }
 
     public void Stop(float duration)

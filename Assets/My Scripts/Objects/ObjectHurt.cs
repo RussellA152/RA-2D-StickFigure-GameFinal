@@ -28,6 +28,11 @@ public class ObjectHurt : MonoBehaviour, IDamageable
         throw new System.NotImplementedException();
     }
 
+    public void PlayParticleEffect()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public void PlayHurtAnimation(int animationHash)
     {
         throw new System.NotImplementedException();

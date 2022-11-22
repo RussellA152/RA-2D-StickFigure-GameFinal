@@ -14,26 +14,37 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
 
     [SerializeField] private BoxCollider2D hitbox;
 
+    [SerializeField] private ParticleSystem particleSys; // particle system used for playing particle effects when damaging something
+    private ParticleSystem.MainModule psMain;
 
     private Transform targetTransform;// the transform of who enters our hitbox collider
 
     private bool enemyInsideTrigger; //is the enemy inside of our hitbox collider?
 
+
     //temporary damage values updated by the attack animation
-    private IDamageAttributes.DamageType tempDamageType;
-    private float tempAttackDamage;
-    private float tempAttackPowerX;
-    private float tempAttackPowerY;
-    private float tempScreenShakePower;
-    private float tempScreenShakeDuration;
-    private int tempHitStopRestoreTimer;
-    private float tempHitStopDelay;
+    [SerializeField] private IDamageAttributes.DamageType tempDamageType;
+    [SerializeField] private float tempAttackDamage;
+
+    [SerializeField] private float tempAttackPowerX;
+    [SerializeField] private float tempAttackPowerY;
+
+    [SerializeField] private float particleEffectDuration;
+
+    [SerializeField] private float tempScreenShakePower;
+    [SerializeField] private float tempScreenShakeDuration;
+
+    //private int tempHitStopRestoreTimer;
+    [SerializeField] private float tempHitStopDelay;
 
     private int ignorePlayerLayer;
 
     private void Start()
     {
         ignorePlayerLayer = LayerMask.NameToLayer("IgnorePlayer");
+
+        psMain = particleSys.main;
+
     }
 
 
@@ -57,6 +68,8 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
 
             //now that enemy is inside the trigger, call the deal damage function
             DealDamage(transform.parent, tempDamageType, tempAttackDamage, tempAttackPowerX, tempAttackPowerY);
+
+            //particleSys.transform.position = collision.gameObject.GetComponent<BoxCollider2D>().ClosestPoint(transform.position);
             //ResetAttackValues();
         }
         else
@@ -98,8 +111,12 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
                 // only for player's attacks
                 CinemachineImpulseManager.Instance.Clear();
 
+                // the closest point from this hitbox to the enemy's collider
+                Vector2 particlePosition = targetTransform.gameObject.GetComponent<Collider2D>().ClosestPoint(transform.position);
 
                 //Debug.Log("Player hit enemy!");
+
+                PlayParticleEffect(particleEffectDuration, particlePosition);
 
                 // do a hitstop when landing an attack
                 hitStopScript.Stop(tempHitStopDelay);
@@ -119,6 +136,22 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
         }
     }
 
+    public void PlayParticleEffect(float duration, Vector2 positionOfParticle)
+    {
+        particleSys.transform.position = positionOfParticle;
+
+        particleSys.Stop();
+
+        psMain.duration = duration;
+
+        particleSys.Play();
+    }
+
+    public void SetParticleEffectDuration(float duration)
+    {
+        particleEffectDuration = duration;
+    }
+
     //this function is updated by the player's attack animations
     public void UpdateAttackValues(IDamageAttributes.DamageType damageType, float damage, float attackPowerX, float attackPowerY, float screenShakePower, float screenShakeDuration)
     {
@@ -132,7 +165,7 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
 
     public void SetHitStopValues(int restoreTime, float delay)
     {
-        tempHitStopRestoreTimer = restoreTime;
+        //tempHitStopRestoreTimer = restoreTime;
         tempHitStopDelay = delay;
     }
 
@@ -143,13 +176,13 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
         tempAttackPowerX = 0f;
         tempAttackPowerY = 0f;
         tempScreenShakePower = 0f;
-        tempHitStopRestoreTimer = 0;
+       // tempHitStopRestoreTimer = 0;
 
     }
 
     public BoxCollider2D GetHitBox()
     {
-        throw new System.NotImplementedException();
+        return hitbox;
     }
 
     /*

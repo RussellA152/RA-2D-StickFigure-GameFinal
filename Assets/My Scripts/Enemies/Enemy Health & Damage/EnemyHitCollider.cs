@@ -9,6 +9,9 @@ public class EnemyHitCollider : MonoBehaviour, IDamageDealingCharacter
 
     [SerializeField] CinemachineImpulseSource impulseSource;
 
+    [SerializeField] private ParticleSystem particleSys; // particle system used for playing particle effects when damaging something
+    private ParticleSystem.MainModule psMain;
+
     private Transform targetTransform; //the gameobject inside of the enemy's hit collider
     private bool playerInsideTrigger; // is the player inside of enemy's hit collider?
 
@@ -16,14 +19,20 @@ public class EnemyHitCollider : MonoBehaviour, IDamageDealingCharacter
     //temporary damage values updated by the attack animation
     private IDamageAttributes.DamageType tempDamageType;
     private float tempAttackDamage;
+
+    private float particleEffectDuration;
+
     private float tempAttackPowerX;
     private float tempAttackPowerY;
+
     private float tempScreenShakePower;
     private float tempScreenShakeDuration;
 
     private void OnEnable()
     {
         //hitbox = GetComponent<BoxCollider2D>();
+
+        psMain = particleSys.main;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -72,6 +81,11 @@ public class EnemyHitCollider : MonoBehaviour, IDamageDealingCharacter
                 //calls the receiver's OnHurt function which will apply the damage and force of this attack (receiverWasPlayer is false because this is the enemy's hit collider)
                 targetTransform.gameObject.GetComponent<IDamageable>().OnHurt(attacker.position, damageType, damage, attackPowerX, attackPowerY);
 
+                // retrieve the closest point, and make the particle system's transform position equal to that closest point
+                Vector2 particlePosition = targetTransform.gameObject.GetComponent<Collider2D>().ClosestPoint(transform.position);
+
+                PlayParticleEffect(particleEffectDuration, particlePosition);
+
                 // change duration of the screenshake 
                 impulseSource.m_ImpulseDefinition.m_TimeEnvelope.m_SustainTime = tempScreenShakeDuration;
 
@@ -83,6 +97,22 @@ public class EnemyHitCollider : MonoBehaviour, IDamageDealingCharacter
             }
             
         }
+    }
+
+    public void PlayParticleEffect(float duration, Vector2 particlePosition)
+    {
+        particleSys.transform.position = particlePosition;
+
+        particleSys.Stop();
+
+        psMain.duration = duration;
+
+        particleSys.Play();
+    }
+
+    public void SetParticleEffectDuration(float duration)
+    {
+        particleEffectDuration = duration;
     }
 
     //this function is updated by the enemy's attack animations

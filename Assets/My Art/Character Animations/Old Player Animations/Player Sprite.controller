@@ -200,6 +200,7 @@ MonoBehaviour:
   attackDamage: 0
   attackingPowerX: 500
   attackingPowerY: 1500
+  particleEffectDuration: 0
   screenShakePower: 0
   screenShakeDuration: 0
   hitStopRestoreTime: 0
@@ -364,6 +365,7 @@ MonoBehaviour:
   attackDamage: 15
   attackingPowerX: 250
   attackingPowerY: 300
+  particleEffectDuration: 0.5
   screenShakePower: 2
   screenShakeDuration: 0.1
   hitStopRestoreTime: 1000
@@ -1554,6 +1556,7 @@ MonoBehaviour:
   attackDamage: 35
   attackingPowerX: 200
   attackingPowerY: 500
+  particleEffectDuration: 0.8
   screenShakePower: 2
   screenShakeDuration: 0
   hitStopRestoreTime: 700
@@ -1606,6 +1609,7 @@ MonoBehaviour:
   attackDamage: 60
   attackingPowerX: 1500
   attackingPowerY: 400
+  particleEffectDuration: 2
   screenShakePower: 5
   screenShakeDuration: 0.1
   hitStopRestoreTime: 200
@@ -2124,6 +2128,7 @@ MonoBehaviour:
   attackDamage: 25
   attackingPowerX: 800
   attackingPowerY: 400
+  particleEffectDuration: 0.8
   screenShakePower: 4
   screenShakeDuration: 0.1
   hitStopRestoreTime: 400
@@ -2268,7 +2273,7 @@ AnimatorStateMachine:
     m_Position: {x: 590, y: 310, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4280152876162357744}
-    m_Position: {x: 330, y: 410, z: 0}
+    m_Position: {x: 310, y: 400, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3945034094330908447}
     m_Position: {x: 600, y: 410, z: 0}
@@ -2521,6 +2526,7 @@ MonoBehaviour:
   attackDamage: 50
   attackingPowerX: 1000
   attackingPowerY: 600
+  particleEffectDuration: 1
   screenShakePower: 4
   screenShakeDuration: 0.1
   hitStopRestoreTime: 500
@@ -2916,6 +2922,7 @@ MonoBehaviour:
   attackDamage: 15
   attackingPowerX: 150
   attackingPowerY: 150
+  particleEffectDuration: 0.5
   screenShakePower: 2
   screenShakeDuration: 0.1
   hitStopRestoreTime: 1000
@@ -3104,6 +3111,7 @@ MonoBehaviour:
   attackDamage: 15
   attackingPowerX: 150
   attackingPowerY: 150
+  particleEffectDuration: 0.5
   screenShakePower: 2
   screenShakeDuration: 0.1
   hitStopRestoreTime: 1000
@@ -3272,6 +3280,7 @@ MonoBehaviour:
   attackDamage: 40
   attackingPowerX: 500
   attackingPowerY: 1500
+  particleEffectDuration: 1.5
   screenShakePower: 8
   screenShakeDuration: 0.25
   hitStopRestoreTime: 50
@@ -3326,6 +3335,7 @@ MonoBehaviour:
   attackDamage: 50
   attackingPowerX: 1000
   attackingPowerY: -1000
+  particleEffectDuration: 1.2
   screenShakePower: 4
   screenShakeDuration: 0.1
   hitStopRestoreTime: 500
@@ -4008,6 +4018,7 @@ MonoBehaviour:
   attackDamage: 15
   attackingPowerX: 200
   attackingPowerY: 1200
+  particleEffectDuration: 0.8
   screenShakePower: 3
   screenShakeDuration: 0
   hitStopRestoreTime: 800
@@ -4198,6 +4209,7 @@ MonoBehaviour:
   attackDamage: 15
   attackingPowerX: 300
   attackingPowerY: -1000
+  particleEffectDuration: 0.8
   screenShakePower: 3
   screenShakeDuration: 0.1
   hitStopRestoreTime: 500
@@ -4892,6 +4904,7 @@ MonoBehaviour:
   attackDamage: 25
   attackingPowerX: 150
   attackingPowerY: 150
+  particleEffectDuration: 0.5
   screenShakePower: 2
   screenShakeDuration: 0.1
   hitStopRestoreTime: 1000
@@ -5534,9 +5547,9 @@ AnimatorStateMachine:
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: 6496870065685537018}
-    second: []
   - first: {fileID: 7812341550167220144}
+    second: []
+  - first: {fileID: 6496870065685537018}
     second: []
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -50, y: -120, z: 0}
@@ -5677,6 +5690,7 @@ MonoBehaviour:
   attackDamage: 15
   attackingPowerX: 300
   attackingPowerY: 300
+  particleEffectDuration: 0.5
   screenShakePower: 2
   screenShakeDuration: 0.1
   hitStopRestoreTime: 1000
@@ -6020,9 +6034,9 @@ AnimatorStateMachine:
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: 1538655715377161641}
-    second: []
   - first: {fileID: 4565386627695345526}
+    second: []
+  - first: {fileID: 1538655715377161641}
     second: []
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
@@ -6332,6 +6346,7 @@ MonoBehaviour:
   attackDamage: 50
   attackingPowerX: 2000
   attackingPowerY: 800
+  particleEffectDuration: 0
   screenShakePower: 5
   screenShakeDuration: 0.1
   hitStopRestoreTime: 500
@@ -6413,6 +6428,7 @@ MonoBehaviour:
   attackDamage: 15
   attackingPowerX: 300
   attackingPowerY: 1000
+  particleEffectDuration: 0.8
   screenShakePower: 3
   screenShakeDuration: 0.1
   hitStopRestoreTime: 500
@@ -7086,6 +7102,7 @@ MonoBehaviour:
   attackDamage: 35
   attackingPowerX: 400
   attackingPowerY: 1100
+  particleEffectDuration: 1
   screenShakePower: 4
   screenShakeDuration: 0.1
   hitStopRestoreTime: 600
@@ -7212,6 +7229,7 @@ MonoBehaviour:
   attackDamage: 15
   attackingPowerX: 250
   attackingPowerY: 300
+  particleEffectDuration: 0.5
   screenShakePower: 2
   screenShakeDuration: 0.1
   hitStopRestoreTime: 1000
@@ -7718,6 +7736,7 @@ MonoBehaviour:
   attackDamage: 25
   attackingPowerX: 500
   attackingPowerY: 200
+  particleEffectDuration: 0.8
   screenShakePower: 3
   screenShakeDuration: 0.1
   hitStopRestoreTime: 200
@@ -8490,6 +8509,7 @@ MonoBehaviour:
   attackDamage: 15
   attackingPowerX: 150
   attackingPowerY: 150
+  particleEffectDuration: 0.5
   screenShakePower: 2
   screenShakeDuration: 0.1
   hitStopRestoreTime: 1000
@@ -8596,6 +8616,7 @@ MonoBehaviour:
   attackDamage: 15
   attackingPowerX: 250
   attackingPowerY: 300
+  particleEffectDuration: 0.5
   screenShakePower: 2
   screenShakeDuration: 0.1
   hitStopRestoreTime: 1000
@@ -8622,6 +8643,7 @@ MonoBehaviour:
   attackDamage: 15
   attackingPowerX: 250
   attackingPowerY: 300
+  particleEffectDuration: 0.5
   screenShakePower: 2
   screenShakeDuration: 0.1
   hitStopRestoreTime: 1000

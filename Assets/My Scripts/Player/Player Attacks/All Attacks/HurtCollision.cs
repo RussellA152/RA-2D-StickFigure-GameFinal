@@ -8,18 +8,20 @@ public class HurtCollision : MonoBehaviour, IDamageDealing
     [SerializeField] private IDamageable hurtScript;
 
     
-
     //[SerializeField] private BoxCollider2D backCollider; // the back collider of this enemy
     [SerializeField] private BoxCollider2D myHurtCollider; // the hurt collider of this enemy
 
     [SerializeField] private Rigidbody2D rb; // rigidbody is needed to check velocity
+
 
     private Transform targetTransform; //the gameobject inside of the enemy's hit collider
     private bool enemyInsideTrigger; // is an enemy inside of enemy's hit collider?
 
     [SerializeField] CinemachineImpulseSource impulseSource;
 
-    
+    [SerializeField] private ParticleSystem particleSys; // particle system used for playing particle effects when damaging something
+    private ParticleSystem.MainModule psMain;
+
 
     [Header("Damage Type")]
     public IDamageAttributes.DamageType damageType;
@@ -28,6 +30,9 @@ public class HurtCollision : MonoBehaviour, IDamageDealing
     [SerializeField] private float damageOnCollision; // how much damage does the other enemy take when they collide with this knocked down enemy?
     [SerializeField] private float forceOnCollisionX; // how much X force is applied to the other enemy take when they collide with this knocked down enemy?
     [SerializeField] private float forceOnCollisionY; // how much Y force is applied to the other enemy take when they collide with this knocked down enemy?
+
+    [Header("Duration of Particle Effect")]
+    [SerializeField] private float particleEffectDuration;
 
     [Header("Screenshake Values")]
     [SerializeField] private float screenShakePower;
@@ -41,6 +46,8 @@ public class HurtCollision : MonoBehaviour, IDamageDealing
     {
         // hurt script is in parent gameobject for both Player and Enemy
         hurtScript = GetComponentInParent<IDamageable>();
+
+        psMain = particleSys.main;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -106,6 +113,10 @@ public class HurtCollision : MonoBehaviour, IDamageDealing
                 if (rb.velocity.y <= -1 * velocityRequirementY)
                     attackPowerY = -1 * attackPowerY;
 
+                Vector2 particlePosition = targetTransform.gameObject.GetComponent<Collider2D>().ClosestPoint(transform.position);
+
+                PlayParticleEffect(particleEffectDuration, particlePosition);
+
                 // change duration of the screenshake 
                 impulseSource.m_ImpulseDefinition.m_TimeEnvelope.m_SustainTime = screenShakeDuration;
 
@@ -121,6 +132,22 @@ public class HurtCollision : MonoBehaviour, IDamageDealing
 
         }
     }
+
+    public void PlayParticleEffect(float duration, Vector2 positionOfParticle)
+    {
+        particleSys.transform.position = positionOfParticle;
+
+        particleSys.Stop();
+
+        psMain.duration = duration;
+
+        particleSys.Play();
+    }
+
+    //public void SetParticleEffectDuration(float duration)
+    //{
+
+    //}
 
     public BoxCollider2D GetHitBox()
     {

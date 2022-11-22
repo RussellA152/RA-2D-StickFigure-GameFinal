@@ -19,6 +19,9 @@ public class EnemyAttackAnimationBehavior : StateMachineBehaviour, IDamageAttrib
     [SerializeField] private float attackDamage; //damage of the attack
     [SerializeField] private float attackingPowerX; //amount of force applied to enemy that is hit by this attack in x-direction
     [SerializeField] private float attackingPowerY; //amount of force applied to enemy that is hit by this attack in y-direction
+
+    [SerializeField] private float particleEffectDuration; // duration that the attack particle effect will play for
+
     [SerializeField] private float screenShakePower; // amount of screenshake to apply
     [SerializeField] private float screenShakeDuration; // duration of screenshake
 
@@ -52,7 +55,10 @@ public class EnemyAttackAnimationBehavior : StateMachineBehaviour, IDamageAttrib
         //invoke jolt movement 
         JoltThisObject(enemyFacingRight, joltForceX, joltForceY);
 
-        hitbox.gameObject.GetComponent<IDamageDealingCharacter>().UpdateAttackValues(damageType, attackDamage, attackingPowerX, attackingPowerY, screenShakePower, screenShakeDuration);
+        IDamageDealingCharacter damageDealingScript = hitbox.gameObject.GetComponent<IDamageDealingCharacter>();
+
+        damageDealingScript.UpdateAttackValues(damageType, attackDamage, attackingPowerX, attackingPowerY, screenShakePower, screenShakeDuration);
+        damageDealingScript.SetParticleEffectDuration(particleEffectDuration);
 
 
     }

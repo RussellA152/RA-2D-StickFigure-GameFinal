@@ -18,6 +18,15 @@ public class PlayerHurtAnimationBehavior : StateMachineBehaviour
 
         playerComponentScript = animator.transform.gameObject.GetComponent<PlayerComponents>();
 
+
+        AttackController.instance.isLightAttacking = false;
+        AttackController.instance.isGroundSlamming = false;
+        AttackController.instance.isBackAttacking = false;
+        AttackController.instance.isHeavyAttacking = false;
+        AttackController.instance.isJumpHeavyAttacking = false;
+        AttackController.instance.isJumpLightAttacking = false;
+        AttackController.instance.isBackHeavyAttacking = false;
+
         //disable all types of movement or attack when hurt (jumping, walking, sliding, rolling, and all attacks)
         playerComponentScript.SetCanMove(false);
 

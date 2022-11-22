@@ -16,5 +16,8 @@ public interface IDamageable
     //takes in an animationHash value using StringToHash
     public void PlayHurtAnimation(int animationHash);
 
+    // when this entity takes damage, play a particle effect
+    public void PlayParticleEffect();
+
     public bool GetIsKnockedDown();
 }

@@ -240,6 +240,11 @@ public class PlayerHurt : MonoBehaviour, IDamageable
         rb.AddForce(new Vector2(attackPowerX, attackPowerY), ForceMode2D.Impulse);
     }
 
+    public void PlayParticleEffect()
+    {
+
+    }
+
     public void SetIsKnockedDown(bool boolean)
     {
         isKnockedDown = boolean;
