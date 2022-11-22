@@ -203,7 +203,6 @@ MonoBehaviour:
   particleEffectDuration: 0
   screenShakePower: 0
   screenShakeDuration: 0
-  hitStopRestoreTime: 0
   hitStopDelay: 0
   forceMode: 0
   joltForceX: 0
@@ -368,7 +367,6 @@ MonoBehaviour:
   particleEffectDuration: 0.5
   screenShakePower: 2
   screenShakeDuration: 0.1
-  hitStopRestoreTime: 1000
   hitStopDelay: 0.03
   forceMode: 0
   joltForceX: 200
@@ -1559,7 +1557,6 @@ MonoBehaviour:
   particleEffectDuration: 0.8
   screenShakePower: 2
   screenShakeDuration: 0
-  hitStopRestoreTime: 700
   hitStopDelay: 0.05
   forceMode: 0
   joltForceX: 400
@@ -1612,7 +1609,6 @@ MonoBehaviour:
   particleEffectDuration: 2
   screenShakePower: 5
   screenShakeDuration: 0.1
-  hitStopRestoreTime: 200
   hitStopDelay: 0.2
   forceMode: 1
   joltForceX: 400
@@ -2131,7 +2127,6 @@ MonoBehaviour:
   particleEffectDuration: 0.8
   screenShakePower: 4
   screenShakeDuration: 0.1
-  hitStopRestoreTime: 400
   hitStopDelay: 0.09
   forceMode: 0
   joltForceX: 1000
@@ -2529,7 +2524,6 @@ MonoBehaviour:
   particleEffectDuration: 1
   screenShakePower: 4
   screenShakeDuration: 0.1
-  hitStopRestoreTime: 500
   hitStopDelay: 0.1
   forceMode: 0
   joltForceX: 3500
@@ -2925,7 +2919,6 @@ MonoBehaviour:
   particleEffectDuration: 0.5
   screenShakePower: 2
   screenShakeDuration: 0.1
-  hitStopRestoreTime: 1000
   hitStopDelay: 0.03
   forceMode: 0
   joltForceX: 500
@@ -3114,7 +3107,6 @@ MonoBehaviour:
   particleEffectDuration: 0.5
   screenShakePower: 2
   screenShakeDuration: 0.1
-  hitStopRestoreTime: 1000
   hitStopDelay: 0.03
   forceMode: 0
   joltForceX: 500
@@ -3283,7 +3275,6 @@ MonoBehaviour:
   particleEffectDuration: 1.5
   screenShakePower: 8
   screenShakeDuration: 0.25
-  hitStopRestoreTime: 50
   hitStopDelay: 0.25
   forceMode: 0
   joltForceX: 0
@@ -3338,7 +3329,6 @@ MonoBehaviour:
   particleEffectDuration: 1.2
   screenShakePower: 4
   screenShakeDuration: 0.1
-  hitStopRestoreTime: 500
   hitStopDelay: 0.18
   forceMode: 0
   joltForceX: 3000
@@ -4021,7 +4011,6 @@ MonoBehaviour:
   particleEffectDuration: 0.8
   screenShakePower: 3
   screenShakeDuration: 0
-  hitStopRestoreTime: 800
   hitStopDelay: 0.05
   forceMode: 0
   joltForceX: 1000
@@ -4212,7 +4201,6 @@ MonoBehaviour:
   particleEffectDuration: 0.8
   screenShakePower: 3
   screenShakeDuration: 0.1
-  hitStopRestoreTime: 500
   hitStopDelay: 0.08
   forceMode: 0
   joltForceX: 400
@@ -4907,7 +4895,6 @@ MonoBehaviour:
   particleEffectDuration: 0.5
   screenShakePower: 2
   screenShakeDuration: 0.1
-  hitStopRestoreTime: 1000
   hitStopDelay: 0.03
   forceMode: 0
   joltForceX: 1500
@@ -5693,7 +5680,6 @@ MonoBehaviour:
   particleEffectDuration: 0.5
   screenShakePower: 2
   screenShakeDuration: 0.1
-  hitStopRestoreTime: 1000
   hitStopDelay: 0.05
   forceMode: 0
   joltForceX: 500
@@ -6288,7 +6274,7 @@ AnimatorStateMachine:
     m_Position: {x: -110, y: 320, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: 2667175908007912112}
-    m_Position: {x: -110, y: -10, z: 0}
+    m_Position: {x: -110, y: 0, z: 0}
   - serializedVersion: 1
     m_StateMachine: {fileID: 8421408869951780934}
     m_Position: {x: 190, y: 90, z: 0}
@@ -6349,7 +6335,6 @@ MonoBehaviour:
   particleEffectDuration: 0
   screenShakePower: 5
   screenShakeDuration: 0.1
-  hitStopRestoreTime: 500
   hitStopDelay: 0.1
   forceMode: 0
   joltForceX: 0
@@ -6431,7 +6416,6 @@ MonoBehaviour:
   particleEffectDuration: 0.8
   screenShakePower: 3
   screenShakeDuration: 0.1
-  hitStopRestoreTime: 500
   hitStopDelay: 0.08
   forceMode: 0
   joltForceX: 400
@@ -6786,7 +6770,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -4828602050463636057}
-    m_Position: {x: 190, y: -130, z: 0}
+    m_Position: {x: 170, y: -130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5208486325792375924}
     m_Position: {x: 590, y: -130, z: 0}
@@ -7105,7 +7089,6 @@ MonoBehaviour:
   particleEffectDuration: 1
   screenShakePower: 4
   screenShakeDuration: 0.1
-  hitStopRestoreTime: 600
   hitStopDelay: 0.08
   forceMode: 0
   joltForceX: 2200
@@ -7232,7 +7215,6 @@ MonoBehaviour:
   particleEffectDuration: 0.5
   screenShakePower: 2
   screenShakeDuration: 0.1
-  hitStopRestoreTime: 1000
   hitStopDelay: 0.03
   forceMode: 0
   joltForceX: 200
@@ -7739,7 +7721,6 @@ MonoBehaviour:
   particleEffectDuration: 0.8
   screenShakePower: 3
   screenShakeDuration: 0.1
-  hitStopRestoreTime: 200
   hitStopDelay: 0.1
   forceMode: 0
   joltForceX: 2500
@@ -8512,7 +8493,6 @@ MonoBehaviour:
   particleEffectDuration: 0.5
   screenShakePower: 2
   screenShakeDuration: 0.1
-  hitStopRestoreTime: 1000
   hitStopDelay: 0.03
   forceMode: 0
   joltForceX: 500
@@ -8619,7 +8599,6 @@ MonoBehaviour:
   particleEffectDuration: 0.5
   screenShakePower: 2
   screenShakeDuration: 0.1
-  hitStopRestoreTime: 1000
   hitStopDelay: 0.03
   forceMode: 0
   joltForceX: 200
@@ -8646,7 +8625,6 @@ MonoBehaviour:
   particleEffectDuration: 0.5
   screenShakePower: 2
   screenShakeDuration: 0.1
-  hitStopRestoreTime: 1000
   hitStopDelay: 0.03
   forceMode: 0
   joltForceX: 200

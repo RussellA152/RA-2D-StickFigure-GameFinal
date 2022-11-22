@@ -110,6 +110,20 @@ public class EnemyHitCollider : MonoBehaviour, IDamageDealingCharacter
         particleSys.Play();
     }
 
+
+    //will move the gameobject using force by powerX and powerY
+    public void JoltThisObject(bool directionIsRight, float powerX, float powerY)
+    {
+
+    }
+
+    // set the entity's gravity scale to the given argument
+    // air attacks will generally have lower gravity counts
+    public void SetEntityGravity(float amountOfGravity)
+    {
+
+    }
+
     public void SetParticleEffectDuration(float duration)
     {
         particleEffectDuration = duration;

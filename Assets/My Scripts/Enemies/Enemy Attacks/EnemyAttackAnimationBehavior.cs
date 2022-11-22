@@ -15,18 +15,20 @@ public class EnemyAttackAnimationBehavior : StateMachineBehaviour, IDamageAttrib
     //type of damage the attack will do (light -- > player flinches, heavy -- > player knocked back )
     public IDamageAttributes.DamageType damageType;
 
-    [Header("Damage & Force")]
-    [SerializeField] private float attackDamage; //damage of the attack
-    [SerializeField] private float attackingPowerX; //amount of force applied to enemy that is hit by this attack in x-direction
-    [SerializeField] private float attackingPowerY; //amount of force applied to enemy that is hit by this attack in y-direction
+    [Header("Damage & Force Values")]
+    [SerializeField] private float attackDamage; // damage of the attack
+    [SerializeField] private float attackingPowerX; // amount of force applied to enemy that is hit by this attack in x-direction
+    [SerializeField] private float attackingPowerY; // amount of force applied to enemy that is hit by this attack in y-direction
 
+    [Header("Particle Effect Values")]
     [SerializeField] private float particleEffectDuration; // duration that the attack particle effect will play for
 
+    [Header("Screenshake Values")]
     [SerializeField] private float screenShakePower; // amount of screenshake to apply
     [SerializeField] private float screenShakeDuration; // duration of screenshake
 
-
-    [Header("Jolt Force Applied To Enemy")]
+    [Header("Jolt Force Applied To Player")]
+    [SerializeField] private ForceMode2D forceMode; // the force mode applied to the jolt force
     [SerializeField] private float joltForceX; //determines how far the player will 'jolt' forward in the x-direction when attacking (Should be a high value)
     [SerializeField] private float joltForceY; //determines how far the player will 'jolt' forward in the y-direction when attacking (Should be a high value)
 

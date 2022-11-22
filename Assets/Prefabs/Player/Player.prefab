@@ -82,14 +82,6 @@ MonoBehaviour:
   hitStopScript: {fileID: 1719390396932942190}
   hitbox: {fileID: 4332903956781392642}
   particleSys: {fileID: 6387937771397364741}
-  tempDamageType: 0
-  tempAttackDamage: 0
-  tempAttackPowerX: 0
-  tempAttackPowerY: 0
-  particleEffectDuration: 0
-  tempScreenShakePower: 0
-  tempScreenShakeDuration: 0
-  tempHitStopDelay: 0
 --- !u!114 &1719390396932942190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,6 +313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 4332903956958558058}
+  playerHitColliderScript: {fileID: 4332903956781392645}
   money: 500
   gravityApplied: 5
   runningSpeed: 65

@@ -539,7 +539,7 @@ public class EnemyController : MonoBehaviour
             // only allow enemy to despawn when stopped and grounded
             if (timeUntilDespawn <= 0f && !hasDespawned && isGrounded)
             {
-                Debug.Log("DESPAWN!");
+                //Debug.Log("DESPAWN!");
                 currentState = EnemyState.Dead;
             }
 

@@ -9,6 +9,8 @@ using Cinemachine;
 // and when the enemy is inside the box collider's trigger, call the deal damage function that will apply the damage and force on the enemy
 public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
 {
+    public AttackValues statsScriptableObject;
+
     [SerializeField] CinemachineImpulseSource impulseSource;
     [SerializeField] private HitStop hitStopScript;
 
@@ -23,19 +25,19 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
 
 
     //temporary damage values updated by the attack animation
-    [SerializeField] private IDamageAttributes.DamageType tempDamageType;
-    [SerializeField] private float tempAttackDamage;
+    private IDamageAttributes.DamageType tempDamageType;
+     private float tempAttackDamage;
 
-    [SerializeField] private float tempAttackPowerX;
-    [SerializeField] private float tempAttackPowerY;
+    private float tempAttackPowerX;
+    private float tempAttackPowerY;
 
-    [SerializeField] private float particleEffectDuration;
+    private float particleEffectDuration;
 
-    [SerializeField] private float tempScreenShakePower;
-    [SerializeField] private float tempScreenShakeDuration;
+    private float tempScreenShakePower;
+    private float tempScreenShakeDuration;
 
     //private int tempHitStopRestoreTimer;
-    [SerializeField] private float tempHitStopDelay;
+    private float tempHitStopDelay;
 
     private int ignorePlayerLayer;
 
@@ -65,6 +67,8 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
             Debug.Log("Hit an enemy!  " + targetTransform.gameObject.name);
 
             enemyInsideTrigger = true;
+
+            //DealDamage(transform.parent, statsScriptableObject.damageType, statsScriptableObject.attackDamage, statsScriptableObject.attackingPowerX, statsScriptableObject.attackingPowerY);
 
             //now that enemy is inside the trigger, call the deal damage function
             DealDamage(transform.parent, tempDamageType, tempAttackDamage, tempAttackPowerX, tempAttackPowerY);
@@ -121,13 +125,15 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
                 // do a hitstop when landing an attack
                 hitStopScript.Stop(tempHitStopDelay);
 
-               // hitStopScript.StopTime(0.05f, tempHitStopRestoreTimer, tempHitStopDelay);
+                // hitStopScript.StopTime(0.05f, tempHitStopRestoreTimer, tempHitStopDelay);
 
                 // change duration of the screenshake 
                 impulseSource.m_ImpulseDefinition.m_TimeEnvelope.m_SustainTime = tempScreenShakeDuration;
+                //impulseSource.m_ImpulseDefinition.m_TimeEnvelope.m_SustainTime = statsScriptableObject.screenShakeDuration;
 
                 // generate an impulse to shake the screen
                 impulseSource.GenerateImpulse(tempScreenShakePower);
+                //impulseSource.GenerateImpulse(statsScriptableObject.screenShakePower);
 
                 //set target to null afterwards to prevent player from dealing damage to enemy without any collision
                 targetTransform = null;
@@ -147,6 +153,18 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
         particleSys.Play();
     }
 
+    ////will move the gameobject using force by powerX and powerY
+    //public void JoltThisObject(bool directionIsRight, float powerX, float powerY)
+    //{
+
+    //}
+
+    //// set the entity's gravity scale to the given argument
+    //// air attacks will generally have lower gravity counts
+    //public void SetEntityGravity(float amountOfGravity) {
+
+    //}
+
     public void SetParticleEffectDuration(float duration)
     {
         particleEffectDuration = duration;
@@ -163,7 +181,7 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
         tempScreenShakeDuration = screenShakeDuration;
     }
 
-    public void SetHitStopValues(int restoreTime, float delay)
+    public void SetHitStopValues(float delay)
     {
         //tempHitStopRestoreTimer = restoreTime;
         tempHitStopDelay = delay;
@@ -179,6 +197,19 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
        // tempHitStopRestoreTimer = 0;
 
     }
+
+    //public void JoltThisObject(bool directionIsRight, float powerX, float powerY)
+    //{
+    //    // if this attack is supposed to reset y velocity on attack
+    //    if (resetYVelocityOnAttack)
+    //        playerComponentScript.GetRB().velocity = Vector2.zero;
+
+    //    if (directionIsRight)
+    //        rb.AddForce(new Vector2(powerX, powerY), forceMode);
+    //    //if player is facing left, then multiply force by negative 1 to prevent player from jolting backwards
+    //    else
+    //        rb.AddForce(new Vector2(-powerX, powerY), forceMode);
+    //}
 
     public BoxCollider2D GetHitBox()
     {

@@ -25,17 +25,20 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
 
     private bool playerFacingRight; // represents direction player is facing (retrieved from playerComponents script)
 
-    [Header("Damage & Force")]
+    [Header("Damage & Force Values")]
     [SerializeField] private float attackDamage; // damage of the attack
     [SerializeField] private float attackingPowerX; // amount of force applied to enemy that is hit by this attack in x-direction
     [SerializeField] private float attackingPowerY; // amount of force applied to enemy that is hit by this attack in y-direction
 
+    [Header("Particle Effect Values")]
     [SerializeField] private float particleEffectDuration; // duration that the attack particle effect will play for
 
+    [Header("Screenshake Values")]
     [SerializeField] private float screenShakePower; // amount of screenshake to apply
     [SerializeField] private float screenShakeDuration; // duration of screenshake
 
-    [SerializeField] private int hitStopRestoreTime; // how quickly it will take for the hitstop to recover or for timescale to reset (higher values = quicker hitstop duration)
+    [Header("Hitstop Values")]
+    //[SerializeField] private int hitStopRestoreTime; // how quickly it will take for the hitstop to recover or for timescale to reset (higher values = quicker hitstop duration)
     [SerializeField] private float hitStopDelay; // how long will hitstop delay last?
 
     [Header("Jolt Force Applied To Player")]
@@ -43,6 +46,8 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
     [SerializeField] private float joltForceX; //determines how far the player will 'jolt' forward in the x-direction when attacking (Should be a high value)
     [SerializeField] private float joltForceY; //determines how far the player will 'jolt' forward in the y-direction when attacking (Should be a high value)
 
+
+    [Space(20)]
     [SerializeField] private float gravityDuringAttack; // how much gravity is applied to player during this attack?  
 
     private int isGroundedHash; //hash value for animator's isGrounded parameter (for performance)
@@ -57,6 +62,8 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
         //animator.SetBool("isAttacking", true);
 
         attackDamage *= PlayerStats.instance.GetDamageMultiplier();
+
+
         //improves performance
         isGroundedHash = Animator.StringToHash("isGrounded");
 
@@ -64,6 +71,15 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
         playerComponentScript = animator.transform.gameObject.GetComponent<PlayerComponents>();
 
         hitbox = playerComponentScript.GetHitBox();
+
+        IDamageDealingCharacter damageDealingScript = hitbox.gameObject.GetComponent<IDamageDealingCharacter>();
+
+        //invoke hitbox's function updates damage values
+        damageDealingScript.UpdateAttackValues(damageType, attackDamage, attackingPowerX, attackingPowerY, screenShakePower, screenShakeDuration);
+        damageDealingScript.SetParticleEffectDuration(particleEffectDuration);
+
+        // set restore time based on the attack animation (ideally, a stronger attack like the ground slam or footdive should have a smaller restore time to make hitstop last longer)
+        hitbox.gameObject.GetComponent<PlayerHitCollider>().SetHitStopValues(hitStopDelay);
 
         //retrive which way player is facing
         playerFacingRight = playerComponentScript.GetPlayerDirection();
@@ -78,14 +94,6 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
         //invoke jolt movement 
         JoltThisObject(playerFacingRight, joltForceX, joltForceY);
 
-        IDamageDealingCharacter damageDealingScript = hitbox.gameObject.GetComponent<IDamageDealingCharacter>();
-
-        //invoke hitbox's function updates damage values
-        damageDealingScript.UpdateAttackValues(damageType, attackDamage, attackingPowerX, attackingPowerY, screenShakePower, screenShakeDuration);
-        damageDealingScript.SetParticleEffectDuration(particleEffectDuration);
-
-        // set restore time based on the attack animation (ideally, a stronger attack like the ground slam or footdive should have a smaller restore time to make hitstop last longer)
-        hitbox.gameObject.GetComponent<PlayerHitCollider>().SetHitStopValues(hitStopRestoreTime, hitStopDelay);
 
         // if gravity is set to 0 in inspector, then we're not trying to change player's gravity during the attack
         if (gravityDuringAttack != 0)

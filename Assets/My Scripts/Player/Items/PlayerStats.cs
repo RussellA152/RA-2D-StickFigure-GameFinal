@@ -12,6 +12,8 @@ public class PlayerStats : MonoBehaviour
 
     [SerializeField] private PlayerInputActions playerControls;
 
+    [SerializeField] private PlayerHitCollider playerHitColliderScript;
+
     //public InputAction useEquipmentBinding { public get; private set; }
 
     //[SerializeField] private GameObject componentHolder; //gameobject that holds all added components from item
@@ -126,6 +128,10 @@ public class PlayerStats : MonoBehaviour
 
 
     }
+    //public void TestScriptableObject(AttackValues so)
+    //{
+    //    playerHitColliderScript.SetAttackValues(so);
+    //}
 
     public void AddPassiveItem(Item passiveItem)
     {
