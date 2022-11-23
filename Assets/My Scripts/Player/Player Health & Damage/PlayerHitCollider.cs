@@ -9,14 +9,16 @@ using Cinemachine;
 // and when the enemy is inside the box collider's trigger, call the deal damage function that will apply the damage and force on the enemy
 public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
 {
-    public AttackValues statsScriptableObject;
+    //public AttackValues statsScriptableObject;
 
     [SerializeField] CinemachineImpulseSource impulseSource;
     [SerializeField] private HitStop hitStopScript;
 
     [SerializeField] private BoxCollider2D hitbox;
 
+    
     [SerializeField] private ParticleSystem particleSys; // particle system used for playing particle effects when damaging something
+    [SerializeField] private ParticleSystemRenderer particleRenderer; // the renderer of the hit effect particle system
     private ParticleSystem.MainModule psMain;
 
     private Transform targetTransform;// the transform of who enters our hitbox collider
@@ -32,6 +34,7 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
     private float tempAttackPowerY;
 
     private float particleEffectDuration;
+    private Material particleEffectMaterial;
 
     private float tempScreenShakePower;
     private float tempScreenShakeDuration;
@@ -144,6 +147,8 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
 
     public void PlayParticleEffect(float duration, Vector2 positionOfParticle)
     {
+        particleRenderer.material = particleEffectMaterial;
+
         particleSys.transform.position = positionOfParticle;
 
         particleSys.Stop();
@@ -165,8 +170,9 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
 
     //}
 
-    public void SetParticleEffectDuration(float duration)
+    public void SetParticleEffectDetails(Material material, float duration)
     {
+        particleEffectMaterial = material;
         particleEffectDuration = duration;
     }
 

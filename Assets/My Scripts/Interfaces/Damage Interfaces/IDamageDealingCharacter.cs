@@ -11,6 +11,7 @@ public interface IDamageDealingCharacter : IDamageDealing
     // attack animations will update the damage values that the hit collider will apply to targets
     public void UpdateAttackValues(IDamageAttributes.DamageType damageType, float damage, float attackPowerX, float attackPowerY, float screenShakePower, float screenShakeDuration);
 
-    // attack animations will update the particle effect duration value that the hit collider's particle system will play
-    public void SetParticleEffectDuration(float duration);
+    // attack animations will set the particle effect material they will use
+    // and will update the particle effect duration value that the hit collider's particle system will play
+    public void SetParticleEffectDetails(Material particleEffectMaterial, float duration);
 }

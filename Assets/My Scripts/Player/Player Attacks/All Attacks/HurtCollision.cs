@@ -20,6 +20,7 @@ public class HurtCollision : MonoBehaviour, IDamageDealing
     [SerializeField] CinemachineImpulseSource impulseSource;
 
     [SerializeField] private ParticleSystem particleSys; // particle system used for playing particle effects when damaging something
+    [SerializeField] private ParticleSystemRenderer particleRenderer; // the renderer of the hit effect particle system
     private ParticleSystem.MainModule psMain;
 
 
@@ -31,7 +32,8 @@ public class HurtCollision : MonoBehaviour, IDamageDealing
     [SerializeField] private float forceOnCollisionX; // how much X force is applied to the other enemy take when they collide with this knocked down enemy?
     [SerializeField] private float forceOnCollisionY; // how much Y force is applied to the other enemy take when they collide with this knocked down enemy?
 
-    [Header("Duration of Particle Effect")]
+    [Header("Particle Effect Details")]
+    [SerializeField] private Material particleEffectMaterial;
     [SerializeField] private float particleEffectDuration;
 
     [Header("Screenshake Values")]
@@ -48,6 +50,8 @@ public class HurtCollision : MonoBehaviour, IDamageDealing
         hurtScript = GetComponentInParent<IDamageable>();
 
         psMain = particleSys.main;
+
+        particleRenderer.material = particleEffectMaterial;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

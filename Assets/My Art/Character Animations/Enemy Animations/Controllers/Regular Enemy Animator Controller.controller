@@ -65,9 +65,11 @@ MonoBehaviour:
   attackDamage: 35
   attackingPowerX: 100
   attackingPowerY: 25
+  particleEffectMaterial: {fileID: 2100000, guid: 05287224517eb034f9c4ffd2696f1f06, type: 2}
   particleEffectDuration: 1
   screenShakePower: 3
   screenShakeDuration: 0.1
+  forceMode: 0
   joltForceX: 20000
   joltForceY: 0
 --- !u!1102 &-7804365842840373576
@@ -255,9 +257,11 @@ MonoBehaviour:
   attackDamage: 0
   attackingPowerX: 0
   attackingPowerY: 0
+  particleEffectMaterial: {fileID: 0}
   particleEffectDuration: 0
   screenShakePower: 0
   screenShakeDuration: 0
+  forceMode: 0
   joltForceX: 0
   joltForceY: 0
 --- !u!1101 &-5909232420724027272
@@ -648,9 +652,11 @@ MonoBehaviour:
   attackDamage: 15
   attackingPowerX: 40
   attackingPowerY: 10
+  particleEffectMaterial: {fileID: 2100000, guid: 121bed60f5dc3254badebf9c80dd2190, type: 2}
   particleEffectDuration: 0.5
   screenShakePower: 1.5
   screenShakeDuration: 0.05
+  forceMode: 0
   joltForceX: 10000
   joltForceY: 0
 --- !u!1102 &-1233105822085669242
@@ -1244,9 +1250,11 @@ MonoBehaviour:
   attackDamage: 0
   attackingPowerX: 0
   attackingPowerY: 0
+  particleEffectMaterial: {fileID: 0}
   particleEffectDuration: 0
   screenShakePower: 0
   screenShakeDuration: 0
+  forceMode: 0
   joltForceX: 0
   joltForceY: 0
 --- !u!1102 &4072863658780497773

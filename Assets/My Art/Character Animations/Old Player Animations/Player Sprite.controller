@@ -200,6 +200,7 @@ MonoBehaviour:
   attackDamage: 0
   attackingPowerX: 500
   attackingPowerY: 1500
+  particleEffectMaterial: {fileID: 0}
   particleEffectDuration: 0
   screenShakePower: 0
   screenShakeDuration: 0
@@ -364,6 +365,7 @@ MonoBehaviour:
   attackDamage: 15
   attackingPowerX: 250
   attackingPowerY: 300
+  particleEffectMaterial: {fileID: 2100000, guid: 862654792aff9714b8f99a86a2398d49, type: 2}
   particleEffectDuration: 0.5
   screenShakePower: 2
   screenShakeDuration: 0.1
@@ -1554,6 +1556,7 @@ MonoBehaviour:
   attackDamage: 35
   attackingPowerX: 200
   attackingPowerY: 500
+  particleEffectMaterial: {fileID: 2100000, guid: bf20d6d48a7842448a7675ac930430ee, type: 2}
   particleEffectDuration: 0.8
   screenShakePower: 2
   screenShakeDuration: 0
@@ -1606,6 +1609,7 @@ MonoBehaviour:
   attackDamage: 60
   attackingPowerX: 1500
   attackingPowerY: 400
+  particleEffectMaterial: {fileID: 2100000, guid: 92c5a321c7a8d21419b5462ae45c2d56, type: 2}
   particleEffectDuration: 2
   screenShakePower: 5
   screenShakeDuration: 0.1
@@ -2124,6 +2128,7 @@ MonoBehaviour:
   attackDamage: 25
   attackingPowerX: 800
   attackingPowerY: 400
+  particleEffectMaterial: {fileID: 2100000, guid: bf20d6d48a7842448a7675ac930430ee, type: 2}
   particleEffectDuration: 0.8
   screenShakePower: 4
   screenShakeDuration: 0.1
@@ -2521,6 +2526,7 @@ MonoBehaviour:
   attackDamage: 50
   attackingPowerX: 1000
   attackingPowerY: 600
+  particleEffectMaterial: {fileID: 2100000, guid: 92c5a321c7a8d21419b5462ae45c2d56, type: 2}
   particleEffectDuration: 1
   screenShakePower: 4
   screenShakeDuration: 0.1
@@ -2916,6 +2922,7 @@ MonoBehaviour:
   attackDamage: 15
   attackingPowerX: 150
   attackingPowerY: 150
+  particleEffectMaterial: {fileID: 2100000, guid: 862654792aff9714b8f99a86a2398d49, type: 2}
   particleEffectDuration: 0.5
   screenShakePower: 2
   screenShakeDuration: 0.1
@@ -3104,6 +3111,7 @@ MonoBehaviour:
   attackDamage: 15
   attackingPowerX: 150
   attackingPowerY: 150
+  particleEffectMaterial: {fileID: 2100000, guid: bf20d6d48a7842448a7675ac930430ee, type: 2}
   particleEffectDuration: 0.5
   screenShakePower: 2
   screenShakeDuration: 0.1
@@ -3272,10 +3280,11 @@ MonoBehaviour:
   attackDamage: 40
   attackingPowerX: 500
   attackingPowerY: 1500
+  particleEffectMaterial: {fileID: 0}
   particleEffectDuration: 1.5
-  screenShakePower: 8
+  screenShakePower: 10
   screenShakeDuration: 0.25
-  hitStopDelay: 0.25
+  hitStopDelay: 0.35
   forceMode: 0
   joltForceX: 0
   joltForceY: 100
@@ -3326,6 +3335,7 @@ MonoBehaviour:
   attackDamage: 50
   attackingPowerX: 1000
   attackingPowerY: -1000
+  particleEffectMaterial: {fileID: 2100000, guid: 92c5a321c7a8d21419b5462ae45c2d56, type: 2}
   particleEffectDuration: 1.2
   screenShakePower: 4
   screenShakeDuration: 0.1
@@ -3944,7 +3954,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Jump Heavy Attack
-  m_Speed: 0.4
+  m_Speed: 0.15
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 6590472493141335950}
@@ -4008,6 +4018,7 @@ MonoBehaviour:
   attackDamage: 15
   attackingPowerX: 200
   attackingPowerY: 1200
+  particleEffectMaterial: {fileID: 2100000, guid: bf20d6d48a7842448a7675ac930430ee, type: 2}
   particleEffectDuration: 0.8
   screenShakePower: 3
   screenShakeDuration: 0
@@ -4198,6 +4209,7 @@ MonoBehaviour:
   attackDamage: 15
   attackingPowerX: 300
   attackingPowerY: -1000
+  particleEffectMaterial: {fileID: 2100000, guid: bf20d6d48a7842448a7675ac930430ee, type: 2}
   particleEffectDuration: 0.8
   screenShakePower: 3
   screenShakeDuration: 0.1
@@ -4892,6 +4904,7 @@ MonoBehaviour:
   attackDamage: 25
   attackingPowerX: 150
   attackingPowerY: 150
+  particleEffectMaterial: {fileID: 2100000, guid: 92c5a321c7a8d21419b5462ae45c2d56, type: 2}
   particleEffectDuration: 0.5
   screenShakePower: 2
   screenShakeDuration: 0.1
@@ -5677,6 +5690,7 @@ MonoBehaviour:
   attackDamage: 15
   attackingPowerX: 300
   attackingPowerY: 300
+  particleEffectMaterial: {fileID: 2100000, guid: 862654792aff9714b8f99a86a2398d49, type: 2}
   particleEffectDuration: 0.5
   screenShakePower: 2
   screenShakeDuration: 0.1
@@ -6332,6 +6346,7 @@ MonoBehaviour:
   attackDamage: 50
   attackingPowerX: 2000
   attackingPowerY: 800
+  particleEffectMaterial: {fileID: 2100000, guid: bf20d6d48a7842448a7675ac930430ee, type: 2}
   particleEffectDuration: 0
   screenShakePower: 5
   screenShakeDuration: 0.1
@@ -6413,6 +6428,7 @@ MonoBehaviour:
   attackDamage: 15
   attackingPowerX: 300
   attackingPowerY: 1000
+  particleEffectMaterial: {fileID: 2100000, guid: bf20d6d48a7842448a7675ac930430ee, type: 2}
   particleEffectDuration: 0.8
   screenShakePower: 3
   screenShakeDuration: 0.1
@@ -7086,6 +7102,7 @@ MonoBehaviour:
   attackDamage: 35
   attackingPowerX: 400
   attackingPowerY: 1100
+  particleEffectMaterial: {fileID: 2100000, guid: bf20d6d48a7842448a7675ac930430ee, type: 2}
   particleEffectDuration: 1
   screenShakePower: 4
   screenShakeDuration: 0.1
@@ -7212,6 +7229,7 @@ MonoBehaviour:
   attackDamage: 15
   attackingPowerX: 250
   attackingPowerY: 300
+  particleEffectMaterial: {fileID: 2100000, guid: 862654792aff9714b8f99a86a2398d49, type: 2}
   particleEffectDuration: 0.5
   screenShakePower: 2
   screenShakeDuration: 0.1
@@ -7718,6 +7736,7 @@ MonoBehaviour:
   attackDamage: 25
   attackingPowerX: 500
   attackingPowerY: 200
+  particleEffectMaterial: {fileID: 2100000, guid: 862654792aff9714b8f99a86a2398d49, type: 2}
   particleEffectDuration: 0.8
   screenShakePower: 3
   screenShakeDuration: 0.1
@@ -8490,6 +8509,7 @@ MonoBehaviour:
   attackDamage: 15
   attackingPowerX: 150
   attackingPowerY: 150
+  particleEffectMaterial: {fileID: 2100000, guid: 1d912c2be2130c74caf061f004a691b8, type: 2}
   particleEffectDuration: 0.5
   screenShakePower: 2
   screenShakeDuration: 0.1
@@ -8596,6 +8616,7 @@ MonoBehaviour:
   attackDamage: 15
   attackingPowerX: 250
   attackingPowerY: 300
+  particleEffectMaterial: {fileID: 2100000, guid: 862654792aff9714b8f99a86a2398d49, type: 2}
   particleEffectDuration: 0.5
   screenShakePower: 2
   screenShakeDuration: 0.1
@@ -8622,6 +8643,7 @@ MonoBehaviour:
   attackDamage: 15
   attackingPowerX: 250
   attackingPowerY: 300
+  particleEffectMaterial: {fileID: 2100000, guid: bf20d6d48a7842448a7675ac930430ee, type: 2}
   particleEffectDuration: 0.5
   screenShakePower: 2
   screenShakeDuration: 0.1

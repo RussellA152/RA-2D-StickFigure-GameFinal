@@ -21,6 +21,7 @@ public class EnemyAttackAnimationBehavior : StateMachineBehaviour, IDamageAttrib
     [SerializeField] private float attackingPowerY; // amount of force applied to enemy that is hit by this attack in y-direction
 
     [Header("Particle Effect Values")]
+    [SerializeField] private Material particleEffectMaterial; // the material that the particle system will use for this animation (how the particle will look like)
     [SerializeField] private float particleEffectDuration; // duration that the attack particle effect will play for
 
     [Header("Screenshake Values")]
@@ -60,7 +61,7 @@ public class EnemyAttackAnimationBehavior : StateMachineBehaviour, IDamageAttrib
         IDamageDealingCharacter damageDealingScript = hitbox.gameObject.GetComponent<IDamageDealingCharacter>();
 
         damageDealingScript.UpdateAttackValues(damageType, attackDamage, attackingPowerX, attackingPowerY, screenShakePower, screenShakeDuration);
-        damageDealingScript.SetParticleEffectDuration(particleEffectDuration);
+        damageDealingScript.SetParticleEffectDetails(particleEffectMaterial, particleEffectDuration);
 
 
     }

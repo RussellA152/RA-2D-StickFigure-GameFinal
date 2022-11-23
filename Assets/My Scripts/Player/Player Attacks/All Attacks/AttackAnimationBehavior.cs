@@ -31,7 +31,9 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
     [SerializeField] private float attackingPowerY; // amount of force applied to enemy that is hit by this attack in y-direction
 
     [Header("Particle Effect Values")]
+    [SerializeField] private Material particleEffectMaterial; // the material that the particle system will use for this animation (how the particle will look like)
     [SerializeField] private float particleEffectDuration; // duration that the attack particle effect will play for
+    
 
     [Header("Screenshake Values")]
     [SerializeField] private float screenShakePower; // amount of screenshake to apply
@@ -76,7 +78,7 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
 
         //invoke hitbox's function updates damage values
         damageDealingScript.UpdateAttackValues(damageType, attackDamage, attackingPowerX, attackingPowerY, screenShakePower, screenShakeDuration);
-        damageDealingScript.SetParticleEffectDuration(particleEffectDuration);
+        damageDealingScript.SetParticleEffectDetails(particleEffectMaterial,particleEffectDuration);
 
         // set restore time based on the attack animation (ideally, a stronger attack like the ground slam or footdive should have a smaller restore time to make hitstop last longer)
         hitbox.gameObject.GetComponent<PlayerHitCollider>().SetHitStopValues(hitStopDelay);

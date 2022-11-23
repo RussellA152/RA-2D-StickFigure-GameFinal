@@ -10,6 +10,7 @@ public class EnemyHitCollider : MonoBehaviour, IDamageDealingCharacter
     [SerializeField] CinemachineImpulseSource impulseSource;
 
     [SerializeField] private ParticleSystem particleSys; // particle system used for playing particle effects when damaging something
+    [SerializeField] private ParticleSystemRenderer particleRenderer; // the renderer of the hit effect particle system
     private ParticleSystem.MainModule psMain;
 
     private Transform targetTransform; //the gameobject inside of the enemy's hit collider
@@ -20,6 +21,7 @@ public class EnemyHitCollider : MonoBehaviour, IDamageDealingCharacter
     private IDamageAttributes.DamageType tempDamageType;
     private float tempAttackDamage;
 
+    private Material particleEffectMaterial;
     private float particleEffectDuration;
 
     private float tempAttackPowerX;
@@ -101,6 +103,8 @@ public class EnemyHitCollider : MonoBehaviour, IDamageDealingCharacter
 
     public void PlayParticleEffect(float duration, Vector2 particlePosition)
     {
+        particleRenderer.material = particleEffectMaterial;
+
         particleSys.transform.position = particlePosition;
 
         particleSys.Stop();
@@ -124,8 +128,9 @@ public class EnemyHitCollider : MonoBehaviour, IDamageDealingCharacter
 
     }
 
-    public void SetParticleEffectDuration(float duration)
+    public void SetParticleEffectDetails(Material material, float duration)
     {
+        particleEffectMaterial = material;
         particleEffectDuration = duration;
     }
 
