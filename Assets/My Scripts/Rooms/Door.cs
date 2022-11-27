@@ -8,6 +8,8 @@ public class Door : Interactable
 
     [SerializeField] private Door neighboringDoor; //the nearby door THIS door will teleport the player to
 
+    [SerializeField] private SpriteRenderer spriteRenderer;
+
     private Vector3 teleportPositionOffset = new Vector3(0f,2.5f); //an offset added to the position the player will be teleported to when using a door
 
     private void Update()
@@ -49,6 +51,13 @@ public class Door : Interactable
 
         //when player uses the door, we will invoke the "EnteringNewAreaEvent" event system
         LevelManager.instance.EnteringNewAreaEvent();
+    }
+
+    // call this function when you want to change the appearance of the door 
+    // ex. a door leading to a boss room will have a red boss door
+    public void ChangeDoorSprite(Sprite doorSprite)
+    {
+        spriteRenderer.sprite = doorSprite;
     }
 
     public void SetNeighboringDoor(Door door)

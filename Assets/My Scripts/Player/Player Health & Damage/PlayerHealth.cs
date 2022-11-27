@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour, IHealth
@@ -13,6 +14,9 @@ public class PlayerHealth : MonoBehaviour, IHealth
 
     private int isAliveHash; // the "isAlive" parameter from the player's animator controller
 
+    public Action onPlayerDeath;
+
+
     private void Start()
     {
         //set current health to max health at beginning of game
@@ -24,6 +28,8 @@ public class PlayerHealth : MonoBehaviour, IHealth
         isAliveHash = Animator.StringToHash("isAlive");
 
         animator.SetBool(isAliveHash, isAlive);
+
+
     }
 
     private void Update()
@@ -42,11 +48,19 @@ public class PlayerHealth : MonoBehaviour, IHealth
         if (health <= 0f)
         {
             //Debug.Log(this.gameObject.name + " has died!");
-            isAlive = false;
+
+            OnPlayerDeath();
+            //isAlive = false;
+
+            //animator.SetBool(isAliveHash, isAlive);
+
+
+        }
+        else
+        {
+            isAlive = true;
 
             animator.SetBool(isAliveHash, isAlive);
-
-
         }
     }
 
@@ -70,6 +84,12 @@ public class PlayerHealth : MonoBehaviour, IHealth
 
     }
 
+    // return true or false if player's current health is full
+    public bool IsCurrentHealthFull()
+    {
+        return playerCurrentHealth == playerMaxHealth;
+    }
+
     //Obsolete
     //public void ModifyMaxHealth(float amount)
     //{
@@ -87,5 +107,18 @@ public class PlayerHealth : MonoBehaviour, IHealth
     public bool CheckIfAlive()
     {
         return isAlive;
+    }
+
+    private void OnPlayerDeath()
+    {
+        isAlive = false;
+
+        animator.SetBool(isAliveHash, isAlive);
+
+        // invoke onPlayerDeath eventSystem
+        if (onPlayerDeath != null)
+        {
+            onPlayerDeath();
+        }
     }
 }

@@ -13,6 +13,8 @@ public class ItemSwapper : MonoBehaviour
 
     public event Action swapEquipmentEvent;
 
+    private bool canSwapEquipment;
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -29,7 +31,7 @@ public class ItemSwapper : MonoBehaviour
 
     public void SwapActiveEquipment()
     {
-        if(swapEquipmentEvent != null)
+        if(swapEquipmentEvent != null && canSwapEquipment)
         {
             swapEquipmentEvent();
         }
@@ -39,5 +41,10 @@ public class ItemSwapper : MonoBehaviour
     public GameObject GetItemHolder()
     {
         return itemHolder;
+    }
+
+    public void SetCanSwapEquipment(bool boolean)
+    {
+        canSwapEquipment = boolean;
     }
 }

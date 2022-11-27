@@ -63,7 +63,10 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
     {
         //animator.SetBool("isAttacking", true);
 
+        // apply damage/ force multipliers from PlayerStats
         attackDamage *= PlayerStats.instance.GetDamageMultiplier();
+        attackingPowerX *= PlayerStats.instance.GetAttackPowerMultiplier();
+        attackingPowerY *= PlayerStats.instance.GetAttackPowerMultiplier();
 
 
         //improves performance

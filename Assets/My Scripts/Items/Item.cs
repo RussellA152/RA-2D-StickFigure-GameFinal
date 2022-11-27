@@ -1,6 +1,6 @@
 //using System;
-//using System.Collections;
-//using System.Collections.Generic;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -8,17 +8,26 @@ using Random = UnityEngine.Random;
 
 public abstract class Item : MonoBehaviour, IPriceable
 {
+    [HideInInspector]
     public string itemName;
 
     public ItemScriptableObject myScriptableObject;
 
+    [HideInInspector]
     public ItemScriptableObject.ItemType type;
 
+    [HideInInspector]
+    public float usageCooldown;
+    private bool canUse = true; // for equipment, false means player can't use equipment item
+
+    [HideInInspector]
     public float procChance;
 
+    [HideInInspector]
     public int amountOfCharge; //how many times can this item be used?
+    [HideInInspector]
     public int chargeConsumedPerUse; //how much charge will this item consume on each use?
-
+    [HideInInspector]
     public int itemPrice;
 
     //public bool active;
@@ -99,7 +108,7 @@ public abstract class Item : MonoBehaviour, IPriceable
             case ItemScriptableObject.ItemType.equipment:
                 //if this item has sufficient charge, take some away
                 //otherwise, return false and don't allow item to activate its use
-                if (amountOfCharge < chargeConsumedPerUse)
+                if (amountOfCharge < chargeConsumedPerUse && canUse)
                 {
                     //when player's equipment item is out of charges we can probably play some sound that
                     //indicates the item can't be used
@@ -113,13 +122,15 @@ public abstract class Item : MonoBehaviour, IPriceable
                 {
                     amountOfCharge -= chargeConsumedPerUse;
                     //hasSufficientCharge = true;
-
+                    StartCoroutine(UsageCooldownCoroutine(usageCooldown));
                     return true;
                 }
 
             //this function is not needed for instant items since they will always activate on pickup (probably won't even invoke this function)
             case ItemScriptableObject.ItemType.instant:
                 //instant items should always activate
+                //StartCoroutine(WaitToReturnToPool());
+                //ReturnToPool();
                 return true;
         }
 
@@ -154,7 +165,9 @@ public abstract class Item : MonoBehaviour, IPriceable
                 ItemAction(PlayerStats.instance.GetPlayer());
 
                 // an instant will immediately return to their respective pool when picked up (no need to hold it anywhere)
-                ReturnToPool();
+                // wait some time before returning to pool so that player doesn't repeatedly retrieve the same item
+                //ReturnToPool();
+                StartCoroutine(WaitToReturnToPool());
                 
                 break;
         }
@@ -185,6 +198,23 @@ public abstract class Item : MonoBehaviour, IPriceable
     {
         if (myPool != null)
             myPool.Release(this);
+    }
+
+    IEnumerator UsageCooldownCoroutine(float timer)
+    {
+        canUse = false;
+        yield return new WaitForSeconds(timer);
+        canUse = true;
+    }
+
+    IEnumerator WaitToReturnToPool()
+    {
+        int randomWaitTime = Random.Range(45, 180);
+
+        // wait 2 minutes before returning to pool
+        yield return new WaitForSeconds(randomWaitTime);
+
+        ReturnToPool();
     }
     
     public IObjectPool<Item> GetMyPool()

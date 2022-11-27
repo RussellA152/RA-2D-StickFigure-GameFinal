@@ -59,6 +59,10 @@ public class PlayerHurt : MonoBehaviour, IDamageable
         if (playerCollisionLayerScript.GetIgnoreLayerIsOnBoolean())
             playerCollisionLayerScript.ResetLayer();
 
+        // if the player "canBeHurt" is false, then the player is unfazed by attacks
+        if (!PlayerStats.instance.ReturnCanBeHurt())
+            return;
+
         //find the direction the attacker is facing
         Vector3 directionOfAttacker = attacker - transform.position;
         
@@ -226,6 +230,9 @@ public class PlayerHurt : MonoBehaviour, IDamageable
 
     public void TakeDamage(float damage, float attackPowerX, float attackPowerY)
     {
+        // subtract damage depending on the damage absorption multiplier of the player
+        damage = damage - (PlayerStats.instance.GetDamageAbsorptionMultiplier() * damage);
+
         //this GameObjects's health is subtracted by damage dealt
         healthScript.ModifyHealth(-1f * damage);
 

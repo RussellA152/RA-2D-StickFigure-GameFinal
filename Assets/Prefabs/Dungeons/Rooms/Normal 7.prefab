@@ -84,6 +84,10 @@ MonoBehaviour:
   topDoor: {fileID: 7732860366777325250}
   leftDoor: {fileID: 6956198649492743644}
   rightDoor: {fileID: 603058294024974675}
+  normalDoorSprite: {fileID: 21300000, guid: 7e4131191cf6f934a96cc765d5984504, type: 3}
+  treasureDoorSprite: {fileID: 21300000, guid: 033149bad2f38dd449f79a4552b4d15a, type: 3}
+  shopDoorSprite: {fileID: 21300000, guid: 01b8098b951c12e4c93346f161ac6a1d, type: 3}
+  bossDoorSprite: {fileID: 21300000, guid: e594944864905ef42a00b27c74ccd524, type: 3}
 --- !u!1 &570149327367189974
 GameObject:
   m_ObjectHideFlags: 0

@@ -86,6 +86,10 @@ MonoBehaviour:
   topDoor: {fileID: 5729943183382851295}
   leftDoor: {fileID: 4926122910458846657}
   rightDoor: {fileID: 3209383378607868238}
+  normalDoorSprite: {fileID: 21300000, guid: 7e4131191cf6f934a96cc765d5984504, type: 3}
+  treasureDoorSprite: {fileID: 21300000, guid: 033149bad2f38dd449f79a4552b4d15a, type: 3}
+  shopDoorSprite: {fileID: 21300000, guid: 01b8098b951c12e4c93346f161ac6a1d, type: 3}
+  bossDoorSprite: {fileID: 21300000, guid: e594944864905ef42a00b27c74ccd524, type: 3}
 --- !u!1 &570149327623157080
 GameObject:
   m_ObjectHideFlags: 0
@@ -476,10 +480,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 570149327623157081}
     m_Modifications:
+    - target: {fileID: 222845970572199305, guid: 3360547f781491d489d0cdb5a34f5c4b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 01b8098b951c12e4c93346f161ac6a1d, type: 3}
     - target: {fileID: 782567093553658677, guid: 3360547f781491d489d0cdb5a34f5c4b, type: 3}
       propertyPath: room
       value: 
       objectReference: {fileID: 2355128438222547626}
+    - target: {fileID: 1100646830264662771, guid: 3360547f781491d489d0cdb5a34f5c4b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 01b8098b951c12e4c93346f161ac6a1d, type: 3}
     - target: {fileID: 1498154974420076222, guid: 3360547f781491d489d0cdb5a34f5c4b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 49.3
@@ -504,6 +516,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 12.94
       objectReference: {fileID: 0}
+    - target: {fileID: 4238305837919983482, guid: 3360547f781491d489d0cdb5a34f5c4b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 01b8098b951c12e4c93346f161ac6a1d, type: 3}
     - target: {fileID: 4896951875835543921, guid: 3360547f781491d489d0cdb5a34f5c4b, type: 3}
       propertyPath: room
       value: 
@@ -528,6 +544,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -23.46
       objectReference: {fileID: 0}
+    - target: {fileID: 7259549401185600139, guid: 3360547f781491d489d0cdb5a34f5c4b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 01b8098b951c12e4c93346f161ac6a1d, type: 3}
     - target: {fileID: 7334178795019466107, guid: 3360547f781491d489d0cdb5a34f5c4b, type: 3}
       propertyPath: m_Name
       value: Shop Bottom Door

@@ -28,7 +28,7 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
 
     //temporary damage values updated by the attack animation
     private IDamageAttributes.DamageType tempDamageType;
-     private float tempAttackDamage;
+    private float tempAttackDamage;
 
     private float tempAttackPowerX;
     private float tempAttackPowerY;

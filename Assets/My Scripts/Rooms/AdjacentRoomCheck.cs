@@ -25,6 +25,12 @@ public class AdjacentRoomCheck : MonoBehaviour
     [SerializeField] private Door leftDoor;
     [SerializeField] private Door rightDoor;
 
+    [Header("Potential Door Sprites")]
+    [SerializeField] private Sprite normalDoorSprite;
+    [SerializeField] private Sprite treasureDoorSprite;
+    [SerializeField] private Sprite shopDoorSprite;
+    [SerializeField] private Sprite bossDoorSprite;
+
     private LevelManager levelManager;
 
     private void Start()
@@ -88,7 +94,10 @@ public class AdjacentRoomCheck : MonoBehaviour
         if (levelManager.roomCoordinatesOccupied.ContainsKey(adjacentRoomCoordinate))
         {
             BaseRoom adjacentRoom = levelManager.roomCoordinatesOccupied[adjacentRoomCoordinate];
+
+            // find the neighboring doors
             FindNearbyDoor(door, adjacentRoom);
+
         }
 
         //if the room coordinate list from LevelManager does NOT contain this adjacent room coordinate,
@@ -126,20 +135,67 @@ public class AdjacentRoomCheck : MonoBehaviour
             if(myDoor == bottomDoor)
             {
                 myDoor.SetNeighboringDoor(adjacentRoom.topDoor);
+
+                ChangeDoorSpriteBasedOnRoom(myDoor, adjacentRoom.topDoor, adjacentRoom);
             }
             else if (myDoor == topDoor)
             {
                 myDoor.SetNeighboringDoor(adjacentRoom.bottomDoor);
+
+                ChangeDoorSpriteBasedOnRoom(myDoor, adjacentRoom.bottomDoor, adjacentRoom);
             }
             else if (myDoor == leftDoor)
             {
                 myDoor.SetNeighboringDoor(adjacentRoom.rightDoor);
+
+                ChangeDoorSpriteBasedOnRoom(myDoor, adjacentRoom.rightDoor, adjacentRoom);
             }
             else if(myDoor == rightDoor)
             {
                 myDoor.SetNeighboringDoor(adjacentRoom.leftDoor);
+
+                ChangeDoorSpriteBasedOnRoom(myDoor, adjacentRoom.leftDoor, adjacentRoom);
             }
         }
+    }
+    // change the sprite of the door based on the room type
+    // ex. if the adjacent room is a treasure room, change the door sprite to a green dollar door
+    private void ChangeDoorSpriteBasedOnRoom(Door doorToModify, Door doorToModify2, BaseRoom adjacentRoom)
+    {
+        // depending on the adjacent room's room type (Normal, Treasure, Shop, or Boss) change its sprite
+
+        if (adjacentRoom.roomType == BaseRoom.RoomType.treasure)
+        {
+            doorToModify.ChangeDoorSprite(treasureDoorSprite);
+            //doorToModify2.ChangeDoorSprite(treasureDoorSprite);
+
+        }
+
+
+        else if (adjacentRoom.roomType == BaseRoom.RoomType.shop)
+        {
+            doorToModify.ChangeDoorSprite(shopDoorSprite);
+            //doorToModify2.ChangeDoorSprite(shopDoorSprite);
+        }
+
+
+        else if (adjacentRoom.roomType == BaseRoom.RoomType.boss)
+        {
+            doorToModify.ChangeDoorSprite(bossDoorSprite);
+            //doorToModify2.ChangeDoorSprite(bossDoorSprite);
+        }
+        else if(adjacentRoom.roomType == BaseRoom.RoomType.normal)
+        {
+            doorToModify.ChangeDoorSprite(normalDoorSprite);
+        }
+
+
+        //else
+        //{
+        //    doorToModify.ChangeDoorSprite(normalDoorSprite);
+        //    doorToModify2.ChangeDoorSprite(normalDoorSprite);
+        //}
+
     }
     /*
     public BaseRoom GetRoomAbove()

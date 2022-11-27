@@ -84,6 +84,10 @@ MonoBehaviour:
   topDoor: {fileID: 8063682121797812048}
   leftDoor: {fileID: 7223270716308294734}
   rightDoor: {fileID: 930320909236869313}
+  normalDoorSprite: {fileID: 21300000, guid: 7e4131191cf6f934a96cc765d5984504, type: 3}
+  treasureDoorSprite: {fileID: 21300000, guid: 033149bad2f38dd449f79a4552b4d15a, type: 3}
+  shopDoorSprite: {fileID: 21300000, guid: 01b8098b951c12e4c93346f161ac6a1d, type: 3}
+  bossDoorSprite: {fileID: 21300000, guid: e594944864905ef42a00b27c74ccd524, type: 3}
 --- !u!1 &570149327623157080
 GameObject:
   m_ObjectHideFlags: 0
@@ -1359,11 +1363,11 @@ PrefabInstance:
     - target: {fileID: 8657064822985743530, guid: ad4995094bdadf14ba7f6754b690e35b, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[2].m_Data
       value: 
-      objectReference: {fileID: -263002943539926266, guid: 608d1f51e6b3ba740a3f0d486f6f1c62, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 8657064822985743530, guid: ad4995094bdadf14ba7f6754b690e35b, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[3].m_Data
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: -263002943539926266, guid: 608d1f51e6b3ba740a3f0d486f6f1c62, type: 3}
     - target: {fileID: 8657064822985743530, guid: ad4995094bdadf14ba7f6754b690e35b, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[4].m_Data
       value: 
@@ -1474,11 +1478,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8657064822985743530, guid: ad4995094bdadf14ba7f6754b690e35b, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[2].m_RefCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8657064822985743530, guid: ad4995094bdadf14ba7f6754b690e35b, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[3].m_RefCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8657064822985743530, guid: ad4995094bdadf14ba7f6754b690e35b, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[4].m_RefCount
@@ -1566,7 +1570,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8657064822985743530, guid: ad4995094bdadf14ba7f6754b690e35b, type: 3}
       propertyPath: m_Tiles.Array.data[0].second.m_TileSpriteIndex
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8657064822985743530, guid: ad4995094bdadf14ba7f6754b690e35b, type: 3}
       propertyPath: m_Tiles.Array.data[1].second.m_TileSpriteIndex

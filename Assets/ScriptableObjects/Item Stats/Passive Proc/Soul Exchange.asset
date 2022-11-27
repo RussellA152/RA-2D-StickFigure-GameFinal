@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1084e8500baebe6488f27cdcf59bc34a, type: 3}
+  m_Name: Soul Exchange
+  m_EditorClassIdentifier: 
+  itemName: Soul Exchange
+  itemType: 1
+  itemPrice: 0
+  amountOfCharge: 0
+  chargesConsumedPerUse: 0
+  chargeRefilledPerKill: 0
+  procChance: 1
+  procChanceModifier: 0
+  maxHealthModifier: 0
+  currentHealthModifier: 150
+  amountOfMoneyGiven: 0
+  moneyMultiplierModifier: 0
+  itemDuration: 0
+  usageCooldown: 0
+  damageOfItem: 0
+  attackPowerX: 0
+  attackPowerY: 0
+  screenShakePower: 0
+  screenShakeDuration: 0
+  throwForceX: 0
+  throwForceY: 0
+  damageMultiplierModifier: 0
+  attackPowerMultiplierModifier: 0
+  damageAbsorptionMultiplierModifier: 0
+  gravityModifier: 0
+  movementSpeedMultiplierModifier: 0

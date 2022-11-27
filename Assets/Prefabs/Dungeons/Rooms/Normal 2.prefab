@@ -116,6 +116,10 @@ MonoBehaviour:
   topDoor: {fileID: 6137294433938445760}
   leftDoor: {fileID: 6842602386079786718}
   rightDoor: {fileID: 3900910162115932753}
+  normalDoorSprite: {fileID: 21300000, guid: 7e4131191cf6f934a96cc765d5984504, type: 3}
+  treasureDoorSprite: {fileID: 21300000, guid: 033149bad2f38dd449f79a4552b4d15a, type: 3}
+  shopDoorSprite: {fileID: 21300000, guid: 01b8098b951c12e4c93346f161ac6a1d, type: 3}
+  bossDoorSprite: {fileID: 21300000, guid: e594944864905ef42a00b27c74ccd524, type: 3}
 --- !u!1 &570149326547281972
 GameObject:
   m_ObjectHideFlags: 0
@@ -3533,7 +3537,7 @@ PrefabInstance:
     - target: {fileID: 8657064822985743530, guid: ad4995094bdadf14ba7f6754b690e35b, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[10].m_Data
       value: 
-      objectReference: {fileID: -7839577618268910772, guid: 608d1f51e6b3ba740a3f0d486f6f1c62, type: 3}
+      objectReference: {fileID: 21300000, guid: 06205de503f296e4ba7cef0060c9257f, type: 3}
     - target: {fileID: 8657064822985743530, guid: ad4995094bdadf14ba7f6754b690e35b, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[11].m_Data
       value: 

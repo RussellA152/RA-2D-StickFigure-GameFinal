@@ -314,12 +314,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 4332903956958558058}
-  playerHitColliderScript: {fileID: 4332903956781392645}
-  money: 500
+  playerHealthScript: {fileID: 4332903956958558053}
+  playerComponentScript: {fileID: 4332903956958558062}
+  hurtbox: {fileID: 4332903957970057214}
+  money: 100
   gravityApplied: 5
   runningSpeed: 65
   maxHealth: 300
   damageMultiplier: 1
+  attackPowerMultiplier: 1
+  damageAbsorptionMultiplier: 0
   procChanceMultiplier: 1
   playerGravity: 0
 --- !u!114 &4332903956958558062

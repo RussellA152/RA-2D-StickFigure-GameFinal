@@ -12,7 +12,12 @@ public class PlayerStats : MonoBehaviour
 
     [SerializeField] private PlayerInputActions playerControls;
 
-    [SerializeField] private PlayerHitCollider playerHitColliderScript;
+    [SerializeField] private PlayerHealth playerHealthScript;
+    [SerializeField] private PlayerComponents playerComponentScript;
+
+    [SerializeField] private BoxCollider2D hurtbox;
+
+    //[SerializeField] private PlayerHitCollider playerHitColliderScript;
 
     //public InputAction useEquipmentBinding { public get; private set; }
 
@@ -47,10 +52,13 @@ public class PlayerStats : MonoBehaviour
     private float defaultGravity; // the amount of gravity applied to the player from the inspector
 
     [Header("All Modifiable Stats")]
+    [SerializeField] private bool canBeHurt = true;
     [SerializeField] private float gravityApplied; // the amount of gravity applied to the player
     [SerializeField] private float runningSpeed; // the running speed of the player
     [SerializeField] private float maxHealth; // the max health of the player
     [SerializeField] private float damageMultiplier; // a value multiplied to all player damage (higher would increase all attack damage)
+    [SerializeField] private float attackPowerMultiplier; // a value multiplied to all player attack power damage (higher would increase amount of force applied to enemies)
+    [SerializeField] private float damageAbsorptionMultiplier; // a percentage that will be removed from each damage that the player takes (ex. a value of 0.1 would be 10% less damage from all sources)
     [SerializeField] private float procChanceMultiplier; // a value multiplied to all proc chances of Items 
     [SerializeField] private float playerGravity; // the amount of gravity applied to the player
 
@@ -248,6 +256,12 @@ public class PlayerStats : MonoBehaviour
         rb.gravityScale = amount;
     }
 
+    // set the player's gravity scale back to "amount"
+    public void ModifyPlayerGravity(float amountToIncreaseBy)
+    {
+        playerGravity += amountToIncreaseBy;
+    }
+
     public int GetPlayerMoney()
     {
         return money;
@@ -255,6 +269,7 @@ public class PlayerStats : MonoBehaviour
 
     public void ModifyPlayerMoney(int amount)
     {
+        Debug.Log("MONEY MODIFIED!");
         money += amount;
     }
 
@@ -265,12 +280,23 @@ public class PlayerStats : MonoBehaviour
     }
     public void ModifyRunningSpeed(float amountToIncreaseBy)
     {
-        runningSpeed += amountToIncreaseBy;
+        // increase running by a percentage
+        runningSpeed = runningSpeed + (runningSpeed * amountToIncreaseBy);
     }
 
     public float GetMaxHealth()
     {
         return maxHealth;
+    }
+
+    public bool IsHealthFull()
+    {
+        return playerHealthScript.IsCurrentHealthFull();
+    }
+
+    public void ModifyPlayerCurrentHealth(float amountToIncreaseBy)
+    {
+        playerHealthScript.ModifyHealth(amountToIncreaseBy);
     }
 
     public void ModifyMaxHealth(float amountToIncreaseBy)
@@ -288,6 +314,23 @@ public class PlayerStats : MonoBehaviour
         damageMultiplier += amountToIncreaseBy;
     }
 
+    public float GetAttackPowerMultiplier()
+    {
+        return attackPowerMultiplier;
+    }
+    public void ModifyAttackPowerMultiplier(float amountToIncreaseBy)
+    {
+        attackPowerMultiplier += amountToIncreaseBy;
+    }
+    public float GetDamageAbsorptionMultiplier()
+    {
+        return damageAbsorptionMultiplier;
+    }
+    public void ModifyDamageAbsorptionMultiplier(float amountToIncreaseBy)
+    {
+        damageAbsorptionMultiplier += amountToIncreaseBy;
+    }
+
     public float GetProcChanceMultiplier()
     {
         return procChanceMultiplier;
@@ -300,6 +343,29 @@ public class PlayerStats : MonoBehaviour
     public void SetCanUseEquipment(bool boolean)
     {
         CanUseEquipment = boolean;
+    }
+    public bool ReturnCanBeHurt()
+    {
+        return canBeHurt;
+    }
+    public void TurnOffHurt(float timer)
+    {
+        StartCoroutine(TurnOffHurtTemporarily(timer));
+    }
+    IEnumerator TurnOffHurtTemporarily(float timer)
+    {
+
+        canBeHurt = false;
+        yield return new WaitForSeconds(timer);
+
+        canBeHurt = true;
+    }
+
+    // true if facing right
+    // false if facing left
+    public bool ReturnPlayerDirection()
+    {
+        return playerComponentScript.GetPlayerDirection();
     }
 
     public GameObject GetPlayer()

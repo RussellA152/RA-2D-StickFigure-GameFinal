@@ -56,6 +56,8 @@ public class ItemManager : MonoBehaviour
     [SerializeField] private int inactiveEquipmentCount;
     [SerializeField] private int inactiveInstantCount;
 
+    [SerializeField] private int maxInstantItemsAtOnce;
+
 
     //public Action spawnItemsInARoomEvent; // this eventsystem is invoked when a set of items has spawned inside of a room
     // we will have our shop and treasure rooms subscribe to this eventsystem in OnEnable(), but they won't actually
@@ -87,9 +89,9 @@ public class ItemManager : MonoBehaviour
         equipmentItemsArray = new Item[equipmentItemsToSpawn.Count];
 
         // Transfer all elements from each item list to a dictionary
-        CopyItemsToDictionary(passiveItemsToSpawn);
-        CopyItemsToDictionary(equipmentItemsToSpawn);
-        CopyItemsToDictionary(instantItemsToSpawn);
+        //CopyItemsToDictionary(passiveItemsToSpawn);
+        //CopyItemsToDictionary(equipmentItemsToSpawn);
+        //CopyItemsToDictionary(instantItemsToSpawn);
 
         // copy item elements from serialized array, to a list
         //TransferItemsFromListToArray(passiveItemsToSpawn, passiveItemsArray);
@@ -122,6 +124,20 @@ public class ItemManager : MonoBehaviour
 
         activeInstantCount = instantItemPool.CountActive;
         inactiveInstantCount = instantItemPool.CountInactive;
+
+
+        // if the instant items reaches max count (too many items at once)
+        // tell the object pool to return them all back to the pool
+        if(inactiveInstantCount >= maxInstantItemsAtOnce)
+        {
+            foreach(Item item in activeItems.Keys)
+            {
+                if(item.type == ItemScriptableObject.ItemType.instant)
+                {
+                    instantItemPool.Release(item);
+                }
+            }
+        }
 
     }
 
@@ -273,6 +289,8 @@ public class ItemManager : MonoBehaviour
 
     Item CreateInstantItem()
     {
+        Debug.Log("CREATE INSTANT ITEM!");
+
         //create a random index from 0 to the length of the instant item array 
         int randomIndex = Random.Range(0, instantItemsToSpawn.Count);
 
@@ -286,6 +304,7 @@ public class ItemManager : MonoBehaviour
     // this function performs actions on the item when they are spawned in 
     void OnTakeItemFromPool(Item item)
     {
+                      
         //set item active
         item.gameObject.SetActive(true);
 
@@ -432,6 +451,7 @@ public class ItemManager : MonoBehaviour
 
     public void SpawnInstantItemAtLocation(Vector2 positionToSpawn)
     {
+
         // fetch an instant item from pool
         var instantItem = instantItemPool.Get();
 

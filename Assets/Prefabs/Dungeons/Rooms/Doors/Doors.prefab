@@ -133,6 +133,8 @@ MonoBehaviour:
   canInteractWith: 1
   cooldownTimer: 1.5
   room: {fileID: 0}
+  neighboringDoor: {fileID: 0}
+  spriteRenderer: {fileID: 222845970572199305}
 --- !u!61 &7353442006225623023
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -375,6 +377,8 @@ MonoBehaviour:
   canInteractWith: 1
   cooldownTimer: 1.5
   room: {fileID: 0}
+  neighboringDoor: {fileID: 0}
+  spriteRenderer: {fileID: 1100646830264662771}
 --- !u!61 &6556090531535826917
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -568,6 +572,8 @@ MonoBehaviour:
   canInteractWith: 1
   cooldownTimer: 1.5
   room: {fileID: 0}
+  neighboringDoor: {fileID: 0}
+  spriteRenderer: {fileID: 4238305837919983482}
 --- !u!61 &957892069106877114
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -644,6 +650,8 @@ MonoBehaviour:
   canInteractWith: 1
   cooldownTimer: 1.5
   room: {fileID: 0}
+  neighboringDoor: {fileID: 0}
+  spriteRenderer: {fileID: 7259549401185600139}
 --- !u!61 &2200501172913840958
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -18,4 +18,5 @@ public interface IHealth
 
     //return a bool representing whether the player is alive or not 
     bool CheckIfAlive();
+
 }
