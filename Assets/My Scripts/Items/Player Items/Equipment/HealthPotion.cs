@@ -22,5 +22,12 @@ public class HealthPotion : Item
 
         type = myScriptableObject.itemType;
 
+        usageCooldown = myScriptableObject.usageCooldown;
+
+        chargeConsumedPerUse = myScriptableObject.chargesConsumedPerUse;
+
+        maxAmountOfCharge = myScriptableObject.maxAmountOfCharge;
+        amountOfCharge = myScriptableObject.maxAmountOfCharge;
+
     }
 }

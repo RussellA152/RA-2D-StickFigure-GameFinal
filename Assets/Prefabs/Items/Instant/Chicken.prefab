@@ -171,7 +171,7 @@ Transform:
   m_GameObject: {fileID: 8782208612927994007}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.48, y: 19.22, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 7788117853104092964}
   - {fileID: 4046205825863032052}
@@ -320,6 +320,8 @@ MonoBehaviour:
   itemName: 
   myScriptableObject: {fileID: 11400000, guid: 766b062092986214589949ce225f8524, type: 2}
   type: 0
+  usageCooldown: 0
+  canUse: 1
   procChance: 0
   amountOfCharge: 0
   chargeConsumedPerUse: 0

@@ -23,5 +23,12 @@ public class DamagePotion : Item
 
         type = myScriptableObject.itemType;
 
+        chargeConsumedPerUse = myScriptableObject.chargesConsumedPerUse;
+
+        usageCooldown = myScriptableObject.usageCooldown;
+
+        maxAmountOfCharge = myScriptableObject.maxAmountOfCharge;
+        amountOfCharge = myScriptableObject.maxAmountOfCharge;
+
     }
 }

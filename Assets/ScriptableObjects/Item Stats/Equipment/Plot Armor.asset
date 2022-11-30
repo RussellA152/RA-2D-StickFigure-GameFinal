@@ -16,9 +16,8 @@ MonoBehaviour:
   itemDescription: 
   itemType: 2
   itemPrice: 12
-  amountOfCharge: 10
+  maxAmountOfCharge: 12
   chargesConsumedPerUse: 8
-  chargeRefilledPerKill: 1
   procChance: 0
   procChanceModifier: 0
   maxHealthModifier: 0
@@ -26,7 +25,8 @@ MonoBehaviour:
   amountOfMoneyGiven: 0
   moneyMultiplierModifier: 0
   itemDuration: 5
-  usageCooldown: 10
+  usageCooldown: 3
+  damageType: 0
   damageOfItem: 0
   attackPowerX: 0
   attackPowerY: 0

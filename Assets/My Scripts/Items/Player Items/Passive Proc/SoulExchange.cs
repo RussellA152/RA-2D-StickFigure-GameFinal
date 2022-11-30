@@ -19,6 +19,8 @@ public class SoulExchange : Item
 
         type = myScriptableObject.itemType;
 
+        procChance = myScriptableObject.procChance;
+
         //PlayerStats.instance.gameObject.GetComponent<PlayerHealth>().onPlayerDeath += ItemAction;
 
     }
@@ -28,12 +30,26 @@ public class SoulExchange : Item
         // Survive a fatal attack and regain some health
         if (ShouldActivate())
         {
-            PlayerStats.instance.ModifyPlayerCurrentHealth(myScriptableObject.currentHealthModifier);
+            Debug.Log("SOUL EXCHANGE!");
+            //PlayerStats.instance.gameObject.GetComponent<PlayerHealth>().onPlayerDeath -= ResurrectPlayer;
+            PlayerStats.instance.gameObject.GetComponent<PlayerHealth>().onPlayerDeath -= ResurrectPlayer;
+
+            Invoke(nameof(RefillHealth), myScriptableObject.itemDuration);
+            
+            //PlayerStats.instance.ModifyPlayerCurrentHealth(myScriptableObject.currentHealthModifier);
+
         }
 
-        PlayerStats.instance.gameObject.GetComponent<PlayerHealth>().onPlayerDeath -= ResurrectPlayer;
+        //PlayerStats.instance.gameObject.GetComponent<PlayerHealth>().onPlayerDeath -= ResurrectPlayer;
 
         //ReturnToPool();
+    }
+
+    private void RefillHealth()
+    {
+        PlayerStats.instance.ModifyPlayerCurrentHealth(myScriptableObject.currentHealthModifier);
+        PlayerStats.instance.GetPlayer().GetComponent<Animator>().Play("Resurrect");
+        
     }
 
 

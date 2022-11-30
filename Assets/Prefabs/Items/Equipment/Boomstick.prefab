@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8861708672349121506}
   - component: {fileID: 7737613729898609175}
   - component: {fileID: 1272710716510649145}
+  - component: {fileID: 447269367577181505}
   m_Layer: 12
   m_Name: Hitbox
   m_TagString: Untagged
@@ -70,12 +71,99 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1fb8569511e4564fa9496bdb7664f56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  impulseSource: {fileID: 447269367577181505}
   hitbox: {fileID: 7737613729898609175}
+  damageType: 0
   attackDamage: 0
   attackPowerX: 0
   attackPowerY: 0
   screenShakePower: 0
   screenShakeDuration: 0
+--- !u!114 &447269367577181505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2984064036955660840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd438dd108a0f284aa931a2da434f1d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_RawSignal: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+    m_AmplitudeGain: 0.5
+    m_FrequencyGain: 4
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.1
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 1000
+    m_PropagationSpeed: 343
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_IgnoreTag: 
+  m_UseImpactDirection: 0
+  m_ScaleImpactWithMass: 0
+  m_ScaleImpactWithSpeed: 0
 --- !u!1 &4002679439401923362
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,7 +336,7 @@ Transform:
   m_GameObject: {fileID: 8782208612927994007}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.48, y: 19.22, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 7788117853104092964}
   - {fileID: 8861708672349121506}
@@ -418,8 +506,10 @@ MonoBehaviour:
   myScriptableObject: {fileID: 11400000, guid: d03790dd86be88040963af5310f487c1, type: 2}
   type: 0
   usageCooldown: 0
+  canUse: 1
   procChance: 0
   amountOfCharge: 0
+  maxAmountOfCharge: 0
   chargeConsumedPerUse: 0
   itemPrice: 0
   itemHitColliderScript: {fileID: 1272710716510649145}

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 public class ItemHitCollider : MonoBehaviour, IDamageDealingItem
@@ -7,6 +8,8 @@ public class ItemHitCollider : MonoBehaviour, IDamageDealingItem
     //public AttackValues statsScriptableObject;
 
     //[SerializeField] private HitStop hitStopScript;
+
+    [SerializeField] CinemachineImpulseSource impulseSource;
 
     [SerializeField] private BoxCollider2D hitbox;
 
@@ -119,19 +122,23 @@ public class ItemHitCollider : MonoBehaviour, IDamageDealingItem
 
                 // hitStopScript.StopTime(0.05f, tempHitStopRestoreTimer, tempHitStopDelay);
 
-                // change duration of the screenshake 
-                //impulseSource.m_ImpulseDefinition.m_TimeEnvelope.m_SustainTime = tempScreenShakeDuration;
-                //impulseSource.m_ImpulseDefinition.m_TimeEnvelope.m_SustainTime = statsScriptableObject.screenShakeDuration;
-
-                // generate an impulse to shake the screen
-                //impulseSource.GenerateImpulse(tempScreenShakePower);
-                //impulseSource.GenerateImpulse(statsScriptableObject.screenShakePower);
+                
 
                 //set target to null afterwards to prevent player from dealing damage to enemy without any collision
                 targetTransform = null;
             }
 
         }
+    }
+
+    public void ShakeScreen()
+    {
+        // change duration of the screenshake 
+        impulseSource.m_ImpulseDefinition.m_TimeEnvelope.m_SustainTime = screenShakeDuration;
+
+        // generate an impulse to shake the screen
+        impulseSource.GenerateImpulse(screenShakePower);
+        //Debug.Log("SHAKE SCREEN ITEM!");
     }
 
     public void PlayParticleEffect(float duration, Vector2 positionOfParticle)

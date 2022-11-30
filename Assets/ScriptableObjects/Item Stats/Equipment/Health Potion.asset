@@ -16,7 +16,7 @@ MonoBehaviour:
   itemDescription: 
   itemType: 2
   itemPrice: 8
-  amountOfCharge: 6
+  maxAmountOfCharge: 10
   chargesConsumedPerUse: 4
   chargeRefilledPerKill: 1
   procChance: 0

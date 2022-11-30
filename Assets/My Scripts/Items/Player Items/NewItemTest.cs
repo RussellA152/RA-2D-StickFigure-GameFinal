@@ -24,7 +24,8 @@ public class NewItemTest : Item
 
         itemPrice = myScriptableObject.itemPrice;
 
-        amountOfCharge = myScriptableObject.amountOfCharge;
+        maxAmountOfCharge = myScriptableObject.maxAmountOfCharge;
+        amountOfCharge = myScriptableObject.maxAmountOfCharge;
         chargeConsumedPerUse = myScriptableObject.chargesConsumedPerUse;
     }
 }

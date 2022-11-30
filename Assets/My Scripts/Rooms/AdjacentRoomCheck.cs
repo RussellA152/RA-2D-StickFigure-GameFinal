@@ -167,7 +167,7 @@ public class AdjacentRoomCheck : MonoBehaviour
         if (adjacentRoom.roomType == BaseRoom.RoomType.treasure)
         {
             doorToModify.ChangeDoorSprite(treasureDoorSprite);
-            //doorToModify2.ChangeDoorSprite(treasureDoorSprite);
+            doorToModify2.ChangeDoorSprite(treasureDoorSprite);
 
         }
 
@@ -175,19 +175,19 @@ public class AdjacentRoomCheck : MonoBehaviour
         else if (adjacentRoom.roomType == BaseRoom.RoomType.shop)
         {
             doorToModify.ChangeDoorSprite(shopDoorSprite);
-            //doorToModify2.ChangeDoorSprite(shopDoorSprite);
+            doorToModify2.ChangeDoorSprite(shopDoorSprite);
         }
 
 
         else if (adjacentRoom.roomType == BaseRoom.RoomType.boss)
         {
             doorToModify.ChangeDoorSprite(bossDoorSprite);
-            //doorToModify2.ChangeDoorSprite(bossDoorSprite);
+            doorToModify2.ChangeDoorSprite(bossDoorSprite);
         }
-        else if(adjacentRoom.roomType == BaseRoom.RoomType.normal)
-        {
-            doorToModify.ChangeDoorSprite(normalDoorSprite);
-        }
+        //else if(adjacentRoom.roomType == BaseRoom.RoomType.normal)
+        //{
+        //    doorToModify.ChangeDoorSprite(normalDoorSprite);
+        //}
 
 
         //else

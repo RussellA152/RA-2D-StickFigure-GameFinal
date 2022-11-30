@@ -13,7 +13,7 @@ public class ItemSwapper : MonoBehaviour
 
     public event Action swapEquipmentEvent;
 
-    private bool canSwapEquipment;
+    private bool canSwapEquipment = true;
 
     private void Awake()
     {
@@ -46,5 +46,10 @@ public class ItemSwapper : MonoBehaviour
     public void SetCanSwapEquipment(bool boolean)
     {
         canSwapEquipment = boolean;
+    }
+
+    public bool GetCanSwapEquipment()
+    {
+        return canSwapEquipment;
     }
 }

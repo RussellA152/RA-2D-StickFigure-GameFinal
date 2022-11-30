@@ -15,6 +15,7 @@ public class ClimbingAnimationBehavior : StateMachineBehaviour
         playerComponentScript.SetCanRoll(false);
         playerComponentScript.SetCanAttack(false);
         playerComponentScript.SetCanSlide(false);
+        PlayerStats.instance.SetCanUseEquipment(false);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -30,6 +31,7 @@ public class ClimbingAnimationBehavior : StateMachineBehaviour
         playerComponentScript.SetCanRoll(true);
         playerComponentScript.SetCanAttack(true);
         playerComponentScript.SetCanSlide(true);
+        PlayerStats.instance.SetCanUseEquipment(true);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

@@ -321,10 +321,14 @@ MonoBehaviour:
   myScriptableObject: {fileID: 11400000, guid: def861ad1d74567419487416168ac7e4, type: 2}
   type: 0
   usageCooldown: 0
+  canUse: 1
   procChance: 0
   amountOfCharge: 0
+  maxAmountOfCharge: 0
   chargeConsumedPerUse: 0
   itemPrice: 0
+  transparentColor: {r: 1, g: 1, b: 1, a: 0.4745098}
+  resetColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!50 &3135146213717763128
 Rigidbody2D:
   serializedVersion: 4

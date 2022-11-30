@@ -16,7 +16,7 @@ MonoBehaviour:
   itemDescription: 
   itemType: 2
   itemPrice: 11
-  amountOfCharge: 10
+  maxAmountOfCharge: 12
   chargesConsumedPerUse: 4
   chargeRefilledPerKill: 1
   procChance: 0
@@ -26,13 +26,13 @@ MonoBehaviour:
   amountOfMoneyGiven: 0
   moneyMultiplierModifier: 0
   itemDuration: 0
-  usageCooldown: 4
+  usageCooldown: 2
   damageType: 2
   damageOfItem: 250
   attackPowerX: 2000
   attackPowerY: 1000
-  screenShakePower: 0
-  screenShakeDuration: 0
+  screenShakePower: 3
+  screenShakeDuration: 0.2
   throwForceX: 0
   throwForceY: 0
   damageMultiplierModifier: 0

@@ -129,12 +129,12 @@ SpriteRenderer:
   m_SortingLayerID: -1771347619
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6742ca7513d4b9c40bb6e59d0b99faa2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b71ece44ed43cc245bb335a099931711, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.2, y: 3.2}
+  m_Size: {x: 0.32, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -320,6 +320,8 @@ MonoBehaviour:
   itemName: 
   myScriptableObject: {fileID: 11400000, guid: 63ecb09658ec85143b32964bc687b580, type: 2}
   type: 0
+  usageCooldown: 0
+  canUse: 1
   procChance: 0
   amountOfCharge: 0
   chargeConsumedPerUse: 0

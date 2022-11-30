@@ -14,11 +14,11 @@ public class ItemScriptableObject : ScriptableObject
     public int itemPrice; // how much does this item cost when it is inside a shop?
 
     [Header("Charge Properties")]
-    public int amountOfCharge; //how many charges does this item have
+    public int maxAmountOfCharge; //how many charges does this item have
 
     public int chargesConsumedPerUse; //how much charge does this item use, on each activation
 
-    public int chargeRefilledPerKill; //how much charge is refilled for each enemy kill
+    //public int chargeRefilledPerKill; //how much charge is refilled for each enemy kill
 
 
     [Header("Proc Chance Properties")]

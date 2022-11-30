@@ -9,6 +9,7 @@ public class BombExplosion : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        ItemSwapper.instance.SetCanSwapEquipment(false);
         rb = animator.transform.gameObject.GetComponent<Rigidbody2D>();
         rb.isKinematic = false;
     }
@@ -22,7 +23,10 @@ public class BombExplosion : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        ItemSwapper.instance.SetCanSwapEquipment(true);
         rb.isKinematic = true;
+
+        //animator.enabled = false;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

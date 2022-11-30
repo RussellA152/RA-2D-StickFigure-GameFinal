@@ -13,19 +13,20 @@ MonoBehaviour:
   m_Name: Soul Exchange
   m_EditorClassIdentifier: 
   itemName: Soul Exchange
+  itemDescription: 
   itemType: 1
-  itemPrice: 0
-  amountOfCharge: 0
+  itemPrice: 15
+  maxAmountOfCharge: 0
   chargesConsumedPerUse: 0
-  chargeRefilledPerKill: 0
   procChance: 1
   procChanceModifier: 0
   maxHealthModifier: 0
   currentHealthModifier: 150
   amountOfMoneyGiven: 0
   moneyMultiplierModifier: 0
-  itemDuration: 0
+  itemDuration: 2
   usageCooldown: 0
+  damageType: 0
   damageOfItem: 0
   attackPowerX: 0
   attackPowerY: 0

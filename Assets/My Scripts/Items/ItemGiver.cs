@@ -118,6 +118,14 @@ public class ItemGiver : Interactable, ILockable
     //need to AddComponent so the item is attached to the player, not the gameobject it initially spawned with
     private void AddItemToPlayer()
     {
+        // if the item you're trying to pick up was an equipment item, and you're not allowed to swap equipment, then 
+        // return from this function and don't pick up that item
+        if(itemToGive.type == ItemScriptableObject.ItemType.equipment)
+        {
+            if (!ItemSwapper.instance.GetCanSwapEquipment())
+                return;
+        }
+
         if(!retrieved){
 
             //when picked up, set isKinematic to true to prevent item from moving 

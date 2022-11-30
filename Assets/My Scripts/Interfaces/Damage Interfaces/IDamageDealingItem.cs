@@ -7,6 +7,6 @@ using UnityEngine;
 //have different values of damages like the Player and Enemy do
 public interface IDamageDealingItem : IDamageDealing
 {
-    
-    
+
+    public void ShakeScreen();
 }

@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
     [SerializeField] private Animator animator;
 
     private float playerMaxHealth; //the maximum health the player can have
-    private float playerCurrentHealth; //the current health of the player
+    [SerializeField] private float playerCurrentHealth; //the current health of the player
 
     private bool isAlive; //is the player alive?
 
@@ -43,16 +43,18 @@ public class PlayerHealth : MonoBehaviour, IHealth
     public void CheckHealth(float health)
     {
         playerMaxHealth = PlayerStats.instance.GetMaxHealth();
+        animator.SetBool(isAliveHash, isAlive);
 
         //if player reaches 0 health, disable their game object (FOR NOW, WE WILL USE OBJECT POOLING LATER)
         if (health <= 0f)
         {
             //Debug.Log(this.gameObject.name + " has died!");
 
-            OnPlayerDeath();
-            //isAlive = false;
+            
+            isAlive = false;
 
             //animator.SetBool(isAliveHash, isAlive);
+            OnPlayerDeath();
 
 
         }
@@ -60,7 +62,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
         {
             isAlive = true;
 
-            animator.SetBool(isAliveHash, isAlive);
+            
         }
     }
 
@@ -111,9 +113,9 @@ public class PlayerHealth : MonoBehaviour, IHealth
 
     private void OnPlayerDeath()
     {
-        isAlive = false;
+        //isAlive = false;
 
-        animator.SetBool(isAliveHash, isAlive);
+        //animator.SetBool(isAliveHash, isAlive);
 
         // invoke onPlayerDeath eventSystem
         if (onPlayerDeath != null)

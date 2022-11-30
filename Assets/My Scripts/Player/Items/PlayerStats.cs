@@ -15,6 +15,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private PlayerHealth playerHealthScript;
     [SerializeField] private PlayerComponents playerComponentScript;
 
+    [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private BoxCollider2D hurtbox;
 
     //[SerializeField] private PlayerHitCollider playerHitColliderScript;
@@ -61,6 +62,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float damageAbsorptionMultiplier; // a percentage that will be removed from each damage that the player takes (ex. a value of 0.1 would be 10% less damage from all sources)
     [SerializeField] private float procChanceMultiplier; // a value multiplied to all proc chances of Items 
     [SerializeField] private float playerGravity; // the amount of gravity applied to the player
+   
 
     //[SerializeField] private CharacterController2D playerMovementScript;
     //[SerializeField] private PlayerHealth playerHealthScript;
@@ -90,8 +92,7 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
         //useEquipmentBinding = playerControls.Player.UseEquipment;
-        
-        
+        spriteRenderer.color = new Color(255, 255, 255, 121);
         
     }
 
@@ -360,6 +361,11 @@ public class PlayerStats : MonoBehaviour
 
         canBeHurt = true;
     }
+
+    //public void SetPlayerTransparency(Color32 colorToSet)
+    //{
+    //    spriteRenderer.material.color = colorToSet;
+    //}
 
     // true if facing right
     // false if facing left

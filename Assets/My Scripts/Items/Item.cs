@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 
 public abstract class Item : MonoBehaviour, IPriceable
 {
+
     [HideInInspector]
     public string itemName;
 
@@ -18,13 +19,15 @@ public abstract class Item : MonoBehaviour, IPriceable
 
     [HideInInspector]
     public float usageCooldown;
-    private bool canUse = true; // for equipment, false means player can't use equipment item
+    [SerializeField] private bool canUse = true; // for equipment, false means player can't use equipment item
 
     [HideInInspector]
     public float procChance;
 
     [HideInInspector]
     public int amountOfCharge; //how many times can this item be used?
+    [HideInInspector]
+    public int maxAmountOfCharge; // the maximum amount of charge this item can hold
     [HideInInspector]
     public int chargeConsumedPerUse; //how much charge will this item consume on each use?
     [HideInInspector]
@@ -44,7 +47,7 @@ public abstract class Item : MonoBehaviour, IPriceable
 
     //private bool wasActiveEquipment = false;
 
-    private void Awake()
+    public void Awake()
     {
         Debug.Log("MY AWAKE! " + gameObject.name);
 
@@ -68,19 +71,26 @@ public abstract class Item : MonoBehaviour, IPriceable
     }
 
 
-    private void OnEnable()
+    public void OnEnable()
     {
         //OnItemPickup();
 
         useEquipmentBinding.performed += UseEquipmentOnCommand;
         useEquipmentBinding.Enable();
+
+        // if this item is an equipment item, then subscribe to the onEnemyKill event so the item can refill some charge when an enemy dies
+        if (type == ItemScriptableObject.ItemType.equipment)
+            EnemyManager.enemyManagerInstance.onEnemyKill += RefillChargeOnKill;
     }
 
-    private void OnDisable()
+    public void OnDisable()
     {
 
         useEquipmentBinding.performed -= UseEquipmentOnCommand;
         useEquipmentBinding.Disable();
+
+        if (type == ItemScriptableObject.ItemType.equipment)
+            EnemyManager.enemyManagerInstance.onEnemyKill -= RefillChargeOnKill;
     }
 
     //what the item does for the player
@@ -107,24 +117,33 @@ public abstract class Item : MonoBehaviour, IPriceable
 
             case ItemScriptableObject.ItemType.equipment:
                 //if this item has sufficient charge, take some away
-                //otherwise, return false and don't allow item to activate its use
-                if (amountOfCharge < chargeConsumedPerUse && canUse)
+                if (canUse)
                 {
-                    //when player's equipment item is out of charges we can probably play some sound that
-                    //indicates the item can't be used
-                    Debug.Log("Insufficient Charge");
+                    //otherwise, return false and don't allow item to activate its use
+                    if (amountOfCharge < chargeConsumedPerUse)
+                    {
+                        //when player's equipment item is out of charges we can probably play some sound that
+                        //indicates the item can't be used
+                        Debug.Log("Insufficient Charge");
 
-                    //hasSufficientCharge = false;
-                    return false;
+                        //hasSufficientCharge = false;
+                        return false;
+                    }
+
+                    else
+                    {
+                        Debug.Log("Take some charge away!");
+                        amountOfCharge -= chargeConsumedPerUse;
+                        //hasSufficientCharge = true;
+                        StartCoroutine(UsageCooldownCoroutine(usageCooldown));
+                        return true;
+                    }
                 }
-
                 else
                 {
-                    amountOfCharge -= chargeConsumedPerUse;
-                    //hasSufficientCharge = true;
-                    StartCoroutine(UsageCooldownCoroutine(usageCooldown));
-                    return true;
+                    return false;
                 }
+                
 
             //this function is not needed for instant items since they will always activate on pickup (probably won't even invoke this function)
             case ItemScriptableObject.ItemType.instant:
@@ -172,6 +191,15 @@ public abstract class Item : MonoBehaviour, IPriceable
                 break;
         }
 
+    }
+
+    public void RefillChargeOnKill()
+    {
+        // each time an enemy is killed, refill the equipment's charge by 1
+        if(amountOfCharge <= maxAmountOfCharge)
+        {
+            amountOfCharge += 1;
+        }
     }
 
     private void UseEquipmentOnCommand(InputAction.CallbackContext context)
@@ -225,6 +253,6 @@ public abstract class Item : MonoBehaviour, IPriceable
     // returns the price of this item
     public int GetPrice()
     {
-        return itemPrice;
+        return myScriptableObject.itemPrice;
     }
 }

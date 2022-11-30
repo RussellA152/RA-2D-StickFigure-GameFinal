@@ -5,6 +5,7 @@ using UnityEngine;
 public class Boomstick : Item
 {
     [SerializeField] private ItemHitCollider itemHitColliderScript;
+    //[SerializeField] private SpriteRenderer
     [SerializeField] private BoxCollider2D hitbox;
     [SerializeField] private Animator animator;
     
@@ -15,6 +16,23 @@ public class Boomstick : Item
 
     [SerializeField] private Vector3 offsetX; // offset applied to weapon
 
+    private void Awake()
+    {
+        base.Awake();
+        animator.enabled = false;
+    }
+
+    private void OnEnable()
+    {
+        base.OnEnable();
+        animator.enabled = true;
+    }
+
+    private void OnDisable()
+    {
+        base.OnDisable();
+        animator.enabled = false;
+    }
 
     public override void ItemAction(GameObject player)
     {
@@ -22,6 +40,10 @@ public class Boomstick : Item
         // Turn off player's hitbox for a few seconds
         if (ShouldActivate())
         {
+            //animator.enabled = true;
+
+            //itemHitColliderScript.ShakeScreen();
+
             if (PlayerStats.instance.ReturnPlayerDirection())
             {
                 transform.position = PlayerStats.instance.GetPlayer().transform.position + offsetX;
@@ -37,8 +59,9 @@ public class Boomstick : Item
 
             //PlayerStats.instance.ModifyPlayerCurrentHealth(myScriptableObject.currentHealthModifier);
             animator.Play(animationName);
+            //animator.enabled = false;
 
-            
+
 
         }
 
@@ -46,10 +69,14 @@ public class Boomstick : Item
 
     public override void InitializeValues()
     {
-
+        
         itemName = myScriptableObject.itemName;
 
         type = myScriptableObject.itemType;
+
+        chargeConsumedPerUse = myScriptableObject.chargesConsumedPerUse;
+        maxAmountOfCharge = myScriptableObject.maxAmountOfCharge;
+        amountOfCharge = myScriptableObject.maxAmountOfCharge;
 
         usageCooldown = myScriptableObject.usageCooldown;
         itemHitColliderScript.damageType = myScriptableObject.damageType;
