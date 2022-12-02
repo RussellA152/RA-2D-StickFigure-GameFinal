@@ -9,7 +9,7 @@ public class ItemGiver : Interactable, ILockable
 {
     //[SerializeField] private NewItem itemToGiveToPlayer; //the item script that this giver will insert in the player's inventory
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
     [SerializeField] private BoxCollider2D actualCollider; //box collider without isTrigger checked
     [SerializeField] private BoxCollider2D triggerCollider; //box collider with isTrigger checked
 
@@ -122,7 +122,7 @@ public class ItemGiver : Interactable, ILockable
         // return from this function and don't pick up that item
         if(itemToGive.type == ItemScriptableObject.ItemType.equipment)
         {
-            if (!ItemSwapper.instance.GetCanSwapEquipment())
+            if (!ItemManager.instance.GetCanSwapEquipment())
                 return;
         }
 
@@ -138,7 +138,7 @@ public class ItemGiver : Interactable, ILockable
             if(itemToGive.type != ItemScriptableObject.ItemType.instant)
             {
                 //set the parent of this ItemGiver to ItemManager's item holder gameobject
-                parent = ItemSwapper.instance.GetItemHolder().transform;
+                parent = ItemManager.instance.GetItemHolder();
 
                 this.transform.SetParent(parent);
             }
@@ -160,6 +160,9 @@ public class ItemGiver : Interactable, ILockable
             // item was picked up, call "OnItemPickup"
             itemToGive.OnItemPickup();
 
+            // item was picked up, call itemPickup event system
+            ItemManager.instance.NewItemPickup();
+
 
         }
     }
@@ -171,19 +174,19 @@ public class ItemGiver : Interactable, ILockable
     private void SwapOutOldEquipmentItem()
     {
         //if the player already has an equipment item, then invoke the swapEquipment event system
-        if (ItemSwapper.instance.activeEquipmentSlot != null && itemToGive.type == ItemScriptableObject.ItemType.equipment)
+        if (ItemManager.instance.activeEquipmentSlot != null && itemToGive.type == ItemScriptableObject.ItemType.equipment)
         {
             //call the event system so that the previous equipment item's itemgiver will call its OnDrop
             //this allows us to not need to know about other itemgivers
-            ItemSwapper.instance.SwapActiveEquipment();
+            ItemManager.instance.SwapActiveEquipment();
 
             //now this item giver will subscribe to event system
-            ItemSwapper.instance.swapEquipmentEvent += OnDrop;
+            ItemManager.instance.swapEquipmentEvent += OnDrop;
         }
         //otherwise, subscribe this OnDrop to the swapEquipment event system
-        else if (ItemSwapper.instance.activeEquipmentSlot == null && itemToGive.type == ItemScriptableObject.ItemType.equipment)
+        else if (ItemManager.instance.activeEquipmentSlot == null && itemToGive.type == ItemScriptableObject.ItemType.equipment)
         {
-            ItemSwapper.instance.swapEquipmentEvent += OnDrop;
+            ItemManager.instance.swapEquipmentEvent += OnDrop;
         }
     }
 
@@ -236,7 +239,7 @@ public class ItemGiver : Interactable, ILockable
         SetRetrieved(false);
 
         //unsubscribe from SwapEquipment event after being dropped
-        ItemSwapper.instance.swapEquipmentEvent -= OnDrop;
+        ItemManager.instance.swapEquipmentEvent -= OnDrop;
 
     }
 

@@ -15,6 +15,14 @@ public class ItemManager : MonoBehaviour
 
     private InputAction useEquipmentBinding;
 
+    public Item activeEquipmentSlot;
+
+    public event Action swapEquipmentEvent; // event that occurs when player swaps their current equipment item for a new equipment item
+
+    public event Action itemPickupEvent; // event that occurs when the player picks up any item
+
+    private bool canSwapEquipment = true;
+
 
     // 3 object pools that contain passive, equipment, and instant items
     ObjectPool<Item> passiveItemPool; 
@@ -488,6 +496,45 @@ public class ItemManager : MonoBehaviour
             Debug.Log("List of i: " + list[i] + "Array of i: " + array[i]);
             array[i] = list[i];
         }
+    }
+
+    public void SwapActiveEquipment()
+    {
+        if (swapEquipmentEvent != null && canSwapEquipment)
+        {
+            swapEquipmentEvent();
+        }
+    }
+
+    public void NewItemPickup()
+    {
+        if (itemPickupEvent != null)
+        {
+
+            itemPickupEvent();
+            
+        }
+    }
+
+    public Item GetActiveEquipmentItem()
+    {
+        return activeEquipmentSlot;
+    }
+
+
+    public Transform GetItemHolder()
+    {
+        return itemHolder;
+    }
+
+    public void SetCanSwapEquipment(bool boolean)
+    {
+        canSwapEquipment = boolean;
+    }
+
+    public bool GetCanSwapEquipment()
+    {
+        return canSwapEquipment;
     }
 
 

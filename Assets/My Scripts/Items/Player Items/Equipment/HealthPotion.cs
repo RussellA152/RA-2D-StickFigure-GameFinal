@@ -8,7 +8,7 @@ public class HealthPotion : Item
     {
         // can only use potion if player has full health
         // and this item has enough charges
-        if (PlayerStats.instance.IsHealthFull() && ShouldActivate())
+        if (!PlayerStats.instance.IsHealthFull() && ShouldActivate())
         {
             PlayerStats.instance.ModifyPlayerCurrentHealth(myScriptableObject.currentHealthModifier);
         }

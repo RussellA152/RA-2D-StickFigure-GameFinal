@@ -147,6 +147,9 @@ public class PlayerHitCollider : MonoBehaviour, IDamageDealingCharacter
 
     public void PlayParticleEffect(float duration, Vector2 positionOfParticle)
     {
+        if (particleEffectMaterial == null)
+            return;
+
         particleRenderer.material = particleEffectMaterial;
 
         particleSys.transform.position = positionOfParticle;

@@ -175,7 +175,7 @@ public abstract class Item : MonoBehaviour, IPriceable
                 break;
             case ItemScriptableObject.ItemType.equipment:
 
-                ItemSwapper.instance.activeEquipmentSlot = this;
+                ItemManager.instance.activeEquipmentSlot = this;
 
                 break;
             case ItemScriptableObject.ItemType.instant:

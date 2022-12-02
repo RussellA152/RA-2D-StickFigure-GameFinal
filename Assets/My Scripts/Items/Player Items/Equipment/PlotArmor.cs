@@ -55,8 +55,8 @@ public class PlotArmor : Item
 
     IEnumerator CanSwapTimer(float timer)
     {
-        ItemSwapper.instance.SetCanSwapEquipment(false);
+        ItemManager.instance.SetCanSwapEquipment(false);
         yield return new WaitForSeconds(timer);
-        ItemSwapper.instance.SetCanSwapEquipment(true);
+        ItemManager.instance.SetCanSwapEquipment(true);
     }
 }

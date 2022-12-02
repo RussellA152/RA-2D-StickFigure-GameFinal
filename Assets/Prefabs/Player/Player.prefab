@@ -318,7 +318,7 @@ MonoBehaviour:
   playerComponentScript: {fileID: 4332903956958558062}
   spriteRenderer: {fileID: 4332903957792595814}
   hurtbox: {fileID: 4332903957970057214}
-  money: 100
+  money: 0
   canBeHurt: 1
   gravityApplied: 5
   runningSpeed: 65

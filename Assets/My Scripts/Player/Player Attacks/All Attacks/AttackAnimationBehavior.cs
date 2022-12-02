@@ -81,6 +81,7 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
 
         //invoke hitbox's function updates damage values
         damageDealingScript.UpdateAttackValues(damageType, attackDamage, attackingPowerX, attackingPowerY, screenShakePower, screenShakeDuration);
+
         damageDealingScript.SetParticleEffectDetails(particleEffectMaterial,particleEffectDuration);
 
         // set restore time based on the attack animation (ideally, a stronger attack like the ground slam or footdive should have a smaller restore time to make hitstop last longer)

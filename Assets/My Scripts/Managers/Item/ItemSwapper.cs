@@ -5,51 +5,56 @@ using UnityEngine;
 
 public class ItemSwapper : MonoBehaviour
 {
-    public static ItemSwapper instance;
+    //public static ItemSwapper instance;
 
-    [SerializeField] private GameObject itemHolder;
+    //[SerializeField] private GameObject itemHolder;
 
-    public Item activeEquipmentSlot;
+    //public Item activeEquipmentSlot;
 
-    public event Action swapEquipmentEvent;
+    //public event Action swapEquipmentEvent;
 
-    private bool canSwapEquipment = true;
+    //private bool canSwapEquipment = true;
 
-    private void Awake()
-    {
-        if (instance != null && instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            instance = this;
-            //Debug.Log("Create player stats  instance");
-        }
-    }
-
-
-    public void SwapActiveEquipment()
-    {
-        if(swapEquipmentEvent != null && canSwapEquipment)
-        {
-            swapEquipmentEvent();
-        }
-    }
+    //private void Awake()
+    //{
+    //    if (instance != null && instance != this)
+    //    {
+    //        Destroy(this);
+    //    }
+    //    else
+    //    {
+    //        instance = this;
+    //        //Debug.Log("Create player stats  instance");
+    //    }
+    //}
 
 
-    public GameObject GetItemHolder()
-    {
-        return itemHolder;
-    }
+    //public void SwapActiveEquipment()
+    //{
+    //    if(swapEquipmentEvent != null && canSwapEquipment)
+    //    {
+    //        swapEquipmentEvent();
+    //    }
+    //}
 
-    public void SetCanSwapEquipment(bool boolean)
-    {
-        canSwapEquipment = boolean;
-    }
+    //public Item GetActiveEquipmentItem()
+    //{
+    //    return activeEquipmentSlot;
+    //}
 
-    public bool GetCanSwapEquipment()
-    {
-        return canSwapEquipment;
-    }
+
+    //public GameObject GetItemHolder()
+    //{
+    //    return itemHolder;
+    //}
+
+    //public void SetCanSwapEquipment(bool boolean)
+    //{
+    //    canSwapEquipment = boolean;
+    //}
+
+    //public bool GetCanSwapEquipment()
+    //{
+    //    return canSwapEquipment;
+    //}
 }
