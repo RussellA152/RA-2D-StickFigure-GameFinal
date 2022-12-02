@@ -434,7 +434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 4332903956958558049}
-  playerCurrentHealth: 1
+  playerCurrentHealth: 300
 --- !u!114 &4332903956958558051
 MonoBehaviour:
   m_ObjectHideFlags: 0

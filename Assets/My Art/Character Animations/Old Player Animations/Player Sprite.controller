@@ -1583,9 +1583,9 @@ MonoBehaviour:
   attackingPowerY: 500
   particleEffectMaterial: {fileID: 2100000, guid: 1d912c2be2130c74caf061f004a691b8, type: 2}
   particleEffectDuration: 0.8
-  screenShakePower: 2
-  screenShakeDuration: 0
-  hitStopDelay: 0.05
+  screenShakePower: 3
+  screenShakeDuration: 0.1
+  hitStopDelay: 0.1
   forceMode: 0
   joltForceX: 400
   joltForceY: 0
@@ -4103,8 +4103,8 @@ MonoBehaviour:
   particleEffectMaterial: {fileID: 2100000, guid: 1d912c2be2130c74caf061f004a691b8, type: 2}
   particleEffectDuration: 0.8
   screenShakePower: 3
-  screenShakeDuration: 0
-  hitStopDelay: 0.05
+  screenShakeDuration: 0.1
+  hitStopDelay: 0.1
   forceMode: 0
   joltForceX: 1000
   joltForceY: 0
