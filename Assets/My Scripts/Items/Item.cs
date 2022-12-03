@@ -196,7 +196,7 @@ public abstract class Item : MonoBehaviour, IPriceable
     public void RefillChargeOnKill()
     {
         // each time an enemy is killed, refill the equipment's charge by 1
-        if(amountOfCharge <= maxAmountOfCharge)
+        if(amountOfCharge < maxAmountOfCharge)
         {
             amountOfCharge += 1;
         }

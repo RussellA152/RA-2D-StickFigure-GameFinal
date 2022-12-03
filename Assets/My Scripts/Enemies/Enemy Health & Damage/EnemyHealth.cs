@@ -96,6 +96,11 @@ public class EnemyHealth : MonoBehaviour, IHealth
         return enemyHealth;
     }
 
+    public float GetMaxHealth()
+    {
+        return enemyMaxHealth;
+    }
+
     public bool CheckIfAlive()
     {
         return isAlive;

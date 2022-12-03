@@ -14,7 +14,6 @@ public class HealthPotion : Item
         }
 
     }
-
     public override void InitializeValues()
     {
 

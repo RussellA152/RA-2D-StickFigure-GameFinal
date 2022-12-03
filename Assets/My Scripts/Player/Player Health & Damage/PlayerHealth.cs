@@ -106,6 +106,11 @@ public class PlayerHealth : MonoBehaviour, IHealth
         return playerCurrentHealth;
     }
 
+    public float GetMaxHealth()
+    {
+        return playerMaxHealth;
+    }
+
     public bool CheckIfAlive()
     {
         return isAlive;

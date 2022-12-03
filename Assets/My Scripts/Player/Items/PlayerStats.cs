@@ -295,10 +295,10 @@ public class PlayerStats : MonoBehaviour
         return playerHealthScript.IsCurrentHealthFull();
     }
 
-    public float GetCurrentHealth()
-    {
-        return playerHealthScript.GetHealth();
-    }
+    //public float GetCurrentHealth()
+    //{
+    //    return playerHealthScript.GetHealth();
+    //}
 
     public void ModifyPlayerCurrentHealth(float amountToIncreaseBy)
     {
