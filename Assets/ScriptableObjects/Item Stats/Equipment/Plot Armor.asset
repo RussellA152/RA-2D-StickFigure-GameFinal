@@ -24,6 +24,8 @@ MonoBehaviour:
   currentHealthModifier: 0
   amountOfMoneyGiven: 0
   moneyMultiplierModifier: 0
+  itemActionSound: {fileID: 8300000, guid: 3b088aaddde0e774091f54472acf4571, type: 3}
+  itemPickupSound: {fileID: 8300000, guid: e313f27b0b581ed478a0db6ca96684ac, type: 3}
   itemDuration: 5
   usageCooldown: 3
   damageType: 0

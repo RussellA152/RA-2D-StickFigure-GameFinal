@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyHurtAnimation : StateMachineBehaviour
 {
     //private EnemyController enemyControllerScript;
-
+    //[SerializeField] private AudioClip hurtSound;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -13,6 +13,9 @@ public class EnemyHurtAnimation : StateMachineBehaviour
         //enemyControllerScript = animator.transform.gameObject.GetComponent<EnemyController>();
         //when this enemy is attacked, increase their aggression level
         //enemyControllerScript.IncreaseAggressionLevelHurt();
+
+        //if (hurtSound != null)
+        //    ObjectSounds.instance.PlaySoundEffect(hurtSound);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

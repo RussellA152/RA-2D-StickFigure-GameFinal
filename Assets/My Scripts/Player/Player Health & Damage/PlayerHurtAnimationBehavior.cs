@@ -9,6 +9,8 @@ public class PlayerHurtAnimationBehavior : StateMachineBehaviour
 
     [SerializeField] private bool allowMovementOnStateExit; // this is used for when we have multiple chains of hurt animations (for the heavy hurt for example)
 
+    //[SerializeField] private AudioClip hurtSound;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -44,6 +46,9 @@ public class PlayerHurtAnimationBehavior : StateMachineBehaviour
 
         //if player is hurt, they cannot use their equipment item
         PlayerStats.instance.SetCanUseEquipment(false);
+
+        //if(hurtSound != null)
+        //    ObjectSounds.instance.PlaySoundEffect(hurtSound);
 
     }
 

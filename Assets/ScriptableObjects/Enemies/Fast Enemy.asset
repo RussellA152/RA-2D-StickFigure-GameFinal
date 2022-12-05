@@ -17,11 +17,12 @@ MonoBehaviour:
   followRangeX: 35
   followRangeY: 12
   minimumYDistanceUntilAutopathDisables: 1.5
-  dropChance: 0.3
+  dropChance: 0.75
   getUpTimer: 0.9
   despawnTimer: 2.5
   attackRangeX: 4.5
   attackRangeY: 2
+  longRangeAttackDistanceX: 0
   specialAttackChance: 0.25
   attackCooldownTimer: 2
   aggressionLevelTreshold: 10

@@ -8,5 +8,5 @@ using UnityEngine;
 public interface IDamageDealingItem : IDamageDealing
 {
 
-    public void ShakeScreen();
+    public void ShakeScreen(float shakePower, float duration);
 }

@@ -9,7 +9,9 @@ public class NormalRoom : BaseRoom
     private void Start()
     {
         base.Start();
-        roomEnemyCountState = RoomEnemyCount.cleared;
+        // starting room is always cleared on start
+        //if(!isStartingRoom)
+            //roomEnemyCountState = RoomEnemyCount.cleared;
         roomType = RoomType.normal;
     }
 

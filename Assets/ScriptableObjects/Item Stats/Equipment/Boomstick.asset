@@ -15,24 +15,25 @@ MonoBehaviour:
   itemName: Boomstick
   itemDescription: 
   itemType: 2
-  itemPrice: 11
+  itemPrice: 12
   maxAmountOfCharge: 12
   chargesConsumedPerUse: 4
-  chargeRefilledPerKill: 1
   procChance: 0
   procChanceModifier: 0
   maxHealthModifier: 0
   currentHealthModifier: 0
   amountOfMoneyGiven: 0
   moneyMultiplierModifier: 0
+  itemActionSound: {fileID: 8300000, guid: ccb212b24c6c1d841adcee71b407a913, type: 3}
+  itemPickupSound: {fileID: 8300000, guid: e313f27b0b581ed478a0db6ca96684ac, type: 3}
   itemDuration: 0
   usageCooldown: 2
   damageType: 2
-  damageOfItem: 250
+  damageOfItem: 200
   attackPowerX: 2000
   attackPowerY: 1000
-  screenShakePower: 3
-  screenShakeDuration: 0.2
+  screenShakePower: 4
+  screenShakeDuration: 0.5
   throwForceX: 0
   throwForceY: 0
   damageMultiplierModifier: 0

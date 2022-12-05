@@ -12,6 +12,8 @@ public class DamagePotion : Item
         {
             PlayerStats.instance.ModifyDamageMultiplier(myScriptableObject.damageMultiplierModifier);
             PlayerStats.instance.ModifyPlayerCurrentHealth(myScriptableObject.currentHealthModifier);
+
+            PlayItemSound(itemActionSound);
         }
 
     }
@@ -29,6 +31,8 @@ public class DamagePotion : Item
 
         maxAmountOfCharge = myScriptableObject.maxAmountOfCharge;
         amountOfCharge = myScriptableObject.maxAmountOfCharge;
+
+        itemActionSound = myScriptableObject.itemActionSound;
 
     }
 }

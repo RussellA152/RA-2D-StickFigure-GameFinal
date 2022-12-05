@@ -65,6 +65,7 @@ MonoBehaviour:
   topDoor: {fileID: 5729943183382851295}
   leftDoor: {fileID: 4926122910458846657}
   rightDoor: {fileID: 3209383378607868238}
+  doorEnteredFrom: {fileID: 0}
   localRoomCoordinate: {x: 0, y: 0}
   numberOfItems: 3
   UnlockerList:
@@ -357,6 +358,8 @@ MonoBehaviour:
   cooldownTimer: 1
   gameObjectToUnlock: {fileID: 0}
   priceOfObject: 0
+  purchaseSuccessfulSound: {fileID: 0}
+  purchaseFailedSound: {fileID: 0}
 --- !u!1 &4008522662359411990
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,6 +434,8 @@ MonoBehaviour:
   cooldownTimer: 1
   gameObjectToUnlock: {fileID: 0}
   priceOfObject: 0
+  purchaseSuccessfulSound: {fileID: 8300000, guid: 8d40679786de8bb4eada1afb634025f7, type: 3}
+  purchaseFailedSound: {fileID: 8300000, guid: f2184d43e8034034dbad4ad5ffb4d8d4, type: 3}
 --- !u!61 &9114347062827665700
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -475,6 +480,8 @@ MonoBehaviour:
   cooldownTimer: 1
   gameObjectToUnlock: {fileID: 0}
   priceOfObject: 0
+  purchaseSuccessfulSound: {fileID: 8300000, guid: 8d40679786de8bb4eada1afb634025f7, type: 3}
+  purchaseFailedSound: {fileID: 8300000, guid: f2184d43e8034034dbad4ad5ffb4d8d4, type: 3}
 --- !u!1001 &896690482953383854
 PrefabInstance:
   m_ObjectHideFlags: 0

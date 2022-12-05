@@ -93,11 +93,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ImpulseDefinition:
     m_ImpulseChannel: 1
-    m_RawSignal: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+    m_RawSignal: {fileID: 11400000, guid: b241f91b9ccf8ff489abf204b30d3112, type: 2}
     m_AmplitudeGain: 0.5
     m_FrequencyGain: 4
     m_RepeatMode: 0
-    m_Randomize: 1
+    m_Randomize: 0
     m_TimeEnvelope:
       m_AttackShape:
         serializedVersion: 2
@@ -512,13 +512,15 @@ MonoBehaviour:
   maxAmountOfCharge: 0
   chargeConsumedPerUse: 0
   itemPrice: 0
+  itemActionSound: {fileID: 0}
+  itemPickupSound: {fileID: 0}
   itemHitColliderScript: {fileID: 1272710716510649145}
   hitbox: {fileID: 7737613729898609175}
   animator: {fileID: 2538536437663321510}
   animationName: Fire
   facingRightVector: {x: 1.5, y: 1.5, z: 1}
   facingLeftVector: {x: -1.5, y: 1.5, z: 1}
-  offsetX: {x: 5, y: 0, z: 0}
+  offsetX: {x: 3, y: 0, z: 0}
 --- !u!50 &3135146213717763128
 Rigidbody2D:
   serializedVersion: 4

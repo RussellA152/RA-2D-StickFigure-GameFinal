@@ -21,6 +21,8 @@ public class SoulExchange : Item
 
         procChance = myScriptableObject.procChance;
 
+        itemActionSound = myScriptableObject.itemActionSound;
+
         //PlayerStats.instance.gameObject.GetComponent<PlayerHealth>().onPlayerDeath += ItemAction;
 
     }
@@ -48,6 +50,8 @@ public class SoulExchange : Item
     private void RefillHealth()
     {
         PlayerStats.instance.ModifyPlayerCurrentHealth(myScriptableObject.currentHealthModifier);
+
+        PlayItemSound(itemActionSound);
         PlayerStats.instance.GetPlayer().GetComponent<Animator>().Play("Resurrect");
         
     }

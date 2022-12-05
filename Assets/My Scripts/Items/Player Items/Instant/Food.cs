@@ -9,6 +9,7 @@ public class Food : Item
         if (ShouldActivate())
         {
             PlayerStats.instance.ModifyPlayerCurrentHealth(myScriptableObject.currentHealthModifier);
+            PlayItemSound(itemActionSound);
         }
 
     }
@@ -19,6 +20,8 @@ public class Food : Item
         itemName = myScriptableObject.itemName;
 
         type = myScriptableObject.itemType;
+
+        itemActionSound = myScriptableObject.itemActionSound;
 
     }
 }

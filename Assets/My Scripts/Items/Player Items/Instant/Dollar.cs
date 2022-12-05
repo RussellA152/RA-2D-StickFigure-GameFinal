@@ -11,6 +11,7 @@ public class Dollar : Item
         if (ShouldActivate())
         {
             PlayerStats.instance.ModifyPlayerMoney(myScriptableObject.amountOfMoneyGiven);
+            PlayItemSound(itemActionSound);
         }
 
     }
@@ -21,6 +22,8 @@ public class Dollar : Item
         itemName = myScriptableObject.itemName;
 
         type = myScriptableObject.itemType;
+
+        itemActionSound = myScriptableObject.itemActionSound;
 
         //amountOfMoneyToGive = myScriptableObject.amountOfMoneyGiven;
 

@@ -13,19 +13,22 @@ MonoBehaviour:
   m_Name: Knuckle Whestone
   m_EditorClassIdentifier: 
   itemName: Knuckle Whestone
+  itemDescription: 
   itemType: 0
   itemPrice: 7
-  amountOfCharge: 0
+  maxAmountOfCharge: 0
   chargesConsumedPerUse: 0
-  chargeRefilledPerKill: 0
   procChance: 0
   procChanceModifier: 0
   maxHealthModifier: 0
   currentHealthModifier: 0
   amountOfMoneyGiven: 0
   moneyMultiplierModifier: 0
+  itemActionSound: {fileID: 0}
+  itemPickupSound: {fileID: 8300000, guid: e313f27b0b581ed478a0db6ca96684ac, type: 3}
   itemDuration: 0
   usageCooldown: 0
+  damageType: 0
   damageOfItem: 0
   attackPowerX: 0
   attackPowerY: 0

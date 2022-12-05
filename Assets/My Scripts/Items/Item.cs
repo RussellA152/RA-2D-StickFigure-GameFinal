@@ -33,6 +33,12 @@ public abstract class Item : MonoBehaviour, IPriceable
     [HideInInspector]
     public int itemPrice;
 
+    [HideInInspector]
+    public AudioClip itemActionSound;
+
+    [HideInInspector]
+    public AudioClip itemPickupSound;
+
     //public bool active;
 
     //private bool hasSufficientCharge = true;
@@ -110,6 +116,8 @@ public abstract class Item : MonoBehaviour, IPriceable
 
             //not needed for passive items that do not have to proc during gameplay (probably won't even invoke this function)
             case ItemScriptableObject.ItemType.passiveProc:
+
+                
                 // check if the item's proc chance was successful
                 // if not, return and do not allow ability to activate
                 // multiply proc chance by PlayerStat's proc chance multiplier
@@ -165,21 +173,24 @@ public abstract class Item : MonoBehaviour, IPriceable
             default:
 
             case ItemScriptableObject.ItemType.passiveBuff:
+                PlayPickupSound();
                 //adds the item of type "Passive Buff" to the player's passive item inventory
                 ItemAction(PlayerStats.instance.GetPlayer());
                 break;
 
             case ItemScriptableObject.ItemType.passiveProc:
+                PlayPickupSound();
                 //adds the item of type "Passive Proc" to the player's passive item inventory
                 ItemAction(PlayerStats.instance.GetPlayer());
                 break;
             case ItemScriptableObject.ItemType.equipment:
-
+                PlayPickupSound();
                 ItemManager.instance.activeEquipmentSlot = this;
 
                 break;
             case ItemScriptableObject.ItemType.instant:
-                Debug.Log("Instant item was picked up!");
+                //Debug.Log("Instant item was picked up!");
+                ObjectSounds.instance.PlaySoundEffect(itemActionSound);
                 // instant items do not get added to any inventory
                 ItemAction(PlayerStats.instance.GetPlayer());
 
@@ -191,6 +202,19 @@ public abstract class Item : MonoBehaviour, IPriceable
                 break;
         }
 
+    }
+
+    public void PlayItemSound(AudioClip clip)
+    {
+        ObjectSounds.instance.PlaySoundEffect(clip);
+    }
+
+    public void PlayPickupSound()
+    {
+        if(myScriptableObject.itemPickupSound != null)
+        {
+            ObjectSounds.instance.PlaySoundEffect(myScriptableObject.itemPickupSound);
+        }
     }
 
     public void RefillChargeOnKill()

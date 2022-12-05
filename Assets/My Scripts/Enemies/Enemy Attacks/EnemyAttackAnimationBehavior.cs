@@ -19,6 +19,7 @@ public class EnemyAttackAnimationBehavior : StateMachineBehaviour, IDamageAttrib
     [SerializeField] private float attackDamage; // damage of the attack
     [SerializeField] private float attackingPowerX; // amount of force applied to enemy that is hit by this attack in x-direction
     [SerializeField] private float attackingPowerY; // amount of force applied to enemy that is hit by this attack in y-direction
+    
 
     [Header("Particle Effect Values")]
     [SerializeField] private Material particleEffectMaterial; // the material that the particle system will use for this animation (how the particle will look like)
@@ -32,6 +33,10 @@ public class EnemyAttackAnimationBehavior : StateMachineBehaviour, IDamageAttrib
     [SerializeField] private ForceMode2D forceMode; // the force mode applied to the jolt force
     [SerializeField] private float joltForceX; //determines how far the player will 'jolt' forward in the x-direction when attacking (Should be a high value)
     [SerializeField] private float joltForceY; //determines how far the player will 'jolt' forward in the y-direction when attacking (Should be a high value)
+
+    [Header("Attack Swing Sound")]
+    [SerializeField] private AudioClip swingSound; // the sound this attack makes when its thrown out (not when it damages its target)
+
 
 
     private bool enemyFacingRight; //need to know the direction of the sprite so we know where to apply the jolt force
@@ -63,6 +68,7 @@ public class EnemyAttackAnimationBehavior : StateMachineBehaviour, IDamageAttrib
         damageDealingScript.UpdateAttackValues(damageType, attackDamage, attackingPowerX, attackingPowerY, screenShakePower, screenShakeDuration);
         damageDealingScript.SetParticleEffectDetails(particleEffectMaterial, particleEffectDuration);
 
+        ObjectSounds.instance.PlaySoundEffect(swingSound);
 
     }
 

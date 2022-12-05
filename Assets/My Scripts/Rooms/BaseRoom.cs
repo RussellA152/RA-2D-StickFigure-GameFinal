@@ -8,7 +8,7 @@ public class BaseRoom: MonoBehaviour
     [HideInInspector]
     public RoomType roomType; // the type of room this is.. could be a boss room, treasure room, or just a regular room
 
-    [SerializeField] private bool isStartingRoom; //Is this room, the starting room? If so, we will manually add the coordinates to the list
+    public bool isStartingRoom; //Is this room, the starting room? If so, we will manually add the coordinates to the list
 
 
     [Header("Spawn Locations")]
@@ -89,6 +89,7 @@ public class BaseRoom: MonoBehaviour
             // remove this after making new room spawner
             CreateCoordinate();
             levelManager.UpdateCurrentRoom(this);
+            roomEnemyCountState = RoomEnemyCount.cleared;
         }
             
 
@@ -98,12 +99,12 @@ public class BaseRoom: MonoBehaviour
 
     public void CheckEnemyCountStatus()
     {
-        //if no more enemies are alive in here, the room is cleared
-        //otherwise, it is uncleared
-        //if (numberOfEnemiesAliveInRoom == 0)
-            //roomEnemyCountState = RoomEnemyCount.cleared;
-        //else
-            //roomEnemyCountState = RoomEnemyCount.uncleared;
+       // if no more enemies are alive in here, the room is cleared
+       // otherwise, it is uncleared
+        if (numberOfEnemiesAliveInRoom == 0)
+            roomEnemyCountState = RoomEnemyCount.cleared;
+        else
+            roomEnemyCountState = RoomEnemyCount.uncleared;
     }
 
     //give the AISpawner the spawn locations needed for enemies

@@ -16,6 +16,9 @@ public class Bomb : Item
     [SerializeField] private Vector3 facingRightVector; //vector3 representing the enemy facing the right direction
     [SerializeField] private Vector3 facingLeftVector; //vector3 representing the enemy facing the left direction
 
+    [SerializeField] private AudioClip throwSound;
+    [SerializeField] private float bombDetonateTime;
+
     private void Awake()
     {
         base.Awake();
@@ -39,6 +42,9 @@ public class Bomb : Item
         // Turn off player's hitbox for a few seconds
         if (ShouldActivate())
         {
+            PlayItemSound(throwSound);
+            StartCoroutine(PlaySound(bombDetonateTime));
+
             //animator.enabled = true;
             transform.position = PlayerStats.instance.GetPlayer().transform.position;
 
@@ -86,8 +92,16 @@ public class Bomb : Item
         itemHitColliderScript.attackPowerX = myScriptableObject.attackPowerX;
         itemHitColliderScript.attackPowerY = myScriptableObject.attackPowerY;
 
-        itemHitColliderScript.screenShakeDuration = myScriptableObject.screenShakePower;
-        itemHitColliderScript.screenShakeDuration = myScriptableObject.screenShakeDuration;
+        //itemHitColliderScript.screenShakeDuration = myScriptableObject.screenShakePower;
+        //itemHitColliderScript.screenShakeDuration = myScriptableObject.screenShakeDuration;
+        itemActionSound = myScriptableObject.itemActionSound;
+    }
+
+    IEnumerator PlaySound(float detonateTime)
+    {
+        yield return new WaitForSeconds(detonateTime);
+        PlayItemSound(itemActionSound);
+        itemHitColliderScript.ShakeScreen(myScriptableObject.screenShakePower, myScriptableObject.screenShakeDuration);
     }
 
 }

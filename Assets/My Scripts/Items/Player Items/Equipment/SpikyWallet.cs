@@ -12,6 +12,8 @@ public class SpikyWallet : Item
         {
             PlayerStats.instance.ModifyPlayerMoney(myScriptableObject.amountOfMoneyGiven);
             PlayerStats.instance.ModifyPlayerCurrentHealth(myScriptableObject.currentHealthModifier);
+
+            PlayItemSound(itemActionSound);
         }
 
     }
@@ -29,6 +31,8 @@ public class SpikyWallet : Item
 
         maxAmountOfCharge = myScriptableObject.maxAmountOfCharge;
         amountOfCharge = myScriptableObject.maxAmountOfCharge;
+
+        itemActionSound = myScriptableObject.itemActionSound;
 
     }
 }

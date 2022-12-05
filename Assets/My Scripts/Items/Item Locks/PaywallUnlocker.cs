@@ -8,6 +8,9 @@ public class PaywallUnlocker : Unlocker
     [SerializeField] private int priceOfObject;
     private bool fetchedPriceOfItem = false; // has this locker grabbed a reference to the item's price?
 
+    [SerializeField] private AudioClip purchaseSuccessfulSound;
+    [SerializeField] private AudioClip purchaseFailedSound;
+
     public override void CheckIfConditionIsFulfilled()
     {
         // TEMPORARY (REMOVE LATER) *** 
@@ -23,6 +26,8 @@ public class PaywallUnlocker : Unlocker
             // tell the locked gameobject to remove its lock
             UnlockItem();
 
+            ObjectSounds.instance.PlaySoundEffect(purchaseSuccessfulSound);
+
             // subtract the player's money by priceOfObject amount
             PlayerStats.instance.ModifyPlayerMoney(-priceOfObject);
         }
@@ -31,7 +36,8 @@ public class PaywallUnlocker : Unlocker
         {
             // Play a failure/unsuccessful purchase sound effect
 
-            Debug.Log("Not enough money");
+            ObjectSounds.instance.PlaySoundEffect(purchaseFailedSound);
+            //Debug.Log("Not enough money");
         }
         
 
@@ -46,5 +52,10 @@ public class PaywallUnlocker : Unlocker
 
         fetchedPriceOfItem = true;
 
+    }
+
+    public void PlayInteractSound(AudioClip clip)
+    {
+        ObjectSounds.instance.PlaySoundEffect(clip);
     }
 }

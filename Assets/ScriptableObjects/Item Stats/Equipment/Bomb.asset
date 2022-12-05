@@ -18,21 +18,22 @@ MonoBehaviour:
   itemPrice: 9
   maxAmountOfCharge: 9
   chargesConsumedPerUse: 3
-  chargeRefilledPerKill: 1
   procChance: 0
   procChanceModifier: 0
   maxHealthModifier: 0
   currentHealthModifier: 0
   amountOfMoneyGiven: 0
   moneyMultiplierModifier: 0
+  itemActionSound: {fileID: 8300000, guid: 206fa215b5742eb4da46e7da884d25c6, type: 3}
+  itemPickupSound: {fileID: 8300000, guid: e313f27b0b581ed478a0db6ca96684ac, type: 3}
   itemDuration: 0
   usageCooldown: 6
   damageType: 2
-  damageOfItem: 400
+  damageOfItem: 200
   attackPowerX: 5000
   attackPowerY: 5000
-  screenShakePower: 4
-  screenShakeDuration: 0.5
+  screenShakePower: 9
+  screenShakeDuration: 0.6
   throwForceX: 2000
   throwForceY: 1500
   damageMultiplierModifier: 0

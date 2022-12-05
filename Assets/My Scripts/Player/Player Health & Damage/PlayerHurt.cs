@@ -11,6 +11,12 @@ public class PlayerHurt : MonoBehaviour, IDamageable
     private Rigidbody2D rb;
     private Animator animator;
 
+    [Header("Hurt Sounds")]
+    [SerializeField] private AudioClip lightHurtFrontSound;
+    [SerializeField] private AudioClip lightHurtBehindSound;
+    [SerializeField] private AudioClip heavyHurtFrontSound;
+    [SerializeField] private AudioClip heavyHurtBehindSound;
+
     //Animations to play when player is hit by a light attack (depends on the direction of the light attack)
     [Header("Player Light Attack Hurt Animation Names")]
     [SerializeField] private string lightHurtAnimFront;
@@ -89,6 +95,8 @@ public class PlayerHurt : MonoBehaviour, IDamageable
                     if (!isKnockedDown)
                         PlayHurtAnimation(lightHurtAnimBehindHash);
 
+                    ObjectSounds.instance.PlaySoundEffect(lightHurtBehindSound);
+
                     //call the TakeDamage function to subtract the health of player 
                     TakeDamage(damage, attackPowerX, attackPowerY);
 
@@ -102,6 +110,8 @@ public class PlayerHurt : MonoBehaviour, IDamageable
                     if (!isKnockedDown)
                         PlayHurtAnimation(lightHurtAnimFrontHash);
 
+                    ObjectSounds.instance.PlaySoundEffect(lightHurtFrontSound);
+
                     TakeDamage(damage, attackPowerX, attackPowerY);
                 }
 
@@ -112,6 +122,8 @@ public class PlayerHurt : MonoBehaviour, IDamageable
 
                     if (!isKnockedDown)
                         PlayHurtAnimation(lightHurtAnimFrontHash);
+
+                    ObjectSounds.instance.PlaySoundEffect(lightHurtFrontSound);
 
                     //call the TakeDamage function to subtract the health of player 
                     TakeDamage(damage, -attackPowerX, attackPowerY);
@@ -125,6 +137,8 @@ public class PlayerHurt : MonoBehaviour, IDamageable
 
                     if (!isKnockedDown)
                         PlayHurtAnimation(lightHurtAnimBehindHash);
+
+                    ObjectSounds.instance.PlaySoundEffect(lightHurtBehindSound);
 
                     TakeDamage(damage, -attackPowerX, attackPowerY);
                 }
@@ -147,6 +161,8 @@ public class PlayerHurt : MonoBehaviour, IDamageable
 
                     PlayHurtAnimation(heavyHurtAnimBehindHash);
 
+                    ObjectSounds.instance.PlaySoundEffect(heavyHurtBehindSound);
+
                     //call the TakeDamage function to subtract the health of player 
                     TakeDamage(damage, attackPowerX, attackPowerY);
 
@@ -157,6 +173,8 @@ public class PlayerHurt : MonoBehaviour, IDamageable
                     //Play forward flinch animation
                     
                     PlayHurtAnimation(heavyHurtAnimFrontHash);
+
+                    ObjectSounds.instance.PlaySoundEffect(heavyHurtFrontSound);
 
                     //Debug.Log("Forward heavy hit! Player facing left!");
                     TakeDamage(damage, attackPowerX, attackPowerY);
@@ -169,6 +187,8 @@ public class PlayerHurt : MonoBehaviour, IDamageable
 
                     
                     PlayHurtAnimation(heavyHurtAnimFrontHash);
+
+                    ObjectSounds.instance.PlaySoundEffect(heavyHurtFrontSound);
                     //call the TakeDamage function to subtract the health of player 
                     TakeDamage(damage, -attackPowerX, attackPowerY);
 
@@ -180,6 +200,9 @@ public class PlayerHurt : MonoBehaviour, IDamageable
 
                     
                     PlayHurtAnimation(heavyHurtAnimBehindHash);
+
+                    ObjectSounds.instance.PlaySoundEffect(heavyHurtFrontSound);
+
                     //Debug.Log("Backward heavy hit! Player facing left!");
                     TakeDamage(damage, -attackPowerX, attackPowerY);
                 }

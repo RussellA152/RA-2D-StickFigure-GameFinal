@@ -93,11 +93,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ImpulseDefinition:
     m_ImpulseChannel: 1
-    m_RawSignal: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+    m_RawSignal: {fileID: 11400000, guid: b241f91b9ccf8ff489abf204b30d3112, type: 2}
     m_AmplitudeGain: 0.5
     m_FrequencyGain: 4
     m_RepeatMode: 0
-    m_Randomize: 1
+    m_Randomize: 0
     m_TimeEnvelope:
       m_AttackShape:
         serializedVersion: 2
@@ -502,8 +502,11 @@ MonoBehaviour:
   canUse: 1
   procChance: 0
   amountOfCharge: 0
+  maxAmountOfCharge: 0
   chargeConsumedPerUse: 0
   itemPrice: 0
+  itemActionSound: {fileID: 0}
+  itemPickupSound: {fileID: 0}
   itemHitColliderScript: {fileID: 1883013763519914088}
   animator: {fileID: 2167490906217085961}
   rb: {fileID: 3135146213717763128}
@@ -511,6 +514,8 @@ MonoBehaviour:
   animationName: Explode
   facingRightVector: {x: 1.5, y: 1.5, z: 1}
   facingLeftVector: {x: -1.5, y: 1.5, z: 1}
+  throwSound: {fileID: 8300000, guid: 6abd6f74aa3acaf4ebdeef6a1154b54a, type: 3}
+  bombDetonateTime: 1.35
 --- !u!50 &3135146213717763128
 Rigidbody2D:
   serializedVersion: 4

@@ -72,6 +72,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private GameObject hurtBox;
 
     [SerializeField] private Vector2 minimumVelocityUntilStopped; // how low should this enemy's velocity reached to be considered "stopped"?
+    [SerializeField] private float minimumVelocityUntilStopIsInterrupted; // how much velocity would it take for this enemy to not get back up after being hit on the ground
     [SerializeField] private float gravityWhenIdle;
 
     private bool attackOnCooldown = false; //is the enemy on attack cooldown? If so, don't let them attack again
@@ -131,7 +132,13 @@ public class EnemyController : MonoBehaviour
 
         //if the enemy does not already have a scriptable object attached, give them a random one from the EnemyManager (generates random scriptable object from list)
         if (enemyScriptableObject == null)
-            enemyScriptableObject = EnemyManager.enemyManagerInstance.GiveScriptableObject();
+        {
+            if (enemyType == EnemyType.regular)
+                enemyScriptableObject = EnemyManager.enemyManagerInstance.GiveScriptableObject();
+            else if (enemyType == EnemyType.boss)
+                enemyScriptableObject = EnemyManager.enemyManagerInstance.GiveBossScriptableObject();
+        }
+            
 
         //enemy is in idle state when spawning in
         currentState = EnemyState.Idle;
@@ -341,6 +348,7 @@ public class EnemyController : MonoBehaviour
         enemyMoveScript.SetCanFlip(true);
 
         enemyHurtScript.SetIsKnockedDown(false);
+        enemyHurtScript.ResetKnockDownResistance();
         enemyHurtScript.SetRBGravity(gravityWhenIdle);
 
         //IncreaseAggressionLevelIdle();
@@ -378,7 +386,7 @@ public class EnemyController : MonoBehaviour
 
         }
 
-        else if ((Mathf.Abs(rb.velocity.x) >= 5f || Mathf.Abs(rb.velocity.y) >= 5f))
+        else if ((Mathf.Abs(rb.velocity.x) >= minimumVelocityUntilStopIsInterrupted|| Mathf.Abs(rb.velocity.y) >= minimumVelocityUntilStopIsInterrupted))
         {
             animator.SetBool(stoppedHash, false);
         }
@@ -488,16 +496,12 @@ public class EnemyController : MonoBehaviour
 
         // if the enemy's velocity is increased again, then they will not get back up from their hurt state
         // I chose 2 because then light attacks don't push enemies far enough for them to get stuck in a loop of being knocked down
-        else if ((Mathf.Abs(rb.velocity.x) >= 5f || Mathf.Abs(rb.velocity.y) >= 5f))
+        else if ((Mathf.Abs(rb.velocity.x) >= minimumVelocityUntilStopIsInterrupted || Mathf.Abs(rb.velocity.y) >= minimumVelocityUntilStopIsInterrupted))
         {
             timeToGetUp = timeToGetUpStored;
             animator.SetBool(stoppedHash, false);
         }
-
-
-
         
-
         animator.SetBool(walkingHash, false);
         //don't let enemy move at all
         enemyMoveScript.DisableMovement();

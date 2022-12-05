@@ -13,19 +13,28 @@ MonoBehaviour:
   m_Name: Soda
   m_EditorClassIdentifier: 
   itemName: Soda
+  itemDescription: 
   itemType: 3
   itemPrice: 0
-  amountOfCharge: 0
+  maxAmountOfCharge: 0
   chargesConsumedPerUse: 0
-  chargeRefilledPerKill: 0
   procChance: 0
   procChanceModifier: 0
   maxHealthModifier: 0
-  currentHealthModifier: 30
+  currentHealthModifier: 60
   amountOfMoneyGiven: 0
   moneyMultiplierModifier: 0
+  itemActionSound: {fileID: 8300000, guid: a4eba3e531b2a0442923e7614cdea8be, type: 3}
+  itemDuration: 0
+  usageCooldown: 0
+  damageType: 0
   damageOfItem: 0
-  rangeOfItem: 0
+  attackPowerX: 0
+  attackPowerY: 0
+  screenShakePower: 0
+  screenShakeDuration: 0
+  throwForceX: 0
+  throwForceY: 0
   damageMultiplierModifier: 0
   attackPowerMultiplierModifier: 0
   damageAbsorptionMultiplierModifier: 0

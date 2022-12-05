@@ -13,6 +13,8 @@ public class CombatRoll : StateMachineBehaviour
     [SerializeField] private int playerLayer;
     [SerializeField] private int enemyLayer;
 
+    [SerializeField] private AudioClip rollSound;
+
     //private bool directionIsRight;
 
     //[SerializeField] private float rollCancellationValue; // how much does TurnRight or TurnLeft binding need to reach to cancel this roll
@@ -46,6 +48,8 @@ public class CombatRoll : StateMachineBehaviour
         //turn off layer collision between "Player" and "Enemy", player will roll behind enemies 
         Physics2D.IgnoreLayerCollision(playerLayer, enemyLayer, true);
 
+
+        ObjectSounds.instance.PlaySoundEffect(rollSound);
 
     }
 

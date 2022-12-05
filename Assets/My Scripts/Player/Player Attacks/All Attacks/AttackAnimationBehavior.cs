@@ -48,6 +48,9 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
     [SerializeField] private float joltForceX; //determines how far the player will 'jolt' forward in the x-direction when attacking (Should be a high value)
     [SerializeField] private float joltForceY; //determines how far the player will 'jolt' forward in the y-direction when attacking (Should be a high value)
 
+    [Header("Attack Swing Sound")]
+    [SerializeField] private AudioClip swingSound; // the sound this attack makes when it occurs (not the same as the attack landing and hurting its target)
+
 
     [Space(20)]
     [SerializeField] private float gravityDuringAttack; // how much gravity is applied to player during this attack?  
@@ -111,6 +114,8 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
             playerCollisionLayerScript = animator.transform.GetComponent<PlayerCollisionLayerChange>();
             playerCollisionLayerScript.SetIgnoreEnemyLayer();
         }
+
+        ObjectSounds.instance.PlaySoundEffect(swingSound);
 
 
     }

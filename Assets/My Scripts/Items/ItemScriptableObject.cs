@@ -36,6 +36,10 @@ public class ItemScriptableObject : ScriptableObject
 
     public float moneyMultiplierModifier; //an increase or decrease to the amount of money the player picks up
 
+    [Header("Sound Properties")]
+    public AudioClip itemActionSound;
+    public AudioClip itemPickupSound;
+
     [Header("Other Properties")]
     public float itemDuration; // this number is used for items that contain coroutines or some sort of timer
 

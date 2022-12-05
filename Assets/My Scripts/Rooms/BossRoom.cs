@@ -24,12 +24,14 @@ public class BossRoom : BaseRoom
     void Start()
     {
         base.Start();
-        roomEnemyCountState = BaseRoom.RoomEnemyCount.cleared;
+        //roomEnemyCountState = RoomEnemyCount.cleared;
         roomType = RoomType.boss;
 
         levelManager.onAllRoomsSpawned += CheckIfRoomIsOnTop;
 
         levelManager.onPlayerEnterNewArea += UpdateBossSpawnLocation;
+
+        EnemyManager.enemyManagerInstance.onBossKill += ClearRoom;
     }
 
     private void CheckIfRoomIsOnTop()
@@ -79,6 +81,10 @@ public class BossRoom : BaseRoom
             spawnLocationsOfThisLevel.Remove(middleSpawnLocation);
         }
             
+    }
+    public void ClearRoom()
+    {
+        roomEnemyCountState = RoomEnemyCount.cleared;
     }
 
     public Transform GetCenterOfRoom()

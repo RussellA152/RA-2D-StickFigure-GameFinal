@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a375c7c4bf6fe394f8397e32c9405374, type: 3}
   m_Name: Fast Boss
   m_EditorClassIdentifier: 
-  maxHealth: 1000
+  maxHealth: 1250
   walkingSpeed: 17
   followRangeX: 45
   followRangeY: 25

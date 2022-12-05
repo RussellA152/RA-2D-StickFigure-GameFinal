@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyHurt : MonoBehaviour, IDamageable
 {
+
     [Header("Required Scripts")]
     [SerializeField] private EnemyController enemyControlScript; //every enemy will have a movement script
     [SerializeField] private EnemyScriptableObject enemyScriptableObject; //every enemy will have a scriptable object
@@ -16,13 +17,23 @@ public class EnemyHurt : MonoBehaviour, IDamageable
     [Header("Required Components")]
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Animator animator;
+    //[SerializeField] private BoxCollider2D hurtBox;
 
     [SerializeField] private float gravityWhenFlinching;
     [SerializeField] private float gravityWhenKnockedDown;
+    [SerializeField] private float immunityTimer; // if enemy is hit too many times mid-air, eventually they need to be able to get back up
+    //private bool isTempImmune; //
 
 
     [Header("Timers")]
     [SerializeField] private float timeGroundCheckIsDisabled; // how long will the ground check be disabled when an enemy FIRST goes into a knockdown state (to be juggled...)
+
+
+    [Header("Hurt Sounds")]
+    [SerializeField] private AudioClip lightHurtFrontSound;
+    [SerializeField] private AudioClip lightHurtBehindSound;
+    [SerializeField] private AudioClip heavyHurtFrontSound;
+    [SerializeField] private AudioClip heavyHurtBehindSound;
 
     //Animations to play when enemy is hit by a light attack (depends on the direction of the light attack)
     //[Header("Enemy Light Attack Hurt Animation Names")]
@@ -42,6 +53,8 @@ public class EnemyHurt : MonoBehaviour, IDamageable
     private int heavyHurtAnimFrontHash;
     private int heavyHurtAnimBehindHash;
 
+
+    private float knockdownBuildUpResistance = 0.0f; // value used to slowly resist amount of force when juggled (meant to prevent enemies from being juggled permanently)
     private bool isKnockedDown = false; // is this enemy in a "knocked down" state? (if so, do not play any other hurt animations like the flinch if in knockdown state)
 
     /*
@@ -91,6 +104,9 @@ public class EnemyHurt : MonoBehaviour, IDamageable
 
         heavyHurtAnimFrontHash = Animator.StringToHash(heavyHurtAnimFront);
         heavyHurtAnimBehindHash = Animator.StringToHash(heavyHurtAnimBehind);
+
+        //isTempImmune = false;
+        //hurtBox.enabled = true;
     }
 
     public void OnHurt(Vector3 attacker, IDamageAttributes.DamageType damageType, float damage, float attackPowerX, float attackPowerY)
@@ -126,6 +142,8 @@ public class EnemyHurt : MonoBehaviour, IDamageable
                     if (!isKnockedDown)
                         PlayHurtAnimation(lightHurtAnimBehindHash);
 
+                    ObjectSounds.instance.PlaySoundEffect(lightHurtBehindSound);
+
                     //call the TakeDamage function to subtract the health of enemy 
                     TakeDamage(damage, attackPowerX, attackPowerY);
 
@@ -139,6 +157,8 @@ public class EnemyHurt : MonoBehaviour, IDamageable
                     if (!isKnockedDown)
                         PlayHurtAnimation(lightHurtAnimFrontHash);
 
+                    ObjectSounds.instance.PlaySoundEffect(lightHurtFrontSound);
+
                     TakeDamage(damage, attackPowerX, attackPowerY);
                 }
 
@@ -149,6 +169,8 @@ public class EnemyHurt : MonoBehaviour, IDamageable
 
                     if(!isKnockedDown)
                         PlayHurtAnimation(lightHurtAnimFrontHash);
+
+                    ObjectSounds.instance.PlaySoundEffect(lightHurtFrontSound);
 
                     //call the TakeDamage function to subtract the health of enemy 
                     TakeDamage(damage, -attackPowerX, attackPowerY);
@@ -161,6 +183,8 @@ public class EnemyHurt : MonoBehaviour, IDamageable
                     // only if this enemy isnt "knockedDown"
                     if (!isKnockedDown)
                         PlayHurtAnimation(lightHurtAnimBehindHash);
+
+                    ObjectSounds.instance.PlaySoundEffect(lightHurtBehindSound);
 
                     TakeDamage(damage, -attackPowerX, attackPowerY);
                 }
@@ -192,6 +216,8 @@ public class EnemyHurt : MonoBehaviour, IDamageable
 
                     PlayHurtAnimation(heavyHurtAnimBehindHash);
 
+                    ObjectSounds.instance.PlaySoundEffect(heavyHurtBehindSound);
+
                     //call the TakeDamage function to subtract the health of enemy 
                     TakeDamage(damage, attackPowerX, attackPowerY);
 
@@ -204,6 +230,8 @@ public class EnemyHurt : MonoBehaviour, IDamageable
 
                     PlayHurtAnimation(heavyHurtAnimFrontHash);
 
+                    ObjectSounds.instance.PlaySoundEffect(heavyHurtFrontSound);
+
                     TakeDamage(damage, attackPowerX, attackPowerY);
                 }
 
@@ -213,6 +241,8 @@ public class EnemyHurt : MonoBehaviour, IDamageable
                     //Debug.Log("Forward heavy hit! enemy facing right!");
 
                     PlayHurtAnimation(heavyHurtAnimFrontHash);
+
+                    ObjectSounds.instance.PlaySoundEffect(heavyHurtFrontSound);
 
                     //call the TakeDamage function to subtract the health of enemy 
                     TakeDamage(damage, -attackPowerX, attackPowerY);
@@ -225,6 +255,8 @@ public class EnemyHurt : MonoBehaviour, IDamageable
                     //Debug.Log("Backward heavy hit! enemy facing left!");
 
                     PlayHurtAnimation(heavyHurtAnimBehindHash);
+
+                    ObjectSounds.instance.PlaySoundEffect(heavyHurtBehindSound);
 
                     TakeDamage(damage, -attackPowerX, attackPowerY);
                 }
@@ -322,12 +354,42 @@ public class EnemyHurt : MonoBehaviour, IDamageable
             rb.velocity = Vector2.zero;
         }
 
+        // attack power decreases each time enemy is hit mid air
+        //attackPowerX = attackPowerX - (attackPowerX * knockdownBuildUpResistance);
+
+        attackPowerY = attackPowerY - (attackPowerY * knockdownBuildUpResistance);
+        
+
         rb.AddForce(new Vector2(attackPowerX, attackPowerY), ForceMode2D.Impulse);
+
+        // resistance builds up by 5% with each hit taken while knocked down
+        knockdownBuildUpResistance += 0.05f;
+
+        if (knockdownBuildUpResistance >= 1.0f)
+        {
+            knockdownBuildUpResistance = 1.0f;
+        }
+
+        //if(knockdownBuildUpResistance == 1.0f)
+        //{
+        //    if (enemyGroundCheckScript.GetIsGrounded() && !isTempImmune)
+        //    {
+
+        //        StartCoroutine(TemporaryImmunity(immunityTimer));
+        //    }
+        //}
+            
     }
 
     public void SetIsKnockedDown(bool boolean)
     {
         isKnockedDown = boolean;
+    }
+
+
+    public void ResetKnockDownResistance()
+    {
+        knockdownBuildUpResistance = 0.0f;
     }
 
     // return "isKnockedDown" needed by EnemyBackColliderAttack script
@@ -340,4 +402,14 @@ public class EnemyHurt : MonoBehaviour, IDamageable
     {
         rb.gravityScale = amount;
     }
+
+    //IEnumerator TemporaryImmunity(float timer)
+    //{
+    //    Debug.Log("Started temp immune!");
+    //    isTempImmune = true;
+    //    hurtBox.enabled = false;
+    //    yield return new WaitForSeconds(timer);
+    //    hurtBox.enabled = true;
+    //    isTempImmune = false;
+    //}
 }

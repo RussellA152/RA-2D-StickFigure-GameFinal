@@ -42,7 +42,7 @@ public class Boomstick : Item
         {
             //animator.enabled = true;
 
-            //itemHitColliderScript.ShakeScreen();
+            itemHitColliderScript.ShakeScreen(myScriptableObject.screenShakePower, myScriptableObject.screenShakeDuration);
 
             if (PlayerStats.instance.ReturnPlayerDirection())
             {
@@ -59,6 +59,7 @@ public class Boomstick : Item
 
             //PlayerStats.instance.ModifyPlayerCurrentHealth(myScriptableObject.currentHealthModifier);
             animator.Play(animationName);
+            PlayItemSound(itemActionSound);
             //animator.enabled = false;
 
 
@@ -83,6 +84,8 @@ public class Boomstick : Item
         itemHitColliderScript.attackDamage = myScriptableObject.damageOfItem;
         itemHitColliderScript.attackPowerX = myScriptableObject.attackPowerX;
         itemHitColliderScript.attackPowerY = myScriptableObject.attackPowerY;
+
+        itemActionSound = myScriptableObject.itemActionSound;
     }
 
     //public void DealDamage(Transform attacker, IDamageAttributes.DamageType damageType, float damage, float attackPowerX, float attackPowerY)

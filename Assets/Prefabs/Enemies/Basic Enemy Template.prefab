@@ -78,6 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a99494eb295fb140a5dc581f8f53c6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyType: 0
   currentState: 0
   agent: {fileID: 1716254764283327715}
   animator: {fileID: 1373278072336133614}
@@ -93,6 +94,7 @@ MonoBehaviour:
   rb: {fileID: -8891431870749144915}
   hurtBox: {fileID: 4622912823528068189}
   minimumVelocityUntilStopped: {x: 0.2, y: 0.2}
+  minimumVelocityUntilStopIsInterrupted: 5
   gravityWhenIdle: 4
   myRoom: {fileID: 0}
   avoidanceBox: {fileID: 4790058886287226208}
@@ -137,7 +139,12 @@ MonoBehaviour:
   animator: {fileID: 1373278072336133614}
   gravityWhenFlinching: 1.75
   gravityWhenKnockedDown: 1.75
+  immunityTimer: 1.25
   timeGroundCheckIsDisabled: 0.3
+  lightHurtFrontSound: {fileID: 8300000, guid: 1e3312d22540aa14597a1fb4739f2782, type: 3}
+  lightHurtBehindSound: {fileID: 8300000, guid: b883c27c88428884fb3a10dcc42b8b47, type: 3}
+  heavyHurtFrontSound: {fileID: 8300000, guid: 0147661c12ea814488259f82d4a4aed8, type: 3}
+  heavyHurtBehindSound: {fileID: 8300000, guid: a91b6eb6aee93de4fa0b41a96fd36c96, type: 3}
 --- !u!114 &1709358543280309288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -589,8 +596,8 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -1771347619
+  m_SortingOrder: 4
   m_TargetDisplay: 0
 --- !u!114 &8008542890087124001
 MonoBehaviour:

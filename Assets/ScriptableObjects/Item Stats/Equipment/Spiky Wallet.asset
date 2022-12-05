@@ -18,13 +18,14 @@ MonoBehaviour:
   itemPrice: 8
   maxAmountOfCharge: 12
   chargesConsumedPerUse: 4
-  chargeRefilledPerKill: 1
   procChance: 0
   procChanceModifier: 0
   maxHealthModifier: 0
   currentHealthModifier: -50
   amountOfMoneyGiven: 10
   moneyMultiplierModifier: 0
+  itemActionSound: {fileID: 8300000, guid: cc43246fea5af4547b984895c689127a, type: 3}
+  itemPickupSound: {fileID: 8300000, guid: e313f27b0b581ed478a0db6ca96684ac, type: 3}
   itemDuration: 0
   usageCooldown: 2
   damageType: 0

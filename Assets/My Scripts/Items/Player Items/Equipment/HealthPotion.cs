@@ -11,6 +11,8 @@ public class HealthPotion : Item
         if (!PlayerStats.instance.IsHealthFull() && ShouldActivate())
         {
             PlayerStats.instance.ModifyPlayerCurrentHealth(myScriptableObject.currentHealthModifier);
+
+            PlayItemSound(itemActionSound);
         }
 
     }
@@ -27,6 +29,8 @@ public class HealthPotion : Item
 
         maxAmountOfCharge = myScriptableObject.maxAmountOfCharge;
         amountOfCharge = myScriptableObject.maxAmountOfCharge;
+
+        itemActionSound = myScriptableObject.itemActionSound;
 
     }
 }

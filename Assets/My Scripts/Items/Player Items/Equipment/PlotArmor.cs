@@ -22,6 +22,8 @@ public class PlotArmor : Item
 
             // don't let player swap equipment for the duration of the plot armor effect and a little extra time just in case
             StartCoroutine(CanSwapTimer(myScriptableObject.itemDuration + 0.5f));
+
+            PlayItemSound(itemActionSound);
             
             //Debug.Log("Hello? Plot armor?");
         }
@@ -41,6 +43,8 @@ public class PlotArmor : Item
 
         maxAmountOfCharge = myScriptableObject.maxAmountOfCharge;
         amountOfCharge = myScriptableObject.maxAmountOfCharge;
+
+        itemActionSound = myScriptableObject.itemActionSound;
 
     }
 

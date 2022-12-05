@@ -72,6 +72,7 @@ MonoBehaviour:
   forceMode: 0
   joltForceX: 20000
   joltForceY: 0
+  swingSound: {fileID: 0}
 --- !u!1102 &-7804365842840373576
 AnimatorState:
   serializedVersion: 6
@@ -164,6 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 933548f8ba550b44988e9ed05437a97c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hurtSound: {fileID: 8300000, guid: a91b6eb6aee93de4fa0b41a96fd36c96, type: 3}
 --- !u!1101 &-6671844931969845133
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -264,6 +266,7 @@ MonoBehaviour:
   forceMode: 0
   joltForceX: 0
   joltForceY: 0
+  swingSound: {fileID: 8300000, guid: 089cb3b202cf0ff4c843754d1ba76d8f, type: 3}
 --- !u!1101 &-5909232420724027272
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -323,6 +326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 933548f8ba550b44988e9ed05437a97c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hurtSound: {fileID: 8300000, guid: b883c27c88428884fb3a10dcc42b8b47, type: 3}
 --- !u!1101 &-5233811862927575428
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -659,6 +663,7 @@ MonoBehaviour:
   forceMode: 0
   joltForceX: 10000
   joltForceY: 0
+  swingSound: {fileID: 8300000, guid: 08e66139fb933654eb4b50210ada355e, type: 3}
 --- !u!1102 &-1233105822085669242
 AnimatorState:
   serializedVersion: 6
@@ -1257,6 +1262,7 @@ MonoBehaviour:
   forceMode: 0
   joltForceX: 0
   joltForceY: 0
+  swingSound: {fileID: 0}
 --- !u!1102 &4072863658780497773
 AnimatorState:
   serializedVersion: 6
@@ -1417,6 +1423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 933548f8ba550b44988e9ed05437a97c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hurtSound: {fileID: 8300000, guid: b883c27c88428884fb3a10dcc42b8b47, type: 3}
 --- !u!1102 &6121178768113359965
 AnimatorState:
   serializedVersion: 6
@@ -1537,6 +1544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 933548f8ba550b44988e9ed05437a97c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hurtSound: {fileID: 8300000, guid: 1e3312d22540aa14597a1fb4739f2782, type: 3}
 --- !u!1102 &7682285813506585243
 AnimatorState:
   serializedVersion: 6

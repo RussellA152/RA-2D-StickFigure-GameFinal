@@ -9,7 +9,7 @@ public class ItemHitCollider : MonoBehaviour, IDamageDealingItem
 
     //[SerializeField] private HitStop hitStopScript;
 
-    [SerializeField] CinemachineImpulseSource impulseSource;
+    [SerializeField] private CinemachineImpulseSource impulseSource;
 
     [SerializeField] private BoxCollider2D hitbox;
 
@@ -131,14 +131,14 @@ public class ItemHitCollider : MonoBehaviour, IDamageDealingItem
         }
     }
 
-    public void ShakeScreen()
+    public void ShakeScreen(float shakePower, float duration)
     {
         // change duration of the screenshake 
-        impulseSource.m_ImpulseDefinition.m_TimeEnvelope.m_SustainTime = screenShakeDuration;
+        impulseSource.m_ImpulseDefinition.m_TimeEnvelope.m_SustainTime = duration;
 
         // generate an impulse to shake the screen
-        impulseSource.GenerateImpulse(screenShakePower);
-        //Debug.Log("SHAKE SCREEN ITEM!");
+        impulseSource.GenerateImpulse(shakePower);
+        Debug.Log("SHAKE SCREEN ITEM!");
     }
 
     public void PlayParticleEffect(float duration, Vector2 positionOfParticle)

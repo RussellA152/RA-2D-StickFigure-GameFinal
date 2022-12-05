@@ -6,10 +6,13 @@ public class JumpLand : StateMachineBehaviour
 {
     private int isRollingHash; //setting the isRolling parameter to a hash value to save performance
 
+    //[SerializeField] private AudioClip landSound;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         isRollingHash = Animator.StringToHash("isRolling");
+        //ObjectSounds.instance.PlaySoundEffect(landSound);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
