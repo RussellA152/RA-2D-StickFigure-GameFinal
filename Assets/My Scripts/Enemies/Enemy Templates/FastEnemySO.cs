@@ -17,13 +17,13 @@ public class FastEnemySO : EnemyScriptableObject
         // if special attack chance procs, then perform a special attack
         if (Random.value <= specialAttackChance)
         {
-            Debug.Log("Enemy performed a special attack!");
+            //Debug.Log("Enemy performed a special attack!");
             animator.Play(specialAttackAnimation);
         }
         else
         {
             // play common attack animation
-            Debug.Log("Enemy performed a common attack!");
+            //Debug.Log("Enemy performed a common attack!");
             animator.Play(commonAttackAnimation);
         }
         

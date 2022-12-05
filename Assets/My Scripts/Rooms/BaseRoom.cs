@@ -40,6 +40,9 @@ public class BaseRoom: MonoBehaviour
     public Door leftDoor;
     public Door rightDoor;
 
+    //[HideInInspector]
+    public Door doorEnteredFrom; // this is the door that the player entered the room from (inside the room, not the door outside the room)
+
     [Header("X & Y Coordinates")]
     public Vector2 localRoomCoordinate; //NOT TO BE CONFUSED with the room coordinate in the Level Manager's dictionary (this is a local version of the same vector2 value*)
 
@@ -197,6 +200,12 @@ public class BaseRoom: MonoBehaviour
     {
         numberOfItems += amount;
     }
+
+    public void SetDoorEnteredFrom(Door door)
+    {
+        doorEnteredFrom = door;
+    }
+
 
 
     private void OnDestroy()

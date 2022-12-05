@@ -8,6 +8,12 @@ public class BossRoom : BaseRoom
     [SerializeField] private Transform centerOfRoom;
     private BaseRoom potentialRoomOnTop;
 
+    [Header("Potential Boss Spawn Locations")]
+    // the spawn location of the boss depends on the door the player entered from (this is so that the boss does not spawn right next to the player)
+    [SerializeField] private Transform rightSpawnLocation;
+    [SerializeField] private Transform middleSpawnLocation;
+    [SerializeField] private Transform leftSpawnLocation;
+
 
     //[SerializeField] private List<Transform> itemDisplayList = new List<Transform>();
     //[SerializeField] private int numberOfItems;
@@ -20,12 +26,10 @@ public class BossRoom : BaseRoom
         base.Start();
         roomEnemyCountState = BaseRoom.RoomEnemyCount.cleared;
         roomType = RoomType.boss;
-        //itemDisplayTransforms = new Transform[amountOfItemDisplays];
-        //StartCoroutine("SpawnBossRoom")
 
-        //localRoomCoordinate = new Vector2(0, 0);
-        //transform.position = new Vector2(0f, 0f);
         levelManager.onAllRoomsSpawned += CheckIfRoomIsOnTop;
+
+        levelManager.onPlayerEnterNewArea += UpdateBossSpawnLocation;
     }
 
     private void CheckIfRoomIsOnTop()
@@ -43,6 +47,38 @@ public class BossRoom : BaseRoom
             //    Debug.Log("There is no room on top of the boss room.");
             //}
         }
+    }
+
+    // depending on which door the player entered the room from, change the spawn location of the boss to prevent it from spawning right next to player
+    public void UpdateBossSpawnLocation()
+    {
+        // only update boss spawn location if the player is entering the boss room
+        if (levelManager.GetCurrentRoom() != this)
+            return;
+
+        if (doorEnteredFrom == topDoor)
+        {
+            return;
+        }
+            
+
+        else if (doorEnteredFrom == leftDoor)
+        {
+            spawnLocationsOfThisLevel.Remove(leftSpawnLocation);
+        }
+            
+
+        else if (doorEnteredFrom == rightDoor)
+        {
+            spawnLocationsOfThisLevel.Remove(rightSpawnLocation);
+        }
+
+        else if (doorEnteredFrom == bottomDoor)
+        {
+            int randomSpawn = Random.Range(0, 2);
+            spawnLocationsOfThisLevel.Remove(middleSpawnLocation);
+        }
+            
     }
 
     public Transform GetCenterOfRoom()

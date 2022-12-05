@@ -16,6 +16,8 @@ public class EnemyScriptableObject : ScriptableObject, IAIAttacks
     public float walkingSpeed;
     public float followRangeX; //x distance enemy must be to chase player
     public float followRangeY; //y distance enemy must be to chase player
+    public float minimumYDistanceUntilAutopathDisables; // how much Y distance until enemy stops following player (used so that enemy's won't levitate towards player when they jump)
+
     [Range(0.0f, 1.0f)]
     public float dropChance; // chance for this enemy to drop an item upon death
     public float getUpTimer; // how long does it take for this enemy to get back up from the ground (always the same for each attack)
@@ -28,6 +30,7 @@ public class EnemyScriptableObject : ScriptableObject, IAIAttacks
     [Header("Attack Properties")]
     public float attackRangeX; //how far enemy can be to attack player in x-direction
     public float attackRangeY; //how far enemy can be to attack player in y-direction
+    public float longRangeAttackDistanceX; // how far can enemy be to attack player with a long ranged attack
     public float specialAttackChance; // chance to perform a special attack (instead of regular attack)
     public float attackCooldownTimer; //time between each attack
     [Header("Obsolete")]

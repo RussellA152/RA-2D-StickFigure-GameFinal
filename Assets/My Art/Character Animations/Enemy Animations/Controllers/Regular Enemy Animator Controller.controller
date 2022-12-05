@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: 2
-  attackDamage: 35
+  attackDamage: 25
   attackingPowerX: 100
   attackingPowerY: 25
   particleEffectMaterial: {fileID: 2100000, guid: 05287224517eb034f9c4ffd2696f1f06, type: 2}

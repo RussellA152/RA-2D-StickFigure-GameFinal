@@ -16,7 +16,8 @@ MonoBehaviour:
   walkingSpeed: 10
   followRangeX: 35
   followRangeY: 12
-  dropChance: 1
+  minimumYDistanceUntilAutopathDisables: 1.5
+  dropChance: 0.3
   getUpTimer: 0.9
   despawnTimer: 2.5
   attackRangeX: 4.5

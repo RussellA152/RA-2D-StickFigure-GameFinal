@@ -13,25 +13,30 @@ public class AISpawner : MonoBehaviour
     //[SerializeField] private LevelManager levelManager;
 
     ObjectPool<EnemyController> enemyPool; //pool of regular enemies (fast, fat, ranged)
+
     ObjectPool<EnemyController> bossEnemyPool; //pool of boss enemies (might use?)
 
-    [SerializeField] private int defaultCapacity; // the capacity of enemies (not entirely sure what this does)
+    [SerializeField] private int enemyDefaultCapacity; // the capacity of enemies (not entirely sure what this does)
+    [SerializeField] private int bossDefaultCapacity; // the capacity of enemies (not entirely sure what this does)
 
     //[SerializeField] private int amountToSpawn; // the maximum number of enemies
-    [SerializeField] private int inReserve = 0;
 
+    [SerializeField] private int inReserve = 0;
     [SerializeField] private int inactiveCount; // amount of inactive enemies
     [SerializeField] private int activeCount; // amount of active enemies
 
-    [Header("AI To Be Pooled")]
+    [Header("Regular AI To Be Pooled")]
     [SerializeField] private EnemyController enemyPrefab; //the enemy to pool/spawn
+    [Header("Boss AI To Be Pooled")]
+    [SerializeField] private EnemyController bossEnemyPrefab; //the boss enemy to pool/spawn
 
 
     private void Awake()
     {
-        enemyPool = new ObjectPool<EnemyController>(CreateEnemy, OnTakeEnemyFromPool, OnReturnEnemyToPool, null, true, defaultCapacity);
+        enemyPool = new ObjectPool<EnemyController>(CreateEnemy, OnTakeEnemyFromPool, OnReturnEnemyToPool, null, true, enemyDefaultCapacity);
+        bossEnemyPool = new ObjectPool<EnemyController>(CreateBossEnemy, OnTakeEnemyFromPool, OnReturnEnemyToPool, null, true, bossDefaultCapacity);
 
-        inReserve = defaultCapacity;
+        inReserve = enemyDefaultCapacity;
 
     }
 
@@ -68,6 +73,14 @@ public class AISpawner : MonoBehaviour
 
     public void SpawnAI()
     {
+        // if we're going to the boss room, then spawn a boss instead of regular enemies
+        if(LevelManager.instance.GetCurrentRoom().roomType == BaseRoom.RoomType.boss)
+        {
+            SpawnBossAI();
+            return;
+        }
+
+
         //find the number of enemies the spawner will need to create (depends on the current room)
         int numberOfEnemiesNeeded = LevelManager.instance.GetCurrentRoom().GetNumberOfEnemiesCanSpawnHere();
 
@@ -89,6 +102,11 @@ public class AISpawner : MonoBehaviour
 
     }
 
+    public void SpawnBossAI()
+    {
+        var bossEnemy = bossEnemyPool.Get();
+    }
+
     EnemyController CreateEnemy()
     {
         //instantiates a new enemy
@@ -98,6 +116,17 @@ public class AISpawner : MonoBehaviour
         enemy.SetPool(enemyPool);
 
         return enemy;
+
+    }
+    EnemyController CreateBossEnemy()
+    {
+        //instantiates a new enemy
+        var boss = Instantiate(bossEnemyPrefab);
+
+        //set the enemy's pool equal to this pool
+        boss.SetPool(bossEnemyPool);
+
+        return boss;
 
     }
 

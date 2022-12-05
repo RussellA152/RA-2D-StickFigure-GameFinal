@@ -11,7 +11,9 @@ using Random = UnityEngine.Random;
 //This script also requires the EnemyHealth and EnemyMovement scripts to function
 public class EnemyController : MonoBehaviour
 {
+    [SerializeField] private EnemyType enemyType;
     [SerializeField] private EnemyState currentState;
+
     [SerializeField] private NavMeshAgent agent;
 
     private IObjectPool<EnemyController> myPool;
@@ -92,6 +94,13 @@ public class EnemyController : MonoBehaviour
     private float timeToGetUpStored; // variable that remembers the original value of the timeToGetUp (for resetting)
 
     private int stoppedHash;
+
+    public enum EnemyType
+    {
+        regular, // regular types of enemies which spawn in normal rooms
+
+        boss // boss enemies will only spawn in boss rooms
+    }
 
     public enum EnemyState
     {
@@ -574,7 +583,10 @@ public class EnemyController : MonoBehaviour
 
 
         // invoke onEnemyKill eventsystem when any enemy dies
-        EnemyManager.enemyManagerInstance.EnemyKilledEventSystem();
+        if(enemyType == EnemyType.regular)
+            EnemyManager.enemyManagerInstance.EnemyKilledEventSystem();
+        else if (enemyType == EnemyType.boss)
+            EnemyManager.enemyManagerInstance.BossKilledEventSystem();
 
         //if this enemy has a pool, return this enemy back to the pool
         if (myPool != null)
@@ -672,7 +684,7 @@ public class EnemyController : MonoBehaviour
     {
         if (!attackOnCooldown)
         {
-            Debug.Log("Cooldown activated!");
+            //Debug.Log("Cooldown activated!");
             StartCoroutine(AttackCooldown());
         }
     }

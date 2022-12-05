@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a375c7c4bf6fe394f8397e32c9405374, type: 3}
+  m_Name: Fast Boss
+  m_EditorClassIdentifier: 
+  maxHealth: 1000
+  walkingSpeed: 17
+  followRangeX: 45
+  followRangeY: 25
+  minimumYDistanceUntilAutopathDisables: 4
+  dropChance: 0
+  getUpTimer: 0.6
+  despawnTimer: 2.5
+  attackRangeX: 4
+  attackRangeY: 2.5
+  longRangeAttackDistanceX: 15
+  specialAttackChance: 0.3
+  attackCooldownTimer: 2.75
+  aggressionLevelTreshold: 0
+  minAggressionLevelIncrease: 0
+  maxAggressionLevelIncrease: 0
+  aggressionLevelIncreaseOnHurt: 0
+  aggressionLevelDecreaseOnAttack: 0
+  rbMass: 150
+  enemyAnimatorController: {fileID: 9100000, guid: 718ff9344e35c5b42ad7582958ee68ac, type: 2}
+  commonAttackAnimation: Common Attack Anticipation
+  specialAttackAnimation: Special Attack Anticipation
+  lightHurtAnimFront: Enemy Light Hurt Front
+  lightHurtAnimBehind: Enemy Light Hurt Behind
+  heavyHurtAnimFront: Enemy Heavy Hurt Front
+  heavyHurtAnimBehind: Enemy Heavy Hurt Back
+  specialAttack1Cooldown: 0
+  specialAttack2Animation: Special Attack 2 Anticipation
+  specialAttack2Chance: 0.4
+  specialAttack2Cooldown: 0

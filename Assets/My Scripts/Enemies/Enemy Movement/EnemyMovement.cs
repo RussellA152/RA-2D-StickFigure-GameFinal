@@ -29,7 +29,7 @@ public class EnemyMovement : MonoBehaviour
 
     private float followRangeX; //how far enemy can be to follow player in x direction
     private float followRangeY; //how far enemy can be to follow player in y direction
-    private float minimumDistanceY = 1.5f; //how much distance between enemy and player allowed until enemy's auto-repath is turned off (prevents enemies from flying towards player)
+    private float minimumDistanceY; //how much distance between enemy and player allowed until enemy's auto-repath is turned off (prevents enemies from flying towards player)
     private bool canAutoSetTarget;
     private bool canSetTemporaryPath = false;
 
@@ -239,6 +239,7 @@ public class EnemyMovement : MonoBehaviour
 
             followRangeX = enemyScriptableObject.followRangeX;
             followRangeY = enemyScriptableObject.followRangeY;
+            minimumDistanceY = enemyScriptableObject.minimumYDistanceUntilAutopathDisables;
         }
         else
         {

@@ -9,6 +9,7 @@ public class EnemyManager : MonoBehaviour
     public static EnemyManager enemyManagerInstance; 
 
     public List<EnemyScriptableObject> enemyScriptableObjects = new List<EnemyScriptableObject>();
+    public List<EnemyScriptableObject> bossScriptableObjects = new List<EnemyScriptableObject>();
 
     [SerializeField] private ItemManager itemManager;
 
@@ -84,6 +85,15 @@ public class EnemyManager : MonoBehaviour
         int randomIndex = Random.Range(0, enemyScriptableObjects.Count);
 
         return enemyScriptableObjects[randomIndex];
+    }
+
+    public EnemyScriptableObject GiveBossScriptableObject()
+    {
+        //picks a random number ranging from 0 to the enemyScriptableObject's list size
+        //SHOULD HAVE HIGHER OR LOWER CHANCES TO SPAWN certain enemies
+        int randomIndex = Random.Range(0, bossScriptableObjects.Count);
+
+        return bossScriptableObjects[randomIndex];
     }
 
 }

@@ -13,7 +13,7 @@ public class UnstuckCollisionPlayer : MonoBehaviour
 
     private float timerUntilUnstuck = 2f;
     private float timerStored = 2f;
-    private float timeUntilCollisionTurnsBackOn = 0.5f;
+    private float timeUntilCollisionTurnsBackOn = 0.75f;
 
     private bool collidingWithEnemy = false;
 
@@ -67,6 +67,7 @@ public class UnstuckCollisionPlayer : MonoBehaviour
 
     IEnumerator TurnCollisionBackOn(float timer)
     {
+        Debug.Log("UNSTUCK ME!");
         startedCoroutine = true;
 
         yield return new WaitForSeconds(timer);
