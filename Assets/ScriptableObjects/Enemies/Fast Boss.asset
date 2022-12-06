@@ -18,7 +18,7 @@ MonoBehaviour:
   followRangeY: 25
   minimumYDistanceUntilAutopathDisables: 4
   dropChance: 0
-  getUpTimer: 0.6
+  getUpTimer: 0.4
   despawnTimer: 2.5
   attackRangeX: 4
   attackRangeY: 2.5

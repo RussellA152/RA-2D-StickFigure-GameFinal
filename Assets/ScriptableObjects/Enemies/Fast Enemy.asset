@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 200
   walkingSpeed: 10
-  followRangeX: 35
+  followRangeX: 30
   followRangeY: 12
   minimumYDistanceUntilAutopathDisables: 1.5
   dropChance: 0.75

@@ -68,6 +68,7 @@ MonoBehaviour:
   topDoor: {fileID: 3272542392093839048}
   leftDoor: {fileID: 2788754765315423702}
   rightDoor: {fileID: 5648844535878035801}
+  doorEnteredFrom: {fileID: 0}
   localRoomCoordinate: {x: 0, y: 0}
   numberOfItems: 0
   UnlockerList: []
@@ -402,7 +403,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5057583739276540369}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.3, y: 9.3, z: 0}
+  m_LocalPosition: {x: 6.3, y: 10.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7082400726964306987}
@@ -432,7 +433,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5604576400756088175}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 67.3, y: 7.7, z: 0}
+  m_LocalPosition: {x: -14.1, y: -10.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7082400726964306987}
@@ -462,7 +463,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5741432452992207718}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 54, y: -9.7, z: 0}
+  m_LocalPosition: {x: 65.9, y: -22.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7082400726964306987}
@@ -477,7 +478,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4413431722473135619, guid: 086e672b64e598647b06ab03d92837d3, type: 3}
       propertyPath: m_Name
-      value: w (1)
+      value: Ladder (1)
       objectReference: {fileID: 0}
     - target: {fileID: 4413431722473135621, guid: 086e672b64e598647b06ab03d92837d3, type: 3}
       propertyPath: m_RootOrder
@@ -1317,7 +1318,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4413431722473135619, guid: 086e672b64e598647b06ab03d92837d3, type: 3}
       propertyPath: m_Name
-      value: w
+      value: Ladder
       objectReference: {fileID: 0}
     - target: {fileID: 4413431722473135621, guid: 086e672b64e598647b06ab03d92837d3, type: 3}
       propertyPath: m_RootOrder
