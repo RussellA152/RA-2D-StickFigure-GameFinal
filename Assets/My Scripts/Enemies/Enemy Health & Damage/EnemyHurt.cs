@@ -198,10 +198,10 @@ public class EnemyHurt : MonoBehaviour, IDamageable
 
                 SetRBGravity(gravityWhenKnockedDown);
 
-                if (isKnockedDown)
-                {
-                    Debug.Log("Hit mid air by heavy!");
-                }
+                //if (isKnockedDown)
+                //{
+                    //Debug.Log("Hit mid air by heavy!");
+                //}
 
                 
 

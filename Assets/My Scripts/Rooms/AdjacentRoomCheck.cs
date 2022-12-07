@@ -167,7 +167,8 @@ public class AdjacentRoomCheck : MonoBehaviour
         if (adjacentRoom.roomType == BaseRoom.RoomType.treasure)
         {
             doorToModify.ChangeDoorSprite(treasureDoorSprite);
-            doorToModify2.ChangeDoorSprite(treasureDoorSprite);
+            if(adjacentRoom.roomType != BaseRoom.RoomType.boss)
+                doorToModify2.ChangeDoorSprite(treasureDoorSprite);
 
         }
 
@@ -175,7 +176,8 @@ public class AdjacentRoomCheck : MonoBehaviour
         else if (adjacentRoom.roomType == BaseRoom.RoomType.shop)
         {
             doorToModify.ChangeDoorSprite(shopDoorSprite);
-            doorToModify2.ChangeDoorSprite(shopDoorSprite);
+            if (adjacentRoom.roomType != BaseRoom.RoomType.boss)
+                doorToModify2.ChangeDoorSprite(shopDoorSprite);
         }
 
 

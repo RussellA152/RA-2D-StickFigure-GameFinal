@@ -14,11 +14,18 @@ public class PlayerHealth : MonoBehaviour, IHealth
 
     private int isAliveHash; // the "isAlive" parameter from the player's animator controller
 
-    public Action onPlayerDeath;
+    public Action onPlayerDeath; // player is dead, but can be saved
+
+    public Action playerIsCompletelyDead; // player is officially dead
+
+    private bool checkIfDeadCompletely = false;
 
 
     private void Start()
     {
+        onPlayerDeath += CheckIfFullyDead;
+
+
         //set current health to max health at beginning of game
         playerMaxHealth = PlayerStats.instance.GetMaxHealth();
         playerCurrentHealth = playerMaxHealth;
@@ -127,5 +134,33 @@ public class PlayerHealth : MonoBehaviour, IHealth
         {
             onPlayerDeath();
         }
+    }
+
+    public void CheckIfFullyDead()
+    {
+        if(!checkIfDeadCompletely)
+            StartCoroutine(CheckIfFullyDeadAfterTime());
+    }
+
+    // if the player is dead for more than 5 seconds, then they are officially dead
+    IEnumerator CheckIfFullyDeadAfterTime()
+    {
+        checkIfDeadCompletely = true;
+        yield return new WaitForSeconds(5f);
+
+        if (playerCurrentHealth <= 0)
+        {
+            playerIsCompletelyDead();
+            Debug.Log("PLAYER IS COMPLETLY DEAD!");
+        }
+            
+
+        checkIfDeadCompletely = false;
+
+    }
+
+    private void OnDisable()
+    {
+        onPlayerDeath -= CheckIfFullyDead;
     }
 }

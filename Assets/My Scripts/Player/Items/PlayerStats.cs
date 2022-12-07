@@ -290,6 +290,11 @@ public class PlayerStats : MonoBehaviour
         return maxHealth;
     }
 
+    public PlayerHealth AccessPlayerHealth()
+    {
+        return playerHealthScript;
+    }
+
     public bool IsHealthFull()
     {
         return playerHealthScript.IsCurrentHealthFull();

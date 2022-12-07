@@ -39,7 +39,7 @@ public class EnemyManager : MonoBehaviour
 
     private void Start()
     {
-        //onEnemyKill += EnemyItemDrop;
+
     }
 
     private void OnDisable()
@@ -59,12 +59,15 @@ public class EnemyManager : MonoBehaviour
     {
         if (onBossKill != null)
             onBossKill();
+
+        //Debug.Log("BOSS DIED!");
     }
     public void EnemyKilledEventSystem()
     {
         if (onEnemyKill != null)
             onEnemyKill();
     }
+
 
     //private void EnemyItemDrop()
     //{
