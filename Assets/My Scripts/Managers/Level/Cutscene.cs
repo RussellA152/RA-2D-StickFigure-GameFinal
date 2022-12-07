@@ -17,6 +17,7 @@ public class Cutscene : MonoBehaviour
     void Start()
     {
         // wait for all rooms to spawn first
+
         LevelManager.instance.onAllRoomsSpawned += IntroCutscene;
     }
 

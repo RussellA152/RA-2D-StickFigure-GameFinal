@@ -104,7 +104,23 @@ public class AISpawner : MonoBehaviour
 
     public void SpawnBossAI()
     {
-        var bossEnemy = bossEnemyPool.Get();
+        //find the number of enemies the spawner will need to create (depends on the current room)
+        int numberOfEnemiesNeeded = LevelManager.instance.GetCurrentRoom().GetNumberOfEnemiesCanSpawnHere();
+
+        if (numberOfEnemiesNeeded <= inReserve)
+        {
+            for (int spawnIterator = 0; spawnIterator < numberOfEnemiesNeeded; spawnIterator++)
+            {
+                bossEnemyPool.Get();
+            }
+        }
+        else if (numberOfEnemiesNeeded > inReserve)
+        {
+            for (int spawnIterator = 0; spawnIterator <= inReserve; spawnIterator++)
+            {
+                bossEnemyPool.Get();
+            }
+        }
     }
 
     EnemyController CreateEnemy()

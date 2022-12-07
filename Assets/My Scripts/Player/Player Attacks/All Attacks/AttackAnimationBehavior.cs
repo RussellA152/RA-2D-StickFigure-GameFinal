@@ -67,9 +67,9 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
         //animator.SetBool("isAttacking", true);
 
         // apply damage/ force multipliers from PlayerStats
-        attackDamage *= PlayerStats.instance.GetDamageMultiplier();
-        attackingPowerX *= PlayerStats.instance.GetAttackPowerMultiplier();
-        attackingPowerY *= PlayerStats.instance.GetAttackPowerMultiplier();
+        //attackDamage *= PlayerStats.instance.GetDamageMultiplier();
+        //attackingPowerX *= PlayerStats.instance.GetAttackPowerMultiplier();
+        //attackingPowerY *= PlayerStats.instance.GetAttackPowerMultiplier();
 
 
         //improves performance
@@ -83,7 +83,7 @@ public class AttackAnimationBehavior : StateMachineBehaviour, IDamageAttributes
         IDamageDealingCharacter damageDealingScript = hitbox.gameObject.GetComponent<IDamageDealingCharacter>();
 
         //invoke hitbox's function updates damage values
-        damageDealingScript.UpdateAttackValues(damageType, attackDamage, attackingPowerX, attackingPowerY, screenShakePower, screenShakeDuration);
+        damageDealingScript.UpdateAttackValues(damageType, attackDamage * PlayerStats.instance.GetDamageMultiplier(), attackingPowerX * PlayerStats.instance.GetAttackPowerMultiplier(), attackingPowerY * PlayerStats.instance.GetAttackPowerMultiplier(), screenShakePower, screenShakeDuration);
 
         damageDealingScript.SetParticleEffectDetails(particleEffectMaterial,particleEffectDuration);
 
