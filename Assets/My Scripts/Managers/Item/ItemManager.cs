@@ -117,12 +117,12 @@ public class ItemManager : MonoBehaviour
     private void Update()
     {
         // TEMP (USING FOR DEBUGGING IGNORED ITEMS RETURNING TO POOLS)
-        if (useEquipmentBinding.triggered && !calledIgnored)
-        {
-            Debug.Log("Return items on command!");
-            calledIgnored = true;
-            ReturnIgnoredItems();
-        }
+        //if (useEquipmentBinding.triggered && !calledIgnored)
+        //{
+        //    Debug.Log("Return items on command!");
+        //    calledIgnored = true;
+        //    ReturnIgnoredItems();
+        //}
 
         activePassiveCount = passiveItemPool.CountActive;
         inactivePassiveCount = passiveItemPool.CountInactive;

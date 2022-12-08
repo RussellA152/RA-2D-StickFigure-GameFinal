@@ -90,7 +90,7 @@ public abstract class Interactable : MonoBehaviour
         //grab a reference to the PlayerComponent script
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Player has entered my trigger: " + gameObject.name);
+            //Debug.Log("Player has entered my trigger: " + gameObject.name);
 
             //interacter is always the player (because player has "Player" tag)
             interacter = collision.transform;
