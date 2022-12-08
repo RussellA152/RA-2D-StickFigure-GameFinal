@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Boomstick
   m_EditorClassIdentifier: 
   itemName: Boomstick
-  itemDescription: 
+  itemDescription: 'Boomstick: Shoots a gun in forward direction'
   itemType: 2
   itemPrice: 12
   maxAmountOfCharge: 12

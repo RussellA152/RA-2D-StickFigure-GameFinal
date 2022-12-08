@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Bomb
   m_EditorClassIdentifier: 
   itemName: Bomb
-  itemDescription: 
+  itemDescription: 'Bomb: Throws a bomb in short distance'
   itemType: 2
   itemPrice: 9
   maxAmountOfCharge: 9

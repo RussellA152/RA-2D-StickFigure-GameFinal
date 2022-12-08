@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Weather Warfare
   m_EditorClassIdentifier: 
   itemName: Weather Warfare
-  itemDescription: 
+  itemDescription: You shouldn't have this item
   itemType: 1
   itemPrice: 0
   maxAmountOfCharge: 0

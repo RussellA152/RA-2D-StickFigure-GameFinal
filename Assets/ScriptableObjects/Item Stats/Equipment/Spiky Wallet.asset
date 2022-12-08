@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Spiky Wallet
   m_EditorClassIdentifier: 
   itemName: Spiky Wallet
-  itemDescription: 
+  itemDescription: 'Spiky Wallet: Gain 10 dollars, but lose 50 health'
   itemType: 2
   itemPrice: 8
   maxAmountOfCharge: 12

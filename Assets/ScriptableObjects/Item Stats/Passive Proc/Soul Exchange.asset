@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Soul Exchange
   m_EditorClassIdentifier: 
   itemName: Soul Exchange
-  itemDescription: 
+  itemDescription: 'Soul Exchange: Resurrect after taking a fatal blow'
   itemType: 1
   itemPrice: 15
   maxAmountOfCharge: 0

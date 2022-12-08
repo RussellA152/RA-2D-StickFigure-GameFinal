@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Malicious Potion
   m_EditorClassIdentifier: 
   itemName: Malicious Potion
-  itemDescription: 
+  itemDescription: 'Malicious Potion: Increase damage by 5%, but lose 50 health'
   itemType: 2
   itemPrice: 8
   maxAmountOfCharge: 10
@@ -21,7 +21,7 @@ MonoBehaviour:
   procChance: 0
   procChanceModifier: 0
   maxHealthModifier: 0
-  currentHealthModifier: -25
+  currentHealthModifier: -50
   amountOfMoneyGiven: 0
   moneyMultiplierModifier: 0
   itemActionSound: {fileID: 8300000, guid: a4eba3e531b2a0442923e7614cdea8be, type: 3}

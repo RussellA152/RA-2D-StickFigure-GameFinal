@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Astronaut Helmet
   m_EditorClassIdentifier: 
   itemName: Astronaut Helmet
-  itemDescription: 
+  itemDescription: 'Astronaut Helmet: Lowers gravity'
   itemType: 0
   itemPrice: 5
   maxAmountOfCharge: 0

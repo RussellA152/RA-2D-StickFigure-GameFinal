@@ -14,15 +14,20 @@ public abstract class Unlocker : Interactable
     [HideInInspector]
     private bool unlockedObject = false; // has this Unlocker already unlocked its given gameObject?
 
+    [SerializeField] private string unlockerText;
+
     //[HideInInspector]
     //public bool conditionFulfilled; // has the Player fullfilled this unlocker's needs to unlock the gameobject
 
-    private void Update()
+    public void Update()
     {
         // if this unlocker hasn't unlocked its given gameObject yet, and the player is in the trigger
         // then check for interaction
         if (!unlockedObject && inTrigger)
+        {
             CheckInteraction();
+        }
+            
     }
 
     public override void InteractableAction()

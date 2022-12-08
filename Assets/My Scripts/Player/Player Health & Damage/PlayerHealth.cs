@@ -151,7 +151,7 @@ public class PlayerHealth : MonoBehaviour, IHealth
         if (playerCurrentHealth <= 0)
         {
             playerIsCompletelyDead();
-            Debug.Log("PLAYER IS COMPLETLY DEAD!");
+            //Debug.Log("PLAYER IS COMPLETLY DEAD!");
         }
             
 

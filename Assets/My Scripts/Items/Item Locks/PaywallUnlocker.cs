@@ -6,19 +6,28 @@ using UnityEngine;
 public class PaywallUnlocker : Unlocker
 {
     [SerializeField] private int priceOfObject;
+    private string priceAsString;
     private bool fetchedPriceOfItem = false; // has this locker grabbed a reference to the item's price?
 
     [SerializeField] private AudioClip purchaseSuccessfulSound;
     [SerializeField] private AudioClip purchaseFailedSound;
 
-    public override void CheckIfConditionIsFulfilled()
+    [SerializeField] private string failedPurchaseText;
+    [SerializeField] private float failedPurchaseDuration;
+
+    private void Update()
     {
-        // TEMPORARY (REMOVE LATER) *** 
-        //conditionFulfilled = true;
+        base.Update();
 
         // check if this locker hasn't grabbed a reference to the item's price already so we don't have to GetComponent more than once
-        if (!fetchedPriceOfItem)
+        if (!fetchedPriceOfItem && gameObjectToUnlock != null)
             CheckPriceOfItem();
+
+    }
+    public override void CheckIfConditionIsFulfilled()
+    {
+
+       
 
         // if the player has enough money to unlock this gameobject
         if (PlayerStats.instance.GetPlayerMoney() >= priceOfObject)
@@ -37,6 +46,7 @@ public class PaywallUnlocker : Unlocker
             // Play a failure/unsuccessful purchase sound effect
 
             ObjectSounds.instance.PlaySoundEffect(purchaseFailedSound);
+            TextUI.instance.TextEnqueue(failedPurchaseText + " $ " + priceOfObject, failedPurchaseDuration);
             //Debug.Log("Not enough money");
         }
         
@@ -49,9 +59,15 @@ public class PaywallUnlocker : Unlocker
     {
         // fetch the price of this locked gameobject
         priceOfObject = gameObjectToUnlock.GetComponent<IPriceable>().GetPrice();
+        priceAsString = priceOfObject.ToString();
 
         fetchedPriceOfItem = true;
 
+    }
+
+    public string GetPriceAsString()
+    {
+        return priceAsString;
     }
 
     public void PlayInteractSound(AudioClip clip)

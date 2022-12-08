@@ -175,11 +175,11 @@ public class LevelManager : MonoBehaviour
         //number of boss rooms not included
         roomCap = maxNumberOfNormalRooms + maxNumberOfTreasureRooms + maxNumberOfShopRooms + maxNumberOfBossRooms;
 
-        Debug.Log("Room cap is " + roomCap);
-        Debug.Log("Normal Room Count: " + maxNumberOfNormalRooms);
-        Debug.Log("Treasure Room Count: " + maxNumberOfTreasureRooms);
-        Debug.Log("Shop Room Count: " + maxNumberOfShopRooms);
-        Debug.Log("Boss Room Count: " + maxNumberOfBossRooms);
+        //Debug.Log("Room cap is " + roomCap);
+        //Debug.Log("Normal Room Count: " + maxNumberOfNormalRooms);
+        //Debug.Log("Treasure Room Count: " + maxNumberOfTreasureRooms);
+        //Debug.Log("Shop Room Count: " + maxNumberOfShopRooms);
+        //Debug.Log("Boss Room Count: " + maxNumberOfBossRooms);
     }
 
     IEnumerator WaitUntilRoomsAreSpawned()

@@ -132,7 +132,7 @@ public abstract class Item : MonoBehaviour, IPriceable
                     {
                         //when player's equipment item is out of charges we can probably play some sound that
                         //indicates the item can't be used
-                        Debug.Log("Insufficient Charge");
+                        //Debug.Log("Insufficient Charge");
 
                         //hasSufficientCharge = false;
                         return false;
@@ -165,6 +165,12 @@ public abstract class Item : MonoBehaviour, IPriceable
         
     }
 
+    private void GiveDescriptionOnPickup()
+    {
+        TextUI.instance.TextEnqueue(myScriptableObject.itemDescription, 2.5f);
+        //Debug.Log("DISPLAY TEXT!");
+    }
+
 
     public void OnItemPickup()
     {
@@ -174,17 +180,20 @@ public abstract class Item : MonoBehaviour, IPriceable
 
             case ItemScriptableObject.ItemType.passiveBuff:
                 PlayPickupSound();
+                GiveDescriptionOnPickup();
                 //adds the item of type "Passive Buff" to the player's passive item inventory
                 ItemAction(PlayerStats.instance.GetPlayer());
                 break;
 
             case ItemScriptableObject.ItemType.passiveProc:
                 PlayPickupSound();
+                GiveDescriptionOnPickup();
                 //adds the item of type "Passive Proc" to the player's passive item inventory
                 ItemAction(PlayerStats.instance.GetPlayer());
                 break;
             case ItemScriptableObject.ItemType.equipment:
                 PlayPickupSound();
+                GiveDescriptionOnPickup();
                 ItemManager.instance.activeEquipmentSlot = this;
 
                 break;

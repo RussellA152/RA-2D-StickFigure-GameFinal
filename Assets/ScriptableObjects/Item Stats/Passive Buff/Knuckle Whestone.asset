@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Knuckle Whestone
   m_EditorClassIdentifier: 
   itemName: Knuckle Whestone
-  itemDescription: 
+  itemDescription: 'Knuckle Whestone: Increase melee damage by 20%'
   itemType: 0
   itemPrice: 7
   maxAmountOfCharge: 0

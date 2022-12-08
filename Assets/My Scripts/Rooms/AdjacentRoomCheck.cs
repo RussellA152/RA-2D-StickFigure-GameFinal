@@ -162,6 +162,10 @@ public class AdjacentRoomCheck : MonoBehaviour
     // ex. if the adjacent room is a treasure room, change the door sprite to a green dollar door
     private void ChangeDoorSpriteBasedOnRoom(Door doorToModify, Door doorToModify2, BaseRoom adjacentRoom)
     {
+        // don't modify the door of a boss room
+        if (this.room.roomType == BaseRoom.RoomType.boss)
+            return;
+
         // depending on the adjacent room's room type (Normal, Treasure, Shop, or Boss) change its sprite
 
         if (adjacentRoom.roomType == BaseRoom.RoomType.treasure)

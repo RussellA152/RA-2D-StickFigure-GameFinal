@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Health Potion
   m_EditorClassIdentifier: 
   itemName: Nutritious Potion
-  itemDescription: 
+  itemDescription: 'Health Potion: Heal for 125 health'
   itemType: 2
   itemPrice: 8
   maxAmountOfCharge: 10
