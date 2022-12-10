@@ -2195,7 +2195,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &815895321
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2763,7 +2763,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.8066037, y: 1}
+    m_SensorSize: {x: 2.3312304, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3512,12 +3512,11 @@ MonoBehaviour:
   rollPrompt: {fileID: 1659728608}
   interactPrompt: {fileID: 257390703}
   useEquipmentPrompt: {fileID: 1367692628}
-  extraSlidePrompt: {fileID: 815895322}
   extraRollPrompt: {fileID: 1842135069}
   jumpKBPrompt: {fileID: 21300000, guid: 576883bd897b87d4b89a6bde0ea9b471, type: 3}
   lightAttKBPrompt: {fileID: 21300000, guid: d9a356893c900274caa6bbd8ba6c36e3, type: 3}
   heavyAttKBPrompt: {fileID: 21300000, guid: e7115655da3c4de4eaf9bd52e8bb07c9, type: 3}
-  slideKBPrompt: {fileID: 21300000, guid: fec55401958d54847808e9f9fb11a45d, type: 3}
+  slideKBPrompt: {fileID: 21300000, guid: 21f0c3635bb37f24d808aad51b6a1cec, type: 3}
   rollKBPrompt: {fileID: 21300000, guid: c9ea7c8157a337947815933253db70a1, type: 3}
   interactKBPrompt: {fileID: 21300000, guid: a57ed4cea817b3742850c96155a76c2e, type: 3}
   useEquipmentKBPrompt: {fileID: 21300000, guid: 92e47147ae8a19744baca9dac84d9a0e, type: 3}
@@ -3581,7 +3580,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.8066037, y: 1}
+    m_SensorSize: {x: 2.3312304, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -8982,7 +8981,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fec55401958d54847808e9f9fb11a45d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 21f0c3635bb37f24d808aad51b6a1cec, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9126,7 +9125,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.8066037, y: 1}
+    m_SensorSize: {x: 2.3312304, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

@@ -17,7 +17,7 @@ public class ControlUI : MonoBehaviour
     [SerializeField] private Image interactPrompt;
     [SerializeField] private Image useEquipmentPrompt;
 
-    [SerializeField] private Image extraSlidePrompt; // the "T" in "SHIFT" is cut off, so we need an extra image for it (if gamepad is detected, disable it)
+    //[SerializeField] private Image extraSlidePrompt; // the "T" in "SHIFT" is cut off, so we need an extra image for it (if gamepad is detected, disable it)
     [SerializeField] private Image extraRollPrompt; // the "L" in "CTRL" is cut off, so we need an extra image for it (if gamepad is detected, disable it)
 
     [Header("Keyboard Prompt Sprites")]
@@ -68,7 +68,7 @@ public class ControlUI : MonoBehaviour
 
                 // these prompts are needed for keyboard use because SHIFT and CTRL prompts are cut off without these being enabled
                 extraRollPrompt.enabled = true;
-                extraSlidePrompt.enabled = true;
+                //extraSlidePrompt.enabled = true;
 
                 UpdateControlPrompts(jumpKBPrompt, lightAttKBPrompt, heavyAttKBPrompt, slideKBPrompt, rollKBPrompt, interactKBPrompt,useEquipmentKBPrompt);
                 //Debug.Log("KEYBOARD USED!");
@@ -80,7 +80,7 @@ public class ControlUI : MonoBehaviour
 
                 // don't need these prompts if gamepad is in use because this is for keyboard
                 extraRollPrompt.enabled = false;
-                extraSlidePrompt.enabled = false;
+                //extraSlidePrompt.enabled = false;
 
                 // if player is using an xbox controller
                 if (Gamepad.current.device.displayName == "Xbox Controller")
