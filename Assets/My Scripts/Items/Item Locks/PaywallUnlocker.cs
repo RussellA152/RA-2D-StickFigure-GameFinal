@@ -12,7 +12,7 @@ public class PaywallUnlocker : Unlocker
     [SerializeField] private AudioClip purchaseSuccessfulSound;
     [SerializeField] private AudioClip purchaseFailedSound;
 
-    [SerializeField] private string failedPurchaseText;
+    //[SerializeField] private string failedPurchaseText;
     [SerializeField] private float failedPurchaseDuration;
 
     private void Update()
@@ -46,7 +46,7 @@ public class PaywallUnlocker : Unlocker
             // Play a failure/unsuccessful purchase sound effect
 
             ObjectSounds.instance.PlaySoundEffect(purchaseFailedSound);
-            TextUI.instance.TextEnqueue(failedPurchaseText + " $ " + priceOfObject, failedPurchaseDuration);
+            TextUI.instance.TextEnqueue("Insufficient Funds", failedPurchaseDuration);
             //Debug.Log("Not enough money");
         }
         

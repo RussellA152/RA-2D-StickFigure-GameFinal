@@ -48,17 +48,22 @@ public class ControlUI : MonoBehaviour
     [SerializeField] private Sprite interactPSPrompt;
     [SerializeField] private Sprite useEquipmentPSPrompt;
 
-    private void Start()
+    private void OnEnable()
     {
         // fetch player input component from the Player Gameobject
         playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
 
-        //Debug.Log("CONTROL UI START");
-        playerInput.onControlsChanged += PlayerInput_onControlsChanged;
+        playerInput.onControlsChanged += PlayerControlsChanged;
     }
 
-    private void PlayerInput_onControlsChanged(PlayerInput obj)
+    private void OnDisable()
     {
+        playerInput.onControlsChanged -= PlayerControlsChanged;
+    }
+
+    public void PlayerControlsChanged(PlayerInput obj)
+    {
+        Debug.Log("Change controls!");
 
         // Check the type of controller the user is using
         switch (obj.currentControlScheme)
@@ -86,14 +91,12 @@ public class ControlUI : MonoBehaviour
                 if (Gamepad.current.device.displayName == "Xbox Controller")
                 {
                     UpdateControlPrompts(jumpXBPrompt, lightAttXBPrompt, heavyAttXBPrompt, slideXBPrompt, rollXBPrompt, interactXBPrompt,useEquipmentXBPrompt);
-                    //Debug.Log("USING XBOX CONTROLLER!");
 
                 }
                 // if player is using a dualshock controller 
                 else if(Gamepad.current.device.displayName == "Wireless Controller")
                 {
                     UpdateControlPrompts(jumpPSPrompt, lightAttPSPrompt, heavyAttPSPrompt, slidePSPrompt, rollPSPrompt, interactPSPrompt,useEquipmentPSPrompt);
-                    //Debug.Log("USING PLAYSTATION CONTROLLER!");
                 }
                 break;
 
@@ -103,14 +106,14 @@ public class ControlUI : MonoBehaviour
     }
 
     // update the UI's button prompts based on the current controller the User is using
-    private void UpdateControlPrompts(Sprite jumpSprite, Sprite lightAttackSprite, Sprite heavyAttackSprite, Sprite slideSprite, Sprite rollSprite, Sprite interacteSprite, Sprite useEquipmentSprite)
+    private void UpdateControlPrompts(Sprite jumpSprite, Sprite lightAttackSprite, Sprite heavyAttackSprite, Sprite slideSprite, Sprite rollSprite, Sprite interactSprite, Sprite useEquipmentSprite)
     {
         jumpPrompt.sprite = jumpSprite;
         lightAttackPrompt.sprite = lightAttackSprite;
         heavyAttackPrompt.sprite = heavyAttackSprite;
         slidePrompt.sprite = slideSprite;
         rollPrompt.sprite = rollSprite;
-        interactPrompt.sprite = interacteSprite;
+        interactPrompt.sprite = interactSprite;
         useEquipmentPrompt.sprite = useEquipmentSprite;
     }
 
